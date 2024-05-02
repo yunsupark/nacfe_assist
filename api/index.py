@@ -12,6 +12,7 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate#, ChatPromptTemplate
 from dotenv import load_dotenv
 from pinecone import Pinecone
+
 from langchain_pinecone import PineconeVectorStore
 from langchain.memory import ConversationBufferMemory
 
@@ -19,6 +20,7 @@ load_dotenv()
 os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
+
 pinecone_index = os.getenv("PINECONE_INDEX")
 index = pc.Index(pinecone_index)
                                
