@@ -82,7 +82,7 @@ def user_input(user_question):
 def main():
     st.set_page_config("Mikey")
     st.header("Chat with Mikey, the NACFE AI Assistant")
-    st.subheader("Mikey can answer questions using information found in NACFE Confidence and Guidance Reports")
+    st.subheader("Mikey can answer questions using information found in the reports shown on the left")
 
     # Chat widget for user input
     user_question = st.chat_input(placeholder="What would you like to know?")
@@ -106,7 +106,14 @@ def main():
             #st.write("Question",["content"])
         #else:
             #st.write("Reply", ["content"])
-
+    with st.sidebar:
+            st.image('images/NACFE logo_newtagline.png')
+            st.title("Available Reports")
+            st.write("RoL-E MD Box Truck Report")
+            st.write("RoL-E HD Regional Haul Report")
+            st.write("RoL-E Vans & Step Vans Report")
+            st.write("RoL-E Terminal Tractor Report")
+            st.write("Run on Less - Electric Summary")
 
 if __name__ == "__main__":
     main()
