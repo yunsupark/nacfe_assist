@@ -1,0 +1,7 @@
+/faiss_index
+/test2.py
+/testapp.py
+.vercel
+.env
+.env.development.local
+node_modules
