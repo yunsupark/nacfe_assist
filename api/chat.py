@@ -95,7 +95,7 @@ def user_input(user_question):
 
 def main():
     st.set_page_config("Mikey")
-    st.header("Chat with Mikey, the NACFE AI Assistant")
+    st.header("Ask Mikey, the NACFE AI Assistant")
     st.subheader("Mikey can answer questions using information found in the reports shown on the left")
 
     # Chat widget for user input
