@@ -16,7 +16,7 @@ from pinecone import Pinecone
 from langchain_pinecone import PineconeVectorStore
 from langchain.memory import ConversationBufferMemory
 #import streamlit.components as components
-from streamlit_feedback import streamlit_feedback
+#from streamlit_feedback import streamlit_feedback
 #from langsmith import traceable
 #from langsmith import Client
 
@@ -90,11 +90,11 @@ def user_input(user_question):
     #show reply
     st.write("Reply: ", response["output_text"])
     
-    feedback = streamlit_feedback(
-        feedback_type="faces",
-        optional_text_label="[Optional] Please provide an explanation",
-    )
-    feedback
+    #feedback = streamlit_feedback(
+        #feedback_type="faces",
+        #optional_text_label="[Optional] Please provide an explanation",
+    #)
+    #feedback
     #client = Client(api_url=langchain_endpoint, api_key=langchain_api_key)
     return response
 
