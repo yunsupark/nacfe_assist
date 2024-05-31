@@ -1,10 +1,10 @@
-streamlit==1.30.0
-google-generativeai==0.4.0
+streamlit
+google-generativeai==0.3.2
 python-dotenv
-langchain==0.2.0
+langchain
 PyPDF2
-langchain_google_genai==1.0.5
-langchain_pinecone==0.1.0
+langchain_google_genai
+langchain_pinecone
 pinecone-client
 
 streamlit-feedback
