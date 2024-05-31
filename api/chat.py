@@ -3,48 +3,39 @@
 import streamlit as st
 #from PyPDF2 import PdfReader
 #from langchain.text_splitter import RecursiveCharacterTextSplitter
-import os
+#import os
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 import google.generativeai as genai
 #from langchain_community.vectorstores import FAISS
 #from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate#, ChatPromptTemplate
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 from pinecone import Pinecone
 
 from langchain_pinecone import PineconeVectorStore
 from langchain.memory import ConversationBufferMemory
-import streamlit.components as components
+#import streamlit.components as components
 from streamlit_feedback import streamlit_feedback
-from langsmith import traceable
-from langsmith import Client
+#from langsmith import traceable
+#from langsmith import Client
 
-load_dotenv()
-if 'GOOGLE_API_KEY' in st.secrets:
-    google_api_key = st.secrets['GOOGLE_API_KEY']
-else:
-    google_api_key = os.getenv("GOOGLE_API_KEY")
+#load_dotenv()
 
+google_api_key = st.secrets['GOOGLE_API_KEY']
+#google_api_key = os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=google_api_key)
 
-if 'PINECONE_API_KEY' in st.secrets:
-    pc = Pinecone(api_key=st.secrets['PINECONE_API_KEY'])
-else:
-    pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
-        
+#pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
+pc = Pinecone(api_key=st.secrets['PINECONE_API_KEY'])
+pinecone_index = st.secrets['PINECONE_INDEX']
+#pinecone_index = os.getenv("PINECONE_INDEX")
+index = pc.Index(pinecone_index)
+                               
 #os.environ["LANGCHAIN_TRACING_V2"] = "true"
 #langchain_endpoint = "<https://api.smith.langchain.com>"
 #langchain_api_key = os.getenv("LANGCHAIN_API_KEY")
 #os.environ["LANGCHAIN_PROJECT"] = "nacfe_assist"
-
-if 'PINECONE_INDEX' in st.secrets:
-    pinecone_index = st.secrets['PINECONE_INDEX']
-else:
-    pinecone_index = os.getenv("PINECONE_INDEX")
-
-index = pc.Index(pinecone_index)
-                               
 
 def get_conversational_chain(user_question=None):
     prompt_template = """
