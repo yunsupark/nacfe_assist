@@ -1,7 +1,10 @@
 /faiss_index
 /test2.py
 /testapp.py
+/report_upload.py
 .vercel
 .env
 .env.development.local
 node_modules
+report_upload.py
+report_upload2.py
