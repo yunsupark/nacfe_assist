@@ -21,14 +21,28 @@ from langsmith import traceable
 from langsmith import Client
 
 load_dotenv()
-os.getenv("GOOGLE_API_KEY")
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
-os.environ["LANGCHAIN_TRACING_V2"] = "true"
-langchain_endpoint = "<https://api.smith.langchain.com>"
-langchain_api_key = os.getenv("LANGCHAIN_API_KEY")
-os.environ["LANGCHAIN_PROJECT"] = "nacfe_assist"
-pinecone_index = os.getenv("PINECONE_INDEX")
+if 'GOOGLE_API_KEY' in st.secrets:
+    google_api_key = st.secrets['GOOGLE_API_KEY']
+else:
+    google_api_key = os.getenv("GOOGLE_API_KEY")
+
+genai.configure(api_key=google_api_key)
+
+if 'PINECONE_API_KEY' in st.secrets:
+    pc = Pinecone(api_key=st.secrets['PINECONE_API_KEY'])
+else:
+    pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
+        
+#os.environ["LANGCHAIN_TRACING_V2"] = "true"
+#langchain_endpoint = "<https://api.smith.langchain.com>"
+#langchain_api_key = os.getenv("LANGCHAIN_API_KEY")
+#os.environ["LANGCHAIN_PROJECT"] = "nacfe_assist"
+
+if 'PINECONE_INDEX' in st.secrets:
+    pinecone_index = st.secrets['PINECONE_INDEX']
+else:
+    pinecone_index = os.getenv("PINECONE_INDEX")
+
 index = pc.Index(pinecone_index)
                                
 
@@ -90,7 +104,7 @@ def user_input(user_question):
         optional_text_label="[Optional] Please provide an explanation",
     )
     feedback
-    client = Client(api_url=langchain_endpoint, api_key=langchain_api_key)
+    #client = Client(api_url=langchain_endpoint, api_key=langchain_api_key)
     return response
 
 def main():
@@ -111,8 +125,8 @@ def main():
 
     memory = st.session_state.get("memory", ConversationBufferMemory(memory_key="chat_history", input_key="question"))
 
-    conversation_history = memory
-    print(conversation_history)
+    #conversation_history = memory
+    #print(conversation_history)
 
     # Display conversation history
     #for chat_memory in conversation_history:
