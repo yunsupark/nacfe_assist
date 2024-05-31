@@ -3,7 +3,7 @@ google-generativeai
 python-dotenv
 langchain==0.1.17
 PyPDF2
-langchain_google_genai
+langchain_google_genai==0.0.6
 langchain_pinecone==0.1.0
 pinecone-client
 
