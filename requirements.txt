@@ -4,7 +4,7 @@ python-dotenv
 langchain
 PyPDF2
 langchain_google_genai
-langchain_pinecone
+langchain_pinecone==0.1.0
 pinecone-client
 
 streamlit-feedback
