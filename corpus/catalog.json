@@ -1,1 +1,200 @@
-[]
+[
+  {
+    "id": "messy-middle-a-time-for-action-2023",
+    "title": "The Messy Middle: A Time for Action",
+    "type": "thought_leadership",
+    "published": "2023-02",
+    "url": null,
+    "media": { "kind": "pdf", "pages": 46 },
+
+    "topics": ["messy-middle", "powertrain-comparison", "decision-framework", "battery-electric", "hydrogen-fuel-cell", "natural-gas", "renewable-diesel", "regulations", "technology-maturity"],
+    "vehicle_classes": [8],
+    "duty_cycles": ["long-haul-otr"],
+    "fleets_studied": [],
+
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+
+    "abstract": "A NACFE thought-leadership report, published February 26, 2023, that lays out the 'messy middle' concept NACFE coined in 2019: the multi-decade transition period between today's diesel-dominated Class 8 long-haul trucking and an eventual zero-emission future. Rather than a fleet demonstration, this is a synthesis and decision-framework document. It surveys every major powertrain option available to fleets at the time -- advanced diesel, renewable diesel, renewable natural gas, biodiesel, CNG, LNG, hydrogen internal combustion engines, hybrids, battery-electric vehicles, and hydrogen fuel cells -- describing each one's technical maturity, cost trajectory, infrastructure availability, and regulatory context as of early 2023. It compares the options directly (Section 6), covers sustainability terminology (well-to-wheels vs. tank-to-wheels), technical maturity via a reliability 'bathtub curve,' range and route flexibility, infrastructure, vehicle integration, and regulatory drivers including California's ACT rule and IRA/IIJA incentives. It closes with a suggested sequential decision framework for fleets (start with BEV, fall back to hydrogen fuel cell, then natural gas/hybrids/renewable fuels, with efficient diesel as a last resort), explicitly flagged as a simplification since most fleets will need multiple technology decisions across their operations over time. An appendix maps North American fueling station counts by fuel type as of January 2023.",
+
+    "key_findings": [
+      "Battery electric trucks are estimated at 65% to 85% overall energy efficiency from charger to wheels, versus approximately 40% to 50% for internal combustion engine trucks and 30% to 50% for hydrogen fuel cell trucks.",
+      "As of December 2022, the U.S. DOE reported only 60 public hydrogen fueling stations in North America for all vehicle types, 53 of them in California, with only 4 designated for heavy-duty trucks.",
+      "Estimated diesel engine costs are projected to rise by $2,300 to $42,000 per vehicle to meet NOx and warranty requirements under the EPA Clean Truck Plan announced in December 2022.",
+      "Most industry analysis indicates hydrogen must reach approximately $3/kg ($1.36/lb) to achieve TCO parity with diesel.",
+      "In December 2022, Tesla demonstrated a Class 8 Semi traveling 500 miles fully loaded at 82,000 lbs, but NACFE cautions this used nearly 100% of battery state of charge (versus the recommended 20-80% range) at California's 55 mph truck speed limit, unlike the 150-250 mile typical single-charge range of other production heavy-duty BEVs from Daimler, Volvo, Kenworth, and Peterbilt at the time.",
+      "By early 2019, NACFE had published three Guidance Reports on electric trucks: Electric Trucks: Where They Make Sense (May 2018), Medium-Duty Electric Trucks - Cost of Ownership (October 2018), and Amping Up - Charging Infrastructure for Electric Trucks (March 2019).",
+      "BEV maintenance costs are estimated at 50% to 60% of diesel maintenance costs due to significantly fewer moving parts."
+    ],
+    "data_available": [
+      "Powertrain technology-readiness comparison matrix (Figure 10: sustainability, range, infrastructure, integration, and maturity ratings by powertrain)",
+      "Reliability bathtub curve by technology maturity stage (Figure 11)",
+      "North American fueling station maps by fuel type as of January 2023 (biofuel, CNG, electric, hydrogen, LNG, renewable diesel)",
+      "EPA PM/NOx emissions progress by year, 1988-2025+ (Figure 6)",
+      "ICCT heavy-duty truck CO2 emissions progress by vehicle segment, 2010-2027 (Figure 7)"
+    ],
+
+    "token_count": 47180,
+    "ingested": "2026-07-28",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "run-on-less-electric-depot-2024",
+    "title": "Electric Truck Depots Are Evolving: How 10 Fleets Grew Their BEV Populations",
+    "type": "run_on_less",
+    "published": "2024-05",
+    "url": null,
+    "media": { "kind": "pdf", "pages": 90 },
+
+    "topics": ["battery-electric", "depot-charging", "infrastructure", "fleet-electrification"],
+    "vehicle_classes": [3, 4, 5, 6, 8],
+    "duty_cycles": ["regional-rtb", "urban-metro-pd"],
+    "fleets_studied": ["Frito-Lay", "OK Produce", "Penske", "PepsiCo", "Performance Team", "Purolator", "Schneider", "UPS", "US Foods", "WattEV"],
+
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+
+    "abstract": "Documents NACFE's Run on Less - Electric DEPOT (RoL-E DEPOT) demonstration, published May 7, 2024. Unlike a single-truck-per-fleet format, this Run tracked 10 fleet depots operating 15 or more battery-electric trucks each, across 22 vehicle models from 11 manufacturers, located in California, New York, and British Columbia. Vehicles spanned Class 3-5 vans and step vans, Class 6 box trucks, Class 8 terminal tractors, and Class 8 regional-haul tractors. The report documents each depot's electrification journey (infrastructure build-out, utility coordination, charger types, funding and incentive programs), per-vehicle specs including battery capacity and estimated range, and real-world telematics data collected via Geotab (GPS, distance, speed, weight, elevation, state of charge, energy in/out while driving/idling/charging). It also covers driver experience, an Electric DEPOT Bootcamp series, and findings on which depot profiles are most electrification-ready today versus which face longer timelines.",
+
+    "key_findings": [
+      "10 fleet depots and 22 BEV models from 11 manufacturers were tracked across sites in California, New York, and British Columbia.",
+      "A Freightliner eCascadia at OK Produce and Penske, equipped with a 475-kWh battery, had an estimated range of 230 miles.",
+      "A Ford E-Transit step van, equipped with a 68-kWh battery, had an estimated range of 108 miles.",
+      "PepsiCo's Sacramento depot operated 21 Tesla Semis; the three tracked in the Run saw ranges of 410 miles on a single charge and completed 1,076 miles in a 24-hour period.",
+      "A GM BrightDrop ZEVO 600 step van (165-kWh battery) and an International eMV (210-kWh battery) each had an estimated range of 135 miles.",
+      "Fast permanent chargers can bring depot BEVs from 0% to 80% state of charge in about 90 minutes.",
+      "Across the four Run on Less demonstrations conducted prior to Messy Middle, NACFE had engaged a total of 48 drivers; RoL-E DEPOT followed the most drivers of any single Run to that point, at 18."
+    ],
+    "data_available": [
+      "Per-fleet BEV specs: battery capacity (kWh) and estimated range (miles) by vehicle model",
+      "Charging infrastructure type, count, and funding/incentive program by depot",
+      "Driver participation counts by Run and by this Run specifically",
+      "Per-depot estimated total power/energy needs if fully electrified",
+      "Electric DEPOT Bootcamp session attendance"
+    ],
+
+    "token_count": 90820,
+    "ingested": "2026-07-28",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "run-on-less-messy-middle-blueprint-2025",
+    "title": "How NACFE Helped Bring Clarity to the Messy Middle",
+    "type": "run_on_less",
+    "published": "2026-01",
+    "url": null,
+    "media": { "kind": "pdf", "pages": 77 },
+
+    "topics": ["messy-middle", "battery-electric", "hydrogen-fuel-cell", "natural-gas", "renewable-diesel", "long-haul", "bootcamp"],
+    "vehicle_classes": [8],
+    "duty_cycles": ["long-haul-otr", "regional-linehaul", "regional-rtb", "drayage-port-shuttle", "urban-metro-pd"],
+    "fleets_studied": ["4Gen Logistics", "Albert Transport", "Frito-Lay", "Joyride Logistics", "Kleysen Group", "Mesilla Valley Transportation", "Nevoya", "Penske", "Pilot", "Saia", "Schneider", "UPS", "Wegmans"],
+
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+
+    "abstract": "The overview/blueprint report for Run on Less - Messy Middle, NACFE's fifth Run on Less demonstration, published January 28, 2026. Unlike prior Runs that focused on a single powertrain or duty-cycle segment, this Run tracked 13 fleets operating 14 Class 8 tractors across all four current powertrain options simultaneously -- diesel/renewable diesel, CNG/renewable natural gas, battery-electric, and hydrogen fuel cell -- in long-haul return-to-base and over-the-road duty cycles, over an 18-day demonstration from September 8-25, 2025. The report documents the year-long process of planning the Run (fleet/OEM selection, the nine-session Messy Middle Bootcamp educational series held February-July 2025, site visits, driver participation, promotion), the dashboard methodology (Geotab-based telematics: GPS, distance, speed, weight, elevation, and powertrain-specific metrics like state of charge and fuel level), and initial high-level findings. It explicitly defers deeper analysis to four companion reports NACFE planned to publish later in 2026: an Operations Report, an Emissions Footprint Report, a TCO Ramifications Report, and a Final Findings Report.",
+
+    "key_findings": [
+      "13 fleets and 14 vehicles were tracked across four powertrains (4 diesel/renewable diesel, 3 natural gas/RNG, 4 battery electric, 2 hydrogen fuel cell) over an 18-day demonstration, September 8-25, 2025.",
+      "Across all five Run on Less demonstrations to date, NACFE has engaged 63 drivers; for Messy Middle specifically, NACFE conducted 105 interviews across its 13 sites between June 3 and July 23, 2025.",
+      "The long-haul segment of trucking is 9% of the market but generates 48% of its emissions, per NREL's Decarbonizing Medium- & Heavy-Duty On-Road Vehicles report.",
+      "Recent powertrain advancements cited include a 15L natural gas engine and 400+ mile battery-electric vehicles; Joyride Logistics' Windrose battery-electric sleeper tractor has a reported range of up to 420 miles.",
+      "The nine-session Messy Middle Bootcamp drew 7,171 total registrations (1,191 unique) and 1,943 total attendance (720 unique) from February through July 2025.",
+      "NACFE's initial finding is that all four powertrain technologies perform well in the long-haul segment with no single winner; powertrain choice depends on duty cycle, haul length, and fueling/charging access.",
+      "A 10,000 lb weight difference affects fuel economy by approximately 0.5 MPG, per NACFE's prior Run on Less findings."
+    ],
+    "data_available": [
+      "Per-fleet vehicle specs, routes, and driver profiles for all 13 fleets",
+      "Bootcamp session-by-session registration and attendance table",
+      "Dashboard metrics methodology across all four powertrains",
+      "Example dashboard charts: weather, distance vs. state of charge, speed bands, gross vehicle weight, elevation, truck activity breakdown, fuel efficiency"
+    ],
+
+    "token_count": 70416,
+    "ingested": "2026-07-28",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "run-on-less-messy-middle-operations-2026",
+    "title": "Terrain, Technology, and Telematics: The Messy Middle Operations Report",
+    "type": "run_on_less",
+    "published": "2026-03",
+    "url": null,
+    "media": { "kind": "pdf", "pages": 274 },
+
+    "topics": ["messy-middle", "operations", "duty-cycle-analysis", "telematics", "battery-electric", "hydrogen-fuel-cell", "natural-gas", "renewable-diesel", "long-haul"],
+    "vehicle_classes": [8],
+    "duty_cycles": ["long-haul-otr", "regional-linehaul", "regional-rtb", "drayage-port-shuttle", "urban-metro-pd"],
+    "fleets_studied": ["4Gen Logistics", "Albert Transport", "Frito-Lay", "JoyRide Logistics", "Kleysen Group", "Mesilla Valley Transportation", "Nevoya", "Penske", "Pilot", "Saia", "Schneider", "UPS", "Wegmans"],
+
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+
+    "abstract": "The deep operational analysis companion to the Run on Less - Messy Middle blueprint report, published March 15, 2026. It compares the same four Class 8 powertrain technologies (diesel/renewable diesel, CNG/RNG, battery-electric, hydrogen fuel cell) operating simultaneously in revenue freight service -- 13 fleets, 14 production tractors, more than 73,000 validated miles over 18 days in September 2025 across long-haul, regional-haul, drayage, and LTL duty cycles in the US and Canada. High-resolution telematics produced more than two million data points; GPS-referenced digital elevation models enabled terrain analysis for every deployment. The report introduces a duty-cycle archetype framework classifying the 14 deployments into five operational categories (Long-Haul OTR, Regional Linehaul, Regional RTB, Urban/Metro P&D, Drayage/Port Shuttles), then applies cross-fleet regression analysis, time-of-day productivity modeling, and infrastructure dependency assessment. Its central finding, echoed throughout: duty cycle and terrain profile predict efficiency variation more strongly than powertrain technology alone, and no single powertrain is universally superior. Includes per-fleet operational profiles for all 13 participating fleets and a Future Outlook section on autonomy, AI optimization, and infrastructure development.",
+
+    "key_findings": [
+      "13 fleets operating 14 production tractors logged more than 73,000 validated miles over 18 days in September 2025.",
+      "High-resolution telematics produced more than two million data points across the tracked trucks.",
+      "A duty-cycle archetype framework classifies the 14 deployments into five operational categories: Long-Haul OTR, Regional Linehaul, Regional RTB, Urban/Metro P&D, and Drayage/Port Shuttles.",
+      "Duty cycle and terrain profile are stronger predictors of efficiency variation than powertrain technology alone.",
+      "No single powertrain technology is universally superior across duty cycles; fleets must match powertrain capabilities to specific duty cycles, terrain profiles, and infrastructure conditions."
+    ],
+    "data_available": [
+      "Per-fleet operational profiles for all 13 participating fleets (Section 3)",
+      "Duty-cycle archetype classification and definitions (Section 4)",
+      "Cross-fleet regression analysis and time-of-day productivity modeling",
+      "GPS-referenced digital elevation/terrain analysis by deployment",
+      "Data validation methodology and technology-specific data-quality considerations"
+    ],
+
+    "token_count": 304861,
+    "ingested": "2026-07-28",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "run-on-less-messy-middle-tco-2026",
+    "title": "Forecasting the TCO of Powertrain Alternatives: The Messy Middle Cost Report",
+    "type": "run_on_less",
+    "published": "2026-04",
+    "url": null,
+    "media": { "kind": "pdf", "pages": 110 },
+
+    "topics": ["messy-middle", "total-cost-of-ownership", "battery-electric", "hydrogen-fuel-cell", "natural-gas", "renewable-diesel", "long-haul"],
+    "vehicle_classes": [8],
+    "duty_cycles": ["long-haul-otr", "regional-linehaul", "regional-rtb", "urban-metro-pd", "drayage-port-shuttle"],
+    "fleets_studied": [],
+
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+
+    "abstract": "The Total Cost of Ownership (TCO) companion report to Run on Less - Messy Middle, published April 30, 2026. Provides a comprehensive TCO framework for Class 8 vehicles across four powertrains (diesel, CNG/RNG, battery-electric, hydrogen fuel cell), five duty cycles (Long-Haul OTR, Regional Linehaul, Regional RTB, Urban/Metro P&D, Drayage/Port Shuttles), and three timeframes (2025, 2028, 2035). Rather than a single national-average TCO per powertrain, the analysis is fleet- and duty-cycle-specific, driven by variables such as utility rates, duty cycle, and asset utilization, and explicitly assumes no incentives in order to give fleets a conservative baseline they can adjust with their own numbers. Central findings include a 'diesel escalator' (diesel's long-term TCO advantage erodes as maintenance, insurance, and emissions-compliance costs rise even as fuel cost per mile drops slightly) and BEVs' aggressive cost-reduction curve, projected to achieve the lowest net TCO in every modeled duty cycle by 2035. Not a fleet demonstration in itself -- it models cost trajectories using data and context from the Messy Middle Run rather than reporting new telematics data.",
+
+    "key_findings": [
+      "By 2035, BEVs are projected to achieve the lowest net TCO of any powertrain in every one of the five modeled duty cycles.",
+      "Approximately 80% of all on-road fuel used in natural gas vehicles in 2023 was RNG.",
+      "In March 2026, diesel prices jumped nearly $1.00 per gallon in a single week, illustrating diesel's ongoing budgetary volatility risk.",
+      "FCEV TCO viability is almost entirely tethered to green hydrogen delivery price, with a sensitivity range of $4.00 to $15.00/kg modeled.",
+      "In the Long-Haul OTR duty cycle, diesel's current $0.61/mile cost advantage is projected to flip by 2035, with BEVs undercutting diesel by $0.09/mile, driven partly by the emergence of 500+ mile range BEVs.",
+      "In Regional Linehaul, BEVs are projected to go from roughly twice diesel's cost in 2025 to the most cost-effective option by 2035 ($0.94/mile vs. $1.00/mile for diesel).",
+      "In Regional Return-to-Base, BEVs are projected to hold a 12% TCO advantage over diesel by 2035 ($1.13/mile vs. $1.29/mile).",
+      "In Urban/Metro Pickup & Delivery, BEVs are projected to go from a cost disadvantage in 2025 (often exceeding $4.00/mile at low utilization) to undercutting diesel by 2035 ($1.92/mile vs. $2.43/mile).",
+      "In Drayage/Port Shuttles, BEV TCO is projected to drop nearly 50% over the next decade, reaching $0.19/mile cheaper than diesel by 2035."
+    ],
+    "data_available": [
+      "TCO by powertrain and duty cycle across 2025, 2028, and 2035 timeframes",
+      "Sensitivity analysis by TCO cost component per powertrain",
+      "Per-duty-cycle cost-per-mile breakdowns (fuel, maintenance, insurance, capital)",
+      "Pre-analysis checklist for fleets computing their own bespoke TCO"
+    ],
+
+    "token_count": 126420,
+    "ingested": "2026-07-28",
+    "ingest_model": "gemini-3.5-flash-lite"
+  }
+]

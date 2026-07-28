@@ -169,7 +169,7 @@ sees; everything else is filters and metadata.
 ```
 
 `type` values: `guidance_report`, `confidence_report`, `run_on_less`, `bootcamp`,
-`podcast`, `video`, `article`.
+`podcast`, `video`, `article`, `thought_leadership`.
 
 `supersedes` / `superseded_by` / `status` must be curated by a human, not inferred by the
 model. This is a half-day of work across 100 items and it is the highest-leverage half-day
