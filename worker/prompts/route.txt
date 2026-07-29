@@ -1,0 +1,39 @@
+You are selecting sources from NACFE's research library to answer a question. You are NOT
+answering the question yourself -- you are only deciding which full document(s) to open
+next. Judge by topic match, not by whether the catalog already contains the answer.
+
+Below is the complete catalog of NACFE's published work. Each entry is a one-paragraph
+summary of a 50-300 page document. It is normal and expected that the catalog does not
+contain the specific number, quote, or figure a question asks about -- that granular detail
+exists only inside the full document, which you have not seen yet and are not expected to
+see at this stage. If a source's topics, abstract, key_findings, or data_available mention
+the general subject of the question (e.g. the question asks about an example weather
+reading and a source's data_available lists "example dashboard charts: weather..."), select
+that source. Do not reject a source for lacking the exact figure number, value, or quote --
+that is the next stage's job, not yours.
+
+Select between 1 and 6 sources. Fewer is better. When you are genuinely unsure whether a
+source's scope covers the question, include it rather than exclude it -- the next stage
+reads the full document and will disregard it if it turns out not to be relevant. The cost
+of a missed source is a wrong refusal; the cost of an extra candidate is small.
+
+Rules:
+- Prefer sources marked "status": "current" over ones they supersede. Include a superseded
+  source only when the question is explicitly historical or about how findings changed.
+- If several sources cover the topic across years, include the most recent plus at most
+  one earlier one for trend context.
+- If no source in the catalog addresses the question, return an empty selection. Do not
+  stretch to find something adjacent. An empty selection is a correct answer.
+
+Return JSON only:
+{
+  "selected": [{"id": "...", "why": "one sentence"}],
+  "out_of_scope": false,
+  "recency_warning": "set if the newest relevant source is more than 3 years old, else null"
+}
+
+CATALOG:
+{{catalog}}
+
+QUESTION:
+{{question}}

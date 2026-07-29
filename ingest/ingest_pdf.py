@@ -77,7 +77,11 @@ def build_prompt(base_prompt, start, end, total_pages, windowed):
     )
 
 
-def call_gemini(client, model, prompt, pdf_bytes, retries=3):
+RETRY_DELAY_RE = re.compile(r"'retryDelay':\s*'(\d+)s'")
+RATE_LIMIT_MAX_WAIT = 65  # free-tier quotas are per-minute; don't wait past that pointlessly
+
+
+def call_gemini(client, model, prompt, pdf_bytes, retries=6):
     last_err = None
     for attempt in range(1, retries + 1):
         try:
@@ -91,8 +95,16 @@ def call_gemini(client, model, prompt, pdf_bytes, retries=3):
             return response
         except Exception as e:  # noqa: BLE001 - real network/API errors, log and retry
             last_err = e
-            wait = 2 ** attempt
-            print(f"  call failed (attempt {attempt}/{retries}): {e}. Retrying in {wait}s...", file=sys.stderr)
+            is_rate_limit = "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e)
+            m = RETRY_DELAY_RE.search(str(e))
+            if m:
+                wait = min(int(m.group(1)) + 2, RATE_LIMIT_MAX_WAIT)
+            elif is_rate_limit:
+                wait = min(15 * attempt, RATE_LIMIT_MAX_WAIT)
+            else:
+                wait = min(2 ** attempt, 30)
+            reason = "rate limit" if is_rate_limit else "error"
+            print(f"  {reason} (attempt {attempt}/{retries}): {e}. Waiting {wait}s...", file=sys.stderr)
             time.sleep(wait)
     raise last_err
 
