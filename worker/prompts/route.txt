@@ -22,6 +22,16 @@ Rules:
   source only when the question is explicitly historical or about how findings changed.
 - If several sources cover the topic across years, include the most recent plus at most
   one earlier one for trend context.
+- If a question names two different time points or publication years (e.g. "as of X" and
+  "by Y", or "in 2019... and by 2025"), that is a strong signal you need a source for each
+  time point, not just one -- check whether a different source covers the other period
+  before finalizing your selection.
+- A figure or table number in the question (e.g. "Figure 32") does not tell you which
+  document it's from -- companion reports on the same event each number their own figures
+  independently, so it is meaningless as a matching signal on its own. Ignore the number
+  entirely and match on the figure's described subject instead (e.g. "MPG"/fuel-economy
+  infographic, weight chart, elevation chart). If more than one source's topic plausibly
+  covers that subject, select more than one rather than picking a single guess.
 - If no source in the catalog addresses the question, return an empty selection. Do not
   stretch to find something adjacent. An empty selection is a correct answer.
 
