@@ -2,13 +2,14 @@
 // the full catalog, then a stronger model answering from the selected sources' full text.
 // See eval/run_eval.py for the local-script version this was ported from, and
 // eval/results/two_stage_scored.md for the eval this design is validated against.
-import { CATALOG, SOURCES, ROUTE_PROMPT, ANSWER_PROMPT } from "./corpus_data";
+import { CATALOG, ROUTE_PROMPT, ANSWER_PROMPT } from "./corpus_data";
 import { generateContent, stripJsonFence, GeminiError } from "./gemini";
 
 export interface Env {
   GEMINI_API: string;
   CACHE: KVNamespace;
   DB: D1Database;
+  SOURCES_BUCKET: R2Bucket;
   MONTHLY_TOKEN_CEILING: string;
   ROUTE_MODEL: string;
   ANSWER_MODEL: string;
@@ -75,17 +76,29 @@ async function route(env: Env, question: string): Promise<{ result: RouteResult;
   return { result: parsed, tokens: usage.totalTokens };
 }
 
+async function fetchSource(env: Env, id: string): Promise<string | null> {
+  const obj = await env.SOURCES_BUCKET.get(`${id}.md`);
+  if (!obj) {
+    console.error(`source not found in R2: ${id}.md`);
+    return null;
+  }
+  return obj.text();
+}
+
 async function answer(
   env: Env,
   question: string,
   selectedIds: string[],
 ): Promise<{ text: string; tokens: number }> {
   const catalogById = new Map(CATALOG.map((c) => [c.id, c]));
+  // Fetch the (at most 6) selected sources from R2 in parallel -- sequential round-trips
+  // would otherwise stack their latency on top of each other for no reason.
+  const bodies = await Promise.all(selectedIds.map((id) => fetchSource(env, id)));
   const documents = selectedIds
-    .map((id) => {
+    .map((id, i) => {
       const entry = catalogById.get(id);
       const title = entry?.title ?? id;
-      const body = SOURCES[id];
+      const body = bodies[i];
       if (!body) return null;
       return `=== SOURCE: ${title} [${id}] ===\n${body}`;
     })

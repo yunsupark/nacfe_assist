@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "build:corpus": "node build_corpus.mjs",
-    "dev": "npm run build:corpus && wrangler dev",
-    "deploy": "npm run build:corpus && wrangler deploy",
+    "upload:corpus": "node upload_corpus.mjs --remote",
+    "upload:corpus:local": "node upload_corpus.mjs --local",
+    "dev": "npm run build:corpus && npm run upload:corpus:local && wrangler dev",
+    "deploy": "npm run build:corpus && npm run upload:corpus && wrangler deploy",
     "db:init": "wrangler d1 execute nacfe-assist --remote --file=schema.sql",
     "db:init:local": "wrangler d1 execute nacfe-assist --local --file=schema.sql"
   },

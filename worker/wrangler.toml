@@ -17,6 +17,10 @@ binding = "DB"
 database_name = "nacfe-assist"
 database_id = "bcd72e66-992b-4a2f-92ef-735329676803"
 
+[[r2_buckets]]
+binding = "SOURCES_BUCKET"
+bucket_name = "nacfe-assist-sources"  # wrangler r2 bucket create nacfe-assist-sources
+
 [vars]
 # Non-secret config. Hard ceiling on monthly Gemini token spend (input+output combined,
 # both stages) before the Worker degrades to cache-only. See SPEC.md 7 and 0 ($100/$50
