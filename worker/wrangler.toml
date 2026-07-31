@@ -1,6 +1,7 @@
 name = "nacfe-assist"
 main = "src/index.ts"
 compatibility_date = "2026-07-31"
+workers_dev = true
 
 # GEMINI_API is set as a secret, not here:
 #   wrangler secret put GEMINI_API
@@ -8,13 +9,13 @@ compatibility_date = "2026-07-31"
 
 [[kv_namespaces]]
 binding = "CACHE"
-id = "REPLACE_WITH_REAL_KV_NAMESPACE_ID"       # wrangler kv namespace create nacfe-assist-cache
-preview_id = "REPLACE_WITH_REAL_PREVIEW_ID"    # wrangler kv namespace create nacfe-assist-cache --preview
+id = "66af829d2560455c85a68770e90bdda9"
+preview_id = "378a8509c9ff47529e03091be67e4ecc"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "nacfe-assist"
-database_id = "REPLACE_WITH_REAL_D1_DATABASE_ID"  # wrangler d1 create nacfe-assist
+database_id = "bcd72e66-992b-4a2f-92ef-735329676803"
 
 [vars]
 # Non-secret config. Hard ceiling on monthly Gemini token spend (input+output combined,

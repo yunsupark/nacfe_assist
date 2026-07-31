@@ -9,3 +9,4 @@ worker/src/corpus_data.ts
 worker/.wrangler/
 worker/.dev.vars
 worker/dist/
+.wrangler/
