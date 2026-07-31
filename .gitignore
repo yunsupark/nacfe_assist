@@ -2,3 +2,10 @@ __pycache__/
 *.pyc
 .env
 .DS_Store
+
+# worker/
+worker/node_modules/
+worker/src/corpus_data.ts
+worker/.wrangler/
+worker/.dev.vars
+worker/dist/

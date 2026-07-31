@@ -1,0 +1,26 @@
+name = "nacfe-assist"
+main = "src/index.ts"
+compatibility_date = "2026-07-31"
+
+# GEMINI_API is set as a secret, not here:
+#   wrangler secret put GEMINI_API
+# Never commit the real key. Local dev reads it from .dev.vars (gitignored).
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "REPLACE_WITH_REAL_KV_NAMESPACE_ID"       # wrangler kv namespace create nacfe-assist-cache
+preview_id = "REPLACE_WITH_REAL_PREVIEW_ID"    # wrangler kv namespace create nacfe-assist-cache --preview
+
+[[d1_databases]]
+binding = "DB"
+database_name = "nacfe-assist"
+database_id = "REPLACE_WITH_REAL_D1_DATABASE_ID"  # wrangler d1 create nacfe-assist
+
+[vars]
+# Non-secret config. Hard ceiling on monthly Gemini token spend (input+output combined,
+# both stages) before the Worker degrades to cache-only. See SPEC.md 7 and 0 ($100/$50
+# cost targets) -- this is a safety valve, not a precise budget instrument.
+MONTHLY_TOKEN_CEILING = "20000000"
+ROUTE_MODEL = "gemini-3.5-flash-lite"
+ANSWER_MODEL = "gemini-3.6-flash"
+RATE_LIMIT_PER_IP_PER_HOUR = "20"
