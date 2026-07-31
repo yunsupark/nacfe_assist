@@ -45,7 +45,10 @@ DEFAULT_QUESTIONS_PATH = Path(__file__).resolve().parent / "questions.jsonl"
 RESULTS_DIR = Path(__file__).resolve().parent / "results"
 
 ROUTE_MODEL = "gemini-3.5-flash-lite"
-ANSWER_MODEL = "gemini-3.5-flash"
+ANSWER_MODEL = "gemini-3.6-flash"  # gemini-3.5-flash's free-tier daily quota got stuck (not
+# resetting on the documented midnight-PT schedule) -- confirmed both gemini-3.5-flash-lite
+# and gemini-3.6-flash work fine on the same key while 3.5-flash stays exhausted, so this
+# switches the answering stage off the stuck model rather than keep waiting on it.
 CURRENT_YEAR = "2026"
 
 JSON_FENCE_RE = re.compile(r"^```(?:json)?\s*|\s*```$", re.MULTILINE)

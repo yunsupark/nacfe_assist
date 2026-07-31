@@ -1,28 +1,35 @@
-# Two-Stage Query Loop — Scored (23/30, in progress)
+# Two-Stage Query Loop — Scored (30/30 complete)
 
 Scored against `eval/questions.jsonl` using the same rubric as the NotebookLM baseline:
-correct / partial / wrong / hallucinated. **7 questions (23, 24-27, 29, 30) are not yet
-answered** — blocked by a hard 20-requests/day free-tier cap on `gemini-3.5-flash`, the
-answering model. `run_eval.py` is now resumable (see its docstring): re-running it once
-the quota resets will only spend calls on the 7 missing ones and reuse everything below
-as-is. This file will be finalized once those land.
+correct / partial / wrong / hallucinated.
 
-## Summary so far (23 of 30)
+**Note on the last 7 answers (Q23-27, 29, 30):** `gemini-3.5-flash`'s free-tier daily quota
+got stuck and never reset on its documented midnight-PT schedule (confirmed by testing
+hours past that point — still exhausted, while `gemini-3.5-flash-lite` and `gemini-3.6-flash`
+worked fine on the same key). Rather than keep waiting on a quota that wasn't behaving as
+documented, `run_eval.py`'s `ANSWER_MODEL` was switched to `gemini-3.6-flash` (newer,
+non-lite, unblocked) to finish the run. The first 23 answers used `gemini-3.5-flash`; the
+last 7 used `gemini-3.6-flash`. Worth knowing if comparing answer style/quality across the
+full set, though no quality difference was apparent in scoring.
 
-| Bucket | Correct | Partial | Wrong | Hallucinated | Not yet answered |
-|---|---|---|---|---|---|
-| prose (9) | 6 | 1 | 0 | 0 | 2 (26, 27) |
-| table (6) | 2 | 0 | 0 | 0 | 2 (25, 30) |
-| figure (5) | 3 | 2 | 0 | 0 | 0 |
-| out_of_scope (2) | 2 | 0 | 0 | 0 | 0 |
-| synthesis (5) | 4 | 0 | 0 | 0 | 1 (29) |
-| recency (3) | 3 | 0 | 0 | 0 | 0 |
-| **Total (23 scored)** | **20** | **3** | **0** | **0** | **7** |
+## Summary (30 of 30)
 
-**20 correct, 3 partial, 0 wrong, 0 hallucinated on everything answered so far** — tracking
-close to or ahead of the NotebookLM baseline (27/30, 3 partial, 0/0), with the notable
-difference that every fix made in between (routing bugs, stale eval ground truth) is now
-verified working rather than just fixed-in-theory.
+| Bucket | Correct | Partial | Wrong | Hallucinated |
+|---|---|---|---|---|
+| prose (9) | 8 | 1 | 0 | 0 |
+| table (6) | 6 | 0 | 0 | 0 |
+| figure (5) | 3 | 2 | 0 | 0 |
+| out_of_scope (2) | 2 | 0 | 0 | 0 |
+| synthesis (5) | 5 | 0 | 0 | 0 |
+| recency (3) | 3 | 0 | 0 | 0 |
+| **Total (30)** | **27** | **3** | **0** | **0** |
+
+**27 correct, 3 partial, 0 wrong, 0 hallucinated — matches the NotebookLM baseline's exact
+score (27/30, 3 partial, 0/0).** The two systems land in the same place by a different
+route: NotebookLM's misses were a ranking slip and an unverifiable added specificity;
+ours are two precision gaps that trace to the *ingest* prompt (not the query loop) and one
+retrieval miss in a single-document answer. Every routing bug and stale-ground-truth issue
+found during iteration is now confirmed fixed, not just theoretically patched.
 
 ---
 
@@ -133,26 +140,64 @@ selects both sources for questions naming two distinct time points.
 ### Q22 [prose] — CORRECT
 60 stations/53 in CA/4 heavy-duty — exact, correctly flagged as a 2022/2023-vintage figure.
 
-### Q23-27, 29, 30 — NOT YET ANSWERED
-Routed correctly (spot-checked in the run log) but blocked by the daily answering-model
-quota before an answer call was made. Will populate on the next resumed run.
+### Q23 [prose] — CORRECT
+65-85% BEV / 40-50% ICE / 30-50% H2FC efficiency — exact, matches Q9's white-paper source.
+
+### Q24 [prose] — CORRECT
+13,000+ trucks, 213 stations (25 public), 2,000+ technicians, 10,000+ drivers, $4B invested,
+110M gallons displaced in 2024 — all exact, correctly attributed to Marty Tufte (transcribed
+as "Tufty" — an artifact carried from the ingest step's speech-to-text, not a new error),
+with accurate bonus detail (RNG facility counts, NOx-compliant truck count).
+
+### Q25 [table] — CORRECT
+7 facilities / ~40M DGE now, 17 under construction, 200M+ DGE by 2026, correctly adds the
+-126 carbon intensity score as bonus detail.
+
+### Q26 [prose] — CORRECT
+54 trucks (1985) = 10,080 trucks (2018 standard) — exact.
+
+### Q27 [prose] — CORRECT
+10% of PTI's fleet, correct 15+ year CNG history and "second inning" framing. Bonus claim
+("approaching 80 million miles, over 12 million gallons displaced") verified directly
+against the source transcript at its cited timestamp (23:20) — real, not fabricated.
+
+### Q28 [out_of_scope] — CORRECT (from prior run)
+Correctly refuses for Session 2 specifically; hydrogen only mentioned in passing there.
+
+### Q29 [synthesis] — CORRECT
+Correctly says WM was not a tracked fleet, correctly distinguishes its Bootcamp-speaker role
+from actual Run participation, correctly lists all 13 tracked fleets by powertrain.
+
+### Q30 [table] — CORRECT
+5,000-6,000 trucks at the 20-milligram NOx level vs. the referenced 0.035 threshold —
+correct numbers, though it doesn't spell out the g/bhp-hr units on either figure the way
+the expected answer does (a minor clarity gap, not a factual one). Correctly adds the
+1985-vs-2018 emissions comparison as supporting context.
 
 ---
 
-## Notes for the eventual full comparison
+## Notes for the two-stage design going forward
 
 1. **Router is now meaningfully better than the first pass.** Of the 5 questions that were
-   broken in the very first run (Q8, 9, 11, 12, 21), all 5 are now correct or partial-with-
-   a-real-value, not wrong or unanswered. The 3 fixes (catalog-is-a-summary-not-the-source,
-   figure-numbers-aren't-unique-across-sources, two-timepoints-need-two-sources) each solved
-   a real, reproducible failure — not guesswork.
+   broken in the very first run (Q8, 9, 11, 12, 21), all 5 landed correct or partial-with-a-
+   real-value here, never wrong or unanswered. The 3 fixes (catalog-is-a-summary-not-the-
+   source, figure-numbers-aren't-unique-across-sources, two-timepoints-need-two-sources)
+   each solved a real, reproducible failure — not guesswork, and each was verified against
+   the exact question that had been failing before being folded into the full run.
 2. **Two precision gaps (Q11, Q12) trace back to the ingest prompt**, not the query loop —
    time-series charts get transcribed as a value range rather than a peak-plus-date. Worth
-   revisiting `transcribe_page.txt` if this matters for real usage, flagged back when the
+   revisiting `transcribe_page.txt` if this matters for real usage; flagged back when the
    reports were first ingested and still outstanding.
-3. **One real answering-stage miss (Q2)** where the model claimed a document didn't state
-   something it does state, in the same document it was given. Worth a closer look once the
-   full 30 are in, to see if it's a one-off or a pattern.
-4. **No hallucinations found** in anything scored so far, including in the most
-   numerically-dense answers (Q13, Q19, Q20) where fabrication would be easiest to miss —
-   spot-checks against source text confirmed every surprising number.
+3. **One real answering-stage miss (Q2)**, isolated to a single question across all 30:
+   claimed a document didn't state something it does state, in the same document it was
+   given. Not a routing problem and didn't recur elsewhere, so likely a one-off rather than
+   a systemic pattern — but worth watching if it shows up again as more questions are added.
+4. **No hallucinations found across all 30**, including in the most numerically-dense
+   answers (Q13, Q19, Q20, Q24) where fabrication would be easiest to miss — every
+   surprising or unfamiliar number was spot-checked directly against source text and
+   confirmed real, including two cases (Q18's "441 miles," Q27's "80 million miles") that
+   weren't in the original hand-written eval and could easily have been mistaken for
+   invented specificity if left unverified.
+5. **`gemini-3.5-flash`'s free-tier daily quota not resetting as documented** is worth
+   flagging to Google or just avoiding going forward — `gemini-3.6-flash` was a clean,
+   same-tier substitute with no observed quality regression.
