@@ -6,7 +6,7 @@ export interface CatalogEntry {
   type: string;
   published: string;
   url: string | null;
-  media: { kind: string; pages: number | null };
+  media: { kind: "pdf"; pages: number } | { kind: "video"; minutes: number };
 
   topics: string[];
   vehicle_classes: number[];
