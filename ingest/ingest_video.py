@@ -19,16 +19,24 @@ Usage:
 """
 import argparse
 import os
+import re
 import sys
+import time
 from pathlib import Path
 
 from dotenv import find_dotenv, load_dotenv
 from google import genai
+from google.genai import types
 from pypdf import PdfReader
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SOURCES_DIR = REPO_ROOT / "corpus" / "sources"
 DEFAULT_MODEL = "gemini-3.5-flash"
+# See ingest_pdf.py for why this exists: without it, a stalled connection hangs forever
+# instead of raising, bypassing retry entirely.
+REQUEST_TIMEOUT_MS = 180_000
+RETRY_DELAY_RE = re.compile(r"'retryDelay':\s*'(\d+)s'")
+RATE_LIMIT_MAX_WAIT = 65
 
 CLEANUP_PROMPT = """You are cleaning up a raw auto-generated caption transcript of a NACFE
 webinar/video, "{title}", for use as the source of record in a public question-answering
@@ -82,9 +90,31 @@ def ingest(transcript_path, source_id, title, model, force=False):
     raw_text = extract_text(transcript_path)
     print(f"{Path(transcript_path).name}: {len(raw_text)} raw chars")
 
-    client = genai.Client(api_key=api_key)
+    client = genai.Client(api_key=api_key, http_options=types.HttpOptions(timeout=REQUEST_TIMEOUT_MS))
     prompt = CLEANUP_PROMPT.format(title=title, transcript=raw_text)
-    response = client.models.generate_content(model=model, contents=[prompt])
+
+    last_err = None
+    response = None
+    for attempt in range(1, 7):
+        try:
+            response = client.models.generate_content(model=model, contents=[prompt])
+            break
+        except Exception as e:  # noqa: BLE001 - real network/API errors, log and retry
+            last_err = e
+            is_rate_limit = "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e)
+            m = RETRY_DELAY_RE.search(str(e))
+            if m:
+                wait = min(int(m.group(1)) + 2, RATE_LIMIT_MAX_WAIT)
+            elif is_rate_limit:
+                wait = min(15 * attempt, RATE_LIMIT_MAX_WAIT)
+            else:
+                wait = min(2 ** attempt, 30)
+            reason = "rate limit" if is_rate_limit else "error"
+            print(f"  {reason} (attempt {attempt}/6): {e}. Waiting {wait}s...", file=sys.stderr)
+            time.sleep(wait)
+    if response is None:
+        raise last_err
+
     usage = response.usage_metadata
     print(f"  tokens: prompt={usage.prompt_token_count} output={usage.candidates_token_count} total={usage.total_token_count}")
 

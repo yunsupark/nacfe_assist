@@ -35,6 +35,7 @@ from pathlib import Path
 import os
 from dotenv import find_dotenv, load_dotenv
 from google import genai
+from google.genai import types
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CATALOG_PATH = REPO_ROOT / "corpus" / "catalog.json"
@@ -50,6 +51,9 @@ ANSWER_MODEL = "gemini-3.6-flash"  # gemini-3.5-flash's free-tier daily quota go
 # and gemini-3.6-flash work fine on the same key while 3.5-flash stays exhausted, so this
 # switches the answering stage off the stuck model rather than keep waiting on it.
 CURRENT_YEAR = "2026"
+# See ingest_pdf.py for why this exists: without it, a stalled connection hangs forever
+# instead of raising, bypassing retry entirely.
+REQUEST_TIMEOUT_MS = 180_000
 
 JSON_FENCE_RE = re.compile(r"^```(?:json)?\s*|\s*```$", re.MULTILINE)
 RETRY_DELAY_RE = re.compile(r"'retryDelay':\s*'(\d+)s'")
@@ -188,7 +192,7 @@ def run(questions_path, limit=None, only_bucket=None, fresh=False):
     if limit:
         questions = questions[:limit]
 
-    client = genai.Client(api_key=api_key)
+    client = genai.Client(api_key=api_key, http_options=types.HttpOptions(timeout=REQUEST_TIMEOUT_MS))
 
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     out_path = RESULTS_DIR / "two_stage_raw.jsonl"

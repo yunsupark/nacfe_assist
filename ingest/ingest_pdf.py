@@ -32,6 +32,13 @@ LOG_PATH = Path(__file__).resolve().parent / "ingest_log.jsonl"
 
 DEFAULT_MODEL = "gemini-3.5-flash-lite"
 SINGLE_CALL_PAGE_LIMIT = 60
+# Without an explicit timeout, a stalled connection hangs forever instead of raising --
+# silently, with no retry, no error, nothing in the logs. Confirmed in practice: one call
+# hung for ~2 real days before being noticed and killed by hand. 300s bounds the worst case
+# to something a retry loop can see; 180s turned out too tight for at least two genuinely
+# dense 40-page windows, which hit ReadTimeout on all 6 retries in a row rather than the
+# transient network blips the retry loop is meant to absorb.
+REQUEST_TIMEOUT_MS = 300_000
 WINDOW_SIZE = 40
 WINDOW_OVERLAP = 2
 
@@ -92,6 +99,16 @@ def call_gemini(client, model, prompt, pdf_bytes, retries=6):
                     prompt,
                 ],
             )
+            if response.text is None:
+                # Empty response (no exception raised) -- usually a safety-filter block on
+                # this specific page range, not a transient network issue. Confirmed in
+                # practice: a hydrogen-tank-storage page range tripped this. Surface the
+                # finish_reason so it's diagnosable, and retry -- a different window
+                # boundary or a retried call sometimes gets through.
+                finish_reason = None
+                if response.candidates:
+                    finish_reason = getattr(response.candidates[0], "finish_reason", None)
+                raise ValueError(f"empty response from model (finish_reason={finish_reason})")
             return response
         except Exception as e:  # noqa: BLE001 - real network/API errors, log and retry
             last_err = e
@@ -138,7 +155,7 @@ def log_call(source_id, start, end, model, usage, window_idx):
     return entry
 
 
-def ingest(pdf_path, source_id, model, published=None, force=False):
+def ingest(pdf_path, source_id, model, published=None, force=False, window_size=WINDOW_SIZE):
     pdf_path = Path(pdf_path)
     out_path = SOURCES_DIR / f"{source_id}.md"
     if out_path.exists() and not force:
@@ -155,9 +172,9 @@ def ingest(pdf_path, source_id, model, published=None, force=False):
     total_pages = len(reader.pages)
     windowed = total_pages > SINGLE_CALL_PAGE_LIMIT
 
-    client = genai.Client(api_key=api_key)
+    client = genai.Client(api_key=api_key, http_options=types.HttpOptions(timeout=REQUEST_TIMEOUT_MS))
 
-    windows = list(page_windows(total_pages))
+    windows = list(page_windows(total_pages, window_size=window_size))
     print(f"{pdf_path.name}: {total_pages} pages -> {len(windows)} call(s), model={model}")
 
     all_window_blocks = []
@@ -200,10 +217,20 @@ def main():
     parser.add_argument("--id", required=True, dest="source_id", help="Source id, e.g. run-on-less-messy-middle-blueprint-2025")
     parser.add_argument("--model", default=DEFAULT_MODEL)
     parser.add_argument("--force", action="store_true", help="Overwrite existing corpus/sources/<id>.md")
+    parser.add_argument(
+        "--window-size",
+        type=int,
+        default=WINDOW_SIZE,
+        help=(
+            f"Pages per call for docs over {SINGLE_CALL_PAGE_LIMIT} pages (default {WINDOW_SIZE}). "
+            "Lower this to work around a persistent recitation block on one window -- a smaller "
+            "window changes what content lands together in a single output pass."
+        ),
+    )
     args = parser.parse_args()
 
     load_dotenv(find_dotenv(usecwd=True))
-    ingest(args.pdf_path, args.source_id, args.model, force=args.force)
+    ingest(args.pdf_path, args.source_id, args.model, force=args.force, window_size=args.window_size)
 
 
 if __name__ == "__main__":
