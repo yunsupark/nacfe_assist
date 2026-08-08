@@ -208,6 +208,9 @@ def run(questions_path, limit=None, only_bucket=None, fresh=False):
         if q["q"] in prior:
             print("    reusing prior result")
             results.append(prior[q["q"]])
+            with open(out_path, "w") as out_f:
+                for r in results:
+                    out_f.write(json.dumps(r) + "\n")
             continue
 
         try:
