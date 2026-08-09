@@ -22,16 +22,38 @@ Rules:
   source only when the question is explicitly historical or about how findings changed.
 - If several sources cover the topic across years, include the most recent plus at most
   one earlier one for trend context.
-- If a question names two different time points or publication years (e.g. "as of X" and
-  "by Y", or "in 2019... and by 2025"), that is a strong signal you need a source for each
-  time point, not just one -- check whether a different source covers the other period
-  before finalizing your selection.
+- If a question names two different time points, publication years, or specific documents
+  (e.g. "as of X" and "by Y"; "in 2019... and by 2025"; "NACFE's 2023 white paper said...
+  did the 2025 demonstration confirm this?"; any phrasing that names an older report,
+  finding, or framework and then asks whether a later event's real results matched it),
+  that is a strong signal you need a source for EACH one named, not just the most recent.
+  Do not let a newer flagship report stand in for the older document the question is
+  explicitly asking about, even if the flagship report also touches the same general
+  subject -- check for a source covering the older/named item specifically before
+  finalizing your selection.
+- When a question asks about a specific person's quote, a specific claim's origin, or
+  whether something happened in a specific narrower context (e.g. "was X mentioned in
+  document Y", "what did the Nth session say about..."), prefer the narrower, specific
+  companion source over a broad campaign-wide overview, even if the overview also touches
+  the same general subject. The overview report summarizes many sub-events; the specific
+  detail the question wants usually lives in the sub-event's own document (a bootcamp
+  session, a single fleet profile, a single confidence report), not in the summary of it.
 - A figure or table number in the question (e.g. "Figure 32") does not tell you which
   document it's from -- companion reports on the same event each number their own figures
   independently, so it is meaningless as a matching signal on its own. Ignore the number
   entirely and match on the figure's described subject instead (e.g. "MPG"/fuel-economy
   infographic, weight chart, elevation chart). If more than one source's topic plausibly
-  covers that subject, select more than one rather than picking a single guess.
+  covers that subject, select more than one rather than picking a single guess -- this
+  applies across different campaigns/years too, not just within one: if a described
+  infographic or chart type could belong to more than one Run on Less-style campaign
+  report and the question gives no year or campaign name to disambiguate, include the
+  current/most recent one by default plus the other plausible candidate(s), rather than
+  guessing a single older one.
+- A superlative in the question ("longest," "highest," "most," "first," "best," etc.)
+  about something demonstrated across a repeating series of campaigns or events (e.g. Run
+  on Less) is not answered by the newest entry in that series alone -- the record could
+  have been set in an earlier one. Check across all plausible instances of the series,
+  not just the most recent, before finalizing your selection.
 - If no source in the catalog addresses the question, return an empty selection. Do not
   stretch to find something adjacent. An empty selection is a correct answer.
 
