@@ -7399,5 +7399,1303 @@
     "token_count": 1470,
     "ingested": "2026-08-07",
     "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "confidence-report-messy-middle-maintenance-2026",
+    "title": "Messy Middle Powertrain Service & Maintenance",
+    "type": "confidence_report",
+    "published": "2026-06",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 198
+    },
+    "topics": [
+      "powertrain-maintenance",
+      "diesel-aftertreatment",
+      "renewable-diesel",
+      "biodiesel",
+      "renewable-natural-gas",
+      "battery-electric-maintenance",
+      "hydrogen-fuel-cell-maintenance",
+      "technician-training",
+      "high-voltage-safety",
+      "tires-wheels-brakes",
+      "charging-and-fueling-infrastructure",
+      "run-on-less-messy-middle"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr",
+      "regional-linehaul",
+      "drayage-port-shuttle"
+    ],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "NACFE Confidence Report examining service and maintenance requirements across the full range of Class 8 powertrains now in the Messy Middle transition: advanced diesel/ICE, renewable diesel, biodiesel, renewable natural gas, battery-electric, hydrogen internal combustion, and hydrogen fuel cell. Developed as a UC Riverside class project, primary author Marcos Alvarez conducted roughly a year of interviews with OEMs, fleet service managers, and subject-matter experts, plus site visits during NACFE's Run on Less – Messy Middle (September 2025) and ACT Expo 2025. Covers technician training, safety protocols, diagnostic tools, oil/DEF/coolant maintenance, tires/wheels/brakes, and fueling/charging infrastructure upkeep. Published June 25, 2026.",
+    "key_findings": [
+      "Cummins' Oil Guard oil-sampling program allows approved fleets to extend FA-4 oil drain intervals up to 80,000 miles, a 60% increase over the 50,000-mile baseline for conventional CK-4 oil, while PACCAR's MX-13 recommends 75,000-mile intervals under regular duty and 35,000 miles under severe duty.",
+      "Fuel cell electric trucks require filter replacement every 30,000 to 40,000 miles, coolant changes every 150,000 miles, and stack replacement at roughly 400,000 to 700,000 miles depending on duty cycle, a maintenance profile very different from hydrogen internal combustion engines, which follow diesel-like service intervals.",
+      "Battery-electric truck curb weights exceed diesel equivalents by 8,000 to 12,000 lbs. (e.g., Tesla Semi over 23,000 lbs., Freightliner eCascadia over 21,000 lbs.), increasing tire contact-patch stress by 30% to 50% during acceleration and requiring tire rotation intervals shortened from 6,000-8,000 miles to 4,500-6,000 miles."
+    ],
+    "data_available": [
+      "OEM biodiesel/renewable diesel support matrix (Fig. 14)",
+      "DPF regeneration intervals by fuel type (Fig. 9)",
+      "oil/coolant/DEF maintenance checklist (Appendix B)",
+      "CAN bus diagnostic primer (Appendix C)",
+      "high-voltage safety check procedures (Appendix D)",
+      "list of diesel/EV technician training programs (Appendix A)"
+    ],
+    "token_count": 123460,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "intentional-pairing-2019",
+    "title": "The Feasibility of Intentional Pairing: Heavy-Duty Tractors and Trailers",
+    "type": "thought_leadership",
+    "published": "2019-07",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 86
+    },
+    "topics": [
+      "tractor-trailer-pairing",
+      "trailer-aerodynamics",
+      "fleet-asset-utilization",
+      "supertruck",
+      "freight-efficiency-modeling",
+      "drop-and-hook",
+      "trailer-tracking"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr",
+      "regional-linehaul"
+    ],
+    "fleets_studied": [
+      "PepsiCo",
+      "NFI",
+      "Schneider",
+      "CFI",
+      "Nussbaum",
+      "Maverick",
+      "Bison Transport",
+      "UPS",
+      "Werner",
+      "Hirschbach",
+      "Ryder"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "NACFE report commissioned by a major truck manufacturer investigating whether intentionally matching specific tractor models to specific trailer models (e.g., pairing SuperTruck-spec tractors with SuperTruck-spec trailers) can reliably improve fuel economy in North American dry van and refrigerated trucking. Published July 30, 2019, the study draws on roughly 90 references, NACFE's Annual Fleet Fuel Study data, and a limited survey of 14 of 50 fleets contacted, plus consultation with owner-operators. It concludes that most dry van and reefer trailers operate in drop-and-hook pools rather than dedicated pairings, making full intentional pairing statistically improbable outside niche or small-fleet operations.",
+    "key_findings": [
+      "A 5% to 10% net improvement in truck operating costs would be needed to make fleets consider restructuring operations for intentional tractor-trailer pairing.",
+      "The national dry van trailer-to-tractor ratio averages about 3:1 (refrigerated vans about 1.2:1 to 2.2:1), meaning a SuperTruck tractor would need roughly three SuperTruck trailers in the pool to realize its full annual efficiency potential.",
+      "NACFE's 2018 Annual Fleet Fuel Study of fleets operating over 71,844 tractors and 236,292 trailers found average fleet fuel economy of 7.26 MPG in 2017, versus a national baseline of 6.7 MPG for the entire U.S. van trailer population."
+    ],
+    "data_available": [
+      "fleet survey data (14 of 50 fleets)",
+      "AFFS technology adoption curves (Figs. 13-16)",
+      "trailer-tractor ratio and duty cycle tables",
+      "probability tables for trip length, load weight, and pairing scenarios"
+    ],
+    "token_count": 43412,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "confidence-report-determining-efficiency-2016",
+    "title": "Confidence Report: Determining Efficiency",
+    "type": "confidence_report",
+    "published": "2016-01",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 65
+    },
+    "topics": [
+      "fuel-efficiency-testing-methods",
+      "aerodynamics-testing",
+      "cfd-analysis",
+      "wind-tunnel-testing",
+      "track-testing",
+      "on-road-testing",
+      "fleet-fuel-study",
+      "payback-analysis"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [],
+    "fleets_studied": [
+      "UPS",
+      "C.R. England",
+      "Frito-Lay",
+      "Challenger Motor Freight",
+      "Con-way Truckload",
+      "Crete Carrier",
+      "Nussbaum",
+      "Paper Transport",
+      "Prime Inc.",
+      "Ryder",
+      "Schneider National",
+      "Bison Transport",
+      "Werner Enterprises"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "NACFE/Trucking Efficiency Confidence Report (published January 28, 2016) explaining the range of methods used to measure and estimate heavy-duty freight efficiency gains, using aerodynamic technologies as the illustrative example. Covers five test categories -- computational fluid dynamics, wind tunnel testing, track testing (coastdown, constant-speed, SAE J1321/J1526), on-road testing, and fleet composite testing -- along with real-world factors (temperature, wind, road grade, driver, traffic drafting) that cause deviation from controlled test results. Draws on NACFE's 2015 Fleet Fuel Study of 14 large fleets and case studies including a 2013 DOE/Lawrence Livermore/Navistar/Frito-Lay field trial and a 2013 NACFE 6x2 axle Confidence Report.",
+    "key_findings": [
+      "NACFE's 2015 Fleet Fuel Study found participating fleets achieving fleet-wide fuel economy of just under 7.0 mpg versus a 5.9 mpg U.S. average for over-the-road tractors, saving about $9,000 per tractor per year compared to a fleet with no efficiency-technology investment.",
+      "A DOE/Lawrence Livermore/Navistar field study of aerodynamic devices over 1.4 million Frito-Lay fleet miles and 690,000 Spirit Truck Lines miles found on-road results roughly half of what SAE Type II track tests and wind tunnel evaluations had predicted.",
+      "In a 2013 NACFE Confidence Report on 6x2 axles, ten independent tests (fleet and OEM) all showed positive fuel economy gains ranging from 1.6% to 4.6%, despite using different test methods, illustrating that trend consistency matters more than absolute precision."
+    ],
+    "data_available": [
+      "EPA GHG Phase I aero drag coefficient comparison across 4 test methods (Fig. 28)",
+      "6x2 vs 6x4 fuel economy test summary table (Figs. 29-30)",
+      "list of ~25 SAE/EPA/TMC test standards",
+      "payback period charts vs. fuel price and device cost"
+    ],
+    "token_count": 36129,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "buckendale-lecture-2020",
+    "title": "Transformational Technologies Reshaping Transportation – An Industry Perspective",
+    "type": "thought_leadership",
+    "published": "2020",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 49
+    },
+    "topics": [
+      "electrification",
+      "autonomous-trucks",
+      "platooning",
+      "connected-vehicles",
+      "supertruck",
+      "alternative-fuels",
+      "technology-adoption-s-curve",
+      "fleet-case-studies",
+      "zero-emission-trucking"
+    ],
+    "vehicle_classes": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr",
+      "regional-rtb",
+      "urban-metro-pd",
+      "drayage-port-shuttle"
+    ],
+    "fleets_studied": [
+      "PepsiCo/Frito-Lay",
+      "UPS",
+      "NFI"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "2020 SAE L. Ray Buckendale Lecture by Mike Roeth (NACFE Executive Director), the third in an SAE series on transformational change in commercial trucking (following 2018 government and 2019 academia perspectives), giving an industry view. Covers electrification (BEV and hydrogen fuel cell), levels of automation/autonomy, platooning, connected vehicles, the DOE SuperTruck I/II programs, and factors driving fleet technology adoption (S-curve dynamics, residual value, regulation, risk, vehicle life expectancy, operating costs, fuel price volatility). Includes 2020 case studies of PepsiCo/Frito-Lay's Transforming Modesto project, UPS's Rolling Laboratory and CNG/RNG fleet, and NFI's Chino, California battery-electric drayage pilot.",
+    "key_findings": [
+      "NACFE's 2017 Run on Less demonstration of 7 Class 8 tractors averaged 10.1 mpg over 17 days and 50,107 miles at an average GVW of 55,498 lbs., more than double the roughly 5.9-6.0 mpg U.S. average for combination trucks at the time.",
+      "PepsiCo's Frito-Lay Transforming Modesto project (announced October 2019) planned to deploy 15 Tesla Semi battery-electric tractors, 38 Volvo CNG/RNG tractors, six Peterbilt 220EV battery-electric box trucks, and associated charging/CNG infrastructure at its Modesto, California facility by 2021.",
+      "NFI's Chino, California drayage pilot planned 65 tractors for electrification on a roughly 50-mile-each-way route to the ports of Los Angeles/Long Beach, with net energy consumption estimated at 1.6 to 2.4 kWh/mile on the drayage routes."
+    ],
+    "data_available": [
+      "FHWA/EPA vehicle weight classification tables (Figs. 1, 3)",
+      "SAE J3016 automation levels (Fig. 10)",
+      "technology decision-bias chart (Fig. 12)",
+      "SuperTruck I/II vehicle photos and specs",
+      "NACFE AFFS 85-technology adoption curves (Figs. 21-23)",
+      "UPS/PepsiCo/NFI fleet technology deployment lists"
+    ],
+    "token_count": 44433,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "trailer-tech-costs-2014",
+    "title": "Costs and Adoption Rates of Fuel-Saving Technologies for Trailers in the North American On-Road Freight Sector",
+    "type": "article",
+    "published": "2014-02",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 22
+    },
+    "topics": [
+      "trailer-aerodynamics",
+      "side-skirts",
+      "boat-tails",
+      "underbody-devices",
+      "gap-reducers",
+      "low-rolling-resistance-tires",
+      "wide-base-tires",
+      "tire-pressure-systems",
+      "smartway",
+      "carb-ghg-regulation"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "Joint ICCT/NACFE white paper (Ben Sharpe, Mike Roeth), published February 2014, based on telephone interviews conducted August-December 2013 with 22 companies -- 11 trucking fleets, 3 trailer OEMs, 6 aerodynamic device manufacturers, and 2 tire manufacturers -- to quantify costs, fuel savings, payback periods, and adoption rates of trailer aerodynamic (side skirts, underbody devices, boat tails, gap reducers) and tire (low rolling resistance duals, wide-base singles, tire pressure systems) technologies. Finds costs for side skirts had dropped roughly 54-70% since 2008-2010 estimates, driven mainly by California's tractor-trailer GHG regulation and the EPA SmartWay program.",
+    "key_findings": [
+      "Side skirts were estimated to be installed on about 40% of new box trailers, at a typical cost of $700-$1,100 and average fuel savings of 3% (best performers up to 7%), yielding payback times of 6 months to 2 years.",
+      "Roughly one-quarter of all trailers on U.S. roads had at least one aerodynamic technology (side skirt, underbody device, or boat tail) as of the study, expected to rise to about 33% once California's regulation fully phases in by 2020.",
+      "About half of all tractor and trailer tires sold were SmartWay-verified low rolling resistance duals (1-3% fuel savings), while wide-base single tire adoption on new trailers was around 10% (2-4% fuel savings)."
+    ],
+    "data_available": [
+      "Table 6 summary of cost/savings/payback/adoption by technology",
+      "side-skirt/boat-tail cost comparison across TIAX 2009, NAS 2010, and this study (Fig. 2)",
+      "payback calculation tables for each trailer technology (Tables 2-5)"
+    ],
+    "token_count": 14310,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "driving-maximum-efficiency-2026",
+    "title": "Driving Maximum Efficiency: How Fleets Are Implementing Existing Technologies to Reduce Costs and Improve Efficiency, and a Closer Look at Renewable Natural Gas in Heavy-Duty Applications",
+    "type": "thought_leadership",
+    "published": "2026",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 21
+    },
+    "topics": [
+      "shell-starship",
+      "renewable-natural-gas",
+      "low-viscosity-lubricants",
+      "fa-4-oil",
+      "fleet-fuel-study",
+      "diesel-optimization",
+      "trailer-and-tractor-aerodynamics",
+      "run-on-less-messy-middle"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr",
+      "regional-linehaul"
+    ],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "Shell-sponsored NACFE report with no explicit publication date printed in the text; internal references to a March 2024 NACFE Natural Gas Confidence Report, the September 2025 Run on Less – Messy Middle event, Shell Starship 3.0's 2025 INDYCAR circuit runs, and a 2026-dated EIA citation confirm publication in 2026 -- not the ~2012 date the filename suggested. Profiles technologies used by high-efficiency fleets to cut fuel costs and carbon intensity: low-viscosity/FA-4 engine oils and synthetic transmission/axle fluids, and renewable natural gas (RNG). Uses NACFE Fleet Fuel Study data and the Shell Starship demonstration vehicle (three generations, 2018-2023) as case studies, alongside results from Run on Less – Messy Middle (18-day event, September 2025).",
+    "key_findings": [
+      "Diesel trucks in Run on Less – Messy Middle averaged 11 mpg over an 18-day period, more than 50% higher than the U.S. average for diesel and a 9% improvement over the 10 mpg average achieved by comparable trucks and drivers in the 2017 Run on Less.",
+      "Shell Starship 3.0, powered by a Cummins X15N engine on renewable natural gas, achieved 9 mpg (diesel gallon equivalent) and freight efficiency exceeding 200 ton-miles per gallon on a 2023 California demonstration run near 80,000 lb GVW.",
+      "NACFE Fleet Fuel Study fleets with 50%+ technology adoption rates averaged 8.8 mpg by 2023 versus 6.8 mpg for fleets with under 30% adoption; fleets using low-viscosity CK-4 engine oil reported 0.5-1.5% fuel savings, with FA-4 oil adding another 0.4-0.7%."
+    ],
+    "data_available": [
+      "FHWA combination-truck fuel economy trend 2007-2023 (Fig. 1)",
+      "FFS technology-adoption vs. fuel-economy trend 2003-2023 (Figs. 2-4)",
+      "confidence matrix for low-viscosity engine oil adoption (Fig. 5)",
+      "Messy Middle powertrain transition decision framework (Fig. 6)"
+    ],
+    "token_count": 9893,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "redefining-long-haul-2025",
+    "title": "A Need to Redefine Class 8 Long-Haul Trucking",
+    "type": "thought_leadership",
+    "published": "2025",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 7
+    },
+    "topics": [
+      "long-haul-definition",
+      "regional-haul",
+      "return-to-base",
+      "day-cab-tractors",
+      "sleeper-tractors",
+      "run-on-less-messy-middle",
+      "messy-middle"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr",
+      "regional-rtb",
+      "regional-linehaul"
+    ],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "NACFE white paper by Mike Roeth (2025) arguing that the industry's traditional definition of 'long haul' trucking -- synonymous with over-the-road sleeper operations -- should be broadened to include long-distance return-to-base operations using day cab tractors. Defines short/medium/long regional-haul mileage bands, discusses slip seating and team driving, and previews the September 2025 Run on Less – Messy Middle demonstration featuring roughly 10 fleets and multiple powertrains (diesel, natural gas, battery electric, hydrogen fuel cell) in long-haul return-to-base and over-the-road duty cycles.",
+    "key_findings": [
+      "NACFE defines short regional haul as under 50 miles out-and-back (100 miles total), medium regional haul as roughly 100 miles out-and-back (200 miles total), and long regional haul as roughly 300 miles out-and-back (600 miles total).",
+      "ACT Research data cited by NACFE shows the Class 8 market splitting into roughly 44% sleeper tractors, 25% day cab tractors, 30% day cab work trucks, and 1% sleeper work trucks.",
+      "During Run on Less – Electric DEPOT, Tesla Semi trucks deployed by PepsiCo reached ranges up to 410 miles on a single charge, with one truck completing 1,076 miles in a 24-hour period; team driving separately allows a truck to cover about 1,000 miles in 24 hours under hours-of-service rules."
+    ],
+    "data_available": [
+      "Class 8 market segmentation by cab/body type (Fig. 1)",
+      "regional haul mileage-band definitions (Fig. 3)",
+      "long-haul redefinition schematic (Fig. 4)"
+    ],
+    "token_count": 3357,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "driver-tips-fuel-economy-2022",
+    "title": "Driver Tips for Increasing Fuel Economy",
+    "type": "article",
+    "published": "2022",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 2
+    },
+    "topics": [
+      "driver-fuel-economy-tips",
+      "idling-reduction",
+      "cruise-control",
+      "tire-inflation",
+      "aerodynamic-device-maintenance"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "Two-page NACFE driver tip sheet listing 12 practical actions truck drivers can take to improve fuel economy: watching speed, maintaining constant speed, finding the engine's efficient RPM range, avoiding harsh braking, smooth acceleration, tire inflation checks, aerodynamic device maintenance, cruise control use, minimizing idling, following distance, route optimization, and minimizing shifting. No formal study methodology; presents commonly cited industry rules of thumb rather than fleet-specific test data. No publication date appears in the document itself; year is carried over from source metadata.",
+    "key_findings": [
+      "Each mile per hour driven over 60 mph is estimated to reduce fuel economy by about 0.1 mpg, so a truck at 65 mph would see roughly 27% better fuel efficiency than the same truck at 75 mph.",
+      "A 10% annual reduction in idling is estimated to be worth about 1% in fuel economy, translating to roughly $300-$500 per year at $3.00/gallon fuel and 100,000 miles driven annually.",
+      "Tires underinflated by 10 psi are associated with a 0.5-1.0% increase in fuel consumption."
+    ],
+    "data_available": [],
+    "token_count": 800,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "run-on-less-messy-middle-emissions-2026",
+    "title": "From Source to Highway: The Messy Middle Emissions Report",
+    "type": "run_on_less",
+    "published": "2026-07",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 151
+    },
+    "topics": [
+      "emissions",
+      "greenhouse-gas",
+      "well-to-wheel",
+      "natural-gas",
+      "renewable-natural-gas",
+      "battery-electric",
+      "hydrogen-fuel-cell",
+      "biodiesel",
+      "renewable-diesel",
+      "air-quality",
+      "public-health",
+      "powertrain-comparison",
+      "decarbonization"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr",
+      "regional-linehaul",
+      "drayage-port-shuttle"
+    ],
+    "fleets_studied": [
+      "Albert Transport Inc.",
+      "Frito-Lay",
+      "Mesilla Valley Transportation (MVT)",
+      "Schneider",
+      "Kleysen Group Ltd.",
+      "UPS",
+      "Wegmans Food Markets",
+      "4Gen Logistics",
+      "JoyRide Logistics",
+      "Nevoya",
+      "Saia",
+      "Penske Logistics",
+      "Pilot Travel Centers LLC"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "This report analyzes well-to-wheel emissions and public-health impacts across the 13 fleets that ran diesel/biodiesel/renewable-diesel, natural gas/RNG, battery-electric, and hydrogen fuel-cell Class 8 trucks in NACFE's 2025 Run on Less – Messy Middle demonstration. Using telematics data, fuel and energy carbon-intensity scores, and health-impact modeling across 31 target counties, the study quantifies CO2, NOx, PM, and health outcomes by powertrain and fuel origin over an 18-day, multi-route real-freight event, concluding that fuel/energy source often matters more than propulsion technology for emissions outcomes.",
+    "key_findings": [
+      "Best-performing diesel fleets achieved 11.77 MPG (Albert Transport) and 11.74 MPG (MVT) against a 6.5 MPG/156.6 metric-ton annual CO2 baseline, while Frito-Lay's B99 biodiesel truck cut estimated annual CO2 emissions by 86% to 21.8 metric tons.",
+      "Battery-electric trucks cut CO2 emissions by 62% to over 99% versus diesel depending on grid carbon intensity, ranging from 351 g CO2e/mile for a drayage truck on the SCE grid to 12-13 g CO2e/mile for Saia trucks charging on PG&E's low-carbon grid.",
+      "Wegmans' dairy-manure RNG truck achieved an estimated carbon-negative footprint (CI score of -150 gCO2e/MJ, ~-250% net GHG impact vs. diesel), and replacing the oldest 130,000 diesel trucks in 31 target counties with RNG was projected to avoid more than 100 premature deaths and save roughly $2 billion annually in healthcare costs."
+    ],
+    "data_available": [
+      "Figures ES2-ES5: fleet-by-fleet MPG/CO2 and well-to-wheel GHG emissions tables and charts",
+      "Diesel/CNG/BEV/hydrogen fleet comparison matrices with speed-band and topography data",
+      "Health-impact modeling for 31 target counties (avoided mortality, morbidity, cost)",
+      "NOx/SOx/PM criteria pollutant analysis by powertrain (Section 9.2)"
+    ],
+    "token_count": 81971,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "confidence-report-natural-gas-2024",
+    "title": "Natural Gas' Role in Decarbonizing Trucking",
+    "type": "confidence_report",
+    "published": "2024-03",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 88
+    },
+    "topics": [
+      "natural-gas",
+      "renewable-natural-gas",
+      "cng",
+      "lng",
+      "decarbonization",
+      "emissions",
+      "fuel-economy",
+      "powertrain-comparison",
+      "methane-leakage",
+      "alternative-fuels"
+    ],
+    "vehicle_classes": [
+      6,
+      7,
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr",
+      "regional-rtb",
+      "urban-metro-pd"
+    ],
+    "fleets_studied": [
+      "UPS",
+      "Waste Management (WM)",
+      "Frito-Lay",
+      "Paper Transport"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "This 2024 NACFE Confidence Report evaluates natural gas (CNG/LNG) and renewable natural gas (RNG) as a decarbonization pathway for medium- and heavy-duty trucking, based on interviews with fleets, OEMs, and industry experts. It covers engine suppliers (led by Cummins' new X15N 15-liter engine), fuel carbon-intensity comparisons to diesel, methane-leakage concerns, fueling infrastructure, and driver experience, and profiles fleet adopters including UPS, Waste Management, Frito-Lay, and Paper Transport. The report frames natural gas as a near-zero-NOx bridge fuel with lower well-to-wheel CO2 than diesel but higher fuel consumption per diesel-gallon-equivalent.",
+    "key_findings": [
+      "Natural gas engines deliver a net CO2 benefit of 13% to 18% versus diesel and produce about 27% less CO2 per unit of energy on a fuel basis, but require 15% to 20% more fuel on a diesel-gallon-equivalent (DGE) basis due to lower engine efficiency.",
+      "UPS operates more than 4,000 heavy-duty natural gas tractors and about 6,500 medium-duty CNG vehicles across roughly 50 CNG and 12 LNG private stations, while Waste Management runs more than 12,000 natural gas vehicles and 193 natural gas stations with over $4 billion invested in vehicles and infrastructure.",
+      "Paper Transport reports a CNG/RNG breakeven point versus diesel at $4.50/gallon diesel (a 6.5% cost penalty at $3/gallon diesel, a 3.5% advantage at $5.25/gallon); as of 2022, about 69% of natural gas dispensed as motor fuel in the US was renewable (RNG)."
+    ],
+    "data_available": [
+      "Figure ES1: benefits/challenges infographic for natural gas trucks",
+      "Figure 44: carbon intensity summary table by fuel (CARB/GREET model)",
+      "Fleet profiles for UPS, WM, Frito-Lay, Paper Transport with infrastructure investment figures",
+      "Appendix C: CNG/LNG fueling station maps for North America",
+      "Figure 1: powertrain alternatives comparison table (Diesel/ICE Renewable/Natural Gas/Hydrogen ICE/BEV/H2FC)"
+    ],
+    "token_count": 51872,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "supertruck2-2024",
+    "title": "Empowering Future Trucks: SuperTruck 2",
+    "type": "thought_leadership",
+    "published": "2024-03",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 68
+    },
+    "topics": [
+      "supertruck",
+      "doe-program",
+      "freight-efficiency",
+      "aerodynamics",
+      "hybridization",
+      "engine-technology",
+      "fuel-economy",
+      "technology-demonstration",
+      "powertrain-technology"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr"
+    ],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "This report reviews the US Department of Energy's SuperTruck 2 program (2016-2024), in which five OEM teams (Cummins/Peterbilt, Daimler Truck North America, Volvo Trucks, Navistar, and PACCAR) each built demonstrator Class 8 tractor-trailers targeting more than 100% freight-ton-efficiency improvement over a Model Year 2009 diesel baseline at 65,000 lbs. GVW, plus a 55% brake thermal efficiency engine target. Drawing on DOE Annual Merit Review data and public team disclosures, NACFE summarizes each team's technology approach (aerodynamics, engine efficiency, hybridization, lightweighting) and results, and assesses which innovations are likely to migrate into production trucks.",
+    "key_findings": [
+      "All five SuperTruck 2 teams exceeded their DOE freight-ton-efficiency (FTE) improvement targets, which ranged from 100% (Navistar, Volvo, PACCAR) to 115% (Daimler) and 125% (Cummins/Peterbilt) versus each team's MY2009 baseline, with stretch goals as high as 170%.",
+      "SuperTruck 2 demonstrators reached fuel economy as high as 16 MPG, versus SuperTruck 1 vehicles that achieved 11-13 MPG against a roughly 50% FTE improvement target; all teams also targeted a 55% brake thermal efficiency engine at 65 mph.",
+      "NACFE estimates that a 100% scale FTE improvement, as demonstrated by SuperTruck 2 teams, could extend a 300-mile battery-electric truck's range to roughly 600 miles by applying the same efficiency technologies."
+    ],
+    "data_available": [
+      "Figure 9: key SuperTruck 2 project KPIs by team (BTE goal, FTE goal, stretch goal)",
+      "Team-by-team technology waterfall charts (Daimler, Navistar, Cummins-Peterbilt path-to-target)",
+      "NACFE Annual Fleet Fuel Study MPG trend chart used for baseline context",
+      "Run on Less 2017 and 2019 MPG distributions referenced as production benchmarks"
+    ],
+    "token_count": 30871,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "defining-production-2019",
+    "title": "Defining Production",
+    "type": "thought_leadership",
+    "published": "2019-12",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 56
+    },
+    "topics": [
+      "technology-adoption",
+      "production-readiness",
+      "oem-strategy",
+      "vehicle-development",
+      "new-technology-diffusion",
+      "product-development-process"
+    ],
+    "vehicle_classes": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "duty_cycles": [],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "This NACFE thought-leadership report examines the ambiguous meaning of the term \"production\" as used by commercial truck OEMs, drawing on interviews with OEM engineers and analysis of historical vehicle-launch case studies for Class 3 through 8 trucks. It surveys product-development frameworks (stage-gate, PLM, APQP, V-Cycle), tooling and validation timelines, and real-world examples -- including the Stoneridge MirrorEye camera-mirror system and Kenworth/Daimler alternative-energy vehicle roadmaps -- to show that \"production\" claims can mean anything from a single low-rate prototype to full-rate, fully supported manufacturing. It argues for a shared industry vocabulary to reduce confusion among fleets, regulators, and media.",
+    "key_findings": [
+      "New heavy-truck product-development cycles typically span four to six years from concept to legally certified production, and established OEM programs such as Daimler's cite roughly a decade to develop a new engine or cab.",
+      "As presented at the 2018 ACT Expo, Kenworth's roadmap for alternative-energy (battery/hybrid) tractors spanned eight years, from a 2018 concept vehicle to volume production in 2026, with tollgate investments ranging from $5 million in early design phases to $100-200 million for production phases.",
+      "By 2018, North American heavy-truck manufacturing capacity was near 300,000 trucks per year against a base of more than 2 million heavy-duty tractors in North American service, with new technology adoption typically following an S-curve that NACFE tracks across 85 technologies and 20 participating fleets in its Annual Fleet Fuel Study."
+    ],
+    "data_available": [
+      "Figure 13: Kenworth tollgate investment/timeline schematic for alt-energy tractors (2018-2026)",
+      "Figure 20: NACFE technology adoption S-curves for 20 fleets, 2003-2017",
+      "Figures 18-19: model-year fleet turnover and technology-penetration projections",
+      "Comparison table of stage-gate/PLM/APQP/V-Cycle project-management frameworks"
+    ],
+    "token_count": 30097,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "confidence-report-6x2-axles-2017",
+    "title": "Confidence Report: 6x2 Axles Update",
+    "type": "confidence_report",
+    "published": "2017-07",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 34
+    },
+    "topics": [
+      "6x2-axles",
+      "axle-technology",
+      "fuel-economy",
+      "tire-wear",
+      "traction",
+      "weight-savings",
+      "liftable-axle",
+      "drivetrain"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr",
+      "regional-linehaul"
+    ],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "This 2017 NACFE Confidence Report updates the original January 2013 6x2 Axles Confidence Report, based on interviews with fleets, OEMs (Volvo, Mack, Meritor, Dana, Hendrickson, Daimler), and tire manufacturers. It revisits the 2013 finding of about 2.5% average fuel savings from 6x2 tandem axles, documents lessons learned by early adopters -- notably accelerated drive-tire wear and driver-perception issues -- catalogs new liftable-pusher-axle (\"Generation III\") products introduced since 2013, and provides updated tire-selection and driver-training recommendations, plus GHG Phase 2 regulatory adoption targets for 6x2/4x2 axle configurations.",
+    "key_findings": [
+      "6x2 adoption among North American long-haul fleets rose from about 2% in 2013 to only 4-5% by 2016, well below the EPA's original 60%-by-2024 proposal; the final GHG Phase 2 rule instead assumes 30% adoption of 6x2/4x2 axles by 2027.",
+      "Early Generation I 6x2 adopters saw a 50-70% reduction in drive-tire life versus 6x4s, but fleets that implemented full Generation II systems (load-shifting, traction control, torque-limiting) cut that penalty to about 20%; at current fuel prices, a 6x2 with a 50% tire-wear penalty needed roughly a 4%+ fuel-economy improvement just to offset the added tire cost, versus the observed ~2.5% average savings.",
+      "New liftable Generation III pusher-axle systems (Volvo Adaptive Loading, in production since 2016; Mack Lifting Pusher Axle; Hendrickson OPTIMAAX, expected 2017) claim an additional ~2% fuel savings over standard tag-axle 6x2s and are recommended for fleets running below 60,000 lbs. GCWR at least 30% of the time."
+    ],
+    "data_available": [
+      "Table 1: 2013 report benefits/challenges summary",
+      "Table 3: 6x2 Generation I/II/III comparison",
+      "Table 4: GHG Phase 2 6x2/4x2 adoption-rate schedule by model year",
+      "Tables 6-9: tire cost-per-mile calculations under 25%/50% wear-penalty scenarios",
+      "Confidence rating grid (payback years vs. information availability) for 2013 report, 2016 tag axles, and 2017 liftable systems"
+    ],
+    "token_count": 20689,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "smart-charging-depots-2025",
+    "title": "Smart Charging for Electric Depots",
+    "type": "thought_leadership",
+    "published": "2025-04",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 29
+    },
+    "topics": [
+      "smart-charging",
+      "electric-depots",
+      "battery-electric",
+      "charging-infrastructure",
+      "grid-capacity",
+      "demand-charges",
+      "microgrid",
+      "vehicle-to-grid",
+      "megawatt-charging-system"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "This joint NACFE/Ampcontrol report examines grid capacity constraints, energy-cost management, and smart/managed charging strategies for electrifying truck depots, building on findings from NACFE's Run on Less – Electric DEPOT study of electric trucks. It explains time-of-use rate and demand-charge dynamics, compares cloud-based versus on-site smart-charging architectures, and profiles microgrid and vehicle-to-grid (V2G) trends. Two anonymized real-world depot case studies quantify demand-charge and time-of-use savings achievable through smart charging, and the report closes with a look at Megawatt Charging System (MCS) and certification trends.",
+    "key_findings": [
+      "Large fleet depots can require up to 5 MW of power, and utility approval for grid upgrades can take one to five years; at one 20-charger depot, smart charging capped peak demand at about 1 MW (versus over 1.5 MW unmanaged), cutting demand charges by 50% for about $150,000 in annual savings plus $100,000 in avoided time-of-use costs, for $250,000 total annual savings.",
+      "At a second 40-DCFC depot facing peak/off-peak/super-off-peak TOU rates of $0.45/$0.25/$0.20 per kWh, shifting charging to super off-peak hours cut monthly energy costs by 15%-55%, worth $60,000 to $217,800 in annual savings.",
+      "Ampcontrol reports observing energy-cost savings of up to 45% from smart charging; current DC fast chargers are generally limited to 360 kW with most vehicles charging below 250 kW, while emerging Megawatt Charging Systems (MCS) target up to 1 MW per port."
+    ],
+    "data_available": [
+      "Figure 1: site load vs. charger demand bar chart",
+      "Figures 3-4: TOU rate and demand-charge curve examples (California)",
+      "Depot 1 and Depot 2 real-world load-management case studies with dollar savings",
+      "Figure 5: charger uptime monitoring example (94.54% average)"
+    ],
+    "token_count": 12620,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "peloton-platooning-fuel-test-2013",
+    "title": "Peloton Technology Platooning Fuel Economy Test",
+    "type": "article",
+    "published": "2013-12",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 11
+    },
+    "topics": [
+      "platooning",
+      "fuel-economy-test",
+      "aerodynamics",
+      "driver-assist-technology",
+      "sae-j1321"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr"
+    ],
+    "fleets_studied": [
+      "CR England"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "This is a NACFE third-party validation letter/report on a SAE J1321 fuel-economy test of the Peloton Technology two-truck platooning system, conducted jointly with CR England near Salt Lake City, Utah, during the week of November 18, 2013. Two Peloton-equipped Peterbilt 386 tractors (first-generation system, 36-foot following gap at 64 mph) were tested against a Freightliner Cascadia control truck across six approximately 40-mile segments on Interstate 80. NACFE oversaw test-protocol compliance and validated the resulting fuel-savings data reported by CR England and Peloton engineers.",
+    "key_findings": [
+      "The lead platooning truck (C1) averaged 4.5% fuel savings and the following/tail truck (B1) averaged 10.0% fuel savings versus the control truck, both measured over three valid test runs at a 36-foot following distance and 64 mph.",
+      "The platooning system was engaged for a minimum of 99% of the time across the three validated test runs, as logged by Peloton's onboard data collection equipment."
+    ],
+    "data_available": [
+      "Figure 2: full tank-weight/fuel-consumed tables for lead (C1) and tail (B1) trucks vs. control, baseline and test-day T/C ratios",
+      "Test segment map (Wendover/Salt Lake City route)"
+    ],
+    "token_count": 3526,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "michelin-5000-mile-challenge-2011",
+    "title": "Michelin 5,000 Mile Fuel Challenge",
+    "type": "article",
+    "published": "2011-08",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 8
+    },
+    "topics": [
+      "tire-technology",
+      "fuel-economy-test",
+      "low-rolling-resistance-tires"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr"
+    ],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "This is a NACFE third-party validation letter for a 5,000-mile real-world fuel-economy test of three Michelin tire configurations, conducted by Jackson Marketing Group for Michelin North America in July 2011. Three identical Freightliner daycab tractors with DD15 engines ran a multi-day route from Greenville, SC toward Los Angeles and back (12 segments, roughly 400 miles per day), rotating drivers, tires, and trailers, with fuel measured at each fueling stop. NACFE's Mike Roeth and a contracted validator (Mike Modrak) witnessed test preparation, key procedures, and a portion of the on-road testing to confirm protocol compliance.",
+    "key_findings": [
+      "Across all 12 test segments, Configuration 2 tires averaged 7.15 MPG, Configuration 3 averaged 6.87 MPG, and baseline Configuration 1 averaged 6.61 MPG, meaning Configuration 2 outperformed the baseline by 8.13% and Configuration 3 by 3.93%.",
+      "Excluding an outlier segment (Segment 5, where Configuration 3 hit 8.08 MPG, about 17.5% above its own average), the fuel-economy advantage over baseline changes to 8.83% for Configuration 2 and 3.08% for Configuration 3."
+    ],
+    "data_available": [
+      "Figure 1: per-segment MPG line chart for all three tire configurations across 12 segments",
+      "NACFE validation checklist table mapping test protocol items to verification method"
+    ],
+    "token_count": 3911,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "xstream-fuel-test-2016",
+    "title": "XStream Trucking On-Highway Fuel Economy Test",
+    "type": "article",
+    "published": "2016-06",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 7
+    },
+    "topics": [
+      "aerodynamics",
+      "trailer-gap-reduction",
+      "fuel-economy-test"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr"
+    ],
+    "fleets_studied": [
+      "Hobby Lobby"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "This NACFE third-party validation letter reports on an on-highway fuel-economy test of XStream Trucking's GapGorilla tractor-trailer gap-closing aerodynamic system, conducted with Hobby Lobby in Oklahoma City during the week of May 9, 2016. A single Volvo tractor with a 53-foot dry van trailer ran paired 68-69-mile round-trip test runs at 65 mph on Interstate 44, alternating between GapGorilla deployed and stowed configurations, using a modified SAE J1321/TMC RP1102A/RP1109 protocol with tank-weight fuel measurement. NACFE's Dave Schaller witnessed test preparation and data collection to validate protocol compliance.",
+    "key_findings": [
+      "Across five paired test runs, the GapGorilla system produced a median fuel-consumption decrease of 2.51% and an average (combined) decrease of 2.49% versus the stowed/control configuration.",
+      "Individual paired-run savings ranged from 1.17% to 4.13%; discarding the highest and lowest pairs reduced the coefficient of variation from 44% to 19% and left an average savings estimate of 2.38%."
+    ],
+    "data_available": [
+      "Full run-by-run fuel-weight-consumed table for all five paired test runs (deployed vs. stowed)"
+    ],
+    "token_count": 3755,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "confidence-report-idle-reduction-playbook-2025",
+    "title": "The Idle-Reduction Playbook: Operational Strategies for Modern Trucking Fleets",
+    "type": "confidence_report",
+    "published": "2025-12",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 113
+    },
+    "topics": [
+      "idle-reduction",
+      "auxiliary-power-units",
+      "diesel-apu",
+      "electric-apu",
+      "fuel-operated-heaters",
+      "driver-comfort",
+      "hotel-loads",
+      "telematics",
+      "engine-idle-parameters",
+      "day-cabs"
+    ],
+    "vehicle_classes": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr",
+      "regional-rtb",
+      "urban-metro-pd"
+    ],
+    "fleets_studied": [
+      "Schneider",
+      "J.B. Hunt",
+      "Werner Enterprises"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "A NACFE Confidence Report, published December 22, 2025, covering the full landscape of idle-reduction technologies and practices for over-the-road trucking fleets -- diesel and electric APUs, fuel-operated heaters, intelligent engine-management systems, thermal management, and driver behavior programs -- with pricing, adoption rates, and best practices for each. It appears to be a 2025 update and successor to NACFE's earlier Confidence Report on Idle-Reduction Technologies (2019), presenting substantially refreshed cost, adoption, and diesel-price data (as of July 2025) while addressing the same core technology categories. The report draws on NACFE's 2024 Fleet Fuel Study, government idling regulations by state, and a forward-looking outlook tied to vehicle electrification.",
+    "key_findings": [
+      "A typical Class 8 truck idles at around 0.8 gallons of diesel per hour, burning 1,000 to 1,800 gallons annually depending on climate and duty cycle, equating to $3,500 to more than $6,000 in annual idle-related fuel cost at the July 2025 national average diesel price of $3.81/gallon.",
+      "NACFE's fleet snapshots show installing a diesel APU or eAPU typically cuts idle percentage from 30-50% down to the low-20% range, avoiding about 480 gallons of diesel and roughly $1,720 in fuel per truck annually at July 2025 diesel prices.",
+      "New diesel APU installations typically cost $8,000 to $10,000 for entry-level systems, $11,000 to $13,000 for mainstream systems, and up to $15,000 for high-end models, plus about $300 to $600 per year in maintenance.",
+      "In NACFE's 2024 Fleet Fuel Study, Anti-Idle Electronic Engine Controls were adopted by 84% of participating fleets, Diesel-Fired Heaters by 67%, and cab insulation upgrades by 61%, while Diesel APU adoption among study fleets was only 7%.",
+      "The 2024 Fleet Fuel Study's 14 participating fleets, representing a combined 75,000 trucks, achieved an average fuel economy of 7.77 MPG in 2023 (a 16% improvement over 10 years) and saved a combined $512,000,000 versus the national average."
+    ],
+    "data_available": [
+      "Confidence matrix (Figure 73) plotting idle-reduction technologies by payback years and data confidence",
+      "Idle-technology adoption rates by category from the 2024 Fleet Fuel Study (Figure 24)",
+      "Diesel APU and eAPU pricing tiers and annual maintenance cost estimates",
+      "State-by-state map of US idling regulations and permitted idle times (Figure 25)",
+      "Class 8 truck production mix by vehicle/cab type (Figure 22)",
+      "ATRI motor carrier cost-per-mile breakdown, 2015-2024 (Figure 4)"
+    ],
+    "token_count": 62952,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "more-regional-haul-2019",
+    "title": "More Regional Haul: An Opportunity for Trucking?",
+    "type": "thought_leadership",
+    "published": "2019-04",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 101
+    },
+    "topics": [
+      "regional-haul",
+      "driver-shortage",
+      "driver-retention",
+      "e-commerce",
+      "gps-tracking",
+      "automation",
+      "load-matching",
+      "long-combination-vehicles",
+      "warehousing",
+      "trend-analysis"
+    ],
+    "vehicle_classes": [
+      7,
+      8
+    ],
+    "duty_cycles": [
+      "regional-linehaul",
+      "regional-rtb"
+    ],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "A NACFE thought-leadership report, published April 8, 2019, examining ten interacting trends driving growth in regional-haul trucking relative to over-the-road (OTR) operations: driver hiring/retention, e-commerce growth, GPS-based asset tracking, electric/hybrid vehicle advances, vehicle automation, load-matching innovation, long combination vehicles, warehousing build-out, and data mining. Based on interviews with fleets, manufacturers, and industry groups, the report defines regional haul as operations keeping the truck within a 300-mile radius of a home base with predictable driver-home time, and is distinct from NACFE's separate Run on Less Regional (2019) demonstration and later Electric Trucks Have Arrived (2022) reports on the same general topic.",
+    "key_findings": [
+      "NACFE defines regional haul as an operation where the truck stays within a 300-mile radius of a home base, whether returning daily or on a multi-day route.",
+      "The American Trucking Associations projected the driver shortage growing from about 51,000 drivers in 2017 to roughly 175,000 by 2026.",
+      "DAT data show average length of haul declined from 2012 to 2018 by about 10% for dry van (approximately 640 to 570 miles), 26% for reefer (approximately 1,060 to 790 miles), and 9% for flatbed (approximately 690 to 630 miles).",
+      "Driver turnover at large for-hire carriers (revenue above $30 million) was 90% at the end of 2017, versus 85% at smaller carriers, holding at similar levels since 2015; private fleet driver turnover is far lower.",
+      "2002 VIUS/DOT data cited in the report show 83% of US truck trips were under 100 miles (67% under 50 miles, 16% between 51-100 miles), which NACFE believes has since shifted further toward shorter trips with e-commerce growth."
+    ],
+    "data_available": [
+      "Length-of-haul trend charts by trailer type, 2012-2018 (DAT and ATRI data, Figure 5)",
+      "Driver shortage projections by year, 2012-2026 (ATA data, Figure 23)",
+      "Distribution of truck trips by mileage band (2002 VIUS data, Figure 8)",
+      "Truck flow map from Miami over a 7-day period (ATRI, Figure 7)",
+      "Ten-trends infographic summarizing regional-haul growth drivers"
+    ],
+    "token_count": 50866,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "fuel-efficiency-barriers-2013",
+    "title": "Barriers to Increased Adoption of Fuel Efficiency Technologies in Freight Trucking",
+    "type": "thought_leadership",
+    "published": "2013-07",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 73
+    },
+    "topics": [
+      "adoption-barriers",
+      "payback-period",
+      "capital-access",
+      "reliability",
+      "information-sharing",
+      "split-incentive",
+      "rebound-effect",
+      "owner-operators"
+    ],
+    "vehicle_classes": [
+      7,
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr"
+    ],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "A joint ICCT/NACFE/Cascade Sierra Solutions report, published July 2013, identifying the primary barriers preventing wider adoption of fuel-saving technologies in North American freight trucking. The study team conducted in-person interviews, conference calls, and a truck-dealer focus group with 29 end-user and supply-chain stakeholders between late 2012 and early 2013, plus online surveys of 1,892 owner-operators via Cascade Sierra Solutions and Let's Truck. The analysis identifies five primary barriers -- uncertain payback time, insufficient access to capital, lack of credible information, inconsistent reliability, and lack of technology availability -- and additional findings on split incentives and the rebound effect.",
+    "key_findings": [
+      "The study drew on 15 one-hour end-user fleet interviews, interviews with 6 large truck/trailer manufacturers and 14 other supply-chain companies, a truck-dealer focus group, and online surveys completed by 1,892 owner-operators between December 2012 and February 2013.",
+      "Five primary barriers to fuel-saving technology adoption were identified: uncertain payback time, insufficient access to capital, lack of credible information (both verifying and sharing), inconsistent reliability, and lack of technology availability.",
+      "Fuel costs represented on average 35% of a fleet's total operating expense, and new long-haul sleeper tractor costs rose from about $90,000-$100,000 in 2006 to $115,000-$135,000 by 2013, a 20-30% increase.",
+      "Large for-hire fleets generally required a payback of 18-24 months (about half their 3-5 year truck ownership cycle), while private fleets accepted longer paybacks of 24-36+ months given 6-10 year ownership cycles.",
+      "Owner-operator survey respondents averaged 122,099 miles driven per truck in 2012 and 6.6 miles per gallon; over 80% wanted a payback of 2 years or less, and 92% deemed under-24-month payback reasonable for retrofit technologies."
+    ],
+    "data_available": [
+      "Tractor trade-cycle years by fleet category (Figure 5)",
+      "Acceptable payback time distribution by stakeholder group (Figure 6)",
+      "Importance ratings of specification factors including fuel economy, reliability, resale value (Figure 7)",
+      "Value of information sources (own testing, third-party, OEM, EPA SmartWay) by stakeholder group (Figure 10)",
+      "Driver turnover data for for-hire vs. private fleets, 2005-2012 (Figures 16-17)",
+      "Technologies ranked by short-term fuel-savings potential (Figure 15)"
+    ],
+    "token_count": 33623,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "guidance-report-truck-trailer-refrigeration-2024",
+    "title": "Decarbonizing Truck & Trailer Refrigeration: Zero-Emission Temperature Control in Trucking",
+    "type": "guidance_report",
+    "published": "2024-10",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 62
+    },
+    "topics": [
+      "transport-refrigeration-units",
+      "electric-tru",
+      "cold-chain",
+      "reefer",
+      "decarbonization",
+      "carb-regulations",
+      "shore-power",
+      "battery-electric"
+    ],
+    "vehicle_classes": [
+      6,
+      7,
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr",
+      "regional-rtb",
+      "urban-metro-pd"
+    ],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "A NACFE guidance report, published October 17, 2024, examining transport refrigeration units (TRUs) used on refrigerated trucks and trailers and the emerging transition to zero-emission electric TRUs (eTRUs). It covers how TRUs work, the environmental impacts of diesel-powered units, the operational and cost barriers to eTRU adoption (battery sizing, weight, charging infrastructure, driver/technician training), and CARB regulations driving the shift, drawing on interviews with suppliers such as PLM and Thermo King. The report closes with findings on the scope of the refrigerated-freight segment and recommendations for coordinating eTRU charging infrastructure with electric-truck charging build-out.",
+    "key_findings": [
+      "Freight requiring temperature-controlled transport accounts for about 15% of straight trucks and trailers in North America.",
+      "CARB estimates the weight penalty of an all-electric eTRU trailer at 728 lbs, while industry experts estimate 2,000-2,500 lbs, versus a federal 2,000-lb weight allowance for electric tractor-trailers that does not separately cover the reefer trailer's added weight.",
+      "PLM reported that a new diesel 53-foot TRU reefer trailer costs about $110,000-$115,000, a standby-electric eTRU about $130,000-$145,000, and an all-electric eTRU about $170,000-$250,000, depending on manufacturer.",
+      "A standard diesel TRU fuel tank holds about 50 gallons and can be quickly refueled anywhere, while eTRUs are constrained by battery run time and require careful sizing to the specific duty cycle."
+    ],
+    "data_available": [
+      "Single-stage vapor compression refrigeration schematic (Figure ES2)",
+      "Consequences-of-improper-temperature matrix by product type (Figure ES1)",
+      "eTRU vs. diesel TRU cost comparison by unit type",
+      "CARB TRU regulation timeline and requirements (Section 14)",
+      "Barriers matrix covering operational, cost, and infrastructure challenges (Section 13)"
+    ],
+    "token_count": 32810,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "guidance-report-high-potential-electric-regions-2020",
+    "title": "High-Potential Regions for Electric Truck Deployments",
+    "type": "guidance_report",
+    "published": "2020-11",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 35
+    },
+    "topics": [
+      "electric-trucks",
+      "regional-prioritization",
+      "charging-infrastructure",
+      "policy-incentives",
+      "air-quality",
+      "environmental-justice",
+      "freight-flow"
+    ],
+    "vehicle_classes": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "duty_cycles": [],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "An RMI/NACFE guidance report, published November 2020 and authored by Jessie Lund and Mike Roeth, presenting a framework for identifying and prioritizing North American regions best suited for early electric truck deployment. The framework organizes indicators into three categories -- Technology (range/climate, electricity pricing, regenerative braking), Need (air quality, environmental justice, greenhouse gas emissions, freight flow), and Support (state/city/provincial policies and incentives, utility programs, training) -- and combines them into a heatmap ranking states and provinces as 'High Priority' or 'Consider' for deployment. The report includes an emerging-megaregions map and closes with conclusions and recommendations for fleets, policymakers, and utilities.",
+    "key_findings": [
+      "Regional-haul heavy-duty trucking (short-haul, return-to-base operations) is identified as a strong early candidate for electrification, with early deployments concentrated in California due to supportive state policy, incentives, and mild climate/terrain.",
+      "The report's three-part framework -- Technology, Need, and Support -- combines into a North American heatmap classifying states and provinces as 'High Priority' versus 'Consider' for electric truck deployment potential.",
+      "An accompanying map identifies eleven emerging US megaregions as defined by the Regional Plan Association, used as an additional lens for regional prioritization."
+    ],
+    "data_available": [
+      "Framework diagram of Technology/Need/Support indicators (Figure ES-1)",
+      "North American heatmap of high-priority electric truck deployment regions (Figure ES-2 / Exhibit 3)",
+      "Indicators-by-category summary table (Exhibit 2)",
+      "US emerging megaregions map (Exhibit 4)"
+    ],
+    "token_count": 15420,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "hd-truck-specifications-2018",
+    "title": "Development of Specifications for Heavy-Duty Tractor Trucks in Canada and the United States",
+    "type": "article",
+    "published": "2018-10",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 30
+    },
+    "topics": [
+      "truck-specification",
+      "procurement-process",
+      "for-hire-vs-private",
+      "payback-period",
+      "canada-us-differences",
+      "driver-shortage",
+      "6x2-axles"
+    ],
+    "vehicle_classes": [
+      7,
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr"
+    ],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "An ICCT working paper (2018-27), authored by Ben Sharpe (ICCT) and Dave Schaller (NACFE) and published October 2018, examining how Class 7/8 tractor trucks are specified and purchased in Canada and the United States. Based on 15 interviews conducted with trucking fleets and owner-operators in early 2018, the paper contrasts the small-fleet dealership pathway against the large-fleet OEM national-account-manager pathway, documents how fuel-saving technologies are marketed and evaluated via payback calculations, and covers differences between Canadian and US specification practices as well as macro trends including driver shortages, electrification, and automation. An appendix reproduces an example full tractor specification sheet.",
+    "key_findings": [
+      "The study team conducted 15 interviews with trucking fleets and owner-operators in early 2018: 13 based in Canada (7 owner-operators/small fleets with fewer than 5 trucks) and 2 in the United States, with the larger fleets interviewed ranging from 100 to 2,000 trucks.",
+      "For-hire fleets averaged about 90% annual driver turnover versus about 10% for private fleets, per American Trucking Association data cited in the report; for-hire fleets typically own trucks 3-5 years versus 6-10 years for private fleets.",
+      "In 2017, the 10 largest for-hire fleets in North America ranged from about 36,000 to 106,000 tractor trucks (UPS the largest), while the 10 largest private fleets ranged from about 3,100 to 11,000 trucks (PepsiCo the largest).",
+      "A typical fuel-saving technology payback threshold is 1.5 to 2 years, based on a typical 3-5 year fleet ownership cycle; interviewed fleets averaged 5 years of truck ownership with a payback threshold of just over 3 years, and 8 of 15 responses required payback shorter than the ownership cycle.",
+      "Engine technologies were rated the highest-value fuel-saving technology category among the six surveyed (average rating about 2.2 of 6, most important), while telematics/IT and weight reduction rated lowest (averages about 4.2-4.3)."
+    ],
+    "data_available": [
+      "Two truck-procurement pathway flowcharts for small/medium vs. large fleets (Figure 1)",
+      "Ten largest for-hire and private fleets by tractor ownership, 2017 (Figure 2)",
+      "Truck ownership duration vs. maximum acceptable payback scatter plot (Figure 4)",
+      "Fuel-saving technology category value rankings (Figure 5)",
+      "Full example tractor specification sheet with weight distribution (Appendix B)"
+    ],
+    "token_count": 19705,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "charging-as-a-service-2025",
+    "title": "Fleet Perspectives on Charging-as-a-Service",
+    "type": "thought_leadership",
+    "published": "2025-03",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 22
+    },
+    "topics": [
+      "charging-as-a-service",
+      "fleet-electrification",
+      "charging-infrastructure",
+      "utility-coordination",
+      "survey",
+      "managed-charging"
+    ],
+    "vehicle_classes": [],
+    "duty_cycles": [
+      "long-haul-otr",
+      "regional-rtb",
+      "urban-metro-pd"
+    ],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "A NACFE report, published March 20, 2025 and sponsored by Electrada, presenting results of an industry survey on Charging-as-a-Service (CaaS) and other outside service-provider models for fleet electrification. Respondents included fleets (38), OEM/software providers, consultants, government, and others; fleet respondents self-reported operation size, duty cycle mix, and electrification maturity. The report identifies working with utilities as the top barrier to electrification, examines when fleets find outside CaaS/managed-charging providers valuable, and reports what fleets and industry members consider markers of a successful electrification project.",
+    "key_findings": [
+      "38 fleet respondents took the survey (25 operating 100+ trucks); their reported duty-cycle mix was 35% Local, 38% Regional, and 27% Long Haul, with 14 fleets operating in multiple duty cycles.",
+      "Both fleet and industry-member respondents identified working with utilities as the top barrier to electrification (24% of fleet responses, 29% of industry responses), ranking above TCO/ROI (14%/17%) and vehicle range (14% each).",
+      "About 38% of fleets that had implemented or were implementing electrification used a CaaS or managed-charging provider, while 33% used no outside provider -- of those, 50% wanted to learn for themselves and 37% cited cost as the reason.",
+      "Fleet respondents rated Operational Effectiveness (about 4.4 of 5) as the most important factor in judging electrification-project success, followed by Total Cost of Ownership and Customer Satisfaction (about 4.1 each).",
+      "46% of fleet respondents said internal company goals require emissions reporting, 37% said both internal and customer goals require it, and 18% said neither."
+    ],
+    "data_available": [
+      "Respondent breakdown by industry and by fleet size/duty cycle (Figures 1-2)",
+      "Barriers to fleet electrification by respondent group (Figure 5)",
+      "Benefits of working with a CaaS/service provider by respondent group (Figure 6)",
+      "Success-factor importance ratings, Fleet vs. Industry (Figure 7)",
+      "Full 25-question survey instrument (Appendix A)"
+    ],
+    "token_count": 5833,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "navigating-messy-middle-2025",
+    "title": "Navigating the Messy Middle",
+    "type": "thought_leadership",
+    "published": "2025",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 9
+    },
+    "topics": [
+      "messy-middle",
+      "powertrain-comparison",
+      "decision-framework",
+      "battery-electric",
+      "hydrogen-fuel-cell",
+      "renewable-diesel",
+      "natural-gas",
+      "hybrid",
+      "run-on-less"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr",
+      "regional-rtb"
+    ],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "A short NACFE thought-leadership white paper by Executive Director Mike Roeth, published in 2025 ahead of the September 2025 Run on Less - Messy Middle demonstration. It is a distinct, condensed companion piece to NACFE's 2023 report The Messy Middle: A Time for Action, briefly surveying diesel, renewable diesel, biodiesel, CNG/RNG, hydrogen ICE, hybrid, battery-electric, and hydrogen fuel cell powertrains, then presenting a decision framework and factors (duty cycle, fleet size, regulatory factors, energy pricing, infrastructure, well-to-wheel impact) fleets should weigh when selecting a powertrain path.",
+    "key_findings": [
+      "NACFE's Run on Less - Messy Middle demonstration, planned for September 2025, will feature about 10 fleets deploying Class 8 sleeper and day cab trucks across long-haul return-to-base and over-the-road duty cycles evaluating multiple powertrain solutions.",
+      "Battery electric trucks are estimated at 65% to 85% overall charger-to-wheels energy efficiency, versus about 40% efficiency for hydrogen internal combustion engines.",
+      "NACFE's powertrain decision framework recommends fleets evaluate battery electric first, then hydrogen fuel cell, then natural gas, then renewables/hybrids and hydrogen ICE, with efficient diesel as a fallback, while noting most fleets will need multiple technology choices over a decades-long transition.",
+      "The 2024 Fleet Fuel Study analyzed data from 14 fleets showing MPG increases tied to investment in fuel-efficiency technologies.",
+      "The first Run on Less (2017) featured seven fleets averaging 10 MPG in long-haul routes; Run on Less Regional (2019) featured 10 fleets averaging 8.4 MPG in regional-haul routes."
+    ],
+    "data_available": [
+      "Present/Messy-Middle/2050-Future powertrain technology roadmap graphic (Figure 1)",
+      "Factors-to-consider decision matrix spanning fleet size, duty cycle, regulation, energy pricing, and infrastructure (Figure 2)",
+      "Sequential powertrain decision-framework flowchart (Figure 3)"
+    ],
+    "token_count": 6300,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "confidence-report-speed-limiters-2014",
+    "title": "Technology Overview: Speed Limiters",
+    "type": "confidence_report",
+    "published": "2014-08",
+    "url": null,
+    "media": {
+      "kind": "pdf",
+      "pages": 5
+    },
+    "topics": [
+      "speed-limiters",
+      "fuel-economy",
+      "engine-parameters",
+      "cruise-control",
+      "tire-wear",
+      "safety"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [
+      "long-haul-otr"
+    ],
+    "fleets_studied": [
+      "Conway",
+      "Schneider National",
+      "Werner",
+      "Pepsi",
+      "Coca-Cola Enterprises"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "A Trucking Efficiency (joint NACFE/Carbon War Room) Technology Overview, published August 2014, on speed limiters for Class 8 tractor-trailers. As the first step in NACFE's Confidence Report process, it summarizes readily available information on setting maximum road-speed engine parameters to reduce fuel consumption, covering fuel-economy and tire-wear effects, existing international and Canadian provincial speed-limiter mandates, US real-world fleet adoption, safety considerations, and the regulatory landscape, with a call for sponsorship funding to support a full Confidence Report on the topic.",
+    "key_findings": [
+      "An estimated 90% of new over-the-road tractors were being ordered with speed-limiting capability at the time of publication, though this figure was not independently surveyed.",
+      "Four major US fleets reported no significant productivity loss on 98% of freight shipments after limiting truck speeds, with affected shipments differing by only minutes per day.",
+      "Per ATA's Technology & Maintenance Council, fuel consumption drops on average 0.1 MPG for every 1 MPH speed increase above 55 MPH, meaning the difference between 55 and 65 MPH can be up to a full 1 MPG.",
+      "Tire tread life decreases by about 1% for every 1 MPH driven above 55 MPH on average.",
+      "The European Union has limited heavy truck/bus speeds to 62 MPH since 1994 and Australia to 62 MPH since 1990 (56 MPH for road trains); Japan limits trucks to 56 MPH and Quebec/Ontario, Canada limit them to 65 MPH."
+    ],
+    "data_available": [
+      "Power required to overcome rolling resistance and aerodynamic drag by speed, 45-65 MPH (bar chart, page 2, Source: USDOE)",
+      "List of NACFE technical advisory group/sponsor fleets and companies (page 4)"
+    ],
+    "token_count": 2791,
+    "ingested": "2026-08-09",
+    "ingest_model": "gemini-3.5-flash-lite"
   }
 ]
