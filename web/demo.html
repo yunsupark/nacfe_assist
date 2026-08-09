@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>NACFE Knowledge Base — widget demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body { margin: 0; padding: 48px 24px; background: #fafafa; }
+  .page { max-width: 760px; margin: 0 auto; background: #fff; padding: 32px 40px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  h1 { font-family: Roboto, Helvetica, Arial, sans-serif; font-size: 22px; color: #292d2d; }
+  p.intro { font-family: Roboto, Helvetica, Arial, sans-serif; color: #555; font-size: 14px; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <h1>NACFE Knowledge Base — embed demo</h1>
+    <p class="intro">
+      This page shows exactly what publishers embed: a <code>&lt;div id="nacfe-assist"&gt;</code>
+      mount point plus one <code>&lt;script&gt;</code> tag. Everything below is rendered by
+      <code>widget.js</code> — no other markup on this page touches it. This demo loads the
+      <em>local</em> copy of widget.js (for iterating on changes before deploying) but talks to
+      the real, live query API — the actual production embed loads widget.js from the Worker
+      itself instead; see README.md.
+    </p>
+
+    <div id="nacfe-assist"></div>
+    <script src="./widget.js" data-api="https://nacfe-assist.nacfe.workers.dev/query" defer></script>
+  </div>
+</body>
+</html>

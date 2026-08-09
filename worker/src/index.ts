@@ -2,7 +2,7 @@
 // the full catalog, then a stronger model answering from the selected sources' full text.
 // See eval/run_eval.py for the local-script version this was ported from, and
 // eval/results/two_stage_scored.md for the eval this design is validated against.
-import { CATALOG, ROUTE_PROMPT, ANSWER_PROMPT } from "./corpus_data";
+import { CATALOG, ROUTE_PROMPT, ANSWER_PROMPT, WIDGET_JS } from "./corpus_data";
 import { generateContent, stripJsonFence, GeminiError } from "./gemini";
 
 export interface Env {
@@ -307,6 +307,16 @@ export default {
 
     if (url.pathname === "/health") {
       return jsonResponse({ ok: true, sources: CATALOG.length });
+    }
+
+    if (url.pathname === "/widget.js" && request.method === "GET") {
+      return new Response(WIDGET_JS, {
+        headers: {
+          "content-type": "application/javascript; charset=utf-8",
+          "cache-control": "public, max-age=3600", // an hour: cheap to bust by redeploying, not so long a fix takes all day to land
+          "access-control-allow-origin": "*",
+        },
+      });
     }
 
     return jsonResponse({ error: "not found" }, 404);
