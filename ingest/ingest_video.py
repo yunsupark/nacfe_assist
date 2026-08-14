@@ -82,9 +82,9 @@ def ingest(transcript_path, source_id, title, model, force=False):
         print(f"{out_path} already exists. Pass --force to overwrite.", file=sys.stderr)
         sys.exit(1)
 
-    api_key = os.getenv("GEMINI_API")
+    api_key = os.getenv("GEMINI_INGEST_API") or os.getenv("GEMINI_API")
     if not api_key:
-        print("GEMINI_API not set (checked environment and .env).", file=sys.stderr)
+        print("Neither GEMINI_INGEST_API nor GEMINI_API is set (checked environment and .env).", file=sys.stderr)
         sys.exit(1)
 
     raw_text = extract_text(transcript_path)

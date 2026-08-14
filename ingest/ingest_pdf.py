@@ -162,9 +162,9 @@ def ingest(pdf_path, source_id, model, published=None, force=False, window_size=
         print(f"{out_path} already exists. Pass --force to overwrite.", file=sys.stderr)
         sys.exit(1)
 
-    api_key = os.getenv("GEMINI_API")
+    api_key = os.getenv("GEMINI_INGEST_API") or os.getenv("GEMINI_API")
     if not api_key:
-        print("GEMINI_API not set (checked environment and .env).", file=sys.stderr)
+        print("Neither GEMINI_INGEST_API nor GEMINI_API is set (checked environment and .env).", file=sys.stderr)
         sys.exit(1)
 
     base_prompt = PROMPT_PATH.read_text()

@@ -1,0 +1,1392 @@
+[
+  {
+    "id": "podcast-ep138-vinny-riscica-2026",
+    "video_id": "QT7MZyjVLAo",
+    "title": "Ep. 138: Vinny Riscica \u2013 Con Edison",
+    "episode_num": 138,
+    "guest": "Vinny Riscica",
+    "org": "Con Edison",
+    "published": "2026-06-30",
+    "duration": 1611
+  },
+  {
+    "id": "podcast-ep139-josh-fisher-2026",
+    "video_id": "fe0r93mn31s",
+    "title": "Ep. 139: Josh Fisher \u2013 Fleet Owner",
+    "episode_num": 139,
+    "guest": "Josh Fisher",
+    "org": "Fleet Owner",
+    "published": "2026-07-21",
+    "duration": 1412
+  },
+  {
+    "id": "podcast-ep137-emily-long-2026",
+    "video_id": "b-uk0k_drFM",
+    "title": "Ep. 137: Emily Long \u2013 NACFE",
+    "episode_num": 137,
+    "guest": "Emily Long",
+    "org": "NACFE",
+    "published": "2026-06-16",
+    "duration": 1237
+  },
+  {
+    "id": "podcast-ep136-matt-srnec-2026",
+    "video_id": "-PYa-IhQiEE",
+    "title": "Ep. 136: Matt Srnec \u2013 Thermo King",
+    "episode_num": 136,
+    "guest": "Matt Srnec",
+    "org": "Thermo King",
+    "published": "2026-06-02",
+    "duration": 1542
+  },
+  {
+    "id": "podcast-ep134-dakota-semler-2026",
+    "video_id": "gT0xGmqPYGc",
+    "title": "Ep. 134: Dakota Semler \u2013 Xos Trucks",
+    "episode_num": 134,
+    "guest": "Dakota Semler",
+    "org": "Xos Trucks",
+    "published": "2026-04-28",
+    "duration": 1695
+  },
+  {
+    "id": "podcast-ep135-steve-mignardi-2026",
+    "video_id": "cPXWF27HAfs",
+    "title": "Ep. 135: Steve Mignardi \u2013 NACFE Board Chairman",
+    "episode_num": 135,
+    "guest": "Steve Mignardi",
+    "org": "NACFE Board Chairman",
+    "published": "2026-05-19",
+    "duration": 1703
+  },
+  {
+    "id": "podcast-ep133-tom-lincoln-2026",
+    "video_id": "O05Psp129G4",
+    "title": "Ep. 133: Tom Lincoln \u2013 Dana",
+    "episode_num": 133,
+    "guest": "Tom Lincoln",
+    "org": "Dana",
+    "published": "2026-04-14",
+    "duration": 1672
+  },
+  {
+    "id": "podcast-ep131-chris-hammond-2026",
+    "video_id": "mM8wOUAZb7Q",
+    "title": "Ep. 131: Chris Hammond \u2013 Great Dane",
+    "episode_num": 131,
+    "guest": "Chris Hammond",
+    "org": "Great Dane",
+    "published": "2026-03-03",
+    "duration": 1544
+  },
+  {
+    "id": "podcast-ep132-derek-turbide-2026",
+    "video_id": "4so1bL179aA",
+    "title": "Ep. 132: Derek Turbide \u2013 Greenlane",
+    "episode_num": 132,
+    "guest": "Derek Turbide",
+    "org": "Greenlane",
+    "published": "2026-03-31",
+    "duration": 1164
+  },
+  {
+    "id": "podcast-ep130-chris-guerrero-2026",
+    "video_id": "PqcC2rpp-Go",
+    "title": "Ep. 130: Chris Guerrero \u2013 ENGIE Resources",
+    "episode_num": 130,
+    "guest": "Chris Guerrero",
+    "org": "ENGIE Resources",
+    "published": "2026-02-17",
+    "duration": 1496
+  },
+  {
+    "id": "podcast-ep129-susan-fall-2026",
+    "video_id": "SIGqYGRH3g8",
+    "title": "Ep. 129: Susan Fall \u2013 LaunchIt PR",
+    "episode_num": 129,
+    "guest": "Susan Fall",
+    "org": "LaunchIt PR",
+    "published": "2026-02-03",
+    "duration": 1511
+  },
+  {
+    "id": "podcast-ep127-mark-willis-2026",
+    "video_id": "bpMeahSv3sI",
+    "title": "Ep. 127: Mark Willis \u2013 Road Dog Trucking News",
+    "episode_num": 127,
+    "guest": "Mark Willis",
+    "org": "Road Dog Trucking News",
+    "published": "2026-01-06",
+    "duration": 1316
+  },
+  {
+    "id": "podcast-ep128-blair-hefty-2026",
+    "video_id": "ODTxpyjcnYI",
+    "title": "Ep. 128: Blair Hefty \u2013 Coyne PR",
+    "episode_num": 128,
+    "guest": "Blair Hefty",
+    "org": "Coyne PR",
+    "published": "2026-01-20",
+    "duration": 1482
+  },
+  {
+    "id": "podcast-ep126-zhe-wang-2025",
+    "video_id": "U60Dkw9w8gI",
+    "title": "Ep. 126: Zhe Wang \u2013 RMI",
+    "episode_num": 126,
+    "guest": "Zhe Wang",
+    "org": "RMI",
+    "published": "2025-12-23",
+    "duration": 1557
+  },
+  {
+    "id": "podcast-ep125-adam-klauber-2025",
+    "video_id": "IVGLk0MAAco",
+    "title": "Ep. 125: Adam Klauber \u2013 World Energy",
+    "episode_num": 125,
+    "guest": "Adam Klauber",
+    "org": "World Energy",
+    "published": "2025-12-09",
+    "duration": 1606
+  },
+  {
+    "id": "podcast-ep124-matt-schrap-2025",
+    "video_id": "ZaiB-_iK37Y",
+    "title": "Ep. 124: Matt Schrap \u2013 Forum Mobility",
+    "episode_num": 124,
+    "guest": "Matt Schrap",
+    "org": "Forum Mobility",
+    "published": "2025-11-25",
+    "duration": 1448
+  },
+  {
+    "id": "podcast-ep123-don-baldwin-2025",
+    "video_id": "ZEbcrgR9pYM",
+    "title": "Ep. 123: Don Baldwin \u2013 Retired from Michelin",
+    "episode_num": 123,
+    "guest": "Don Baldwin",
+    "org": "Retired from Michelin",
+    "published": "2025-11-11",
+    "duration": 1580
+  },
+  {
+    "id": "podcast-ep122-graham-richard-2025",
+    "video_id": "_-I-dpsX7ZM",
+    "title": "Ep. 122: Graham Richard \u2013 Advisor to CEOs and Founders",
+    "episode_num": 122,
+    "guest": "Graham Richard",
+    "org": "Advisor to CEOs and Founders",
+    "published": "2025-10-28",
+    "duration": 1623
+  },
+  {
+    "id": "podcast-ep121-mike-mchorse-2025",
+    "video_id": "6-Q72Sw4rFM",
+    "title": "Ep. 121: Mike McHorse \u2013 NACFE",
+    "episode_num": 121,
+    "guest": "Mike McHorse",
+    "org": "NACFE",
+    "published": "2025-10-14",
+    "duration": 1414
+  },
+  {
+    "id": "podcast-ep120-dan-gage-2025",
+    "video_id": "C2qWlHubb2o",
+    "title": "Ep. 120: Dan Gage \u2013 The Transport Project",
+    "episode_num": 120,
+    "guest": "Dan Gage",
+    "org": "The Transport Project",
+    "published": "2025-09-30",
+    "duration": 1423
+  },
+  {
+    "id": "podcast-ep119-rachael-nealer-2025",
+    "video_id": "CWGnPvcLU_A",
+    "title": "Ep. 119: Rachael Nealer \u2013 U.S. Joint Office of Energy and Transportation",
+    "episode_num": 119,
+    "guest": "Rachael Nealer",
+    "org": "U.S. Joint Office of Energy and Transportation",
+    "published": "2025-09-16",
+    "duration": 1406
+  },
+  {
+    "id": "podcast-ep118-dan-priestley-2025",
+    "video_id": "v_7kKUoo3d4",
+    "title": "Ep. 118: Dan Priestley \u2013 Tesla",
+    "episode_num": 118,
+    "guest": "Dan Priestley",
+    "org": "Tesla",
+    "published": "2025-09-04",
+    "duration": 1594
+  },
+  {
+    "id": "podcast-ep116-leia-guccione-2025",
+    "video_id": "TIjSFMjTMIk",
+    "title": "Ep. 116: Leia Guccione \u2013 RMI",
+    "episode_num": 116,
+    "guest": "Leia Guccione",
+    "org": "RMI",
+    "published": "2025-08-05",
+    "duration": 1537
+  },
+  {
+    "id": "podcast-ep117-john-walters-2025",
+    "video_id": "RQd78j1qbuw",
+    "title": "Ep. 117: John Walters \u2013 Valvoline",
+    "episode_num": 117,
+    "guest": "John Walters",
+    "org": "Valvoline",
+    "published": "2025-08-20",
+    "duration": 1408
+  },
+  {
+    "id": "podcast-ep115-cliff-campbell-2025",
+    "video_id": "Rqf2qT1plxE",
+    "title": "Ep. 115:Cliff Campbell\u2013Center for Freight & Logistics Efficiency w/ Electrified & Automated Trucking",
+    "episode_num": 115,
+    "guest": "Cliff Campbell",
+    "org": "Center for Freight & Logistics Efficiency w/ Electrified & Automated Trucking",
+    "published": "2025-07-22",
+    "duration": 1510
+  },
+  {
+    "id": "podcast-ep113-kim-ehrenhaft-2025",
+    "video_id": "NatKxVkQPtI",
+    "title": "Ep. 113: Kim Ehrenhaft \u2013 NACFE",
+    "episode_num": 113,
+    "guest": "Kim Ehrenhaft",
+    "org": "NACFE",
+    "published": "2025-06-24",
+    "duration": 1531
+  },
+  {
+    "id": "podcast-ep114-jason-morgan-2025",
+    "video_id": "xRh5v9vbdqc",
+    "title": "Ep. 114: Jason Morgan \u2013 Fleet Equipment",
+    "episode_num": 114,
+    "guest": "Jason Morgan",
+    "org": "Fleet Equipment",
+    "published": "2025-07-08",
+    "duration": 1380
+  },
+  {
+    "id": "podcast-ep112-deborah-lockridge-2025",
+    "video_id": "4Z2j7JO-0VA",
+    "title": "Ep. 112: Deborah Lockridge \u2013 Heavy Duty Trucking",
+    "episode_num": 112,
+    "guest": "Deborah Lockridge",
+    "org": "Heavy Duty Trucking",
+    "published": "2025-06-10",
+    "duration": 1316
+  },
+  {
+    "id": "podcast-ep111-giorgio-rizzoni-2025",
+    "video_id": "NqIh_A-yrQc",
+    "title": "Ep. 111: Giorgio Rizzoni \u2013 The Ohio State University and the Center for Automotive Research",
+    "episode_num": 111,
+    "guest": "Giorgio Rizzoni",
+    "org": "The Ohio State University and the Center for Automotive Research",
+    "published": "2025-05-27",
+    "duration": 1622
+  },
+  {
+    "id": "podcast-ep110-mike-rowand-2025",
+    "video_id": "wrNmocdBeD0",
+    "title": "Ep. 110: Mike Rowand \u2013 Energy and Electric Transportation Consultant",
+    "episode_num": 110,
+    "guest": "Mike Rowand",
+    "org": "Energy and Electric Transportation Consultant",
+    "published": "2025-05-13",
+    "duration": 1453
+  },
+  {
+    "id": "podcast-ep109-ken-north-2025",
+    "video_id": "elHhruMqIwY",
+    "title": "Ep. 109: Ken North \u2013 NACFE",
+    "episode_num": 109,
+    "guest": "Ken North",
+    "org": "NACFE",
+    "published": "2025-04-29",
+    "duration": 1321
+  },
+  {
+    "id": "podcast-ep108-andrew-halonen-2025",
+    "video_id": "0h3gbaKKFKY",
+    "title": "Ep. 108: Andrew Halonen \u2013 Mayflower Consulting",
+    "episode_num": 108,
+    "guest": "Andrew Halonen",
+    "org": "Mayflower Consulting",
+    "published": "2025-04-15",
+    "duration": 1416
+  },
+  {
+    "id": "podcast-ep106-emilia-sibley-2025",
+    "video_id": "NCXDdn1C3A0",
+    "title": "Ep. 106: Emilia Sibley \u2013 Terawatt",
+    "episode_num": 106,
+    "guest": "Emilia Sibley",
+    "org": "Terawatt",
+    "published": "2025-02-18",
+    "duration": 1538
+  },
+  {
+    "id": "podcast-ep107-elaine-jones-2025",
+    "video_id": "LFJklMjnyRY",
+    "title": "Ep. 107: Elaine Jones \u2013 Stillwater Hospice",
+    "episode_num": 107,
+    "guest": "Elaine Jones",
+    "org": "Stillwater Hospice",
+    "published": "2025-04-01",
+    "duration": 1304
+  },
+  {
+    "id": "podcast-ep105-ryan-bankerd-2025",
+    "video_id": "647stnUYbc4",
+    "title": "Ep. 105: Ryan Bankerd \u2013 UPS and NACFE board member",
+    "episode_num": 105,
+    "guest": "Ryan Bankerd",
+    "org": "UPS and NACFE board member",
+    "published": "2025-02-04",
+    "duration": 1650
+  },
+  {
+    "id": "podcast-ep103-yann-kulp-2025",
+    "video_id": "tlrHMnHt8Fs",
+    "title": "Ep. 103: Yann Kulp \u2013 Driivz",
+    "episode_num": 103,
+    "guest": "Yann Kulp",
+    "org": "Driivz",
+    "published": "2025-01-07",
+    "duration": 1348
+  },
+  {
+    "id": "podcast-ep104-dean-bushey-2025",
+    "video_id": "M7xjVkPS_ww",
+    "title": "Ep. 104: Dean Bushey \u2013 NACFE",
+    "episode_num": 104,
+    "guest": "Dean Bushey",
+    "org": "NACFE",
+    "published": "2025-01-21",
+    "duration": 1506
+  },
+  {
+    "id": "podcast-ep102-jim-park-2024",
+    "video_id": "o2PATf7S1bI",
+    "title": "Ep. 102: Jim Park \u2013 Journalist and NACFE",
+    "episode_num": 102,
+    "guest": "Jim Park",
+    "org": "Journalist and NACFE",
+    "published": "2024-12-17",
+    "duration": 1646
+  },
+  {
+    "id": "podcast-ep101-ben-sharpe-2024",
+    "video_id": "UtIyvmYBEMg",
+    "title": "Ep. 101: Ben Sharpe \u2013 Atlas Public Policy",
+    "episode_num": 101,
+    "guest": "Ben Sharpe",
+    "org": "Atlas Public Policy",
+    "published": "2024-12-03",
+    "duration": 1375
+  },
+  {
+    "id": "podcast-ep100-mike-roeth-2024",
+    "video_id": "Fy0HsEP6HMc",
+    "title": "Ep. 100: Mike Roeth \u2013 NACFE",
+    "episode_num": 100,
+    "guest": "Mike Roeth",
+    "org": "NACFE",
+    "published": "2024-11-19",
+    "duration": 1374
+  },
+  {
+    "id": "podcast-ep99-jim-castelaz-2024",
+    "video_id": "AT68U6H2bis",
+    "title": "Ep. 99: Jim Castelaz \u2013 Motiv Electric Trucks",
+    "episode_num": 99,
+    "guest": "Jim Castelaz",
+    "org": "Motiv Electric Trucks",
+    "published": "2024-11-05",
+    "duration": 1405
+  },
+  {
+    "id": "podcast-ep98-dave-mullaney-2024",
+    "video_id": "j9DU8tg18-w",
+    "title": "Ep. 98: Dave Mullaney \u2013 TruCurrent",
+    "episode_num": 98,
+    "guest": "Dave Mullaney",
+    "org": "TruCurrent",
+    "published": "2024-10-22",
+    "duration": 1498
+  },
+  {
+    "id": "podcast-ep97-michele-calbi-2024",
+    "video_id": "vscvYaS7YTE",
+    "title": "Ep. 97: Michele Calbi \u2013Team DriveAway",
+    "episode_num": 97,
+    "guest": "Michele Calbi",
+    "org": "Team DriveAway",
+    "published": "2024-10-08",
+    "duration": 1618
+  },
+  {
+    "id": "podcast-ep96-jason-mathers-2024",
+    "video_id": "4LGm8TxcJS4",
+    "title": "Ep. 96: Jason Mathers \u2013 Environmental Defense Fund",
+    "episode_num": 96,
+    "guest": "Jason Mathers",
+    "org": "Environmental Defense Fund",
+    "published": "2024-09-24",
+    "duration": 1216
+  },
+  {
+    "id": "podcast-ep95-yunsu-park-2024",
+    "video_id": "Trci7VEGpiw",
+    "title": "Ep. 95: Yunsu Park \u2013 NACFE",
+    "episode_num": 95,
+    "guest": "Yunsu Park",
+    "org": "NACFE",
+    "published": "2024-09-10",
+    "duration": 1294
+  },
+  {
+    "id": "podcast-ep94-jordan-spradling-2024",
+    "video_id": "hSTyLm9Q6_s",
+    "title": "Ep. 94: Jordan Spradling \u2013 Pilot Flying J",
+    "episode_num": 94,
+    "guest": "Jordan Spradling",
+    "org": "Pilot Flying J",
+    "published": "2024-08-27",
+    "duration": 1591
+  },
+  {
+    "id": "podcast-ep93-bruce-stockton-2024",
+    "video_id": "51OIg_y7_Vc",
+    "title": "Ep. 93: Bruce Stockton \u2013 Wilson Logistics",
+    "episode_num": 93,
+    "guest": "Bruce Stockton",
+    "org": "Wilson Logistics",
+    "published": "2024-08-13",
+    "duration": 1418
+  },
+  {
+    "id": "podcast-ep92-john-hroncich-2024",
+    "video_id": "1G_B-naAT6g",
+    "title": "Ep. 92: John Hroncich \u2013 BAE Systems",
+    "episode_num": 92,
+    "guest": "John Hroncich",
+    "org": "BAE Systems",
+    "published": "2024-07-30",
+    "duration": 1583
+  },
+  {
+    "id": "podcast-ep91-rob-swim-2024",
+    "video_id": "i9EKV0pMfaA",
+    "title": "Ep. 91: Rob Swim \u2013 Trucking Industry Veteran",
+    "episode_num": 91,
+    "guest": "Rob Swim",
+    "org": "Trucking Industry Veteran",
+    "published": "2024-06-18",
+    "duration": 1352
+  },
+  {
+    "id": "podcast-ep90-amory-lovins-2024",
+    "video_id": "3SZna6bax6w",
+    "title": "Ep. 90: Amory Lovins \u2013 RMI",
+    "episode_num": 90,
+    "guest": "Amory Lovins",
+    "org": "RMI",
+    "published": "2024-04-30",
+    "duration": 1591
+  },
+  {
+    "id": "podcast-ep89-james-menzies-2024",
+    "video_id": "1NOCD53rbYM",
+    "title": "Ep. 89: James Menzies \u2013 Today\u2019s Trucking",
+    "episode_num": 89,
+    "guest": "James Menzies",
+    "org": "Today\u2019s Trucking",
+    "published": "2024-04-02",
+    "duration": 1579
+  },
+  {
+    "id": "podcast-ep88-henrik-holland-2024",
+    "video_id": "3ebv77UbABQ",
+    "title": "Ep. 88: Henrik Holland \u2013 Prologis",
+    "episode_num": 88,
+    "guest": "Henrik Holland",
+    "org": "Prologis",
+    "published": "2024-03-05",
+    "duration": 1670
+  },
+  {
+    "id": "podcast-ep87-coralie-cooper-2024",
+    "video_id": "DpaiOnzSvLM",
+    "title": "Ep. 87: Coralie Cooper \u2013 NESCAUM",
+    "episode_num": 87,
+    "guest": "Coralie Cooper",
+    "org": "NESCAUM",
+    "published": "2024-02-20",
+    "duration": 1555
+  },
+  {
+    "id": "podcast-ep86-amanda-devoe-2024",
+    "video_id": "iPX3rwRiA_4",
+    "title": "Ep. 86: Amanda Devoe \u2013 PepsiCo",
+    "episode_num": 86,
+    "guest": "Amanda Devoe",
+    "org": "PepsiCo",
+    "published": "2024-01-30",
+    "duration": 1955
+  },
+  {
+    "id": "podcast-ep85-scott-perry-2024",
+    "video_id": "l9ZxjYo2pBY",
+    "title": "Ep. 85: Scott Perry \u2013 Industry Executive and former NACFE board chairman",
+    "episode_num": 85,
+    "guest": "Scott Perry",
+    "org": "Industry Executive and former NACFE board chairman",
+    "published": "2024-01-16",
+    "duration": 1546
+  },
+  {
+    "id": "podcast-ep84-rachel-ellenberger-2024",
+    "video_id": "hHnoWv8cECc",
+    "title": "Ep. 84: Rachel Ellenberger \u2013 Green Seed Collective and NACFE",
+    "episode_num": 84,
+    "guest": "Rachel Ellenberger",
+    "org": "Green Seed Collective and NACFE",
+    "published": "2024-01-09",
+    "duration": 1666
+  },
+  {
+    "id": "podcast-ep82-ari-kahn-2023",
+    "video_id": "22ExIMrbxKk",
+    "title": "Ep. 82: Ari Kahn \u2013 RMI",
+    "episode_num": 82,
+    "guest": "Ari Kahn",
+    "org": "RMI",
+    "published": "2023-10-17",
+    "duration": 1381
+  },
+  {
+    "id": "podcast-ep83-marie-brougham-2023",
+    "video_id": "toR6rGC1XWk",
+    "title": "Ep. 83: Marie Brougham \u2013 Sacramento Municipal Utility District",
+    "episode_num": 83,
+    "guest": "Marie Brougham",
+    "org": "Sacramento Municipal Utility District",
+    "published": "2023-11-28",
+    "duration": 1495
+  },
+  {
+    "id": "podcast-ep81-dave-beasley-2023",
+    "video_id": "TcGqLB2ksww",
+    "title": "Ep. 81: Dave Beasley \u2013 Goodyear Tire and Rubber Company",
+    "episode_num": 81,
+    "guest": "Dave Beasley",
+    "org": "Goodyear Tire and Rubber Company",
+    "published": "2023-10-03",
+    "duration": 1472
+  },
+  {
+    "id": "podcast-ep79-brady-matoian-2023",
+    "video_id": "lmk4hn-w_AM",
+    "title": "Ep. 79: Brady Matoian \u2013 OK Produce",
+    "episode_num": 79,
+    "guest": "Brady Matoian",
+    "org": "OK Produce",
+    "published": "2023-09-06",
+    "duration": 1619
+  },
+  {
+    "id": "podcast-ep80-ali-javidan-2023",
+    "video_id": "JfMZN080Ht4",
+    "title": "Ep. 80: Ali Javidan \u2013 Range Energy",
+    "episode_num": 80,
+    "guest": "Ali Javidan",
+    "org": "Range Energy",
+    "published": "2023-09-19",
+    "duration": 1637
+  },
+  {
+    "id": "podcast-ep77-matt-mclelland-2023",
+    "video_id": "H5gWhEZR6Ek",
+    "title": "Ep. 77: Matt McLelland \u2013 Covenant",
+    "episode_num": 77,
+    "guest": "Matt McLelland",
+    "org": "Covenant",
+    "published": "2023-06-20",
+    "duration": 1526
+  },
+  {
+    "id": "podcast-ep78-ed-chipalowsky-2023",
+    "video_id": "aZCPtda5n_I",
+    "title": "Ep. 78: Ed Chipalowsky \u2013 NACFE",
+    "episode_num": 78,
+    "guest": "Ed Chipalowsky",
+    "org": "NACFE",
+    "published": "2023-07-11",
+    "duration": 1506
+  },
+  {
+    "id": "podcast-ep76-jason-cannon-2023",
+    "video_id": "oD8wmxSJDmA",
+    "title": "Ep. 76: Jason Cannon \u2013 CCJ",
+    "episode_num": 76,
+    "guest": "Jason Cannon",
+    "org": "CCJ",
+    "published": "2023-05-31",
+    "duration": 1528
+  },
+  {
+    "id": "podcast-ep75-cristina-commendatore-2023",
+    "video_id": "HMkcwAje7N0",
+    "title": "Ep. 75: Cristina Commendatore \u2013 Fleet Owner",
+    "episode_num": 75,
+    "guest": "Cristina Commendatore",
+    "org": "Fleet Owner",
+    "published": "2023-05-09",
+    "duration": 1406
+  },
+  {
+    "id": "podcast-ep73-seth-clevenger-2023",
+    "video_id": "akri9cpKDNo",
+    "title": "Ep 73: Seth Clevenger \u2013 Transport Topics",
+    "episode_num": 73,
+    "guest": "Seth Clevenger",
+    "org": "Transport Topics",
+    "published": "2023-04-11",
+    "duration": 1477
+  },
+  {
+    "id": "podcast-ep74-melvyn-roeth-2023",
+    "video_id": "ovmR-1drGOU",
+    "title": "Ep. 74: Melvyn Roeth \u2013 father of NACFE Executive Director Mike Roeth",
+    "episode_num": 74,
+    "guest": "Melvyn Roeth",
+    "org": "father of NACFE Executive Director Mike Roeth",
+    "published": "2023-04-18",
+    "duration": 1403
+  },
+  {
+    "id": "podcast-ep72-dan-burrows-2023",
+    "video_id": "yYi5OYM7-Ww",
+    "title": "Ep. 72: Dan Burrows \u2013 TruckLabs",
+    "episode_num": 72,
+    "guest": "Dan Burrows",
+    "org": "TruckLabs",
+    "published": "2023-03-28",
+    "duration": 1529
+  },
+  {
+    "id": "podcast-ep71-eric-starks-2023",
+    "video_id": "mPki4-WKrCI",
+    "title": "Ep. 71: Eric Starks \u2013 FTR",
+    "episode_num": 71,
+    "guest": "Eric Starks",
+    "org": "FTR",
+    "published": "2023-02-21",
+    "duration": 1665
+  },
+  {
+    "id": "podcast-ep70-michelle-buffington-2023",
+    "video_id": "thwLDLcjJ-Y",
+    "title": "Ep 70: Michelle Buffington \u2013 California Air Resources Board",
+    "episode_num": 70,
+    "guest": "Michelle Buffington",
+    "org": "California Air Resources Board",
+    "published": "2023-02-05",
+    "duration": 1469
+  },
+  {
+    "id": "podcast-ep69-rob-kelly-2023",
+    "video_id": "ByNAkU8nmAM",
+    "title": "Ep. 69: Rob Kelly \u2013 Forum Mobility",
+    "episode_num": 69,
+    "guest": "Rob Kelly",
+    "org": "Forum Mobility",
+    "published": "2023-02-01",
+    "duration": 1718
+  },
+  {
+    "id": "podcast-ep68-ken-marko-2022",
+    "video_id": "Q2Q_J5tnxAU",
+    "title": "Ep. 68: Ken Marko \u2013 US Foods",
+    "episode_num": 68,
+    "guest": "Ken Marko",
+    "org": "US Foods",
+    "published": "2022-12-20",
+    "duration": 1658
+  },
+  {
+    "id": "podcast-ep67-marc-andre-page-2022",
+    "video_id": "qsJPCQT5DWw",
+    "title": "Ep. 67: Marc-Andre Page \u2013 The Lion Electric",
+    "episode_num": 67,
+    "guest": "Marc-Andre Page",
+    "org": "The Lion Electric",
+    "published": "2022-11-22",
+    "duration": 1616
+  },
+  {
+    "id": "podcast-ep66-kenny-vieth-2022",
+    "video_id": "KLFV2yUQ4o4",
+    "title": "Ep. 66: Kenny Vieth \u2013 ACT Research",
+    "episode_num": 66,
+    "guest": "Kenny Vieth",
+    "org": "ACT Research",
+    "published": "2022-10-12",
+    "duration": 1697
+  },
+  {
+    "id": "podcast-ep65-graham-doorley-2022",
+    "video_id": "PDAIslU-FJI",
+    "title": "Ep. 65: Graham Doorley \u2013 Solo Advanced Vehicle Technologies",
+    "episode_num": 65,
+    "guest": "Graham Doorley",
+    "org": "Solo Advanced Vehicle Technologies",
+    "published": "2022-09-27",
+    "duration": 1602
+  },
+  {
+    "id": "podcast-ep64-andrew-bremer-2022",
+    "video_id": "ouVOSl1yOHU",
+    "title": "Ep. 64: Andrew Bremer \u2013 DriveOhio",
+    "episode_num": 64,
+    "guest": "Andrew Bremer",
+    "org": "DriveOhio",
+    "published": "2022-09-20",
+    "duration": 1592
+  },
+  {
+    "id": "podcast-ep63-erik-neandross-2022",
+    "video_id": "eu5UkRq9QsY",
+    "title": "Ep 63: Erik Neandross \u2013 Gladstein, Neandross & Associates",
+    "episode_num": 63,
+    "guest": "Erik Neandross",
+    "org": "Gladstein, Neandross & Associates",
+    "published": "2022-08-30",
+    "duration": 1408
+  },
+  {
+    "id": "podcast-ep62-glen-kedzie-2022",
+    "video_id": "1HfQVP1wZsg",
+    "title": "Ep 62: Glen Kedzie \u2013 American Trucking Associations",
+    "episode_num": 62,
+    "guest": "Glen Kedzie",
+    "org": "American Trucking Associations",
+    "published": "2022-08-16",
+    "duration": 1555
+  },
+  {
+    "id": "podcast-ep61-jigar-shah-2022",
+    "video_id": "t1kzqmv4h1A",
+    "title": "Ep. 61: Jigar Shah \u2013 United States Department of Energy",
+    "episode_num": 61,
+    "guest": "Jigar Shah",
+    "org": "United States Department of Energy",
+    "published": "2022-08-02",
+    "duration": 1577
+  },
+  {
+    "id": "podcast-ep60-chet-ciesielski-2022",
+    "video_id": "Yc1BjuizbJQ",
+    "title": "Ep. 60: Chet Ciesielski \u2013 International",
+    "episode_num": 60,
+    "guest": "Chet Ciesielski",
+    "org": "International",
+    "published": "2022-07-26",
+    "duration": 1538
+  },
+  {
+    "id": "podcast-ep59-anthony-eggert-2022",
+    "video_id": "s5BmhLkGRFg",
+    "title": "Ep. 59: Anthony Eggert \u2013 Climate Works Foundation",
+    "episode_num": 59,
+    "guest": "Anthony Eggert",
+    "org": "Climate Works Foundation",
+    "published": "2022-07-19",
+    "duration": 1643
+  },
+  {
+    "id": "podcast-ep58-alison-conway-2022",
+    "video_id": "d9QNMKuKbck",
+    "title": "Ep. 58: Alison Conway \u2013 The City College of New York",
+    "episode_num": 58,
+    "guest": "Alison Conway",
+    "org": "The City College of New York",
+    "published": "2022-07-12",
+    "duration": 1570
+  },
+  {
+    "id": "podcast-ep57-jose-pepe-gutierrez-2022",
+    "video_id": "WzAWPdhgm-w",
+    "title": "Ep. 57: Jose \u201cPepe\u201d Gutierrez \u2013 NACFE LATAM",
+    "episode_num": 57,
+    "guest": "Jose \u201cPepe\u201d Gutierrez",
+    "org": "NACFE LATAM",
+    "published": "2022-06-28",
+    "duration": 1354
+  },
+  {
+    "id": "podcast-ep56-kevin-beaty-2022",
+    "video_id": "7lMc3qTIU8w",
+    "title": "Ep. 56: Kevin Beaty \u2013 YUNEV LLC",
+    "episode_num": 56,
+    "guest": "Kevin Beaty",
+    "org": "YUNEV LLC",
+    "published": "2022-06-07",
+    "duration": 1470
+  },
+  {
+    "id": "podcast-ep55-venkatesan-murali-2022",
+    "video_id": "kind8V2Rtvg",
+    "title": "Ep 55: Venkatesan Murali \u2013 Merlin Solar",
+    "episode_num": 55,
+    "guest": "Venkatesan Murali",
+    "org": "Merlin Solar",
+    "published": "2022-05-17",
+    "duration": 1549
+  },
+  {
+    "id": "podcast-ep54-sean-larkin-2022",
+    "video_id": "pK0ajVvng7U",
+    "title": "Ep. 54: Sean Larkin \u2013 Amply Power",
+    "episode_num": 54,
+    "guest": "Sean Larkin",
+    "org": "Amply Power",
+    "published": "2022-05-03",
+    "duration": 1481
+  },
+  {
+    "id": "podcast-ep53-jennifer-wheeler-2022",
+    "video_id": "JGvSeK77HOc",
+    "title": "Ep. 53: Jennifer Wheeler \u2013 NACFE",
+    "episode_num": 53,
+    "guest": "Jennifer Wheeler",
+    "org": "NACFE",
+    "published": "2022-04-26",
+    "duration": 1574
+  },
+  {
+    "id": "podcast-ep52-diane-newton-2022",
+    "video_id": "G50XWTht-sk",
+    "title": "Ep. 52: Diane Newton \u2013 HNTB",
+    "episode_num": 52,
+    "guest": "Diane Newton",
+    "org": "HNTB",
+    "published": "2022-04-19",
+    "duration": 1614
+  },
+  {
+    "id": "podcast-ep51-allen-schaeffer-2022",
+    "video_id": "fn99pkz4ayA",
+    "title": "Ep. 51: Allen Schaeffer \u2013 Diesel Technology Forum",
+    "episode_num": 51,
+    "guest": "Allen Schaeffer",
+    "org": "Diesel Technology Forum",
+    "published": "2022-04-05",
+    "duration": 1531
+  },
+  {
+    "id": "podcast-ep49-sam-spofforth-2022",
+    "video_id": "3hfM-VWwQpY",
+    "title": "Ep. 49: Sam Spofforth \u2013 NREL",
+    "episode_num": 49,
+    "guest": "Sam Spofforth",
+    "org": "NREL",
+    "published": "2022-03-21",
+    "duration": 1461
+  },
+  {
+    "id": "podcast-ep50-bill-bliem-2022",
+    "video_id": "uUX06Y2oVOg",
+    "title": "Ep. 50: Bill Bliem \u2013 NFI Industries",
+    "episode_num": 50,
+    "guest": "Bill Bliem",
+    "org": "NFI Industries",
+    "published": "2022-03-22",
+    "duration": 1574
+  },
+  {
+    "id": "podcast-ep48-britta-gross-2022",
+    "video_id": "nRzWcB1v7lI",
+    "title": "Ep 48: Britta Gross \u2013RMI",
+    "episode_num": 48,
+    "guest": "Britta Gross",
+    "org": "RMI",
+    "published": "2022-03-08",
+    "duration": 1685
+  },
+  {
+    "id": "podcast-ep47-henry-albert-2022",
+    "video_id": "0ElPS1eiT_0",
+    "title": "Ep. 47: Henry Albert \u2013 Albert Transport",
+    "episode_num": 47,
+    "guest": "Henry Albert",
+    "org": "Albert Transport",
+    "published": "2022-03-01",
+    "duration": 1559
+  },
+  {
+    "id": "podcast-ep46-rob-graff-2022",
+    "video_id": "4qxXG2v6Kyw",
+    "title": "Ep. 46: Rob Graff \u2013 RMI and NACFE",
+    "episode_num": 46,
+    "guest": "Rob Graff",
+    "org": "RMI and NACFE",
+    "published": "2022-02-22",
+    "duration": 1174
+  },
+  {
+    "id": "podcast-ep45-gina-lopez-2022",
+    "video_id": "desrFoNIhEo",
+    "title": "Ep. 45: Gina Lopez \u2013 Kalmar",
+    "episode_num": 45,
+    "guest": "Gina Lopez",
+    "org": "Kalmar",
+    "published": "2022-02-15",
+    "duration": 1619
+  },
+  {
+    "id": "podcast-ep44-paul-rosa-2022",
+    "video_id": "_h4eNRQnmmk",
+    "title": "Ep. 44: Paul Rosa \u2013 Penske",
+    "episode_num": 44,
+    "guest": "Paul Rosa",
+    "org": "Penske",
+    "published": "2022-02-08",
+    "duration": 1551
+  },
+  {
+    "id": "podcast-ep43-tim-reeser-2022",
+    "video_id": "597-vNEwANU",
+    "title": "Ep. 43: Tim Reeser \u2013 Lightning eMotors",
+    "episode_num": 43,
+    "guest": "Tim Reeser",
+    "org": "Lightning eMotors",
+    "published": "2022-02-01",
+    "duration": 1548
+  },
+  {
+    "id": "podcast-ep42-george-miller-2022",
+    "video_id": "5zj-RnlbpYA",
+    "title": "Ep. 42: George Miller \u2013 BYD",
+    "episode_num": 42,
+    "guest": "George Miller",
+    "org": "BYD",
+    "published": "2022-01-25",
+    "duration": 1586
+  },
+  {
+    "id": "podcast-ep41-rob-ulsh-2022",
+    "video_id": "7DT3o4E_uOk",
+    "title": "Ep 41: Rob Ulsh \u2013 Great Dane",
+    "episode_num": 41,
+    "guest": "Rob Ulsh",
+    "org": "Great Dane",
+    "published": "2022-01-18",
+    "duration": 1570
+  },
+  {
+    "id": "podcast-ep40-randy-cornell-2022",
+    "video_id": "UYFRZh6hoqw",
+    "title": "Ep 40: Randy Cornell \u2013 CFI",
+    "episode_num": 40,
+    "guest": "Randy Cornell",
+    "org": "CFI",
+    "published": "2022-01-11",
+    "duration": 1573
+  },
+  {
+    "id": "podcast-ep39-jim-sharkey-2022",
+    "video_id": "FACsBw8JHi0",
+    "title": "Ep. 39: Jim Sharkey \u2013 Pressure Systems International",
+    "episode_num": 39,
+    "guest": "Jim Sharkey",
+    "org": "Pressure Systems International",
+    "published": "2022-01-04",
+    "duration": 1473
+  },
+  {
+    "id": "podcast-ep38-avra-brahma-2021",
+    "video_id": "1jWx0uodxU8",
+    "title": "Ep. 38: Avra Brahma \u2013 Locomation",
+    "episode_num": 38,
+    "guest": "Avra Brahma",
+    "org": "Locomation",
+    "published": "2021-12-21",
+    "duration": 1648
+  },
+  {
+    "id": "podcast-ep37-selda-gunsel-2021",
+    "video_id": "CBv78e9_XV8",
+    "title": "Ep 37: Selda Gunsel \u2013 Shell Global Solutions",
+    "episode_num": 37,
+    "guest": "Selda Gunsel",
+    "org": "Shell Global Solutions",
+    "published": "2021-12-14",
+    "duration": 1491
+  },
+  {
+    "id": "podcast-ep36-todd-mouw-2021",
+    "video_id": "Q-qdzXUyUKc",
+    "title": "Ep. 36: Todd Mouw \u2013 Roush CleanTech",
+    "episode_num": 36,
+    "guest": "Todd Mouw",
+    "org": "Roush CleanTech",
+    "published": "2021-12-07",
+    "duration": 1569
+  },
+  {
+    "id": "podcast-ep34-scott-sutarik-2021",
+    "video_id": "UMB7xRMw5u8",
+    "title": "Ep. 34: Scott Sutarik \u2013 Geotab",
+    "episode_num": 34,
+    "guest": "Scott Sutarik",
+    "org": "Geotab",
+    "published": "2021-09-14",
+    "duration": 1445
+  },
+  {
+    "id": "podcast-ep35-taki-darakos-2021",
+    "video_id": "4Rg7-15hWzw",
+    "title": "Ep. 35: Taki Darakos \u2013 Pitt Ohio",
+    "episode_num": 35,
+    "guest": "Taki Darakos",
+    "org": "Pitt Ohio",
+    "published": "2021-11-30",
+    "duration": 1544
+  },
+  {
+    "id": "podcast-ep33-ade-thomas-2021",
+    "video_id": "DbhtwkIkKYA",
+    "title": "Ep. 33: Ade Thomas \u2013 green.tv media",
+    "episode_num": 33,
+    "guest": "Ade Thomas",
+    "org": "green.tv media",
+    "published": "2021-08-03",
+    "duration": 1494
+  },
+  {
+    "id": "podcast-ep32-gary-gaussoin-2021",
+    "video_id": "hd975gRsUrM",
+    "title": "Ep. 32: Gary Gaussoin \u2013 Silver Eagle Manufacturing",
+    "episode_num": 32,
+    "guest": "Gary Gaussoin",
+    "org": "Silver Eagle Manufacturing",
+    "published": "2021-07-13",
+    "duration": 1351
+  },
+  {
+    "id": "podcast-ep31-thomas-healy-2021",
+    "video_id": "Y9nSnjwJ_GQ",
+    "title": "Ep. 31: Thomas Healy \u2013 Hyliion",
+    "episode_num": 31,
+    "guest": "Thomas Healy",
+    "org": "Hyliion",
+    "published": "2021-06-08",
+    "duration": 1537
+  },
+  {
+    "id": "podcast-ep30-chris-nordh-2021",
+    "video_id": "Uzb-hmMOQMM",
+    "title": "Ep. 30: Chris Nordh \u2013 Workhorse Group, Inc.",
+    "episode_num": 30,
+    "guest": "Chris Nordh",
+    "org": "Workhorse Group, Inc.",
+    "published": "2021-05-25",
+    "duration": 1614
+  },
+  {
+    "id": "podcast-ep29-jack-allen-2021",
+    "video_id": "HK_sMJh48SQ",
+    "title": "Ep. 29: Jack Allen \u2013 Proterra",
+    "episode_num": 29,
+    "guest": "Jack Allen",
+    "org": "Proterra",
+    "published": "2021-05-18",
+    "duration": 1499
+  },
+  {
+    "id": "podcast-ep28-matt-mclelland-2021",
+    "video_id": "Axp_SvsIay4",
+    "title": "Ep. 28: Matt McLelland \u2013 Covenant Transport Services",
+    "episode_num": 28,
+    "guest": "Matt McLelland",
+    "org": "Covenant Transport Services",
+    "published": "2021-05-11",
+    "duration": 1547
+  },
+  {
+    "id": "podcast-ep27-greg-hintler-2021",
+    "video_id": "YPn06kfsatc",
+    "title": "Ep. 27: Greg Hintler \u2013 The Mobility House",
+    "episode_num": 27,
+    "guest": "Greg Hintler",
+    "org": "The Mobility House",
+    "published": "2021-04-27",
+    "duration": 1351
+  },
+  {
+    "id": "podcast-ep26-muffi-ghadiali-2021",
+    "video_id": "oVvousR1F6Y",
+    "title": "Ep. 26: Muffi Ghadiali \u2013 Electriphi",
+    "episode_num": 26,
+    "guest": "Muffi Ghadiali",
+    "org": "Electriphi",
+    "published": "2021-03-23",
+    "duration": 1508
+  },
+  {
+    "id": "podcast-ep25-jules-kortenhorst-2021",
+    "video_id": "3u0DEko_ABY",
+    "title": "Ep. 25: Jules Kortenhorst \u2013 RMI",
+    "episode_num": 25,
+    "guest": "Jules Kortenhorst",
+    "org": "RMI",
+    "published": "2021-03-09",
+    "duration": 1542
+  },
+  {
+    "id": "podcast-ep23-paul-stith-2021",
+    "video_id": "FtwyKwxQI5A",
+    "title": "Ep. 23: Paul Stith \u2013 Black & Veatch",
+    "episode_num": 23,
+    "guest": "Paul Stith",
+    "org": "Black & Veatch",
+    "published": "2021-02-04",
+    "duration": 1556
+  },
+  {
+    "id": "podcast-ep24-michael-berube-2021",
+    "video_id": "Y39xNNE4esg",
+    "title": "Ep. 24: Michael Berube \u2013 US Department of Energy",
+    "episode_num": 24,
+    "guest": "Michael Berube",
+    "org": "US Department of Energy",
+    "published": "2021-02-16",
+    "duration": 1481
+  },
+  {
+    "id": "podcast-ep22-denise-rondini-2021",
+    "video_id": "rPrGDgdmIc0",
+    "title": "Ep. 22: Denise Rondini, Rondini Communications & NACFE",
+    "episode_num": 22,
+    "guest": "Denise Rondini",
+    "org": "Rondini Communications & NACFE",
+    "published": "2021-01-26",
+    "duration": 1514
+  },
+  {
+    "id": "podcast-ep21-patrick-molloy-2021",
+    "video_id": "TKElxMf34Bo",
+    "title": "Ep. 21: Patrick Molloy \u2013 Rocky Mountain Institute",
+    "episode_num": 21,
+    "guest": "Patrick Molloy",
+    "org": "Rocky Mountain Institute",
+    "published": "2021-01-05",
+    "duration": 1503
+  },
+  {
+    "id": "podcast-ep20-rick-mihelic-2020",
+    "video_id": "-iRiA7PXRyk",
+    "title": "Ep. 20: Rick Mihelic \u2013 Mihelic Vehicle Consulting & NACFE",
+    "episode_num": 20,
+    "guest": "Rick Mihelic",
+    "org": "Mihelic Vehicle Consulting & NACFE",
+    "published": "2020-12-22",
+    "duration": 1564
+  },
+  {
+    "id": "podcast-ep19-steve-ernest-2020",
+    "video_id": "60VMQC-cDtw",
+    "title": "Ep. 19: Steve Ernest \u2013 Jacobs Vehicle Systems",
+    "episode_num": 19,
+    "guest": "Steve Ernest",
+    "org": "Jacobs Vehicle Systems",
+    "published": "2020-12-15",
+    "duration": 1651
+  },
+  {
+    "id": "podcast-ep17-rustam-kocher-2020",
+    "video_id": "IAHxCfNlE5E",
+    "title": "Ep. 17: Rustam Kocher \u2013 Daimler Trucks NA",
+    "episode_num": 17,
+    "guest": "Rustam Kocher",
+    "org": "Daimler Trucks NA",
+    "published": "2020-11-24",
+    "duration": 1375
+  },
+  {
+    "id": "podcast-ep18-ellen-voie-2020",
+    "video_id": "TScw6soXQ68",
+    "title": "Ep. 18: Ellen Voie \u2013 Women in Trucking",
+    "episode_num": 18,
+    "guest": "Ellen Voie",
+    "org": "Women in Trucking",
+    "published": "2020-12-01",
+    "duration": 1137
+  },
+  {
+    "id": "podcast-ep16-jack-roberts-2020",
+    "video_id": "xt51fKWEMMI",
+    "title": "Ep. 16: Jack Roberts \u2013 Senior Trucking Editor and Freight Futurist",
+    "episode_num": 16,
+    "guest": "Jack Roberts",
+    "org": "Senior Trucking Editor and Freight Futurist",
+    "published": "2020-11-05",
+    "duration": 1601
+  },
+  {
+    "id": "podcast-ep15-kyle-treadway-2020",
+    "video_id": "Osl0zYnTOLM",
+    "title": "Ep. 15: Kyle Treadway \u2013 Kenworth Sales Company",
+    "episode_num": 15,
+    "guest": "Kyle Treadway",
+    "org": "Kenworth Sales Company",
+    "published": "2020-10-20",
+    "duration": 1509
+  },
+  {
+    "id": "podcast-ep13-jessie-lund-2020",
+    "video_id": "ZlgOBvzQxdc",
+    "title": "Ep. 13: Jessie Lund \u2013 Rocky Mountain Institute",
+    "episode_num": 13,
+    "guest": "Jessie Lund",
+    "org": "Rocky Mountain Institute",
+    "published": "2020-09-29",
+    "duration": 1551
+  },
+  {
+    "id": "podcast-ep14-clark-reed-2020",
+    "video_id": "zTr6KZIZnbw",
+    "title": "Ep. 14: Clark Reed \u2013 Nussbaum Transportation",
+    "episode_num": 14,
+    "guest": "Clark Reed",
+    "org": "Nussbaum Transportation",
+    "published": "2020-10-06",
+    "duration": 1373
+  },
+  {
+    "id": "podcast-ep12-jeff-baer-2020",
+    "video_id": "mq6-ObJi2-o",
+    "title": "Ep. 12: Jeff Baer \u2013 LinkeDrive",
+    "episode_num": 12,
+    "guest": "Jeff Baer",
+    "org": "LinkeDrive",
+    "published": "2020-09-22",
+    "duration": 1528
+  },
+  {
+    "id": "podcast-ep11-steve-slesinski-2020",
+    "video_id": "S8d4x0Nn5sM",
+    "title": "Ep. 11: Steve Slesinski \u2013 Dana Commercial Vehicle",
+    "episode_num": 11,
+    "guest": "Steve Slesinski",
+    "org": "Dana Commercial Vehicle",
+    "published": "2020-09-15",
+    "duration": 1445
+  },
+  {
+    "id": "podcast-ep8-jay-lau-2020",
+    "video_id": "Hf0XVgwwJCg",
+    "title": "Ep. 8: Jay Lau \u2013 TuSimple",
+    "episode_num": 8,
+    "guest": "Jay Lau",
+    "org": "TuSimple",
+    "published": "2020-08-26",
+    "duration": 1365
+  },
+  {
+    "id": "podcast-ep7-dr-andrew-brown-jr-2020",
+    "video_id": "M3MNgMU8hpU",
+    "title": "Ep. 7: Dr. Andrew Brown, Jr. \u2013 National Academy of Engineering, Delphi Corporation (ret.)",
+    "episode_num": 7,
+    "guest": "Dr. Andrew Brown, Jr.",
+    "org": "National Academy of Engineering, Delphi Corporation (ret.)",
+    "published": "2020-08-19",
+    "duration": 1425
+  },
+  {
+    "id": "podcast-ep9-quin-garcia-2020",
+    "video_id": "eMVDd00aJ8Y",
+    "title": "Ep. 9: Quin Garcia \u2013 Autotech Ventures",
+    "episode_num": 9,
+    "guest": "Quin Garcia",
+    "org": "Autotech Ventures",
+    "published": "2020-09-02",
+    "duration": 1462
+  },
+  {
+    "id": "podcast-ep10-james-brown-2020",
+    "video_id": "Mqq2vBCn2t8",
+    "title": "Ep. 10: James Brown \u2013 James Brown Media",
+    "episode_num": 10,
+    "guest": "James Brown",
+    "org": "James Brown Media",
+    "published": "2020-09-09",
+    "duration": 961
+  },
+  {
+    "id": "podcast-ep6-kevin-otto-and-dave-schaller-2020",
+    "video_id": "3EUfqvn2DSM",
+    "title": "Ep. 6: Kevin Otto and Dave Schaller \u2013 NACFE Team",
+    "episode_num": 6,
+    "guest": "Kevin Otto and Dave Schaller",
+    "org": "NACFE Team",
+    "published": "2020-08-12",
+    "duration": 1261
+  },
+  {
+    "id": "podcast-ep5-ned-harvey-2020",
+    "video_id": "f5C2bID1FeU",
+    "title": "Ep. 5: Ned Harvey \u2013 Rocky Mountain Institute",
+    "episode_num": 5,
+    "guest": "Ned Harvey",
+    "org": "Rocky Mountain Institute",
+    "published": "2020-08-05",
+    "duration": 1544
+  },
+  {
+    "id": "podcast-ep4-elizabeth-fretheim-2020",
+    "video_id": "2uBRl-jsZJQ",
+    "title": "Ep 4: Elizabeth Fretheim \u2013 Nikola Motor Co.",
+    "episode_num": 4,
+    "guest": "Elizabeth Fretheim",
+    "org": "Nikola Motor Co.",
+    "published": "2020-07-29",
+    "duration": 1268
+  },
+  {
+    "id": "podcast-ep3-jennifer-rumsey-2020",
+    "video_id": "bov30yEpfug",
+    "title": "Ep. 3: Jennifer Rumsey \u2013 Cummins Inc.",
+    "episode_num": 3,
+    "guest": "Jennifer Rumsey",
+    "org": "Cummins Inc.",
+    "published": "2020-07-16",
+    "duration": 1144
+  },
+  {
+    "id": "podcast-ep2-rob-reich-2020",
+    "video_id": "1I4L8cAzU30",
+    "title": "Ep. 2: Rob Reich \u2013 Schneider",
+    "episode_num": 2,
+    "guest": "Rob Reich",
+    "org": "Schneider",
+    "published": "2020-07-16",
+    "duration": 1306
+  },
+  {
+    "id": "podcast-ep1-joel-morrow-2020",
+    "video_id": "Xk7V0bO6Clo",
+    "title": "Ep. 1: Joel Morrow \u2013 Ploger Transportation",
+    "episode_num": 1,
+    "guest": "Joel Morrow",
+    "org": "Ploger Transportation",
+    "published": "2020-07-16",
+    "duration": 1548
+  }
+]
