@@ -59,6 +59,13 @@
       "#nacfe-assist-root .na-error{font-size:14px;color:#ab1428;padding:12px 0}",
       "#nacfe-assist-root .na-footer{font-size:11px;color:#9a9a9a;margin-top:18px}",
       "#nacfe-assist-root .na-footer a{color:#001961}",
+      "#nacfe-assist-root .na-sponsor{display:flex;align-items:center;gap:8px;",
+      "font-size:12px;color:#6b6b6b;margin:0 0 6px}",
+      "#nacfe-assist-root .na-sponsor img{width:20px;height:20px;border-radius:4px;",
+      "flex-shrink:0;object-fit:contain}",
+      "#nacfe-assist-root .na-sponsor b{color:#333}",
+      "#nacfe-assist-root .na-sponsor a{color:#001961;text-decoration:none}",
+      "#nacfe-assist-root .na-sponsor a:hover{text-decoration:underline}",
     ].join("");
     document.head.appendChild(style);
   }
@@ -81,6 +88,10 @@
     '<div id="na-sources-list"></div>',
     '</div>',
     '</div>',
+    '<p class="na-sponsor" id="na-sponsor">',
+    '<img src="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 40 40\'%3E%3Crect width=\'40\' height=\'40\' rx=\'8\' fill=\'%232563eb\'/%3E%3Ctext x=\'20\' y=\'26\' font-family=\'Arial\' font-size=\'16\' font-weight=\'700\' fill=\'white\' text-anchor=\'middle\'%3EES%3C/text%3E%3C/svg%3E" alt="Example Sponsor Name logo" />',
+    '<span><b>Example Sponsor Name</b> — Sponsor tag line. <a href="#">Learn more</a></span>',
+    '</p>',
     '<p class="na-footer">Powered by NACFE’s research library. Answers cite specific reports and demonstrations — verify against the original source for critical decisions.</p>',
     '</div>',
   ].join("");
