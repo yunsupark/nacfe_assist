@@ -341,7 +341,7 @@ Terrain, Technology, and Telematics: The Messy Middle Operations Report
 > Axes: none
 > Series: none
 > Values: DATA SOURCES: Telematics (10-Second Intervals), GPS & Elevation Data, Fleet Reports & Interviews; INTEGRATION: Data Integration & Screening; VALIDATION: Automated Anomaly Detection, Cross-Validation vs. Dashboard, Energy Reconciliaton; OUTPUT: Validated Dataset (1% to 5% alignment)
-> Notes: Logo "RUN ON LESS MESSY MIDDLE by NACFE", Technology-specific validation: $H_2$ cumulative totals, BEV energy components, payload sensors
+> Notes: Logo "RUN ON LESS MESSY MIDDLE by NACFE", Technology-specific validation: H2 cumulative totals, BEV energy components, payload sensors
 
 Figure 4: Data collection and validation process
 
@@ -399,7 +399,7 @@ Figure 5 form the foundation of fleet-level and cross-fleet analysis.
 > Type: table / schematic
 > Axes: none
 > Series: none
-> Values: Metric: Diesel Miles per Gallon Equivalent (MPGde) | Definition/Purpose: Measures vehicle energy efficiency normalized across all fuel types to enable cross-technology comparison. Also reported as MPGe for brevity throughout this report.; Metric: Miles per Kilogram $H_2$ | Definition/Purpose: Hydrogen-specific efficiency metric measuring distance traveled per kilogram of hydrogen consumed.; Metric: Miles per kilowatt hour (mi/kWh) | Definition/Purpose: Measures vehicle energy efficiency for battery-electric vehicles, the inverse of consumption. Higher values indicate higher efficiency.; Metric: Ton-Miles per Energy Unit | Definition/Purpose: Freight-efficiency indicator capturing payload productivity — how much cargo is moved per unit of energy consumed.; Metric: Probable Maximum Range (PMR) | Definition/Purpose: Estimated single-charge or single-fill range derived from observed best-day and worst-day efficiency, accounting for operational variability.; Metric: Daily Productivity | Definition/Purpose: Miles driven per active day, capturing operational throughput within hours-of-service constraints.; Metric: Route Utilization Ratio (RUR) | Definition/Purpose: Percentage of operating hours spent in productive motion versus idle or dwell time.; Metric: Idle Share / Dwell Time | Definition/Purpose: Portion of total time the vehicle is stationary with power draw, affecting auxiliary energy consumption.
+> Values: Metric: Diesel Miles per Gallon Equivalent (MPGde) | Definition/Purpose: Measures vehicle energy efficiency normalized across all fuel types to enable cross-technology comparison. Also reported as MPGe for brevity throughout this report.; Metric: Miles per Kilogram H2 | Definition/Purpose: Hydrogen-specific efficiency metric measuring distance traveled per kilogram of hydrogen consumed.; Metric: Miles per kilowatt hour (mi/kWh) | Definition/Purpose: Measures vehicle energy efficiency for battery-electric vehicles, the inverse of consumption. Higher values indicate higher efficiency.; Metric: Ton-Miles per Energy Unit | Definition/Purpose: Freight-efficiency indicator capturing payload productivity — how much cargo is moved per unit of energy consumed.; Metric: Probable Maximum Range (PMR) | Definition/Purpose: Estimated single-charge or single-fill range derived from observed best-day and worst-day efficiency, accounting for operational variability.; Metric: Daily Productivity | Definition/Purpose: Miles driven per active day, capturing operational throughput within hours-of-service constraints.; Metric: Route Utilization Ratio (RUR) | Definition/Purpose: Percentage of operating hours spent in productive motion versus idle or dwell time.; Metric: Idle Share / Dwell Time | Definition/Purpose: Portion of total time the vehicle is stationary with power draw, affecting auxiliary energy consumption.
 > Notes: Logo "RUN ON LESS MESSY MIDDLE by NACFE" icons at top right.
 
 Figure 5: The foundation of fleet-level and cross-fleet analysis
@@ -437,7 +437,7 @@ energy but with significant net efficiency variation between flat and mountainou
 comparison across technologies. PMR is calculated from observed efficiency data rather than
 manufacturer specifications, using the following formula.
 
-$$\text{PMR} = \text{Usable Energy Capacity} \times \text{Observed Efficiency}$$
+PMR = Usable Energy Capacity × Observed Efficiency
 
 For each fleet, PMR is reported as a range reflecting best-day and worst-day efficiency, providing
 realistic bounds for operational planning. This approach acknowledges that range varies significantly
@@ -5063,14 +5063,14 @@ Overall (driving with GPS): The Saia 1 truck had total driving miles of approxim
 | Flat (0% to 1%) | 87.5% | 583 ft. | 0.521 | 13.7% |
 | Light Rolling (1% to 3%) | 8.6% | 4,014 ft. | 0.364 | 41% |
 | Moderate (3% to 6%) | 1.0% | 12,461 ft. | 0.156 | 50.8% |
-| Steep ($\ge$ 6%) | 0.2% | 26,848 ft. | — | — |
+| Steep (≥ 6%) | 0.2% | 26,848 ft. | — | — |
 
 > **Figure 117 — Distance traveled by terrain type for Saia Tesla Semi 1**
 > Type: table
 > Axes: n/a
 > Series: n/a
 > Values: n/a
-> Notes: Note: Steep ($\ge$6%) band represents $\approx$0.2% of driving miles ($\approx$2 miles total). Efficiency and regen figures for this band are not statistically meaningful and are omitted. Figure 117: Distance traveled by terrain type for Saia Tesla Semi 1
+> Notes: Note: Steep (≥6%) band represents ≈0.2% of driving miles (≈2 miles total). Efficiency and regen figures for this band are not statistically meaningful and are omitted. Figure 117: Distance traveled by terrain type for Saia Tesla Semi 1
 
 Small shares of distance occur on ramps and localized grades (1% to 3% and above), where elevation gain per 100 miles jumps into the four-to-five-figure range and regen share rises sharply into the 40 to 50% range. These segments illustrate how BEV efficiency responds sharply once grades increase, despite meaningful regen recovery. The high regen percentage in the 1% to 3% band reflects the frequent braking cycles inherent to LTL multi-stop operations rather than sustained downhill running.
 
@@ -5194,7 +5194,7 @@ Terrain, Technology, and Telematics: The Messy Middle Operations Report
 | Component | Spec | Component | Spec |
 | --- | --- | --- | --- |
 | Tractor | Tesla Semi | Cab Type | Day cab, center driving position |
-| Battery Capacity | $\sim$800 to 900 kWh (estimated) | Drivetrain | Tri-motor electric powertrain |
+| Battery Capacity | ~800 to 900 kWh (estimated) | Drivetrain | Tri-motor electric powertrain |
 | Transmission | Single-speed direct drive | Axle Configuration | 6x4 |
 | Advertised Range | 500-mile | Charging | Tesla proprietary high-power DC |
 | Aero/Safety Devices | Full aero integration, ADAS suite | Application | Terminal-to-terminal long haul |
@@ -5217,9 +5217,9 @@ Figure 121 is a summary of the various metrics that were tracked for Saia’s Te
 | Metric | Value | Metric | Value |
 | --- | --- | --- | --- |
 | Total Miles | 4,841 | Active Days | 13 |
-| Avg Miles/Day | $\approx$372 mi/day | Max Miles/Day | 660 miles |
-| Fleet Efficiency | $\approx$0.624 mi/kWh<br>(1.604 kWh/mi) | Regen Share<br>(Run Level) | $\approx$13% to 15% |
-| Charge Events<br>per 100 Miles | $\approx$0.35<br>(one charge per $\approx$285 miles) | Probable Maximum<br>Range (PMR, single<br>charge) | $\approx$350 to 450 miles |
+| Avg Miles/Day | ≈372 mi/day | Max Miles/Day | 660 miles |
+| Fleet Efficiency | ≈0.624 mi/kWh<br>(1.604 kWh/mi) | Regen Share<br>(Run Level) | ≈13% to 15% |
+| Charge Events<br>per 100 Miles | ≈0.35<br>(one charge per ≈285 miles) | Probable Maximum<br>Range (PMR, single<br>charge) | ≈350 to 450 miles |
 
 > **Figure 121 — Fleet metrics for Saia’s Tesla Semi 2**
 > Type: table
@@ -5346,7 +5346,7 @@ Efficiency in the steepest band remains in the mid-0.3 to low-0.4 mi/kWh range w
 
 5.3.5.7 Terrain & Grade Summary
 
-Saia 2’s route set features flat-to-rolling terrain with meaningful but not extreme elevation change. Nearly 67% of miles occur on grades above 1%, a notably higher share than Saia 1’s regional LTL operation, consistent with the longer interstate linehaul corridors that connect NorCal terminals. Moderate (3% to 6%) and steep ($\ge$6%) segments represent smaller shares of total distance but account for a large share of elevation gain, with the
+Saia 2’s route set features flat-to-rolling terrain with meaningful but not extreme elevation change. Nearly 67% of miles occur on grades above 1%, a notably higher share than Saia 1’s regional LTL operation, consistent with the longer interstate linehaul corridors that connect NorCal terminals. Moderate (3% to 6%) and steep (≥6%) segments represent smaller shares of total distance but account for a large share of elevation gain, with the
 
 March 15, 2026
 NACFE
@@ -5372,7 +5372,7 @@ Overall (driving with GPS): The Saia 2 truck had total driving miles of approxim
 | Flat (0% to 1%) | 30.0% | 1,650 ft. | 0.515 | 5.6% |
 | Light Rolling (1% to 3%) | 36.7% | 4,855 ft. | 0.481 | 8.8% |
 | Moderate (3% to 6%) | 11.1% | 11,284 ft. | 0.389 | 42.9% |
-| Steep ($\ge$ 6%) | 6.1% | 30,098 ft. | 0.350 | 35.4% |
+| Steep (≥ 6%) | 6.1% | 30,098 ft. | 0.350 | 35.4% |
 
 > **Figure 124 — Distance traveled by terrain type for Saia Tesla Semi 2**
 > Type: table
@@ -5492,11 +5492,11 @@ Terrain, Technology, and Telematics: The Messy Middle Operations Report
 
 | Fleet | Vehicle | Battery (approx) | Total Miles | Avg mi/day | Max Daily Miles | Efficiency mi/kWh | Regen Share (approx) | Terrain Profile | Primary Duty Cycle |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 4Gen | Volvo VNR Electric | 565 kWh | 2,612 | $\approx$201 | 388 | $\approx$0.530 | $\approx$11% to 20% | Inland Empire; $\approx$80% of miles <3% grade | Regional drayage and distribution, mixed congestion |
-| JoyRide | Windrose sleeper | 705 kWh | 5,725 | $\approx$409 | 875 | $\approx$0.545 | $\approx$15% | TX $\rightarrow$ CA via Rockies, Sierra, Grapevine; $\approx$96% of miles <3% grade (interstate design) | Long-haul regional and corridor operations |
-| Nevoya | Freightliner eCascadia | 438 kWh | 2,247 | $\approx$173 | 348 | $\approx$0.600 | $\approx$8.9% | Central Valley; $\approx$90% of miles <3% grade | Regional distribution and DC-to-DC transfers, evening-heavy |
-| Saia 1 | Tesla Semi | $\sim$800 to 900 kWh | 1,025 | $\approx$79 | 130 | $\approx$0.569 | $\approx$19.7% | Bay Area / Central Valley; $\approx$90% <1% grade | LTL multi-stop regional distribution, evening-heavy |
-| Saia 2 | Tesla Semi | $\sim$800 to 900 kWh | 4,841 | $\approx$372 | 660 | $\approx$0.624 | $\approx$13% to 15% | NorCal long-haul; $\approx$81% of miles <3% grade | Terminal-to-terminal LTL long-haul, overnight/early AM |
+| 4Gen | Volvo VNR Electric | 565 kWh | 2,612 | ≈201 | 388 | ≈0.530 | ≈11% to 20% | Inland Empire; ≈80% of miles <3% grade | Regional drayage and distribution, mixed congestion |
+| JoyRide | Windrose sleeper | 705 kWh | 5,725 | ≈409 | 875 | ≈0.545 | ≈15% | TX → CA via Rockies, Sierra, Grapevine; ≈96% of miles <3% grade (interstate design) | Long-haul regional and corridor operations |
+| Nevoya | Freightliner eCascadia | 438 kWh | 2,247 | ≈173 | 348 | ≈0.600 | ≈8.9% | Central Valley; ≈90% of miles <3% grade | Regional distribution and DC-to-DC transfers, evening-heavy |
+| Saia 1 | Tesla Semi | ~800 to 900 kWh | 1,025 | ≈79 | 130 | ≈0.569 | ≈19.7% | Bay Area / Central Valley; ≈90% <1% grade | LTL multi-stop regional distribution, evening-heavy |
+| Saia 2 | Tesla Semi | ~800 to 900 kWh | 4,841 | ≈372 | 660 | ≈0.624 | ≈13% to 15% | NorCal long-haul; ≈81% of miles <3% grade | Terminal-to-terminal LTL long-haul, overnight/early AM |
 
 > **Figure 127 — Comparison of operating characteristic of Run on Less – Messy Middle BEVs**
 > Type: table
@@ -5513,11 +5513,11 @@ Regional fleets used more frequent, shorter charge events (approximately 0.7 to 
 
 | Fleet | Charges per 100 miles | Practical Single-Charge PMR\* | Speed Profile | SOC Management Style |
 | --- | --- | --- | --- | --- |
-| 4Gen | $\approx$0.73 | 180 to 220 miles | $\approx$51% at 50 to 60 mph | Conservative (mean SOC = 75%) |
-| JoyRide | $\approx$0.44 | 350 to 400 miles | $\approx$85% above 50 mph | Moderate (mean SOC = 62%) |
-| Nevoya | $\approx$0.76 | 150 to 200 miles | $\approx$80% at 50 to 60 mph | Conservative (mean SOC = 83%) |
-| Saia 1 | $\approx$0.88 | 120 to 160 miles | $\approx$40% at 50 to 60 mph | Aggressive (mean SOC = 45%) |
-| Saia 2 | $\approx$0.35 | 350 to 450 miles | $\approx$65% at 50 to 60 mph | Aggressive (mean SOC = 49%) |
+| 4Gen | ≈0.73 | 180 to 220 miles | ≈51% at 50 to 60 mph | Conservative (mean SOC = 75%) |
+| JoyRide | ≈0.44 | 350 to 400 miles | ≈85% above 50 mph | Moderate (mean SOC = 62%) |
+| Nevoya | ≈0.76 | 150 to 200 miles | ≈80% at 50 to 60 mph | Conservative (mean SOC = 83%) |
+| Saia 1 | ≈0.88 | 120 to 160 miles | ≈40% at 50 to 60 mph | Aggressive (mean SOC = 45%) |
+| Saia 2 | ≈0.35 | 350 to 450 miles | ≈65% at 50 to 60 mph | Aggressive (mean SOC = 49%) |
 
 > **Figure 128 — Charging data for the BEVs in Run on Less – Messy Middle**
 > Type: table
@@ -5586,7 +5586,7 @@ penalties, even with high regen. Sustained climbs can reduce efficiency by more 
 > Type: bar chart
 > Axes: Grade Band vs Efficiency (mi/kWh)
 > Series: Nevoya, 4Gen, Saia 1, Saia 2, JoyRide
-> Values: Flat (0-1%): Nevoya approx 0.45, 4Gen 0.59, Saia 1 0.46, Saia 2 approx 0.69, JoyRide approx 0.70; Light Rolling (1-3%): Nevoya 0.28, 4Gen 0.19, Saia 1 0.37, Saia 2 approx 0.49, JoyRide approx 0.79; Moderate (3-6%): Saia 2 0.23, JoyRide approx 0.49; Steep ($\ge$6%): Saia 2 0.25, JoyRide approx 0.49
+> Values: Flat (0-1%): Nevoya approx 0.45, 4Gen 0.59, Saia 1 0.46, Saia 2 approx 0.69, JoyRide approx 0.70; Light Rolling (1-3%): Nevoya 0.28, 4Gen 0.19, Saia 1 0.37, Saia 2 approx 0.49, JoyRide approx 0.79; Moderate (3-6%): Saia 2 0.23, JoyRide approx 0.49; Steep (≥6%): Saia 2 0.25, JoyRide approx 0.49
 > Notes: Efficiency declines with increasing grade. Figure 129: Grade impact on BEV efficiency
 
 All deployments deliberately avoided sustained mountain passes. While 80% to 96% of miles occurred on grades below 3%, the limited exposure to steeper grades (6% or greater) showed large efficiency penalties, even with high regen. Sustained climbs can reduce efficiency by more than half relative to flat segments, significantly shortening range and requiring more conservative planning.
@@ -5649,7 +5649,7 @@ The XCIENT's 56 mph governed speed — a design choice consistent with regional 
 
 These were not controlled demonstrations. Both fleets ran real freight, on commercial schedules, with commercial payloads, using developing hydrogen infrastructure rather than idealized test conditions. The two deployments provide early but meaningful evidence of where hydrogen fits today, how it performs under real operational variability, and what infrastructure and economic barriers remain.
 
-Pilot's California corridors delivered 7.80 mi/kg $H_2$ with a wide $\pm$17% daily variation reflecting real-world terrain, grade, and traffic. Daily distances averaged 272 miles per day, with a maximum of 427 miles. Operations spanned elevations from -33 ft. to 1,640 ft., with significant periods at highway speeds (61% at 50 to 60 mph), and meaningful time on 3% to 6% and 6% or greater grades.
+Pilot's California corridors delivered 7.80 mi/kg H2 with a wide ±17% daily variation reflecting real-world terrain, grade, and traffic. Daily distances averaged 272 miles per day, with a maximum of 427 miles. Operations spanned elevations from -33 ft. to 1,640 ft., with significant periods at highway speeds (61% at 50 to 60 mph), and meaningful time on 3% to 6% and 6% or greater grades.
 
 Penske's Texas regional operation produced a more stable efficiency band at approximately 7.5 mi/kg, averaging 121 miles per day across 15 days. Nearly 90% of miles were run at 50 to 60 mph on flat terrain with an elevation range of only 374 ft. to 863 ft., providing an ideal profile for assessing hydrogen performance without topographic distortion.
 
@@ -5705,7 +5705,7 @@ Figure 132 is a detailed look at the specifications of Penske’s Hyundai XCIENT
 
 # Equipment Specs
 ## Penske
-### HYDROGEN $H_2$
+### HYDROGEN H2
 
 | Component | Spec | Component | Spec |
 | --- | --- | --- | --- |
@@ -5739,15 +5739,15 @@ Terrain, Technology, and Telematics: The Messy Middle Operations Report
 
 # Fleet Metrics
 ## Penske
-### HYDROGEN $H_2$
+### HYDROGEN H2
 
 | Metric | Value | Metric | Value |
 | --- | --- | --- | --- |
-| Active Days | 15 | Total Miles | $\approx$1,820 miles |
-| Avg Miles/Day | $\approx$121 mi | Max Miles/Day | 159 miles |
-| Average Efficiency | $\approx$7.5 mi/kg $H_2$ | Idle Share | <3% |
-| Elevation Range | 374 to 863 ft. | Mean Elevation | $\approx$630 ft. |
-| PMR (usable range) | $\approx$350 to 450 mi/fill | Route Utilization<br>Ratio (typical) | 30% to 45% of PMR used |
+| Active Days | 15 | Total Miles | ≈1,820 miles |
+| Avg Miles/Day | ≈121 mi | Max Miles/Day | 159 miles |
+| Average Efficiency | ≈7.5 mi/kg H2 | Idle Share | <3% |
+| Elevation Range | 374 to 863 ft. | Mean Elevation | ≈630 ft. |
+| PMR (usable range) | ≈350 to 450 mi/fill | Route Utilization<br>Ratio (typical) | 30% to 45% of PMR used |
 | Refueling Time | Not measured | Fueling Method | Single mobile heavy-duty<br>dispenser |
 
 > **Figure 133 — Fleet metrics for Penske’s Hyundai XCIENT truck**
@@ -5765,7 +5765,7 @@ Duty Cycle: Highly structured overnight RTB freight with repetitive corridors. T
 
 Distance & Utilization: Daily mileage was tightly clustered (approximately 100 to 160 mi), enabling consistent hydrogen budgeting and minimal on-route refueling risk.
 
-Efficiency (mi/kg $H_2$): The truck delivered approximately 7 to 8 mi/kg across the Run, driven primarily by flat terrain and disciplined freeway speeds.
+Efficiency (mi/kg H2): The truck delivered approximately 7 to 8 mi/kg across the Run, driven primarily by flat terrain and disciplined freeway speeds.
 
 Payload Context: Though precise GVW data were not logged, Penske confirmed that loads were commercial freight, not reduced-weight demos.
 
@@ -5816,7 +5816,7 @@ Terrain, Technology, and Telematics: The Messy Middle Operations Report
 
 # Daily Summary
 ## Penske
-### HYDROGEN $H_2$
+### HYDROGEN H2
 
 | Date | Miles | mi/kg |
 | --- | --- | --- |
@@ -5850,7 +5850,7 @@ Terrain, Technology, and Telematics: The Messy Middle Operations Report
 
 # Speed Band Variability
 ## Penske
-### HYDROGEN $H_2$
+### HYDROGEN H2
 
 | Speed Band | % Distance | mi/kg | Interpretation |
 | --- | --- | --- | --- |
@@ -5886,14 +5886,14 @@ Terrain, Technology, and Telematics: The Messy Middle Operations Report
 
 # Terrain Analysis
 ## Penske
-### HYDROGEN $H_2$
+### HYDROGEN H2
 
-| Grade Band | % Distance | Elevation Gain per 100 mi | mi/kg $H_2$ | Notes |
+| Grade Band | % Distance | Elevation Gain per 100 mi | mi/kg H2 | Notes |
 | --- | --- | --- | --- | --- |
-| Flat (0% to 1%) | 43.4% | $\approx$1,147 ft. | 7.68 | Southern California RTB corridors; predictable and fuel-efficient |
-| Light Rolling (1% to 3%) | 45.1% | $\approx$4,850 ft. | 7.94 | Gentle grade transitions typical of SoCal freight lanes |
-| Moderate (3% to 6%) | 10.4% | $\approx$9,790 ft. | 5.91 | Foothill and interchange grades; efficiency softens with increased vertical work |
-| Steep ($\ge$ 6%) | 1.1% | $\approx$21,043 ft. | 1.87 | Rare but hydrogen-intensive; likely ramp grades and localized terrain |
+| Flat (0% to 1%) | 43.4% | ≈1,147 ft. | 7.68 | Southern California RTB corridors; predictable and fuel-efficient |
+| Light Rolling (1% to 3%) | 45.1% | ≈4,850 ft. | 7.94 | Gentle grade transitions typical of SoCal freight lanes |
+| Moderate (3% to 6%) | 10.4% | ≈9,790 ft. | 5.91 | Foothill and interchange grades; efficiency softens with increased vertical work |
+| Steep (≥ 6%) | 1.1% | ≈21,043 ft. | 1.87 | Rare but hydrogen-intensive; likely ramp grades and localized terrain |
 
 > **Figure 136 — Penske’s distance traveled by grade band**
 > Type: table
@@ -5998,7 +5998,7 @@ Figure 139 is a detailed look at the specifications of Pilot’s Hyundai XCIENT 
 
 # Equipment Specs
 ## Pilot
-### HYDROGEN $H_2$
+### HYDROGEN H2
 
 | Component | Spec | Component | Spec |
 | --- | --- | --- | --- |
@@ -6032,15 +6032,15 @@ Terrain, Technology, and Telematics: The Messy Middle Operations Report
 
 # Fleet Metrics
 ## Pilot
-### HYDROGEN $H_2$
+### HYDROGEN H2
 
 | Metric | Value | Metric | Value |
 | --- | --- | --- | --- |
-| Active Days | 15 | Total Miles | $\approx$4,077 miles |
-| Avg Miles/Day | $\approx$272 mi/day | Max Miles/Day | 427 miles |
-| Average Efficiency | $\approx$7.80 mi/kg $H_2$ | Efficiency Range | 6.19 to 10.76 mi/kg |
-| Elevation Range | -33 to 1,640 ft. | Mean Elevation | $\approx$652 ft. |
-| PMR (usable range) | $\approx$300 to 450 mi/fill<br>(wider range reflecting<br>terrain variability) | RUR (typical) | 60% to 95% of PMR<br>on long days |
+| Active Days | 15 | Total Miles | ≈4,077 miles |
+| Avg Miles/Day | ≈272 mi/day | Max Miles/Day | 427 miles |
+| Average Efficiency | ≈7.80 mi/kg H2 | Efficiency Range | 6.19 to 10.76 mi/kg |
+| Elevation Range | -33 to 1,640 ft. | Mean Elevation | ≈652 ft. |
+| PMR (usable range) | ≈300 to 450 mi/fill<br>(wider range reflecting<br>terrain variability) | RUR (typical) | 60% to 95% of PMR<br>on long days |
 | Refueling Time | Not measured | Infrastructure | Fixed 700-bar<br>heavy-duty station |
 
 > **Figure 140 — Fleet metrics for Pilot’s Hyundai XCIENT truck**
@@ -6076,7 +6076,7 @@ Terrain, Technology, and Telematics: The Messy Middle Operations Report
 
 Distance & Utilization: High-tempo corridor operation with many days between 250 and 400 miles and a demonstrated upper bound of 427 miles, confirming hydrogen's daily-range capability.
 
-Efficiency (mi/kg $H_2$): Fleet average approximately 7.80 mi/kg with wide ($\pm$17%) variation driven by terrain, grade, and routing, typical for mixed California corridors.
+Efficiency (mi/kg H2): Fleet average approximately 7.80 mi/kg with wide (±17%) variation driven by terrain, grade, and routing, typical for mixed California corridors.
 
 Payload / GVW: Pilot confirmed commercial hydrogen bulk freight loads were hauled; efficiency reflects true operational weight, not light demo payloads.
 
@@ -6110,11 +6110,11 @@ Terrain Influence: Operation included foothill approaches and transitions with g
 
 5.4.2.4 Sample Daily Summary
 
-The sample daily summary for Pilot captures the widest efficiency range among the hydrogen fleets — and among all non-BEV participants in the Run. Daily mileage ranged from short 84-mile partial days to extended 427-mile corridor runs, with validated hydrogen efficiency spanning roughly 6.2 to 10.8 mi/kg. This $\pm$38% variation around the 7.80 mi/kg fleet average was driven overwhelmingly by terrain: California corridor routes that included sustained foothill climbs and grade transitions produced significantly higher hydrogen consumption per mile, while favorable flat-to-rolling segments on I-15 and I-10 corridors yielded efficiency well above the fleet average. See Figure 142.
+The sample daily summary for Pilot captures the widest efficiency range among the hydrogen fleets — and among all non-BEV participants in the Run. Daily mileage ranged from short 84-mile partial days to extended 427-mile corridor runs, with validated hydrogen efficiency spanning roughly 6.2 to 10.8 mi/kg. This ±38% variation around the 7.80 mi/kg fleet average was driven overwhelmingly by terrain: California corridor routes that included sustained foothill climbs and grade transitions produced significantly higher hydrogen consumption per mile, while favorable flat-to-rolling segments on I-15 and I-10 corridors yielded efficiency well above the fleet average. See Figure 142.
 
 # Daily Summary
 ## Pilot
-### HYDROGEN $H_2$
+### HYDROGEN H2
 
 | Date | Miles | mi/kg |
 | --- | --- | --- |
@@ -6152,14 +6152,14 @@ Speed band variability analysis segments each fleet's total miles into standardi
 
 # Speed Band Variability
 ## Pilot
-### HYDROGEN $H_2$
+### HYDROGEN H2
 
 | Speed Band | % Distance | mi/kg | Interpretation |
 | --- | --- | --- | --- |
-| 0 to 25 mph | $\sim$9% | $\approx$2.1 | Stop-start connectors; hydrogen-intensive like BEV/CNG |
-| 25 to 40 mph | $\sim$12% | $\approx$7.7 | Urban connectors and on/off-ramps |
-| 40 to 50 mph | $\sim$18% | $\approx$10.8 | Transition arterials; strong efficiency |
-| 50 to 60 mph | $\sim$61% | $\approx$11.5 | Dominant corridor band; best hydrogen productivity |
+| 0 to 25 mph | ~9% | ≈2.1 | Stop-start connectors; hydrogen-intensive like BEV/CNG |
+| 25 to 40 mph | ~12% | ≈7.7 | Urban connectors and on/off-ramps |
+| 40 to 50 mph | ~18% | ≈10.8 | Transition arterials; strong efficiency |
+| 50 to 60 mph | ~61% | ≈11.5 | Dominant corridor band; best hydrogen productivity |
 | > 60 mph | <1% | N/A | Limited exposure; negligible effect on average |
 
 > **Figure 143 — Pilot’s distance traveled by speed band**
@@ -6188,14 +6188,14 @@ Terrain, Technology, and Telematics: The Messy Middle Operations Report
 
 # Terrain Analysis
 ## Pilot
-### HYDROGEN $H_2$
+### HYDROGEN H2
 
-| Grade Band | % Distance | Elevation Gain per 100 miles | mi/kg $H_2$ | Notes |
+| Grade Band | % Distance | Elevation Gain per 100 miles | mi/kg H2 | Notes |
 | --- | --- | --- | --- | --- |
-| Flat (0% to 1%) | 39.9% | $\approx$1,184 ft. | 8.40 | California coastal and Central Valley corridors; most efficient terrain |
-| Light Rolling (1% to 3%) | 41.9% | $\approx$4,894 ft. | 9.71 | Foothill approaches and valley transitions; strong efficiency maintained |
-| Moderate (3% to 6%) | 14.2% | $\approx$10,458 ft. | 7.05 | Pass-adjacent grades; moderate hydrogen penalty on sustained climbs |
-| Steep ($\ge$ 6%) | 3.9% | $\approx$23,589 ft. | 3.24 | Localized steep grades; significant efficiency drop on extended pulls |
+| Flat (0% to 1%) | 39.9% | ≈1,184 ft. | 8.40 | California coastal and Central Valley corridors; most efficient terrain |
+| Light Rolling (1% to 3%) | 41.9% | ≈4,894 ft. | 9.71 | Foothill approaches and valley transitions; strong efficiency maintained |
+| Moderate (3% to 6%) | 14.2% | ≈10,458 ft. | 7.05 | Pass-adjacent grades; moderate hydrogen penalty on sustained climbs |
+| Steep (≥ 6%) | 3.9% | ≈23,589 ft. | 3.24 | Localized steep grades; significant efficiency drop on extended pulls |
 
 > **Figure 144 — Pilot’s distance traveled by grade band**
 > Type: table
@@ -6273,17 +6273,17 @@ Here is a comparison of the two hydrogen fuel cell trucks that participated in R
 
 # Cross-Fleet Comparison
 ## of Hydrogen Fuel Cell Fleets
-### HYDROGEN $H_2$
+### HYDROGEN H2
 
 | Metric | Penske (TX) | Pilot (CA) | Notes |
 | --- | --- | --- | --- |
-| Total Miles | $\approx$1,820 | $\approx$4,077 | Pilot ran longer corridors |
-| Avg mi/day | $\approx$121 | $\approx$272 | Pilot demonstrated long-haul potential |
-| Avg mi/kg | $\sim$7.5 | $\sim$7.80 | CA terrain creates wider variation |
+| Total Miles | ≈1,820 | ≈4,077 | Pilot ran longer corridors |
+| Avg mi/day | ≈121 | ≈272 | Pilot demonstrated long-haul potential |
+| Avg mi/kg | ~7.5 | ~7.80 | CA terrain creates wider variation |
 | Efficiency Range | 7.0 to 8.1 | 6.19 to 10.76 | Pilot operated on varied terrain |
 | PMR Used | 30 % to 45% | 60% to 95% | Pilot pushed upper range envelope |
 | Refuel Time | 10 to 12 minutes (mobile) | Not measured | Comparable performance |
-| Terrain | Flat $\rightarrow$ light rolling | Flat $\rightarrow$ rolling $\rightarrow$ foothill | Broader grade exposure |
+| Terrain | Flat → light rolling | Flat → rolling → foothill | Broader grade exposure |
 | Speed Profile | 89% at 50 to 60 mph | 61% at 50 to 60 mph | Both highway-dominant |
 
 > **Figure 145 — Cross-fleet comparison of hydrogen fuel cell trucks in Run on Less – Messy Middle.**

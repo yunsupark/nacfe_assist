@@ -580,7 +580,7 @@ information may be available via weigh-in-motion reporting as NACFE reported in 
 > Values: see table
 > Notes: Source: ATRI
 
-The introduction of natural gas (NG) powered vehicles, BEVs, hybrid-electric vehicles such as fuel cells (FCEV), and other alternative fuel vehicles such as hydrogen internal combustion (HICE) challenge MPG reporting. NACFE describes the transition period as the Messy Middle, where many alternatives will see production use [14]. The DOE and EPA estimate fuel efficiency in a common metric expressed in diesel gallon equivalent, $\text{MPG}_{\text{dge}}$ or sometimes abbreviated $\text{MPG}_e$ when the context is clearly diesel.
+The introduction of natural gas (NG) powered vehicles, BEVs, hybrid-electric vehicles such as fuel cells (FCEV), and other alternative fuel vehicles such as hydrogen internal combustion (HICE) challenge MPG reporting. NACFE describes the transition period as the Messy Middle, where many alternatives will see production use [14]. The DOE and EPA estimate fuel efficiency in a common metric expressed in diesel gallon equivalent, MPGdge or sometimes abbreviated MPGe when the context is clearly diesel.
 
 Efficiencies vary considerably depending on the powertrain. For example, energy conversion into motion for fossil-fueled vehicles may be in the 40% to 50% range, while battery electric vehicles may be 60% to 90% efficient. NACFE estimates the fuel efficiency of recent vehicles including the SuperTruck 1 and 2 prototypes, and BEVs overlaid in Figure 24 with the previous data for diesels [15].
 
@@ -588,12 +588,12 @@ Efficiencies vary considerably depending on the powertrain. For example, energy 
 
 > **Figure 24 — Comparisons of fuel economies in the messy middle (NACFE)**
 > Type: line chart
-> Axes: Year vs Average $\text{MPG}_{\text{dge}}$
+> Axes: Year vs Average MPGdge
 > Series: NACFE FFS Average MPG, ATRI MPG (60%-80% GVW), ATRI Average MPG by Year, U.S. Combination Trucks (FHWA)
-> Values: (Estimates from chart) 2000 to 2023 values range between 5 and 18 $\text{MPG}_{\text{dge}}$
+> Values: (Estimates from chart) 2000 to 2023 values range between 5 and 18 MPGdge
 > Notes: Annotations point to 18.3 BEVs, DOE SuperTrucks 2, DOE SuperTrucks 1, 10.1 NACFE Run on Less Long Haul, 8.3 NACFE Run on Less Regional. Legend shows series icons. Source: NACFE.
 
-Fuel economy reporting using averages is challenging on several levels, but there is demand to see averages. NACFE has summarized available data in Figure 25. The SuperTruck 1 and 2 programs demonstrated that multiple OEMs could achieve significant fuel economy for diesel-powered vehicles operating at 65,000 lbs. GVW in real-world conditions, achieving 10.7 MPG to 16 MPG [15]. NACFE Run on Less and Run on Less Regional demonstrated that well-driven modern production-level trucks could achieve fuel economy in excess of 10 MPG on long-haul routes and exceed 8.7 MPG in regional haul using diesel powertrains. NACFE estimates that recent production Class 8 battery electric semi-tractors are achieving in excess of 18 $\text{MPG}_{\text{dge}}$ [16].
+Fuel economy reporting using averages is challenging on several levels, but there is demand to see averages. NACFE has summarized available data in Figure 25. The SuperTruck 1 and 2 programs demonstrated that multiple OEMs could achieve significant fuel economy for diesel-powered vehicles operating at 65,000 lbs. GVW in real-world conditions, achieving 10.7 MPG to 16 MPG [15]. NACFE Run on Less and Run on Less Regional demonstrated that well-driven modern production-level trucks could achieve fuel economy in excess of 10 MPG on long-haul routes and exceed 8.7 MPG in regional haul using diesel powertrains. NACFE estimates that recent production Class 8 battery electric semi-tractors are achieving in excess of 18 MPGdge [16].
 
 December 17, 2024
 NACFE
@@ -606,7 +606,7 @@ NORTH AMERICAN COUNCIL FOR FREIGHT EFFICIENCY
 
 > **Figure 25 — Average fuel economy comparisons (NACFE) [13]**
 > Type: line chart
-> Axes: Year vs Average $\text{MPG}_{\text{dge}}$
+> Axes: Year vs Average MPGdge
 > Series: NACFE FFS Average MPG, ATRI MPG (60%-80% GVW), ATRI Average MPG by Year, All U.S. Trucks (FHWA)
 > Values: (Estimates from chart) 2000 to 2024 values range between 5.5 and 7.9 MPG. 2021 VIUS point marked.
 > Notes: Source: [13].
@@ -929,9 +929,9 @@ NORTH AMERICAN COUNCIL FOR FREIGHT EFFICIENCY
 
 > **Figure 39 — Mileage comparisons (NACFE)**
 > Type: line chart
-> Axes: Year vs Average $\text{MPG}_{\text{dge}}$
+> Axes: Year vs Average MPGdge
 > Series: NACFE FFS Average MPG, ATRI MPG (60%-80% GVW), ATRI Average MPG by Year, U.S. Combination Trucks (FHWA)
-> Values: (Estimates from chart) 2000 to 2023 values range between 5 and 18 $\text{MPG}_{\text{dge}}$
+> Values: (Estimates from chart) 2000 to 2023 values range between 5 and 18 MPGdge
 > Notes: Annotations point to 18.3 BEVs, DOE SuperTrucks 2, DOE SuperTrucks 1, 10.1 NACFE Run on Less Long Haul, 8.3 NACFE Run on Less Regional. Source: NACFE.
 
 ## 5.3 WHY NOT TON-MILES PER GALLON?

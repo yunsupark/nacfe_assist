@@ -230,19 +230,19 @@ Figure 8: Production and consumption of renewable diesel [12]
 
 From Source to Highway: The Messy Middle Emissions Report
 
-The net $\text{CO}_2$ benefit of a natural gas engine is a reduction of 13% to 18% compared to diesel fuel. Natural gas produces approximately 27% less $\text{CO}_2$ per unit of energy on a fuel-comparison basis compared with No. 2 diesel fuel. However, the natural gas engine is less efficient than a diesel, and natural gas must be compressed for storage on the vehicle [13]. Since compressing natural gas to 3600 PSI requires a great deal of electrical energy. This electricity may be attached to emission creation so natural gas does come with an upstream emission consequence.
+The net CO2 benefit of a natural gas engine is a reduction of 13% to 18% compared to diesel fuel. Natural gas produces approximately 27% less CO2 per unit of energy on a fuel-comparison basis compared with No. 2 diesel fuel. However, the natural gas engine is less efficient than a diesel, and natural gas must be compressed for storage on the vehicle [13]. Since compressing natural gas to 3600 PSI requires a great deal of electrical energy. This electricity may be attached to emission creation so natural gas does come with an upstream emission consequence.
 
 ## 6.2.1 Combustion Characteristics
 
-Most heavy-duty NG engines use spark ignition and stoichiometric combustion, a homogenous cylinder charge. In other words, fuel is mixed within the intake manifold before it enters the combustion chamber. This lower-pressure combustion produces significantly less $\text{NO}_x$ than the diesel cycle, often 90% below current EPA standards (based on EPA standards in effect at the time of this report). Furthermore, because methane has a higher hydrogen-to-carbon ratio than diesel, it generates less $\text{CO}_2$ at the tailpipe per unit of energy [14].
+Most heavy-duty NG engines use spark ignition and stoichiometric combustion, a homogenous cylinder charge. In other words, fuel is mixed within the intake manifold before it enters the combustion chamber. This lower-pressure combustion produces significantly less NOx than the diesel cycle, often 90% below current EPA standards (based on EPA standards in effect at the time of this report). Furthermore, because methane has a higher hydrogen-to-carbon ratio than diesel, it generates less CO2 at the tailpipe per unit of energy [14].
 
-During the combustion process, some hydrocarbons and $\text{NO}_x$ also are created. These emissions are managed by the aftertreatment system, usually a three-way catalyst system. The $\text{NO}_x$ output is much lower than typical diesel combustion as there is less oxygen available during the combustion process. However, hydrocarbon output from this type of combustion system tends to be significantly higher than that from diesel combustion. The particulate output from natural gas combustion is minimal and does not need to be managed by the three-way aftertreatment system. Hydrocarbon control is managed by the aftertreatment catalyst, but natural gas is somewhat more difficult to oxidize than typical hydrocarbons from either gasoline or diesel combustion as it takes higher temperatures to manage this process.
+During the combustion process, some hydrocarbons and NOx also are created. These emissions are managed by the aftertreatment system, usually a three-way catalyst system. The NOx output is much lower than typical diesel combustion as there is less oxygen available during the combustion process. However, hydrocarbon output from this type of combustion system tends to be significantly higher than that from diesel combustion. The particulate output from natural gas combustion is minimal and does not need to be managed by the three-way aftertreatment system. Hydrocarbon control is managed by the aftertreatment catalyst, but natural gas is somewhat more difficult to oxidize than typical hydrocarbons from either gasoline or diesel combustion as it takes higher temperatures to manage this process.
 
-A three-wat catalyst (TWC) is an emissions-control device integrated into the exhaust system that simultaneously manages three primary pollutants: $\text{NO}_x$, CO, and unburned HC. For the system to function effectively, the engine must operate at a stoichiometric air-fuel ratio, with exactly enough oxygen to burn the fuel completely. To manage $\text{NO}_x$, the catalyst uses a reduction reaction — typically facilitated by precious metals like rhodium — which strips the oxygen atoms away from the $\text{NO}_x$. This chemical process converts the harmful $\text{NO}_x$ into harmless nitrogen gas and oxygen, while the liberated oxygen is then used in the simultaneous oxidation of CO and HC into $\text{CO}_2$ and water vapor.
+A three-wat catalyst (TWC) is an emissions-control device integrated into the exhaust system that simultaneously manages three primary pollutants: NOx, CO, and unburned HC. For the system to function effectively, the engine must operate at a stoichiometric air-fuel ratio, with exactly enough oxygen to burn the fuel completely. To manage NOx, the catalyst uses a reduction reaction — typically facilitated by precious metals like rhodium — which strips the oxygen atoms away from the NOx. This chemical process converts the harmful NOx into harmless nitrogen gas and oxygen, while the liberated oxygen is then used in the simultaneous oxidation of CO and HC into CO2 and water vapor.
 
 ## 6.2.2 The Issue of Methane Slip
 
-The environmental advantage of natural gas is precarious due to methane slip — the release of unburned methane into the atmosphere. Methane is a potent GHG with a Global Warming Potential (GWP) 27 to 30 times that of $\text{CO}_2$ over 100 years (AR6) and more than 80 times greater over a 20-year horizon [15]. Slip occurs at the vehicle level (crankcase ventilation, dynamic seals) and, more significantly, in the upstream supply chain (extraction leakage, pipeline venting). Studies indicate that if total system leakage exceeds roughly 1%, the climate benefits of natural gas over diesel can be negated, potentially leading to increased radiative forcing in the short term (an action that causes the Earth to trap more of the sun's energy in the immediate future) [16]. The EPA estimates the leakage to be 1.4%, and there are some higher estimates.
+The environmental advantage of natural gas is precarious due to methane slip — the release of unburned methane into the atmosphere. Methane is a potent GHG with a Global Warming Potential (GWP) 27 to 30 times that of CO2 over 100 years (AR6) and more than 80 times greater over a 20-year horizon [15]. Slip occurs at the vehicle level (crankcase ventilation, dynamic seals) and, more significantly, in the upstream supply chain (extraction leakage, pipeline venting). Studies indicate that if total system leakage exceeds roughly 1%, the climate benefits of natural gas over diesel can be negated, potentially leading to increased radiative forcing in the short term (an action that causes the Earth to trap more of the sun's energy in the immediate future) [16]. The EPA estimates the leakage to be 1.4%, and there are some higher estimates.
 
 ## 6.2.3 Renewable Natural Gas
 
@@ -268,13 +268,13 @@ small percentage of the total population of commercial vehicles in use today. So
 > Axes: none
 > Series: none
 > Values: none
-> Notes: Displays two side-by-side boxes: "Benefits" (Can be near-zero sustainability, Easier $\text{NO}_x$ solution, Some existing fueling infrastructure, Near diesel performance with new 15L engine, RNG availability growing) and "Challenges" (Capacity and cost of RNG, Methane leakage, Enough time for payback until ZEVs are available, Lower efficiency in miles per diesel equivalent, Incentives may decrease or be eliminated, Space onsite for fueling or access to public stations). NACFE logo at bottom right.
+> Notes: Displays two side-by-side boxes: "Benefits" (Can be near-zero sustainability, Easier NOx solution, Some existing fueling infrastructure, Near diesel performance with new 15L engine, RNG availability growing) and "Challenges" (Capacity and cost of RNG, Methane leakage, Enough time for payback until ZEVs are available, Lower efficiency in miles per diesel equivalent, Incentives may decrease or be eliminated, Space onsite for fueling or access to public stations). NACFE logo at bottom right.
 
-RNG fundamentally changes the equation. Produced from anaerobic digesters at dairy farms, landfills, or wastewater treatment plants, RNG captures methane that would otherwise vent naturally into the atmosphere. When this captured methane is used as fuel, it is converted to $\text{CO}_2$, a far less potent GHG. Consequently, RNG from sources like dairy manure can have a negative carbon intensity score, meaning by capturing this escaping GHG pollutant at the source and redirecting it as a transportation fuel the truck is effectively removing GHG impact from the atmosphere as it drives.
+RNG fundamentally changes the equation. Produced from anaerobic digesters at dairy farms, landfills, or wastewater treatment plants, RNG captures methane that would otherwise vent naturally into the atmosphere. When this captured methane is used as fuel, it is converted to CO2, a far less potent GHG. Consequently, RNG from sources like dairy manure can have a negative carbon intensity score, meaning by capturing this escaping GHG pollutant at the source and redirecting it as a transportation fuel the truck is effectively removing GHG impact from the atmosphere as it drives.
 
 ## 6.3 Battery Electric Vehicle
 
-Tailpipe, or tank-to-wheel, emissions from a BEV in operation are virtually zero. The vehicle propulsion system emits no $\text{NO}_x$, PM, or $\text{CO}_2$ during operation, providing immediate air quality benefits in local operating
+Tailpipe, or tank-to-wheel, emissions from a BEV in operation are virtually zero. The vehicle propulsion system emits no NOx, PM, or CO2 during operation, providing immediate air quality benefits in local operating
 
 July 16, 2026
 
@@ -291,12 +291,12 @@ From Source to Highway: The Messy Middle Emissions Report
 
 environments. Therefore, discussions about BEV emissions must revolve around the well-to-tank supply of energy to the vehicle batteries.
 
-* **Grid Dependency:** Emissions are transferred to the power plants generating the electricity. A BEV charged in a region dominated by coal (e.g., West Virginia) will have a dramatically different emissions signature than one charged in a hydro-dominated region (e.g., the Pacific Northwest). The US average grid carbon intensity fell to approximately 384 $\text{gCO}_2$/kWh in 2024, improving the BEV case, but regional variability remains high [17].
+* **Grid Dependency:** Emissions are transferred to the power plants generating the electricity. A BEV charged in a region dominated by coal (e.g., West Virginia) will have a dramatically different emissions signature than one charged in a hydro-dominated region (e.g., the Pacific Northwest). The US average grid carbon intensity fell to approximately 384 gCO2/kWh in 2024, improving the BEV case, but regional variability remains high [17].
 * **Manufacturing Emissions:** The emission impact of BEV manufacturing is substantial. The mining and refining of lithium, cobalt, and nickel, along with the energy-intensive battery manufacturing process, mean that a battery electric Class 8 truck enters service with a carbon debt significantly higher than a diesel truck. It may take tens of thousands of miles of operation to offset lifecycle emissions [18].
 
 It is important to recognize that BEVs (including automobiles) account for a very small percentage of the total electrical power generated in the US. Most estimates indicate that they currently draw much less than 1% of the total electricity generated in the US. Conversely, transportation accounts for about 26% of the total energy consumption in the US [19]. Efficiency also is significantly different, with BEVs being two to three times more energy efficient than diesel, meaning more of the energy goes into moving the vehicle rather than wasted as heat to the environment.
 
-Electrical generation accounts for about 35% of the total energy consumption in the US [20]. Therefore, to understand the emissions impact of a BEV compared to a diesel-powered vehicle, it is important to understand both the emissions impact of the power source as well as the efficiency of the overall process of power generation and the use of the energy on the vehicle. BEVs provide significant improvements in overall efficiency of electrical power generation, transmission, and use over the extraction, transport, refining, and consumption of a fossil fuel in a vehicle. This is also true of the criteria pollutant and $\text{CO}_2$ emissions. Another advantage is that emissions that do occur are moved from where the traffic is to where the power is generated. Figure 10 provides a high-level look at the structure of an electric generation and delivery system.
+Electrical generation accounts for about 35% of the total energy consumption in the US [20]. Therefore, to understand the emissions impact of a BEV compared to a diesel-powered vehicle, it is important to understand both the emissions impact of the power source as well as the efficiency of the overall process of power generation and the use of the energy on the vehicle. BEVs provide significant improvements in overall efficiency of electrical power generation, transmission, and use over the extraction, transport, refining, and consumption of a fossil fuel in a vehicle. This is also true of the criteria pollutant and CO2 emissions. Another advantage is that emissions that do occur are moved from where the traffic is to where the power is generated. Figure 10 provides a high-level look at the structure of an electric generation and delivery system.
 
 > **Figure 10 — Power generation and delivery overview, source US DOE [21]**
 > Type: Schematic / diagram
@@ -322,7 +322,7 @@ From Source to Highway: The Messy Middle Emissions Report
 
 > **Figure 11 — National average for electricity Source, source Alternative Fuels Data Center [24]**
 > Type: Combination chart (Donut chart + Bar chart)
-> Axes: none (Bar chart y-axis: Pounds of $\text{CO}_2$ Equivalent, 0 to 15k)
+> Axes: none (Bar chart y-axis: Pounds of CO2 Equivalent, 0 to 15k)
 > Series: Electricity Sources (Natural Gas, Nuclear, Coal, Wind, Solar, Hydro, Biomass, Geothermal, Oil, Other Fossil); Annual Emissions per Vehicle (All Electric, Plug-in Hybrid, Hybrid, Gasoline) divided into Electric emissions and Gasoline emissions.
 > Values: Electricity Sources: Natural Gas: 41.72%, Nuclear: 18.44%, Coal: 15.27%, Wind: 10.65%, Solar: 7.14%, Hydro: 5.56%, Biomass: 0.47%, Geothermal: 0.36%, Oil: 0.34%, Other Fossil: 0.05%. Annual Emissions per Vehicle (approximate height): All Electric: approx. 2,000 lbs, Plug-in Hybrid: approx. 4,000 lbs, Hybrid: approx. 7,000 lbs, Gasoline: approx. 12,000 lbs.
 > Notes: Title: "The source of your electricity has an effect on the emissions of your electric vehicle." Subtitle: "Based on assumptions with 2024 data from EIA."
@@ -357,7 +357,7 @@ From Source to Highway: The Messy Middle Emissions Report
 > Axes: none
 > Series: none
 > Values: none
-> Notes: Features four boxed illustrations representing what is not in emissions: Carbon Dioxide ($\text{CO}_2$) - The primary driver of climate change; Nitrogen Oxides ($\text{N}_2\text{O}$ [sic]) - A major contributor to smog and respiratory issues; Particulate Matter - The "soot" or fine dust that causes air pollution; Carbon Monoxide or Hydrocarbons (CO) - chemical structure shown. Top banner has "RUN ON LESS MESSY MIDDLE" logo.
+> Notes: Features four boxed illustrations representing what is not in emissions: Carbon Dioxide (CO2) - The primary driver of climate change; Nitrogen Oxides (N2O [sic]) - A major contributor to smog and respiratory issues; Particulate Matter - The "soot" or fine dust that causes air pollution; Carbon Monoxide or Hydrocarbons (CO) - chemical structure shown. Top banner has "RUN ON LESS MESSY MIDDLE" logo.
 
 In short, the emission complexity of a fuel cell engine lies entirely in the well-to-tank phase.
 
@@ -381,7 +381,7 @@ From Source to Highway: The Messy Middle Emissions Report
 > Axes: none
 > Series: none
 > Values: none
-> Notes: Illustrates Electric current (e-), Fuel in ($\text{H}_2$), Excess fuel out, Anode, Electrolyte, Cathode, Air in ($\text{O}_2$), Unused air, water, and heat ($\text{H}_2\text{O}$).
+> Notes: Illustrates Electric current (e-), Fuel in (H2), Excess fuel out, Anode, Electrolyte, Cathode, Air in (O2), Unused air, water, and heat (H2O).
 
 Figure 14 is an example of a fuel cell system’s efficiency vs power output [28]. Note that fuel cell efficiency is ~30% to 40%, which is less than that of production heavy-duty diesels at ~40% to 50% and significantly less than the 60% to 70% efficiency of battery electric powertrains.
 
@@ -429,12 +429,12 @@ From Source to Highway: The Messy Middle Emissions Report
 > Values: none
 > Notes: Caption includes link "Click here for larger image". Illustrates production, conditioning, usage, storage & distribution of hydrogen applications.
 
-1. **Steam Methane Reforming:** Currently, most hydrogen fuel is produced via SMR, which strips hydrogen from natural gas using high-temperature steam. Hydrogen produced by this method is identified in the industry as grey hydrogen. This process is energy-intensive and releases about 20 lbs. of $\text{CO}_2$ for every kilogram of hydrogen produced. Since 1 kg of hydrogen has roughly the same energy content as a gallon of diesel (which emits ~22 lbs. $\text{CO}_2$), SMR-based hydrogen offers negligible GHG benefits without carbon capture [33].
+1. **Steam Methane Reforming:** Currently, most hydrogen fuel is produced via SMR, which strips hydrogen from natural gas using high-temperature steam. Hydrogen produced by this method is identified in the industry as grey hydrogen. This process is energy-intensive and releases about 20 lbs. of CO2 for every kilogram of hydrogen produced. Since 1 kg of hydrogen has roughly the same energy content as a gallon of diesel (which emits ~22 lbs. CO2), SMR-based hydrogen offers negligible GHG benefits without carbon capture [33].
 2. **Electrolysis:** Producing green hydrogen via electrolysis (splitting water with renewable electricity) is carbon-neutral but energy inefficient. The round-trip process — converting electricity to hydrogen, compressing it, transporting it, and converting it back to electricity in a fuel cell — results in significant energy losses compared to direct battery use.
 
 **The Energy Penalty of State Change:** The physical state of the fuel imposes a heavy energy tax. Compressing hydrogen to 10,000 psi (700 bar) for onboard storage consumes about 15% of the fuel's energy content. Liquefying it to -423°F (-253°C) for higher density storage consumes approximately 35% of the energy. These parasitic loads are major contributors to the WTT emissions catalog [30].
 
-A kilogram of hydrogen has the highest energy density per unit mass of any known fuel, which is often referred to as its specific energy or gravimetric energy density. Hydrogen represents a gravimetric energy density of approximately 33,000 Wh/kg. By comparison, today’s modern lithium-Ion batteries have a comparable mass energy density of 200 Wh/kg, with industry efforts striving toward approximately 400 Wh/kg in a future solid state battery design [31]. In transportation, one kilogram of $\text{H}_2$ contains about the same energy potential as one gallon of diesel fuel.
+A kilogram of hydrogen has the highest energy density per unit mass of any known fuel, which is often referred to as its specific energy or gravimetric energy density. Hydrogen represents a gravimetric energy density of approximately 33,000 Wh/kg. By comparison, today’s modern lithium-Ion batteries have a comparable mass energy density of 200 Wh/kg, with industry efforts striving toward approximately 400 Wh/kg in a future solid state battery design [31]. In transportation, one kilogram of H2 contains about the same energy potential as one gallon of diesel fuel.
 
 July 16, 2026
 
@@ -476,17 +476,17 @@ From Source to Highway: The Messy Middle Emissions Report
 
 | Energy Carrier | Primary WTT Source | Primary TTW Emission | Key Pollutants of Concern | Lifecycle GHG Impact (vs. Diesel) |
 | --- | --- | --- | --- | --- |
-| Petroleum Diesel | Extraction, Refining | Combustion | $\text{NO}_x$, PM, $\text{CO}_2$ | Baseline |
-| Renewable Diesel | Feedstock Agriculture | Combustion | $\text{NO}_x$, PM, Biogenic $\text{CO}_2$ | -40% to -86% (Feedstock Dependent) |
-| Natural Gas (CNG/LNG) | Extraction Leakage | Combustion | Methane (Slip), $\text{CO}_2$ | -13% to -18% (Highly variable) |
-| Renewable Natural Gas | Anaerobic Digestion (Livestock Farm-Landfill-Waste Water Treatment) | Combustion | Biogenic $\text{CO}_2$ | Can be Carbon Negative depending on source origin |
-| Battery Electric | Power Generation | None | $\text{SO}_x$, PM (Power Plants) | -30% to -63% (Grid Dependent) |
-| Hydrogen (SMR) | NG Reforming | Water Vapor | $\text{CO}_2$ (Process) | Comparable to Diesel |
+| Petroleum Diesel | Extraction, Refining | Combustion | NOx, PM, CO2 | Baseline |
+| Renewable Diesel | Feedstock Agriculture | Combustion | NOx, PM, Biogenic CO2 | -40% to -86% (Feedstock Dependent) |
+| Natural Gas (CNG/LNG) | Extraction Leakage | Combustion | Methane (Slip), CO2 | -13% to -18% (Highly variable) |
+| Renewable Natural Gas | Anaerobic Digestion (Livestock Farm-Landfill-Waste Water Treatment) | Combustion | Biogenic CO2 | Can be Carbon Negative depending on source origin |
+| Battery Electric | Power Generation | None | SOx, PM (Power Plants) | -30% to -63% (Grid Dependent) |
+| Hydrogen (SMR) | NG Reforming | Water Vapor | CO2 (Process) | Comparable to Diesel |
 | Hydrogen (Electrolysis) | Power Generation | Water Vapor | None (if renewable) | >90% Reduction (if renewable) |
 
 Figure 16: Emissions catalog [NACFE]
 
-Figure 17 demonstrates the reality that no propulsion technology delivers truly zero emissions when viewed through a rigorous lifecycle lens. The industry is trading one set of emissions (tailpipe $\text{NO}_x$/PM) for another (power plant $\text{SO}_x$, mining impacts, refrigerant leakage). Understanding these trade-offs is essential for policymakers and fleets as they construct their decarbonization strategies.
+Figure 17 demonstrates the reality that no propulsion technology delivers truly zero emissions when viewed through a rigorous lifecycle lens. The industry is trading one set of emissions (tailpipe NOx/PM) for another (power plant SOx, mining impacts, refrigerant leakage). Understanding these trade-offs is essential for policymakers and fleets as they construct their decarbonization strategies.
 
 # 7 THE TECHNOLOGY OF POWERTRAINS
 
@@ -603,16 +603,16 @@ In a modern 4-stroke engine, the inputs of air and fuel are managed by highly so
 
 ### 7.1.4 Chemical Energy Conversion & Emission Formation
 
-Diesel fuel is a dense mixture of hydrocarbons, typically characterized by an average molecular formula of $\text{C}_{12}\text{H}_{23}$ or $\text{C}_{13.8}\text{H}_{24}$. The conversion of this chemical energy into mechanical power occurs through an exothermic oxidation reaction [47].
+Diesel fuel is a dense mixture of hydrocarbons, typically characterized by an average molecular formula of C12H23 or C13.8H24. The conversion of this chemical energy into mechanical power occurs through an exothermic oxidation reaction [47].
 
 * **The Combustion Reaction:** In an ideal scenario, the combustion of diesel fuel would be complete, yielding only carbon dioxide, water, and nitrogen.
 
-$$4\text{C}_{12}\text{H}_{23} + 71\text{O}_2 \rightarrow 48\text{CO}_2 + 46\text{H}_2\text{O}$$
+4C12H23 + 71O2 → 48CO2 + 46H2O
 
 In terms of the total energy liberated, this reaction releases approximately 56,000 kJ per mole of fuel [48]. However, because diesel engines operate with an overall lean air-fuel ratio (often exceeding 25:1 to avoid smoke), the exhaust also contains significant amounts of unused oxygen and atmospheric nitrogen [49].
 
 * **The Mechanism of Pollutant Formation:** The “dirty” nature of historical diesel exhaust is the result of three primary chemical phenomena occurring in the cylinder.
-  * *Thermal $\text{NO}_x$ (Zeldovich Mechanism):* $\text{NO}_x$ is formed when atmospheric nitrogen and oxygen react under conditions of extreme heat (above 1,800 Kelvin) [50]. The high compression ratios
+  * *Thermal NOx (Zeldovich Mechanism):* NOx is formed when atmospheric nitrogen and oxygen react under conditions of extreme heat (above 1,800 Kelvin) [50]. The high compression ratios
 
 July 16, 2026
 
@@ -627,7 +627,7 @@ Page 52
 
 From Source to Highway: The Messy Middle Emissions Report
 
-  of diesel engines naturally create these temperatures [51]. The dissociation of $\text{O}_2$ into atomic oxygen starts a chain reaction that produces NO [50].
+  of diesel engines naturally create these temperatures [51]. The dissociation of O2 into atomic oxygen starts a chain reaction that produces NO [50].
   * *Particulate Matter (PM/Soot):* Soot is formed in the fuel-rich core of the injection jet where the temperature is high enough to crack the fuel molecules, but oxygen is insufficient for complete oxidation. These carbon particles can then grow through agglomeration [47].
   * *Unburned Hydrocarbons & Carbon Monoxide:* These result from incomplete combustion, often near the cooler cylinder walls or in the quench zones of the combustion chamber where the flame cannot be sustained.
 
@@ -635,18 +635,18 @@ From Source to Highway: The Messy Middle Emissions Report
 
 To transform raw engine-out emissions into harmless tailpipe output, modern diesel engines employ a complex, multi-stage aftertreatment stack. This system is a chemical factory on the chassis that operates in concert with the engine's electronic control module (ECM).
 
-* **Exhaust Gas Recirculation (EGR):** EGR is a diesel engine-level strategy used to inhibit $\text{NO}_x$ formation. A portion of exhaust gas is cooled and recirculated back into the intake manifold. Because the returning exhaust gas has reduced $\text{O}_2$ saturation, it lowers the concentration of oxygen in the cylinder and increases the heat capacity of the charge, thereby lowering the peak combustion temperature below the threshold where the Zeldovich mechanism becomes most active. First proposed by the Russian physicist Yakov Borisovich Zel’dovich in 1946, the Zeldovich reaction pathway accounts for nitrogen and oxygen in the air combining at high temperatures to form nitric oxide.
+* **Exhaust Gas Recirculation (EGR):** EGR is a diesel engine-level strategy used to inhibit NOx formation. A portion of exhaust gas is cooled and recirculated back into the intake manifold. Because the returning exhaust gas has reduced O2 saturation, it lowers the concentration of oxygen in the cylinder and increases the heat capacity of the charge, thereby lowering the peak combustion temperature below the threshold where the Zeldovich mechanism becomes most active. First proposed by the Russian physicist Yakov Borisovich Zel’dovich in 1946, the Zeldovich reaction pathway accounts for nitrogen and oxygen in the air combining at high temperatures to form nitric oxide.
 * **The Diesel Oxidation Catalyst (DOC):** The first component in the aftertreatment stack is the DOC. It contains a ceramic or metallic substrate coated with precious metals like platinum and palladium. The DOC promotes the oxidation of gaseous pollutants.
 
-$$2\text{CO} + \text{O}_2 \rightarrow 2\text{CO}_2$$
-$$[\text{HC}] + \text{O}_2 \rightarrow \text{CO}_2 + \text{H}_2\text{O}$$
+2CO + O2 → 2CO2
+[HC] + O2 → CO2 + H2O
 
-Another critical function of the DOC in modern systems is also to oxidize NO into $\text{NO}_2$, which is more reactive and helps in downstream processes.
+Another critical function of the DOC in modern systems is also to oxidize NO into NO2, which is more reactive and helps in downstream processes.
 
-* **The Diesel Particulate Filter (DFP) [sic]:** The DPF is a wall-flow filter that captures the physical soot particles. The exhaust gas is forced through porous ceramic walls, leaving the soot trapped in the channels [52]. Periodically, the DPF must undergo regeneration to prevent clogging. This can be passive, using the $\text{NO}_2$ from the DOC to oxidize soot at normal operating temperatures, or active, where the ECM injects fuel into the exhaust to raise temperatures above 1,000°F to burn the soot into a small amount of ash. Ash is mostly a result of lubricating oil that makes its way into the combustion chamber, thus, the industry push for low ash formulation lubricating oils. Ash cannot be oxidized by the DPF.
-* **Selective Catalytic Reduction (SCR) & Ammonia Slip Catalyst:** The SCR system targets the remaining $\text{NO}_x$. It requires the injection of DEF, which is a urea-water solution. In the hot exhaust stream, urea decomposes into ammonia ($\text{NH}_3$).
+* **The Diesel Particulate Filter (DFP) [sic]:** The DPF is a wall-flow filter that captures the physical soot particles. The exhaust gas is forced through porous ceramic walls, leaving the soot trapped in the channels [52]. Periodically, the DPF must undergo regeneration to prevent clogging. This can be passive, using the NO2 from the DOC to oxidize soot at normal operating temperatures, or active, where the ECM injects fuel into the exhaust to raise temperatures above 1,000°F to burn the soot into a small amount of ash. Ash is mostly a result of lubricating oil that makes its way into the combustion chamber, thus, the industry push for low ash formulation lubricating oils. Ash cannot be oxidized by the DPF.
+* **Selective Catalytic Reduction (SCR) & Ammonia Slip Catalyst:** The SCR system targets the remaining NOx. It requires the injection of DEF, which is a urea-water solution. In the hot exhaust stream, urea decomposes into ammonia (NH3).
 
-$$(\text{NH}_2)_2\text{CO} + \text{H}_2\text{O} \rightarrow 2\text{NH}_3 + \text{CO}_2$$
+(NH2)2CO + H2O → 2NH3 + CO2
 
 July 16, 2026
 
@@ -661,16 +661,16 @@ Page 53
 
 From Source to Highway: The Messy Middle Emissions Report
 
-Inside the SCR catalyst, the ammonia reacts with $\text{NO}_x$ to form nitrogen and water vapor.
+Inside the SCR catalyst, the ammonia reacts with NOx to form nitrogen and water vapor.
 
-$$\text{Fast SCR Reaction: } 2\text{NH}_3 + \text{NO} + \text{NO}_2 \rightarrow 2\text{N}_2 + 3\text{H}_2\text{O}$$
-$$\text{Standard SCR Reaction: } 4\text{NH}_3 + 4\text{NO} + \text{O}_2 \rightarrow 4\text{N}_2 + 6\text{H}_2\text{O}$$
+Fast SCR Reaction: 2NH3 + NO + NO2 → 2N2 + 3H2O
+Standard SCR Reaction: 4NH3 + 4NO + O2 → 4N2 + 6H2O
 
-Finally, the ASC ensures that any excess ammonia (slip) is oxidized back into nitrogen and water before exiting the tailpipe, preventing the release of pungent $\text{NH}_3$ [52]. $\text{NH}_3$ in high concentrations can cause respiratory issues. Therefore, there are important limits on $\text{NH}_3$ content in the exhaust.
+Finally, the ASC ensures that any excess ammonia (slip) is oxidized back into nitrogen and water before exiting the tailpipe, preventing the release of pungent NH3 [52]. NH3 in high concentrations can cause respiratory issues. Therefore, there are important limits on NH3 content in the exhaust.
 
 ### 7.1.6 Summary of Diesel Findings
 
-Modern diesel engines built from high-strength components like sculpted cast-iron blocks, forged steel crankshafts, and steel pistons withstand intense internal combustion temperatures and pressures. Their advanced design today accounts for escalating levels of fuel efficiency improvement, while complex exhaust aftertreatment systems work in tandem to neutralize harmful pollutants like thermal $\text{NO}_x$, soot, and unburned hydrocarbons before they escape the tailpipe. The diesel engine platforms demonstrated in Run on Less – Messy Middle represent the most advanced technologies within this space.
+Modern diesel engines built from high-strength components like sculpted cast-iron blocks, forged steel crankshafts, and steel pistons withstand intense internal combustion temperatures and pressures. Their advanced design today accounts for escalating levels of fuel efficiency improvement, while complex exhaust aftertreatment systems work in tandem to neutralize harmful pollutants like thermal NOx, soot, and unburned hydrocarbons before they escape the tailpipe. The diesel engine platforms demonstrated in Run on Less – Messy Middle represent the most advanced technologies within this space.
 
 ## 7.2 The Natural Gas Powertrain
 
@@ -679,7 +679,7 @@ The Cummins X15N (natural gas) represents a paradigm shift from the traditional 
 | Metric | Cummins X15 Diesel | Cummins X15N Natural Gas |
 | --- | --- | --- |
 | Ignition Type | Compression Ignition (CI) | Spark Ignition (SI) |
-| Fuel Composition | Complex Hydrocarbons ($\text{C}_{12}\text{H}_x$) | Methane ($\text{CH}_4$) |
+| Fuel Composition | Complex Hydrocarbons (C12Hx) | Methane (CH4) |
 | Compression Ratio | High (18:1 - 20:1) | Moderate (11:1 - 12:1) |
 | Air Control | Unthrottled / VGT | Throttled / Wastegate |
 | Peak Pressure | Extremely High | High |
@@ -719,9 +719,9 @@ The most significant difference between spark ignition and compression ignition 
 The move to natural gas fundamentally changes the problem of emissions, allowing for a much simpler aftertreatment solution known as the three-way catalyst.
 
 * **The Stoichiometric Advantage:** In a stoichiometric engine, the air-fuel ratio is maintained near 17.2:1 (for methane) [59]. This creates an environment where both reduction and oxidation reactions can occur simultaneously over a single catalyst [60].
-  * $\text{NO}_x$: Because there is no excess oxygen in the exhaust (unlike the lean diesel), $\text{NO}_x$ can be easily reduced to nitrogen gas.
+  * NOx: Because there is no excess oxygen in the exhaust (unlike the lean diesel), NOx can be easily reduced to nitrogen gas.
 
-$$2\text{CO} + 2\text{NO} \rightarrow 2\text{CO}_2 + \text{N}_2$$
+2CO + 2NO → 2CO2 + N2
 
 July 16, 2026
 
@@ -737,9 +737,9 @@ Page 55
 From Source to Highway: The Messy Middle Emissions Report
 
   * **Particulate Matter:** Natural gas contains no long-chain hydrocarbons and produces virtually zero soot [58]. Consequently, the X15N does not require a DPF [53].
-  * **CO & Hydrocarbons:** These are oxidized to $\text{CO}_2$ and water vapor, in a reaction temperature higher than required by a DOC.
+  * **CO & Hydrocarbons:** These are oxidized to CO2 and water vapor, in a reaction temperature higher than required by a DOC.
 
-$$\text{CH}_4 + 2\text{O}_2 \rightarrow \text{CO}_2 + \text{H}_2\text{O}$$
+CH4 + 2O2 → CO2 + H2O
 
 ### 7.2.4 Three-Way Catalyst vs. the Diesel Aftertreatment Stack
 
@@ -747,9 +747,9 @@ The aftertreatment for the X15N is a passive, flow-through TWC that is virtually
 
 | Emission Species | Diesel Tailpipe Output | X15N Natural Gas Output |
 | --- | --- | --- |
-| $\text{NO}_x$ | Ultra-low (via SCR/DEF) | Near-zero (via TWC) |
+| NOx | Ultra-low (via SCR/DEF) | Near-zero (via TWC) |
 | PM (Soot) | Ultra-low (via DPF) | Naturally Near-zero |
-| $\text{CO}_2$ (TTW) | Base Value (100%) | ~27% Lower per MJ |
+| CO2 (TTW) | Base Value (100%) | ~27% Lower per MJ |
 | Methane Slip | Negligible | Controlled via TWC |
 | Ammonia | Low (via ASC) | Potentially higher (TWC byproduct) |
 
@@ -778,12 +778,12 @@ In contrast, RNG shifts the conversation from mechanical efficiency to carbon ci
 
 The X15N's most potent environmental advantage is its compatibility with RNG [62]. Chemically identical to fossil methane, RNG is captured from a variety of feedstock origins, including organic waste sources like dairy farms or landfills [63].
 
-* **Diesel Carbon Intensity:** 102.01 $\text{gCO}_2\text{e}$/MJ [64]
-* **Fossil CNG Carbon Intensity:** 78.36 $\text{gCO}_2\text{e}$/MJ [64]
-* **Landfill:** ~30 to 60 $\text{gCO}_2\text{e}$/MJ
-* **Wastewater Treatment:** ~20 to 50 $\text{gCO}_2\text{e}$/MJ
-* **Food Waste:** ~0 to -100 $\text{gCO}_2\text{e}$/MJ
-* **Dairy/Livestock Manure:** ~-150 to -400+ $\text{gCO}_2\text{e}$/MJ
+* **Diesel Carbon Intensity:** 102.01 gCO2e/MJ [64]
+* **Fossil CNG Carbon Intensity:** 78.36 gCO2e/MJ [64]
+* **Landfill:** ~30 to 60 gCO2e/MJ
+* **Wastewater Treatment:** ~20 to 50 gCO2e/MJ
+* **Food Waste:** ~0 to -100 gCO2e/MJ
+* **Dairy/Livestock Manure:** ~-150 to -400+ gCO2e/MJ
 
 It is crucial to identify and differentiate the RNG source and different carbon intensity reporting methodologies which consider the avoided emissions. When running on dairy RNG, the X15N can achieve a 300% reduction in lifecycle GHG emissions compared to diesel, effectively becoming a carbon-negative vehicle by preventing the release of methane from manure into the atmosphere [63].
 
@@ -1194,7 +1194,7 @@ The Tesla Semi is engineered to compete directly with diesel on range and payloa
 | Battery | ~900 kWh (Est.) | Structural pack integrated into chassis; 1000V architecture |
 | Charging | 1 MW+ (MCS) | Liquid-cooled connector allows massive current for 30-min recharge |
 | Rotor | Carbon-Sleeved | Allows 20k+ RPM for extreme power density |
-| Chassis | Center Seat | Driver sits centrally for visibility; tapered cab for $\text{C}_d$ 0.36 (pre-production claim) |
+| Chassis | Center Seat | Driver sits centrally for visibility; tapered cab for Cd 0.36 (pre-production claim) |
 
 Figure 28: Tesla Semi systems summary [110]
 
@@ -1233,12 +1233,12 @@ Insight: The chassis-by-wire concept positions the E700 not just as a truck, but
 
 While BEVs produce zero tailpipe emissions, a thorough wide aperture analysis must account for the full lifecycle.
 
-**WTW Analysis:** A Class 8 diesel truck emits approximately 2,200 grams of $\text{CO}_2$ per mile.
+**WTW Analysis:** A Class 8 diesel truck emits approximately 2,200 grams of CO2 per mile.
 * **Electric Efficiency:** A BEV truck consumes ~2.0 kWh/mile. Of note: BEV kWh efficiency has improved approximately 20% to 30% from 2021 to 2026 and now may represent top efficiency in the range of ~1.7 kWh/mile [100].
-* **Grid Emissions:** On the current US grid average (~0.85 lbs.$\text{CO}_2$/kWh), a BEV truck is responsible for ~1.7 lbs. (770 grams) of $\text{CO}_2$ per mile [101].
+* **Grid Emissions:** On the current US grid average (~0.85 lbs.CO2/kWh), a BEV truck is responsible for ~1.7 lbs. (770 grams) of CO2 per mile [101].
 * **Net Benefit:** This represents a 65% reduction in operational carbon emissions immediately. As the grid decarbonizes, this reduction approaches 90% to 95% [102].
 
-**Lifecycle Assessment (LCA):** The manufacturing of a 900-kWh battery generates a significant carbon debt (approximately 60 to 100 tons of $\text{CO}_2$).
+**Lifecycle Assessment (LCA):** The manufacturing of a 900-kWh battery generates a significant carbon debt (approximately 60 to 100 tons of CO2).
 
 However, given the extreme utilization of Class 8 trucks (100,000+ miles/year), this carbon debt is typically offset within 12 to 18 months of operation compared to a diesel baseline. Over a 1-million-mile service life, the BEV creates a massive net environmental benefit [103].
 
@@ -1255,7 +1255,7 @@ Page 70
 
 From Source to Highway: The Messy Middle Emissions Report
 
-**PM Non-Exhaust Emissions:** A common critique of heavier BEVs is that they will generate more tire dust ($\text{PM}_{10}$/$\text{PM}_{2.5}$). While tire wear may increase marginally because of weight (though partially mitigated by smoother torque delivery), brake wear is virtually eliminated by regenerative braking. Since brake dust is a major contributor to metallic PM emissions, studies indicate that heavy-duty BEVs generally have a neutral or positive impact on total non-exhaust particulate emissions [104].
+**PM Non-Exhaust Emissions:** A common critique of heavier BEVs is that they will generate more tire dust (PM10/PM2.5). While tire wear may increase marginally because of weight (though partially mitigated by smoother torque delivery), brake wear is virtually eliminated by regenerative braking. Since brake dust is a major contributor to metallic PM emissions, studies indicate that heavy-duty BEVs generally have a neutral or positive impact on total non-exhaust particulate emissions [104].
 
 ### 7.3.10 Summary of Battery Electric Findings
 
@@ -1288,7 +1288,7 @@ From Source to Highway: The Messy Middle Emissions Report
 
 ## 7.4 Fuel Cell Class 8 Heavy-Duty Trucks
 
-The global logistics sector is currently navigating a paradigm shift of historical magnitude, moving from ICE architectures that have defined the $20^{\text{th}}$ Century toward zero- and near-zero-emission propulsion systems. Within this transition, the Class 8 heavy-duty truck segment presents the most formidable engineering challenge. Unlike light-duty passenger vehicles, where battery electric solutions have achieved dominance as the alternative powertrain choice, the heavy-duty sector demands a rigorous balance of high payload capacity, extended range, and rapid turnaround times — operational metrics that challenge the energy density limits of current lithium-ion battery technology.
+The global logistics sector is currently navigating a paradigm shift of historical magnitude, moving from ICE architectures that have defined the 20th Century toward zero- and near-zero-emission propulsion systems. Within this transition, the Class 8 heavy-duty truck segment presents the most formidable engineering challenge. Unlike light-duty passenger vehicles, where battery electric solutions have achieved dominance as the alternative powertrain choice, the heavy-duty sector demands a rigorous balance of high payload capacity, extended range, and rapid turnaround times — operational metrics that challenge the energy density limits of current lithium-ion battery technology.
 
 It is within this specific high-demand envelope that FCEVs emerge as a technology solution. The Hyundai XCIENT fuel cell truck represents the maturation of this technology from experimental prototyping to early successful deployments on a potential path to mass commercialization. This section provides a technical analysis of the XCIENT platform, specifically focusing on the North American 6x4 tractor configuration. By dissecting the mechanical design, electrochemical architecture, and operational logic, the study team examined how the FCEV achieves performance parity with its diesel counterparts while emitting only water vapor.
 
@@ -1393,15 +1393,15 @@ The core of the XCIENT's propulsion capabilities is its hydrogen fuel cell syste
 The stacks use PEM technology, which is the industry standard for automotive applications because of its high-power density and relatively low operating temperature (allowing for quick start-up).
 
 **Principle of Operation:** The fundamental operation occurs at the membrane electrode assembly (MEA) within each cell of the stack.
-* **Anode Reaction (Hydrogen Oxidation):** Hydrogen gas flows from the tanks into the anode side of the stack. A platinum-based catalyst facilitates splitting the hydrogen molecule into protons ($\text{H}^+$) and electrons ($\text{e}^-$).
+* **Anode Reaction (Hydrogen Oxidation):** Hydrogen gas flows from the tanks into the anode side of the stack. A platinum-based catalyst facilitates splitting the hydrogen molecule into protons (H^+) and electrons (e^-).
 
-$$2\text{H}_2 \rightarrow 4\text{H}^+ + 4\text{e}^-$$
+2H2 → 4H^+ + 4e^-
 
 * **Proton Transport:** The PEM is a selectively permeable polymer electrolyte. It allows the positively charged protons to migrate through the membrane to the cathode side. Critically, the membrane is electrically insulating, blocking the electrons.
 * **Electron Flow (Current):** Forced to find an alternative path, the electrons travel through an external circuit. This flow of electrons constitutes the DC electricity that powers the truck's motor and charges the battery.
 * **Cathode Reaction (Oxygen Reduction):** On the cathode side, oxygen from the ambient air meets the protons (from the membrane) and the electrons (returning from the circuit). The catalyst facilitates their recombination to form water.
 
-$$\text{O}_2 + 4\text{H}^+ + 4\text{e}^- \rightarrow 2\text{H}_2\text{O}$$
+O2 + 4H^+ + 4e^- → 2H2O
 
 July 16, 2026
 
@@ -1418,7 +1418,7 @@ From Source to Highway: The Messy Middle Emissions Report
 
 * **Overall Reaction:** The summation of these half-reactions results in the clean oxidation of hydrogen.
 
-$$2\text{H}_2 + \text{O}_2 \rightarrow 2\text{H}_2\text{O} + \text{Electricity} + \text{Heat}$$
+2H2 + O2 → 2H2O + Electricity + Heat
 
 ### 7.4.4 Balance of Plant: Supporting Systems
 
@@ -1437,7 +1437,7 @@ The fuel cell stack cannot operate in isolation. It requires a complex array of 
 > Axes: none
 > Series: none
 > Values: none
-> Notes: Features photograph of Sean Falcone and quote: "We want to get the word out there that we want to make a difference for the environment and doing all the right things to reduce $\text{NO}_x$ and to decarbonize. We're very serious, and we are committed to that." — Sean Falcone, Vice President – Fleet Operations, Penske.
+> Notes: Features photograph of Sean Falcone and quote: "We want to get the word out there that we want to make a difference for the environment and doing all the right things to reduce NOx and to decarbonize. We're very serious, and we are committed to that." — Sean Falcone, Vice President – Fleet Operations, Penske.
 
 ### 7.4.5 Hydrogen Storage & Fuel Delivery
 
@@ -2864,11 +2864,11 @@ emissions profile for Electric - Phoenix, AZ is higher than the other BEVs despi
 
 Along with GHG emissions, the GREET model also evaluates the level of criteria pollutants released during both RNG - Salt Lake City, UT upstream fuel processes and on-road vehicle operation. Like the GHG data, these emissions also are baselined with respect to GVW and miles driven.
 
-### 9.2.1 $\text{NO}_\text{x}$ Notes
+### 9.2.1 NOx Notes
 
-By a notable margin, the diesel trucks have the largest $\text{NO}_\text{x}$ emissions. $\text{NO}_\text{x}$ controls have improved significantly in recent decades, but diesel combustion is still a very $\text{NO}_\text{x}$ intensive process compared to the other fuels. The results are shown below in Figure 48.
+By a notable margin, the diesel trucks have the largest NOx emissions. NOx controls have improved significantly in recent decades, but diesel combustion is still a very NOx intensive process compared to the other fuels. The results are shown below in Figure 48.
 
-The CNG trucks have a much lower emissions rate overall, with most of the $\text{NO}_\text{x}$ coming from RNG - Salt Lake City, UT upstream sources rather than in the vehicle’s tailpipe emissions
+The CNG trucks have a much lower emissions rate overall, with most of the NOx coming from RNG - Salt Lake City, UT upstream sources rather than in the vehicle’s tailpipe emissions
 
 The hydrogen trucks are roughly on par with CNG, with Hydrogen - Rialto, CA having higher emissions than Hydrogen - Lancaster, TX because of the emissions profile differences between California and Texas. When the GREET model considers the source origin for hydrogen in both Texas and California it penalizes the California hydrogen due to the anticipated distances the gaseous hydrogen has traveled by diesel truck to where it will be consumed. It also considers the carbon impact of the grid in each region.
 
@@ -2902,13 +2902,13 @@ From Source to Highway: The Messy Middle Emissions Report
 > Electric - Stockton, CA: Net approx. 0.015
 > Notes: Figure 48: NOx emissions by fleet [RMI]
 
-### 9.2.2 $\text{SO}_\text{x}$ Notes:
+### 9.2.2 SOx Notes:
 
-Results for $\text{SO}_\text{x}$ are much different, however. By far, the CNG trucks achieve the lowest $\text{SO}_\text{x}$ emissions. The results are shown in Figure 49.
+Results for SOx are much different, however. By far, the CNG trucks achieve the lowest SOx emissions. The results are shown in Figure 49.
 
-Hydrogen is competitive with CNG but is very sensitive to where the hydrogen is produced and its upstream natural gas. Trucks using California hydrogen will see lower $\text{SO}_\text{x}$ while those operating in Texas will see higher levels owing to the Texas-based fuel production pathway.
+Hydrogen is competitive with CNG but is very sensitive to where the hydrogen is produced and its upstream natural gas. Trucks using California hydrogen will see lower SOx while those operating in Texas will see higher levels owing to the Texas-based fuel production pathway.
 
-Diesel produces very low on-road $\text{SO}_\text{x}$ but has a high level of upstream emissions.
+Diesel produces very low on-road SOx but has a high level of upstream emissions.
 
 July 16, 2026
 NACFE
@@ -2919,7 +2919,7 @@ Page 125
 <!-- page: 126 -->
 From Source to Highway: The Messy Middle Emissions Report
 
-The battery electric trucks have the highest $\text{SO}_\text{x}$ emissions because coal and natural gas are used to produce their electricity. While other literature also has found heavy-duty BEV $\text{SO}_\text{x}$ emissions to be higher than diesel, this fact speaks to the success of diesel truck emission controls and the progress the grid must make to be competitive against all varieties of criteria pollutants [196] [197].
+The battery electric trucks have the highest SOx emissions because coal and natural gas are used to produce their electricity. While other literature also has found heavy-duty BEV SOx emissions to be higher than diesel, this fact speaks to the success of diesel truck emission controls and the progress the grid must make to be competitive against all varieties of criteria pollutants [196] [197].
 
 > **Figure 49: SOx emissions by fleet**
 > Type: bar chart
@@ -3061,7 +3061,7 @@ While fuels have varying carbon intensities that largely determine truck emissio
 
 ## 9.4 Health Impacts Analysis
 
-Health impacts were evaluated using the EPA CO-Benefits Risk Assessment Health Impacts Screening and Mapping Tool (COBRA) [198]. This model quantifies the health impact of air pollutants as it relates to metrics such as lost workdays, lost school days, hospitalizations, and premature mortality. It is a location-specific tool as well, meaning that emissions in dense urban areas have greater health impacts than those dispersed in rural areas. The specific pollutants considered in this analysis are PM, $\text{SO}_\text{x}$, and $\text{NO}_\text{x}$.
+Health impacts were evaluated using the EPA CO-Benefits Risk Assessment Health Impacts Screening and Mapping Tool (COBRA) [198]. This model quantifies the health impact of air pollutants as it relates to metrics such as lost workdays, lost school days, hospitalizations, and premature mortality. It is a location-specific tool as well, meaning that emissions in dense urban areas have greater health impacts than those dispersed in rural areas. The specific pollutants considered in this analysis are PM, SOx, and NOx.
 
 While long-haul emissions occur across large geographic areas, it is analytically difficult to distribute emissions along the full routes on which the trucks ran. For the purposes of this analysis, we assumed that emissions are concentrated at a specific depot along each truck’s route, as represented by Figure 53.
 
@@ -3081,7 +3081,7 @@ While long-haul emissions occur across large geographic areas, it is analyticall
 > | Schneider | San Bernardino, CA | Saia (Truck #2) | San Joaquin, CA |
 > Notes: *Because the Kleysen truck is based in Canada, outside the scope of EPA COBRA, it is assumed to operate in Salt Lake City, UT to keep consistency with the fuel assuming to be sourced from that region.
 
-The diesel truck platform was chosen as the modeling baseline. This means the energy powertrain shows no health benefits from its operation, with other trucks in the Run showing the incremental impacts of their operations when compared to the baseline diesel truck. And while a diesel platform represents the reporting baseline, a further word on diesel is necessary. The reduction in diesel criteria emissions since the turn of the millennium is significant. In 2000, heavy-duty diesel engines operated under standards that allowed for approximately 4.0 g/bhp-hr. of $\text{NO}_\text{x}$ and 0.10 g/bhp-hr. of PM. By contrast, today’s diesel engine represents a massive 95% reduction in $\text{NO}_\text{x}$ and a 90% reduction in PM compared to the standards in place just over 20 years ago.
+The diesel truck platform was chosen as the modeling baseline. This means the energy powertrain shows no health benefits from its operation, with other trucks in the Run showing the incremental impacts of their operations when compared to the baseline diesel truck. And while a diesel platform represents the reporting baseline, a further word on diesel is necessary. The reduction in diesel criteria emissions since the turn of the millennium is significant. In 2000, heavy-duty diesel engines operated under standards that allowed for approximately 4.0 g/bhp-hr. of NOx and 0.10 g/bhp-hr. of PM. By contrast, today’s diesel engine represents a massive 95% reduction in NOx and a 90% reduction in PM compared to the standards in place just over 20 years ago.
 
 July 16, 2026
 NACFE
@@ -3108,7 +3108,7 @@ Finally, the per-truck results are relatively small and therefore the analysis i
 > Electric: 321
 > Notes: Figure 54: Avoided lost workdays by fuel source [278]
 
-Overall, $\text{NO}_\text{x}$ has the largest impact on health outcomes, but all three criteria pollutants contribute to avoided lost workdays and avoided mortalities. However, the locations of the trucks play a significant role as well. Because the RNG - Rochester, NY truck operates in a more densely populated area, its community health benefits per unit of reduced emissions are larger than those operating in less dense areas.
+Overall, NOx has the largest impact on health outcomes, but all three criteria pollutants contribute to avoided lost workdays and avoided mortalities. However, the locations of the trucks play a significant role as well. Because the RNG - Rochester, NY truck operates in a more densely populated area, its community health benefits per unit of reduced emissions are larger than those operating in less dense areas.
 
 It’s important to note that these results are conservative. Most trucks being replaced by fleets are older and less efficient, not new and highly efficient like the baseline Schnider truck in this analysis. Therefore, retiring old diesel trucks and replacing them with alternative fuels will create much greater community health benefits than shown here.
 
@@ -3128,7 +3128,7 @@ Page 131
 <!-- page: 132 -->
 From Source to Highway: The Messy Middle Emissions Report
 
-From a criteria pollutant standpoint, modern natural gas engines are inherently cleaner than diesel. They use spark ignition and stoichiometric combustion, which produces significantly less $\text{NO}_\text{x}$ than the compression-ignition diesel cycle — often 90% below current EPA standards. Furthermore, because they do not rely on high-pressure injection of liquid fuel, they produce virtually zero PM.
+From a criteria pollutant standpoint, modern natural gas engines are inherently cleaner than diesel. They use spark ignition and stoichiometric combustion, which produces significantly less NOx than the compression-ignition diesel cycle — often 90% below current EPA standards. Furthermore, because they do not rely on high-pressure injection of liquid fuel, they produce virtually zero PM.
 
 Analysis has quantified the benefit of replacing the oldest 130,000 diesel trucks in the 31 target counties with RNG models [217]. The results were profound:
 
@@ -3139,13 +3139,13 @@ Analysis has quantified the benefit of replacing the oldest 130,000 diesel truck
 Independent findings confirm RNG achieves approximately 88% of the public health benefits of full electrification. This is a critical insight for the Messy Middle. While BEVs might represent a destination goal of zero tailpipe emissions, RNG offers nearly all the local air quality benefits today through access to existing natural gas infrastructure and commercially available vehicles, without the massive capital cost and delays of building a megawatt-charging grid. Conversely, it would be oversimplification to suggest growth in RNG capacity and distribution does not also come with significant capital cost or delay in market availability.
 
 **The BEV Promise & Challenge**
-The battery-electric truck is the gold standard for local health. With zero tailpipe emissions, a BEV eliminates street-level $\text{NO}_\text{x}$, PM, and VOCs entirely. In a 31-county study, replacing the legacy diesel fleet with BEVs yielded the highest theoretical health savings, valued at approximately $34.4 billion over a 15-year period.
+The battery-electric truck is the gold standard for local health. With zero tailpipe emissions, a BEV eliminates street-level NOx, PM, and VOCs entirely. In a 31-county study, replacing the legacy diesel fleet with BEVs yielded the highest theoretical health savings, valued at approximately $34.4 billion over a 15-year period.
 
 However, the well-to-wheel reality adds nuance. Run on Less BEV fleets demonstrate while the trucks are clean, the grid which fueled their charging activity varies in upstream emission output.
 
 For example:
 * Electric - Rialto, CA Logistics charged on the Southern California Edison grid (low carbon intensity), delivered a massive net emission reduction.
-* Electric - Phoenix, AZ Logistics operating across AZ, NM, and TX, drew power from grids with higher coal and gas mixtures. While still cleaner than diesel, their upstream $\text{SO}_\text{x}$ and PM footprint was non-zero.
+* Electric - Phoenix, AZ Logistics operating across AZ, NM, and TX, drew power from grids with higher coal and gas mixtures. While still cleaner than diesel, their upstream SOx and PM footprint was non-zero.
 
 Furthermore, BEVs still produce non-exhaust emissions. The sheer weight of the battery packs (often adding 8,000+ lbs. to the chassis) can increase tire and road wear, generating coarse PM. However, the use of regenerative braking drastically reduces brake dust emissions, likely resulting in a net neutral or positive impact on non-exhaust PM compared to diesel.
 
@@ -3212,7 +3212,7 @@ All website links were last accessed in July 2026.
 7. US DOE. R&D GREET Life Cycle Assessment Model. [https://www.energy.gov/cmei/rd-greet-life-cycle-assessment-model](https://www.energy.gov/cmei/rd-greet-life-cycle-assessment-model)
 8. US EPA. Overview of Greenhouse Gases. [https://www.epa.gov/ghgemissions/overview-greenhouse-gases](https://www.epa.gov/ghgemissions/overview-greenhouse-gases)
 9. USA EPA. Overview of Greenhouse Gases. [https://www.epa.gov/ghgemissions/overview-greenhouse-gases](https://www.epa.gov/ghgemissions/overview-greenhouse-gases)
-10. NOAA. Trends in $\text{CO}_2$, $\text{CH}_4$, $\text{N}_2\text{O}$, $\text{SF}_6$. [https://gml.noaa.gov/ccgg/trends/](https://gml.noaa.gov/ccgg/trends/)
+10. NOAA. Trends in CO2, CH4, N2O, SF6. [https://gml.noaa.gov/ccgg/trends/](https://gml.noaa.gov/ccgg/trends/)
 11. Capital Press. Road to the Future. August 15, 2024. [https://capitalpress.com/2024/08/15/road-to-the-future-renewable-diesel-cleaner-route-to-reducing-emissions-analysts-find/](https://capitalpress.com/2024/08/15/road-to-the-future-renewable-diesel-cleaner-route-to-reducing-emissions-analysts-find/)
 12. US DOE. Renewable Diesel Production and Consumption. [https://afdc.energy.gov/data/10965](https://afdc.energy.gov/data/10965)
 13. Argonne National Labs. Well-to-Wheels Analysis of Advanced Fuel/Vehicle Systems. [https://greet.anl.gov/files/4mz3q5dw](https://greet.anl.gov/files/4mz3q5dw)
@@ -3230,7 +3230,7 @@ Page 135
 <!-- page: 136 -->
 From Source to Highway: The Messy Middle Emissions Report
 
-18. MDPI. $\text{CO}_2\text{e}$ Life-Cycle Assessment. [https://ember-energy.org/latest-insights/us-electricity-2025-special-report/insight-4-rising-demand-pushes-up-emissions-slight/](https://ember-energy.org/latest-insights/us-electricity-2025-special-report/insight-4-rising-demand-pushes-up-emissions-slight/)
+18. MDPI. CO2e Life-Cycle Assessment. [https://ember-energy.org/latest-insights/us-electricity-2025-special-report/insight-4-rising-demand-pushes-up-emissions-slight/](https://ember-energy.org/latest-insights/us-electricity-2025-special-report/insight-4-rising-demand-pushes-up-emissions-slight/)
 19. US EIA. Use of Energy Explained. [https://www.eia.gov/energyexplained/use-of-energy/transportation.php](https://www.eia.gov/energyexplained/use-of-energy/transportation.php)
 20. US EIA. US Energy Facts. [https://www.eia.gov/energyexplained/us-energy-facts/](https://www.eia.gov/energyexplained/us-energy-facts/)
 21. US DOE. Appendix C ELECTRICITY. [https://www.energy.gov/sites/prod/files/2015/09/f26/QER_AppendixC_Electricity.pdf](https://www.energy.gov/sites/prod/files/2015/09/f26/QER_AppendixC_Electricity.pdf)
@@ -3246,7 +3246,7 @@ From Source to Highway: The Messy Middle Emissions Report
 31. USABC. Goals. [https://uscar.org/usabc/goals/](https://uscar.org/usabc/goals/)
 32. Parker US. Hydrogen Applications. [https://corpapps.parker.com/interactive-media/parker-hannifin-world/hydrogen-applications/](https://corpapps.parker.com/interactive-media/parker-hannifin-world/hydrogen-applications/)
 33. NACFE. Natural Gas Role in Decarbonizing Trucking. [https://nacfe.org/wp-content/uploads/2024/03/Nat-Gas-2024-Confidence-Report.pdf](https://nacfe.org/wp-content/uploads/2024/03/Nat-Gas-2024-Confidence-Report.pdf)
-34. ATRI. Understanding the $\text{CO}_2$ Impacts of Zero Emission Trucks. [https://www.ortrucking.org/assets/pdf/ATRI+CO2+Emissions+Info/](https://www.ortrucking.org/assets/pdf/ATRI+CO2+Emissions+Info/)
+34. ATRI. Understanding the CO2 Impacts of Zero Emission Trucks. [https://www.ortrucking.org/assets/pdf/ATRI+CO2+Emissions+Info/](https://www.ortrucking.org/assets/pdf/ATRI+CO2+Emissions+Info/)
 35. Big Bear Engine Company. Difference between ISX15 and X15. [https://4btengines.com/what-is-the-difference-between-an-isx15-and-x15/](https://4btengines.com/what-is-the-difference-between-an-isx15-and-x15/)
 36. The Diesel Store. Cummins X15 Specs. [https://www.thedieselstore.com/blog/cummins-x15-specs](https://www.thedieselstore.com/blog/cummins-x15-specs)
 37. Cummins. The X15N. [https://www.cummins.com/news/2024/04/25/x15ntm-improved-design-thanks-customer-feedback](https://www.cummins.com/news/2024/04/25/x15ntm-improved-design-thanks-customer-feedback)
@@ -3272,8 +3272,8 @@ From Source to Highway: The Messy Middle Emissions Report
 47. Dieselnet Technology Guide. Combustion in Diesel Engines. [https://dieselnet.com/tech/diesel_combustion.php](https://dieselnet.com/tech/diesel_combustion.php)
 48. Chem Blog Green. The Chemistry of the Diesel Engine. [https://chembloggreen1.wordpress.com](https://chembloggreen1.wordpress.com)
 49. X-Engineer. Air Fuel Ratio. [https://x-engineer.org/air-fuel-ratio/#google_vignette](https://x-engineer.org/air-fuel-ratio/#google_vignette)
-50. Pollution Sustainability Directory. What Is the Zeldovich Mechanism and How Does It Relate to the Formation of Thermal $\text{NO}_\text{x}$. [https://pollution.sustainability-directory.com/learn/what-is-the-zeldovich-mechanism-and-how-does-it-relate-to-the-formation-of-thermal-nox/#:~:text=It%20is%20a%20set%20of,occurring%20above%20approximately%201800%20Kelvin](https://pollution.sustainability-directory.com/learn/what-is-the-zeldovich-mechanism-and-how-does-it-relate-to-the-formation-of-thermal-nox/#:~:text=It%20is%20a%20set%20of,occurring%20above%20approximately%201800%20Kelvin)
-51. Pollution Sustainability Directory. What Is the Primary Mechanism by Which $\text{NO}_\text{x}$ Is Formed in Combustion Engines? [https://pollution.sustainability-directory.com/learn/what-is-the-primary-mechanism-by-which-nox-is-formed-in-combustion-engines/](https://pollution.sustainability-directory.com/learn/what-is-the-primary-mechanism-by-which-nox-is-formed-in-combustion-engines/)
+50. Pollution Sustainability Directory. What Is the Zeldovich Mechanism and How Does It Relate to the Formation of Thermal NOx. [https://pollution.sustainability-directory.com/learn/what-is-the-zeldovich-mechanism-and-how-does-it-relate-to-the-formation-of-thermal-nox/#:~:text=It%20is%20a%20set%20of,occurring%20above%20approximately%201800%20Kelvin](https://pollution.sustainability-directory.com/learn/what-is-the-zeldovich-mechanism-and-how-does-it-relate-to-the-formation-of-thermal-nox/#:~:text=It%20is%20a%20set%20of,occurring%20above%20approximately%201800%20Kelvin)
+51. Pollution Sustainability Directory. What Is the Primary Mechanism by Which NOx Is Formed in Combustion Engines? [https://pollution.sustainability-directory.com/learn/what-is-the-primary-mechanism-by-which-nox-is-formed-in-combustion-engines/](https://pollution.sustainability-directory.com/learn/what-is-the-primary-mechanism-by-which-nox-is-formed-in-combustion-engines/)
 52. Cummins. On-Highway Aftertreatment. [https://www.cummins.com/en/in/components/emission-solutions/aftertreatment/on-highway](https://www.cummins.com/en/in/components/emission-solutions/aftertreatment/on-highway)
 53. Cummins. X15N (2024). [https://www.cummins.com/engines/x15n-2024](https://www.cummins.com/engines/x15n-2024)
 54. Cummins. Make the switch to natural gas engines. [https://www.cummins.com/engines/natural-gas](https://www.cummins.com/engines/natural-gas)
@@ -3355,7 +3355,7 @@ From Source to Highway: The Messy Middle Emissions Report
 100. Basenor. Tesla Semi Powertrain Secrets Revealed: The Engineering Behind the Truck. [https://www.basenor.com/blogs/news/tesla-semi-powertrain-secrets-revealed-the-engineering-behind-the-truck#:~:text=Metric%2C7%25%20improvement%20over%20prior](https://www.basenor.com/blogs/news/tesla-semi-powertrain-secrets-revealed-the-engineering-behind-the-truck#:~:text=Metric%2C7%25%20improvement%20over%20prior)
 101. US EPA. Emissions & Generation Resource Integrated Database. [https://www.epa.gov/egrid](https://www.epa.gov/egrid)
 102. Metrans. ATRI - Analysis of Long-Haul Class 8 Battery Electric Trucks. [https://metrans.org/assets/upload/jeff_short-0.pdf](https://metrans.org/assets/upload/jeff_short-0.pdf)
-103. MDPI. $\text{CO}_2\text{e}$ Life-Cycle Assessment: Twin Comparison of Battery–Electric and Diesel Heavy-Duty Tractor Units with Real-World Data. [https://www.mdpi.com/2673-7590/5/1/12](https://www.mdpi.com/2673-7590/5/1/12)
+103. MDPI. CO2e Life-Cycle Assessment: Twin Comparison of Battery–Electric and Diesel Heavy-Duty Tractor Units with Real-World Data. [https://www.mdpi.com/2673-7590/5/1/12](https://www.mdpi.com/2673-7590/5/1/12)
 104. ACS Publications. Well-to-Wheels Analysis of Zero-Emission Plug-In Battery Electric Vehicle Technology for Medium- and Heavy-Duty Trucks. [https://pubs.acs.org/doi/10.1021/acs.est.0c02931](https://pubs.acs.org/doi/10.1021/acs.est.0c02931)
 105. California HVIP. XCIENT Fuel Cell. Technical Report: Mechanical Architecture, Systems Engineering, and Operational Principles of the Hyundai XCIENT Fuel Cell Class-8 Heavy-Duty Truck Executive Introduction: The Hydrogen Transition in Heavy Logistics The global logistics sector is curr.
 106. Hyundai. The future of hydrogen power is here. [https://www.hyundaixcientusa.com/](https://www.hyundaixcientusa.com/)
@@ -3470,7 +3470,7 @@ From Source to Highway: The Messy Middle Emissions Report
 175. PGE. 2024 Power Content Label. [https://www.pge.com/assets/pge/docs/account/billing-and-assistance/bill-inserts/1225-power-content-label.pdf](https://www.pge.com/assets/pge/docs/account/billing-and-assistance/bill-inserts/1225-power-content-label.pdf)
 176. Geotab. The State of Fuel Economy. [https://www.geotab.com/truck-mpg-benchmark/](https://www.geotab.com/truck-mpg-benchmark/)
 177. US EPA. Greenhouse Gas Emissions. [https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-vehicle](https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-vehicle)
-178. ICCT. Current State of $\text{NO}_\text{x}$ Emissions. [https://theicct.org/wp-content/uploads/2021/06/NOx_Emissions_In_Use_HDV_US_20191125.pdf](https://theicct.org/wp-content/uploads/2021/06/NOx_Emissions_In_Use_HDV_US_20191125.pdf)
+178. ICCT. Current State of NOx Emissions. [https://theicct.org/wp-content/uploads/2021/06/NOx_Emissions_In_Use_HDV_US_20191125.pdf](https://theicct.org/wp-content/uploads/2021/06/NOx_Emissions_In_Use_HDV_US_20191125.pdf)
 179. Dieselnet. Emission Standards. [https://dieselnet.com/standards/us/hd.php](https://dieselnet.com/standards/us/hd.php)
 180. 4Gen. 4Gen Logistics Vision. [https://drive4gen.com/2024/11/4gen-logistics-vision-for-a-100-emission-free-fleet/](https://drive4gen.com/2024/11/4gen-logistics-vision-for-a-100-emission-free-fleet/)
 181. JoyRide Logistics. Windrose Launch. [https://JoyRidelogistics.com/windrose-launches-first-all-electric-long-haul-sleeper-truck-in-u-s-partnering-with-JoyRide-logistics-eo-charging-to-deliver-tco-parity-for-shippers/](https://JoyRidelogistics.com/windrose-launches-first-all-electric-long-haul-sleeper-truck-in-u-s-partnering-with-JoyRide-logistics-eo-charging-to-deliver-tco-parity-for-shippers/)
@@ -3602,7 +3602,7 @@ From Source to Highway: The Messy Middle Emissions Report
 257. Yale Environment 360. Air Pollution from Fossil Fuels Costs $8 Billion Per Day, New Research Finds. [https://e360.yale.edu/digest/air-pollution-from-fossil-fuels-costs-8-billion-per-day-new-research-finds](https://e360.yale.edu/digest/air-pollution-from-fossil-fuels-costs-8-billion-per-day-new-research-finds)
 258. Capital Press. Road to the Future. [https://capitalpress.com/2024/08/15/road-to-the-future-renewable-diesel-cleaner-route-to-reducing-emissions-analysts-find/](https://capitalpress.com/2024/08/15/road-to-the-future-renewable-diesel-cleaner-route-to-reducing-emissions-analysts-find/)
 259. HFI Energy. Hydrogen Production. [https://www.hfienergy.com/SMRANDCCS.asp#:~:text=Typically%2C%20the%20energy%20efficiency%20of,content%20of%20the%20produced%20hydrogen.&text=For%20every%20kilogram%20of%20hydrogen,kWh%20of%20energy%20is%20required](https://www.hfienergy.com/SMRANDCCS.asp#:~:text=Typically%2C%20the%20energy%20efficiency%20of,content%20of%20the%20produced%20hydrogen.&text=For%20every%20kilogram%20of%20hydrogen,kWh%20of%20energy%20is%20required)
-260. Hydrogen Newsletter. How much $\text{CO}_2$ is produced from SMR. [https://www.hydrogennewsletter.com/how-much-co2-is-produced-from-steam-methane-reforming/](https://www.hydrogennewsletter.com/how-much-co2-is-produced-from-steam-methane-reforming/)
+260. Hydrogen Newsletter. How much CO2 is produced from SMR. [https://www.hydrogennewsletter.com/how-much-co2-is-produced-from-steam-methane-reforming/](https://www.hydrogennewsletter.com/how-much-co2-is-produced-from-steam-methane-reforming/)
 261. Cummins. What are Well to Wheel Emissions. [https://www.youtube.com/watch?v=PXws4G1nuQI&t=1s](https://www.youtube.com/watch?v=PXws4G1nuQI&t=1s)
 262. CCJ. A closer look at diesel emissions: [https://www.youtube.com/watch?v=7G6cA6KbT9A](https://www.youtube.com/watch?v=7G6cA6KbT9A)
 263. C2ES. Federal Vehicle Standards. [https://www.c2es.org/content/regulating-transportation-sector-carbon-emissions/#:~:text=2023–2026%20standards,CO2%20(g/mi)](https://www.c2es.org/content/regulating-transportation-sector-carbon-emissions/#:~:text=2023–2026%20standards,CO2%20(g/mi))
@@ -3611,7 +3611,7 @@ From Source to Highway: The Messy Middle Emissions Report
 266. US EPA. Calculation of Upstream Emissions for the GHG Vehicle Rule. [https://downloads.regulations.gov/NHTSA-2010-0079-0255/content.pdf](https://downloads.regulations.gov/NHTSA-2010-0079-0255/content.pdf)
 267. Smart Charge Tech. What is a Carbon Intensity Score. [https://www.smartchargetech.com/what-is-carbon-intensity-score/](https://www.smartchargetech.com/what-is-carbon-intensity-score/)
 268. US EPA. Lifecycle Analysis of Greenhouse Gas Emissions. [https://www.epa.gov/renewable-fuel-standard/lifecycle-analysis-greenhouse-gas-emissions-under-renewable-fuel-standard](https://www.epa.gov/renewable-fuel-standard/lifecycle-analysis-greenhouse-gas-emissions-under-renewable-fuel-standard)
-269. Science Direct. Investigation of major factors that cause diesel $\text{NO}_\text{x}$ formation. [https://www.sciencedirect.com/science/article/abs/pii/S0016236121001745](https://www.sciencedirect.com/science/article/abs/pii/S0016236121001745)
+269. Science Direct. Investigation of major factors that cause diesel NOx formation. [https://www.sciencedirect.com/science/article/abs/pii/S0016236121001745](https://www.sciencedirect.com/science/article/abs/pii/S0016236121001745)
 270. Teknikal Diagnostics. Diesel Engine EGR Explained. [https://www.youtube.com/watch?v=g2XvVL64hl8](https://www.youtube.com/watch?v=g2XvVL64hl8)
 271. NETT Technologies. What Is a Diesel Oxidation Catalyst. [https://www.nettinc.com/information/emissions-faq/what-is-a-diesel-oxidation-catalyst](https://www.nettinc.com/information/emissions-faq/what-is-a-diesel-oxidation-catalyst)
 272. OTR Performance. Aftertreatment Injector (7th injector. [https://otrperformance.com/blogs/quick-tips/7-basics-of-hd-aftertreatment-system-explained#:~:text=Spraying%20this%20fuel%20directly%20into,is%20burned%20down%20to%20ash](https://otrperformance.com/blogs/quick-tips/7-basics-of-hd-aftertreatment-system-explained#:~:text=Spraying%20this%20fuel%20directly%20into,is%20burned%20down%20to%20ash)

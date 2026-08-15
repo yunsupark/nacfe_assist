@@ -658,10 +658,10 @@ Viable Class 7/8 Electric, Hybrid & Alternative Fuel Tractors
 
 46
 
-$$\left[ \frac{1\text{ kWh}}{0.031\text{ gal of gasoline}} \div \frac{2.27\text{ kWh}}{\text{gal of battery pack}} \right] \div \frac{1\text{ gal diesel}}{1.155\text{ gal gasoline}} = 16.41 \frac{\text{gal battery pack}}{\text{gal diesel}}$$
+≤ft[ (1 kWh/0.031 gal of gasoline) div (2.27 kWh/gal of battery pack) right] div (1 gal diesel/1.155 gal gasoline) = 16.41 (gal battery pack/gal diesel)
 
 The inverse gives battery pack DGE:
-$$\frac{\text{gal diesel}}{\text{gal battery pack}} = 0.061$$
+(gal diesel/gal battery pack) = 0.061
 
 The actual number depends on assumptions on battery pack design, so this is just a directional number and might have a DGE range from 0.04 to 0.07 gallon of battery pack per gallon of diesel. This range should be thought of in the same way as CNG has different ranges in AFDC’s table based on the storage pressure in the tanks, i.e. packaging of the “fuel,” which, in the case of batteries, is electricity.
 
@@ -1504,7 +1504,7 @@ The crux of the matter with comparing the benefits and challenges with alternati
 > Axes: none vs GHG emissions / efficiency percentage
 > Series: Gasoline (fossil), Diesel (fossil), FH (fossil), PHEV, ICE with renewable fuels, BEV (2030 EU-mix), BEV (green electricity), CNG (EU-mix), SNG, FCV (H2 50/50 mix), FCV (H2 wind electrolysis)
 > Values: Gasoline: 100% TTW + WTT; Diesel: approx. 125%; FH: approx. 110%; PHEV: approx. 60%; ICE with renewable: approx. 40%; BEV (2030 EU-mix): approx. 40%; BEV (green electricity): approx. 20%; CNG: approx. 100%; SNG: approx. 40%; FCV mix: approx. 60%; FCV electrolysis: approx. 20%
-> Notes: For ultra-low-carbon mobility beyond 2030, technologies with average TTW GHG emissions below ~40 g/km are required in EU fleet. In all technologies significant vehicle efficiency improvements are included. Well-to-tank; Tank-to-wheel; Allowed average vehicle $CO_2$ emission in fleet in 2050 for compliance with reference emissions. 1) Biofuel adjusted 2) With 30% electric driving 3) If NG is produced via power-to-gas from renewable electricity TTW = 0.
+> Notes: For ultra-low-carbon mobility beyond 2030, technologies with average TTW GHG emissions below ~40 g/km are required in EU fleet. In all technologies significant vehicle efficiency improvements are included. Well-to-tank; Tank-to-wheel; Allowed average vehicle CO2 emission in fleet in 2050 for compliance with reference emissions. 1) Biofuel adjusted 2) With 30% electric driving 3) If NG is produced via power-to-gas from renewable electricity TTW = 0.
 
 ---
 
@@ -1554,7 +1554,7 @@ An October 2019 webinar by an AVL expert, Martin Rothbart, Senior Product Manage
 > Axes: stages of energy chain (Electricity, Fuel processing, Transport/Storage, Charging/Refuelling, Tank-to-Wheel, Vehicle Efficiency) vs WTW Efficiency percentage (0% to 100%)
 > Series: BEV, FCEV, PtX
 > Values: BEV efficiency: starts at 100%, drops to approx. 70-80%; FCEV efficiency: drops to approx. 30-40%; PtX efficiency: drops to approx. 20-30%
-> Notes: Source: AVL Energy Consulting Services. BEV: direct use of green electricity in Europe; FCEV: green electricity to produce $H_2$, use in FC Vehicle; PtX: green electricity to produce eFuel, use in ICE Vehicle
+> Notes: Source: AVL Energy Consulting Services. BEV: direct use of green electricity in Europe; FCEV: green electricity to produce H2, use in FC Vehicle; PtX: green electricity to produce eFuel, use in ICE Vehicle
 
 Rothbart explained in the webinar that electricity generation and use are not synchronous, for example solar panel power output varies by time of day, by weather and by season, and wind turbine output varies, so some form of storage is likely needed to augment the power grid to maintain some level of consistent power supply per day, week and year. Rothbart discussed that long-term energy storage may involve converting the electricity from solar or wind power into a chemical based storage system such as making hydrogen, or possibly storing in stationary battery power packs. In those cases, there are additional reductions in efficiency to deal with the additional energy conversion processes.
 
@@ -1621,7 +1621,7 @@ AVL’s Resende presented in June 2019 an AVL analysis of fill rates for diesel,
 > Axes: Range (km/min) (0 to 450) vs Fuel Types
 > Series: Diesel, Hydrogen H70HF Standard, Hydrogen 700 Bar SAEJ2601, Electricity (1 MW), Electricity (250 kW)
 > Values: Diesel: approx. 320; Hydrogen H70HF Standard: approx. 70; Hydrogen 700 Bar SAEJ2601: approx. 10; Electricity (1 MW): approx. 5; Electricity (250 kW): approx. 1.2
-> Notes: Assumptions table inset: Diesel: Dispensing rate 130 L/min, Consumption 32 L/100 km; Electricity (250 kW): 250 kW, Consumption 220 kwh/100 km; Electricity (1 MW): 1 MW, Consumption 220 kwh/100 km; Hydrogen 700 bar today: 1 kg of $H_2$/min, Consumption 10 kg of $H_2$/100 km; Hydrogen 700 bar (H70HF Standard): 10 kg of $H_2$/min, Consumption 10 kg of $H_2$/100 km
+> Notes: Assumptions table inset: Diesel: Dispensing rate 130 L/min, Consumption 32 L/100 km; Electricity (250 kW): 250 kW, Consumption 220 kwh/100 km; Electricity (1 MW): 1 MW, Consumption 220 kwh/100 km; Hydrogen 700 bar today: 1 kg of H2/min, Consumption 10 kg of H2/100 km; Hydrogen 700 bar (H70HF Standard): 10 kg of H2/min, Consumption 10 kg of H2/100 km
 
 ---
 
@@ -1685,7 +1685,7 @@ Resende provided in 2019 a diesel versus fuel cell cost comparison with assumpti
 > Axes: Vehicle types (Diesel, Fuel Cell, Battery) vs TCO
 > Series: Diesel, Fuel Cell (+7%), Battery (+38%)
 > Values: Diesel: baseline; Fuel Cell: +7%; Battery: +38%
-> Notes: TCO Calculation Assumptions table: Depreciation Costs: 10% of total purchasing costs per year for 10 years; Fuel Costs: Electricity: 0.30 to 0.50 €/kWh, $H_2$: 4.0 to 8.0 €/kg, Diesel: 0.90 to 1.20 €/L; Insurance Costs: 2,660 €/year for all powertrains; Maintenance Costs: Diesel and Fuel Cell: 10% of powertrain purchasing costs, Battery: 5% of powertrain purchasing costs; Opportunity Cost: 3% Interest per year applied to total purchasing costs; Toll Costs: 18 €/100 Km for Diesel Trucks, Zero Emission Trucks exempt; Driver: 60,000 €/year
+> Notes: TCO Calculation Assumptions table: Depreciation Costs: 10% of total purchasing costs per year for 10 years; Fuel Costs: Electricity: 0.30 to 0.50 €/kWh, H2: 4.0 to 8.0 €/kg, Diesel: 0.90 to 1.20 €/L; Insurance Costs: 2,660 €/year for all powertrains; Maintenance Costs: Diesel and Fuel Cell: 10% of powertrain purchasing costs, Battery: 5% of powertrain purchasing costs; Opportunity Cost: 3% Interest per year applied to total purchasing costs; Toll Costs: 18 €/100 Km for Diesel Trucks, Zero Emission Trucks exempt; Driver: 60,000 €/year
 
 Resende estimates the cost drivers of the three technologies as shown Figure 73, including “opportunity,” the financial concept of using the money invested somewhere else to make returns. If the actual purchase price paid by a fleet for all three technologies were to be the same because of incentives, grants, LCFS credits, etc., then these pie charts would change, and fundamentally the opportunity cost would be the same for all three.
 

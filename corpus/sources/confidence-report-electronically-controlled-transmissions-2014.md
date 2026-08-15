@@ -1052,11 +1052,11 @@ An important impact is the effect of grade, as shown Figure C, which was generat
 > Notes: Source: Cummins Inc.
 
 The simplified calculations for wheel power in this graph are:
-$$\text{Aero Power (HP)} = (\text{Height} - 0.75) * \text{Width} * \text{Cd} * (\text{MPH})^3 / 156000$$
+Aero Power (HP) = (Height - 0.75) * Width * Cd * (MPH)³ / 156000
 (Note: the 0.75 height deduction is for ground clearance)
-$$\text{Rolling Power (HP)} = \text{Weight} * \text{Crr} * \text{MPH} / 375000$$
+Rolling Power (HP) = Weight * Crr * MPH / 375000
 (This assumes Crr includes pavement factor)
-$$\text{Grade Power (HP)} = \text{Weight} * \text{Grade} * \text{MPH} / 37500$$
+Grade Power (HP) = Weight * Grade * MPH / 37500
 (Grade expressed as a percentage)
 
 The vehicle assumptions are:
@@ -1076,7 +1076,7 @@ Aero Power = 76 HP
 Rolling Power = 103 HP
 Total Wheel Power = 179 HP
 
-Finally Figure D, taken from a Cummins Inc. presentation to a National Academy of Sciences committee reviewing the $21^{\text{st}}$ Century Truck Partnership, shows the variation in grade along a typical highway in the USA. Even in what would be expected to be a flat area of the country, Texas, there is significant road grade variation of +/- 2%.
+Finally Figure D, taken from a Cummins Inc. presentation to a National Academy of Sciences committee reviewing the 21st Century Truck Partnership, shows the variation in grade along a typical highway in the USA. Even in what would be expected to be a flat area of the country, Texas, there is significant road grade variation of +/- 2%.
 
 > **Figure D — Grade on a Route**
 > Type: Bar chart / Histogram
@@ -1099,9 +1099,9 @@ Three key performance curves are used to picture the capabilities of an engine:
 2. Horsepower versus engine speed;
 3. Brake Specific Fuel Consumption versus engine speed and load.
 
-Figure E shows two of the performance curves for a current Detroit DD13 engine taken from a specification sheet. The engine produces 410 brake horsepower (bhp) when running at 1800 rpm. It produces a maximum torque of 1450 lb-ft when the engine is at 1100 rpm. [Figure E shows the peak torque of 1450 lb-ft at about 1225 rpm, yet, the specification sheet shows it occurs at 1100 rpm, see Figure F]. As shown in Figure E, the torque capability of the engine is relatively constant from 1000 rpm to 1400 rpm. A dot is also shown on the torque curve at the rated engine speed of 1800 rpm. This torque value is less than the peak torque. The torque rise of an engine in percent is also a measure of engine performance. It gives an indication of the ability of the engine to provide a constant torque versus speed. In this case the torque rise in percent is $(100 \times (1450-1196)/1196)=21\%$.
+Figure E shows two of the performance curves for a current Detroit DD13 engine taken from a specification sheet. The engine produces 410 brake horsepower (bhp) when running at 1800 rpm. It produces a maximum torque of 1450 lb-ft when the engine is at 1100 rpm. [Figure E shows the peak torque of 1450 lb-ft at about 1225 rpm, yet, the specification sheet shows it occurs at 1100 rpm, see Figure F]. As shown in Figure E, the torque capability of the engine is relatively constant from 1000 rpm to 1400 rpm. A dot is also shown on the torque curve at the rated engine speed of 1800 rpm. This torque value is less than the peak torque. The torque rise of an engine in percent is also a measure of engine performance. It gives an indication of the ability of the engine to provide a constant torque versus speed. In this case the torque rise in percent is (100 × (1450-1196)/1196)=21%.
 
-$$\text{Torque Rise in \%} = \frac{(\text{Peak Torque} - \text{Torque at Rated Speed})}{\text{Torque at Rated Speed}} \times 100$$
+Torque Rise in % = ((Peak Torque - Torque at Rated Speed)/Torque at Rated Speed) × 100
 
 > **Figure E — Current DD13 engine performance curves**
 > Type: Line chart (dual y-axis)
@@ -1287,11 +1287,11 @@ An important part of a good shift is to be able to maintain forward momentum aft
 
 Figure T is taken from a public presentation by Cummins to the National Academies of Science in 2013. In addition to moving the vehicle, the engine has much to do to provide cooling for itself, cooling for the driver, air for the brakes, power for steering and electric energy for many items. We will focus only on the transmission in relation to the engine and the wheels. The formula for vehicle speed is quite simple.
 
-$$\text{Vehicle Speed (Miles/Hour)} = \frac{\text{Engine Speed (Revs/Min)} \times 60 \text{ Min/Hour}}{\text{Tire Revs/Mile} \times \text{Transmission Ratio} \times \text{Axle Ratio}}$$
+Vehicle Speed (Miles/Hour) = (Engine Speed (Revs/Min) × 60 Min/Hour/Tire Revs/Mile × Transmission Ratio × Axle Ratio)
 
 Engine speed may be about 2350 rpm at highway speeds, tire revs are about 500 per mile, preferred top gear in the transmission is usually direct for efficiency (ratio of 1), and axle ratios range from a low of 2.26 to well over 3. A common number is 2.42. That would give an equation of:
 
-$$\text{Cruising vehicle speed of 62 mph} = 1250 \times 60 / (500 \times 1 \times 2.42)$$
+Cruising vehicle speed of 62 mph = 1250 × 60 / (500 × 1 × 2.42)
 
 To get to that speed, the driver or the vehicle will go through as many as 18 gears or as few as six gears. The more gears the smaller the change in engine speed. Less change in engine speed tends to lead to better fuel consumption, but can tax the driver’s physical abilities. Thus, automated transmissions are, literally, ideal for accomplishing the efficient shifting of a vehicle to keep the engine where it runs best.
 
@@ -1392,7 +1392,7 @@ Cummins analyzed a tractor-trailer with both sets of gearing. (Figure Z) The rou
 <!-- page: 66 -->
 ### Ideal Transmission
 
-* Gradeability at start to move a vehicle on a 20% to 25% grade in $1^{\text{st}}$ gear
+* Gradeability at start to move a vehicle on a 20% to 25% grade in 1st gear
 * Startability Index (Si) greater than 25
 * Gradeability at engine rated cruise speed of 0.5 to 1%
 * Gradeability at engine rated peak torque of 1 to 1.5%

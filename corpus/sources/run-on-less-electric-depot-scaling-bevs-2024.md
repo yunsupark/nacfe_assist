@@ -548,7 +548,7 @@ Run on Less – Electric DEPOT: Scaling BEVs in the Real World
 so have a load factor near 100%. Warehouses, that have shift operations, lighting, heating, etc. may 
 differ based on seasons or time of day, so have more variation in power demand.
 
-| Facility Type | Energy (MW) | Load Factor (%) | Power Use For 300,000 $\text{ft}^2$ |
+| Facility Type | Energy (MW) | Load Factor (%) | Power Use For 300,000 ft² |
 | :--- | :--- | :--- | :--- |
 | Warehouse | 0.5 | 80% | 3.5 MWh/yr |
 | Large Data Center | 100 | 95% | 832 MWh/yr |
@@ -962,7 +962,7 @@ designs.
 > **Figure 41 — Horsepower required to counteract Class 8 tractor-trailer drag (DOE) [129]**
 > Type: line chart / curve plot
 > Axes: Level Highway Speed, MPH (20 to 90) vs Horsepower Contribution (0 to 350)
-> Series: Aerodynamic Drag ($C_D=0.6$), Rolling Friction and Accessories
+> Series: Aerodynamic Drag (CD=0.6), Rolling Friction and Accessories
 > Values: Curves show increasing horsepower requirements up to 350 hp at 90 MPH.
 > Notes: Source: ORNL 2000-06268A/lmh, DOE [129].
 
@@ -1042,8 +1042,8 @@ July 9, 2024 Page 58
 
 Run on Less – Electric DEPOT: Scaling BEVs in the Real World
 
-described in miles per diesel gallon equivalent ($\text{MPG}_{\text{de}}$), or miles per gasoline gallon equivalent (usually 
-$\text{MPG}_{\text{e}}$).
+described in miles per diesel gallon equivalent (MPGde), or miles per gasoline gallon equivalent (usually 
+MPGe).
 
 Major testing standards organizations such as SAE have not yet standardized commercial vehicle BEV 
 energy consumption measurement test methodologies, although there are standards for ICE vehicles 
@@ -1194,7 +1194,7 @@ Run on Less – Electric DEPOT: Scaling BEVs in the Real World
 > **Figure 47 — Technology optimization for weight and range (NACFE) [23]**
 > Type: chart / diagram (overlapping rectangles)
 > Axes: Range (mi.) (250 to 650) vs Freight Payload (lb.) (43,000 to 48,000)
-> Series: Other Hybrids, Battery Electric, CNG/RNG, RD, $\text{H}_2$ ICE and Fuel Cell
+> Series: Other Hybrids, Battery Electric, CNG/RNG, RD, H2 ICE and Fuel Cell
 > Values: none
 > Notes: Source: NACFE [23]. Title: "Optimum Duty Cycle Sweet Spot". Callout text: "Different ZEV Solutions Perform Differently".
 
@@ -1204,7 +1204,7 @@ described the envelope for different technologies with respect to types of vehic
 > **Figure 48 — Solution space for ZEVs (NACFE data workshop participant) [119]**
 > Type: chart / infographic
 > Axes: Desired Range (Short Haul, 200 km/day, 500 km/day, > 500 km/day) vs Freight Weight (8-16T, 16-30T, 30-40T, 40-60T, 60T+)
-> Series: Commercial, Battery Electric (Developed), $\text{H}_2$ ICE, $\text{H}_2$ Fuel Cell (Developing / R&D)
+> Series: Commercial, Battery Electric (Developed), H2 ICE, H2 Fuel Cell (Developing / R&D)
 > Values: none
 > Notes: Source: EM Analysis. Title: "Opportunity Landscape for ZEV Powertrains".
 
@@ -1221,7 +1221,7 @@ Run on Less – Electric DEPOT: Scaling BEVs in the Real World
 > **Figure 49 — Framework for emission reduction powertrain decision making (NACFE) [23]**
 > Type: flowchart / decision tree diagram
 > Axes: none
-> Series: Start Here, BEV, $\text{H}_2\text{FC}$, Natural Gas, Renewables/Hybrids, $\text{H}_2$ ICE, Diesel
+> Series: Start Here, BEV, H2FC, Natural Gas, Renewables/Hybrids, H2 ICE, Diesel
 > Values: none
 > Notes: Source: NACFE [23].
 
@@ -1585,7 +1585,7 @@ upwards of 50% deadheading where they ship outbound loaded and return empty.
 > Type: scatter plot with linear regression line
 > Axes: Payload capacity (ton) (0 to 45) vs Energy consumption (kWh/km) (0 to 2.5)
 > Series: BET Model, Linear (BET Model)
-> Values: Data points for EMS 1612, EMS 1620, EMS 1820, EMS 1824, MX30 Class 8, DAF CF Electric; Equation: $y = 0.0412x + 0.43$, $R^2 = 0.9866$.
+> Values: Data points for EMS 1612, EMS 1620, EMS 1820, EMS 1824, MX30 Class 8, DAF CF Electric; Equation: $y = 0.0412x + 0.43$, R² = 0.9866.
 > Notes: Source: Samet et al [20].
 
 July 9, 2024 Page 73

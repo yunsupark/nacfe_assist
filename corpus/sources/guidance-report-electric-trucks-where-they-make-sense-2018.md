@@ -1567,11 +1567,11 @@ cost and lifetime as shown in Figure 67.
 
 | Cathode Material | Energy Density (Wh/kg) | Cost | Lifetime |
 | :--- | :--- | :--- | :--- |
-| $\text{LiCoO}_2$ (LCO) | 546 | Medium | Medium |
-| $\text{LiMn}_2\text{O}_4$ (LMO) | 410–492 | Low | Low |
-| $\text{LiNiMnCoO}_2$ (NMC) | 610–650 | High | High |
-| $\text{LiFePO}_4$ (LFP) | 518–587 | Medium | High |
-| $\text{LiNiCoAlO}_2$ (NCA) | 680–760 | High | Medium |
+| LiCoO2 (LCO) | 546 | Medium | Medium |
+| LiMn2O4 (LMO) | 410–492 | Low | Low |
+| LiNiMnCoO2 (NMC) | 610–650 | High | High |
+| LiFePO4 (LFP) | 518–587 | Medium | High |
+| LiNiCoAlO2 (NCA) | 680–760 | High | Medium |
 
 > **Figure 67 — Present Lithium Based Battery Technology Characterized (MOBI) [131]**
 > Type: Table

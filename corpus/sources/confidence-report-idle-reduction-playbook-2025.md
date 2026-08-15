@@ -793,7 +793,7 @@ Some idling is still unavoidable, but the extent of what can be reduced has beco
 * Argonne National Laboratory now estimates that well over one million US sleeper tractors idle during their federally mandated rest periods each night, making the relevant fleet far larger than the 400,000 units used in previous calculations [33].
 * NACFE’s fleet snapshots show that installing a diesel APU or an eAPU typically reduces idle percentages from 30% to 50% to the low 20% range, achieving a realistic reduction of about 600 idle hours per truck per year. At the DOE benchmark burn rate of 0.8 gallons per hour, this means approximately 480 gallons of diesel is avoided per truck [34].
 * With the national on-highway diesel average at $3.81/gal. (week of July 28, 2025), each APU-equipped tractor now saves approximately $1,720 in fuel every year [33].
-* Scaling that to the million-plus sleeper fleet yields a technical potential of approximately 480 million gallons of diesel and 4.8 Mt of $CO_2$ avoided annually [35].
+* Scaling that to the million-plus sleeper fleet yields a technical potential of approximately 480 million gallons of diesel and 4.8 Mt of CO2 avoided annually [35].
 * APU uptake is accelerating. A 2019 to 2020 Dallas-Fort Worth driver survey found that 55% of overnighting sleepers already carry an APU, and large carriers, such as Werner Enterprises, ordered APUs for 50% of the tractors it placed in service in 2022 [36].
 * If the trucking industry could increase the combined take rate for diesel APUs, eAPUs, and auto stop/start from roughly half of sleeper cabs today to approximately 80%, analysts expect the national idle share could drop another 10 points — from about 35% to around 25% — resulting in an additional per-truck fuel savings of $700 to $900 (depending on duty cycle and diesel price volatility) and reducing hundreds of millions more gallons from the nation’s idle fuel bill.
 
@@ -1030,8 +1030,8 @@ December 22, 2025 49
 
 * **Fuel savings:** A modern diesel APU burns approximately 0.25 gal per hour, roughly 75% less than the fuel consumption of an idling tractor engine. This can save up to about 2,500 gallons of diesel per truck per year, or approximately 10,000 gallons over a four-year trade cycle [46].
 * **Lower operating costs and longer engine life:** Because the main engine no longer racks up idle hours, fleets cut oil changes, DPF regens, and unplanned downtime, resulting in trucks spending less time in shops.
-* **Rapid ROI and resale upside:** Installed prices of $8,500 to 13,000 typically pay back in 12 to 24 months for trucks idling $\ge$ 1,000 hours per year. Used tractors with APUs also sell faster and for more because of the lower odometer-equivalent engine hours.
-* **Substantial emissions cuts and noise reduction:** Eliminating long-duration idling reduces $CO_2$, $NO_x$, and PM, while also decreasing cab-side noise, which improves driver rest and supports corporate ESG goals [46].
+* **Rapid ROI and resale upside:** Installed prices of $8,500 to 13,000 typically pay back in 12 to 24 months for trucks idling ≥ 1,000 hours per year. Used tractors with APUs also sell faster and for more because of the lower odometer-equivalent engine hours.
+* **Substantial emissions cuts and noise reduction:** Eliminating long-duration idling reduces CO2, NOx, and PM, while also decreasing cab-side noise, which improves driver rest and supports corporate ESG goals [46].
 * **Full compliance with anti-idling regulations:** SmartWay-verified APUs are accepted nationwide (including CARB’s 50-state after-treatment variant), helping fleets avoid fines and allowing them to operate in idle-restricted zones [47].
 * **Enhanced driver comfort and retention:** APUs provide sleeper HVAC, 120 V AC for microwaves, CPAP machines, battery charging, and engine preheating, offering drivers the “hotel loads” they demand without sacrificing productivity [48].
 
@@ -1041,7 +1041,7 @@ While there are many benefits to using diesel APUs, as with any technology solut
 * **Up-front price and payback risk:** Installed costs of $8,500 to $13,000 are substantial; savings disappear if diesel prices fall or the truck idles for less than roughly 1,000 hours per year [49].
 * **Weight and space penalty:** A complete diesel APU, condenser, and bunk evaporator add 400 lbs. to 550 lbs. and take up frame rail real estate, often requiring drivers to rely on the 550 lbs. federal/state weight exemption to avoid payload losses.
 * **Extra maintenance:** The APU’s engine needs oil, filters, and valve adjustments every 500 to 2,000 operating hours, in addition to periodic fuel system and HVAC service, which adds labor and parts that the truck would otherwise avoid [50].
-* **Residual fuel use, emissions and noise:** Even at 0.25 gal. per hour, diesel APUs still burn fuel, emit $CO_2$, $NO_x$, PM, and produce approximately 60 dBA of sound outside the cab — issues that electric or fuel cell APUs sidestep [50].
+* **Residual fuel use, emissions and noise:** Even at 0.25 gal. per hour, diesel APUs still burn fuel, emit CO2, NOx, PM, and produce approximately 60 dBA of sound outside the cab — issues that electric or fuel cell APUs sidestep [50].
 * **Regulatory complexity:** California already requires a Level 3 DPF or routing APU exhaust through the truck’s DPF. CARB is reviewing whether to further tighten hours of use and health limits, so compliance costs could increase [51].
 * **Installation and service network constraints:** Upfitting can be tricky on short wheelbase tractors or those with fairings, and fleets operating far from OEM dealers may face delays in parts or warranty service.
 
@@ -1200,9 +1200,9 @@ Here are the key benefits of installing an eAPU on a truck to limit idling and p
 
 While there are many benefits to using eAPUs, as with any technology solution, there are challenges. These challenges don’t negate the clear fuel, emissions, and noise-reduction benefits of eAPUs. Still, they mean fleets must carefully match battery chemistry, climate profile, duty cycle, and support strategy before committing to an electric-only idle-reduction path.
 * **Limited runtime in extreme heat:** Drivers in hot regions report that four-battery eAPUs fail to cool the sleeper during a full 10-hour rest. Many fleets idle or use workarounds on hot nights when temperatures are above 90°F [50].
-* **Cold weather battery limitations:** At around 32°F, AGM batteries can lose up to half their capacity, reducing runtime. Lithium iron phosphate ($LiFePO_4$) batteries retain capacity better in the cold but need limited charge current to prevent damage, often requiring heating or cab mounting for winter. Most modern lithium systems have onboard thermal protection and management systems to mitigate these risks automatically [55].
+* **Cold weather battery limitations:** At around 32°F, AGM batteries can lose up to half their capacity, reducing runtime. Lithium iron phosphate (LiFePO4) batteries retain capacity better in the cold but need limited charge current to prevent damage, often requiring heating or cab mounting for winter. Most modern lithium systems have onboard thermal protection and management systems to mitigate these risks automatically [55].
 * **Battery replacement and lifecycle cost:** AGM systems need battery “change-outs” every 24 to 36 months, resulting in recurring costs that reduce fuel savings. Lithium packs last longer but raise the initial purchase price [55].
-* **Weight and payload impact:** A four-battery AGM setup under the bunk usually adds about 345 to 400 lbs. to the tractor, which can reduce payload capacity on weight-sensitive routes. $LiFePO_4$ systems provide the same or greater usable capacity at a significantly lower weight — often reducing the added mass by 40% to 60% — although they come with a higher initial cost [50].
+* **Weight and payload impact:** A four-battery AGM setup under the bunk usually adds about 345 to 400 lbs. to the tractor, which can reduce payload capacity on weight-sensitive routes. LiFePO4 systems provide the same or greater usable capacity at a significantly lower weight — often reducing the added mass by 40% to 60% — although they come with a higher initial cost [50].
 * **High upfront investment:** Despite recent price drops, fleets spend $9,000 to $16,000 per tractor on lithium eAPUs. Despite the favorable payback window, OEMs and suppliers note that sticker shock is the biggest hurdle to adoption.
 
 ---
@@ -1417,7 +1417,7 @@ Fuel-operated heaters are among the most widely adopted idle reduction devices b
 
 Here are the key benefits of installing a fuel-operated heater on a truck to limit idling and provide driver comfort.
 * **Significant fuel-cost savings:** A fuel-operated heater burns about 0.03 to 0.06 gal. per hour, compared to more than 0.6 gal. for an idling engine, reducing winter idle fuel by approximately 85% to 90%.
-* **Lower emissions:** Reducing idling significantly decreases $CO_2$, $NO_x$, and PM.
+* **Lower emissions:** Reducing idling significantly decreases CO2, NOx, and PM.
 * **Reduced engine wear and maintenance expense:** Eliminating long idle periods extends oil life, reduces soot loading in DPFs, and generally lengthens engine life, resulting in lower maintenance costs.
 * **Improved driver comfort and quieter rest breaks:** Fuel-operated heaters keep sleepers warm without engine noise or vibration, helping drivers rest better and meet hours of service requirements.
 * **Regulatory and incentive advantages:** Fuel-operated heaters are an EPA SmartWay-verified idle-reduction technology that meets state anti-idle rules and makes fleets eligible for Diesel Emissions Reduction Act (DERA) grants or federal excise-tax exemptions. As of 2025, DERA is still active, although its funding levels vary by administration and year. The EPA continues to award grants through DERA, often coordinated with states or regional air quality agencies. While the Inflation Reduction Act and Clean Ports Program now get more visibility, DERA is still listed on EPA’s clean diesel program site [67].
@@ -1429,7 +1429,7 @@ Here are the key benefits of installing a fuel-operated heater on a truck to lim
 While there are many benefits to using fuel-operated heaters, as with any technology solution, there are challenges.
 * **Provide heat only — no cooling or AC power:** Drivers still need a separate solution for summer air conditioning and hotel loads.
 * **Draw down the starter batteries during extended rest periods:** The heater’s 12-volt fan and control unit consume a few amps. Over 10 hours, this can weaken the batteries, especially in older systems and trucks.
-* **Create small but real exhaust emissions:** Although much lower than an idling engine, fuel-operated heaters still consume diesel and emit $CO_2$, $NO_x$, and PM, which may concern some sustainability-minded shippers.
+* **Create small but real exhaust emissions:** Although much lower than an idling engine, fuel-operated heaters still consume diesel and emit CO2, NOx, and PM, which may concern some sustainability-minded shippers.
 
 ---
 
@@ -1506,7 +1506,7 @@ Coolant heaters regulate the engine’s coolant temperature by cycling the heate
 
 A fuel-operated coolant heater uses only a fraction of an idling engine’s diesel. Manufacturer data show that 5 kW truck units burn approximately 0.07 to 0.16 gallons per hour (low to high), while larger 7 to 9 kW models top out around 0.23 gal/hr., with a “boost” mode reaching 0.29 gal/hr. Electrical demand is modest: the glow plug draws 80 to 120 watts for the first two minutes, after which the circulation pump and ECU stabilize at 30 to 60 watts, or roughly 0.05 kWh per hour.
 
-For perspective, a typical Group 31 battery holds around 1 kWh, meaning the system can run several hours without significant drain. However, long rest periods (e.g., 34-hour resets) may require a fully charged battery at the outset or supplemental charging. Compared with a Class 8 diesel engine idling at approximately 0.8 gallon per hour, fuel-operated heaters reduce fuel use and $CO_2$ emissions by 80% to 90% while pre-warming the engine, heating the cab, and enabling defrosting.
+For perspective, a typical Group 31 battery holds around 1 kWh, meaning the system can run several hours without significant drain. However, long rest periods (e.g., 34-hour resets) may require a fully charged battery at the outset or supplemental charging. Compared with a Class 8 diesel engine idling at approximately 0.8 gallon per hour, fuel-operated heaters reduce fuel use and CO2 emissions by 80% to 90% while pre-warming the engine, heating the cab, and enabling defrosting.
 
 Driver controls are straightforward, often limited to an on/off switch and diagnostic display. Most models offer a 7-day programmable timer for automatic startup. Coolant heaters are frequently required in trucks operating in cold climates and are often bundled with other idle-reduction technologies like air heaters or eAPUs.
 
@@ -1521,7 +1521,7 @@ December 22, 2025 67
 
 According to Webasto [69], the key benefits of installing a fuel-operated coolant heater on a truck are limiting idling and providing driver comfort.
 * **Large fuel and cost savings:** Replaces 0.8 to 1 gal./hr. of cold-weather idling with approximately 0.07 to 0.23 gal./hr. of burner use, typically reducing winter fuel consumption by 80% to 90%, and recouping the capital cost within a single season for high-idle fleets.
-* **Lower emissions and regulatory compliance:** Reducing idling hours decreases $CO_2$, $NO_x$, and PM, assisting fleets in complying with anti-idling regulations in more than 30 states and enhancing ESG reporting.
+* **Lower emissions and regulatory compliance:** Reducing idling hours decreases CO2, NOx, and PM, assisting fleets in complying with anti-idling regulations in more than 30 states and enhancing ESG reporting.
 * **Engine and aftertreatment protection:** Re-warming coolant prevents “dry” cold starts, reduces oil viscosity wear, and maintains system readiness in cold weather. Although modern engines control DPF loading during idle, higher engine and exhaust temperatures still promote efficient regeneration and lessen wear.
 * **Improved driver comfort and safety:** Provides instant cab heat and windshield defrosting with the main engine off, allowing drivers to rest quietly without vibration or exhaust fumes and ensuring clear visibility before departure.
 * **Extended battery life and accessory support:** Because the engine is already warm, starting amps are lower, and alternator run time is shorter, which preserves batteries while still powering hotel loads.
@@ -1535,7 +1535,7 @@ While fuel-operated coolant heaters offer many benefits, as with any technology 
 * **Regular maintenance and soot build-up:** Whether used for heating the cab or warming the engine coolant, fuel-operated heaters require routine care. Manufacturers recommend running the unit for at least 10 minutes each month, annual combustion chamber cleaning, atomizer replacement, fuel filter changes, and inspections for leaks, corrosion, and exhaust blockage. Regular maintenance prevents soot buildup, ensures efficiency, and extends component life. Neglect can lead to carbon fouling, lockouts, or flameouts [71].
 * **Altitude sensitivity:** At elevations above approximately 7,500’, thinner air enriches the mixture, causing incomplete burning and heavy soot unless a high-altitude kit or auto-altitude ECU is fitted. Without it, heaters can “choke” or fail [72].
 * **Fuel-quality and winter-gelling issues:** ULSD with high paraffin content or biodiesel blends can gel and starve the dosing pump in extreme cold. Fleets often add winter additives and keep filters warm to avoid no-start faults [73].
-* **Residual emissions and regulatory limits:** Although fuel-operated coolant heaters are far cleaner than idling, they still emit diesel $NO_x$ and PM. Some anti-idling ordinances restrict their use near schools or loading areas and docks [74].
+* **Residual emissions and regulatory limits:** Although fuel-operated coolant heaters are far cleaner than idling, they still emit diesel NOx and PM. Some anti-idling ordinances restrict their use near schools or loading areas and docks [74].
 
 ---
 
@@ -1638,7 +1638,7 @@ December 22, 2025 72
 > Type: dashboard screenshot / line chart / bar chart
 > Axes: Date vs Emission Intensity / Fuel & Energy Economy
 > Series: Emission Intensity, Avoided Tailpipe Emissions, Fuel & Energy Economy
-> Values: Emission Intensity: 48.4 TON $CO_2$/100KM, Avoided Tailpipe Emissions: 12k METRIC TON $CO_2$, Fuel & Energy Economy: 12.8 L-E/100KM
+> Values: Emission Intensity: 48.4 TON CO2/100KM, Avoided Tailpipe Emissions: 12k METRIC TON CO2, Fuel & Energy Economy: 12.8 L-E/100KM
 > Notes: myGeotab dashboard interface showing sustainability metrics.
 
 Beyond fuel and emissions, predictive shutdown trims engine-hour accumulation, reduces aftertreatment clogging, and keeps eAPUs within healthy temperature bands — benefits that translate into lower maintenance spend and higher resale value. With telematics penetration above 70% of connected trucks and AI modules available as over-the-air upgrades, predictive idle shutdown is rapidly moving from pilot project to default fleet spec.
@@ -1663,7 +1663,7 @@ December 22, 2025 73
 > Values: none
 > Notes: Photograph showing Allison Transmission display/interface showing FuelSense 2.0.
 
-Cummins modeling using the EPA’s GEM tool estimates that neutral idle can reduce total $CO_2$ emissions by approximately 4.6% for a Class 6 pickup and delivery box truck and about 6.3% for a Class 8 refuse truck. These reductions reflect fuel use improvements, primarily in idle-heavy, stop-and-go duty cycles. As a low-cost, “software-only” strategy, neutral idle provides significant fuel-related emissions savings without compromising system performance [78].
+Cummins modeling using the EPA’s GEM tool estimates that neutral idle can reduce total CO2 emissions by approximately 4.6% for a Class 6 pickup and delivery box truck and about 6.3% for a Class 8 refuse truck. These reductions reflect fuel use improvements, primarily in idle-heavy, stop-and-go duty cycles. As a low-cost, “software-only” strategy, neutral idle provides significant fuel-related emissions savings without compromising system performance [78].
 
 ### 8.4.4 Contextual Idle Management Systems
 

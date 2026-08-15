@@ -222,9 +222,9 @@ NACFE used its proven methodology of investigating available prior research and 
 
 The era of an all-purpose general mechanic capable of fixing any truck with wrenches, sockets, and incredible skill is fading. The latest, modern machines require technicians with specialized expertise tailored to each platform. Today's essential tools are no longer limited to a wrench and a socket; they also include diagnostic laptops, high-voltage safety and diagnostic equipment, secure connectivity, and the ability to integrate software, hardware, and mechanical knowledge to effectively repair a vehicle.
 
-We are living and working in a time that the North American Council for Freight Efficiency (NACFE) has dubbed the Messy Middle — a period of transition before the trucking industry reaches the carbon-neutral movement of freight, which is marked by an inefficient scattering of developing truck technologies and public policy shifts [120]. The recission of California's Advanced Clean Fleets (AFC) regulation has kept the door open to continue to develop technologies other than battery electric vehicles (BEVs) like renewable diesel (RD), renewable natural gas (RNG), hydrogen ($H_2$ or $H_2$ internal combustion engine ($H_2ICE$), hybrid, and other solutions. The industry's goal is to make these low- and zero-emission vehicles the best and most efficient choice for a fleet. Although achieving 100% freight efficiency and business utilization is currently beyond our reach, pursuing freight efficiency through technological advancements drives innovation in trucking.
+We are living and working in a time that the North American Council for Freight Efficiency (NACFE) has dubbed the Messy Middle — a period of transition before the trucking industry reaches the carbon-neutral movement of freight, which is marked by an inefficient scattering of developing truck technologies and public policy shifts [120]. The recission of California's Advanced Clean Fleets (AFC) regulation has kept the door open to continue to develop technologies other than battery electric vehicles (BEVs) like renewable diesel (RD), renewable natural gas (RNG), hydrogen (H2 or H2 internal combustion engine (H2ICE), hybrid, and other solutions. The industry's goal is to make these low- and zero-emission vehicles the best and most efficient choice for a fleet. Although achieving 100% freight efficiency and business utilization is currently beyond our reach, pursuing freight efficiency through technological advancements drives innovation in trucking.
 
-Working on these trucks is different from operating them, and knowledge of operational safety is important for all invested parties. Each technology requires its own set of standard operating procedures, maintenance philosophy, safety protocols, and diagnostic tools. This report examines the evolving service requirements for advanced technology trucks, beginning with conventional internal combustion engines (ICE) and the implications of renewable fuels, then progressing to BEVs, fuel cell electric vehicles (FCEVs), and $H_2ICE$ vehicles.
+Working on these trucks is different from operating them, and knowledge of operational safety is important for all invested parties. Each technology requires its own set of standard operating procedures, maintenance philosophy, safety protocols, and diagnostic tools. This report examines the evolving service requirements for advanced technology trucks, beginning with conventional internal combustion engines (ICE) and the implications of renewable fuels, then progressing to BEVs, fuel cell electric vehicles (FCEVs), and H2ICE vehicles.
 
 A description of the technology would be useless without an implementation plan — one that connects innovation to the technicians, fleets, and service networks responsible for keeping these advanced trucks on the road.
 
@@ -598,7 +598,7 @@ When fleets implement these procedures — accelerated early-stage filtration, s
 
 # 8 RENEWABLE NATURAL GAS
 
-RNG also called biomethane, is chemically identical to fossil-fuel CNG and consists entirely of methane ($CH_4$). Unlike fossil natural gas, RNG is produced by capturing biogenic methane from landfills, wastewater treatment plants, and agricultural digesters, then upgrading it through scrubbing, dehydration, and $CO_2$ removal to pipeline-quality fuel [98]. The RNG production and treatment lifecycle is depicted in Figure 15. Because the upgraded fuel meets the exact specifications of fossil CNG, it can be stored at the same pressures (up to 3,600
+RNG also called biomethane, is chemically identical to fossil-fuel CNG and consists entirely of methane (CH4). Unlike fossil natural gas, RNG is produced by capturing biogenic methane from landfills, wastewater treatment plants, and agricultural digesters, then upgrading it through scrubbing, dehydration, and CO2 removal to pipeline-quality fuel [98]. The RNG production and treatment lifecycle is depicted in Figure 15. Because the upgraded fuel meets the exact specifications of fossil CNG, it can be stored at the same pressures (up to 3,600
 
 <!-- page: 36 -->
 Messy Middle Powertrain Service & Maintenance
@@ -632,30 +632,30 @@ application or duty cycle [378]." However, ammonia formation can still occur und
 > Axes: None
 > Series: None
 > Values: None
-> Notes: Diagram illustrating exhaust temperature ($250 \sim 550^\circ C$), aging induced OSC loss, low air-to-fuel ratios, high durations in rich operation leading to High $NH_3$ emissions with a catalytic converter with a TWC (Three-Way Catalyst).
+> Notes: Diagram illustrating exhaust temperature (250 ~ 550° C), aging induced OSC loss, low air-to-fuel ratios, high durations in rich operation leading to High NH3 emissions with a catalytic converter with a TWC (Three-Way Catalyst).
 
-These three-way catalysts convert CO, HC, and NOx. While the aftertreatment system's primary function is to convert NOx into $CO_2$, water, and nitrogen ($N_2$), it is important to be aware that ammonia ($NH_3$) can form as a by-product during transitions between lean and rich combustion. This is particularly true under high load or transient fueling events. Understanding how this occurs, and how to identify and correct it in the field, is not just a matter of emissions compliance and aftertreatment hardware protection, it is a critical step in mitigating potential risks [146].
+These three-way catalysts convert CO, HC, and NOx. While the aftertreatment system's primary function is to convert NOx into CO2, water, and nitrogen (N2), it is important to be aware that ammonia (NH3) can form as a by-product during transitions between lean and rich combustion. This is particularly true under high load or transient fueling events. Understanding how this occurs, and how to identify and correct it in the field, is not just a matter of emissions compliance and aftertreatment hardware protection, it is a critical step in mitigating potential risks [146].
 
-During lean operation (air-fuel equivalence ratio $\lambda > 1.0$), the exhaust contains excess oxygen. Here, the catalyst plays a crucial role: it actively oxidizes CO and unburned hydrocarbons and stores oxygen within its ceria-zirconia oxygen-storage component (OSC). This "oxygen buffering" capability is the catalyst's way of maintaining balance, keeping it near the stoichiometric point. When the engine transitions to rich operation ($\lambda < 1.0$), the stored oxygen is released, and the catalyst environment becomes fuel rich. In this phase, NOx species are reduced over palladium and rhodium sites, often forming $N_2$ as the desired product. However, if CO and $H_2$ concentrations remain high, part of the NOx reduction proceeds via an alternative pathway that produces $NH_3$. The catalytic mechanism driving this reaction is shown in Figure 17 [146].
+During lean operation (air-fuel equivalence ratio lambda > 1.0), the exhaust contains excess oxygen. Here, the catalyst plays a crucial role: it actively oxidizes CO and unburned hydrocarbons and stores oxygen within its ceria-zirconia oxygen-storage component (OSC). This "oxygen buffering" capability is the catalyst's way of maintaining balance, keeping it near the stoichiometric point. When the engine transitions to rich operation (lambda < 1.0), the stored oxygen is released, and the catalyst environment becomes fuel rich. In this phase, NOx species are reduced over palladium and rhodium sites, often forming N2 as the desired product. However, if CO and H2 concentrations remain high, part of the NOx reduction proceeds via an alternative pathway that produces NH3. The catalytic mechanism driving this reaction is shown in Figure 17 [146].
 
 <!-- page: 38 -->
 Messy Middle Powertrain Service & Maintenance
 June 25, 2026 Page 38
 
-> **Figure 17: Active sites for $CH_4$ catalytic oxidation over $Pd/CeO_2$ [146]**
+> **Figure 17: Active sites for CH4 catalytic oxidation over Pd/CeO2 [146]**
 > Type: 3D molecular / chemical structure diagram
 > Axes: None
 > Series: None
 > Values: None
-> Notes: Shows molecular representation of $CH_4$, O vacancy atom, Pd atom, $CeO_2$, showing catalytic oxidation mechanisms.
+> Notes: Shows molecular representation of CH4, O vacancy atom, Pd atom, CeO2, showing catalytic oxidation mechanisms.
 
-Research shows that ammonia ($NH_3$) formation in heavy-duty CNG exhaust systems is most pronounced when exhaust temperatures range from 250°C to 550°C [146]. This temperature range is typical for cruise and mid-load vehicle operating conditions in these vehicles. At lower temperatures, the catalyst reaction is limited because of slow kinetics; conversely, when temperatures exceed approximately 550°C, the ammonia produced is rapidly decomposed back to nitrogen and hydrogen.
+Research shows that ammonia (NH3) formation in heavy-duty CNG exhaust systems is most pronounced when exhaust temperatures range from 250°C to 550°C [146]. This temperature range is typical for cruise and mid-load vehicle operating conditions in these vehicles. At lower temperatures, the catalyst reaction is limited because of slow kinetics; conversely, when temperatures exceed approximately 550°C, the ammonia produced is rapidly decomposed back to nitrogen and hydrogen.
 
-Furthermore, the study highlights the impact of catalyst thermal aging, which frequently occurs in fleet service environments. As the oxygen storage component (OSC) of the catalyst degrades over time, its capacity to store and release oxygen diminishes. This deterioration causes the exhaust mixture to oscillate more dramatically between oxidized and reduced states, leading to the persistence of richer gas pockets within the catalyst. As a result, $NH_3$ selectivity increases significantly, with aged catalyst units producing several times as much ammonia as newer ones, even under identical operating conditions.
+Furthermore, the study highlights the impact of catalyst thermal aging, which frequently occurs in fleet service environments. As the oxygen storage component (OSC) of the catalyst degrades over time, its capacity to store and release oxygen diminishes. This deterioration causes the exhaust mixture to oscillate more dramatically between oxidized and reduced states, leading to the persistence of richer gas pockets within the catalyst. As a result, NH3 selectivity increases significantly, with aged catalyst units producing several times as much ammonia as newer ones, even under identical operating conditions.
 
 The current regulatory frameworks leaves both methane and ammonia slip unresolved. SAE studies have shown that unburned methane, a highly potent greenhouse gas, can escape through catalysts, especially at low exhaust temperatures. Existing EPA standards focus exclusively on non-methane hydrocarbons, leaving a gap in how methane emissions from these sources are regulated and accounted for in lifecycle assessments. For executives tasked with environmental, social, and governance (ESG) reporting, it is important to acknowledge this regulatory blind spot when presenting the carbon benefits of RNG technologies.
 
-Methane slip in CNG-fueled heavy-duty engines occurs when unburned $CH_4$ passes through the combustion chamber and catalyst without complete oxidation. The phenomenon is most pronounced during cold starts, extended idle, and rapid transitions between load states, when exhaust temperature remains below the catalyst's effective "light-off" range of 350°C to 400°C [147] [148]. Within this range, palladium-based oxidation
+Methane slip in CNG-fueled heavy-duty engines occurs when unburned CH4 passes through the combustion chamber and catalyst without complete oxidation. The phenomenon is most pronounced during cold starts, extended idle, and rapid transitions between load states, when exhaust temperature remains below the catalyst's effective "light-off" range of 350°C to 400°C [147] [148]. Within this range, palladium-based oxidation
 
 <!-- page: 39 -->
 
@@ -667,8 +667,8 @@ incomplete catalyst warm-up.
 
 Sensor behavior is equally critical to controlling and diagnosing methane slips. Wideband lambda sensors must
 respond within ≤100 milliseconds to maintain stoichiometric balance; values are confirmed for Bosch LSU 4-
-series sensors and comparable devices [149] [150]. A lean bias ($\lambda > 1.05$) cools exhaust gases and suppresses
-oxidation, while a rich bias ($\lambda < 0.98$) limits available oxygen — both sharply reducing $\text{CH}_4$ conversion efficiency
+series sensors and comparable devices [149] [150]. A lean bias (lambda > 1.05) cools exhaust gases and suppresses
+oxidation, while a rich bias (lambda < 0.98) limits available oxygen — both sharply reducing CH4 conversion efficiency
 [380]. During visual inspections, technicians should examine the catalyst housing for thermal distress or
 contamination. Chalk-white or bluish hues often indicate overheating. In contrast, oily or glassy films indicate
 siloxane or lubricant poisoning of the palladium active sites [381]. A healthy catalyst operating above 450°C,
@@ -717,7 +717,7 @@ verification procedure outlined in Figure 19.
 **Tools and equipment:**
 1. Cummins Troubleshooting and Repair Manual
 2. DVOM
-3. $\text{INSITE}^{\text{TM}}$
+3. INSITETM
 4. Propane Enrichment Tool
 
 **Step 1:** Using the classroom manual, locate the Catalyst Inlet and Outlet Oxygen Sensor wiring diagram:
@@ -1033,7 +1033,7 @@ width of the actual PWM signal and the height of the sine wave peak.
 There is one caveat: different battery chemistries will perform differently. Therefore, according to Quarto,
 "Knowing how to interpret the battery-pack data or the parameter IDs is important, and this is based on the
 chemistry. Several chemistries are in use, but technicians must know which chemistry they are working with, for
-example, NMC (Lithium Nickel manganese Cobalt Oxide ($\text{LiNiMnCoO}_2$) or LFP (Lithium Iron Phosphate, $\text{LiFePO}_4$),
+example, NMC (Lithium Nickel manganese Cobalt Oxide (LiNiMnCoO2) or LFP (Lithium Iron Phosphate, LiFePO4),
 because LFP and NMC will display differently. When you get into battery packs, you need a deep level of
 understanding of what you are working with [159].”
 
@@ -1064,7 +1064,7 @@ switching [161].
 > Axes: none
 > Series: none
 > Values: none
-> Notes: Diagram showing Source (S), Gate (G), Drain (D), $\text{V}_{\text{DS}}$, $\text{V}_{\text{GS}}$, $\text{I}_{\text{D}}$, $\text{SiO}_2$, Metal Electrode, Metal Oxide Insulator, N-type Channel, P-type Substrate, Depletion Layer, Substrate.
+> Notes: Diagram showing Source (S), Gate (G), Drain (D), VDS, VGS, ID, SiO2, Metal Electrode, Metal Oxide Insulator, N-type Channel, P-type Substrate, Depletion Layer, Substrate.
 
 Fleet managers comparing electric powertrains to diesel systems require standardized power metrics to
 evaluate parity. A common question emerges: how does a 400-hp diesel engine compare to an electric motor in
@@ -1094,7 +1094,7 @@ horsepower across the operating range of Class 8 electric trucks, enabling rapid
 | 500 | 671 |
 
 1 kW = 1.34102 HP • 1 HP = 0.7457 kW
-Conversion formulas: KW to HP: $HP = kW \times 1.34102$ • HP to kW: $kW = HP \times 0.7457$
+Conversion formulas: KW to HP: HP = kW × 1.34102 • HP to kW: kW = HP × 0.7457
 
 > **Figure 30 — Quick reference table converting kilowatts to horsepower [397]**
 > Type: table
@@ -1588,13 +1588,13 @@ Indicators, Estimation Method, Development Trends and Challenges formalized this
 “internal resistance is a crucial SOH indicator. As SOH declines, internal resistance increases,” which in turn
 reduces both energy capacity and maximum power [175]. See Figure 45.
 
-$$\text{SOH} = \frac{R_E - R_{real}}{R_E - R_N} \times 100\%$$
+SOH = fracRE - RrealRE - RN × 100%
 
 > **Figure 45 — State of health equation [175]**
 > Type: equation / schematic
 > Axes: none
 > Series: none
-> Values: Formula: $\text{SOH} = \frac{R_E - R_{real}}{R_E - R_N} \times 100\%$
+> Values: Formula: SOH = fracRE - RrealRE - RN × 100%
 > Notes: Figure 45: State of health equation [175]
 
 This expression enables fleets and service providers to trend the effects of power fade, ensuring drivability and
@@ -1842,7 +1842,7 @@ connectors [407].
 Insulation resistance verification is among the most critical tests in a BEV service, a direct analogue to
 compression testing in the diesel era. The test validates that high-voltage circuits remain properly isolated from
 vehicle chassis ground, preventing hazardous leakage currents or unintended conductive paths. Industry
-practice requires that any circuit operating above 120 V DC exhibit at least $1\text{ M}\Omega$ of resistance when subjected to
+practice requires that any circuit operating above 120 V DC exhibit at least 1 MΩ of resistance when subjected to
 test voltages between 500 and 5,000 V [182].
 
 Instrument safety is critical in high-voltage service environments. Technicians must use only CAT III 1000 V or
@@ -2026,7 +2026,7 @@ Messy Middle Powertrain Service & Maintenance
 
 June 25, 2026 Page 83
 
-“hydrogen is the only viable zero-emission solution currently proposed as one-for-one replacements for diesel in the future of long-haul heavy-duty trucks,” according to NACFE’s report on hydrogen trucks [194]. Three hydrogen use cases will be discussed in this paper: hydrogen-diesel co-combustion (HDC), the hydrogen internal combustion engine ($H_2ICE$), and the hydrogen fuel cell vehicle (HCEV).
+“hydrogen is the only viable zero-emission solution currently proposed as one-for-one replacements for diesel in the future of long-haul heavy-duty trucks,” according to NACFE’s report on hydrogen trucks [194]. Three hydrogen use cases will be discussed in this paper: hydrogen-diesel co-combustion (HDC), the hydrogen internal combustion engine (H2ICE), and the hydrogen fuel cell vehicle (HCEV).
 
 HDC offers a retrofit solution for fleets seeking to reduce emissions without extensive engine modifications. See Figure 59. This strategy uses a supplemental hydrogen injection alongside standard diesel operation, allowing existing Class 8 trucks to operate in HDC mode. Notably, this approach does not require a redesign of the base engine, offering a practical and cost-efficient pathway for operators interested in hydrogen adoption while maintaining their current diesel assets. North America OEMs currently offer no production HDC engines.
 
@@ -2034,9 +2034,9 @@ HDC offers a retrofit solution for fleets seeking to reduce emissions without ex
 > Type: Photograph
 > Notes: Photograph showing the rear cab area of a Dennis Eagle truck with Prior Power hydrogen injection equipment.
 
-Research by Kheirkhah et al highlights the significant environmental benefits of HDC, demonstrating a 25% reduction in $CO_2$ emissions (0.83 vs. 1.11 kg/kWh) for Class 8 trucks [409]. Additionally, engine-out nitrogen oxides (NOx) were reduced by 22%, and tailpipe NOx emissions saw reductions of up to 60% under medium load conditions. These findings underscore the potential of HDC as a transitional technology, enabling fleets to reduce emissions and comply with evolving regulations without requiring complete fleet overhauls.
+Research by Kheirkhah et al highlights the significant environmental benefits of HDC, demonstrating a 25% reduction in CO2 emissions (0.83 vs. 1.11 kg/kWh) for Class 8 trucks [409]. Additionally, engine-out nitrogen oxides (NOx) were reduced by 22%, and tailpipe NOx emissions saw reductions of up to 60% under medium load conditions. These findings underscore the potential of HDC as a transitional technology, enabling fleets to reduce emissions and comply with evolving regulations without requiring complete fleet overhauls.
 
-$H_2$-ICEs are a bigger commitment to the hydrogen ecosystem. Cummins notes that hydrogen ICE engines like the X15H “operate on the same cycle as regular natural gas engines and have almost the same components,” making them familiar to fleets already servicing diesel or natural gas platforms [195]. They are more tolerant of impurities, simpler to maintain, and less costly to produce than fuel cells. The $H_2ICE$ is expected to allow fleets to pursue decarbonization with minimal operational disruption. See Figure 60. There are currently no OEMs in production offering $H_2ICE$ engines in North America.
+H2-ICEs are a bigger commitment to the hydrogen ecosystem. Cummins notes that hydrogen ICE engines like the X15H “operate on the same cycle as regular natural gas engines and have almost the same components,” making them familiar to fleets already servicing diesel or natural gas platforms [195]. They are more tolerant of impurities, simpler to maintain, and less costly to produce than fuel cells. The H2ICE is expected to allow fleets to pursue decarbonization with minimal operational disruption. See Figure 60. There are currently no OEMs in production offering H2ICE engines in North America.
 
 ---
 
@@ -2062,7 +2062,7 @@ FCEVs convert hydrogen into electricity using a proton exchange membrane (PEM) f
 
 > **Figure 61 — Basic operation of a proton exchange membrane [197]**
 > Type: Schematic / Diagram
-> Notes: Diagram of a SEPUP Fuel Cell Animation showing Catalyst, Proton Exchange Membrane, Hydrogen from Tank ($H_2$), Oxygen from Air ($O_2$), Exhaust, and Electrical Current.
+> Notes: Diagram of a SEPUP Fuel Cell Animation showing Catalyst, Proton Exchange Membrane, Hydrogen from Tank (H2), Oxygen from Air (O2), Exhaust, and Electrical Current.
 
 ---
 
@@ -2079,7 +2079,7 @@ Understanding PEM fuel cell electrochemistry is vital, but technicians also must
 > Type: Photograph / Cutaway
 > Notes: Cutaway photograph of the Ballard FCmove-XD fuel cell power module.
 
-Hydrogen propulsion is expected to offer advantages that align well with the demands of heavy-duty trucking, beginning with refueling speed. The Port of Oakland, FirstElement Fuel’s True Zero station has demonstrated that a hydrogen truck can be refueled in under 10 minutes, dispensing 100 kilograms of hydrogen in a single session and serving up to 200 Class 8 trucks per day [410]. This puts hydrogen on par with CNG in terms of fast-fueling time. Timed fueling options exist for both $H_2$ and CNG that can extend fueling sessions over hours to reduce costs.
+Hydrogen propulsion is expected to offer advantages that align well with the demands of heavy-duty trucking, beginning with refueling speed. The Port of Oakland, FirstElement Fuel’s True Zero station has demonstrated that a hydrogen truck can be refueled in under 10 minutes, dispensing 100 kilograms of hydrogen in a single session and serving up to 200 Class 8 trucks per day [410]. This puts hydrogen on par with CNG in terms of fast-fueling time. Timed fueling options exist for both H2 and CNG that can extend fueling sessions over hours to reduce costs.
 
 ---
 
@@ -2094,7 +2094,7 @@ Unlike battery-electric trucks, which largely depend on high-capacity grid conne
 
 Early-production North American heavy-duty fuel cell trucks will be comparable in weight to their BEV counterparts. As the Clean Air Task Force explains, hydrogen is expected to allow fleets to maintain gross vehicle weights close to today’s diesel standards at some point in the future [440].
 
-Finally, hydrogen propulsion provides important environmental and community health benefits. Because hydrogen does not produce soot, sulfur oxides, or carbon monoxide when burned, and because it can be tuned for lean combustion that lowers NOx, it contributes to cleaner air [86]. At fleet scale, NACFE projects that hydrogen adoption could significantly reduce $CO_2$, NOx, and particulate matter across freight corridors, helping fleets stay ahead of emissions regulations while improving conditions in communities near major transport routes.
+Finally, hydrogen propulsion provides important environmental and community health benefits. Because hydrogen does not produce soot, sulfur oxides, or carbon monoxide when burned, and because it can be tuned for lean combustion that lowers NOx, it contributes to cleaner air [86]. At fleet scale, NACFE projects that hydrogen adoption could significantly reduce CO2, NOx, and particulate matter across freight corridors, helping fleets stay ahead of emissions regulations while improving conditions in communities near major transport routes.
 
 Research by Dr. Johnson demonstrates why this matters. Emissions from ports and warehousing operations do not remain within the facility — they disperse into surrounding neighborhoods driven by wind patterns and atmospheric conditions. Using NOAA's HYSPLIT trajectory modeling, Johnson's team mapped how pollutants from freight operations in the Inland Empire travel up to 56 sq. mi. into residential communities, with exposure varying dramatically based on time of day (morning winds at 5 mph versus afternoon winds at 15 mph) and temperature differentials [79].
 
@@ -2147,9 +2147,9 @@ Messy Middle Powertrain Service & Maintenance
 
 June 25, 2026 Page 89
 
-Recent work in the UK’s APC-18 “Project Brunel” H2-ICE program has focused on addressing these issues in engine internals rather than in storage vessels [205]. As a consortium supplier, Zircotec developed and tested specialist hydrogen-barrier coatings “to combat the negative effect hydrogen can have on some metals,” working alongside project partners Cummins, Johnson Matthey, and PHINIA. These coatings are now described as “market ready.” Zircotec explains that its ceramic coating “acts as a hydrogen permeation barrier for $H_2ICE$ systems,” and that the high-density, controlled-porosity coating “can prevent hydrogen embrittlement” by minimizing hydrogen diffusion and leakage through coated surfaces. According to Zircotec Engineering Director Dominic Graham, “Our coatings [are] enabling the safe use of high-risk materials for combustion engine internals,” and the APC-18 development work has reinforced the company’s position “at the forefront of material science for future mobility solutions [204].”
+Recent work in the UK’s APC-18 “Project Brunel” H2-ICE program has focused on addressing these issues in engine internals rather than in storage vessels [205]. As a consortium supplier, Zircotec developed and tested specialist hydrogen-barrier coatings “to combat the negative effect hydrogen can have on some metals,” working alongside project partners Cummins, Johnson Matthey, and PHINIA. These coatings are now described as “market ready.” Zircotec explains that its ceramic coating “acts as a hydrogen permeation barrier for H2ICE systems,” and that the high-density, controlled-porosity coating “can prevent hydrogen embrittlement” by minimizing hydrogen diffusion and leakage through coated surfaces. According to Zircotec Engineering Director Dominic Graham, “Our coatings [are] enabling the safe use of high-risk materials for combustion engine internals,” and the APC-18 development work has reinforced the company’s position “at the forefront of material science for future mobility solutions [204].”
 
-It is important to note that these developments are targeted explicitly at hydrogen internal combustion engines and associated fuel-injection and exhaust components, not at PEM fuel cells. The APC-18/Project Brunel work is consistently described as a hydrogen combustion engine program for medium- and heavy-duty applications, with coatings applied to $H_2ICE$ and related hardware rather than to PEM stacks or their balance-of-plant components.
+It is important to note that these developments are targeted explicitly at hydrogen internal combustion engines and associated fuel-injection and exhaust components, not at PEM fuel cells. The APC-18/Project Brunel work is consistently described as a hydrogen combustion engine program for medium- and heavy-duty applications, with coatings applied to H2ICE and related hardware rather than to PEM stacks or their balance-of-plant components.
 
 ## 10.1 Hydrogen Safety
 
@@ -2201,17 +2201,17 @@ pressure relief devices and J2579-compliant fittings are added to otherwise fami
 
 Together, these examples show that hydrogen maintenance is not just an extension of diesel practice — it is a new discipline. Fleets must invest in training, equipment, and predictive analytics systems to maintain acceptable uptime while meeting safety and regulatory requirements.
 
-### 10.2.1 $H_2ICE$ versus FCEV
+### 10.2.1 H2ICE versus FCEV
 
-Technician training and shop preparation diverge sharply depending on whether fleets adopt $H_2ICE$ or FCEV. Both platforms require expertise in high-pressure storage, leak detection, and fueling safety, but day-to-day workflows differ significantly.
+Technician training and shop preparation diverge sharply depending on whether fleets adopt H2ICE or FCEV. Both platforms require expertise in high-pressure storage, leak detection, and fueling safety, but day-to-day workflows differ significantly.
 
-For $H_2ICE$s, training builds directly on experience with diesel and natural gas. Cummins explains, “A hydrogen engine can be installed in the same equipment as a diesel engine while also using the same transmission, cooling systems, and hydraulic systems. Maintenance practices and costs are comparable to those of diesel engines. The major difference is the onboard hydrogen storage system [21] [22].” Hydrogen systems operate at very high pressures of 10,000 psi or more, whereas natural gas operates at 3,600 psi and diesel at ambient pressure. Otto confirmed this point, “If you are working on a hydrogen ICE, it feels a lot like working on a natural gas engine [115].”
+For H2ICEs, training builds directly on experience with diesel and natural gas. Cummins explains, “A hydrogen engine can be installed in the same equipment as a diesel engine while also using the same transmission, cooling systems, and hydraulic systems. Maintenance practices and costs are comparable to those of diesel engines. The major difference is the onboard hydrogen storage system [21] [22].” Hydrogen systems operate at very high pressures of 10,000 psi or more, whereas natural gas operates at 3,600 psi and diesel at ambient pressure. Otto confirmed this point, “If you are working on a hydrogen ICE, it feels a lot like working on a natural gas engine [115].”
 
 College of the Desert training modules emphasize hydrogen’s unique combustion characteristics, such as its broader flammability range, exceptionally low ignition energy, and a stoichiometric ratio of about 34.33:1, compared with 14.7:1 for gasoline [213]. These properties make engines more prone to knock and backfire, so technicians must learn dual-spark ignition, exhaust gas recirculation, and injector calibration. Routine inspections of pressure relief devices and J2579-compliant fittings are added to otherwise familiar diesel-style practices.
 
 For FCEVs, training diverges more dramatically. Otto explained, “If you’re working on a fuel cell, that’s a whole new world. You are dealing with high voltage, membranes, and stack diagnostics. It’s not just a little bit different, it is a totally different career path for technicians [115].” FCEV training requires mastery of electrochemical systems, predictive diagnostics, and high-voltage lockout/tagout protocols. Service intervals differ as well. Fuel cells eliminate “oil change” type service, but require filter replacements every 30,000 to 40,000 miles, coolant changes every 150,000 miles, and stack replacements of about 400,000 to 700,000 miles depending on duty cycle [198]. Axles still require lube changes per OEM specifications.
 
-Fleet leaders confirm the workforce's readiness gap. Hyliion’s Healy said, “We have seen firsthand that it is not easy to find techs who are certified to handle high-voltage and hydrogen at the same time. That’s slowing things down. We can train diesel guys on $H_2ICE$ fairly quickly, but fuel cells are a different story. You need new certifications [202].” As an example of these differences in maintenance, see Figure 66 for daily and weekly FCEV bus maintenance checks.
+Fleet leaders confirm the workforce's readiness gap. Hyliion’s Healy said, “We have seen firsthand that it is not easy to find techs who are certified to handle high-voltage and hydrogen at the same time. That’s slowing things down. We can train diesel guys on H2ICE fairly quickly, but fuel cells are a different story. You need new certifications [202].” As an example of these differences in maintenance, see Figure 66 for daily and weekly FCEV bus maintenance checks.
 
 ---
 
@@ -2233,7 +2233,7 @@ June 25, 2026 Page 92
 > - Weekly Inspection and Service (Conventional Procedures): Inspect fire suppression sensors; Clean stack vent fan filters; Inspect stack air inlet filters and replace if required; Inspect sintered air vents and clean as required; Inspect filter minder and replace air intake filter if indicated; Inspect lubrication oil sump magnetic plug; Drain turbocharger oil trap; Check transmission fluid level; Check hydraulic fluid level; Check stack coolant level; Check bus coolant level; Inspect hoses and tubes.
 > Notes: Tables outlining daily and weekly fuel cell vehicle maintenance procedures.
 
-The fuel cell stack leak-down test exemplifies the procedural complexity that distinguishes FCEV maintenance from conventional diesel or even $H_2ICE$ service. Unlike engine compression tests that technicians routinely perform with handheld gauges, stack integrity verification requires pressurizing the hydrogen side of the membrane with inert nitrogen — never hydrogen — to a specified pressure (typically 0.5 to 1.0 bar above ambient) and monitoring the decay rate through a calibrated rotameter over a defined interval. The test confirms that neither the membrane electrode assembly (MEA) nor the bipolar plate gaskets exhibit crossover leaks that would allow hydrogen to migrate to the cathode side and escape through the exhaust. Such a crossover not only reduces fuel efficiency but creates a safety hazard: unburned hydrogen in the exhaust stream could accumulate in enclosed spaces.
+The fuel cell stack leak-down test exemplifies the procedural complexity that distinguishes FCEV maintenance from conventional diesel or even H2ICE service. Unlike engine compression tests that technicians routinely perform with handheld gauges, stack integrity verification requires pressurizing the hydrogen side of the membrane with inert nitrogen — never hydrogen — to a specified pressure (typically 0.5 to 1.0 bar above ambient) and monitoring the decay rate through a calibrated rotameter over a defined interval. The test confirms that neither the membrane electrode assembly (MEA) nor the bipolar plate gaskets exhibit crossover leaks that would allow hydrogen to migrate to the cathode side and escape through the exhaust. Such a crossover not only reduces fuel efficiency but creates a safety hazard: unburned hydrogen in the exhaust stream could accumulate in enclosed spaces.
 
 The DOE Hydrogen Fuel Cell Engines Course Manual, developed through College of the Desert, specifies this procedure in detail — including acceptable decay rates, equipment calibration requirements, and failure criteria [86]. Figure 67 Illustrates the fuel cell leak-down test schematic showing a nitrogen bottle and a rotameter setup for stack integrity verification. Properly setting up the rotameter or pressure regulator is essential for not blowing out sensitive systems.
 
@@ -2261,7 +2261,7 @@ June 25, 2026 Page 94
 > Type: Flowchart / Decision Tree
 > Notes: Flowchart detailing diagnostic steps for Fuel Cell Bus Maintenance starting from Fuel Delivery Circuit Test (Weekly Service) through Leak-Down Test, Stack Module Tests (3,750 mi Service), Individual Membrane Humidifier Tests, and Individual Stack Tests to Repair Manifold or Replace Stack.
 
-Visualizing these subsystem integration points helps technicians develop the mental models necessary for efficient diagnosis and maintenance. As shown in Figure 69, a production FCEV architecture integrates high-pressure storage (350 to 700 bar), a fuel cell stack with integrated air management and hydrogen recirculation, balance-of-plant systems, high-voltage power distribution, supplemental battery storage, and thermal management loops into a coordinated system. Unlike $H_2$-ICE platforms, where familiar engine, transmission, and exhaust components dominate the service landscape, FCEV technicians must understand how hydrogen, electrical power, and thermal management interact across multiple integrated subsystems.
+Visualizing these subsystem integration points helps technicians develop the mental models necessary for efficient diagnosis and maintenance. As shown in Figure 69, a production FCEV architecture integrates high-pressure storage (350 to 700 bar), a fuel cell stack with integrated air management and hydrogen recirculation, balance-of-plant systems, high-voltage power distribution, supplemental battery storage, and thermal management loops into a coordinated system. Unlike H2-ICE platforms, where familiar engine, transmission, and exhaust components dominate the service landscape, FCEV technicians must understand how hydrogen, electrical power, and thermal management interact across multiple integrated subsystems.
 
 ---
 
@@ -2274,7 +2274,7 @@ June 25, 2026 Page 95
 > Type: Diagram / Schematic
 > Notes: Diagram of a truck chassis indicating Fuel Cell Power Module, Battery Packs, eAxle, H2 Tanks (3X Backpack Tanks, 2X Saddle Tanks, Nominal Working Pressure 700 bar Type 4 Composite).
 
-Academic pipelines are beginning to respond. US colleges such as Rio Hondo and Saddleback now offer certificates in hydrogen and fuel cell technician training, while in Europe, the IMI Level 3 Hydrogen FCEV Qualification has become a recognized standard entry credential [210]. In practice, $H_2ICE$ adoption enables incremental upskilling of existing diesel technicians. In contrast, FCEV adoption requires fleets to build a new class of cross-disciplinary specialists proficient in hydrogen handling, high-voltage safety, and digital diagnostics.
+Academic pipelines are beginning to respond. US colleges such as Rio Hondo and Saddleback now offer certificates in hydrogen and fuel cell technician training, while in Europe, the IMI Level 3 Hydrogen FCEV Qualification has become a recognized standard entry credential [210]. In practice, H2ICE adoption enables incremental upskilling of existing diesel technicians. In contrast, FCEV adoption requires fleets to build a new class of cross-disciplinary specialists proficient in hydrogen handling, high-voltage safety, and digital diagnostics.
 
 ## 11 WHEELS, TIRES & BRAKES
 
@@ -2282,7 +2282,7 @@ The maintenance needs of wheels, tires and brakes on BEVs are different from tho
 
 ## 11.1 Wheels
 
-Wheel-end integrity remains foundational to safe commercial vehicle operation regardless of powertrain technology. Federal regulations mandate minimum tread depths of 4/32" on steer axles and 2/32" on all other positions, with daily Driver Vehicle Inspection Reports required under 49 CFR §396.11 [215]. These baseline requirements apply across diesel, natural gas, battery-electric, and fuel-cell platforms. However, BEV, $H_2ICE$, HCNG, and FCEV, and other variants, introduce substantially higher wheel-end stresses that require maintenance and inspection protocols beyond conventional practices for several reasons.
+Wheel-end integrity remains foundational to safe commercial vehicle operation regardless of powertrain technology. Federal regulations mandate minimum tread depths of 4/32" on steer axles and 2/32" on all other positions, with daily Driver Vehicle Inspection Reports required under 49 CFR §396.11 [215]. These baseline requirements apply across diesel, natural gas, battery-electric, and fuel-cell platforms. However, BEV, H2ICE, HCNG, and FCEV, and other variants, introduce substantially higher wheel-end stresses that require maintenance and inspection protocols beyond conventional practices for several reasons.
 
 ---
 
@@ -2339,7 +2339,7 @@ June 25, 2026 Page 98
 
 Grade Performance & Powertrain Differences Between Diesel and Electric Trucks:
 - On moderate grades (3% to 4%), BEVs and FCEVs can climb at twice the speed or more than an ICE truck. We do not encourage this behavior, but when it occurs, it causes additional wear.
-- Most BEVs have just two gears. For example, Volvos shift from $1^{\text{st}}$ to $2^{\text{nd}}$ at around 20 mph, making their driveline performance markedly different from that of any diesel transmission.
+- Most BEVs have just two gears. For example, Volvos shift from 1st to 2nd at around 20 mph, making their driveline performance markedly different from that of any diesel transmission.
 
 BEV Duty Cycle Realities:
 - BEVs are not yet a regional or long-haul replacement. They are primarily used in drayage and short-haul operations (100 to 250 miles), where constant stop-and-go driving is the norm.
@@ -2795,7 +2795,7 @@ In May 2024, at the FirstElement Hydrogen Fueling station in West Oakland, the C
 
 Hydrogen fueling stations comprise interconnected subsystems that work together to ensure safe and efficient operation. These include bulk storage, multi-stage compression or cryo-pumping, high-pressure buffer storage, precooling trains, dispensers, and the safety-instrumented and supervisory control systems that manage and monitor the entire facility.
 
-Each subsystem requires a specific PM strategy supported by measurable indicators. For example, valve-train inspection intervals should be tracked by both hours of operation and cycle counts. The performance of dryers or cold boxes should be monitored using dew point measurements or temperature changes ($\Delta$T). Buffer-bank relief verification must be documented with both the setpoint and the verification date. Dispenser flowmeters and pressure transducers require calibration against traceable standards. At the same time, safety-instrumented systems (SIS) must undergo proof tests, with results mapped to a cause-and-effect table and recorded as clear pass or fail outcomes.
+Each subsystem requires a specific PM strategy supported by measurable indicators. For example, valve-train inspection intervals should be tracked by both hours of operation and cycle counts. The performance of dryers or cold boxes should be monitored using dew point measurements or temperature changes (ΔT). Buffer-bank relief verification must be documented with both the setpoint and the verification date. Dispenser flowmeters and pressure transducers require calibration against traceable standards. At the same time, safety-instrumented systems (SIS) must undergo proof tests, with results mapped to a cause-and-effect table and recorded as clear pass or fail outcomes.
 
 Maintenance logs must be kept for everything and organized with audit-resilient rigor. This ensures transparency and accountability, allowing maintenance teams and executives to monitor station health in real time. Maintenance effectiveness relies on visibility into these metrics; issues cannot be addressed if they are not visible or tracked.
 
@@ -2815,7 +2815,7 @@ High-performance hydrogen trucks requiring on-board storage at 70 MPa (10,150 ps
 > Type: Schematic / System diagram
 > Axes: None
 > Series: Scenario 1: Gaseous Station, Scenario 2: Liquid Station
-> Values: Accumulator: 3, Chiller, HX (Heat Exchanger), Dispenser (Limits the Rated Flowrate, Onboard tank (700 bar)), Mid Pressure Buffer Storage (Maintained at 500 bar), Booster Compressor (Compressed to 900 bar), Compressor (Compressed to 530 bar), Evaporator, High Pressure Cryogenic Pump (Pressurized to 530 bar), Cryogenic Storage Tank ($LH_2$), Reformer/Electrolyzer $H_2$ Production Unit (20 bar), Hydrogen Supply Source (Pipeline (20 bar))
+> Values: Accumulator: 3, Chiller, HX (Heat Exchanger), Dispenser (Limits the Rated Flowrate, Onboard tank (700 bar)), Mid Pressure Buffer Storage (Maintained at 500 bar), Booster Compressor (Compressed to 900 bar), Compressor (Compressed to 530 bar), Evaporator, High Pressure Cryogenic Pump (Pressurized to 530 bar), Cryogenic Storage Tank (LH2), Reformer/Electrolyzer H2 Production Unit (20 bar), Hydrogen Supply Source (Pipeline (20 bar))
 > Notes: Diagram showing flow paths, storage, compression, and dispensing for H70 stations under Gaseous and Liquid scenarios.
 
 Hydrogen dispensing requires precise control of gas flow, pressure regulation, and storage management to deliver fuel safely at the correct pressure and temperature. As shown in Figure 85, the control screen demonstrates how multiple pressure stages integrate, from onboard tank dispensing limits through mid-pressure reformer/electrolyzer hydrogen production, buffer storage at 500 bar, and cryogenic liquid hydrogen storage maintained at precise pressures, all coordinated by a centralized control system that manages compressor activation, pressure relief, and dispenser sequencing. This control architecture ensures vehicles receive hydrogen at rated specifications while protecting equipment from overpressure and thermal cycling damage.
@@ -2859,7 +2859,7 @@ Safety culture is reinforced by robust visual communication systems that promote
 > Axes: Issue vs Requirement Description vs What to Look For vs Code/Standard
 > Series: Ventilation rate and operation, Gas detection system, Electrolyzers, Insulation
 > Values: 
-> - Issue: Ventilation rate and operation | Requirement Description: Establishes minimum continuous and uniform air movement of 1 cubic foot per minute per 12 cubic feet [0.00138 $m^3/(s \cdot m^3)$] of room volume as the baseline level of performance. Operational provisions for such ventilation systems need to be interlocked with a continuously monitoring, flammable gas detection system. | What to Look For: Confirm supply inlets are uniformly arranged in exterior walls near the floor. Exhaust outlets shall be uniformly arranged in exterior walls at the high point of the space. Additionally, NFPA requires inlet and outlet openings to be 1 $ft^3$/1,000 $ft^3$ (1 $m^3$/305 $m^3$) of room volume. Verify that the detection system is installed, operational, and activates when the level of flammable gas exceeds 25% of the lower flammability limit. | Code/Standard: IFC – §2311.7, IFGC – §706.3.2, IMC – §502.16, NFPA 2 – §6.17.1, §6.18.2, NFPA 2 – §6.19
+> - Issue: Ventilation rate and operation | Requirement Description: Establishes minimum continuous and uniform air movement of 1 cubic foot per minute per 12 cubic feet [0.00138 m³/(s · m³)] of room volume as the baseline level of performance. Operational provisions for such ventilation systems need to be interlocked with a continuously monitoring, flammable gas detection system. | What to Look For: Confirm supply inlets are uniformly arranged in exterior walls near the floor. Exhaust outlets shall be uniformly arranged in exterior walls at the high point of the space. Additionally, NFPA requires inlet and outlet openings to be 1 ft³/1,000 ft³ (1 m³/305 m³) of room volume. Verify that the detection system is installed, operational, and activates when the level of flammable gas exceeds 25% of the lower flammability limit. | Code/Standard: IFC – §2311.7, IFGC – §706.3.2, IMC – §502.16, NFPA 2 – §6.17.1, §6.18.2, NFPA 2 – §6.19
 > - Issue: Gas detection system | Requirement Description: Requires indoor installations to be provided with an approved flammable gas detection system. NOTE: Indoor rooms exclusively housing a gaseous hydrogen system are constructed to requirements for a “Hydrogen cut-off room” in ICC or a “Special room” in NFPA. (Other rules apply.) | What to Look For: The flammable gas detection system shall be of an approved type. Confirm or field test detectors such that they are set to alarm at 1% hydrogen (25% lower flammable limit [LFL]) and to shut down at 2% hydrogen concentration. | Code/Standard: CGA G-5.4 – §4.3.6, IFC – §2311.7, IFGC – §706.3.2, IMC – §502.16, NFPA 2 – §10.3.3.2.2.7
 > - Issue: Electrolyzers | Requirement Description: Covers siting, design, ventilation, sensor use, and other issues associated with the use of electrolyzers. | What to Look For: Gives requirements for siting of electrolyzers, system connections, fire protection, piping design, and the use of listed or approved equipment. | Code/Standard: Chapter 13 of NFPA 2
 > - Issue: Insulation | Requirement Description: Covers the design of piping systems and equipment to minimize the exposure of piping, surfaces, and supports operating at cryogenic temperatures. | What to Look For: Inspect insulation levels and potential personnel exposure points. Insulation shall be noncombustible, vapor-tight and suitable for exposure to the environment. | Code/Standard: CGA G-5.4 – §6.2.2, §6.3, CGA G-5.5 – §6.11
@@ -2889,7 +2889,7 @@ Safety culture in hydrogen maintenance facilities depends on clear visual commun
 > - Alarm Conditions: System, intake fan or exhaust fan in "OFF": 1. RED panel light, RED flashing remote light & siren | Turn system, intake fan and exhaust fan to "ON"
 > - Curtain is Open: 1. Solid RED remote panel light | Close curtain
 > - Curtain is Open for > 3 min: 1. Flashing RED remote light & siren | Close curtain
-> - 10% LEL Hydrogen reached: 1. Fan speed increases to 2,000+ cfm, 2. LEL alarm #1 - YELLOW light & buzzer on beacon $H_2$ sensor | Warning Only. Upon exit do not re-enter until yellow light turns off.
+> - 10% LEL Hydrogen reached: 1. Fan speed increases to 2,000+ cfm, 2. LEL alarm #1 - YELLOW light & buzzer on beacon H2 sensor | Warning Only. Upon exit do not re-enter until yellow light turns off.
 > - 25% LEL Hydrogen reached: 1. Alarm horn, 2. RED flashing light & siren | Stop work; evacuate hydrogen safety bay and surrounding area. Do no re-enter until alarms are silenced and YELLOW light turns off.
 > - LEL System Failure (Hydrogen Detection System Failure): 1. Alarm bell, 2. AMBER light top of panel, 3. Remote solid RED light, 4. Fans active at 2,000+ cfm | Stop work and cease use of hydrogen service bay until repairs can be made.
 > - Hydrogen Service Bay Indicator Status: Red (OFF, NOT SAFE FOR HYDROGEN REPAIR, TURN MASTER SWITCH ON CLOSE CURTAINS), Red-Flashing (ON, NOT SAFE FOR HYDROGEN REPAIR, CLOSE CURTAINS), Green (OFF, SAFE FOR HYDROGEN REPAIR, IN CASE OF HYDROGEN RELEASE ACTIVATE FIRE PULL)
@@ -2966,7 +2966,7 @@ June 25, 2026 Page 123
 
 Messy Middle Powertrain Service & Maintenance
 
-The 125% continuous load derating requirement applies to all conductors and overcurrent protective devices supplying EVSE loads. For a fleet depot with ten 150 kW DC fast chargers: base load equals 1,500 kW, continuous derating requires 1,500 kW $\times$ 1.25 = 1,875 kW equivalent service requirement, and transformer capacity needed is 2,000-2,250 kVA, allowing 6% to 7% growth margin [266] [267]. This requirement is frequently overlooked during initial electrical design, resulting in undersized service-entrance capacity that precludes future expansion without an expensive transformer replacement.
+The 125% continuous load derating requirement applies to all conductors and overcurrent protective devices supplying EVSE loads. For a fleet depot with ten 150 kW DC fast chargers: base load equals 1,500 kW, continuous derating requires 1,500 kW × 1.25 = 1,875 kW equivalent service requirement, and transformer capacity needed is 2,000-2,250 kVA, allowing 6% to 7% growth margin [266] [267]. This requirement is frequently overlooked during initial electrical design, resulting in undersized service-entrance capacity that precludes future expansion without an expensive transformer replacement.
 
 Physical protection from vehicle impact prevents 15% to 20% of charger downtime events. Bollards positioned 4' to 6' from EVSE enclosures must withstand 10,000-lb. impact forces per ASTM F3016 crash testing standards. Site lighting requires a minimum of 10 footcandles of horizontal illumination at 3' above grade, with a uniformity ratio not exceeding 4:1 for safety and operational visibility [261].
 
@@ -2980,7 +2980,7 @@ Mechanical, electrical, plumbing (MEP) design fees typically range from 8% to 12
 > - Overall construction fee | 100% | $1,000,000
 > - MEP portion | 25% of the total cost | $250,000
 > - MEP design fee | 4% of MEP portion | $10,000
-> Notes: In other words, MEP design fee is about 1% of overall construction cost ($1,000,000 $\times$ 1% = $10,000).
+> Notes: In other words, MEP design fee is about 1% of overall construction cost ($1,000,000 × 1% = $10,000).
 
 June 25, 2026 Page 124
 
@@ -3080,7 +3080,7 @@ Fleet procurement strategy must balance current market vehicle availability, wei
 
 Level 2 AC chargers and DC fast chargers operate under fundamentally different duty cycles, thermal loads, and maintenance requirements, requiring distinct operational protocols and spare management strategies. The performance gap reflects architectural complexity. Level 2 units deliver fixed power via rectified grid current with minimal active thermal management, whereas DCFC systems employ liquid cooling, active isolation monitoring, multiple power-conversion stages, and complex firmware that manages kW-to-MW power transitions.
 
-Electrical safety testing anchors the annual protocol for all charger types, with ground continuity not exceeding 0.1 $\Omega$ for Class I equipment and insulation resistance testing requiring a minimum of 1 M$\Omega$ between conductors and ground. Component replacement schedules are tied directly to observed wear rather than arbitrary time intervals. Connector assemblies with contact scoring, housing cracks, or latch mechanism failures require
+Electrical safety testing anchors the annual protocol for all charger types, with ground continuity not exceeding 0.1 Ω for Class I equipment and insulation resistance testing requiring a minimum of 1 MΩ between conductors and ground. Component replacement schedules are tied directly to observed wear rather than arbitrary time intervals. Connector assemblies with contact scoring, housing cracks, or latch mechanism failures require
 
 June 25, 2026 Page 128
 
@@ -3094,9 +3094,9 @@ immediate replacement. High-utilization depot installations typically cycle conn
 
 Uptime percentage, measured as the fraction of time chargers remain operational and available, establishes compliance reporting benchmarks, with mean time between failures (MTBF) for DCFC installations typically ranging from 2,000 to 4,000 hours under commercial fleet conditions. Equipment refresh cycles normally span 10 to 15 years for commercial EVSE installations, after which obsolescence or technological advancement justifies replacement.
 
-Insulation resistance testing allows technicians to verify conductor insulation integrity, with a minimum acceptable value of 1 M$\Omega$ for new installations. Continuity testing allows technicians to confirm the integrity of the grounding conductor in accordance with NEC Article 250. Ground-fault protection testing injects controlled fault current to verify GFCI or EGFP devices trip within specified thresholds. Load testing applies actual charging loads to verify voltage regulation under maximum demand conditions [272].
+Insulation resistance testing allows technicians to verify conductor insulation integrity, with a minimum acceptable value of 1 MΩ for new installations. Continuity testing allows technicians to confirm the integrity of the grounding conductor in accordance with NEC Article 250. Ground-fault protection testing injects controlled fault current to verify GFCI or EGFP devices trip within specified thresholds. Load testing applies actual charging loads to verify voltage regulation under maximum demand conditions [272].
 
-Network connectivity testing allows technicians to verify that primary and backup transport paths achieve the required signal strength (RSSI $\ge$ -85 dBm), latency (< 100 ms), and throughput. OCPP handshaking tests confirm that EVSE successfully initiates a connection to the broker and maintains a persistent connection. Session authorization testing help technicians validate RFID card or mobile app credentials to successfully authorize charging sessions, with transaction latency below 2 seconds.
+Network connectivity testing allows technicians to verify that primary and backup transport paths achieve the required signal strength (RSSI ≥ -85 dBm), latency (< 100 ms), and throughput. OCPP handshaking tests confirm that EVSE successfully initiates a connection to the broker and maintains a persistent connection. Session authorization testing help technicians validate RFID card or mobile app credentials to successfully authorize charging sessions, with transaction latency below 2 seconds.
 
 Weekly visual inspections form the foundation of effective station management, catching noticeable connector wear, cable damage, and environmental hazards before they escalate to failures (AMPPAL). These rapid walkthroughs verify that cables remain properly stowed; contact pins show no carbon tracking or corrosion, and user-facing components — including payment terminals and display screens — function correctly.
 
@@ -3175,7 +3175,7 @@ Messy Middle Powertrain Service & Maintenance
 
 Condition-based maintenance (CBM) shifts maintenance timing from fixed intervals to evidence-based interventions triggered by system conditions. ISO 14224 defines CBM as maintenance performed according to condition as monitored by sensors or external measurement [274]. NASA and DoD Instruction 4151.22, 2012 frameworks embed CBM within Reliability-Centered Maintenance, using integrated sensors and fault-code recording [275].
 
-Figure 99 illustrates the CBM sensor integration architecture: NOx sensors (upstream/downstream of SCR) $\rightarrow$ turbocharger speed/temperature/pressure sensors $\rightarrow$ aftertreatment outlet temperature sensors $\rightarrow$ diagnostic algorithms $\rightarrow$ maintenance decision logic. Advanced ICE platforms require integrating multiple sensors to monitor combustion efficiency, turbocharger health, and aftertreatment performance. These sensor streams provide real-time health indices that trigger maintenance actions before failure.
+Figure 99 illustrates the CBM sensor integration architecture: NOx sensors (upstream/downstream of SCR) → turbocharger speed/temperature/pressure sensors → aftertreatment outlet temperature sensors → diagnostic algorithms → maintenance decision logic. Advanced ICE platforms require integrating multiple sensors to monitor combustion efficiency, turbocharger health, and aftertreatment performance. These sensor streams provide real-time health indices that trigger maintenance actions before failure.
 
 June 25, 2026 Page 132
 
@@ -3194,7 +3194,7 @@ Messy Middle Powertrain Service & Maintenance
 
 Advanced ICE platforms require integrating multiple sensors to monitor combustion efficiency, turbocharger health, and aftertreatment performance. NOx sensors upstream and downstream of SCR catalysts directly measure engine-out emissions and catalyst performance, supporting optimized urea dosing and regulatory compliance [276]. Turbocharger systems use embedded temperature, pressure, and speed sensors to calculate airflow and pressure ratios, enabling real-time health monitoring and optimized overhaul scheduling.
 
-In BEVs, CBM applications include monitoring cell-voltage imbalance (10 to 15 mV threshold), pack insulation-resistance degradation, and inverter temperature thresholds that trigger shop actions before outright failure. Robust fleet monitoring systems — most notably Tesla's remote diagnostics platform — track battery state of health across thousands of vehicles. Figure 100 presents the battery state of health (SOH) evaluation framework: data collection (vehicle mileage, drive cycles, ambient temperature) $\rightarrow$ data cleansing and outlier removal $\rightarrow$ ampere-hour integration (Ah counting) $\rightarrow$ open-circuit voltage correction $\rightarrow$ cubic spline fitting of capacity decay curve $\rightarrow$ SOH label generation. Nature's multimodal framework demonstrates that this integration enables accurate SOH prediction across diverse driving conditions and user behaviors.
+In BEVs, CBM applications include monitoring cell-voltage imbalance (10 to 15 mV threshold), pack insulation-resistance degradation, and inverter temperature thresholds that trigger shop actions before outright failure. Robust fleet monitoring systems — most notably Tesla's remote diagnostics platform — track battery state of health across thousands of vehicles. Figure 100 presents the battery state of health (SOH) evaluation framework: data collection (vehicle mileage, drive cycles, ambient temperature) → data cleansing and outlier removal → ampere-hour integration (Ah counting) → open-circuit voltage correction → cubic spline fitting of capacity decay curve → SOH label generation. Nature's multimodal framework demonstrates that this integration enables accurate SOH prediction across diverse driving conditions and user behaviors.
 
 June 25, 2026 Page 133
 
@@ -3288,11 +3288,11 @@ June 25, 2026 Page 137
 
 Messy Middle Powertrain Service & Maintenance
 
-> **Figure 104 — Typical J1939 backbone and stub architecture with 120 $\Omega$ termination [423]**
+> **Figure 104 — Typical J1939 backbone and stub architecture with 120 Ω termination [423]**
 > Type: Network architecture diagram
 > Axes: None
 > Series: Transmission Control Module, ABS Control Module, Electronic Gauge Cluster, Secondary Instrument Cluster, Aftertreatment Control Module, Engine Control Module, Body Controller, Electronic Shifter, Telematics Device
-> Values: Terminator 120 $\Omega$ at both ends, Backbone bus, Stub branches connecting ECUs, CAN_H, CAN_L.
+> Values: Terminator 120 Ω at both ends, Backbone bus, Stub branches connecting ECUs, CAN_H, CAN_L.
 > Notes: Diagram illustrating J1939 bus topology with terminators and stubs.
 
 The ISO 11898 CAN standard and SAE J1939 establish universal communication protocols, ensuring interoperability across OEM fleets. Updates such as SAE J1939-22 CAN FD support high-bandwidth data exchange, whereas SAE J1939-91C mandates secure messaging to mitigate cyber threats. Industry innovations such as New Eagle’s Raptor Platform integrate legacy CAN 2.0 with CAN FD, bridging older truck architectures with next-gen systems [284]. For fleets, this means that diagnostic reliability, predictive maintenance, and secure OTA updates all depend on CAN integrity. For more on CAN, see Appendix C.
@@ -4288,7 +4288,7 @@ Messy Middle Powertrain Service & Maintenance
 
 248. OutSpection. CNG System Inspection and Certification. https://outspection.com/cng-inspections/
 249. GDS Corp. LEL Gas Monitor. https://www.gdscorp.com/lel-gas-monitor/
-250. U.S. Department of Energy. Increase Your $H_2IQ$. The #H2IQ Hour. https://www.energy.gov/sites/default/files/2024-04/h2iqhour-03262024.pdf
+250. U.S. Department of Energy. Increase Your H2IQ. The #H2IQ Hour. https://www.energy.gov/sites/default/files/2024-04/h2iqhour-03262024.pdf
 251. Hydrogen Fuel Cell Partnership. Port of Oakland. May 2, 2024. https://h2fcp.org/hydrogen-trucks/port-of-oakland
 252. Hydrogen Tools. Best Practices. https://h2tools.org/bestpractices/best-practices-overview
 253. NFPA. NFPA 2: Hydrogen Technologies Code. https://www.nfpa.org/codes-and-standards/nfpa-2-standard-development/2
@@ -4546,7 +4546,7 @@ Messy Middle Powertrain Service & Maintenance
 406. UCR website. Vehicle Testing Laboratories. https://www.cert.ucr.edu/vehicle-testing-labs#heavy-duty-chassis-dynamometer
 407. Kenworth. T680E Operators Manual. https://www.kenworth.com/media/1wpfm4oz/y53-1334-1d1.pdf
 408. Prior Power website. https://priorpower.com/hydrogen/
-409. Kheirkhah, et al., On-Road $CO_2$ and $NO_x$ Emissions for a Heavy-Duty Truck with Hydrogen-Diesel Co-Combustion, SAE Technical Paper 2023-01-0281, 2023, https://doi.org/10.4271/2023-01-0281.
+409. Kheirkhah, et al., On-Road CO2 and NOx Emissions for a Heavy-Duty Truck with Hydrogen-Diesel Co-Combustion, SAE Technical Paper 2023-01-0281, 2023, https://doi.org/10.4271/2023-01-0281.
 
 June 25, 2026
 NACFE
@@ -4751,17 +4751,17 @@ Notes: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\
 
 ### 4) DOC Light-Off Sanity
 
-Warm idle $\rightarrow$ light load step test performed
-Inlet °C: \_\_\_\_\_\_ Outlet °C: \_\_\_\_\_\_ $\Delta$T: \_\_\_\_\_\_ [ ] Pass [ ] Fail
+Warm idle → light load step test performed
+Inlet °C: \_\_\_\_\_\_ Outlet °C: \_\_\_\_\_\_ ΔT: \_\_\_\_\_\_ [ ] Pass [ ] Fail
 
-DOC $\Delta$P at \_\_\_\_\_\_ rpm / \_\_\_\_\_\_ load: \_\_\_\_\_\_ kPa [ ] Normal [ ] High
+DOC ΔP at \_\_\_\_\_\_ rpm / \_\_\_\_\_\_ load: \_\_\_\_\_\_ kPa [ ] Normal [ ] High
 Notes: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
 ### 5) DPF Reality Check
 
 ECU estimated soot: \_\_\_\_\_\_ g/L ash: \_\_\_\_\_\_ g/L
 
-$\Delta$P @ \_\_\_\_\_\_ rpm / \_\_\_\_\_\_ load: \_\_\_\_\_\_ kPa (hose/sensor integrity verified)
+ΔP @ \_\_\_\_\_\_ rpm / \_\_\_\_\_\_ load: \_\_\_\_\_\_ kPa (hose/sensor integrity verified)
 
 June 25, 2026
 NACFE
@@ -4792,7 +4792,7 @@ Notes: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\
 
 VGT commanded \_\_\_\_\;% / actual \_\_\_\_\;% (sweep test) [ ] Pass [ ] Fail
 
-CAC pressure test: start \_\_\_\_\_\_ psi $\rightarrow$ \_\_\_\_\_\_ psi / \_\_\_\_\_\_ min [ ] Pass [ ] Leak
+CAC pressure test: start \_\_\_\_\_\_ psi → \_\_\_\_\_\_ psi / \_\_\_\_\_\_ min [ ] Pass [ ] Leak
 
 Boost commanded \_\_\_\_\_\_ kPa / actual \_\_\_\_\_\_ kPa @ \_\_\_\_\_\_ rpm/load
 
@@ -4820,7 +4820,7 @@ Notes: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\
 
 Hot pressure test: \_\_\_\_\_\_ psi / \_\_\_\_\_\_ min [ ] Pass [ ] Leak
 
-EGR cooler integrity (block test / $\Delta$T): \_\_\_\_\_\_ [ ] Pass [ ] Fail
+EGR cooler integrity (block test / ΔT): \_\_\_\_\_\_ [ ] Pass [ ] Fail
 
 Fan clutch commanded \_\_\_\_\;% / observed \_\_\_\_\;% @ \_\_\_\_\_\_ °F/°C ambient
 Notes: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
@@ -4841,7 +4841,7 @@ Faults cleared / learned values reset [ ] Yes [ ] N/A
 
 Post-repair drive w/ live log uploaded (portal case ID: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_)
 
-Post-checks: NOx up/down, $\Delta$P, temps, dose %, boost/EGR tracks [ ] OK
+Post-checks: NOx up/down, ΔP, temps, dose %, boost/EGR tracks [ ] OK
 Exceptions: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
 ### 12) Evidence Package (attach to RO)
@@ -4885,11 +4885,11 @@ Modern heavy-duty trucks use multiple Controller Area Network (CAN) data links t
 
 ## Quick Start Workflow
 
-To access the network, connect an RP1210 adapter, such as the Nexiq USB Link, to the 9-pin Deutsch DLC and to your PC. Launch your sniffer or diagnostic software (Device Manager, DAVIE4, Tech Tool), then select the correct protocol/channel. Channel 1 typically carries J1939 traffic (e.g., SA 0 = Engine, SA 3 = Transmission, SA 11 = ABS), while Channel 2 often hosts J1708/J1587 MIDs such as MID 130 (Transmission) or MID 136 (Brakes) [364] [365]. If no traffic appears, confirm power/grounds and check for ~60 $\Omega$ across CAN-H/L, which indicates proper termination [366].
+To access the network, connect an RP1210 adapter, such as the Nexiq USB Link, to the 9-pin Deutsch DLC and to your PC. Launch your sniffer or diagnostic software (Device Manager, DAVIE4, Tech Tool), then select the correct protocol/channel. Channel 1 typically carries J1939 traffic (e.g., SA 0 = Engine, SA 3 = Transmission, SA 11 = ABS), while Channel 2 often hosts J1708/J1587 MIDs such as MID 130 (Transmission) or MID 136 (Brakes) [364] [365]. If no traffic appears, confirm power/grounds and check for ~60 Ω across CAN-H/L, which indicates proper termination [366].
 
 ## OEM-Specific Practices
 
-**PACCAR MX (2016–2021):** Some builds route critical signals on CAN Channel 3. In these cases, the VIN reads, but the diagnostic menus in DAVIE4 remain greyed out. The solution is a CAN3$\rightarrow$CAN1 crossover adapter that routes scan tool traffic [367] [368].
+**PACCAR MX (2016–2021):** Some builds route critical signals on CAN Channel 3. In these cases, the VIN reads, but the diagnostic menus in DAVIE4 remain greyed out. The solution is a CAN3→CAN1 crossover adapter that routes scan tool traffic [367] [368].
 
 **Volvo VNL/VNR (including BEV):** Uses multiple links — DL1 for J1939 backbone, DL2 for SAE J2284 high-speed diagnostics at 500 kbps, and DL4 for legacy J1587. ECU programming in Premium Tech Tool requires a connection to DL2; failure to do so results in session errors [369].
 
@@ -4901,12 +4901,12 @@ Most fleet shops standardize on Nexiq RP1210 adapters, with eTechnician software
 
 ## Shop-Floor Checklist
 
-* Verify DLC power/grounds and ~60 $\Omega$ baseline.
+* Verify DLC power/grounds and ~60 Ω baseline.
 * Sniff frames to confirm active link and baud.
 * Toggle 250 vs. 500 kbps if no traffic.
 * Select the correct backbone (e.g., Volvo DL2 for programming).
 * Match adapter session to channel; use RP1210 compliance.
-* For PACCAR MY2016–2021, add CAN3$\rightarrow$CAN1 if VIN reads but tests are greyed.
+* For PACCAR MY2016–2021, add CAN3→CAN1 if VIN reads but tests are greyed.
 * Record network settings in the RO to streamline repeat work.
 
 June 25, 2026

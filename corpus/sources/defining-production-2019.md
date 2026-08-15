@@ -268,7 +268,7 @@ The Code of Federal Regulations (CFR) describes that:
 
 “(a) Every bus, truck, and truck tractor shall be equipped with two rear-vision mirrors, one at each side, firmly attached to the outside of the motor vehicle, and so located as to reflect to the driver a view of the highway to the rear, along both sides of the vehicle. All such regulated rear-vision mirrors and their replacements shall meet, as a minimum, the requirements of FMVSS No. 111 (49 CFR 571.111) in force at the time the vehicle was manufactured [13].”
 
-Where tractors and trucks require each flat mirror to be “not less than 323 $cm^2$ of reflective surface, installed with stable supports on both sides of the vehicle [14].”
+Where tractors and trucks require each flat mirror to be “not less than 323 cm² of reflective surface, installed with stable supports on both sides of the vehicle [14].”
 
 Over time, the cab-mounted mirrors grew in size to provide greater visibility than required by the CFR through market demands for improved visibility. More recent focus on improving aerodynamics has seen some cab mirrors decreasing back to the minimum required size, again, due again to market demands. The “firmly attached” provision of the CFR is satisfied through accelerated life testing using cab shake tests, cabs mounted on automated shaker tables and run through a lifetime worth of cycles in a relatively short calendar time. The “firmly attached” implies also that the mirror view is stable — mirrors poorly mounted can blur while driving from vibration and weather conditions. This human factor is validated in track tests and then road tests in a variety of conditions.
 
@@ -818,7 +818,7 @@ All website links were last accessed in March-December 2019.
 61. Reiskin, J., “Navistar Unveils International LT to Replace ProStar,” Transport Topics (TT), Oct 1, 2016, https://www.ttnews.com/articles/navistar-unveils-international-lt-replace-prostar
 62. “The PDMA Glossary for New Product Development,” Product Development and Management Association (PDMA) website, https://www.pdma.org/page/glossary_access1#C
 63. Lewis, J., “A Comprehensive Guide to Project Planning, Scheduling, Evaluation and Control Systems,” McGraw-Hill, 1995, ISBN 1-55738-462-4
-64. Stevenson, W., “Production/Operations Management,” Irwin Professional Publishing, 1998, $6^{th}$ Edition, ISBN-10 0073661120, ISBN-13 978-0073661124 also under McGraw-Hill, 1999, ISBN-13: 978-0072476569 ISBN-10: 0072476567
+64. Stevenson, W., “Production/Operations Management,” Irwin Professional Publishing, 1998, 6th Edition, ISBN-10 0073661120, ISBN-13 978-0073661124 also under McGraw-Hill, 1999, ISBN-13: 978-0072476569 ISBN-10: 0072476567
 65. Microsoft Project website, https://products.office.com/en-us/project/project-and-portfolio-management-software
 66. White, J., Sholtes, M., “Going beyond CPM,” Project Management Institute (PMI), conference paper, Oct 22, 2011,
 67. Stage-Gate website, https://www.stage-gate.com/

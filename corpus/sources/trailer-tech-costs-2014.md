@@ -170,7 +170,7 @@ Table 2: Estimates of fuel savings and payback times for trailer side skirts usi
 | **Fuel savings** | 3% | 7% | 3% | 7% |
 | **Fuel savings** | 162 gallons | 377 gallons | 162 gallons | 377 gallons |
 | **Fuel cost savings** | $606 | $1,413 | $606 | $1,413 |
-| **Technology capital cost** | \multicolumn{2}{c}{$1,100} | \multicolumn{2}{c}{$700} |
+| **Technology capital cost** | \multicolumn{2}{c}{1,100 | μlticolumn2c700} |
 | **Payback time** | 22 months | 9 months | 14 months | 6 months |
 
 Though there were certainly a variety of attitudes about the experiences with side skirts, it was clear from the interviews that California's regulation has prompted wide-ranging sales, which is further driving down capital costs, which, in turn, is motivating more adoption. Fleets generally cited payback times between 6 months and 2 years, which accords with the estimates in Table 2. Another interesting finding is that fleets claimed that the uptake of technologies is faster for refrigerated trailers because their annual miles are greater than for dry box trailers, and, hence, payback times for fuel-saving technologies are shorter. From all of the stakeholders, there was a sentiment that side skirts are a technology that is generally working well for the majority of fleets, and the expectation is that adoption will continue to expand.
@@ -199,7 +199,7 @@ Table 3: Estimates of fuel savings and payback times for trailer underbody devic
 | **Fuel savings** | 2% | 5% | 2% | 5% |
 | **Fuel savings** | 108 gallons | 269 gallons | 108 gallons | 269 gallons |
 | **Fuel cost savings** | $404 | $1,010 | $404 | $1,010 |
-| **Technology capital cost** | \multicolumn{2}{c}{$2,200} | \multicolumn{2}{c}{$1,500} |
+| **Technology capital cost** | \multicolumn{2}{c}{2,200 | μlticolumn2c1,500} |
 | **Payback time** | 65 months | 26 months | 45 months | 18 months |
 
 ### 3.1.3 Boat tails
@@ -226,7 +226,7 @@ Table 4: Estimates of fuel savings and payback times for trailer boat tails usin
 | **Fuel savings** | 3% | 5% | 3% | 5% |
 | **Fuel savings** | 162 gallons | 269 gallons | 162 gallons | 269 gallons |
 | **Fuel cost savings** | $606 | $1,010 | $606 | $1,010 |
-| **Technology capital cost** | \multicolumn{2}{c}{$1,600} | \multicolumn{2}{c}{$1,000} |
+| **Technology capital cost** | \multicolumn{2}{c}{1,600 | μlticolumn2c1,000} |
 | **Payback time** | 32 months | 19 months | 20 months | 12 months |
 
 <!-- page: 16 -->
@@ -249,12 +249,12 @@ Table 5: Estimates of fuel savings and payback times for trailer gap reducers us
 | **Fuel savings** | 1% | 2% | 1% | 2% |
 | **Fuel savings** | 54 gallons | 108 gallons | 54 gallons | 108 gallons |
 | **Fuel cost savings** | $202 | $404 | $202 | $404 |
-| **Technology capital cost** | \multicolumn{2}{c}{$1,000} | \multicolumn{2}{c}{$700} |
+| **Technology capital cost** | \multicolumn{2}{c}{1,000 | μlticolumn2c700} |
 | **Payback time** | 59 months | 30 months | 42 months | 21 months |
 
 ## 3.2 ROLLING RESISTANCE TECHNOLOGIES
 
-The energy losses in tires occur both in the tread and in the sidewalls. Both the tread area and the sidewalls can be designed to absorb less energy, thereby reducing the coefficient of rolling resistance ($C_{RR}$). This may include choice of elastomers, arrangement of belts and reinforcement, and tread design. As a result, there are low rolling resistance (LRR) tires in the marketplace that can be used for tractor steer and drive tires as well as in trailer applications. Further reductions in tire rolling resistance may be gained by using wide base single (WBS) tires. A WBS tire can carry high load and be substituted for a dual tire set. Reduction in drag occurs because there are only two sidewalls to flex rather than four,
+The energy losses in tires occur both in the tread and in the sidewalls. Both the tread area and the sidewalls can be designed to absorb less energy, thereby reducing the coefficient of rolling resistance (CRR). This may include choice of elastomers, arrangement of belts and reinforcement, and tread design. As a result, there are low rolling resistance (LRR) tires in the marketplace that can be used for tractor steer and drive tires as well as in trailer applications. Further reductions in tire rolling resistance may be gained by using wide base single (WBS) tires. A WBS tire can carry high load and be substituted for a dual tire set. Reduction in drag occurs because there are only two sidewalls to flex rather than four,
 
 <!-- page: 17 -->
 12

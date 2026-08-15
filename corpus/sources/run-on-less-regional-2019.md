@@ -96,7 +96,7 @@ REGIONAL HAUL DUTY CYCLE DEFINITIONS
 <!-- page: 11 -->
 ## RESULTS
 
-In total, the 10 trucks traveled more than 58,000 miles during the 18-day event, recording 237 deliveries while achieving a cumulative 8.3 MPG (103 ton-miles/gallon), a 38% improvement over the average Class 8 regional haul operation, estimated by NACFE to be 6.0 MPG. (see Figure ES2.) If all regional haul fleets were to operate at this fuel efficiency, the industry would save more than $9 billion in fuel and 30.6 million tons of $CO_2$ over the course of a year.
+In total, the 10 trucks traveled more than 58,000 miles during the 18-day event, recording 237 deliveries while achieving a cumulative 8.3 MPG (103 ton-miles/gallon), a 38% improvement over the average Class 8 regional haul operation, estimated by NACFE to be 6.0 MPG. (see Figure ES2.) If all regional haul fleets were to operate at this fuel efficiency, the industry would save more than $9 billion in fuel and 30.6 million tons of CO2 over the course of a year.
 
 After the *Run on Less Regional* event, a group of people from various organizations analyzed the data for interesting conclusions which are presented in the full report. Two complementary reports contain findings from separate studies conducted over the past few months. The first is *Battery Electric Powertrains for Class 8 Regional Haul Freight Based on NACFE Run-On-Less*, which analyzes how electric trucks might be employed for these duty cycles. The second is a white paper written in conjunction with Ballard titled *Fuel Cell Electric Trucks: An analysis of hybrid vehicle specifications for regional freight transport*, which does the same for hydrogen fuel cell electric trucks.
 
@@ -588,7 +588,7 @@ Eight of the fleets in RoLR are EPA SmartWay certified fleets, a commitment to t
 > **Figure 13: Fuel savings at varying vehicle speeds (SAE)**
 > Type: Scatter plot
 > Axes: Speed (MPH) vs Fuel Savings (%)
-> Series: ECU-based, Gravimetric, Poly. (ECU-based) ($R^2 = 0.9264$), Poly. (Gravimetric) ($R^2 = 0.9308$)
+> Series: ECU-based, Gravimetric, Poly. (ECU-based) (R² = 0.9264), Poly. (Gravimetric) (R² = 0.9308)
 > Values: Speed 0: approx. 0%; Speed 35: approx. 4%; Speed 46: approx. 7%; Speed 55: approx. 9%; Speed 62: approx. 9%
 > Notes: Citation: "Fuel Savings from Aerodynamic Efficiency Improvements for Combination Tractor-Trailers Relative to Vehicle Speed," Waltzer et al, SAE 2016-01-8133
 
@@ -830,13 +830,13 @@ using the website's location feature. The timing of RoLR generally resulted in m
 
 Similarly, wind data also indicate that general conditions were moderate, though every truck experienced 10-minute intervals with significant average wind speeds (wind gust data was sporadic and is not included). Wind data is represented as relative wind to the direction of travel using vector addition as shown in the equation below (Ortega et al. 2013). [14]
 
-$$V_r = V_t \times \sqrt{1 + 2(V_w/V_t)\cos\varphi + (V_w/V_t)^2}$$
+Vr = Vt × sqrt(1 + 2(Vw/Vt)cosφ + (Vw/Vt)²)
 
 where
-$V_r$ = Relative wind speed
-$V_t$ = Truck speed
-$V_w$ = Wind speed
-$\varphi$ = difference between wind direction and truck bearing
+Vr = Relative wind speed
+Vt = Truck speed
+Vw = Wind speed
+φ = difference between wind direction and truck bearing
 
 Using the relative wind equation, wind was resolved into two components, in the direction of travel and across the direction of travel. The data indicate that nearly every vehicle experienced some periods with significant wind. Six trucks experienced at least one period with tailwinds in excess of 20 MPH and eight saw headwinds over 20 MPH. Eight also experienced at least one 10-minute interval with an average crosswind greater than 20 MPH with the J.B. Hunt truck even experiencing one interval with a 30 MPH average wind (Table 8).
 
@@ -959,13 +959,13 @@ While MPG is a typical metric, there are others such as freight-ton-efficiency (
 * Brake Specific Fuel Consumption (BSFC)
   * A measure of fuel used to produce a specific amount of power
 
-$$BSFC = \frac{r}{P}$$
+BSFC = (r/P)
 
 where
 $r$ = rate of fuel consumption in grams per second
 $P$ = power produced in watts
 
-usually expressed as either $g / (kW \cdot h)$ or $lb / (hp \cdot h)$
+usually expressed as either g / (kW · h) or lb / (hp · h)
 
 The RoLR review team highlighted a number of lessons learned from conducting the demonstration. The cooperation of NREL in equipping each vehicle with data loggers and providing collection and storage of the data was extremely valuable to the success of the event. This combined with the Geotab and LinkeDrive parallel systems gave data rich results with robust redundancy. Running practice data collection and integrating it into the NACFE RoLR website was largely successful and the website refreshed daily during the event giving everyone access to progress.
 
@@ -1015,14 +1015,14 @@ For the regression model, the predictors of MPG are the independent variables th
 | Condition | Crosswind | Negative |
 | Truck Spec | Flag for diesel vs CNG | Higher for diesel |
 
-When building a regression model, there are several indications as to whether a variable and the resulting model is valid. One indication is discussed above: the direction of the relationship should make sense. Another is the p-value. The p-value is the probability that the variable is irrelevant to the outcome. In other words, if the regression model shows that every 1 MPH change in wind speed increases MPG by 0.1 but the p-value is 0.5, this means that in the data, there is a 50% chance wind has no impact on MPG and that the relationship is a coincidence. Typically, a p-value of less than 0.05 is desired indicating that there is a 95% or greater probability that the variable does impact MPG. A further indication of the usefulness of a variable is the impact it has on R squared ($R^2$), known as the coefficient of determination. In simple terms, the $R^2$ of a regression model shows how much the independent variables explain changes in the dependent variable (MPG in our case). If the model shows that gross weight, wind speed, and elevation change (the independent variables) all have p-values of less than 0.05 and the regression model has an $R^2$ of 10%, it indicates that all of the independent variables are valid but their combined impact on MPG is relatively small compared to some other unknown variable (perhaps the driver as an example). Even if the whole model only explains a small portion of MPG, the coefficients are valid as long as the p-value for each coefficient is below the threshold. One more critical test for independent variables is that they are not significantly correlated with each other. In other words, if a change in the value of one independent variable is closely tied to a change in one of the other independent variables, the model will have difficulty discerning the impact from each variable. A test for correlation will be discussed later in this section.
+When building a regression model, there are several indications as to whether a variable and the resulting model is valid. One indication is discussed above: the direction of the relationship should make sense. Another is the p-value. The p-value is the probability that the variable is irrelevant to the outcome. In other words, if the regression model shows that every 1 MPH change in wind speed increases MPG by 0.1 but the p-value is 0.5, this means that in the data, there is a 50% chance wind has no impact on MPG and that the relationship is a coincidence. Typically, a p-value of less than 0.05 is desired indicating that there is a 95% or greater probability that the variable does impact MPG. A further indication of the usefulness of a variable is the impact it has on R squared (R²), known as the coefficient of determination. In simple terms, the R² of a regression model shows how much the independent variables explain changes in the dependent variable (MPG in our case). If the model shows that gross weight, wind speed, and elevation change (the independent variables) all have p-values of less than 0.05 and the regression model has an R² of 10%, it indicates that all of the independent variables are valid but their combined impact on MPG is relatively small compared to some other unknown variable (perhaps the driver as an example). Even if the whole model only explains a small portion of MPG, the coefficients are valid as long as the p-value for each coefficient is below the threshold. One more critical test for independent variables is that they are not significantly correlated with each other. In other words, if a change in the value of one independent variable is closely tied to a change in one of the other independent variables, the model will have difficulty discerning the impact from each variable. A test for correlation will be discussed later in this section.
 
-Finally, a model is easiest to understand and less likely to be influenced by the specific dataset used to develop it if it explains as much of the dependent variable with the least number of independent variables. Therefore, if the addition of an independent variable, even one with a p-value less than 0.05 does not increase the $R^2$ of a model very much, the model may be more useful if it is left out. In this case, since there are many possible independent variables for MPG, some may be left out in the final model for this reason.
+Finally, a model is easiest to understand and less likely to be influenced by the specific dataset used to develop it if it explains as much of the dependent variable with the least number of independent variables. Therefore, if the addition of an independent variable, even one with a p-value less than 0.05 does not increase the R² of a model very much, the model may be more useful if it is left out. In this case, since there are many possible independent variables for MPG, some may be left out in the final model for this reason.
 
 <!-- page: 56 -->
 ### Regression Results
 
-The data collected from RoLR proved to be very useful in developing a model that explained a large amount of the variation seen in MPGs both day to day and across different vehicles. Several models were developed, one using data in hourly intervals and a second one using 30-minute intervals. The model using the hourly data had an $R^2$ of 78%, meaning that the predictors explained 78% of the hourly variation in MPG while the model built using the 30-minute intervals had a $R^2$ of 72%. Where a predictor appeared in both models it had a similar coefficient, meaning that its impact was consistent in the two models.
+The data collected from RoLR proved to be very useful in developing a model that explained a large amount of the variation seen in MPGs both day to day and across different vehicles. Several models were developed, one using data in hourly intervals and a second one using 30-minute intervals. The model using the hourly data had an R² of 78%, meaning that the predictors explained 78% of the hourly variation in MPG while the model built using the 30-minute intervals had a R² of 72%. Where a predictor appeared in both models it had a similar coefficient, meaning that its impact was consistent in the two models.
 
 ### Average Weight
 
@@ -1038,11 +1038,11 @@ Another condition for which both models produced consistent results is for wind 
 
 ### Elevation Change
 
-Elevation change is as expected also a large predictor of MPG adding about 10% to the $R^2$ to each model. The impact of a change in elevation is a reduction in MPG in the range of 0.14 to 0.18 MPG per 100 'of elevation gain though the models were a little inconsistent on the impact of an elevation decrease. It would be reasonable to expect that the impact would be similar, though at a slightly lower magnitude (i.e. the MPG lost going uphill is not completely gained back on the return downhill). One model indicated that this was the case while the other did not.
+Elevation change is as expected also a large predictor of MPG adding about 10% to the R² to each model. The impact of a change in elevation is a reduction in MPG in the range of 0.14 to 0.18 MPG per 100 'of elevation gain though the models were a little inconsistent on the impact of an elevation decrease. It would be reasonable to expect that the impact would be similar, though at a slightly lower magnitude (i.e. the MPG lost going uphill is not completely gained back on the return downhill). One model indicated that this was the case while the other did not.
 
 ### Time in Top Gear and Gear Changes
 
-Considerable effort was made to remove both of these factors from the MPG models since both are often indicators of other factors including speed, elevation change, road type and perhaps more. However, time in top gear increased $R^2$ by over 9% even with speed and elevation in the one-hour interval model while the number of gear changes had a similar effect in the model using the 30-minute interval data (slightly over 7%). As expected, the two predictors are highly correlated and were not used in the same model. Both predictors therefore appear to inform their respective models on factors not captured by elevation change, speed or the
+Considerable effort was made to remove both of these factors from the MPG models since both are often indicators of other factors including speed, elevation change, road type and perhaps more. However, time in top gear increased R² by over 9% even with speed and elevation in the one-hour interval model while the number of gear changes had a similar effect in the model using the 30-minute interval data (slightly over 7%). As expected, the two predictors are highly correlated and were not used in the same model. Both predictors therefore appear to inform their respective models on factors not captured by elevation change, speed or the
 
 <!-- page: 57 -->
 number of stops. In a time before automated manual transmissions (AMT) were the norm, time in top gear was a metric fleets have watched more closely. All of the trucks in RoLR were equipped with AMTs and the drivers that operated them are very skillful at achieving high MPGs. It may be that these two predictors are indicative of the duty cycle and the type of roads on which regional haul trucks are often operating.

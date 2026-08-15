@@ -10,7 +10,7 @@ REPORT
 
 The event included a total of 13 fleets and 13 vehicle models from 13 manufacturers located in eight states or provinces in the US and Canada. However, this report is only focusing on the battery electric terminal truck segment of the market — a market NACFE believes is 100% electrifiable.
 
-If 100% of the terminal tractors in the US and Canada were electrified, it would require approximately 726 gWh of electricity for charging and result in the avoidance of 929,687 MT $\text{CO}_2\text{e}$ annually. (e equals carbon dioxide equivalent.)
+If 100% of the terminal tractors in the US and Canada were electrified, it would require approximately 726 gWh of electricity for charging and result in the avoidance of 929,687 MT CO2e annually. (e equals carbon dioxide equivalent.)
 
 The Run took place from September 2 through September 19, 2021, with continuous tracking of vehicle parameters on two of the vehicles via a Geotab device and one via the manufacturer’s own system.
 
@@ -35,7 +35,7 @@ Run on Less 2017 was a first-of-its-kind fuel efficiency roadshow that proved 10
 
 Run on Less Regional was conducted in October of 2019. Ten participating fleets demonstrated a variety of commercially available freight efficiency technologies in the three-week cross-country roadshow, proving that 8.3 MPG is possible in regional haul.
 
-Run on Less – Electric was the first NACFE demonstration to focus on electric vehicles. Thirteen fleet-OEM pairs in the US and Canada participated in the three-week long event. If all US and Canadian medium- and heavy-duty trucks in the market segments — vans and step vans, medium-duty box trucks, terminal tractors and heavy-duty regional haul — studied in the Run became electric, about 100 million metric tons of $\text{CO}_2$ would be saved from entering the atmosphere. Visit runonless.com or follow us on Twitter @RunOnLess.
+Run on Less – Electric was the first NACFE demonstration to focus on electric vehicles. Thirteen fleet-OEM pairs in the US and Canada participated in the three-week long event. If all US and Canadian medium- and heavy-duty trucks in the market segments — vans and step vans, medium-duty box trucks, terminal tractors and heavy-duty regional haul — studied in the Run became electric, about 100 million metric tons of CO2 would be saved from entering the atmosphere. Visit runonless.com or follow us on Twitter @RunOnLess.
 
 **ABOUT NACFE**
 
@@ -147,7 +147,7 @@ one terminal tractor, an electric one, moving only a few trailers around each da
 
 Based on the duty cycle and frequency of intermittent charging, fleets may be able to reduce the battery pack size, which will lower the overall cost of the vehicle without sacrificing performance.
 
-If 100% of the terminal tractors in the US and Canada were electrified, it would require approximately 726 gWh of electricity for charging and result in the avoidance of 929,687 MT $\text{CO}_2\text{e}$ annually. (e equals carbon dioxide equivalent.) See Figure ES3.
+If 100% of the terminal tractors in the US and Canada were electrified, it would require approximately 726 gWh of electricity for charging and result in the avoidance of 929,687 MT CO2e annually. (e equals carbon dioxide equivalent.) See Figure ES3.
 
 > **Figure ES3 — ESTIMATED NET EMISSIONS SAVINGS FOR RUN ON LESS – ELECTRIC MARKET SEGMENTS**
 > Type: Table
@@ -539,7 +539,7 @@ do not hear much from the outside.” To learn more about what Vasquez thinks ab
 ● Battery electric terminal tractors generally have a slight performance advantage over their diesel-powered counterparts. Electrical propulsion systems tend to be more responsive, especially accelerating from a stop.
 ● Battery electric terminal tractors always are near their charging facilities since they are never far from their home base, thus minimizing any range anxiety the operator might have. Longer term, if there are a large number of both electrified delivery vehicles and electric terminal tractors at a facility, the electric terminal tractors could share charging equipment with the electric delivery vehicles. Burt Fosse, operations lead at Ruan, talked about the company’s practices. “We don’t just charge the truck at one single point. Whenever the driver has an opportunity to do paperwork or to take a break, he plugs it in. Anytime that the truck is idle and sitting, it is typically plugged in and charging.” To learn more about Ruan’s experience with an electric terminal tractor watch this video.
 ● In both cold and hot weather, it is often customary to leave the engine in the terminal tractor idling to maintain temperatures in the driver’s cabin. NACFE has been told that idle times can be 30% to 40% or even higher in many situations. This can be a fuel waster and it likely increases the stress that is placed on the vehicle’s aftertreatment system. With a battery electric terminal tractor, the cabin temperatures can be maintained by electrical accessories powered by the battery. This uses substantially less energy than an idling diesel and still maintains cabin comfort levels for the operator. Fosse also talked about weather and battery electric terminal tractors. “I was very apprehensive if the batteries would work within the winter environment of the upper Midwest where ambient temperatures can reach 23 degrees below zero. The batteries have held very well. I can't remember a time when a unit was under 70% charged.”
-● The battery electric terminal tractor has a significantly smaller emission footprint — both $\text{CO}_2$ and criteria pollutants — even in areas where the electrical power generation is more carbon intensive. (Criteria pollutants are carbon monoxide, ground-level ozone, lead, nitrogen dioxide, particulate matter, and sulfur dioxide.) This can be quite helpful in meeting corporate sustainability goals. In addition, emissions that are generated from the creation of power to charge the battery electric terminal tractor are “moved” from the location where the tractor operates to where the power is generated. Paul Jensen, senior vice president of supply chain at Ruan said, “It is more sustainable long-term. It is a better work environment for the driver too.” Many warehouse districts where these tractors operate are located in areas where there also is higher risk of respiratory disease and other effects of emissions in the surrounding neighborhoods. Moving the point of power generation can alleviate some of the harmful emissions in these high-risk areas.” [38][39][40]
+● The battery electric terminal tractor has a significantly smaller emission footprint — both CO2 and criteria pollutants — even in areas where the electrical power generation is more carbon intensive. (Criteria pollutants are carbon monoxide, ground-level ozone, lead, nitrogen dioxide, particulate matter, and sulfur dioxide.) This can be quite helpful in meeting corporate sustainability goals. In addition, emissions that are generated from the creation of power to charge the battery electric terminal tractor are “moved” from the location where the tractor operates to where the power is generated. Paul Jensen, senior vice president of supply chain at Ruan said, “It is more sustainable long-term. It is a better work environment for the driver too.” Many warehouse districts where these tractors operate are located in areas where there also is higher risk of respiratory disease and other effects of emissions in the surrounding neighborhoods. Moving the point of power generation can alleviate some of the harmful emissions in these high-risk areas.” [38][39][40]
 ● Diesel fuel smells and can be an irritant to the operator and others if it is spilled. This problem is eliminated when the energy to power the vehicle is electricity.
 
 March 6, 2022
@@ -847,7 +847,7 @@ The terminal tractor market globally is estimated to grow from about $700M in 20
 
 Based on the duty cycle and frequency of intermittent charging, fleets may be able to reduce the battery pack size, which will lower the overall cost of the vehicle without sacrificing performance.
 
-If 100% of the terminal tractors in the US and Canada were electrified, it would require approximately 726 gWh of electricity for charging and result in the avoidance of 929,687 MT $\text{CO}_2\text{e}$ annually. (e equals carbon dioxide equivalent.)
+If 100% of the terminal tractors in the US and Canada were electrified, it would require approximately 726 gWh of electricity for charging and result in the avoidance of 929,687 MT CO2e annually. (e equals carbon dioxide equivalent.)
 
 Figure 19 contains information on the terminal tractor population in the US and Canada, the carbon that would be avoided annually if all terminal tractors were electric and the electricity needed to charge them annually.
 
@@ -913,7 +913,7 @@ See Figure 20 for a comparison of a battery electric terminal tractor and a comp
 
 In Section 5 above, a number of obvious and less obvious benefits to operating an electric terminal tractor were described. Fleets should monetize these benefits when determining the TCO of a battery electric terminal tractor.
 
-**Environmental Impact of battery electric terminal tractors:** If 100% of the terminal tractors in the US and Canada were electrified, it would require approximately 726 gWh of electricity for charging and result in the avoidance of 929,687 MT $\text{CO}_2\text{e}$ annually. (e equals carbon dioxide equivalent.)
+**Environmental Impact of battery electric terminal tractors:** If 100% of the terminal tractors in the US and Canada were electrified, it would require approximately 726 gWh of electricity for charging and result in the avoidance of 929,687 MT CO2e annually. (e equals carbon dioxide equivalent.)
 
 March 6, 2022
 NACFE
@@ -1110,7 +1110,7 @@ Electric Trucks Have Arrived: The Use Case For Terminal Tractors
 22. Geotab GPS tracker installation guide website. https://www.Geotab.com/blog/gps-tracker-installation-guide/.
 23. Geotab website. What is GPS? Geotab. https://www.Geotab.com/blog/what-is-gps/.
 24. OpenWeatherMap website https://openweathermap.org/.
-25. Roeth, Mike. “Real-World Study Shows That Certain Trucking Segments Are Ready To Go Electric and Save 100 Million Metric Tons of $\text{CO}_2$.” Run on Less – Electric press release. https://runonless.com/run-on-less-electric-demonstrates-co2-saved-with-electric-trucks/ September 22, 2021.
+25. Roeth, Mike. “Real-World Study Shows That Certain Trucking Segments Are Ready To Go Electric and Save 100 Million Metric Tons of CO2.” Run on Less – Electric press release. https://runonless.com/run-on-less-electric-demonstrates-co2-saved-with-electric-trucks/ September 22, 2021.
 26. US Department of Energy Clean Cities Coalition Network.
 27. Outrider website https://www.outrider.ai/.
 28. ACT Research website https://www.actresearch.net/.

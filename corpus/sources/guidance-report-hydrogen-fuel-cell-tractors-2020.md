@@ -503,7 +503,7 @@ This is the elephant in the room that needs to be clarified first. Efficiency an
 Making Sense of Heavy-Duty Hydrogen Fuel Cell Tractors
 December 16, 2020 32
 
-$$\text{Improved Efficiency} = \text{Less Fuel} = \text{Less Emissions} = \text{Less Costs} = \text{More Profit}$$
+Improved Efficiency = Less Fuel = Less Emissions = Less Costs = More Profit
 
 It is quite common for proponents of hydrogen powered vehicles to qualify emissions as “zero at the tail pipe.” While technically correct, these statements ignore the net system emissions that support creating and supplying the hydrogen to the vehicle. BEVs are 2X to 3X more efficient than hydrogen-based fuel cells on a well-to-wheel basis as illustrated by a Volkswagen example analysis shown in Figure 11.
 
@@ -552,9 +552,9 @@ The merit review report summarizes that the average fuel cell efficiency obtaine
 Making Sense of Heavy-Duty Hydrogen Fuel Cell Tractors
 December 16, 2020 34
 
-The DOE Fuel Cell Technologies technical targets for peak efficiency of an 80-$\text{kW}_\text{e}$ (net) transportation application fuel cell show 2015 actuals as 60% with a 2020 target of 65% and an ultimate target of 70% as shown in Figure 14 [74]. These values exclude the impacts of losses from hydrogen storage, power electronics and electric drive. The 80-$\text{kW}_\text{e}$ is a fuel cell size which would need to be a battery dominant system design based on Ballard analysis for NACFE in 2020 of regional haul applications from NACFE’s 2019 Run on Less Regional database [7]. Ballard’s analysis recommended fuel cells in the 200 kW to 300 kW range for these duty cycles in a fuel cell dominant design with small battery capacity. 
+The DOE Fuel Cell Technologies technical targets for peak efficiency of an 80-kWe (net) transportation application fuel cell show 2015 actuals as 60% with a 2020 target of 65% and an ultimate target of 70% as shown in Figure 14 [74]. These values exclude the impacts of losses from hydrogen storage, power electronics and electric drive. The 80-kWe is a fuel cell size which would need to be a battery dominant system design based on Ballard analysis for NACFE in 2020 of regional haul applications from NACFE’s 2019 Run on Less Regional database [7]. Ballard’s analysis recommended fuel cells in the 200 kW to 300 kW range for these duty cycles in a fuel cell dominant design with small battery capacity. 
 
-> **Figure 14. 80-$\text{kW}_\text{e}$ fuel cell peak efficiency targets (DOE) [74]**
+> **Figure 14. 80-kWe fuel cell peak efficiency targets (DOE) [74]**
 > Type: Table
 > Axes: None
 > Series: Characteristic (Peak energy efficiency)
@@ -592,7 +592,7 @@ December 16, 2020 35
 Making Sense of Heavy-Duty Hydrogen Fuel Cell Tractors
 December 16, 2020 36
 
-Whichever fuel cell technology and however efficient the fuel cell is at converting hydrogen back into electricity, it can never be as efficient as using the electricity directly. Directly using electricity to power batteries foregoes the added conversions needed for fuel cells to first create hydrogen and then convert the hydrogen back into electricity as these conversions introduce additional losses. Analysis published in 2018 by Brian Cox of the Swiss ETH University for a life cycle energy assessment of Swiss passenger transport technologies to 2050 compares fuel cell versus pure battery electric vehicles in Figure 16 [77]. Energy use is measured in Mega-Joules per vehicle kilometer. Trends would be identical measured in kWh per mile or diesel gallon equivalent ($\text{DG}_\text{e}$) or gasoline gallon equivalent ($\text{GG}_\text{e}$) per mile. This is consistent with several other studies NACFE found. 
+Whichever fuel cell technology and however efficient the fuel cell is at converting hydrogen back into electricity, it can never be as efficient as using the electricity directly. Directly using electricity to power batteries foregoes the added conversions needed for fuel cells to first create hydrogen and then convert the hydrogen back into electricity as these conversions introduce additional losses. Analysis published in 2018 by Brian Cox of the Swiss ETH University for a life cycle energy assessment of Swiss passenger transport technologies to 2050 compares fuel cell versus pure battery electric vehicles in Figure 16 [77]. Energy use is measured in Mega-Joules per vehicle kilometer. Trends would be identical measured in kWh per mile or diesel gallon equivalent (DGe) or gasoline gallon equivalent (GGe) per mile. This is consistent with several other studies NACFE found. 
 
 > **Figure 16. Comparison of energy use for buses (Cox)**
 > Type: Stacked bar charts (for 1990, 2017, 2030)
@@ -614,9 +614,9 @@ Hydrogen does not exist in its natural state, but has to be extracted from other
 > **Figure 17. Many paths to making hydrogen (Shell) [225]**
 > Type: Schematic flow diagram
 > Axes: None
-> Series: Primary Energy Source (Biogas or Biomethane, Natural Gas, Solar or wind are used to produce electricity), Conversion (Thermochemical conversion / Steam methane reform (SMR); Electricity / Electrolysis), Final Energy Carrier ($\text{H}_2$)
+> Series: Primary Energy Source (Biogas or Biomethane, Natural Gas, Solar or wind are used to produce electricity), Conversion (Thermochemical conversion / Steam methane reform (SMR); Electricity / Electrolysis), Final Energy Carrier (H2)
 > Values: None
-> Notes: Illustrates paths from primary energy sources through conversion methods to $\text{H}_2$.
+> Notes: Illustrates paths from primary energy sources through conversion methods to H2.
 
 How hydrogen is extracted is critical to determining efficiencies and emissions levels. There are a variety of methods to produce hydrogen, varying in economic, environmental and societal sustainability from worse to better to best. This is very similar to the variety of electricity generating methods used for powering battery electric vehicles [3][4]. Each of these methods inevitably has trade-offs, pluses and minuses.
 
@@ -626,7 +626,7 @@ Just as electricity generation sees significant differences in sustainability le
 Making Sense of Heavy-Duty Hydrogen Fuel Cell Tractors
 December 16, 2020 38
 
-Hydrogen is not a new energy source. It has been and continues to be extensively used by a number of industrial processes including making steel, refining oil into various fuel products, producing ammonia, making hydrogen peroxide and even in producing hydrogenated vegetable oils [10]. There are many potential uses for hydrogen if it were readily available and on par or better on cost than alternatives. Bloomberg New Energy Finance (BNEF) estimates that, “a carbon price of $50/\text{tCO}_2$ would be enough to switch from coal to clean hydrogen in steel making by 2050, $60/\text{tCO}_2$ to use hydrogen for heat in cement production, $78/\text{tCO}_2$ for making chemicals like ammonia, and $145/\text{tCO}_2$ to power ships with clean fuel, if hydrogen costs reach $1/\text{kg}$. Heavy trucks could also be cheaper to run on hydrogen than diesel by 2031, although batteries remain a cheaper solution for cars, buses and light trucks [80].”
+Hydrogen is not a new energy source. It has been and continues to be extensively used by a number of industrial processes including making steel, refining oil into various fuel products, producing ammonia, making hydrogen peroxide and even in producing hydrogenated vegetable oils [10]. There are many potential uses for hydrogen if it were readily available and on par or better on cost than alternatives. Bloomberg New Energy Finance (BNEF) estimates that, “a carbon price of 50/tCO2 would be enough to switch from coal to clean hydrogen in steel making by 2050, 60/tCO2 to use hydrogen for heat in cement production, 78/tCO2 for making chemicals like ammonia, and 145/tCO2 to power ships with clean fuel, if hydrogen costs reach 1/kg. Heavy trucks could also be cheaper to run on hydrogen than diesel by 2031, although batteries remain a cheaper solution for cars, buses and light trucks [80].”
 
 Scale is the consistent and primary answer offered by proponents of a hydrogen future. Kobad Bhavnagri, head of industrial decarbonization for BNEF, summarizes it as follows:
 
@@ -714,8 +714,8 @@ another form of blue hydrogen, because the emissions are captured and repurposed
 
 | Source | Default Methane Content of Biogas by Volume | Range of Methane Content in Biogas High | Low | Reference |
 |---|---|---|---|---|
-| WWTPs | 65% | 70% ($CH_4$ by volume) | 55% ($CH_4$ by volume) | [33] |
-| Landfills | 50% | 60% ($CH_4$ by volume) | 40% ($CH_4$ by volume) | [34] |
+| WWTPs | 65% | 70% (CH4 by volume) | 55% (CH4 by volume) | [33] |
+| Landfills | 50% | 60% (CH4 by volume) | 40% (CH4 by volume) | [34] |
 | Animal Manure | Calculates methane, not biogas | +10% | -10% | |
 | IIC | 60% | +10% | -10% | |
 
@@ -790,7 +790,7 @@ have to manage or create ways to mitigate the emissions.
 > Type: schematic / color chart
 > Axes: none vs none
 > Series: GREEN, TURQUOISE, PINK/PURPLE/RED, BLACK/GRAY, YELLOW, BLUE, WHITE, BROWN
-> Values: GREEN: Hydrogen produced by electrolysis of water, using electricity from renewable sources like hydropower, wind, and solar. Zero carbon emissions are produced.; TURQUOISE: Hydrogen produced by the thermal splitting of methane (methane pyrolysis). Instead of $CO_2$, solid carbon is produced.; PINK/PURPLE/RED: Hydrogen produced by electrolysis using nuclear power.; BLACK/GRAY: Hydrogen extracted from natural gas using steam-methane reforming.; YELLOW: Hydrogen produced by electrolysis using grid electricity.; BLUE: Grey or brown hydrogen with its $CO_2$ sequestered or repurposed.; WHITE: Hydrogen produced as a byproduct of industrial processes.; BROWN: Hydrogen extracted from fossil fuels, usually coal, using gasification.
+> Values: GREEN: Hydrogen produced by electrolysis of water, using electricity from renewable sources like hydropower, wind, and solar. Zero carbon emissions are produced.; TURQUOISE: Hydrogen produced by the thermal splitting of methane (methane pyrolysis). Instead of CO2, solid carbon is produced.; PINK/PURPLE/RED: Hydrogen produced by electrolysis using nuclear power.; BLACK/GRAY: Hydrogen extracted from natural gas using steam-methane reforming.; YELLOW: Hydrogen produced by electrolysis using grid electricity.; BLUE: Grey or brown hydrogen with its CO2 sequestered or repurposed.; WHITE: Hydrogen produced as a byproduct of industrial processes.; BROWN: Hydrogen extracted from fossil fuels, usually coal, using gasification.
 > Notes: Note: There are no official definitions of these colors, but the above represents common industry nomenclature.
 
 Just like electricity can be produced through multiple methods, so too can hydrogen. Hydrogen 
@@ -1047,8 +1047,8 @@ greater potential in these regions with active support for zero-emission goals.
 
 Economics are crucial to getting green hydrogen to be viable for transportation. A focal point is the price 
 of hydrogen at the pump, frequently stated as hydrogen at ~$2/GGE (gasoline gallon equivalent) as the 
-point where $H_2$ is competitive with diesel costs. Note that the DOE estimates 1 kg of $H_2$ hydrogen has the 
-energy equivalence of 1.019 gallons of gasoline. It’s frequently simplified as 1 kg of $H_2$ has the same 
+point where H2 is competitive with diesel costs. Note that the DOE estimates 1 kg of H2 hydrogen has the 
+energy equivalence of 1.019 gallons of gasoline. It’s frequently simplified as 1 kg of H2 has the same 
 energy content as 1 gallon of gasoline [66]. 
 
 Clearly energy prices always are moving targets because of significant pricing volatility in the energy 
@@ -1379,7 +1379,7 @@ trucks out of an estimated 2 million, but captured that an average range for the
 Ballard found that, “the majority of duty cycles could be met with a 200kW fuel cell and battery packs of 
 32kWh or lower capacity [7].” One truck required, “a 300kW fuel cell with a 22kW hour battery pack.” 
 Ballard estimates that daily hydrogen consumption for these RoLR duty cycles varies between 25 and 
-110 kg of $H_2$ per day. (See Figure 42.)
+110 kg of H2 per day. (See Figure 42.)
 
 | Truck | Fuel cell power, kW | Battery, kWh | Daily distance, mile | H2 daily consumption, kg | H2 consumption, kg/100mile | Battery C-Rate, max. | Battery SOC, min. |
 |---|---|---|---|---|---|---|---|
@@ -1467,7 +1467,7 @@ minute [103]. Allowing a net 10 minutes for a fuel stop as an estimate, it’s r
 these two trucks stops might each see hundreds of trucks fueling per day. NACFE confirmed with a 
 major truck stop operator that throughput can be 350 to 700 trucks depending on the station. Future 
 hydrogen truck stops to replace the ones that today handle diesel fueling may need to service a similar 
-number of tractor-trailers per day. Figure 46 estimates truck stop daily $H_2$ capacities based on volume of 
+number of tractor-trailers per day. Figure 46 estimates truck stop daily H2 capacities based on volume of 
 trucks and their consumption rates.
 
 ---
@@ -1487,7 +1487,7 @@ December 16, 2020 62
 | **250** | 13,750 | 15,000 | 16,250 | 17,500 | 18,750 | 20,000 |
 | **300** | 16,500 | 18,000 | 19,500 | 21,000 | 22,500 | 24,000 |
 
-> **Figure 46. Estimated truck stop daily $H_2$ capacities (NACFE)**
+> **Figure 46. Estimated truck stop daily H2 capacities (NACFE)**
 > Type: table
 > Axes: none vs none
 > Series: Volume of Trucks vs Truck consumption kg H2/day
@@ -1561,15 +1561,15 @@ Making Sense of Heavy-Duty Hydrogen Fuel Cell Tractors
 December 16, 2020 64
 
 5,500,000 kg of hydrogen demand per day. Assuming 250 production days a year, these use rate 
-equates to 1,375,000 metric tons of $H_2$ demand for heavy-duty truck freight per year. This is about 6.8% 
-of today’s total production of $H_2$ in the U.S. based on DOE 2018 estimates that U.S. production of $H_2$ was 
+equates to 1,375,000 metric tons of H2 demand for heavy-duty truck freight per year. This is about 6.8% 
+of today’s total production of H2 in the U.S. based on DOE 2018 estimates that U.S. production of H2 was 
 20 million metric tons per year [62]. 100,000 trucks represent only about 6% of the freight transport 
 vehicles on the road today.
 
-One million fuel cell freight trucks at 55 kg $H_2$ per day represents 13,750,000 tons of $H_2$ demand for 
+One million fuel cell freight trucks at 55 kg H2 per day represents 13,750,000 tons of H2 demand for 
 transportation, or 69% of the total U.S. production today, and 55% of today’s freight vehicles. 
 
-Clearly a significant increase in production of $H_2$ will be needed across the board to handle both today’s 
+Clearly a significant increase in production of H2 will be needed across the board to handle both today’s 
 existing industrial demand plus the additional demand for heavy-duty truck transportation use in a 
 future hydrogen freight world. In parallel, the manufacture of hydrogen fuel cell vehicles will need to 
 grow significantly. Market acceptance, demand and penetration of fuel cell vehicles similarly must grow 
@@ -2752,9 +2752,9 @@ sources less polluting through capture technology in addition to promoting green
 through electrolyzers [157]:
 
 > *“Hydrogen is almost entirely supplied from natural gas and coal today. Hydrogen is already with us 
-at industrial scale all around the world, but its production is responsible for annual $CO_2$ emissions 
+at industrial scale all around the world, but its production is responsible for annual CO2 emissions 
 equivalent to those of Indonesia and United Kingdom combined. Harnessing this existing scale on the 
-way to a clean energy future requires both the capture of $CO_2$ from hydrogen production from fossil 
+way to a clean energy future requires both the capture of CO2 from hydrogen production from fossil 
 fuels and greater supplies of hydrogen from clean electricity.”*
 
 <!-- page: 95 -->
@@ -2797,7 +2797,7 @@ December 16, 2020 96
 > Type: stacked bar chart / infographic
 > Axes: n/a
 > Series: Space and water heating, Peaking power, Cement, Steel, Glass, Aluminum, Oil refining, Methanol, Ammonia, Cars, Buses, Light trucks, Heavy trucks, Ships
-> Values: Total energy: 195 EJ, Total $H_2$ demand: 1370MMT; Buildings 106MMT; Power 439MMT; Industry 515MMT; Transport 524MMT; Theoretical max
+> Values: Total energy: 195 EJ, Total H2 demand: 1370MMT; Buildings 106MMT; Power 439MMT; Industry 515MMT; Transport 524MMT; Theoretical max
 > Notes: Source: BNEF. Potential demand for hydrogen in 2050.
 
 Proponents for a hydrogen future are across a wide spectrum, each may have different vested interests 
@@ -2879,7 +2879,7 @@ December 16, 2020 98
 ## 18.3 WATER 
 
 NACFE would be remiss to not highlight that while hydrogen is the most abundant atom in the universe, 
-water, $H_2O$, is not always abundant. California, Texas and other locations periodically go through 
+water, H2O, is not always abundant. California, Texas and other locations periodically go through 
 extended severe drought conditions, requiring water use restrictions on industries and the public. 
 
 Green hydrogen comes from breaking down water through use of electricity in an electrolyzer, 
@@ -2896,8 +2896,8 @@ tool. GREET stands for Greenhouse Gases, Regulated Emissions, and Energy Use in 
 
 There are a wide range of influences and factors impacting the estimation of the water consumption 
 tied to creating hydrogen, far too much for this report to dive into. However, suffice it to say that 
-estimates on the required amount of water to produce hydrogen vary from 2 gallons per kg $H_2$ to 
-perhaps 9 gallons per kg $H_2$. It’s important to note that some amount of this water returns as vapor in 
+estimates on the required amount of water to produce hydrogen vary from 2 gallons per kg H2 to 
+perhaps 9 gallons per kg H2. It’s important to note that some amount of this water returns as vapor in 
 the exhaust system of a fuel cell vehicle, and some is cooling water returned to the environment at 
 power facilities. The DOE has funded research on Life-Cycle Analysis of Water Consumption for 
 Hydrogen Production with annual Merit Review reports starting in 2016 [228]. Other researchers such as 
@@ -3028,7 +3028,7 @@ is very high pressure. A typical car tire has 35 psi, and a truck tire is at 110
 The magic of gas is that you can double the stored energy in a tank by doubling the pressure, while 
 keeping the tank the exact same internal size. It originates from the physics ideal gas law:
 
-$$PV = nRT$$
+PV = nRT
 
 Without diving too deep into college physics, P is gas pressure, V is gas volume, T is temperature, R is a 
 constant, and n is related to the number of molecules of hydrogen. The proportional relationship is that 
@@ -3189,29 +3189,29 @@ of technology development is significant.
 
 Fuel cell vehicle fill times are also not static or for that matter, a given. While a Toyota Mirai operating in 
 southern California has been documented to fill in about five minutes, those fills are only on the order of 
-2 kg $H_2$ to 5 kg $H_2$ [102]. The SAE J2601 Fueling Protocols for Light Duty Gaseous Hydrogen Surface 
+2 kg H2 to 5 kg H2 [102]. The SAE J2601 Fueling Protocols for Light Duty Gaseous Hydrogen Surface 
 Vehicles “meets the U.S. DOE FCEV Targets for 2017 by enabling a hydrogen fueling in three minutes 
-(using H70-T40 dispenser, 4-7 kg $H_2$ storage; reference ambient temperature 20°C) which enables a 300+ 
+(using H70-T40 dispenser, 4-7 kg H2 storage; reference ambient temperature 20°C) which enables a 300+ 
 mile (500 km) range. SAE J2601/J2799 are being used as a basis for FCEV fueling worldwide. 
 [114][115][116].” A typical hydrogen fueling station is shown in Figure 90 [114].
 
-> **Figure 90. Automotive $H_2$ fueling (DOE)**
+> **Figure 90. Automotive H2 fueling (DOE)**
 > Type: photograph
 > Axes: n/a
 > Series: n/a
 > Values: n/a
 > Notes: Photograph of a Toyota Mirai being fueled with hydrogen at a station.
 
-Fuel cell buses have documented fill times for up to 32 kg $H_2$ of 22 to 24 minutes using equipment 
+Fuel cell buses have documented fill times for up to 32 kg H2 of 22 to 24 minutes using equipment 
 designed for fueling hydrogen cars, but they have a goal of fueling in under 10 minutes [111]. SAE 
 J2601/2 defines “fast fill” as a flow rate of 61-120 grams per second [113][114]. 
 
-The DOE published goals in 2019 for heavy-duty truck fill rates are 8 kg $H_2$/min in 2030 and 10 kg $H_2$/min 
+The DOE published goals in 2019 for heavy-duty truck fill rates are 8 kg H2/min in 2030 and 10 kg H2/min 
 in 2050 [117]. The DOE in the long-term estimates a six-minute fill time at a truck efficiency of 12.4 
-mpkg (miles per kg) with 60 kg $H_2$ and said that a range of 750 miles is feasible. In the interim, a longer 
+mpkg (miles per kg) with 60 kg H2 and said that a range of 750 miles is feasible. In the interim, a longer 
 fill time of 10 minutes is expected to be acceptable to fleets allowing a slightly slower fill rate [117]. (See 
 Figure 91.) In discussions with fuel cell experts, NACFE finds that hydrogen fills at these 700 Bar 
-pressures and 8 to 10 kg $H_2$/min flow rates have not yet been demonstrated in production, but are part 
+pressures and 8 to 10 kg H2/min flow rates have not yet been demonstrated in production, but are part 
 of current research and development efforts such as with the Protocol for Heavy Duty Hydrogen 
 Refueling (PRHYDE) project in Europe [118]. Its goal is to have experimental validation of proposed 
 fueling standards and equipment by June 2021 through multiple test sites [119].
@@ -3228,7 +3228,7 @@ December 16, 2020 106
 | **Fill Rate** | 0.35 kg/min | 1-1.5 kg/min | 8 kg/min | 10 kg/min |
 | **Efficiency** | 51 mpkg | 6.2 mpkg | 11 mpkg | 12.4 mpkg |
 
-> **Figure 91. Fill metrics for $H_2$ vehicles (NACFE from NREL data)**
+> **Figure 91. Fill metrics for H2 vehicles (NACFE from NREL data)**
 > Type: table
 > Axes: n/a
 > Series: n/a
@@ -3267,8 +3267,8 @@ December 16, 2020 107
 > **Figure 92. Fuel Cell cost goals and scaling effects (EERE)**
 > Type: chart / infographic
 > Axes: n/a
-> Series: Fuel Cell System ($/kW), $H_2$ Production, Delivery & Dispensing ($/gge), Onboard $H_2$ Storage ($/kWh)
-> Values: Fuel Cell System: 2020 Targets: $40/kW, 500K/yr: $53/kW, 100K/yr: $59/kW, Low-Volume Estimate: $230/kW; $H_2$ Production: 2020 Targets: <$4/gge, High-Volume Projection: $7.5*/gge to $5**/gge, Low-Volume Estimate: $16 to $13/gge; Onboard $H_2$ Storage: 2020 Targets: $10/kWh, 500K/yr: $15/kWh, 100K/yr: $17/kWh, Low-Volume Estimate: $33/kWh
+> Series: Fuel Cell System ($/kW), H2 Production, Delivery & Dispensing ($/gge), Onboard H2 Storage ($/kWh)
+> Values: Fuel Cell System: 2020 Targets: $40/kW, 500K/yr: $53/kW, 100K/yr: $59/kW, Low-Volume Estimate: $230/kW; H2 Production: 2020 Targets: <$4/gge, High-Volume Projection: $7.5*/gge to $5**/gge, Low-Volume Estimate: $16 to $13/gge; Onboard H2 Storage: 2020 Targets: $10/kWh, 500K/yr: $15/kWh, 100K/yr: $17/kWh, Low-Volume Estimate: $33/kWh
 > Notes: Source: EERE. *Based on Electrolysis **Based on NG SMR. *For illustration purposes only, not drawn to scale.
 
 The goals are to get to $40/kW for the fuel cell, less than $4/gge for the hydrogen fuel, and $10/kWh for 
@@ -3464,16 +3464,16 @@ December 16, 2020 112
 > Type: flow chart / step efficiency diagram
 > Axes: n/a
 > Series: CNGV, FCEV, PEV
-> Values: CNGV: Drilling, Processing, and Transportation: 92%*; NG Distribution: 99%; NG Compression: 98%; CNGV: 16%*; Total: 175 miles per mmbtu natural gas; FCEV: Drilling, Processing, and Transportation: 93%; City Gate; NG SMR** Plant: 72%; $H_2$ Compression: 97%; $H_2$ T&D: 92%; $H_2$ Fueling: 35%*; Total: 255 miles per mmbtu natural gas; PEV: Drilling, Processing, and Transportation: 93%; NG Power Plants***: 50%; Electricity T&D: 94%; Charging: 85%; PEV: 67%* (including charging losses); Total: 325 miles per mmbtu natural gas
+> Values: CNGV: Drilling, Processing, and Transportation: 92%*; NG Distribution: 99%; NG Compression: 98%; CNGV: 16%*; Total: 175 miles per mmbtu natural gas; FCEV: Drilling, Processing, and Transportation: 93%; City Gate; NG SMR** Plant: 72%; H2 Compression: 97%; H2 T&D: 92%; H2 Fueling: 35%*; Total: 255 miles per mmbtu natural gas; PEV: Drilling, Processing, and Transportation: 93%; NG Power Plants***: 50%; Electricity T&D: 94%; Charging: 85%; PEV: 67%* (including charging losses); Total: 325 miles per mmbtu natural gas
 > Notes: Source: NREL. *Efficiency of drilling, processing, and transportation varies slightly between pathways due to expected differences in pipeline distance to use... **Actual end-use efficiency will depend on drive cycle and other factors... ***Primarily from natural gas combined cycle plants.
 
 Energy conversion efficiency is not the only metric to consider. Greenhouse gas emissions are another 
 critical metric. An NREL study includes the results shown in Figure 97 [11]. NREL estimated that a CNG 
 internal combustion car on the CNG equivalent of nine gallons of gasoline (1 million BTU of energy) 
-could go 175 miles with WTW GHG emissions of 390 $gCO_2e$/mi, while a FCEV with energy originating 
-from converting natural gas to hydrogen, would go 255 miles producing 255 $gCO_2e$/mi, and a plug-in EV 
+could go 175 miles with WTW GHG emissions of 390 gCO2e/mi, while a FCEV with energy originating 
+from converting natural gas to hydrogen, would go 255 miles producing 255 gCO2e/mi, and a plug-in EV 
 using electricity produced from burning natural gas at a power plant would go 325 miles producing 200 
-$gCO_2e$/mi. The example shows CNG, FCEV and the PEV are sequentially better with respect to GHG 
+gCO2e/mi. The example shows CNG, FCEV and the PEV are sequentially better with respect to GHG 
 emissions than a gasoline powered car, but the PEV is best. If the starting energy is green energy, these 
 differences are more pronounced. While these examples are cars, the trends are directionally similar for 
 trucks.
@@ -3488,7 +3488,7 @@ December 16, 2020 113
 > Type: infographic / bar chart
 > Axes: n/a
 > Series: Gasoline Vehicle, Natural Gas Internal Combustion Engine, Fuel Cell Vehicle on Hydrogen from Natural Gas, Electric Vehicle on Electricity from Natural Gas
-> Values: Gasoline Vehicle: 200 miles, 430 $gCO_2e$/mi; Natural Gas Internal Combustion Engine: 175 miles, 390 $gCO_2e$/mi; Fuel Cell Vehicle on Hydrogen from Natural Gas: 255 miles, 255 $gCO_2e$/mi; Electric Vehicle on Electricity from Natural Gas: 325 miles, 200 $gCO_2e$/mi
+> Values: Gasoline Vehicle: 200 miles, 430 gCO2e/mi; Natural Gas Internal Combustion Engine: 175 miles, 390 gCO2e/mi; Fuel Cell Vehicle on Hydrogen from Natural Gas: 255 miles, 255 gCO2e/mi; Electric Vehicle on Electricity from Natural Gas: 325 miles, 200 gCO2e/mi
 > Notes: Source: NREL. *One million Btu is the energy contained in approximately nine gallons of gasoline.
 
 This NREL graphic can be redisplayed to better highlight the relationships for emission and range as 
@@ -3508,8 +3508,8 @@ December 16, 2020 114
 
 > **Figure 98. Powertrain energy use comparison (NACFE)**
 > Type: line chart / dual axis chart
-> Axes: Vehicle Powertrain (Gasoline Vehicle, Natural Gas ICE, Fuel Cell on Hydrogen from Natural Gas, Electric Vehicle on Electricity from Natural Gas) vs Emissions $gCO_2e$/mi (0 to 450) and Range mi (0 to 350)
-> Series: Emissions $gCO_2e$/mi, Range mi
+> Axes: Vehicle Powertrain (Gasoline Vehicle, Natural Gas ICE, Fuel Cell on Hydrogen from Natural Gas, Electric Vehicle on Electricity from Natural Gas) vs Emissions gCO2e/mi (0 to 450) and Range mi (0 to 350)
+> Series: Emissions gCO2e/mi, Range mi
 > Values: Gasoline Vehicle: Emissions: approx. 420, Range: 200; Natural Gas ICE: Emissions: 390, Range: 175; Fuel Cell on Hydrogen from Natural Gas: Emissions: 255, Range: 255; Electric Vehicle on Electricity from Natural Gas: Emissions: 200, Range: 325
 > Notes: Source: NACFE. Powertrain energy use comparison.
 
@@ -3523,7 +3523,7 @@ green solar energy, what is considered zero-emission is not actually zero in thi
 
 > **Figure 99. Estimated carbon emissions based on production pathway (UCS)**
 > Type: stacked bar chart
-> Axes: x axis: Alternative pathways (SMR Using Natural Gas (distributed production), SMR Using Natural Gas & Tube Truck Delivery (centralized production), SMR Using Biogas & Tube Truck Delivery (centralized production), Electrolysis Using Solar Energy (distributed production), Electrolysis Using Solar Energy & Tube Truck Delivery (centralized production)) vs y axis: kg $CO_2$ per kg Hydrogen Delivered (0 to 16)
+> Axes: x axis: Alternative pathways (SMR Using Natural Gas (distributed production), SMR Using Natural Gas & Tube Truck Delivery (centralized production), SMR Using Biogas & Tube Truck Delivery (centralized production), Electrolysis Using Solar Energy (distributed production), Electrolysis Using Solar Energy & Tube Truck Delivery (centralized production)) vs y axis: kg CO2 per kg Hydrogen Delivered (0 to 16)
 > Series: Upstream, Production, Delivery, Distribution
 > Values: SMR Using Natural Gas (distributed): Total approx. 14; SMR Using Natural Gas & Tube Truck Delivery (centralized): Total approx. 13; SMR Using Biogas & Tube Truck Delivery (centralized): Total approx. 6; Electrolysis Using Solar Energy (distributed): Total approx. 2; Electrolysis Using Solar Energy & Tube Truck Delivery (centralized): Total approx. 4
 > Notes: Source: UCS. *Note: This analysis calculated “well-to-wheel” emissions... For electricity emissions related to hydrogen compression, our calculations used the California average.

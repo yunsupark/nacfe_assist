@@ -371,10 +371,7 @@ Every fleet operates under its own capital constraints and trade-cycle criteria;
 Fleets must start by estimating all the component costs of the vehicle over its lifetime. Fleets must then combine and boil these costs down into the one metric that matters most to the bottom line: Total Cost of Ownership Per Mile ($/mi).
 
 The basic math looks like this:
-$$\text{TCO Per Mile (\$/mi)} = [\text{Total Capital Costs} + \text{Total Operating Costs}] \div \text{Total Lifetime Miles}$$
-
-To further break this down into the specific components discussed in this report, the equation looks like this:
-$$\text{TCO Per Mile (\$/mi)} = \frac{[\text{Total CapEx (Vehicle Cost} - \text{Residual Value} + \text{Charging \& Fueling Infrastructure} - \text{Incentives \& Grants} + \text{Financing Fees)}] + [\text{Total OpEx (Fuel \& Electricity} + \text{Maintenance \& Repair} + \text{Insurance} + \text{Regulatory Penalties)}]}{\text{Total Lifetime Miles}}$$
+TCO Per Mile (/mi) = [Total Capital Costs + Total Operating Costs] div Total Lifetime MilesTo further break this down into the specific components discussed in this report, the equation looks like this:textTCO Per Mile (/mi) = ([Total CapEx (Vehicle Cost - Residual Value + Charging & Fueling Infrastructure - Incentives & Grants + Financing Fees)] + [Total OpEx (Fuel & Electricity + Maintenance & Repair + Insurance + Regulatory Penalties)]/Total Lifetime Miles)
 
 To get an accurate financial picture, fleets also should consider the "time value of money" through a Net Present Value (NPV) analysis. Before dividing by lifetime miles, future costs and savings should be discounted to their present value to account for the time value of money. This is a critical step for ZEVs, where fleets pay a higher price up front today in exchange for operational savings that accrue over subsequent years.
 
@@ -2541,7 +2538,7 @@ April 30, 2026 Page 97
 * **How to source the data**
   * **For BEV:** Review state-level voucher databases (like California’s HVIP) and utility make-ready programs.
   * **For CNG/RNG:** Identify Natural Gas Corridors and states with active Clean Cities coalitions that offer NGV-specific tax credits.
-  * **For FCEV:** Map your routes against the DOE’s designated Regional Clean Hydrogen Hubs ($H_2$Hubs) where localized production is expected to drive down fuel costs first.
+  * **For FCEV:** Map your routes against the DOE’s designated Regional Clean Hydrogen Hubs (H2Hubs) where localized production is expected to drive down fuel costs first.
 
 ### 6.1.3 Step 3: Match the Powertrain to the Duty Cycle
 

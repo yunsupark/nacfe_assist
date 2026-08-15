@@ -983,7 +983,7 @@ Ellram and Golicic. 2011. *Environmentally Sustainable Transport*. Executive sum
 
 Goodyear Dunlop Tires Europe. 2012. *Driving Fleet Fuel Efficiency: The Road to 2020*. Available online at http://www.cadenadesuministro.es/wp-content/uploads/2012/01/Driving-fleet-fuel-efficiency-The-Road-to-2020-informe-Goodyear-Dunlop.pdf
 
-International Energy Agency (IEA). 2009. *Transport, Energy and $CO_2$: Moving Toward Sustainability*. Available online at http://www.iea.org/publications/freepublications/publication/transport2009.pdf
+International Energy Agency (IEA). 2009. *Transport, Energy and CO2: Moving Toward Sustainability*. Available online at http://www.iea.org/publications/freepublications/publication/transport2009.pdf
 
 Jaffe, A. and Stavins, R. 1994. “The Energy Paradox and the Diffusion of Conservation Technology.” *Resource and Energy Economics* 16 (2): 91-112.
 

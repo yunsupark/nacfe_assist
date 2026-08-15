@@ -419,15 +419,15 @@ The 2013 Confidence Report presents test data that supports the idea that a 6x4-
 
 <!-- page: 24 -->
 
-An analytical approach is helpful in understanding the reason tractive effort is lost in a 6x2 and why load biasing is the preferred approach for offsetting the problem. The starting point for most traction evaluations is the well-known equation describing the relationship between the weight or load carried by a driven tire, which we will call ($F_L$), and the total amount of horizontal force that can be generated to propel the vehicle ($F_H$), through a coefficient of friction ($\mu$), by a given number of driven tires ($N$). This equation is given as:
+An analytical approach is helpful in understanding the reason tractive effort is lost in a 6x2 and why load biasing is the preferred approach for offsetting the problem. The starting point for most traction evaluations is the well-known equation describing the relationship between the weight or load carried by a driven tire, which we will call (FL), and the total amount of horizontal force that can be generated to propel the vehicle (FH), through a coefficient of friction (μ), by a given number of driven tires ($N$). This equation is given as:
 
-$$F_{H,\text{drive}} = N_{\text{drive}} * \mu * F_{L,\text{drive}} \quad \text{(Equation 1)}$$
+FH,drive = Ndrive * μ * FL,drive (Equation 1)
 
 If the total driving forces provided by all the driven tires on the vehicle is greater than the force needed to move the vehicle—which is most often the case—then the truck is able to start up or accelerate normally. If the tires cannot generate the force necessary to move the vehicle, then the tires may spin without the vehicle advancing.
 
 Examples of the maximum value of coefficient of friction that can be achieved on various road surfaces are summarized in Table 11. Generally speaking, the nature of the road surface is the primary determining factor of friction coefficient.
 
-| Road Surface | Peak $\mu$ |
+| Road Surface | Peak μ |
 | --- | --- |
 | Dry Asphalt or Concrete | 0.7 – 1.2 |
 | Wet Asphalt | 0.7 – 0.9 |
@@ -441,9 +441,9 @@ Table 11: Coefficient of Friction for Various Road Surface Conditions
 
 *(Source: Lex, Cornelia, Maximum Tire-Road Friction Coefficient Estimation, Graz University of Technology, Austria, 2015)*
 
-Once the friction coefficient of the road surface is significantly degraded, traction must be improved by other factors. Looking back at Equation 1, to increase traction requires either: 1) an increase in the number of driven axles ($N_{\text{drive}}$); or 2) increased weight on the driven tires ($F_{L\text{ drive}}$).
+Once the friction coefficient of the road surface is significantly degraded, traction must be improved by other factors. Looking back at Equation 1, to increase traction requires either: 1) an increase in the number of driven axles (Ndrive); or 2) increased weight on the driven tires (FL drive).
 
-It should be clear from Equation 1 that a change from two to one driving axle will reduce the available force to move the vehicle by half (i.e., driven tires are carrying only half the load they would carry in a 6x4 application). If at the same time the road surface coefficient of friction ($\mu$) drops from 1 to 0.5, the available horizontal force ($F_H$) is again cut by half. A change in tire type alone typically will not be enough to offset this condition. Although significant differences in friction coefficient exist when comparing drive and trailer tires, the differences between viable drive tires intended for line-haul use are relatively small in comparison to the differences resulting from changing road conditions. However, shifting load onto the driven tires can increase $F_{L\text{ drive}}$ substantially, particularly when lightly loaded or bobtailing, conditions that fleets report as being particularly difficult for 6x2 traction, resulting in enough tractive force to allow the vehicle to move.
+It should be clear from Equation 1 that a change from two to one driving axle will reduce the available force to move the vehicle by half (i.e., driven tires are carrying only half the load they would carry in a 6x4 application). If at the same time the road surface coefficient of friction (μ) drops from 1 to 0.5, the available horizontal force (FH) is again cut by half. A change in tire type alone typically will not be enough to offset this condition. Although significant differences in friction coefficient exist when comparing drive and trailer tires, the differences between viable drive tires intended for line-haul use are relatively small in comparison to the differences resulting from changing road conditions. However, shifting load onto the driven tires can increase FL drive substantially, particularly when lightly loaded or bobtailing, conditions that fleets report as being particularly difficult for 6x2 traction, resulting in enough tractive force to allow the vehicle to move.
 
 <!-- page: 25 -->
 
@@ -504,9 +504,9 @@ On-board sensors in the tandem suspension determine when the pusher axle is depl
 
 ## Benefits of Liftable 6x2 Axles
 
-The study team spent considerable effort in trying to understand whether a liftable system provides a fuel consumption benefit and how this is possible. A common perception is that when an axle is raised, rolling resistance of the vehicle is reduced since fewer tires are on the ground. However, this perception is not supported by the facts. In simple terms, rolling resistance ($F_{RR}$) is a function of the rolling resistance coefficient ($C_{RR}$) of a tire and the load ($F_L$) on the tire as given by the following equation:
+The study team spent considerable effort in trying to understand whether a liftable system provides a fuel consumption benefit and how this is possible. A common perception is that when an axle is raised, rolling resistance of the vehicle is reduced since fewer tires are on the ground. However, this perception is not supported by the facts. In simple terms, rolling resistance (FRR) is a function of the rolling resistance coefficient (CRR) of a tire and the load (FL) on the tire as given by the following equation:
 
-$$F_{RR} = C_{RR} * F_L \quad \text{(Equation 2)}$$
+FRR = CRR * FL (Equation 2)
 
 Therefore, when tires are lifted, the rolling resistance those tires would have generated is simply transferred to the remaining tires still in contact with the ground. The overall rolling resistance of the vehicle remains unchanged. As a matter of fact, since many fleets fit trailer tires on the free rolling axle, and trailer tires (with their reduced tread height and smoother tread face) generally have lower rolling resistance than drive tires, the overall average rolling resistance of a vehicle is actually increased when the free rolling axle is lifted. As mentioned in an earlier section, SuperTruck teams took advantage of this phenomenon and increased loading on the free rolling axle during steady highway speed operation to the benefit of about 1% in fuel consumption.
 

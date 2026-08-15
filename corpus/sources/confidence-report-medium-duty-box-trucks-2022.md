@@ -1246,7 +1246,7 @@ NACFE believes that 100% of that market segment will embrace electrification alt
 applications within the duty cycle will be easier to electrify than others that have more complex 
 operations. When the simpler box truck portion of this market segment, about 380,000 trucks 
 in the US and Canada, electrifies, it will result in the avoidance of 7,681,707 metric tonnes (MT) 
-of $CO_2e$ annually, as shown in Figure 45. The more complex trucks in this category also will 
+of CO2e annually, as shown in Figure 45. The more complex trucks in this category also will 
 electrify as the medium-duty marketplace expands the electric coverage over the next decade. 
 These trucks cover both freight and work truck use cases.
 

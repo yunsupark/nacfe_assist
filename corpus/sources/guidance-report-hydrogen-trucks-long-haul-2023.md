@@ -82,7 +82,7 @@ Many vested interests are promoting the benefits of hydrogen fuel for burning in
 
 Technologies though are never sure things. Hydrogen has been in the limelight before, many times, earning the prediction that “hydrogen is the fuel of the future, and always will be.” Various inventors developed hydrogen combustion prototypes in the mid-1800s. The 1920s and 1930s saw the innovation of transoceanic travel by hydrogen filled dirigibles. The 1940s and 1950s saw the feasibility of releasing massive amounts of energy through hydrogen fusion demonstrated through the Manhattan project. Space programs in the 1960s continuing into today successfully have deployed fuel cell systems into space vehicles. GM prototyped the GM Electrovan fuel cell vehicle in 1966. The 1970s and 1980s oil supply challenges encouraged a range of prototype hydrogen combustion and fuel cell vehicles from researchers and mainstream manufacturers. The 1990s saw another wave of prototype hydrogen-based cars. The period 2000 through 2010 saw hydrogen fuel cell buses enter production. The 2010s saw small numbers of production fuel cell cars enter the market from Hyundai, Toyota, Honda and Mercedes. Investment has been growing in research and prototypes of hydrogen powered heavy-duty trucks, ships, trains and planes with growing media coverage as the world searches for viable transition strategies from traditional fossil fuels to zero-emission solutions.
 
-Hydrogen is all around us. It’s in the water we drink ($\text{H}_2\text{O}$). Hydrogen is in the fuels we burn including gasoline ($\text{C}_8\text{H}_{18}$), diesel ($\text{C}_{12}\text{H}_{23}$), natural gas ($\text{CH}_4$), propane ($\text{C}_3\text{H}_8$), and others. It’s used extensively in a variety of industrial processes making everything from fertilizers to cement. Hydrogen has an affinity to readily bond to other atoms and molecules. Hydrogen generally has to be separated from these other materials such as water or natural gas using industrial processes. Natural hydrogen, sometimes labeled white hydrogen, does actually occur in nature but is not available in commercial quantities at this time [5][2].
+Hydrogen is all around us. It’s in the water we drink (H2O). Hydrogen is in the fuels we burn including gasoline (C8H18), diesel (C12H23), natural gas (CH4), propane (C3H8), and others. It’s used extensively in a variety of industrial processes making everything from fertilizers to cement. Hydrogen has an affinity to readily bond to other atoms and molecules. Hydrogen generally has to be separated from these other materials such as water or natural gas using industrial processes. Natural hydrogen, sometimes labeled white hydrogen, does actually occur in nature but is not available in commercial quantities at this time [5][2].
 
 <!-- page: 17 -->
 Separating hydrogen from other materials takes significant amounts of energy. And that is where the story gets much more complicated for use in heavy-duty trucks. Hydrogen is a much bigger question than whether it is the right fuel for the truck. How it is produced, stored and delivered to the truck has significant energy, emission, regional economic, social justice and cost ramifications.
@@ -308,7 +308,7 @@ Facilities that have heavy-duty truck operations also may have emissions regulat
 > Type: table
 > Axes: Phase vs Warehouse Size (square feet), Initial Reporting Date (Annual WAIRE Report), Initial Compliance Period
 > Series: Phase 1, Phase 2, Phase 3
-> Values: Phase 1: $\ge 250,000$, January 31, 2023, January 1, 2022 to December 31, 2022. Phase 2: $\ge 150,000 - <250,000$, January 31, 2024, January 1, 2023 to December 31, 2023. Phase 3: $\ge 100,000 - <150,000$, January 31, 2025, January 1, 2024 to December 31, 2024.
+> Values: Phase 1: ≥ 250,000, January 31, 2023, January 1, 2022 to December 31, 2022. Phase 2: ≥ 150,000 - <250,000, January 31, 2024, January 1, 2023 to December 31, 2023. Phase 3: ≥ 100,000 - <150,000, January 31, 2025, January 1, 2024 to December 31, 2024.
 > Notes: Figure 8. ISR Rule phase in (SCAQMD)
 
 This ISR could modify a fleet’s choice of vehicles that visit specific facilities at the request or demand of the warehouse operators. This rule is considered a novel approach moving beyond regulating the fleet operators to now include operating warehouses of shippers and receivers.
@@ -408,7 +408,7 @@ The DOE also has a Disadvantaged Communities tool as shown in Figure 11 [103]. T
 Hydrogen is clearly linked to economic development, employment and social justice at both regional and national levels in addition to environmental objectives, consistent with conclusions in NACFE’s *Making Sense of Heavy-Duty Hydrogen Fuel Cell Tractors* report.
 
 <!-- page: 34 -->
-## 6.18 Liquid $\text{H}_2$ vs Gaseous
+## 6.18 Liquid H2 vs Gaseous
 
 The December 2020 NACFE hydrogen report focused on gaseous hydrogen being the on-board fuel for the proposed fuel cell long-haul heavy-duty trucks. The consensus opinion then, and now, is that hydrogen would be transported to fueling stations as a liquid due to the overwhelming advantage in energy density of the liquid versus gas [60]. The liquid would then be converted to 750 bar (10,000 psi) hydrogen gas for use by trucks. Progress was being made toward fueling standards for 750 bar gaseous hydrogen. This immense pressure is needed to package the energy densely enough that the tractor chassis can be a reasonable length for commercial operations. Multiple high-pressure tanks are required on a gaseous hydrogen fueled tractor as illustrated in the example from Kenworth in Figure 12.
 
@@ -419,7 +419,7 @@ The December 2020 NACFE hydrogen report focused on gaseous hydrogen being the on
 > Values: 420kW (560hp) Electric Traction Motor, 12kW-h Li-ion Battery, Range - 300 miles, Hydrogen Fuel System (Spun Carbon Fiber Tanks, 10,000 psi Operating Pressure, 60kg Hydrogen Capacity), Refill Time - 15 minutes, Transmission Eaton 4-speed HD Electric Vehicle.
 > Notes: Port of Los Angeles Piloting T680 Hydrogen Fuel Cell Electric Trucks.
 
-Ginger Gardiner writing for *Composites World* published the graph in Figure 13 which captures the physical properties of the multiple paths to storing hydrogen on a truck [143]. The densest energy storage is achieved with liquid hydrogen ($\text{LH}_2$) in the gray area at the left of the graph where temperatures are below 33 Kelvin (-400 °F) but can be at very low pressure because it is a liquid. Getting equivalent energy densities from gaseous hydrogen requires significant levels of compression shown by the pressure lines, such as the 700-bar line. Higher pressures allow for higher storage temperatures reducing the requirements for the thermal containment systems of the on-board tanks. The yellow shaded area shows gaseous hydrogen at 350 bar and 700 bar can be stored about -40°C (-40°F), but
+Ginger Gardiner writing for *Composites World* published the graph in Figure 13 which captures the physical properties of the multiple paths to storing hydrogen on a truck [143]. The densest energy storage is achieved with liquid hydrogen (LH2) in the gray area at the left of the graph where temperatures are below 33 Kelvin (-400 °F) but can be at very low pressure because it is a liquid. Getting equivalent energy densities from gaseous hydrogen requires significant levels of compression shown by the pressure lines, such as the 700-bar line. Higher pressures allow for higher storage temperatures reducing the requirements for the thermal containment systems of the on-board tanks. The yellow shaded area shows gaseous hydrogen at 350 bar and 700 bar can be stored about -40°C (-40°F), but
 
 <!-- page: 35 -->
 cannot reach the same energy densities of liquid. The green region in the graph is for “cryo-compressed” hydrogen, which is much colder temperatures but still gaseous.
@@ -427,7 +427,7 @@ cannot reach the same energy densities of liquid. The green region in the graph 
 > **Figure 13 — Hydrogen physical properties (BMW) [143]**
 > Type: line chart / scatter plot
 > Axes: Temperature [K] (20 to 300 K) vs Density [g/L] (0 to 100 g/L)
-> Series: $\text{LH}_2$ (Liquid Hydrogen), $\text{CcH}_2$ (Cryo-compressed Hydrogen), $\text{CGH}_2$ (Compressed Gaseous Hydrogen)
+> Series: LH2 (Liquid Hydrogen), CcH2 (Cryo-compressed Hydrogen), CGH2 (Compressed Gaseous Hydrogen)
 > Values: See plotted lines for 4 bara, 20 bar, 150 bar, 250 bar, 350 bar, 500 bar, 700 bar, 880 bar.
 > Notes: Figure 13. Hydrogen physical properties (BMW) [143]
 
@@ -446,7 +446,7 @@ There is no easy solution for storing hydrogen. Either the tanks are complex the
 > **Figure 15 — Hydrogen fueling choices (BMW) [143]**
 > Type: schematic / diagram
 > Axes: none
-> Series: $\text{CGH}_2$ Compressed Gaseous (70 MPa), $\text{LH}_2$ Liquid Hydrogen, $\text{CcH}_2$-CRYOGAS
+> Series: CGH2 Compressed Gaseous (70 MPa), LH2 Liquid Hydrogen, CcH2-CRYOGAS
 > Values: See diagram for delivery conditions (63 - 70 g/L), pump parameters, and tank storage densities (35 - 38 g/L, 50 - 62 g/L, 70 - 75 g/L).
 > Notes: Figure 15. Hydrogen fueling choices (BMW) [143]
 
@@ -517,9 +517,9 @@ An evolving challenge for hydrogen infrastructure planners is whether to design 
 
 There have been developments in technology and infrastructure since the original release of *Making Sense of Heavy-Duty Hydrogen Fuel Cell Tractors* [2]. The most significant is the development of hydrogen internal combustion engines, essentially adaptations of traditional diesel engines replacing diesel or natural gas combustion with hydrogen combustion.
 
-### 7.1 $\text{H}_2$ ICE ENGINES
+### 7.1 H2 ICE ENGINES
 
-A hydrogen internal combustion engine alternative presents a near-zero emissions vehicle that has the capability of going longer distances with shorter refuel times and weighing less than a battery electric vehicle specified to do the same job. The hydrogen ICE also preserves the conventional powertrain and will likely have a significantly lower initial cost than an equivalent fuel cell equipped vehicle. However, the overall efficiency of the hydrogen ICE vehicle in terms of miles per kg of $\text{H}_2$ will likely be less than the HFCEV alternative. It should generally have better efficiency on an energy-equivalent basis compared to natural gas-powered engines.
+A hydrogen internal combustion engine alternative presents a near-zero emissions vehicle that has the capability of going longer distances with shorter refuel times and weighing less than a battery electric vehicle specified to do the same job. The hydrogen ICE also preserves the conventional powertrain and will likely have a significantly lower initial cost than an equivalent fuel cell equipped vehicle. However, the overall efficiency of the hydrogen ICE vehicle in terms of miles per kg of H2 will likely be less than the HFCEV alternative. It should generally have better efficiency on an energy-equivalent basis compared to natural gas-powered engines.
 
 Of course, the hydrogen ICE alternative must overcome the challenges of fuel creation, cost, transportation and storage that any other hydrogen alternative has as outlined in other parts of this report. In addition, the challenges of servicing and maintaining hydrogen ICE vehicles also will be more involved than traditional diesels.
 
@@ -541,7 +541,7 @@ like the conventional diesel application. Third, hydrogen fuel can be combined w
 
 For use in ICE applications, hydrogen has some distinct advantages as a fuel.
 
-* Since the primary combustion product is water vapor, emissions can be minimized. The hydrogen internal combustion engine has virtually no output of greenhouse gas $\text{CO}_2$, PM or hydrocarbons. However, $\text{NOx}$, is still a byproduct of the combustion process. This is described in the next section on disadvantages.
+* Since the primary combustion product is water vapor, emissions can be minimized. The hydrogen internal combustion engine has virtually no output of greenhouse gas CO2, PM or hydrocarbons. However, NOx, is still a byproduct of the combustion process. This is described in the next section on disadvantages.
 * Hydrogen internal combustion engines have a very broad range of fuel-air mixtures where combustion can be initiated. This allows the engine manufacturers a great deal of flexibility to tune the air-fuel ratios and other combustion parameters to meet targets for power output and emissions performance.
 * The energy to initiate combustion in a hydrogen internal combustion engine is relatively low compared to gasoline or natural gas, so the combustion ignition system has fewer demands on it.
 * Hydrogen as a fuel allows the use of slightly higher compression ratios in the engine compared to other spark ignited fuels, thus allowing somewhat greater thermal efficiency to be achieved.
@@ -549,9 +549,9 @@ For use in ICE applications, hydrogen has some distinct advantages as a fuel.
 However, hydrogen also has some disadvantages when used in an ICE configuration.
 
 * Hydrogen combustion in an ICE can be prone to pre-ignition problems where combustion is started at the wrong time resulting in knock or backfire.
-* $\text{NOx}$ output of the combustion process can still be a problem due to high combustion temperatures and the presence of nitrogen in the intake air. Although there are ways to minimize $\text{NOx}$ output, $\text{NOx}$ aftertreatment will almost certainly be required for hydrogen internal combustion engines similar to traditional diesels. Large amounts of exhaust gas recirculation (EGR) also almost certainly will be required to manage the combustion process.
+* NOx output of the combustion process can still be a problem due to high combustion temperatures and the presence of nitrogen in the intake air. Although there are ways to minimize NOx output, NOx aftertreatment will almost certainly be required for hydrogen internal combustion engines similar to traditional diesels. Large amounts of exhaust gas recirculation (EGR) also almost certainly will be required to manage the combustion process.
 * Depending on the hydrogen induction system, engine power output can be limited for a given displacement engine. With either a throttle body or port injection system the peak power output almost certainly will be lower than either natural gas or diesel for the same displacement engine. Hydrogen gas takes up more space in the combustion chamber compared to natural gas or any liquid fuel. Therefore, less air (i.e., oxygen) can be introduced in the cylinder volume, thus limiting maximum power output. Direct injection of the hydrogen gas after the intake valves are closed allows the power output to match or slightly exceed that of a natural gas engine for the same displacement.
-* Hydrogen combustion works best from a $\text{NOx}$-emissions standpoint with a very high fuel-air ratio (Phi). Natural gas works best where there is just enough oxygen to match the amount of gas that has been introduced. Hydrogen, on the other hand, works best when there is about twice as much oxygen in the combustion chamber as needed for the combustion process. The chart in Figure 20 highlights this. A Phi of 1 represents the stoichiometric fuel-air ratio for the
+* Hydrogen combustion works best from a NOx-emissions standpoint with a very high fuel-air ratio (Phi). Natural gas works best where there is just enough oxygen to match the amount of gas that has been introduced. Hydrogen, on the other hand, works best when there is about twice as much oxygen in the combustion chamber as needed for the combustion process. The chart in Figure 20 highlights this. A Phi of 1 represents the stoichiometric fuel-air ratio for the
 
 April 4, 2023
 41
@@ -563,7 +563,7 @@ NORTH AMERICAN COUNCIL FOR FREIGHT EFFICIENCY
 <!-- page: 42 -->
 Hydrogen Trucks: Long Haul’s Future?
 
-fuel. Note that $\text{NOx}$ emissions go to nearly zero at about 0.5 Phi which represents twice the amount of air compared to the fuel quantity.
+fuel. Note that NOx emissions go to nearly zero at about 0.5 Phi which represents twice the amount of air compared to the fuel quantity.
 
 > **Figure 20. Emissions for hydrogen engine (DOE) [168]**
 > Type: line chart
@@ -579,7 +579,7 @@ fuel. Note that $\text{NOx}$ emissions go to nearly zero at about 0.5 Phi which 
 > Phi 1.2: approx. 8.5
 > Notes: Source: DOE [168]
 
-* $\text{NOx}$ production can be further managed by recirculating exhaust gas back into the power cylinder. Exhaust gas has a lower oxygen content, so it has the effect of slowing down the combustion process and therefore the peak temperatures that are reached during the power stroke. The lower the peak temperatures achieved, generally the lower the $\text{NOx}$ output is. Of course, engine designers must balance all these effects as the engine is under development.
+* NOx production can be further managed by recirculating exhaust gas back into the power cylinder. Exhaust gas has a lower oxygen content, so it has the effect of slowing down the combustion process and therefore the peak temperatures that are reached during the power stroke. The lower the peak temperatures achieved, generally the lower the NOx output is. Of course, engine designers must balance all these effects as the engine is under development.
 * The need for such a significant amount of excess air (much more than even diesel applications) means the matching of the turbomachinery and EGR systems will be a challenge for engine designers.
 
 Cummins has written that hydrogen internal combustion engines tend to have the best fuel efficiency when they are heavily loaded [170][171]. Conversely, the hydrogen fuel cell tends to have the best efficiency at lighter load conditions. Generally, it would appear that the hydrogen ICE overall efficiency is likely to be lower than that of the hydrogen fuel cell due to differences in the physics of converting energy [169]. It is possible that the efficiency numbers in real-world operational hydrogen ICE and fuel cells may be close enough that matching the chosen technology to the vehicle’s duty cycle as well as the initial cost of the vehicle will be a critical part of determining the best product for a particular application.
@@ -740,11 +740,11 @@ These long-haul ranges are challenging for battery electric trucks that are curr
 
 ### 7.3.4 Pacific Northwest Hydrogen Association Hub
 
-A Washington-Oregon collaboration for DOE hydrogen hub funding is the Pacific Northwest Hydrogen Association ($\text{PNWH}_2$). The extensive hydro, wind and solar power in the Northwest region represents a significant resource for creating green hydrogen through electrolysis [82]. A goal of the DOE hydrogen hub effort is to promote diversity in energy associated with creating hydrogen. Where the Houston hub is capable of building off an existing fossil fuel hydrogen infrastructure with carbon capture and sequestration technology, the $\text{PNWH}_2$ hub is building from an existing renewable energy foundation to produce what one group terms evergreen hydrogen [83]. According to the Washington State Department of Commerce, “The $\text{PNWH}_2$ Hub serves a diverse stakeholder group in the Pacific Northwest that will leverage several of the region’s primary strengths: abundant renewable energy resources, utility companies that today produce 81,000 MWh of clean energy (including hydroelectric), 947,000 labor union members, 172 transit providers, 64 public colleges and university zones [82].”
+A Washington-Oregon collaboration for DOE hydrogen hub funding is the Pacific Northwest Hydrogen Association (PNWH2). The extensive hydro, wind and solar power in the Northwest region represents a significant resource for creating green hydrogen through electrolysis [82]. A goal of the DOE hydrogen hub effort is to promote diversity in energy associated with creating hydrogen. Where the Houston hub is capable of building off an existing fossil fuel hydrogen infrastructure with carbon capture and sequestration technology, the PNWH2 hub is building from an existing renewable energy foundation to produce what one group terms evergreen hydrogen [83]. According to the Washington State Department of Commerce, “The PNWH2 Hub serves a diverse stakeholder group in the Pacific Northwest that will leverage several of the region’s primary strengths: abundant renewable energy resources, utility companies that today produce 81,000 MWh of clean energy (including hydroelectric), 947,000 labor union members, 172 transit providers, 64 public colleges and university zones [82].”
 
 ### 7.3.5 Midwest Alliance for Clean Hydrogen Hub
 
-A Midwest group pursuing DOE hydrogen hub funding is the Midwest Alliance for Clean Hydrogen ($\text{MachH}_2$) [84]. This coalition includes representation from seven Midwest states — Illinois, Indiana,
+A Midwest group pursuing DOE hydrogen hub funding is the Midwest Alliance for Clean Hydrogen (MachH2) [84]. This coalition includes representation from seven Midwest states — Illinois, Indiana,
 
 April 4, 2023
 48
@@ -756,7 +756,7 @@ NORTH AMERICAN COUNCIL FOR FREIGHT EFFICIENCY
 <!-- page: 49 -->
 Hydrogen Trucks: Long Haul’s Future?
 
-Kentucky, Michigan, Minnesota, Ohio and Wisconsin. This diverse region’s electric grid has a significant, nuclear power component and a growing renewable power sector, representing yet another foundation to producing hydrogen. According to $\text{MachH}_2$, “Hydrogen projects already proposed by alliance members will support an estimated 4,500 construction jobs and 400 permanent positions once complete. Total construction spending is estimated at nearly $4 billion, including $1.7 billion in wages and $65 million to $70 million in state income taxes. The 400 permanent positions will generate an estimated $60 million in wages annually — or roughly $900 million over the 15-year operating life of the projects — and an additional $35 million to $40 million in state income taxes. More projects may be added as the hub continues to develop, leading to further economic benefits for the region [84].”
+Kentucky, Michigan, Minnesota, Ohio and Wisconsin. This diverse region’s electric grid has a significant, nuclear power component and a growing renewable power sector, representing yet another foundation to producing hydrogen. According to MachH2, “Hydrogen projects already proposed by alliance members will support an estimated 4,500 construction jobs and 400 permanent positions once complete. Total construction spending is estimated at nearly $4 billion, including $1.7 billion in wages and $65 million to $70 million in state income taxes. The 400 permanent positions will generate an estimated $60 million in wages annually — or roughly $900 million over the 15-year operating life of the projects — and an additional $35 million to $40 million in state income taxes. More projects may be added as the hub continues to develop, leading to further economic benefits for the region [84].”
 
 ### 7.3.6 Northeast Region Hydrogen Hub
 
@@ -811,7 +811,7 @@ NORTH AMERICAN COUNCIL FOR FREIGHT EFFICIENCY
 <!-- page: 51 -->
 Hydrogen Trucks: Long Haul’s Future?
 
-capture and store 90% of $\text{CO}_2$ produced in making the hydrogen [95][96]. The plant is described by the government of Alberta as follows: “Project details include a joint venture between Suncor and ATCO to build a hydrogen production facility, capable of producing 300,000 tonnes of hydrogen annually. It will be located near ATCO's Heartland Energy Centre near Fort Saskatchewan. The project is expected to face an investment decision in 2024 and could be operational as early as 2028. According to Suncor, approximately 65% of the hydrogen would be used by Suncor in refining processes and cogeneration of steam and electricity, reducing emissions by up to 60% at its Edmonton refinery. Another 20% would be added to the provincial natural gas grid to reduce emissions from uses such as home and business heating. The rest will be sold to various users.”
+capture and store 90% of CO2 produced in making the hydrogen [95][96]. The plant is described by the government of Alberta as follows: “Project details include a joint venture between Suncor and ATCO to build a hydrogen production facility, capable of producing 300,000 tonnes of hydrogen annually. It will be located near ATCO's Heartland Energy Centre near Fort Saskatchewan. The project is expected to face an investment decision in 2024 and could be operational as early as 2028. According to Suncor, approximately 65% of the hydrogen would be used by Suncor in refining processes and cogeneration of steam and electricity, reducing emissions by up to 60% at its Edmonton refinery. Another 20% would be added to the provincial natural gas grid to reduce emissions from uses such as home and business heating. The rest will be sold to various users.”
 
 In June 2021, Air Products also announced plans to build a hydrogen production and liquification plant in Edmonton [97][98]. The graphic in Figure 26 outlines the proposed hydrogen system.
 
@@ -865,8 +865,8 @@ Hydrogen also is being demonstrated in freight trains through the Canadian Pacif
 
 Hydrogen is a regional solution for Alberta due to the province’s extensive engagement with fossil fuels. Critical to success will be to actualize, at scale, carbon capture, utilization and storage (CCUS) technologies. According to the Albert Hydrogen Roadmap, Alberta currently hosts two large-scale CCUS projects that reduce industrial emissions, described below [94].
 
-* In 2015, the Quest project began operations to the northwest of Edmonton, capturing over five Mt of $\text{CO}_2$ by the end of 2020. The $\text{CO}_2$ emissions are captured from hydrogen production at three steam-methane-reforming (SMR) units at the Scotford Upgrader complex, which is owned by the Athabasca Oil Sands Project consortium and is operated by Shell Canada. Hydrogen is required to upgrade oil sands and heavy oil into synthetic crude oil, increasing its overall quality and efficiency to transport by pipeline. The captured $\text{CO}_2$ is transported 65 kilometers to the north by pipeline and injected by three wells into a two-kilometer deep underground geologic reservoir for permanent storage.
-* In 2020, the Alberta Carbon Trunk Line (ACTL) commenced operations as one of the world’s largest CCUS systems with $\text{CO}_2$ gathering and transportation infrastructure, and the capacity to transport up to 14.6 Mt of $\text{CO}_2$ per year. The ACTL currently transports approximately 1.6 Mt of captured $\text{CO}_2$ per year by a 240-kilometre pipeline from the North West Redwater Partnership Sturgeon Refinery and the Nutrien Redwater Fertilizer Facility to mature oilfields in Central
+* In 2015, the Quest project began operations to the northwest of Edmonton, capturing over five Mt of CO2 by the end of 2020. The CO2 emissions are captured from hydrogen production at three steam-methane-reforming (SMR) units at the Scotford Upgrader complex, which is owned by the Athabasca Oil Sands Project consortium and is operated by Shell Canada. Hydrogen is required to upgrade oil sands and heavy oil into synthetic crude oil, increasing its overall quality and efficiency to transport by pipeline. The captured CO2 is transported 65 kilometers to the north by pipeline and injected by three wells into a two-kilometer deep underground geologic reservoir for permanent storage.
+* In 2020, the Alberta Carbon Trunk Line (ACTL) commenced operations as one of the world’s largest CCUS systems with CO2 gathering and transportation infrastructure, and the capacity to transport up to 14.6 Mt of CO2 per year. The ACTL currently transports approximately 1.6 Mt of captured CO2 per year by a 240-kilometre pipeline from the North West Redwater Partnership Sturgeon Refinery and the Nutrien Redwater Fertilizer Facility to mature oilfields in Central
 
 April 4, 2023
 53
@@ -878,9 +878,9 @@ NORTH AMERICAN COUNCIL FOR FREIGHT EFFICIENCY
 <!-- page: 54 -->
 Hydrogen Trucks: Long Haul’s Future?
 
-Alberta for enhanced oil recovery (EOR) and permanent storage. Multiple partners are involved with the ACTL, including Wolf Midstream which owns and operates the pipeline and Enhance Energy, which owns and operates the geologic storage reservoir. Based on its current capacity, the ACTL could support an additional 12 Mt of $\text{CO}_2$ per year.
+Alberta for enhanced oil recovery (EOR) and permanent storage. Multiple partners are involved with the ACTL, including Wolf Midstream which owns and operates the pipeline and Enhance Energy, which owns and operates the geologic storage reservoir. Based on its current capacity, the ACTL could support an additional 12 Mt of CO2 per year.
 
-Carbon capture is not constrained to the production of hydrogen. NACFE also discussed with an Alberta company that diesel trucks with on-board carbon capture capability were being investigated for use in delivering materials to cement plants. The duty cycle for this is very specific to this operation. Diesel truck emissions are captured on the trucks as they travel from and then to the cement plant where they can deliver both raw materials and the $\text{CO}_2$ to the plant which uses both in the creation of cement. Remora is one of the technology developers for this capability [107][108]. An example diesel truck outfitted with Remora carbon capture is shown in Figure 28.
+Carbon capture is not constrained to the production of hydrogen. NACFE also discussed with an Alberta company that diesel trucks with on-board carbon capture capability were being investigated for use in delivering materials to cement plants. The duty cycle for this is very specific to this operation. Diesel truck emissions are captured on the trucks as they travel from and then to the cement plant where they can deliver both raw materials and the CO2 to the plant which uses both in the creation of cement. Remora is one of the technology developers for this capability [107][108]. An example diesel truck outfitted with Remora carbon capture is shown in Figure 28.
 
 > **Figure 28. On-board carbon capture (Remora) [109]**
 > Type: photograph
@@ -894,7 +894,7 @@ The Alberta hydrogen roadmap recognizes that several technology areas need to ma
 * Methane-based technologies such as methane pyrolysis and chemical looping which show significant promise but are not yet at a high technology-readiness level.
 * Underground coal gasification with CCUS and biomass conversion, which both show promise as clean hydrogen production methods for Alberta.
 * Research and analysis to better understand hydrogen impacts on high-pressure steel pipes as well as other system-wide impacts (for example, compression requirements, welding, and maintenance) to ensure operational safety as hydrogen is transported across the province to an expanding base of end users.
-* Research to determine ideal carbon sequestration locations and available pore space for permanent $\text{CO}_2$ storage in the province. Clean hydrogen production will require accompanying incremental carbon sequestration.
+* Research to determine ideal carbon sequestration locations and available pore space for permanent CO2 storage in the province. Clean hydrogen production will require accompanying incremental carbon sequestration.
 * Research for hydrogen storage options with natural gas, including salt caverns. Given its small molecular size, hydrogen may be prone to migration from storage compared to
 
 April 4, 2023
@@ -1091,7 +1091,7 @@ It is noteworthy that fleets such as TTSI have been investing in hydrogen trucks
 
 ### 7.7.5 Westport Hydrogen ICE Demonstrator
 
-Westport Fuel Systems unveiled a hydrogen ICE demonstrator truck in May 2022 [137]. Westport is a Tier 1 supplier of powertrain systems to OEMs. Westport described that the demonstrator, shown in Figure 35, adapts the liquid natural gas high pressure direct injection (HPDI) engine to run on hydrogen, achieving over a 98% reduction in $\text{CO}_2$ emissions versus a comparable diesel.
+Westport Fuel Systems unveiled a hydrogen ICE demonstrator truck in May 2022 [137]. Westport is a Tier 1 supplier of powertrain systems to OEMs. Westport described that the demonstrator, shown in Figure 35, adapts the liquid natural gas high pressure direct injection (HPDI) engine to run on hydrogen, achieving over a 98% reduction in CO2 emissions versus a comparable diesel.
 
 > **Figure 35. Westport prototype hydrogen ICE truck 2022 (Westport) [6]**
 > Type: photograph
@@ -1148,11 +1148,11 @@ Hydrogen Trucks: Long Haul’s Future?
 
 The key financial aspect going for the hydrogen ICE is a lower initial capital cost versus other alternatives like fuel cells and battery electric trucks. The efficiency of combusting hydrogen versus using it in a fuel cell, however, will always be significantly less. Therefore, hydrogen internal combustion engines will need more hydrogen per mile than comparable fuel cells, likely making operating costs higher. The simplicity of dropping in a hydrogen ICE in a diesel platform is also attractive, as one Cummins executive states, “These engines look like engines, they sound like engines, and fit where engines normally fit.”
 
-Hydrogen fueling infrastructure is still an issue whether hydrogen ICE or fuel cell. The choice of fuel type, liquid or gaseous for dispensing, and at what pressures, remains a potential challenge since this has not been standardized between the various competing hydrogen technologies. “Cummins specifies that the carbon-fiber fuel tanks of an $\text{H}_2$ truck will store the fuel at 700 bar (10,000 psi). Cummins notes that this is not an industry standard; systems can range from 350 bar (5,000 psi) to 700 bar. However, the company claims that 700-bar pressure enables greater onboard fuel storage and range. This storage pressure does increase the number of windings required for each fuel tank, which increases weight and cost of the system versus natural gas, but these tanks can be used for either a hydrogen ICE or FCEV [140].” Cummins expects the engine to be used in heavy-duty trucks where duty cycle ranges exceed 250 miles (400 km).
+Hydrogen fueling infrastructure is still an issue whether hydrogen ICE or fuel cell. The choice of fuel type, liquid or gaseous for dispensing, and at what pressures, remains a potential challenge since this has not been standardized between the various competing hydrogen technologies. “Cummins specifies that the carbon-fiber fuel tanks of an H2 truck will store the fuel at 700 bar (10,000 psi). Cummins notes that this is not an industry standard; systems can range from 350 bar (5,000 psi) to 700 bar. However, the company claims that 700-bar pressure enables greater onboard fuel storage and range. This storage pressure does increase the number of windings required for each fuel tank, which increases weight and cost of the system versus natural gas, but these tanks can be used for either a hydrogen ICE or FCEV [140].” Cummins expects the engine to be used in heavy-duty trucks where duty cycle ranges exceed 250 miles (400 km).
 
 NOx emissions remain an issue for internal combustion engines, even those burning hydrogen. Cummins believes these issues can be handled through prudent engineering and adapting proven technologies from diesel systems.
 
-Cummins expects they “Could bring a PFI (port fuel injection) $\text{H}_2$ system to market as early as 2023 and would be able to launch a DFI (direct fuel injection) system by 2025. FEV claims a 5% increase in efficiency from its PFI system to a DFI system [140].”
+Cummins expects they “Could bring a PFI (port fuel injection) H2 system to market as early as 2023 and would be able to launch a DFI (direct fuel injection) system by 2025. FEV claims a 5% increase in efficiency from its PFI system to a DFI system [140].”
 
 ### 7.7.7 Forklifts
 
@@ -1461,9 +1461,9 @@ The production cost of SMR-based hydrogen is shown as 3x to 4x less than electro
 
 The DOE’s hydrogen program targets for driving down the cost of hydrogen are [147]:
 
-* $1/kg clean $\text{H}_2$ production
-* $2/kg \text{H}_2$ delivery
-* $9/kg \text{H}_2$ storage
+* $1/kg clean H2 production
+* 2/kg H2 delivery
+* 9/kg H2 storage
 * $150/kW stationary electrolyzer capital
 * 73% stationary electrolyzer energy conversion efficiency
 * 80,000 hour stationary electrolyzer durability
@@ -1486,7 +1486,7 @@ Hydrogen Trucks: Long Haul’s Future?
 
 Storing compressed hydrogen requires tanks capable of high pressures and low temperatures. In 2015, DOE estimated the total costs of compressed storage systems shown in Figure 46 [160][161]. The costs are linked to manufacturing volumes.
 
-> **Figure 46. 700-bar compressed $\text{H}_2$ storage system cost breakout (DOE)[160]**
+> **Figure 46. 700-bar compressed H2 storage system cost breakout (DOE)[160]**
 > Type: stacked bar chart
 > Axes: Systems per Year (10000, 30000, 80000, 130000, 500000) vs Total System Cost, $/kWh
 > Series: He Fill & Leak Test Manufacturing, Hydro Test Manufacturing, Full Cure Manufacturing, B-Stage Cure (Cure #1) Manufacturing, Liner Annealing Manufacturing, Liner Blow Mold Manufacturing, Boss Materials, Tank Shoulder Foam Materials, Liner Blow Mold Materials, BOP & Assembly, Composite Materials & Processing

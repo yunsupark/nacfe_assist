@@ -192,10 +192,10 @@ Maneuverability is also a consideration, as the wires used to carry the energy f
 
 > **Figure 8: Charging Temperature With and Without High Power Charging Technology (Phoenix Contact)**
 > Type: Line chart
-> Axes: Time ($t$) vs Temperature Difference ($\Delta T [K]$)
-> Series: Temperature characteristic without cooling, Temperature characteristic with the HPC cooling system ($I = 500\text{ A}$)
-> Values: Qualitative chart showing higher temperature rise without cooling and stable lower temperature with cooling up to $\Delta T_{max}$.
-> Notes: Integrated temperature sensors measure the development of heat. The cooling system ensures that the normative limit temperature $\Delta T_{max}$ is not exceeded. Source: Phoenix Contact [24]
+> Axes: Time ($t$) vs Temperature Difference (Δ T [K])
+> Series: Temperature characteristic without cooling, Temperature characteristic with the HPC cooling system (I = 500 A)
+> Values: Qualitative chart showing higher temperature rise without cooling and stable lower temperature with cooling up to Δ Tmax.
+> Notes: Integrated temperature sensors measure the development of heat. The cooling system ensures that the normative limit temperature Δ Tmax is not exceeded. Source: Phoenix Contact [24]
 
 <!-- page: 30 -->
 > **Figure 9: Liquid Cooled Cables Enable Higher Level Charging (ITT Cannon)**

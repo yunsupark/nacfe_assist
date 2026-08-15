@@ -224,7 +224,7 @@ A good deal of government and industry literature published in the last 15 years
 > **Figure 8 — Curve dating to 2000 showing the "horsepower required to overcome aerodynamic drag and rolling friction/accessories as a function of travel speed for a typical Class 8 tractor-trailer"**
 > Type: Line chart
 > Axes: Level Highway Speed, MPH (20 to 90) vs Horsepower Contribution (0 to 350)
-> Series: Aerodynamic Drag ($C_D=0.6$), Rolling Friction and Accessories
+> Series: Aerodynamic Drag (CD=0.6), Rolling Friction and Accessories
 > Values: approx. curves showing rolling friction increasing linearly and aerodynamic drag increasing exponentially. Crossover point near 50 mph.
 > Notes: ORNL 2000-06268A/mh.
 
@@ -341,7 +341,7 @@ These five are combined in a single equation of motion for the vehicle, originat
 > Type: Schematic / equation display
 > Axes: none vs none
 > Series: none
-> Values: Equation text showing $(dv/dt)x(M0+MF)/G0 = F0xM0xg/(G0x1000) + (M0xg/G0)xH\%/100 + F1x\dots$
+> Values: Equation text showing (dv/dt)x(M0+MF)/G0 = F0xM0xg/(G0x1000) + (M0xg/G0)xH%/100 + F1x...
 > Notes: SAE 2007-01-4297. Road Evaluation of the Aerodynamic Characteristics of Heavy Trucks. Helmut H. Korst, Robert A. White and L. Daniel Metz, University of Illinois at Urbana.
 
 Figure 14: Equation of Motion for Coastdown of a Heavy Duty Truck (source: Road Evaluation of the Aerodynamic Characteristics of Heavy Vehicles, SAE 2007-01-4297)
@@ -530,14 +530,14 @@ Wind tunnels provide a controlled environment for precise (repeatable) test resu
 
 > **Figure 21 — Reynolds Number Is Related to Speed**
 > Type: Line chart
-> Axes: Re vs $C_D$
+> Axes: Re vs CD
 > Series: Subcritical, Critical Re, Transcritical Re, Transitional, Transcritical
-> Values: approx. curve showing $C_D$ vs Re with subcritical, critical, and transcritical regions.
+> Values: approx. curve showing CD vs Re with subcritical, critical, and transcritical regions.
 > Notes: Source: Wood, 2012 from Roshko, 1961.
 
 Figure 21: Reynolds Number Is Related to Speed
 
-The drag coefficient ($C_D$) measured in a wind tunnel on a typical vehicle will change depending on what wind speed is being tested. There is a speed above which the $C_D$ is insensitive to Reynolds Number
+The drag coefficient (CD) measured in a wind tunnel on a typical vehicle will change depending on what wind speed is being tested. There is a speed above which the CD is insensitive to Reynolds Number
 
 <!-- page: 30 -->
 Confidence Report: Determining Efficiency
@@ -563,12 +563,12 @@ Any and every efficiency technology can be tested using the track testing method
 
 Coastdown testing is one example of a type of track testing that can be applied to aerodynamics. The test methodology adopted by the EPA in their Phase I Greenhouse Gas rules, and developed with industry input, adapted two SAE car test methods to make them applicable to trucks, which are heavier than cars, with more axles and tires, much more surface areas, and worse aerodynamics.
 
-The coastdown test method involves accelerating a tractor-trailer to a highway speed and then letting it "coast down" to a stop, while measuring the deceleration, or change in velocity, that the vehicle experiences as its motion is resisted by aerodynamic forces as well as by tire pavement friction and a host of other factors that the test engineers diligently try to quantify. For example, the tire manufacturers would have supplied a tire rolling resistance factor ($C_{rr}$) based on their controlled lab tests of a new tire against a steel drum. The coastdown test engineers will have weighed the vehicle at each axle. Wind conditions will be monitored and recorded using track-side equipment, though some amount of crosswind is unavoidable. Since trucks are heavy, gravity can also impact results, so test tracks or roads are chosen that have been surveyed to be very flat. The mechanical drag of engine and driveline components will be estimated from a combination of component lab tests and from the low speed moments of the coastdown test, as these represent the major causes of drag in those moments, as shown in Power vs. Speed in Figure 12. Figure 22 presents a simplified view of what is actually measured, along with some of the assumptions.
+The coastdown test method involves accelerating a tractor-trailer to a highway speed and then letting it "coast down" to a stop, while measuring the deceleration, or change in velocity, that the vehicle experiences as its motion is resisted by aerodynamic forces as well as by tire pavement friction and a host of other factors that the test engineers diligently try to quantify. For example, the tire manufacturers would have supplied a tire rolling resistance factor (Crr) based on their controlled lab tests of a new tire against a steel drum. The coastdown test engineers will have weighed the vehicle at each axle. Wind conditions will be monitored and recorded using track-side equipment, though some amount of crosswind is unavoidable. Since trucks are heavy, gravity can also impact results, so test tracks or roads are chosen that have been surveyed to be very flat. The mechanical drag of engine and driveline components will be estimated from a combination of component lab tests and from the low speed moments of the coastdown test, as these represent the major causes of drag in those moments, as shown in Power vs. Speed in Figure 12. Figure 22 presents a simplified view of what is actually measured, along with some of the assumptions.
 
 > **Figure 22 — Coastdown Testing (2013 SAE COMVEC Aero Plenary Presentation)**
 > Type: Diagram / table
 > Axes: none vs none
-> Series: Measurements (Velocity vs. Time, Effective Wind Speed vs. Time, Effective Wind Angle vs. Time, Ambient Conditions, Axle Loading), Supplied Factors (Tire $C_{rr}$, Rotating Wheel Mass), Estimations (Mechanical Drag, Aerodynamic Drag, Gravity Effects), Assumptions (Re Effects Constant, Aero Cd Constant, $C_{rr}$ Accurate With Temp, $C_{rr}$ Constant With Speed, Grade Effects Minimal, Cross Wind Effects Minimal, Trailer Geometry Constant, Speed Range Effects Minimal, Anemometer Effects Minimal, Vehicle Weight Not A Factor)
+> Series: Measurements (Velocity vs. Time, Effective Wind Speed vs. Time, Effective Wind Angle vs. Time, Ambient Conditions, Axle Loading), Supplied Factors (Tire Crr, Rotating Wheel Mass), Estimations (Mechanical Drag, Aerodynamic Drag, Gravity Effects), Assumptions (Re Effects Constant, Aero Cd Constant, Crr Accurate With Temp, Crr Constant With Speed, Grade Effects Minimal, Cross Wind Effects Minimal, Trailer Geometry Constant, Speed Range Effects Minimal, Anemometer Effects Minimal, Vehicle Weight Not A Factor)
 > Values: none
 > Notes: Source: 2013 SAE COMVEC Aero Plenary Presentation.
 

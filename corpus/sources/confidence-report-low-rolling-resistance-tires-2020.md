@@ -194,26 +194,26 @@ Note that when the term dual is used without a qualifier as to rolling resistanc
 
 ### 1.2.1 What is Rolling Resistance?
 
-The rolling resistance of a tire is defined as the force needed to keep a tire rolling at a constant speed on a level surface and usually is expressed in the form of a rolling resistance coefficient ($C_{RR}$). An easy way to think about $C_{RR}$ is as the ratio given by the force needed to keep a tire rolling to the weight on the contact patch. The tire’s rolling friction increases as more weight is put on the contact patch since in the real world, the rolling frictional coefficient of a tire is always greater than zero. (Figure 5).
+The rolling resistance of a tire is defined as the force needed to keep a tire rolling at a constant speed on a level surface and usually is expressed in the form of a rolling resistance coefficient (CRR). An easy way to think about CRR is as the ratio given by the force needed to keep a tire rolling to the weight on the contact patch. The tire’s rolling friction increases as more weight is put on the contact patch since in the real world, the rolling frictional coefficient of a tire is always greater than zero. (Figure 5).
 
 > **Figure 5: Rolling Resistance Coefficient**
 > Type: Schematic diagram
 > Axes: None
 > Series: None
 > Values: None
-> Notes: Diagram showing a tire with weight felt at contact patch (W), force needed to keep tire rolling (F), and equation $C_{RR} = F/W$.
+> Notes: Diagram showing a tire with weight felt at contact patch (W), force needed to keep tire rolling (F), and equation CRR = F/W.
 
 <!-- page: 20 -->
 Confidence Report on Low Rolling Resistance Tires
 October 15, 2020 Page 20
 
-There are several standard methods for calculating a tire’s $C_{RR}$. One common method is prescribed by ISO 28580, which specifies the test rig and conditions under which a tire is tested. [3] A $C_{RR}$ resulting from an ISO 28580 test is expressed in the unit “kg force per metric ton.” Since there are 1,000 kg in a metric ton, this can be used with any unit of measure divided by 1,000. For example, a tire with a rolling resistance of 10 and a load of 10,000 lbs. requires 100 lbs. of force to keep it rolling at a constant speed (10,000 lbs. x 10/1000 = 100 lbs.). For a tire to be accepted as SmartWay verified, at least three tires must be tested using the ISO 28580 or equivalent method and the average of the tests must be below the SmartWay target values for the tire position. (Figure 6.)
+There are several standard methods for calculating a tire’s CRR. One common method is prescribed by ISO 28580, which specifies the test rig and conditions under which a tire is tested. [3] A CRR resulting from an ISO 28580 test is expressed in the unit “kg force per metric ton.” Since there are 1,000 kg in a metric ton, this can be used with any unit of measure divided by 1,000. For example, a tire with a rolling resistance of 10 and a load of 10,000 lbs. requires 100 lbs. of force to keep it rolling at a constant speed (10,000 lbs. x 10/1000 = 100 lbs.). For a tire to be accepted as SmartWay verified, at least three tires must be tested using the ISO 28580 or equivalent method and the average of the tests must be below the SmartWay target values for the tire position. (Figure 6.)
 
 | | Steer | Drive | Trailer |
 | :--- | :---: | :---: | :---: |
-| SmartWay Target $C_{RR}$ (ISO28580) | 6.5 | 6.6 | 5.1 |
+| SmartWay Target CRR (ISO28580) | 6.5 | 6.6 | 5.1 |
 
-Figure 6: SmartWay $C_{RR}$ Targets
+Figure 6: SmartWay CRR Targets
 
 ## 1.3 Methodology
 
@@ -264,9 +264,9 @@ October 15, 2020 Page 22
 > Values: Purchase Price: $0.038 per Mile; Rolling Resistance: $0.13 per Mile
 > Notes: Illustrates that only a small portion of a tire's true cost is visible in the purchase price.
 
-According to one major U.S. tire manufacturer that has tested many of the tires available in the U.S. from the various manufacturers at an independent lab, the $C_{RR}$ for an on-highway truck tires varies from a low of 4.4 to over 9, with the lower figure of 4.4 indicating lower rolling resistance. This means that not only is the hidden cost of fuel far greater than the tire’s price, but that the difference in the impact on fuel economy that one tire versus another can have is also greater than those tires’ initial cost. Put simply, fleets purchasing tires without considering the fuel expenditure that will be driven by their tire choice are missing the biggest impact on the fleet’s bottom line that the tires will have.
+According to one major U.S. tire manufacturer that has tested many of the tires available in the U.S. from the various manufacturers at an independent lab, the CRR for an on-highway truck tires varies from a low of 4.4 to over 9, with the lower figure of 4.4 indicating lower rolling resistance. This means that not only is the hidden cost of fuel far greater than the tire’s price, but that the difference in the impact on fuel economy that one tire versus another can have is also greater than those tires’ initial cost. Put simply, fleets purchasing tires without considering the fuel expenditure that will be driven by their tire choice are missing the biggest impact on the fleet’s bottom line that the tires will have.
 
-Today, tire manufacturers do not disclose a tire’s rolling resistance to the general public, though it may be revealed selectively to some large fleets. [4] The best indication of a tire’s $C_{RR}$ comes from EPA SmartWay, which has a list of tires it has verified as low rolling resistance. [5] For a tire to qualify for the SmartWay list, it must meet a rolling resistance threshold set by SmartWay for each type of tire. According to SmartWay, the threshold is set at a level that reduces fuel consumption by 3% or more relative to the best-selling new tires for line haul tractor-trailers.
+Today, tire manufacturers do not disclose a tire’s rolling resistance to the general public, though it may be revealed selectively to some large fleets. [4] The best indication of a tire’s CRR comes from EPA SmartWay, which has a list of tires it has verified as low rolling resistance. [5] For a tire to qualify for the SmartWay list, it must meet a rolling resistance threshold set by SmartWay for each type of tire. According to SmartWay, the threshold is set at a level that reduces fuel consumption by 3% or more relative to the best-selling new tires for line haul tractor-trailers.
 
 A consequence of this SmartWay list is that it only incentivizes tire manufacturers to make sure their tires fall below the threshold, but not to decrease their rolling resistance any further than that. Finally, while lower rolling resistance will improve fuel economy, it is not without its trade-offs. Nearly every tire manufacturer has achieved a degree of its rolling resistance reductions by sacrificing tread depth, which
 
@@ -332,7 +332,7 @@ The current trend in LRR tires is moving toward a closed shoulder with a tighter
 
 ### 3.2.2 Tread Depth
 
-Treads are typically shallower on LRR tires for the same reason — to minimize tread movement at the contact patch. There is a general belief that shallower tread provides less traction and will run fewer miles to removal, simply because there is less rubber there to begin with. In the early days of LRR tires, when many tire manufacturers relied heavily on reduced tread depth to meet the SmartWay requirements, this was mostly true. However, tread compounds and manufacturing processes developed by the leading tire manufacturers have improved over the years, enabling engineers to specify stiffer, more resilient rubber for the tread faces that is capable of running more miles per $32^{\text{nd}}$ of an inch of rubber with minimal impact to traction. One leading tire manufacturer indicated that early data received on its newest LRR tires actually have improved tread life, up to 400,000 miles in the drive position.
+Treads are typically shallower on LRR tires for the same reason — to minimize tread movement at the contact patch. There is a general belief that shallower tread provides less traction and will run fewer miles to removal, simply because there is less rubber there to begin with. In the early days of LRR tires, when many tire manufacturers relied heavily on reduced tread depth to meet the SmartWay requirements, this was mostly true. However, tread compounds and manufacturing processes developed by the leading tire manufacturers have improved over the years, enabling engineers to specify stiffer, more resilient rubber for the tread faces that is capable of running more miles per 32nd of an inch of rubber with minimal impact to traction. One leading tire manufacturer indicated that early data received on its newest LRR tires actually have improved tread life, up to 400,000 miles in the drive position.
 
 <!-- page: 26 -->
 Confidence Report on Low Rolling Resistance Tires
@@ -391,13 +391,13 @@ For these reasons, fleets testing tires on their own do not always achieve stati
 
 Tire manufacturers test their tires to determine rolling resistance using one of two recognized test procedures: ISO 28580 or SAE J1269. [3, 8] The actual results of these tests, usually expressed numerically, are not publicly available, but are used by OEMs and various regulatory agencies when calculating, for example, GHG reduction credits. The finding in isolation may not be that useful to a tire buyer as it speaks only to its rolling resistance, which is not the only factor to be considered in a tire specification decision.
 
-Michelin's website allows users to compare the LRR values of almost any make and model tire to a baseline. [4] Users can choose their own baseline tire and the model for comparison. Michelin presents relative rolling resistance on a scale where the baseline tire has a value of 100. Customer can select the brand and model. The compared tire has a plus/minus value (again, customer can select the brand and model), e.g., baseline = 100, compared tire = 91, or perhaps 110. The lower number indicates less rolling resistance than the baseline. (In this example, the compared tire has a 9% lower $C_{RR}$.)
+Michelin's website allows users to compare the LRR values of almost any make and model tire to a baseline. [4] Users can choose their own baseline tire and the model for comparison. Michelin presents relative rolling resistance on a scale where the baseline tire has a value of 100. Customer can select the brand and model. The compared tire has a plus/minus value (again, customer can select the brand and model), e.g., baseline = 100, compared tire = 91, or perhaps 110. The lower number indicates less rolling resistance than the baseline. (In this example, the compared tire has a 9% lower CRR.)
 
 Michelin also offers a fuel economy tool, which allows a user to provide information on their vehicle, and then gets information on the fuel economy gains or losses that would result from a given tire selection.
 
 Goodyear provides a total potential fuel savings tool using recommended Goodyear tires based on the fleet’s tractor and trailer configurations. Other manufacturers offer similar tools to help fleets make decisions. [9]
 
-Finally, the aforementioned EPA SmartWay Verified Tire List offers some guidance in the availability and selection of LRR tires. SmartWay does not reveal the actual $C_{RR}$ values for any tires but lists the tires that meet its target threshold for a given axle position. [5]
+Finally, the aforementioned EPA SmartWay Verified Tire List offers some guidance in the availability and selection of LRR tires. SmartWay does not reveal the actual CRR values for any tires but lists the tires that meet its target threshold for a given axle position. [5]
 
 # 5 Trends in Tire Purchasing
 
@@ -434,9 +434,9 @@ Another place where this trend is apparent is in the growth of the *SmartWay Ver
 
 Tire manufacturers do not discuss sales by tire model, but some have gone so far as to say that there is no reason to produce a non-SmartWay verified tire for the on-highway long-haul market. This may have been a generalization, as all tire manufacturers are quick to point out that correct application is critical, and that rolling resistance is only one of several criteria for selecting the right tire. But by their having made this observation, it emphasizes the recognition that the SmartWay List has received in the industry.
 
-Truck OEMs also indirectly confirm this trend. To meet Phase 1 requirements of EPA Greenhouse Gas (GHG) regulations, truck manufacturers are required to document the rolling resistance coefficient of the tires fitted to the vehicles they produce. [11] The truck OEMs interviewed by the study team indicated that so far the specs the customers desire have allowed the OEMs to meet the standards. In other words, the OEMs have not needed to push for more fuel-efficient tires than already were requested by the customer. As one manufacturer said, “Customers seem to know which tire is best for their application,” providing as evidence the fact that the average $C_{RR}$ for the tires the customers specified was lowest in the sub-category associated with on-highway sleeper trucks.
+Truck OEMs also indirectly confirm this trend. To meet Phase 1 requirements of EPA Greenhouse Gas (GHG) regulations, truck manufacturers are required to document the rolling resistance coefficient of the tires fitted to the vehicles they produce. [11] The truck OEMs interviewed by the study team indicated that so far the specs the customers desire have allowed the OEMs to meet the standards. In other words, the OEMs have not needed to push for more fuel-efficient tires than already were requested by the customer. As one manufacturer said, “Customers seem to know which tire is best for their application,” providing as evidence the fact that the average CRR for the tires the customers specified was lowest in the sub-category associated with on-highway sleeper trucks.
 
-The trend is likely to continue, for it is one that should benefit most on-highway truck fleets. By 2027, the $C_{RR}$ targets in Phase 2 of the GHG regulations decrease by 8% to 27% (depending on vehicle type and axle position) from the Phase 1 levels and will meet or exceed the SmartWay threshold by 2021 for non-vocational vehicles. Truck and tire manufacturers continue to educate their customers on the benefits of LRR tires, new tire technology will continue to diminish the traction and tire life trade-offs associated with LRR tires, and SmartWay and other organizations will continue to look for ways to educate tire buyers about the fuel impact of tires.
+The trend is likely to continue, for it is one that should benefit most on-highway truck fleets. By 2027, the CRR targets in Phase 2 of the GHG regulations decrease by 8% to 27% (depending on vehicle type and axle position) from the Phase 1 levels and will meet or exceed the SmartWay threshold by 2021 for non-vocational vehicles. Truck and tire manufacturers continue to educate their customers on the benefits of LRR tires, new tire technology will continue to diminish the traction and tire life trade-offs associated with LRR tires, and SmartWay and other organizations will continue to look for ways to educate tire buyers about the fuel impact of tires.
 
 # 6 Tire Regulations
 
@@ -452,15 +452,15 @@ October 15, 2020 Page 31
 
 The Phase 2 rule set emission standards for tractor-trailers, vocational vehicles, and heavy-duty pickup trucks and vans. The rule expanded on the Phase 1 standards (published on September 15, 2011, for model years 2014 through 2018) and introduced first-ever controls on trailers and glider vehicles. As of the fall of 2020, the trailer portion of this rule remains in limbo. A stay on the implementation of the GHG Phase 2 rules for trailers was issued by the U.S. Court of Appeals. This stay may have the effect of suspending the trailer rules indefinitely. [15]
 
-The standards phase-in is between MY 2021 and MY 2027 for engines and vehicles and between MY 2018 and MY 2027 for trailers and gliders. The agencies outline several benefits of the rule, including reducing carbon dioxide ($CO_2$) emissions and fuel consumption from new on-road vehicles, reducing the costs for transporting goods, and spurring innovation in the clean energy technology sector.
+The standards phase-in is between MY 2021 and MY 2027 for engines and vehicles and between MY 2018 and MY 2027 for trailers and gliders. The agencies outline several benefits of the rule, including reducing carbon dioxide (CO2) emissions and fuel consumption from new on-road vehicles, reducing the costs for transporting goods, and spurring innovation in the clean energy technology sector.
 
 The Phase 2 rule maintains the underlying regulatory structure developed in Phase 1, however, unlike Phase 1, the rule puts forth “technology advancing standards” (i.e., standards based “not only on currently available technologies but also on utilization of technologies now under development or not yet widely deployed”). These may include advancements in the engine, transmission, driveline, aerodynamic design, lower rolling resistance tires, and extended idle reduction technologies.
 
-The agencies estimate that the Phase 2 standards will achieve vehicle fuel savings of up to 25% beyond Phase 1 when fully implemented and depending on the vehicle category. (See Figure 13.) [12] Overall, the agencies estimate it could cut GHG emissions by 1.1 billion metric tons of $CO_2$ and conserve 2 billion barrels of oil over the lifetime of the vehicles sold in the regulatory time frame. [13]
+The agencies estimate that the Phase 2 standards will achieve vehicle fuel savings of up to 25% beyond Phase 1 when fully implemented and depending on the vehicle category. (See Figure 13.) [12] Overall, the agencies estimate it could cut GHG emissions by 1.1 billion metric tons of CO2 and conserve 2 billion barrels of oil over the lifetime of the vehicles sold in the regulatory time frame. [13]
 
-> **Figure 13: $CO_2$ and Fuel Consumption**
+> **Figure 13: CO2 and Fuel Consumption**
 > Type: Line chart
-> Axes: Model year (2010–2025) vs $CO_2$ and fuel consumption relative to 2010 (0.00–1.00)
+> Axes: Model year (2010–2025) vs CO2 and fuel consumption relative to 2010 (0.00–1.00)
 > Series: Class 8 heavy haul, Class 7-8 heavy-duty vocational, Class 6-7 medium duty vocational, Class 2b-3 commercial pickups, vans, Class 7 tractor, day cab, low roof, trailer, Class 7 tractor, day cab high roof, trailer, Class 8 tractor, sleeper cab, high roof, Class 8 tractor, sleeper cab, high roof, trailer
 > Values: Multiple lines showing downward trend from 1.00 down to approx. 0.60–0.75 by 2025.
 > Notes: Indicates Phase 1 and Phase 2 transition zones.
@@ -1051,7 +1051,7 @@ The study team developed the following recommendations for fleets to follow:
 * Fleets should understand the total life cycle cost for tires in their specific operation, including the up-front purchase price, weight, wear, retreadability, etc.
 * Fleets should use the lowest rolling resistance tires for their specific needs from a trusted manufacturer. Tires on the *SmartWay Verified List of Low Rolling Resistance New and Retread Tire Technologies* meet only a specific rolling resistance threshold and can encompass a wide range of quality, fuel efficiency and service life.
 * Tire manufacturers should continue to develop even lower LRR tires while continuing to lessen the tradeoffs in traction and tread life.
-* Tire manufacturers should work to agree on a testing protocol, with the goal of making $C_{RR}$ data widely available to tire purchasers.
+* Tire manufacturers should work to agree on a testing protocol, with the goal of making CRR data widely available to tire purchasers.
 * Tire manufacturers should publicly share the rolling resistance coefficient (along with wearability and wet traction) for all their tires once industry-wide collaboration and agreement on a standard testing protocol is achieved.
 * Tractor and trailer makers and their dealers, industry associations, EPA SmartWay, TMC, NACFE and others can better assist fleets in these decisions by making data more accessible to tire purchasers.
 * EPA SmartWay should develop tiers of rolling resistance tire categories to encourage early adopters to utilize the best tires for their needs.
@@ -1171,7 +1171,7 @@ So, small though it was, the fleet did see a fuel cost savings, which when coupl
 
 In 2011 the fleet chose to test “super” low rolling resistance wide-base tires against the wide-base tires its vehicles were by then uniformly equipped with. The super LRR tires showed an additional savings of 0.2 MPG over the wide-base tires. Fuel prices were slightly more than double those of 2004, so the savings were better, $1,650 dollars per truck on 433 gallons of fuel — but still less than forecast by the tire manufacturer.
 
-A few issues arose in testing the super LRR wide-base tires against the fleet’s current wide-base tires. The acquisition cost of that first batch of super LRR tires was (and remains), higher than the wide-base tires they replaced. On top of that, tire life was shortened due to the generally thinner tread on the new tires. Miles per $32^{\text{nd}}$ decreased slightly as well. As the tires wore, lack-of-traction complaints from some of the drivers resurfaced, though that is believed to be more a matter of perception rather than a genuine safety issue.
+A few issues arose in testing the super LRR wide-base tires against the fleet’s current wide-base tires. The acquisition cost of that first batch of super LRR tires was (and remains), higher than the wide-base tires they replaced. On top of that, tire life was shortened due to the generally thinner tread on the new tires. Miles per 32nd decreased slightly as well. As the tires wore, lack-of-traction complaints from some of the drivers resurfaced, though that is believed to be more a matter of perception rather than a genuine safety issue.
 
 The overall shorter mileage-to-takeoff did pose a problem for this fleet, but a suitable workaround was implemented. This fleet disposes of its own equipment. Its tractors typically have about 600,000 – 625,000 miles at retirement. Drive tires in this fleet typically last about 250,000 miles. In this scenario, a tractor would get tires at 250,000 miles, again at 500,000 miles and be retired with approximately 50% rubber left on the tire. The loss of some tire life seen with the super LRR wide-base tires would have forced the purchase and installation of a third set of tires during the tractors' life cycle to meet the resale
 
@@ -1183,4 +1183,4 @@ requirements in some cases. To solve this problem, units with about 50% tread le
 
 Ultimately, it was determined that while the super LRR wide-base tires did reduce fuel consumption, those savings were offset by the additional initial cost, the loss of usable tire life, and the possibility of having to purchase an additional set of tires — including labor to install — during a tractor’s life cycle.
 
-Therefore, the use of super LRR wide-base tires still is under consideration at the time of this writing. Fleet management says it is open to more testing, and acknowledges that the test it ran was a small sample on early-generation super LRR wide-base tires. To that end, the fleet currently has a small group of trailers on order which will be equipped with the latest generation LRR wide-base tires. These tires will be closely audited for fuel efficiency and miles-per-$32^{\text{nd}}$ as the fleet continues in its quest of gaining MPGs and lowering operating costs.
+Therefore, the use of super LRR wide-base tires still is under consideration at the time of this writing. Fleet management says it is open to more testing, and acknowledges that the test it ran was a small sample on early-generation super LRR wide-base tires. To that end, the fleet currently has a small group of trailers on order which will be equipped with the latest generation LRR wide-base tires. These tires will be closely audited for fuel efficiency and miles-per-32nd as the fleet continues in its quest of gaining MPGs and lowering operating costs.

@@ -17,7 +17,7 @@ Dear Josh:
 
 Thank you for allowing us to support the recently completed SAE J1321 fuel economy test that we conducted jointly with CR England. The North American Council for Freight Efficiency is working to fulfill our mission to help double the efficiency of North American goods movement and this project allowed us to help Peloton with their development and promotion of your freight efficiency technology.  
 
-The following is our report on the test as an independent third party organization witnessing and validating the processes used to ensure an unbiased test of the platooning technology. The very capable, combined team of engineers and technicians from CR England, Peloton and NACFE conducted the tests during the week of November $18^{\text{th}}$, 2013.  
+The following is our report on the test as an independent third party organization witnessing and validating the processes used to ensure an unbiased test of the platooning technology. The very capable, combined team of engineers and technicians from CR England, Peloton and NACFE conducted the tests during the week of November 18th, 2013.  
 
 Please contact me at mike.roeth@nacfe.org or 260.750.0106 to discuss any details of the report or to answer any questions. Thanks for engaging us and we look forward to supporting additional projects such as this one in the future.  
 
@@ -75,7 +75,7 @@ Since 2009, CR England has been testing trucks per SAE test procedures. The curr
 
 ### CR England Peloton Test the week of November 18
 
-In mid-October 2013, Peloton Technology engaged the NACFE and CR England to assist them with a fuel efficiency test of their platooning technology. Many meetings were held to plan the testing that culminated in a fuel efficiency test the week of November $18^{\text{th}}$ in Salt Lake City per the protocol described above.
+In mid-October 2013, Peloton Technology engaged the NACFE and CR England to assist them with a fuel efficiency test of their platooning technology. Many meetings were held to plan the testing that culminated in a fuel efficiency test the week of November 18th in Salt Lake City per the protocol described above.
 
 ### Test Equipment
 
@@ -98,7 +98,7 @@ Equipment was organized at the CR England terminal after new tires were supplied
 
 ### Tuesday, November 19
 
-Two days of testing were conducted on Tuesday and Wednesday. All six test segments were completed on Day 1 with 30 seconds of separation between all three vehicles; the control truck, Peloton Peterbilt C1 and Peloton Peterbilt B1. This is approximately $\frac{1}{2}$ mile between each tractor trailer. As stated before, this was a baseline test of the two Peloton Peterbilt Trucks. Tests were conducted per the previously mentioned procedures and fuel tank weights and exact distances documented on the test data sheets.
+Two days of testing were conducted on Tuesday and Wednesday. All six test segments were completed on Day 1 with 30 seconds of separation between all three vehicles; the control truck, Peloton Peterbilt C1 and Peloton Peterbilt B1. This is approximately (1/2) mile between each tractor trailer. As stated before, this was a baseline test of the two Peloton Peterbilt Trucks. Tests were conducted per the previously mentioned procedures and fuel tank weights and exact distances documented on the test data sheets.
 
 ### Wednesday, November 20
 
@@ -114,7 +114,7 @@ During the weeks leading up to the tests, NACFE reviewed the CR England test pro
 
 ### Test Results
 
-As stated above, tank weights were recorded after each segment. This was completed by both CR England test technicians and Peloton engineers simultaneously. Mike Roeth witnessed this data collection. Data documentation sheets were submitted to Michael Stapley, CR England Test Lead Engineer. Analysis was completed and the test data formalized in the test report shown in Figure 2. Mike Roeth confirmed its accuracy to the test data collection and a test analysis meeting was held on Friday, November $22^{\text{nd}}$, between CR England, Peloton Technology and NACFE.
+As stated above, tank weights were recorded after each segment. This was completed by both CR England test technicians and Peloton engineers simultaneously. Mike Roeth witnessed this data collection. Data documentation sheets were submitted to Michael Stapley, CR England Test Lead Engineer. Analysis was completed and the test data formalized in the test report shown in Figure 2. Mike Roeth confirmed its accuracy to the test data collection and a test analysis meeting was held on Friday, November 22nd, between CR England, Peloton Technology and NACFE.
 
 ---
 

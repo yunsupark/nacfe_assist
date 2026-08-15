@@ -517,7 +517,7 @@ May 5, 2022 48
 > Type: infographic / diagram
 > Axes: none
 > Series: Diesel vs BEV
-> Values: Diesel: Freight Max ~49,500 lbs., Allowed GVWR 80,000 lbs., Tare ~13,500 lbs. + 17,000 lbs.; BEV: Freight Max ~45,500 lbs., $\Delta$ ~4,000 lbs., Allowed GVWR 82,000 lbs., Tare ~13,500 lbs. + 22,500 lbs.
+> Values: Diesel: Freight Max ~49,500 lbs., Allowed GVWR 80,000 lbs., Tare ~13,500 lbs. + 17,000 lbs.; BEV: Freight Max ~45,500 lbs., Δ ~4,000 lbs., Allowed GVWR 82,000 lbs., Tare ~13,500 lbs. + 22,500 lbs.
 > Notes: 75% of loads are below 75,000 GVW
 
 Figure 29. Freight weight example comparison
@@ -819,9 +819,9 @@ The DLA Piper group summarizes the rule, “Warehouse operators must earn a spec
 
 | Phase | Warehouse Size (square feet) | Initial Reporting Date (Annual WAIRE Report) | Initial Compliance Period |
 | :--- | :--- | :--- | :--- |
-| 1 | $\ge 250,000$ | January 31, 2023 | January 1, 2022 to December 31, 2022 |
-| 2 | $\ge 150,000 - <250,000$ | January 31, 2024 | January 1, 2023 to December 31, 2023 |
-| 3 | $\ge 100,000 - <150,000$ | January 31, 2025 | January 1, 2024 to December 31, 2024 |
+| 1 | ≥ 250,000 | January 31, 2023 | January 1, 2022 to December 31, 2022 |
+| 2 | ≥ 150,000 - <250,000 | January 31, 2024 | January 1, 2023 to December 31, 2023 |
+| 3 | ≥ 100,000 - <150,000 | January 31, 2025 | January 1, 2024 to December 31, 2024 |
 
 Figure 43. ISR Rule phase in (SCAQMD)
 
@@ -2810,8 +2810,8 @@ dependent, at minimum, on regional charging infrastructure.
 As Run on Less – Electric concluded in September 2021, NACFE predicted that 70% of this market
 segment was electrifiable. Given the more detailed analysis, interviews with industry experts and further
 research, we now consider this market segment to be 50% electrifiable with lower average daily miles
-which results in the avoidance of nearly 29.4 million metric tonnes of $CO_2e$ (e equals carbon dioxide
-equivalent) annually as shown in Figure 113. [94] NACFE estimates the entire $CO_2e$ to be eliminated by
+which results in the avoidance of nearly 29.4 million metric tonnes of CO2e (e equals carbon dioxide
+equivalent) annually as shown in Figure 113. [94] NACFE estimates the entire CO2e to be eliminated by
 this segment at an average of 250 miles per day to be 97.8 million metric tonnes.
 
 <!-- page: 124 -->
@@ -2823,7 +2823,7 @@ May 5, 2022 124
 > Type: infographic / graphic
 > Axes: none
 > Series: none
-> Values: 468,782 HD Regional Haul Tractors (half the total population); 29,351,582 metric tonnes of $CO_2e$ would be prevented from entering the atmosphere each year
+> Values: 468,782 HD Regional Haul Tractors (half the total population); 29,351,582 metric tonnes of CO2e would be prevented from entering the atmosphere each year
 > Notes: NACFE NORTH AMERICAN COUNCIL FOR FREIGHT EFFICIENCY
 
 While specifications are incomplete on production vehicles, NACFE found information from various

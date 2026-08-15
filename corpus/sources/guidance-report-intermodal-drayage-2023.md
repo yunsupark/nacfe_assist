@@ -2405,7 +2405,7 @@ Heavy-Duty Regional Haul Tractors. NACFE. https://nacfe.org/downloads/electric-t
 26. Union Pacific website. Pros & Cons of Freight Shipping Modes: Truck, Rail, Water & Air 
 Compared. UP. https://www.up.com/customers/track-record/tr091019-transportation-modes-all.htm
 27. Iden, Michael. Oct. 25, 2017. US Freight Rail Fuel Efficiency – 1920-2015 & Beyond. Union Pacific 
-presentation at the $19^{\text{th}}$ Railroad Environmental Conference. Archived at RailTec, University of 
+presentation at the 19th Railroad Environmental Conference. Archived at RailTec, University of 
 Illinois. https://railtec.illinois.edu/wp/wp-content/uploads/pdf-archive/9.1.pdf .
 28. National Academies of Sciences, Engineering, and Medicine. 2019. Impacts of Policy-Induced 
 Freight Modal Shifts. Washington, DC: The National Academies Press. 

@@ -28,7 +28,7 @@ CONFIDENCE REPORT: EXECUTIVE SUMMARY – NATURAL GAS’ ROLE IN DECARBONIZING TR
 
 Natural gas (NG) is a fuel that has the potential to help reduce total greenhouse gas (GHG) emissions, but also has significant advantages in reducing the more immediate and local health effects caused by air pollutants like nitrogen oxides (NOx) and particulate matter (PM). PM filters are very efficient and the actual difference in PM output between diesel and NG is very small. The big difference between natural gas and diesel is NOx. Replacing diesels with spark-ignited natural gas engines could improve a fleet’s ability to meet upcoming more stringent emission standards.
 
-The net $\text{CO}_2$ benefit of a natural gas engine is in the range of 13% to 18% compared to diesel fuel. Natural gas produces approximately 27% less $\text{CO}_2$ per unit of energy on a fuel-comparison basis compared with No. 2 diesel fuel. However, the natural gas engine is less efficient than a diesel and natural gas needs to be compressed for storage on the vehicle. Methane leakage that occurs primarily in the upstream process in the natural gas supply system (pipelines and local distribution systems) also must be considered. The Environmental Protection Agency (EPA) estimates the leakage to be 1.4%, and there are some higher estimates. 
+The net CO2 benefit of a natural gas engine is in the range of 13% to 18% compared to diesel fuel. Natural gas produces approximately 27% less CO2 per unit of energy on a fuel-comparison basis compared with No. 2 diesel fuel. However, the natural gas engine is less efficient than a diesel and natural gas needs to be compressed for storage on the vehicle. Methane leakage that occurs primarily in the upstream process in the natural gas supply system (pipelines and local distribution systems) also must be considered. The Environmental Protection Agency (EPA) estimates the leakage to be 1.4%, and there are some higher estimates. 
 
 According to the American Petroleum Institute (API), natural gas is a form of petroleum most often found accompanying crude oil in oil wells. Most of the natural gas in the US is considered a fossil fuel because it is made from underground sources formed over millions of years by the action of heat and pressure on organic materials. Alternatively, renewable natural gas (RNG), also known as biomethane, is a pipeline-quality vehicle fuel produced by purifying biogas. RNG offers a significant environmental benefit: it has negative carbon intensity when derived from animal waste such as dairy. Currently most of the natural gas used in transportation, around 70%, is RNG.
 
@@ -137,14 +137,14 @@ CONFIDENCE REPORT: EXECUTIVE SUMMARY – NATURAL GAS’ ROLE IN DECARBONIZING TR
 After researching natural gas engines for use in commercial vehicles and speaking with fleets and other experts, the study team developed the following key findings.
 
 1. **There appears to be a wide range in perception and results regarding the business case for natural gas.** Some fleets have been able to save money with natural gas fueled vehicles while others select them only for sustainability reasons. Some key factors to make a business case positive for natural gas are: Full utilization of fueling stations, utilizing both medium- and heavy-duty trucks, and taking advantage of all incentives. 
-2. **There are several positive environmental aspects of natural gas engines.** These include its ultra-low NOx capability, the fact that there is no need for a diesel particulate filter, and the well-to-wheels $\text{CO}_2$ reduction. Additionally, compared to conventional natural gas, RNG is the more attractive solution from an environmental standpoint, which can help fleets, shippers and customers meet their corporate ESG goals.
+2. **There are several positive environmental aspects of natural gas engines.** These include its ultra-low NOx capability, the fact that there is no need for a diesel particulate filter, and the well-to-wheels CO2 reduction. Additionally, compared to conventional natural gas, RNG is the more attractive solution from an environmental standpoint, which can help fleets, shippers and customers meet their corporate ESG goals.
 3. **There are environmental concerns with natural gas.** These include methane leaking from aging pipelines and natural gas infrastructure and outdated equipment.
-4. **Sustainability goals, regulations, and the California conundrum.** The $\text{CO}_2$, NOx, and PM benefits of natural gas-powered vehicles allow fleets and shippers to improve the carbon footprint and reduce their Scope 2 and 3 emissions. Natural gas also helps OEMs and engine manufacturers meet GHG regulation and NOx and PM standards. However, in California and other states, ZEV mandates are being established, and natural gas does not qualify. 
+4. **Sustainability goals, regulations, and the California conundrum.** The CO2, NOx, and PM benefits of natural gas-powered vehicles allow fleets and shippers to improve the carbon footprint and reduce their Scope 2 and 3 emissions. Natural gas also helps OEMs and engine manufacturers meet GHG regulation and NOx and PM standards. However, in California and other states, ZEV mandates are being established, and natural gas does not qualify. 
 5. **The new 15-liter Cummins X15N engine seems promising.** In the past, natural gas engines experienced reliability and performance issues, but many of these are believed to be fixed.
 6. **Aftertreatment is simple and more reliable.** Natural gas engines do not require a DPF or SCR system, eliminating a major cause of downtime, warranty, and repairs.
 7. **Natural gas is very abundant in the US.** The question is, how accessible is it for a given fleet’s routes?
 8. **There is a question as to whether there will be an ample supply of RNG.** Natural Gas Vehicles for America (NVGA) has projected significant increases in RNG over the next several years. Given the introduction of the Cummins X15N (and Cummins’ projections), there could be a couple hundred thousand natural gas engines in heavy-duty applications later in the decade.
-9. **Because of economics and the environment, there are a few points to consider when comparing BEV vs CNG.** Converting to natural gas is a long-term decision. Capital for fueling stations or charging stations, etc. is a 5 to 10+ year investment. From a $\text{CO}_2$ standpoint it is essential on a local level to consider the grid’s dependence on fossil fuel vs. renewable/nuclear fuel. Local consideration of grid and CNG capacity also is a factor. CNG requires installing venting equipment, methane detection, and alarms in maintenance shops, which can be an expensive infrastructure investment. 
+9. **Because of economics and the environment, there are a few points to consider when comparing BEV vs CNG.** Converting to natural gas is a long-term decision. Capital for fueling stations or charging stations, etc. is a 5 to 10+ year investment. From a CO2 standpoint it is essential on a local level to consider the grid’s dependence on fossil fuel vs. renewable/nuclear fuel. Local consideration of grid and CNG capacity also is a factor. CNG requires installing venting equipment, methane detection, and alarms in maintenance shops, which can be an expensive infrastructure investment. 
 
 > “The latest big bore natural gas powertrain has power and torque curves almost identical to those of diesels, which will help long haul fleets see improved economic and environmental performance.”
 > — José Samperio, Vice President and General Manager for North America On-highway Operations, Cummins
@@ -188,13 +188,13 @@ All of these developments are discussed in more detail throughout this report.
 
 # 4 THE ENVIRONMENTAL BENEFIT OF NATURAL GAS VEHICLES 
 
-A primary goal of switching to natural gas is the potential for reducing $\text{CO}_2$ emissions — the most plentiful greenhouse gas. Running natural gas instead of diesel fuel in your trucks may also help retain drivers because these engines are quieter. Drivers also frequently complain about the smells associated with diesel fuel that often gets on clothing, gloves, skin, etc. Natural gas fueling doesn’t have the same issues associated with it. Natural gas engines also may reduce some maintenance costs because of the absence of emissions reduction systems found on diesel trucks, while also reducing emissions of primary pollutants like NOx. NOx control on natural gas engines in accomplished using a much simpler and well-proven aftertreatment system.
+A primary goal of switching to natural gas is the potential for reducing CO2 emissions — the most plentiful greenhouse gas. Running natural gas instead of diesel fuel in your trucks may also help retain drivers because these engines are quieter. Drivers also frequently complain about the smells associated with diesel fuel that often gets on clothing, gloves, skin, etc. Natural gas fueling doesn’t have the same issues associated with it. Natural gas engines also may reduce some maintenance costs because of the absence of emissions reduction systems found on diesel trucks, while also reducing emissions of primary pollutants like NOx. NOx control on natural gas engines in accomplished using a much simpler and well-proven aftertreatment system.
 
-The net $\text{CO}_2$ benefit of a natural gas engine is in the range of 13% to 18% compared to diesel fuel. Natural gas produces approximately 27% less $\text{CO}_2$ per unit of energy on a fuel-comparison basis compared with No. 2 diesel fuel. However, the natural gas engine is less efficient than a diesel and natural gas needs to be compressed for storage on the vehicle. Methane leakage that occurs primarily in the upstream process in the natural gas supply system (pipelines and local distribution systems) must also be considered. The Environmental Protection Agency (EPA) estimates the leakage to be 1.4%, and there are some higher estimates [105]. Efforts are underway to limit leakage and ensure equipment does not leak. Companies can by certified by a non-profit organization called MiQ which works toward limiting methane leakage [106].
+The net CO2 benefit of a natural gas engine is in the range of 13% to 18% compared to diesel fuel. Natural gas produces approximately 27% less CO2 per unit of energy on a fuel-comparison basis compared with No. 2 diesel fuel. However, the natural gas engine is less efficient than a diesel and natural gas needs to be compressed for storage on the vehicle. Methane leakage that occurs primarily in the upstream process in the natural gas supply system (pipelines and local distribution systems) must also be considered. The Environmental Protection Agency (EPA) estimates the leakage to be 1.4%, and there are some higher estimates [105]. Efforts are underway to limit leakage and ensure equipment does not leak. Companies can by certified by a non-profit organization called MiQ which works toward limiting methane leakage [106].
 
-Taking all the above factors into consideration (efficiency, estimated upstream methane leakage, gas compression), there is still a $\text{CO}_2$ savings that is on the order of 13% to 18% using conventional natural gas versus running standard diesel trucks [23]. 
+Taking all the above factors into consideration (efficiency, estimated upstream methane leakage, gas compression), there is still a CO2 savings that is on the order of 13% to 18% using conventional natural gas versus running standard diesel trucks [23]. 
 
-While the overall $\text{CO}_2$ savings is better with natural gas, it is worth noting that from a diesel gallon equivalent (DGE) standpoint, more fuel is consumed with natural gas vs diesel. This is because spark ignited engines are less efficient. Hence more fuel will be burned on a DGE basis. 
+While the overall CO2 savings is better with natural gas, it is worth noting that from a diesel gallon equivalent (DGE) standpoint, more fuel is consumed with natural gas vs diesel. This is because spark ignited engines are less efficient. Hence more fuel will be burned on a DGE basis. 
 
 In 2019, NACFE conducted Run on Less Regional. Nine of the 10 tractors in this event were diesel, but one unit was powered by compressed natural gas (CNG). One objective of the event was to demonstrate to the industry the art of the possible in terms of MPG for a typical regional haul duty cycle. The average
 
@@ -274,7 +274,7 @@ According to the American Petroleum Institute’s website, natural gas is a form
 
 While natural gas has been used in combustion engines for decades, there is a renewed interest in using it in transportation because it is a lower-carbon fuel than diesel and cleaner-burning. This quality extends to its ability to be used in spark-ignited, natural gas engines. These truck engines are similar to present day passenger car gasoline engines, meaning they can use a simple, three-way catalyst as aftertreatment, eliminating the diesel particulate filter (DPF) and SCR systems.
 
-Calculating the net reduction in $\text{CO}_2$ emissions when natural gas is used in large trucks is complex, however there is likely a measurable reduction. In addition, natural gas recovered from various agricultural sources and landfills, known as RNG, when used in trucks, can reduce the total warming effect of GHG emissions. Using RNG as a fuel converts methane (initially 80 times as potent a GHG as $\text{CO}_2$) to $\text{CO}_2$ and water vapor. This results in a lower CI, which even can be negative in some cases. This is discussed in more detail in Section 9.3.
+Calculating the net reduction in CO2 emissions when natural gas is used in large trucks is complex, however there is likely a measurable reduction. In addition, natural gas recovered from various agricultural sources and landfills, known as RNG, when used in trucks, can reduce the total warming effect of GHG emissions. Using RNG as a fuel converts methane (initially 80 times as potent a GHG as CO2) to CO2 and water vapor. This results in a lower CI, which even can be negative in some cases. This is discussed in more detail in Section 9.3.
 
 While the processing is different, conventional natural gas and RNG are virtually identical in the way they behave in the engine. However, RNG is much kinder to the environment than conventional natural gas. This is because the source of RNG is actually an extremely potent warming agent that is normally simply released to the atmosphere and converted to less harmful greenhouse gases in the engine; and because its carbon is not derived from mineral sources.
 
@@ -282,7 +282,7 @@ While the processing is different, conventional natural gas and RNG are virtuall
 
 The trucking industry is poised to begin using larger amounts of natural gas as a fuel, but will the fuel be available in the quantities needed? The answer appears to be yes because of the use of hydraulic fracturing in recovering natural gas.
 
-Hydraulic fracturing of sedimentary rock containing natural gas, called “fracking,” has significantly increased the supply of natural gas in recent years. The demand for fracked gas is largely the result of the fact that natural gas has made a large contribution to the reduction of $\text{CO}_2$ in power generation.
+Hydraulic fracturing of sedimentary rock containing natural gas, called “fracking,” has significantly increased the supply of natural gas in recent years. The demand for fracked gas is largely the result of the fact that natural gas has made a large contribution to the reduction of CO2 in power generation.
 
 <!-- page: 20 -->
 Natural Gas’ Role in Decarbonizing Trucking
@@ -296,7 +296,7 @@ It is no secret that the majority of carriers in North America have little to no
 
 ## 7.1 RISE AND FALL OF NATURAL GAS IN HEAVY DUTY TRUCKS
 
-Natural gas is not new to the transportation sector. In fact, natural gas has been used to power vehicles dating back to the early $20^{\text{th}}$ century when many people were experimenting with fuels to power the new internal combustible engine automobile. The first widespread use of natural gas as a vehicle fuel came during World War I when many parts of the world experienced gasoline shortages. 
+Natural gas is not new to the transportation sector. In fact, natural gas has been used to power vehicles dating back to the early 20th century when many people were experimenting with fuels to power the new internal combustible engine automobile. The first widespread use of natural gas as a vehicle fuel came during World War I when many parts of the world experienced gasoline shortages. 
 
 However, natural gas did not take off as a viable transportation fuel source until the 1930s. Because of the gasoline shortages, early European natural gas vehicles (built mostly during WWI and WWII) ran on uncompressed gas and were known as “gas-bag” vehicles. The Dutch old-timer pictured in Figure 3 carried a gas storage bag of 13 cubic meters, an installation that gave it a range of about 50 km (30 miles) at an energy consumption of 13 liters per km (22 mpg). As you can see, natural gas technology has come a long way since its early adoption [28].
 
@@ -573,13 +573,13 @@ The HPDI system was designed for LNG to maximize energy storage density and mini
 
 A video of the Volvo/Westport system, found on Volvo’s YouTube channel, illustrates how the LNG is vaporized and in turn routed into the engine [14]. 
 
-Westport indicates that the efficiency is much higher than spark ignited natural gas systems and typically within 1% to 2% of that of a diesel. Because of the benefits of natural gas and its direct injection system, the company claims it can reduce tank-to-wheel $\text{CO}_2$ by 20% vs. diesel.
+Westport indicates that the efficiency is much higher than spark ignited natural gas systems and typically within 1% to 2% of that of a diesel. Because of the benefits of natural gas and its direct injection system, the company claims it can reduce tank-to-wheel CO2 by 20% vs. diesel.
 
-Figure 9 is a summary of $\text{CO}_2$ reduction presented by Westport. It has demonstrated a 20% reduction in engine-out $\text{CO}_2$ relative to diesel on a Euro VI emissions cycle, tank-to-wheels standpoint. Considering well-to-wheels implications, which includes the energy required to liquefy the gas, the $\text{CO}_2$ benefit can be reduced by 3% to 4%, according to Westport. Also, the transfer of the fuel needs to be considered and this will reduce the benefit. *Note: in Figure 9, SING refers to Spark Ignited Natural Gas.*
+Figure 9 is a summary of CO2 reduction presented by Westport. It has demonstrated a 20% reduction in engine-out CO2 relative to diesel on a Euro VI emissions cycle, tank-to-wheels standpoint. Considering well-to-wheels implications, which includes the energy required to liquefy the gas, the CO2 benefit can be reduced by 3% to 4%, according to Westport. Also, the transfer of the fuel needs to be considered and this will reduce the benefit. *Note: in Figure 9, SING refers to Spark Ignited Natural Gas.*
 
 > **Figure 9 — Westport SAE presentation stating 20% tank to wheel reduction [13]**
 > Type: bar chart
-> Axes: Commercial applications (relative to base diesel) vs Relative $\text{CO}_2$ Emissions Per Unit LHV (Complete Combustion Assumed) (70% to 105%)
+> Axes: Commercial applications (relative to base diesel) vs Relative CO2 Emissions Per Unit LHV (Complete Combustion Assumed) (70% to 105%)
 > Series: Diesel, Natural Gas (L, H), Methane
 > Values: 
 > Diesel: 100%
@@ -858,16 +858,16 @@ March 25, 2024 Page 44
 
 RNG is a form of natural gas that can be used as a fuel to power vehicles. It is fully interchangeable with conventional natural gas and has significant environmental benefits. RNG is generated from various feedstock sources such as livestock (e.g., animal manure), landfills, wastewater, and other sources.
 
-Decomposition of these organic materials forms a gas. The gas is then run through a biochemical process referred to as an anaerobic digester. The gas is then conditioned to remove water, $CO_2$, and other elements.
+Decomposition of these organic materials forms a gas. The gas is then run through a biochemical process referred to as an anaerobic digester. The gas is then conditioned to remove water, CO2, and other elements.
 
-The $CO_2$ benefits of RNG are illustrated in Figure 23. Negative CI can be achieved through animal waste. Feedstock through landfills and wastewater do not produce negative CI but still offer an advantage over diesel and conventional natural gas. Negative CI is desirable. Rather than harmful methane gases being released into the atmosphere, the gas is captured and used to power the vehicles. This has a positive impact on the environment and results in a negative CI because methane otherwise would have been released.
+The CO2 benefits of RNG are illustrated in Figure 23. Negative CI can be achieved through animal waste. Feedstock through landfills and wastewater do not produce negative CI but still offer an advantage over diesel and conventional natural gas. Negative CI is desirable. Rather than harmful methane gases being released into the atmosphere, the gas is captured and used to power the vehicles. This has a positive impact on the environment and results in a negative CI because methane otherwise would have been released.
 
 > **Figure 23. Carbon intensity comparison of various fuels [114]**
 > Type: bar chart
-> Axes: Greenhouse Gases ($gCO_2e/MJ$) vs Fuels
+> Axes: Greenhouse Gases (gCO2e/MJ) vs Fuels
 > Series: Diesel (Conventional), Natural Gas (Conventional), Hydrogen (from LFG), RD (from Tallow), Biodiesel, Electricity (California Grid), RNG (Landfill), RNG (Wastewater), RNG (Dairy)
 > Values: Diesel (Conventional): 100.45, Natural Gas (Conventional): 88.01, Hydrogen (from LFG): 52.36, RD (from Tallow): 37.71, Biodiesel: 32.64, Electricity (California Grid): 16.3, RNG (Landfill): 52.5-54.7, RNG (Wastewater): 47.8, RNG (Dairy): -283.27
-> Notes: Bar chart comparing carbon intensity (greenhouse gases in $gCO_2e/MJ$) of various fuels.
+> Notes: Bar chart comparing carbon intensity (greenhouse gases in gCO2e/MJ) of various fuels.
 
 “RNG can be put right in the same pipeline as traditional natural gas at essentially no cost to the customer,” said Ted Barnes, senior director of mobility, GTI Energy.
 
@@ -885,7 +885,7 @@ March 25, 2024 Page 45
 
 and emit methane into the atmosphere, so this opportunity needs to be seized and RNG is an excellent way to take advantage of it.
 
-Not all RNG is created equal. The negative CI score touted for RNG is only achieved with manure feedstock. Landfill RNG, although not negative, does achieve a CI score lower than diesel and conventional natural gas. RNG, from manure feedstock, is the only transportation fuel that has a negative CI (- $gCO_2e/MJ$). This makes it extremely attractive, so attractive that even a major alternative fuel provider said, “RNG makes natural gas relevant. I don’t know where we would be without it.”
+Not all RNG is created equal. The negative CI score touted for RNG is only achieved with manure feedstock. Landfill RNG, although not negative, does achieve a CI score lower than diesel and conventional natural gas. RNG, from manure feedstock, is the only transportation fuel that has a negative CI (- gCO2e/MJ). This makes it extremely attractive, so attractive that even a major alternative fuel provider said, “RNG makes natural gas relevant. I don’t know where we would be without it.”
 
 Argonne National Laboratory’s database captures the total annual RNG production capacity in the US. In 2021, production capacity was about 660 million gallons gasoline equivalent (GGE) [46]. That’s a 20% increase compared to the previous year. This is a lot of RNG, yet still just a fraction — about 3% — of the total natural gas consumption each year in the US, beyond solely vehicle consumption.
 
@@ -1032,13 +1032,13 @@ There is a tremendous amount of governmental regulation that has been created ov
 
 These governmental regulations are being applied on multiple fronts. First, EPA released a new standard for engines built in 2027 and later. This will reduce NOx from 0.2 g/bhp-hr to 0.035 g/bhp-hr, an 85% reduction. Additional components will need to be added which will add cost and complexity to diesel engines.
 
-The EPA also proposed $CO_2$ reductions in the form of the GHG Phase 3 regulations. This regulation will be imposed at the vehicle level. For medium-duty trucks, a 50% reduction is mandated for 2032. For Class 7 and 8 heavy-duty day cab and sleeper tractors, a 27% reduction will go into effect over this timeframe.
+The EPA also proposed CO2 reductions in the form of the GHG Phase 3 regulations. This regulation will be imposed at the vehicle level. For medium-duty trucks, a 50% reduction is mandated for 2032. For Class 7 and 8 heavy-duty day cab and sleeper tractors, a 27% reduction will go into effect over this timeframe.
 
 Zero-emission and near-zero emission vehicle mandates also are going into effect at the state level. California has led this effort and 17 other states have signed a Memorandum of Understanding (MOU). These regulations are being imposed on the OEMs (ACT Rule) and the fleets. The 2024 ACF regulation will have the biggest impact on municipalities and drayage operations. Starting January 1, 2024, fleets can only purchase ZEVs. See Figure 31.
 
 The impact of these regulations on the natural gas engine is as follows:
 1. Natural gas engines can easily meet the EPA 27 criteria pollutant regulations, therefore the initial cost difference between the natural gas and diesel engine will be significantly reduced because EPA 27 will add more cost and complexity to diesel engines.
-2. Natural gas engines can be used as a tool to help OEMs meet the GHG Phase 3 regulations. The net $CO_2$ benefit of natural gas is on the order of 13% to 18% lower than diesel from a well-to-wheels standpoint.
+2. Natural gas engines can be used as a tool to help OEMs meet the GHG Phase 3 regulations. The net CO2 benefit of natural gas is on the order of 13% to 18% lower than diesel from a well-to-wheels standpoint.
 3. Natural gas engines will not comply with the ZEV mandates. However, if a natural gas engine is combined with a hybrid, it can qualify as a near-zero emission vehicle. Fleets will be able to purchase 50% of their ZEV required vehicles with a hybrid/natural gas product. (Note: a diesel hybrid with enough battery capacity to run 75 miles on electric power alone also can qualify for the NZEV. However, at the time this report was written, the study team was unaware of any such diesel hybrids being offered in the Class 4 to 8 space.)
 
 Industry groups and fleets have voiced concern that natural gas vehicles are not given adequate credit and recognition when it comes to the ACT and ACF rules, but at the time this report was written, there has been no progress toward getting California to recognize this.
@@ -1055,7 +1055,7 @@ March 25, 2024 Page 52
 > Type: table / chart
 > Axes: none
 > Series: US EPA Regulations, State Regulations
-> Values: US EPA NOx: '24: 0.2 g/bhp-hr, '27: 0.035 g/bhp-hr*, Natural Gas Ability: Excellent Solution At 0.02 g/bhp-hr now; US EPA $CO_2$: '25: GHG 2, '28-'30: Proposed GHG 3, 15-27% $CO_2$ reduction between MY27-32 Class 7 and 8, day cabs and sleepers, Natural Gas Ability: Can contribute to GHG - approx. 15% reduction; CARB Omni: '24: Provide Offsets, '27: Synchronized with EPA 27,.035 g/bhp-hr, Natural Gas Ability: Excellent Solution At 0.02 g/bhp-hr now; ACT: '24: Zero Emission Vehicle Mandate, Natural Gas Ability: Does not qualify for ZEV; ACF: '25: Fleet Zero Emission Vehicle Mandate, Natural Gas Ability: Does not qualify for ZEV
+> Values: US EPA NOx: '24: 0.2 g/bhp-hr, '27: 0.035 g/bhp-hr*, Natural Gas Ability: Excellent Solution At 0.02 g/bhp-hr now; US EPA CO2: '25: GHG 2, '28-'30: Proposed GHG 3, 15-27% CO2 reduction between MY27-32 Class 7 and 8, day cabs and sleepers, Natural Gas Ability: Can contribute to GHG - approx. 15% reduction; CARB Omni: '24: Provide Offsets, '27: Synchronized with EPA 27,.035 g/bhp-hr, Natural Gas Ability: Excellent Solution At 0.02 g/bhp-hr now; ACT: '24: Zero Emission Vehicle Mandate, Natural Gas Ability: Does not qualify for ZEV; ACF: '25: Fleet Zero Emission Vehicle Mandate, Natural Gas Ability: Does not qualify for ZEV
 > Notes: * In some cases, 0.05 g/BHP-Hr exception can be applied. NACFE logo present.
 
 CARB regulations for ACT are complicated, in summary, OEMs must sell 5% to 9% ZEVs in California depending on vehicle class starting in 2024. It ramps up to 30% by 2030.
@@ -1147,10 +1147,10 @@ Fleets promoted their sustainability commitments and investments to their custom
 > Values: 
 > | Carrier | Tractors/ Trucks* | Revenue* | Natural Gas | Other Energy Sources | Near Plan | Far Plan |
 > |---|---|---|---|---|---|---|
-> | KNIGHT SWIFT | 21,899 | $7.4 billion | Mid-2023 planed Cummins' new 15-lit natural gas engine | Continued testing of hydrogen fuel through 2024. BEV deployments are moving into select locations. | Reduce $CO_2$ emissions per mile by 5% by 2025. To date, 3.9% reduction from 2019 baseline. | Reduce $CO_2$ emissions per mile by 50% by 2035 |
-> | SCHNEIDER | 10,200 | $6.6 billion | | '22 Freightliners eCascadias in at end of 2023 | Reduce $CO_2$ emissions by 7.5% per mile by 2025 | Reduce $CO_2$ emissions by 60% per mile by 2035 |
+> | KNIGHT SWIFT | 21,899 | $7.4 billion | Mid-2023 planed Cummins' new 15-lit natural gas engine | Continued testing of hydrogen fuel through 2024. BEV deployments are moving into select locations. | Reduce CO2 emissions per mile by 5% by 2025. To date, 3.9% reduction from 2019 baseline. | Reduce CO2 emissions per mile by 50% by 2035 |
+> | SCHNEIDER | 10,200 | $6.6 billion | | '22 Freightliners eCascadias in at end of 2023 | Reduce CO2 emissions by 7.5% per mile by 2025 | Reduce CO2 emissions by 60% per mile by 2035 |
 > | WERNER ENTERPRISES | 8,639 | $3.3 billion | Testing new 15 liter CNG internal combustion engine | 10 BEV and hydrogen fuel cell trucks by early 2024. | Disclose Scope 2 greenhouse gas emissions - 2025 | -55% reduction of GHG emissions by 2035 compared to 2020 |
-> | ups | 16,440 | $100.3 billion | | 15,600 alternative fuel and advanced technology vehicles, including more than 1,000 electric and plug-in hybrid electric vehicles. | 40% alternative fuel for ground operations by 2025 | 50% reduction in $CO_2$ per package delivered by 2035 (2020 baseline) |
+> | ups | 16,440 | $100.3 billion | | 15,600 alternative fuel and advanced technology vehicles, including more than 1,000 electric and plug-in hybrid electric vehicles. | 40% alternative fuel for ground operations by 2025 | 50% reduction in CO2 per package delivered by 2035 (2020 baseline) |
 > | FedEx | 38,749 | $92.6 billion | | Deployed 4,213 electric and alt-power fuel vehicles | 50% of pickup and delivery vehicle purchases are zero-tailpipe emission electric vehicles by 2025 | 100% of pickup and delivery vehicle purchases are zero-tailpipe emission electric vehicles by 2030 |
 > | pepsico | 11,274 / 16,138 | $6.3 billion / $79.5 billion | In 2022, 80% of CNG purchased for Pepsi fleet of 703 was renewable CNG | Increased use of biodiesel and other renewable fuels by 45.7% from 2020 to 2022 | In 2022, took delivery of the first Class 8 electric Tesla Semi | Reduce Scope 1 and 2 emissions by 75% by 2030 | Net-zero emissions by 2040 |
 > | Walmart | 9280 / 25 | $572.8 billion | | Looking to meet the demands of business with different technologies, including but not limited to renewable diesel, battery electric and hydrogen fuel cells | | Electric fleet and much net-zero emissions in 100% of vehicles in US and Canada by 2040 |
@@ -1178,11 +1178,11 @@ The study team found that shippers are most excited about BEV technology. Howeve
 
 ## 12 ALTERNATIVE FUELS COMPARISON
 
-There is a good bit of discussion in the industry about alternatives to traditional diesel fuel that has been the industry standard for decades. In this section, we will discuss each fuel and outline where it comes from and provide information on the advantages and disadvantages of each, as well as information on each fuel’s $CO_2$ intensity.
+There is a good bit of discussion in the industry about alternatives to traditional diesel fuel that has been the industry standard for decades. In this section, we will discuss each fuel and outline where it comes from and provide information on the advantages and disadvantages of each, as well as information on each fuel’s CO2 intensity.
 
 Although this report concentrates on natural gas as an alternative fuel for commercial vehicles, we think it is appropriate to discuss some of the other fuel options.
 
-Figure 33 summarizes some key aspects of alternative fuels for internal combustion engines. You will notice that there is often a large variation in the estimated $CO_2$ reduction relative to diesel fuel. Determining this number for a specific supply of fuel from a given source can require a great deal of
+Figure 33 summarizes some key aspects of alternative fuels for internal combustion engines. You will notice that there is often a large variation in the estimated CO2 reduction relative to diesel fuel. Determining this number for a specific supply of fuel from a given source can require a great deal of
 
 ---
 
@@ -1197,9 +1197,9 @@ research. Please note that this chart is intended to provide a basic overview an
 > **Figure 33. Key attributes of different fuel types [11][12]**
 > Type: table
 > Axes: none
-> Series: Fuel Type, $CO_2$ Reduction*, Engine Out NOx*, Energy Content*, Challenges
+> Series: Fuel Type, CO2 Reduction*, Engine Out NOx*, Energy Content*, Challenges
 > Values: 
-> | Fuel Type | $CO_2$ Reduction* | Engine Out NOx* | Energy Content* | Challenges |
+> | Fuel Type | CO2 Reduction* | Engine Out NOx* | Energy Content* | Challenges |
 > |---|---|---|---|---|
 > | DIESEL | BASELINE | BASELINE | BASELINE | |
 > | NATURAL GAS | 13% to 18% | Very low | 25% of diesel on volumetric basis | |
@@ -1211,7 +1211,7 @@ research. Please note that this chart is intended to provide a basic overview an
 > | PROPANE | 5% to 10% | Very low | 65% of diesel | Fueling station availability |
 > | RENEWABLE DIESEL | 50% to 70% | About the same as fossil diesel | About the same as fossil diesel | Costs are higher than biodiesel |
 > | RENEWABLE PROPANE | 60% to 70% | Very low | 65% of diesel | Fueling station availability |
-> | SYNTHETIC FUELS | 40% to 50% but assumes green $H_2$. If $H_2$ is not green, $CO_2$ likely worse. | About the same as fossil diesel | About the same as fossil diesel | Need green energy to produce $H_2$; possibly not a good use of green energy |
+> | SYNTHETIC FUELS | 40% to 50% but assumes green H2. If H2 is not green, CO2 likely worse. | About the same as fossil diesel | About the same as fossil diesel | Need green energy to produce H2; possibly not a good use of green energy |
 > Notes: * Relative to diesel. Note: Hydrogen is required to create synthetic fuels - thus the comments in the other cells on this line. NACFE logo present.
 
 ---
@@ -1256,7 +1256,7 @@ March 25, 2024 Page 59
 
 Biodiesel blends have about the same emission performance and the same energy content as standard diesel fuel. NOx has been shown to be slightly higher and particulates slightly lower, but the differences are very small.
 
-From a $CO_2$ standpoint, the portion of the blend that is biodiesel has been shown to reduce $CO_2$ emissions by about 75% because the carbon in the fuel came from plants that were the source of the feedstock. The reduction is not 100% because it takes alcohol and energy to process the feedstock into biodiesel and then it has to be transported to where the blending takes place. Therefore, a biodiesel B20 blend will have about 85% of the CI of fossil diesel.
+From a CO2 standpoint, the portion of the blend that is biodiesel has been shown to reduce CO2 emissions by about 75% because the carbon in the fuel came from plants that were the source of the feedstock. The reduction is not 100% because it takes alcohol and energy to process the feedstock into biodiesel and then it has to be transported to where the blending takes place. Therefore, a biodiesel B20 blend will have about 85% of the CI of fossil diesel.
 
 Figure 34 from the DOE’s Alternate Fuels Data Center compares the price of diesel to biodiesel blends and pure biodiesel. Note that the units on the chart are listed in GGEs, so the prices differ somewhat compared to the prices at the pump.
 
@@ -1290,9 +1290,9 @@ Figure 35 and GHG emissions reductions are shown in Figure 36. Alternative fuels
 > Values: Data points trace step-down standards from 14 g/bhp-hr in 1988 down to 0.02 g/bhp-hr by 2027.
 > Notes: Graph showing progress on PM and NOx reduction in diesel engines by EPA.
 
-> **Figure 36. Progress on heavy-duty truck $CO_2$ emissions (ICCT) [73]**
+> **Figure 36. Progress on heavy-duty truck CO2 emissions (ICCT) [73]**
 > Type: line chart
-> Axes: $CO_2$ and fuel consumption relative to 2010 vs Model year (2010 to 2025)
+> Axes: CO2 and fuel consumption relative to 2010 vs Model year (2010 to 2025)
 > Series: Class 8 heavy haul, Class 7-8 heavy-duty vocational, Class 6-7 medium duty vocational, Class 2b-3 commercial pickups, vans, Class 7 tractor, day cab, low roof, trailer, Class 7 tractor, day cab high roof, trailer, Class 8 tractor, sleeper cab, high roof, Class 8 tractor, sleeper cab, high roof, trailer
 > Values: Values decline from 1.00 in 2010 to approx. 0.5 to 0.8 relative levels by 2027.
 > Notes: Phase 1 and Phase 2 arrows shown at top. ICCT logo present.
@@ -1337,7 +1337,7 @@ March 25, 2024 Page 62
 
 #### 12.2.3 Ethanol
 
-Ethanol ($CH_3CH_2OH$) has been used as an internal combustion engine fuel for many years by being mixed in relatively small quantities with gasoline. This formula works very well in gasoline engines. However, mixing ethanol with diesel fuel is not as straightforward.
+Ethanol (CH3CH2OH) has been used as an internal combustion engine fuel for many years by being mixed in relatively small quantities with gasoline. This formula works very well in gasoline engines. However, mixing ethanol with diesel fuel is not as straightforward.
 
 The study team is aware of only a small amount of research exploring the advantages and disadvantages of using diesel/ethanol blends. Advantages include using a domestic renewable resource similar to what is done with blending it into gasoline. Gasoline engines can be configured to use a high percentage of ethanol, like those that can use E85 (85% ethanol). There are roughly 4,200 stations around the country that sell E85 according to the DOE’s Energy Efficiency & Renewable Energy website, but many are not configured to be accessible by large commercial vehicles [90]. The referenced website has filters that allow you to sort what types of vehicles can be fueled at the locations. The energy.gov website currently doesn’t publish any data relative to the availability of pure ethanol (e.g., E98). Many of the newest engines that can use E85 feature direct injection of the fuel into the combustion chamber but still use a spark plug to ignite the fuel at the correct time.
 
@@ -1380,7 +1380,7 @@ March 25, 2024 Page 64
 
 #### 12.2.4 Methanol
 
-Methanol ($CH_3OH$) as an internal combustion engine fuel is primarily used by the motorsports industry in North America. It has combustion characteristics that make it very well suited to that application — in fact, methanol is a required fuel in several racing circuits. The primary reason for this is that the flames in the event of an accident do not produce a cloud of smoke that obscures visibility for approaching vehicles.
+Methanol (CH3OH) as an internal combustion engine fuel is primarily used by the motorsports industry in North America. It has combustion characteristics that make it very well suited to that application — in fact, methanol is a required fuel in several racing circuits. The primary reason for this is that the flames in the event of an accident do not produce a cloud of smoke that obscures visibility for approaching vehicles.
 
 In addition, the combustion of methanol has a significant amount of water as a byproduct and a lower flame temperature which helps to keep the combustion process cooler. This makes the fuel suitable for applications where there is very high-power output compared to the engine’s displacement.
 
@@ -1400,7 +1400,7 @@ Natural gas and renewable natural gas have been discussed throughout this report
 
 #### 12.2.6 Propane
 
-Propane ($C_3H_8$) also has been used extensively as a motor vehicle fuel for many years. For example, many forklifts operated in and around warehouse facilities use propane as a fuel. This is the largest single application of propane for internal combustion engines. Propane is a gas at atmospheric pressure and temperature but becomes a liquid when compressed to a relatively low pressure of about 150 psi. The low storage pressure allows the storage tanks to be much less expensive than those for CNG or LNG.
+Propane (C3H8) also has been used extensively as a motor vehicle fuel for many years. For example, many forklifts operated in and around warehouse facilities use propane as a fuel. This is the largest single application of propane for internal combustion engines. Propane is a gas at atmospheric pressure and temperature but becomes a liquid when compressed to a relatively low pressure of about 150 psi. The low storage pressure allows the storage tanks to be much less expensive than those for CNG or LNG.
 
 ---
 
@@ -1440,9 +1440,9 @@ March 25, 2024 Page 66
 
 #### 12.2.8 Synthetically Derived Fuels
 
-It is possible to create fuels synthetically using feedstocks of compounds high in carbon (like coal and recovered $CO_2$) with hydrogen. The processes vary, but most are not capable of being produced at high volume at this point. The cost of these fuels is not well documented either, so it is impossible to see if they could ever be competitive with some of the other fuels discussed in this report.
+It is possible to create fuels synthetically using feedstocks of compounds high in carbon (like coal and recovered CO2) with hydrogen. The processes vary, but most are not capable of being produced at high volume at this point. The cost of these fuels is not well documented either, so it is impossible to see if they could ever be competitive with some of the other fuels discussed in this report.
 
-All these synthetic fuels use hydrogen as one of the feedstocks. Today, virtually all hydrogen is created via a process called steam methane reforming which uses natural gas and water as inputs. The process has a very high $CO_2$ output and there are currently no viable/widespread means of carbon capture and storage to manage the $CO_2$ output. Until that technology becomes economically viable for very high production, it is likely that synthetic fuel production will have higher GHG emissions than traditional fuel production and use processes.
+All these synthetic fuels use hydrogen as one of the feedstocks. Today, virtually all hydrogen is created via a process called steam methane reforming which uses natural gas and water as inputs. The process has a very high CO2 output and there are currently no viable/widespread means of carbon capture and storage to manage the CO2 output. Until that technology becomes economically viable for very high production, it is likely that synthetic fuel production will have higher GHG emissions than traditional fuel production and use processes.
 
 The study team encourages work on these technologies to continue at very high levels so that the economics can make sense in the coming years.
 
@@ -1608,7 +1608,7 @@ RNG is classified as D3. As of April 22, 2023, D3 RINS were worth $3 per gallon.
 
 ### 13.3.3 Low Carbon Fuel Standard Credits — California
 
-California awards Low Carbon Fuel Standard (LCFS) credits to producers of low-carbon fuels. RNG qualifies for credits as long as it is used to replace conventional transportation fuel in California. For the first 10 months of 2023, LCFS credit prices ranged from $62 to $85 per metric ton of $CO_2$ [66]. As noted earlier, these credits go to the fuel company, not the fleet. However, fleets likely will negotiate some of the credit in their overall pricing agreement.
+California awards Low Carbon Fuel Standard (LCFS) credits to producers of low-carbon fuels. RNG qualifies for credits as long as it is used to replace conventional transportation fuel in California. For the first 10 months of 2023, LCFS credit prices ranged from $62 to $85 per metric ton of CO2 [66]. As noted earlier, these credits go to the fuel company, not the fleet. However, fleets likely will negotiate some of the credit in their overall pricing agreement.
 
 ### 13.4 MAINTENANCE AND OTHER COSTS
 
@@ -1650,8 +1650,8 @@ One final financial consideration regarding the economics of natural gas vehicle
 After researching natural gas engines for use in commercial vehicles and speaking with fleets and other experts, the study team developed the following key findings.
 
 1. There appears to be a wide range in perception and results regarding the business case for natural gas. Some fleets have been able to save money with natural gas fueled vehicles while others select them only for sustainability reasons. Some key factors to make a business case positive for natural gas are: Full utilization of fueling stations, utilizing both medium- and heavy-duty trucks, taking advantage of all incentives. Also, owning the fueling station allows the fleet to take advantage of tax incentives. Fleets that have been successful with natural gas engines have been “all in” and built stations behind the fence, which can offer a lower price per cubic foot. The perceived financial savings of natural gas has varied over time as the price differential between natural gas and diesel varies and system reliability has changed.
-2. There are several positive environmental aspects of natural gas engines. It has ultra-low NOx capability. The spark-ignited natural gas engine produces significantly lower NOx than a diesel engine because of the three-way catalyst, which is enabled by the spark-ignited, stoichiometric combustion process. Some engines that meet the 0.02 g/bhp-hr and the California standards already have been released. It does not require a DPF. This means there is no need for DPF regens and cleaning. Also, no DEF needs to be added and there are no filters to maintain. It offers a well-to-wheels $CO_2$ reduction. CARB estimates the well-to-wheels $CO_2$ reduction of conventional CNG compared to diesel at approximately 15%. Compared to conventional natural gas, RNG is the more attractive solution from an environmental standpoint. It has lower CI than diesel and in some cases, it has negative CI because it offsets expected methane emissions from animal waste, decaying plants and other sources. There always will always be animal waste, decaying plants, swamps, etc. and RNG is an excellent way to take advantage of this energy and improve the environment. Considering all of these items, natural gas vehicles will be a good solution to help OEMs upcoming NOx and the proposed GHG regulations which will take place in 2027.
-3. There are environmental concerns with natural gas. Methane leakage from aging pipelines and natural gas infrastructure and outdated equipment is a major concern. When released into the atmosphere, methane is 30 to 80 times worse in terms of GHG than $CO_2$ emissions with impacts lasting for several decades. This leakage could offset the reduced $CO_2$ value of natural gas. The EPA estimates this leakage at 1.4%, and there are other studies that show higher leakage rates. This could easily offset the 15% $CO_2$ reduction quoted above. There are ways to curtail this leakage via maintenance and repair, and replacement of outdated valves and pressure regulating equipment that was designed prior to awareness of methane’s warming potential. A certification process can be done to certify such work, and it is referred to as MiQ certification. It ensures upstream quality of equipment to minimize leakage. (Note that while methane leakage is bad for the environment, RNG captures this from animal and other waste converting it to $CO_2$ and water vapor in the engine, and that is the value of RNG.)
+2. There are several positive environmental aspects of natural gas engines. It has ultra-low NOx capability. The spark-ignited natural gas engine produces significantly lower NOx than a diesel engine because of the three-way catalyst, which is enabled by the spark-ignited, stoichiometric combustion process. Some engines that meet the 0.02 g/bhp-hr and the California standards already have been released. It does not require a DPF. This means there is no need for DPF regens and cleaning. Also, no DEF needs to be added and there are no filters to maintain. It offers a well-to-wheels CO2 reduction. CARB estimates the well-to-wheels CO2 reduction of conventional CNG compared to diesel at approximately 15%. Compared to conventional natural gas, RNG is the more attractive solution from an environmental standpoint. It has lower CI than diesel and in some cases, it has negative CI because it offsets expected methane emissions from animal waste, decaying plants and other sources. There always will always be animal waste, decaying plants, swamps, etc. and RNG is an excellent way to take advantage of this energy and improve the environment. Considering all of these items, natural gas vehicles will be a good solution to help OEMs upcoming NOx and the proposed GHG regulations which will take place in 2027.
+3. There are environmental concerns with natural gas. Methane leakage from aging pipelines and natural gas infrastructure and outdated equipment is a major concern. When released into the atmosphere, methane is 30 to 80 times worse in terms of GHG than CO2 emissions with impacts lasting for several decades. This leakage could offset the reduced CO2 value of natural gas. The EPA estimates this leakage at 1.4%, and there are other studies that show higher leakage rates. This could easily offset the 15% CO2 reduction quoted above. There are ways to curtail this leakage via maintenance and repair, and replacement of outdated valves and pressure regulating equipment that was designed prior to awareness of methane’s warming potential. A certification process can be done to certify such work, and it is referred to as MiQ certification. It ensures upstream quality of equipment to minimize leakage. (Note that while methane leakage is bad for the environment, RNG captures this from animal and other waste converting it to CO2 and water vapor in the engine, and that is the value of RNG.)
 
 ---
 
@@ -1661,12 +1661,12 @@ Natural Gas’ Role in Decarbonizing Trucking
 
 March 25, 2024 Page 74
 
-4. Sustainability goals, regulations, and the California conundrum are considerations. The $CO_2$, NOx, and PM benefits of natural gas-powered vehicles allows fleets and shippers to improve the carbon footprint and reduce their Scope 2 and 3 emissions. Currently, none of this is regulated, but fleets are monitoring it and making long-term sustainability goals. Natural gas also helps OEMs and the engine manufacturers meet GHG regulations and NOx and PM standards. However, in California and other states, ZEV mandates are being established, and natural gas does not qualify.
+4. Sustainability goals, regulations, and the California conundrum are considerations. The CO2, NOx, and PM benefits of natural gas-powered vehicles allows fleets and shippers to improve the carbon footprint and reduce their Scope 2 and 3 emissions. Currently, none of this is regulated, but fleets are monitoring it and making long-term sustainability goals. Natural gas also helps OEMs and the engine manufacturers meet GHG regulations and NOx and PM standards. However, in California and other states, ZEV mandates are being established, and natural gas does not qualify.
 5. The new 15-liter Cummins X15N engine seems promising. In the past, natural gas engines experienced reliability problems, but many of these have been fixed. Other changes Cummins has made to its engine include the following. Spark plug change intervals are extended from their current product because of better cooling. Cummins is trying to sync with the oil change interval (60k miles). The engine is believed to be quieter than diesel because of the spark-ignited combustion process. Cummins says the performance of the X15N is almost indistinguishable from the torque and power of diesels (and a major improvement relative to all its predecessors such as the Cummins 12N).
 6. Aftertreatment is simple and more reliable. Natural gas engines do not require a DPF or SCR system, eliminating a major cause of downtime, warranty and repairs. Spark-ignited natural gas uses only a three-way catalyst. This will have increased value in 2027 with the new EPA standards. The 2027 EPA standards for both significantly lower NOx as well as better low temperature performance will likely force diesel aftertreatment to become significantly more complex and costly.
 7. Natural gas is very abundant in the US. The question is how accessible it is for a given fleet’s routes. Maps are available to show public fueling stations, however if a fleet wants to run natural gas, it will need to work with the fuel providers to see if additional stations are needed.
 8. There is a question as to whether there will be an ample supply of RNG. NGVA has projected significant increases in RNG over the next several years. Given the introduction of the Cummins X15N (and Cummins’ projections), there could be a couple hundred thousand natural gas engines in heavy-duty applications later in the decade. If so, they would consume roughly 3 to 3.5 billion DGE per year. NGVA has shared information where there could be as much as 14 billion DGE per year by 2030. The question is: how it will be allocated between transportation, electricity generation, etc. and whether subsidies will remain as well as what mandates might come up.
-9. Because of economics and the environment, there are a few points to consider when comparing BEV and CNG. Converting to natural gas is a long-term decision. Capital for fueling stations or charging stations, etc. is 5 to 10+ year investment. From a $CO_2$ standpoint it is essential on a local level to consider the grid’s dependence on fossil fuel vs. renewable/nuclear is essential. Local consideration of grid and CNG capacity is also a factor. CNG requires installing venting equipment, methane detection, and alarms in shops, which can be an expensive infrastructure investment. Once infrastructure is installed, it reinforces buying more CNG.
+9. Because of economics and the environment, there are a few points to consider when comparing BEV and CNG. Converting to natural gas is a long-term decision. Capital for fueling stations or charging stations, etc. is 5 to 10+ year investment. From a CO2 standpoint it is essential on a local level to consider the grid’s dependence on fossil fuel vs. renewable/nuclear is essential. Local consideration of grid and CNG capacity is also a factor. CNG requires installing venting equipment, methane detection, and alarms in shops, which can be an expensive infrastructure investment. Once infrastructure is installed, it reinforces buying more CNG.
 
 ---
 
@@ -1692,7 +1692,7 @@ All links were last accessed in March 2024.
 10. Hyliion Website. https://www.hyliion.com/powertrains/erx
 11. Transportation Energy Institute website. July 5, 2023. Decarbonizing Combustion Vehicles: A Portfolio Approach to GHG Reductions. https://www.transportationenergy.org/research/reports/decarbonizing-combustion-vehicles-a-portfolio-approach-to-ghg-reductions/
 12. The Propane Education & Research Council website. https://propane.com/about-propane/renewable-propane/
-13. Westport Fuel Systems. Natural Gas: Meeting $CO_2$ Emission Targets, Here and Now. Panel Presentation at SAE International: 2020 $CO_2$ Reduction for Transportation Systems Powertrains, Fuels, and Lubricants Conference, July 2020.
+13. Westport Fuel Systems. Natural Gas: Meeting CO2 Emission Targets, Here and Now. Panel Presentation at SAE International: 2020 CO2 Reduction for Transportation Systems Powertrains, Fuels, and Lubricants Conference, July 2020.
 14. YouTube video. Volvo Trucks. October 8, 2018. This is how gas flows in the engine inside our gas-powered trucks. https://www.youtube.com/watch?v=KNGzgzmFIV0&t=20s
 15. DieselNet website. July 19, 2023. Volvo and Westport to form JV to Advance HDPI Fuel System. https://dieselnet.com/news/2023/07westport.php
 16. U.S. Energy Information Administration website. https://www.eia.gov/energyexplained/natural-gas/use-of-natural-gas.php

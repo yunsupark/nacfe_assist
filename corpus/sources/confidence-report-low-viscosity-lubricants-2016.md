@@ -183,7 +183,7 @@ June 28, 2016 9
 
 Trucking Efficiency is a joint effort between NACFE and Carbon War Room to double the freight efficiency of North American goods movement by eliminating barriers associated with information, demand, and supply.
 
-Worldwide, heavy-duty freight trucks emit 1.6 gigatons of $CO_2$ emissions annually—5.5% of society's total greenhouse gas emissions—due to the trucking sector's dependence on petroleum-based fuels. With fuel prices still commanding nearly 40% of the cost of trucking, the adoption of efficiency technologies by all classes of trucks and fleets offers significant cost savings to the sector while reducing emissions. These technologies are relatively cheap to implement and widely available on the market today.
+Worldwide, heavy-duty freight trucks emit 1.6 gigatons of CO2 emissions annually—5.5% of society's total greenhouse gas emissions—due to the trucking sector's dependence on petroleum-based fuels. With fuel prices still commanding nearly 40% of the cost of trucking, the adoption of efficiency technologies by all classes of trucks and fleets offers significant cost savings to the sector while reducing emissions. These technologies are relatively cheap to implement and widely available on the market today.
 
 Trucking Efficiency provides detailed information on cost-effective efficiency technologies, including data from across a variety of fleets and best practices for adoption. This Confidence Report series from Trucking Efficiency aims to serve as a credible and independent source of information on fuel efficiency technologies and their applications.
 
@@ -424,7 +424,7 @@ June 28, 2016 18
 
 > **Figure 7 — Stribeck Curve courtesy of Shell**
 > Type: line chart / schematic
-> Axes: Oil Film Thickness/Roughness ($\Lambda$) vs Friction coefficient
+> Axes: Oil Film Thickness/Roughness (Lambda) vs Friction coefficient
 > Series: The Stribeck curve
 > Values: none
 > Notes: Annotations point to Additives important here (boundary zone), piston rings, valve train, plain bearings, skirt, Viscosity important here (fluid-film HD, EHD zone).
@@ -458,7 +458,7 @@ Most people who purchase engine oil recognize that oil comes in different viscos
 
 In engineering terms, viscosity is defined as a measure of a fluid's internal resistance to flow. Resistance to flow generally equates to fluid friction, and results in pumping losses that affect an engine's fuel consumption. The viscosity of engine oil is commonly measured or defined in two ways:
 
-1. **Kinematic viscosity (KV)** is a measure of the fluid's resistance to flow due to gravity. It is typically determined by measuring the time required for oil to flow through an orifice at a certain temperature (ASTM D445). Kinematic viscosity at both 40 °C and 100 °C is often shown on oil analysis reports. The unit of measurement is centistokes (cSt), equivalent to 1 $mm^2$/second in SI units. In everyday terms, a difference in KV can be observed by pouring a liquid out of a jar – maple syrup, for example has a higher KV than coffee at room temperature, and therefore pours much more slowly.
+1. **Kinematic viscosity (KV)** is a measure of the fluid's resistance to flow due to gravity. It is typically determined by measuring the time required for oil to flow through an orifice at a certain temperature (ASTM D445). Kinematic viscosity at both 40 °C and 100 °C is often shown on oil analysis reports. The unit of measurement is centistokes (cSt), equivalent to 1 mm²/second in SI units. In everyday terms, a difference in KV can be observed by pouring a liquid out of a jar – maple syrup, for example has a higher KV than coffee at room temperature, and therefore pours much more slowly.
 2. **Dynamic viscosity (DV)**, also known as absolute viscosity, is a measure of a fluid's resistance to deformation by shear stress, and is given in centipoise (cP) or milliPascal·second (mP·s). Unlike KV, dynamic viscosity characterizes viscosity under higher shear forces than gravity, such as in a pump or bearing.
 3. **High temperature high shear (HTHS) viscosity** is an example of a measurement of a fluid's dynamic viscosity under high shear and at elevated temperature. Per ASTM D4683, HTHS viscosity is measured by filling the area between a rotor and a stator at a test temperature of 150 °C (302 °F) and measuring the torque needed to turn the rotor at a given speed. Within a diesel engine, the HTHS viscosity of an oil relates to the environment at the ring/liner interface.
 
@@ -508,7 +508,7 @@ The process of defining a performance category, not to mention of producing and 
 
 While in engineering terms viscosity is measured by kinematic or dynamic viscosity (as discussed in section 2.3), automotive oil viscosity is typically referred to by its viscosity grade (also commonly called its weight). SAE's system of classifying viscosity is based on a numerical grade system defined in SAE J300, with corresponding kinematic viscosity shown in Table 2. Important to note, the numbers used in determining viscosity grades are *grades*, and do not corresponded to measurements in any set units
 
-| Viscosity Grade | Kinematic Viscosity ($mm^2$/s @ 100 °C) | HTHS Viscosity (mPa·s @150 °C) |
+| Viscosity Grade | Kinematic Viscosity (mm²/s @ 100 °C) | HTHS Viscosity (mPa·s @150 °C) |
 | :--- | :--- | :--- |
 | Min | Max | Min |
 | **0W** | 3.8 | | |
@@ -588,7 +588,7 @@ Since this is the first time that two new service categories are launched at the
 
 > **Figure 8 — Relationship between kinematic viscosity and HTHS viscosity is approximate. HTHS scale not linear. Figure courtesy of Shell.**
 > Type: bar chart / schematic
-> Axes: Kinematic Viscosity ($mm^2$/s @ 100°C) (10 to 16) vs HTHS Viscosity (mPa-s @ 150°C)
+> Axes: Kinematic Viscosity (mm²/s @ 100°C) (10 to 16) vs HTHS Viscosity (mPa-s @ 150°C)
 > Series: SAE 40, CJ-4, CK-4 (PC-11A), FA-4 (PC-11B)
 > Values: Typical 15W-40: approx 4.2 HTHS; CJ-4/CK-4 xW-30: approx 3.5 HTHS; FA-4 xW-30: 3.2 to 2.9 HTHS.
 > Notes: Figure 8: Relationship between kinematic viscosity and HTHS viscosity is approximate. HTHS scale not linear. Figure courtesy of Shell.
@@ -755,7 +755,7 @@ No matter what, it is certain that the largest predictor of the fuel economy of 
 > Axes: Soot (%) (0 to 9) vs HTHS (mPa·s) (3 to 6.5)
 > Series: Oil A T11, Oil A OM441LA
 > Values: [values estimated from chart] Oil A T11: Soot 0 to 8%, HTHS 4.3 to 5.05. Oil A OM441LA: Soot 0 to 2%, HTHS 4.1 to 6.0.
-> Notes: $R^2 = 0.9971$, $R^2 = 0.9947$
+> Notes: R² = 0.9971, R² = 0.9947
 
 June 28, 2016 30
 
