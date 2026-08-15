@@ -3,9 +3,14 @@ main = "src/index.ts"
 compatibility_date = "2026-07-31"
 workers_dev = true
 
-# GEMINI_API is set as a secret, not here:
+# GEMINI_API (paid key) and GEMINI_API_FREE (a separate free-tier key, no billing linked) are
+# set as secrets, not here:
 #   wrangler secret put GEMINI_API
-# Never commit the real key. Local dev reads it from .dev.vars (gitignored).
+#   wrangler secret put GEMINI_API_FREE
+# Every model call tries GEMINI_API_FREE first and only falls back to GEMINI_API on a quota
+# error (see generateContentWithFallback in src/gemini.ts) -- this keeps routine usage free
+# and only spills over to paid once free tier's daily quota is actually exhausted.
+# Never commit the real keys. Local dev reads them from .dev.vars (gitignored).
 
 [[kv_namespaces]]
 binding = "CACHE"

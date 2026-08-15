@@ -21,3 +21,16 @@ CREATE TABLE IF NOT EXISTS queries (
 
 CREATE INDEX IF NOT EXISTS idx_queries_timestamp ON queries (timestamp);
 CREATE INDEX IF NOT EXISTS idx_queries_normalized_question ON queries (normalized_question);
+
+-- Widget feedback, one row per rating a reader submits. Linked to the specific queries row
+-- that was actually served (not just the question text) since the same question can be
+-- answered differently over time and cache hits get their own fresh queries row per serve.
+-- Anonymous like the queries table itself -- no IP or user identity, just the rating.
+CREATE TABLE IF NOT EXISTS feedback (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  query_id INTEGER NOT NULL REFERENCES queries (id),
+  rating TEXT NOT NULL CHECK (rating IN ('correct', 'partial', 'wrong')),
+  timestamp TEXT NOT NULL  -- ISO 8601
+);
+
+CREATE INDEX IF NOT EXISTS idx_feedback_query_id ON feedback (query_id);

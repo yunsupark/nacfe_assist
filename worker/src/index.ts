@@ -3,10 +3,11 @@
 // See eval/run_eval.py for the local-script version this was ported from, and
 // eval/results/two_stage_scored.md for the eval this design is validated against.
 import { CATALOG, ROUTE_PROMPT, ANSWER_PROMPT, WIDGET_JS } from "./corpus_data";
-import { generateContent, stripJsonFence, GeminiError } from "./gemini";
+import { generateContentWithFallback, stripJsonFence, GeminiError } from "./gemini";
 
 export interface Env {
   GEMINI_API: string;
+  GEMINI_API_FREE: string;
   CACHE: KVNamespace;
   DB: D1Database;
   SOURCES_BUCKET: R2Bucket;
@@ -26,12 +27,73 @@ function normalizeQuestion(q: string): string {
   return q.trim().toLowerCase().replace(/\s+/g, " ").replace(/[?.!]+$/, "");
 }
 
+/** Attach each selected source's catalog url (null if the source has none) so the widget can
+ * render a real link instead of plain text. */
+function enrichSources(
+  selected: Array<{ id: string; why: string }>,
+): Array<{ id: string; why: string; url: string | null }> {
+  const catalogById = new Map(CATALOG.map((c) => [c.id, c]));
+  return selected.map((s) => ({ ...s, url: catalogById.get(s.id)?.url ?? null }));
+}
+
 function jsonResponse(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), {
     status,
     headers: {
       "content-type": "application/json",
       "access-control-allow-origin": "*", // the embeddable widget (SPEC.md /web/) is meant to be embedded cross-origin
+    },
+  });
+}
+
+/**
+ * A response that streams newline-delimited lines as the query pipeline actually progresses,
+ * so the widget's loading text is driven by real backend events instead of a client-side
+ * guess at timing. Two line kinds: "STAGE:<name>" (progress marker, zero or more) and
+ * "DATA:<json>" (exactly one, terminal -- either the real result or {"error": "..."}).
+ *
+ * The status code is necessarily fixed at 200 for this response, since headers are already
+ * committed before we know whether route()/answer() will succeed -- errors are signaled
+ * in-band via a DATA line with an "error" field instead of an HTTP status, same tradeoff any
+ * streaming API (SSE, GraphQL subscriptions, etc.) makes. `run` does the real work and must
+ * be kept alive past the synchronous return via ctx.waitUntil, per the Workers streaming
+ * pattern (returning a Response wrapping a stream while the producer side keeps writing).
+ */
+function lineStreamResponse(
+  ctx: ExecutionContext,
+  run: (write: (line: string) => Promise<void>) => Promise<void>,
+): Response {
+  const { readable, writable } = new TransformStream();
+  const writer = writable.getWriter();
+  const encoder = new TextEncoder();
+  const write = (line: string) => writer.write(encoder.encode(line + "\n"));
+
+  ctx.waitUntil(
+    (async () => {
+      try {
+        await run(write);
+      } catch (err) {
+        console.error(err);
+        try {
+          await write(`DATA:${JSON.stringify({ error: "internal error" })}`);
+        } catch {
+          // writer already errored/closed -- nothing more we can do
+        }
+      } finally {
+        try {
+          await writer.close();
+        } catch {
+          // already closed
+        }
+      }
+    })(),
+  );
+
+  return new Response(readable, {
+    headers: {
+      "content-type": "text/plain; charset=utf-8",
+      "access-control-allow-origin": "*",
+      "cache-control": "no-store",
     },
   });
 }
@@ -71,7 +133,13 @@ async function route(env: Env, question: string): Promise<{ result: RouteResult;
     "{{question}}",
     question,
   );
-  const { text, usage } = await generateContent(env.GEMINI_API, env.ROUTE_MODEL, prompt);
+  const { text, usage } = await generateContentWithFallback(
+    env.CACHE,
+    env.GEMINI_API_FREE,
+    env.GEMINI_API,
+    env.ROUTE_MODEL,
+    prompt,
+  );
   const parsed = JSON.parse(stripJsonFence(text)) as RouteResult;
   return { result: parsed, tokens: usage.totalTokens };
 }
@@ -109,7 +177,13 @@ async function answer(
   const prompt = ANSWER_PROMPT.replace("{{current_year}}", currentYear)
     .replace("{{documents}}", documents)
     .replace("{{question}}", question);
-  const { text, usage } = await generateContent(env.GEMINI_API, env.ANSWER_MODEL, prompt);
+  const { text, usage } = await generateContentWithFallback(
+    env.CACHE,
+    env.GEMINI_API_FREE,
+    env.GEMINI_API,
+    env.ANSWER_MODEL,
+    prompt,
+  );
   return { text, tokens: usage.totalTokens };
 }
 
@@ -128,8 +202,8 @@ async function logQuery(
     latencyMs: number;
     degradedCacheOnly: boolean;
   },
-): Promise<void> {
-  await env.DB.prepare(
+): Promise<number> {
+  const result = await env.DB.prepare(
     `INSERT INTO queries
       (timestamp, question, normalized_question, cache_hit, out_of_scope, selected_sources,
        recency_warning, route_tokens, answer_tokens, total_tokens, latency_ms, degraded_cache_only)
@@ -150,6 +224,7 @@ async function logQuery(
       fields.degradedCacheOnly ? 1 : 0,
     )
     .run();
+  return result.meta.last_row_id;
 }
 
 async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
@@ -172,8 +247,8 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   const cacheKey = `answer:${normalized}`;
   const cached = await env.CACHE.get(cacheKey, "json");
   if (cached) {
-    ctx.waitUntil(
-      logQuery(env, {
+    return lineStreamResponse(ctx, async (write) => {
+      const queryId = await logQuery(env, {
         question,
         normalizedQuestion: normalized,
         cacheHit: true,
@@ -185,9 +260,9 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         totalTokens: null,
         latencyMs: Date.now() - start,
         degradedCacheOnly: false,
-      }),
-    );
-    return jsonResponse({ ...(cached as object), cached: true });
+      });
+      await write(`DATA:${JSON.stringify({ ...(cached as object), cached: true, query_id: queryId })}`);
+    });
   }
 
   const { key: budgetKey, used: monthlyUsed } = await getMonthlyTokenUsage(env);
@@ -219,22 +294,22 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
     );
   }
 
-  try {
-    const { result: routeResult, tokens: routeTokens } = await route(env, question);
-    const selectedIds = routeResult.selected.map((s) => s.id);
+  return lineStreamResponse(ctx, async (write) => {
+    try {
+      const { result: routeResult, tokens: routeTokens } = await route(env, question);
+      const selectedIds = routeResult.selected.map((s) => s.id);
 
-    if (selectedIds.length === 0 || routeResult.out_of_scope) {
-      const payload = {
-        answer:
-          "NACFE hasn't published research that addresses this question. This is a correct answer, not a limitation of this tool -- see nacfe.org for the full library of what NACFE has studied.",
-        selected_sources: [],
-        out_of_scope: true,
-        recency_warning: routeResult.recency_warning,
-      };
-      ctx.waitUntil(env.CACHE.put(cacheKey, JSON.stringify(payload), { expirationTtl: 3600 * 24 * 30 }));
-      ctx.waitUntil(addMonthlyTokenUsage(env, budgetKey, routeTokens));
-      ctx.waitUntil(
-        logQuery(env, {
+      if (selectedIds.length === 0 || routeResult.out_of_scope) {
+        const payload = {
+          answer:
+            "NACFE hasn't published research that addresses this question. This is a correct answer, not a limitation of this tool -- see nacfe.org for the full library of what NACFE has studied.",
+          selected_sources: [],
+          out_of_scope: true,
+          recency_warning: routeResult.recency_warning,
+        };
+        ctx.waitUntil(env.CACHE.put(cacheKey, JSON.stringify(payload), { expirationTtl: 3600 * 24 * 30 }));
+        ctx.waitUntil(addMonthlyTokenUsage(env, budgetKey, routeTokens));
+        const queryId = await logQuery(env, {
           question,
           normalizedQuestion: normalized,
           cacheHit: false,
@@ -246,24 +321,29 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
           totalTokens: routeTokens,
           latencyMs: Date.now() - start,
           degradedCacheOnly: false,
-        }),
-      );
-      return jsonResponse({ ...payload, cached: false });
-    }
+        });
+        await write(`DATA:${JSON.stringify({ ...payload, cached: false, query_id: queryId })}`);
+        return;
+      }
 
-    const { text: answerText, tokens: answerTokens } = await answer(env, question, selectedIds);
-    const totalTokens = routeTokens + answerTokens;
+      // Real signal, not a guessed delay: the widget switches its loading text here, exactly
+      // when routing has actually finished and the (much longer) answer-generation call
+      // actually starts -- there's no further mid-call signal available since reading the
+      // documents and writing the response happen inside one continuous Gemini generation.
+      await write("STAGE:reading");
 
-    const payload = {
-      answer: answerText,
-      selected_sources: routeResult.selected,
-      out_of_scope: false,
-      recency_warning: routeResult.recency_warning,
-    };
-    ctx.waitUntil(env.CACHE.put(cacheKey, JSON.stringify(payload), { expirationTtl: 3600 * 24 * 30 }));
-    ctx.waitUntil(addMonthlyTokenUsage(env, budgetKey, totalTokens));
-    ctx.waitUntil(
-      logQuery(env, {
+      const { text: answerText, tokens: answerTokens } = await answer(env, question, selectedIds);
+      const totalTokens = routeTokens + answerTokens;
+
+      const payload = {
+        answer: answerText,
+        selected_sources: enrichSources(routeResult.selected),
+        out_of_scope: false,
+        recency_warning: routeResult.recency_warning,
+      };
+      ctx.waitUntil(env.CACHE.put(cacheKey, JSON.stringify(payload), { expirationTtl: 3600 * 24 * 30 }));
+      ctx.waitUntil(addMonthlyTokenUsage(env, budgetKey, totalTokens));
+      const queryId = await logQuery(env, {
         question,
         normalizedQuestion: normalized,
         cacheHit: false,
@@ -275,16 +355,41 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         totalTokens,
         latencyMs: Date.now() - start,
         degradedCacheOnly: false,
-      }),
-    );
-    return jsonResponse({ ...payload, cached: false });
-  } catch (err) {
-    if (err instanceof GeminiError && (err.isRateLimit || err.isDailyQuota)) {
-      return jsonResponse({ error: "upstream model is temporarily rate-limited, try again shortly" }, 503);
+      });
+      await write(`DATA:${JSON.stringify({ ...payload, cached: false, query_id: queryId })}`);
+    } catch (err) {
+      if (err instanceof GeminiError && (err.isRateLimit || err.isDailyQuota || err.isServerError)) {
+        await write(`DATA:${JSON.stringify({ error: "upstream model is temporarily unavailable, try again shortly" })}`);
+        return;
+      }
+      throw err; // handled generically (logged + {"error":"internal error"}) by lineStreamResponse
     }
-    console.error(err);
-    return jsonResponse({ error: "internal error" }, 500);
+  });
+}
+
+const VALID_RATINGS = ["correct", "partial", "wrong"];
+
+async function handleFeedback(request: Request, env: Env): Promise<Response> {
+  let body: { query_id?: number; rating?: string };
+  try {
+    body = await request.json();
+  } catch {
+    return jsonResponse({ error: "invalid JSON body" }, 400);
   }
+  const queryId = body.query_id;
+  const rating = body.rating;
+  if (!Number.isInteger(queryId) || (queryId as number) <= 0) {
+    return jsonResponse({ error: "missing or invalid 'query_id'" }, 400);
+  }
+  if (!rating || !VALID_RATINGS.includes(rating)) {
+    return jsonResponse({ error: `'rating' must be one of: ${VALID_RATINGS.join(", ")}` }, 400);
+  }
+
+  await env.DB.prepare(`INSERT INTO feedback (query_id, rating, timestamp) VALUES (?, ?, ?)`)
+    .bind(queryId, rating, new Date().toISOString())
+    .run();
+
+  return jsonResponse({ ok: true });
 }
 
 export default {
@@ -303,6 +408,10 @@ export default {
 
     if (url.pathname === "/query" && request.method === "POST") {
       return handleQuery(request, env, ctx);
+    }
+
+    if (url.pathname === "/feedback" && request.method === "POST") {
+      return handleFeedback(request, env);
     }
 
     if (url.pathname === "/health") {
