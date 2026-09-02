@@ -26,6 +26,12 @@ CREATE INDEX IF NOT EXISTS idx_queries_normalized_question ON queries (normalize
 -- that was actually served (not just the question text) since the same question can be
 -- answered differently over time and cache hits get their own fresh queries row per serve.
 -- Anonymous like the queries table itself -- no IP or user identity, just the rating.
+--
+-- query_id is UNIQUE: each serve gets its own queries row, so a second rating for the same
+-- row is one reader changing their mind, not a second opinion. The Worker upserts. Together
+-- with the HMAC feedback token it requires (see feedbackToken in src/index.ts) this stops
+-- anyone from enumerating sequential query ids and mass-submitting ratings against answers
+-- they were never served.
 CREATE TABLE IF NOT EXISTS feedback (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   query_id INTEGER NOT NULL REFERENCES queries (id),
@@ -33,4 +39,4 @@ CREATE TABLE IF NOT EXISTS feedback (
   timestamp TEXT NOT NULL  -- ISO 8601
 );
 
-CREATE INDEX IF NOT EXISTS idx_feedback_query_id ON feedback (query_id);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_feedback_query_id ON feedback (query_id);

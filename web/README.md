@@ -56,6 +56,31 @@ resolvable from inside this repo:
    Cloudflare at all, skip this — the `workers.dev` URL works fine indefinitely, it's
    just not branded.
 
+## Deploy checklist (new steps from the security review)
+
+Three one-time steps before the next `npm run deploy`, on top of the existing secrets:
+
+```bash
+cd worker
+
+# 1. Signs the per-answer feedback token. Without it /feedback stays disabled
+#    (GET /health reports "feedback": false) rather than accepting ratings against
+#    guessable sequential query ids.
+openssl rand -hex 32 | npx wrangler secret put FEEDBACK_SECRET
+
+# 2. One rating per served answer, and dedupe any existing duplicates.
+npx wrangler d1 execute nacfe-assist --remote --file=migrations/0001_feedback_unique_query_id.sql
+```
+
+3. The rate limit and the monthly token ceiling are now Durable Objects (`RateLimiter`,
+   `Budget` in `src/counters.ts`) rather than KV counters, which were eventually consistent
+   and so didn't actually hold under concurrency. `wrangler deploy` applies the `v1`
+   migration in `wrangler.toml` automatically; Durable Objects must be enabled on the
+   account for the deploy to succeed.
+
+After deploying, `curl https://nacfe-assist.nacfe.workers.dev/health` should report
+`"feedback": true`.
+
 ## Before sending real public traffic
 
 The deployed Worker currently runs on a **free-tier Gemini API key** — the same one

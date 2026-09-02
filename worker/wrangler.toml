@@ -7,6 +7,11 @@ workers_dev = true
 # set as secrets, not here:
 #   wrangler secret put GEMINI_API
 #   wrangler secret put GEMINI_API_FREE
+# FEEDBACK_SECRET is also a secret. It signs the per-answer token the widget must present to
+# submit a rating -- without it the /feedback endpoint stays disabled (and GET /health reports
+# "feedback": false) rather than accepting ratings against guessable sequential query ids.
+# Any long random string works:
+#   openssl rand -hex 32 | wrangler secret put FEEDBACK_SECRET
 # Every model call tries GEMINI_API_FREE first and only falls back to GEMINI_API on a quota
 # error (see generateContentWithFallback in src/gemini.ts) -- this keeps routine usage free
 # and only spills over to paid once free tier's daily quota is actually exhausted.
@@ -22,6 +27,22 @@ binding = "DB"
 database_name = "nacfe-assist"
 database_id = "bcd72e66-992b-4a2f-92ef-735329676803"
 
+# Atomic counters for the per-IP rate limit and the monthly token ceiling. These were KV
+# read-modify-write, which is eventually consistent and edge-cached -- concurrent requests all
+# read the same stale total, so neither limit actually held. A Durable Object is
+# single-threaded with strongly consistent storage, so check-and-increment is atomic.
+[[durable_objects.bindings]]
+name = "RATE_LIMITER"
+class_name = "RateLimiter"
+
+[[durable_objects.bindings]]
+name = "BUDGET"
+class_name = "Budget"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["RateLimiter", "Budget"]
+
 [[r2_buckets]]
 binding = "SOURCES_BUCKET"
 bucket_name = "nacfe-assist-sources"  # wrangler r2 bucket create nacfe-assist-sources
@@ -34,3 +55,8 @@ MONTHLY_TOKEN_CEILING = "20000000"
 ROUTE_MODEL = "gemini-3.5-flash-lite"
 ANSWER_MODEL = "gemini-3.6-flash"
 RATE_LIMIT_PER_IP_PER_HOUR = "20"
+
+# console.error had nowhere to go before this -- a public endpoint with no logs.
+[observability]
+enabled = true
+head_sampling_rate = 1

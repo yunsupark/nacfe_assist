@@ -12,6 +12,10 @@ export interface GeminiUsage {
 export interface GeminiResult {
   text: string;
   usage: GeminiUsage;
+  /** Gemini's own reason for stopping. Anything other than "STOP" means the text is not a
+   * complete answer (MAX_TOKENS truncation, a safety block, a recitation block, ...) and
+   * must not be cached and served as one. */
+  finishReason: string;
 }
 
 export class GeminiError extends Error {
@@ -30,18 +34,36 @@ export class GeminiError extends Error {
   }
 }
 
+/** The HTTP call succeeded but the response carries no usable answer -- blocked by a safety
+ * filter, an empty candidate list, or a candidate with no text parts. Distinct from
+ * GeminiError (a transport/status failure) because it must never be retried blindly or
+ * cached, but it also isn't an outage. */
+export class GeminiEmptyResponse extends Error {
+  constructor(public reason: string) {
+    super(`Gemini returned no usable text (${reason})`);
+  }
+}
+
 async function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function generateContentOnce(apiKey: string, model: string, prompt: string): Promise<GeminiResult> {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+async function generateContentOnce(
+  apiKey: string,
+  model: string,
+  prompt: string,
+  signal?: AbortSignal,
+): Promise<GeminiResult> {
+  // The key goes in a header, not the query string: a URL carrying the key ends up in
+  // proxy/CDN access logs and in any error text that echoes the request URL.
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
   const response = await fetch(url, {
     method: "POST",
-    headers: { "content-type": "application/json" },
+    headers: { "content-type": "application/json", "x-goog-api-key": apiKey },
     body: JSON.stringify({
       contents: [{ parts: [{ text: prompt }] }],
     }),
+    signal,
   });
 
   if (!response.ok) {
@@ -59,7 +81,11 @@ async function generateContentOnce(apiKey: string, model: string, prompt: string
   }
 
   const data = (await response.json()) as {
-    candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
+    candidates?: Array<{
+      content?: { parts?: Array<{ text?: string; thought?: boolean }> };
+      finishReason?: string;
+    }>;
+    promptFeedback?: { blockReason?: string };
     usageMetadata?: {
       promptTokenCount?: number;
       candidatesTokenCount?: number;
@@ -67,26 +93,49 @@ async function generateContentOnce(apiKey: string, model: string, prompt: string
     };
   };
 
-  const text = data.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
   const usage: GeminiUsage = {
     promptTokens: data.usageMetadata?.promptTokenCount ?? 0,
     outputTokens: data.usageMetadata?.candidatesTokenCount ?? 0,
     totalTokens: data.usageMetadata?.totalTokenCount ?? 0,
   };
 
-  return { text, usage };
+  if (data.promptFeedback?.blockReason) {
+    throw new GeminiEmptyResponse(`prompt blocked: ${data.promptFeedback.blockReason}`);
+  }
+
+  const candidate = data.candidates?.[0];
+  if (!candidate) throw new GeminiEmptyResponse("no candidates returned");
+
+  // Join every non-thought part. Reading only parts[0] silently drops the answer whenever the
+  // model emits a thought part first (thinking models) or splits its output across parts.
+  const text = (candidate.content?.parts ?? [])
+    .filter((p) => p.thought !== true && typeof p.text === "string")
+    .map((p) => p.text as string)
+    .join("");
+
+  const finishReason = candidate.finishReason ?? "STOP";
+  if (!text.trim()) throw new GeminiEmptyResponse(`empty text (finishReason=${finishReason})`);
+
+  return { text, usage, finishReason };
 }
 
 /** One same-key retry on a transient 5xx before giving up -- a single short-lived "high
  * demand" blip (the most common real-world failure this project has seen) often clears on
  * an immediate retry, without even needing to burn the fallback key. */
-export async function generateContent(apiKey: string, model: string, prompt: string): Promise<GeminiResult> {
+export async function generateContent(
+  apiKey: string,
+  model: string,
+  prompt: string,
+  signal?: AbortSignal,
+): Promise<GeminiResult> {
   try {
-    return await generateContentOnce(apiKey, model, prompt);
+    return await generateContentOnce(apiKey, model, prompt, signal);
   } catch (err) {
     if (!(err instanceof GeminiError) || !err.isServerError) throw err;
-    await sleep(500);
-    return generateContentOnce(apiKey, model, prompt);
+    // Jittered so a burst of requests hitting the same blip doesn't retry in lockstep.
+    await sleep(400 + Math.floor(Math.random() * 400));
+    if (signal?.aborted) throw err;
+    return generateContentOnce(apiKey, model, prompt, signal);
   }
 }
 
@@ -116,11 +165,12 @@ export async function generateContentWithFallback(
   paidApiKey: string,
   model: string,
   prompt: string,
+  signal?: AbortSignal,
 ): Promise<GeminiResult> {
   const exhausted = await cache.get(FREE_TIER_EXHAUSTED_KEY);
   if (!exhausted && freeApiKey) {
     try {
-      return await generateContent(freeApiKey, model, prompt);
+      return await generateContent(freeApiKey, model, prompt, signal);
     } catch (err) {
       if (!(err instanceof GeminiError) || !(err.isRateLimit || err.isServerError)) throw err;
       if (err.isDailyQuota) {
@@ -130,5 +180,5 @@ export async function generateContentWithFallback(
       // transient server error that survived generateContent's own same-key retry
     }
   }
-  return generateContent(paidApiKey, model, prompt);
+  return generateContent(paidApiKey, model, prompt, signal);
 }

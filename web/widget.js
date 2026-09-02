@@ -82,13 +82,8 @@
       "#nacfe-assist-root .na-error{font-size:14px;color:#ab1428;padding:12px 0}",
       "#nacfe-assist-root .na-footer{font-size:11px;color:#9a9a9a;margin-top:18px}",
       "#nacfe-assist-root .na-footer a{color:#001961}",
-      "#nacfe-assist-root .na-sponsor{display:flex;align-items:center;gap:10px;",
       "font-size:14px;color:#6b6b6b;margin:0 0 6px}",
-      "#nacfe-assist-root .na-sponsor img{width:28px;height:28px;border-radius:5px;",
       "flex-shrink:0;object-fit:contain}",
-      "#nacfe-assist-root .na-sponsor b{color:#333}",
-      "#nacfe-assist-root .na-sponsor a{color:#001961;text-decoration:none}",
-      "#nacfe-assist-root .na-sponsor a:hover{text-decoration:underline}",
       // Desktop-width viewports get a wider column and larger type -- the base rules above
       // stay mobile-sized so phones/narrow embeds aren't affected.
       "@media (min-width:640px){",
@@ -108,8 +103,6 @@
       "#nacfe-assist-root .na-feedback-btn{font-size:15px;padding:8px 16px}",
       "#nacfe-assist-root .na-feedback-thanks{font-size:15px}",
       "#nacfe-assist-root .na-footer{font-size:13px}",
-      "#nacfe-assist-root .na-sponsor{font-size:16px}",
-      "#nacfe-assist-root .na-sponsor img{width:32px;height:32px}",
       "}",
     ].join("");
     document.head.appendChild(style);
@@ -119,16 +112,16 @@
     '<div id="nacfe-assist-root">',
     '<p class="na-label">Ask NACFE\'s Research</p>',
     '<form id="na-form">',
-    '<input type="text" id="na-input" placeholder="e.g. What was Frito-Lay’s fuel economy in the Messy Middle demonstration?" autocomplete="off" />',
+    '<input type="text" id="na-input" maxlength="1000" aria-label="Ask a question about NACFE\u2019s research" placeholder="e.g. What was Frito-Lay’s fuel economy in the Messy Middle demonstration?" autocomplete="off" />',
     '<button type="submit" id="na-submit">Ask</button>',
     '</form>',
     '<p class="na-hint">Answers are grounded only in NACFE’s published reports, videos, and studies — not general knowledge.</p>',
-    '<div class="na-loading" id="na-loading" style="display:none">',
+    '<div class="na-loading" id="na-loading" role="status" aria-live="polite" style="display:none">',
     '<span id="na-loading-text">Searching NACFE’s research library</span>',
     '<span class="na-dots"><span></span><span></span><span></span></span>',
     '</div>',
-    '<div class="na-error" id="na-error" style="display:none"></div>',
-    '<div class="na-result" id="na-result">',
+    '<div class="na-error" id="na-error" role="alert" style="display:none"></div>',
+    '<div class="na-result" id="na-result" aria-live="polite">',
     '<div class="na-warning" id="na-warning" style="display:none"></div>',
     '<div class="na-answer" id="na-answer"></div>',
     '<div class="na-sources" id="na-sources" style="display:none">',
@@ -143,11 +136,7 @@
     '<span class="na-feedback-thanks" id="na-feedback-thanks" style="display:none">Thanks for the feedback!</span>',
     '</div>',
     '</div>',
-    '<p class="na-sponsor" id="na-sponsor">',
-    '<img src="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 40 40\'%3E%3Crect width=\'40\' height=\'40\' rx=\'8\' fill=\'%232563eb\'/%3E%3Ctext x=\'20\' y=\'26\' font-family=\'Arial\' font-size=\'16\' font-weight=\'700\' fill=\'white\' text-anchor=\'middle\'%3EES%3C/text%3E%3C/svg%3E" alt="Example Sponsor Name logo" />',
-    '<span><b>Example Sponsor Name</b> — Sponsor tag line. <a href="#">Learn more</a></span>',
-    '</p>',
-    '<p class="na-footer">Powered by NACFE’s research library. Answers cite specific reports and demonstrations — verify against the original source for critical decisions.</p>',
+    '<p class="na-footer">Powered by NACFE’s research library. Answers cite specific reports and demonstrations — verify against the original source for critical decisions. Questions are logged (without any identifying information) to help NACFE see what the industry is asking; please don’t enter personal or confidential details.</p>',
     '</div>',
   ].join("");
 
@@ -165,36 +154,78 @@
   var feedbackEl = mount.querySelector("#na-feedback");
   var feedbackBtns = mount.querySelectorAll(".na-feedback-btn");
   var feedbackThanksEl = mount.querySelector("#na-feedback-thanks");
-  var feedbackApiUrl = apiUrl.replace(/\/query$/, "/feedback");
+  // Derive /feedback from /query, matching on the path only so a data-api carrying a query
+  // string or a relative path still resolves. If the path doesn't end in /query there's
+  // nothing sensible to derive, so leave feedback off rather than POSTing ratings at the
+  // query endpoint (which the old blind `.replace()` would have done).
+  var feedbackApiUrl = (function () {
+    try {
+      var parsed = new URL(apiUrl, document.baseURI);
+      if (!/\/query$/.test(parsed.pathname)) return null;
+      parsed.pathname = parsed.pathname.replace(/\/query$/, "/feedback");
+      return parsed.toString();
+    } catch (err) {
+      return null;
+    }
+  })();
   var currentQueryId = null;
+  // Server-issued HMAC over the query id; the API rejects ratings without it, so that
+  // sequential ids can't be enumerated and rated by anyone who never saw the answer.
+  var currentFeedbackToken = null;
+  var REQUEST_TIMEOUT_MS = 120000;
 
-  function escapeHtml(s) {
-    var div = document.createElement("div");
-    div.textContent = s;
-    return div.innerHTML;
+  // Everything below builds DOM nodes and sets textContent rather than concatenating HTML
+  // strings. The previous escapeHtml() escaped via textContent -> innerHTML, which handles
+  // < > & but NOT quotes -- and its output was interpolated straight into href="...", one
+  // character away from breaking out of the attribute. Nodes sidestep the whole class.
+
+  /** Only ever render http(s) links: a "javascript:" or "data:" url in a source record would
+   * otherwise become a live link in the reader's page. */
+  function safeHttpUrl(u) {
+    return typeof u === "string" && /^https?:\/\//i.test(u) ? u : null;
   }
 
   // The answer stage writes plain paragraphs separated by blank lines -- render each as
   // its own <p> rather than dumping one unbroken block of text.
   function renderAnswer(text) {
-    var paragraphs = text.split(/\n\s*\n/).filter(function (p) { return p.trim(); });
-    answerEl.innerHTML = paragraphs.map(function (p) {
-      return "<p>" + escapeHtml(p.trim()) + "</p>";
-    }).join("");
+    answerEl.textContent = "";
+    var paragraphs = String(text == null ? "" : text)
+      .split(/\n\s*\n/)
+      .filter(function (p) { return p.trim(); });
+    for (var i = 0; i < paragraphs.length; i++) {
+      var para = document.createElement("p");
+      para.textContent = paragraphs[i].trim();
+      answerEl.appendChild(para);
+    }
   }
 
   function renderSources(sources) {
+    sourcesListEl.textContent = "";
     if (!sources || !sources.length) {
       sourcesEl.style.display = "none";
       return;
     }
-    sourcesListEl.innerHTML = sources.map(function (s) {
-      var label = s.url
-        ? '<a href="' + escapeHtml(s.url) + '" target="_blank" rel="noopener">' + escapeHtml(s.id) + "</a>"
-        : escapeHtml(s.id);
-      return '<div class="na-source"><b>' + label + "</b> — " +
-        escapeHtml(s.why || "") + "</div>";
-    }).join("");
+    for (var i = 0; i < sources.length; i++) {
+      var s = sources[i] || {};
+      var row = document.createElement("div");
+      row.className = "na-source";
+
+      var name = document.createElement("b");
+      var url = safeHttpUrl(s.url);
+      if (url) {
+        var link = document.createElement("a");
+        link.setAttribute("href", url);
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel", "noopener noreferrer");
+        link.textContent = String(s.id || "");
+        name.appendChild(link);
+      } else {
+        name.textContent = String(s.id || "");
+      }
+      row.appendChild(name);
+      row.appendChild(document.createTextNode(" \u2014 " + String(s.why || "")));
+      sourcesListEl.appendChild(row);
+    }
     sourcesEl.style.display = "block";
   }
 
@@ -202,6 +233,7 @@
   // answer so a rating given on a prior answer never carries over onto the next one.
   function resetFeedback() {
     currentQueryId = null;
+    currentFeedbackToken = null;
     feedbackEl.style.display = "none";
     feedbackThanksEl.style.display = "none";
     for (var i = 0; i < feedbackBtns.length; i++) {
@@ -212,14 +244,18 @@
   }
 
   function submitFeedback(rating, clickedBtn) {
-    if (!currentQueryId) return;
+    if (!currentQueryId || !currentFeedbackToken || !feedbackApiUrl) return;
     for (var i = 0; i < feedbackBtns.length; i++) feedbackBtns[i].disabled = true;
     clickedBtn.classList.add("na-selected");
 
     fetch(feedbackApiUrl, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ query_id: currentQueryId, rating: rating }),
+      body: JSON.stringify({
+        query_id: currentQueryId,
+        rating: rating,
+        token: currentFeedbackToken,
+      }),
     })
       .then(function (res) {
         if (!res.ok) throw new Error("feedback request failed");
@@ -302,14 +338,28 @@
     resetFeedback();
     setLoading(true);
 
+    // Bound the request. Without this, a stalled backend leaves the widget spinning with its
+    // input disabled and no way back other than reloading the host page.
+    var controller = typeof AbortController === "function" ? new AbortController() : null;
+    var timedOut = false;
+    var timer = setTimeout(function () {
+      timedOut = true;
+      if (controller) controller.abort();
+    }, REQUEST_TIMEOUT_MS);
+
     fetch(apiUrl, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ question: question }),
+      signal: controller ? controller.signal : undefined,
     })
       .then(function (res) {
         if (!res.ok) {
           return res.json().catch(function () { return {}; }).then(function (body) {
+            // The monthly-budget degrade path answers 503 with {answer, degraded:true}. That
+            // is a real notice written for the reader, not a failure -- surfacing it as
+            // "Something went wrong: request failed (503)" threw the message away.
+            if (body && body.answer) return { answer: body.answer, degraded: true };
             throw new Error(body.error || ("request failed (" + res.status + ")"));
           });
         }
@@ -319,7 +369,19 @@
       })
       .then(function (data) {
         if (data.error) throw new Error(data.error);
+        clearTimeout(timer);
         setLoading(false);
+
+        if (data.degraded) {
+          // Notice only: there is no answer, no sources and nothing to rate.
+          renderAnswer("");
+          renderSources(null);
+          warningEl.textContent = data.answer;
+          warningEl.style.display = "block";
+          resultEl.classList.add("na-visible");
+          return;
+        }
+
         renderAnswer(data.answer || "");
         renderSources(data.selected_sources);
         if (data.recency_warning) {
@@ -328,15 +390,19 @@
         } else {
           warningEl.style.display = "none";
         }
-        if (data.query_id) {
+        if (data.query_id && data.feedback_token) {
           currentQueryId = data.query_id;
+          currentFeedbackToken = data.feedback_token;
           feedbackEl.style.display = "flex";
         }
         resultEl.classList.add("na-visible");
       })
       .catch(function (err) {
+        clearTimeout(timer);
         setLoading(false);
-        errorEl.textContent = "Something went wrong: " + err.message;
+        errorEl.textContent = timedOut
+          ? "That took too long to answer. Please try again."
+          : "Something went wrong: " + err.message;
         errorEl.style.display = "block";
       });
   });
