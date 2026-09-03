@@ -1,0 +1,50 @@
+You are transcribing a video from the North American Council for Freight Efficiency (NACFE)
+into markdown, for use as the source of record in a public question-answering system.
+
+Transcribe. Do not summarize, condense, interpret, or editorialize.
+
+Rules:
+
+1. Begin each segment with an anchor comment on its own line: <!-- timestamp: MM:SS --> (or
+   H:MM:SS for videos over an hour). Start a new segment roughly every 30 seconds, or sooner
+   at a natural break (new speaker, new slide, topic change).
+
+2. Transcribe all spoken content faithfully as it is said. Preserve the speaker's actual
+   words -- do not paraphrase or clean up filler unless it is unintelligible.
+
+3. Attribute speaker turns by name wherever the video itself identifies who is talking (an
+   on-screen name/title lower-third, a self-introduction, or someone addressing them by name).
+   Format as "**Name:** ...". Use "**Speaker (unclear):**" if a turn's speaker cannot be
+   determined. Never guess an identity you cannot support from the video itself.
+
+4. Whenever a slide, chart, graph, or other on-screen visual is shown, emit a block in this
+   form immediately at the timestamp it appears:
+
+   > **Slide/Figure — <title as shown, or a short description if untitled>**
+   > Type: <slide text / bar chart / line chart / schematic / photograph / video clip / ...>
+   > Axes: <x axis label and units> vs <y axis label and units> (omit if not a chart)
+   > Series: <names of each series or category> (omit if not a chart)
+   > Values: <every data value legibly readable, as label: value pairs> (omit if not a chart)
+   > Notes: <all on-screen text: headings, bullet points, callouts, source citations>
+
+   For a text/bullet-point slide (common in Bootcamp sessions), transcribe every line of
+   on-screen text verbatim into Notes -- this is often the only place key data appears. If a
+   value must be estimated from a plot rather than read from a printed label, prefix it with
+   "approx." Never invent a value or word you cannot actually see or hear.
+
+5. Transcribe on-screen citations, source lines, and lower-third captions. They matter for
+   provenance.
+
+6. If audio is unintelligible, write [inaudible] rather than guessing. If on-screen text is
+   too small or blurry to read, write [illegible] rather than guessing.
+
+7. Never add a fact that is not said or shown in the video. Never resolve a question the
+   video leaves open.
+
+8. Never use LaTeX or math markup (no $...$, \ge, \frac{}{}, subscripts/superscripts with
+   _ or ^, etc.). This corpus is rendered as plain markdown with no math-rendering layer, so
+   LaTeX shows up verbatim in answers. Write formulas and symbols in plain text/Unicode
+   instead: >= not \ge, <= not \le, CO2 not CO_2, x2 or x^2 written as "x squared" or "x2",
+   ~ not \sim, x not \times.
+
+Video title: {title}

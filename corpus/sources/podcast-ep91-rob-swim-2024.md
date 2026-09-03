@@ -1,0 +1,120 @@
+# Ep. 91: Rob Swim – Trucking Industry Veteran
+
+<!-- source: reformatted from YouTube auto-captions (standard podcast ingest path), source video i9EKV0pMfaA -->
+
+<!-- timestamp: 00:04 -->
+Freight efficiency with NACFE's Mike Roeth and friends. Here in episode 91,
+
+<!-- timestamp: 00:08 -->
+Rob Swim, a trucking industry veteran, talks about his 35-year passion in the truck business. We talk about the big old pickup truck, the International CXT, the complexity of vocational vehicles, and what it takes to be a successful truck dealer. He also shares his thoughts on all the powertrain options available now, about the Scout and its battery electric reincarnation, and about the perfect places for electric trucks.
+
+<!-- timestamp: 00:35 -->
+**Mike Roeth:** Today we have joining us Rob Swim. Uh, I'd call Rob a trucking industry veteran and somebody I've worked really close with over the years. Thanks for joining us today, Rob, and um, it's great to have you on.
+
+<!-- timestamp: 00:46 -->
+**Rob Swim:** I appreciate the invite. It's uh, always great to talk to you and talk about uh my 35-year passion in the truck business.
+
+<!-- timestamp: 00:53 -->
+**Mike Roeth:** First of course, uh, you know, over 90 of these um podcasts I've always asked all of my friends um, you know, how did we meet and become friends? Uh, do you remember, Rob?
+
+<!-- timestamp: 00:05 -->
+**Rob Swim:** Oh, absolutely. Um, you were the product manager. I was in charge of uh marketing and launching a brand new line of uh work trucks uh called the 7000 series. And we worked together as a team. We had new models to introduce. We had new people to work with. We even had a new plant down in Garland, Texas. And it was really exciting. You know, these are the trucks that uh carry the loads, their dumps, their mixers, construction, logging, um work trucks, and it was a blast um working with you and your team in Fort Wayne and myself and my team in in Chicago or suburban Chicago uh building a brand and launching the models were great. Uh, on top of that, we had a little side job that was a lot of fun. The world's largest pickup truck, the uh, International CXT. Not really practical as a consumer vehicle. Uh, but what a great brand builder. You know, you drive in the neighborhood or up and down the street or whatever with your name on the side and people are going to stop. I called it a look at me, look at me, look at me truck and and that was kind of fun, too. Uh, maybe some of the executives didn't like us uh not focusing 100% on commercial work trucks, but uh CXT was a was a great brand builder uh for our trucks and our brand.
+
+<!-- timestamp: 02:26 -->
+**Mike Roeth:** Yeah, I remember that. And you know that that uh that whole what we call severe service, people call it vocational or work trucks. I mean, I I got to be honest, when I took that job, what would have been in um 1998, uh I had no idea what I was getting into. I mean, the complexity of the boxes and the bodies, uh you know, you know, how do you turn a cabin chassis into a you know, a side loader garbage truck or a uh you know, a snow plow in northern Michigan, etc., etc.
+
+<!-- timestamp: 02:57 -->
+**Rob Swim:** Yeah. Even even how you plow snow in Wisconsin is different than you do it in Minnesota and their specs are different and sometimes they have four axles, sometimes they have, you know, just lift axles, sometimes they have pusher axles and the complexity, not just with the how the truck is used, but where it's used uh kind of blew me away.
+
+<!-- timestamp: 03:16 -->
+**Mike Roeth:** Yeah, great point. And and and you know, there were times where the body uh you know, you think about a box truck, a simple box truck. I mean, the complexity is in the in the cabin chassis and you just put a box with some lights and maybe a lift gate on it. But I remember going to a pretty wild or complex I think it was a concrete pumper or something, Rob, where uh you know, I was in the room and I was talking and talking and talking and finally somebody turned to me and said, "You know, this is a million-dollar truck, Mike, and your cabin chassis is just a very small portion."
+
+<!-- timestamp: 03:51 -->
+**Rob Swim:** Yeah. We were just the front part that carried a very complex uh uh product on the back many times.
+
+<!-- timestamp: 03:56 -->
+**Mike Roeth:** Yeah. So that so that that was uh that was good and that was kind of a a tough part of the market. Um, I remember, but that's why they put you and I on it. We we we got her done, didn't we?
+
+<!-- timestamp: 04:06 -->
+**Rob Swim:** Right. Right. I think we did a great job.
+
+<!-- timestamp: 04:07 -->
+**Mike Roeth:** So, uh, you know, a lot of people are listening to this, Rob, and, um, you know, and what I find in these podcasts is a lot of people say, you know, I listen to this and, I listen to that, and so we're we're kind of helping the industry get along. I mean, how would you describe the trucking industry? Um, you know, and why did you make it a full career of yours?
+
+<!-- timestamp: 04:29 -->
+**Rob Swim:** Well, you know, I I like to describe trucks as the backbone of American commerce. And I remember a a phrase, you know, you'd see on the back, I think the ATA, American Trucking Associations, came up with this marketing line, and you see it on trucks, you see it on advertising, and it says if you got it, a truck brought it. So, uh, that's kind of how I see the trucking industry. And, uh, you know, I'm a guy that likes mechanical things, too. I've always liked cars. I've liked trucks. And who doesn't like big trucks? If you're a kid, you're driving down the road with your family and you know and there's there's that big long and tall with the big smoke stacks and you lean out the window and you know do the arm and if he blows the horn and you're really happy. So it's just uh a part of America that is never going away and uh it's a great business.
+
+<!-- timestamp: 05:20 -->
+**Mike Roeth:** I find there's a real like modesty in trucking. I like to test if you agree with me and that serves us really well when it's just like all right we're going to get her done. We don't want a lot of fanfare. We don't want a lot of criticism. Uh, but of course sometimes that modesty can be a I suppose a liability and that you know you're kind of like that uh you know Rodney Dangerfield. Maybe we're two older guys that remember Rodney Dangerfield, but you don't get any respect. So there's times where we complain about that. But how how does that sit with you? Is that accurate?
+
+<!-- timestamp: 05:49 -->
+**Rob Swim:** I I think it is. Um there's not a lot of flash. There's not a lot of uh, you know, automotive uh type pizzazz with trucks. You know, you know, on the you know, you got to be careful. A lot of people don't like trucks. You know, there's a concern that uh that big truck ran me off the road or uh, etc. And it's always great to be able to tell the story that uh you know, these people are professional and they care about what they're doing. Meeting a lot of truck owners and people uh, they start out small. They build a business, you know, from scratch. It's a family business. They care about their employees and uh, it's just really just the heart of America.
+
+<!-- timestamp: 06:33 -->
+**Mike Roeth:** Yeah. And I think that is uh that permeates across the whole industry. Don't you agree? I mean from the from the um not just the fleets and the drivers that are delivering the goods, but for the manufacturers like you and I worked for, as well as the suppliers, the dealers, the shippers. Um, you know, it just kind of that whole I don't know ecosystem of trucking kind of gets in your blood. Um, it's quite collaborative. Um, you know, just kind of working together to to solve problems. Tell us about your dad. I mean, you guys had I can't remember, but you you you both worked for International Harvester and he uh had a long career and so did you. Did those careers overlap? I mean, just tell us a little bit about your dad and your career.
+
+<!-- timestamp: 07:15 -->
+**Rob Swim:** Yeah. Yeah, a little bit. So, so my dad was a World War II vet and you know, he went to college for several years, got a degree, and then uh joined International Harvester Credit Corporation in 1948, I think it was. So, that was his first venture into that business. And at the time, they were they were selling refrigerators and creamers and farm equipment. And he told me one time he had to go down in Kentucky because he was based in Cincinnati and repossess some guy's refrigerator because he wasn't paying the bill. And then he then he transitioned more into farm equipment. Uh and you know International Harvester back in that day, um it was trucks, it was farm equipment, it was construction equipment, it was lawnmowers, it was basically everything for the farmer and so trucks were included in that even though uh his focus primarily was with farm equipment. And uh like I like my career, I moved seven times and he probably moved six or eight times with the family in various parts of the country and over to England for a few years when they were building farm equipment in England. All the times we'd go on family vacations, you know, this is my story about the the IH, the red and the black runs really deep. And we'd drive on the family vacation and we'd pass a IH International Harvester dealership and he'd make us all in the back seat go, "Yay!" And then we'd pass a John [Deere] dealership and he'd make us all in the back seat go boo. So yeah, I got out of college and he was still working for a few more years. He uh transitioned from the overseas business. He was into construction equipment uh and retired after 30 plus years. So uh he told me, "You never want to go to work for this company." And of course I did. You never always do what your dad did and and I had a great career and I uh he taught me a lot about the company, a lot of values uh about business.
+
+<!-- timestamp: 09:11 -->
+**Mike Roeth:** Give us truck dealerships 101. What is um what do they do in the marketplace and uh what does it take to be a successful one and and you know kind of maybe you know why is it important?
+
+<!-- timestamp: 09:24 -->
+**Rob Swim:** Well, I've I've worked with a lot of truck dealerships, some of them company-owned dealerships, which most states don't allow. Most uh don't do that anymore. Um, but what I find is first off, you you've got a dealer principal or a group of people that want to be part of the community, want to be part of a geographical community, want to be part of the trucking community, that uh want to build a lifelong business. And um it's it's not just about, you know, I think the truck brand can make a difference, but regardless of the truck brand, it's about service, parts, support, knowing the customer. Um, and the successful dealers, you can just walk in, you know, walk in the front door and feel the atmosphere. Uh, they know what's going on. They've got a common goal. They understand what it is to serve the customer. It's a people business. It's know your customer number one, know your product number two, know your customer number three, and number four, know how to differentiate and collect for the value that's in your product. It could be a service product, a parts product, or eventually a new or used truck.
+
+<!-- timestamp: 10:44 -->
+**Mike Roeth:** And these are these are definitely tools. I mean, I mean, you you could you could we could maybe make the mistake that like car dealerships and truck dealerships are similar, but boy, I tell you what, when that truck's down, um, you know, I've been in truck dealerships where the driver, you know, he got nowhere to go, so he sits there for a whole day while his truck's being serviced or he's got to go to a hotel. I mean, so you got the driver uh in a downtime situation, you got the driver, the wheels aren't turning, so you're not earning as we hear in trucking. So you know that is a big deal which um is different from you know cars which are somewhat not so mission critical. Um, so the parts availability and all that, I mean, really really matter and so when a dealer does that well and his customers are successful that that works well and when they don't it's a real struggle.
+
+<!-- timestamp: 11:31 -->
+**Rob Swim:** Yeah. Yeah. Absolutely. And unlike a car dealership, you you don't have a rental. Oftentimes, you you have a right truck that's designed for a specific job. And uh, you know, when the truck's down, the guy on the other end is not getting his load. And it could be it could be a a box full of widgets or it could be, like you said, some critical drugs that have to get uh, you know, to a hospital or something.
+
+<!-- timestamp: 11:53 -->
+**Mike Roeth:** So, as we look forward, and you know, you're I'm sure following things closely, I mean, uh, we've had and you just brought it up. I mean, even with the diesel trucks we've had, there's a lot of expense. There's a lot of diagnostic equipment now. We got a lot of computers. We got a lot of training and so forth. I mean, as we look forward to, you know, a lot more power trains, you know, natural gas, uh, maybe hybrids, battery electric, hydrogen. Um, boy, is this going to be too much for dealers to handle or or, um, do you think they'll I suppose they'll figure it out? But uh, what do you think about us going from just at least one powertrain to a whole bunch of them in the future?
+
+<!-- timestamp: 12:33 -->
+**Rob Swim:** You know, you've seen over the years the consolidation of dealers, either multiple brands or or uh one dealer group owning and operating at multiple locations uh because of investments they have to make and trying to spread that investment over multiple locations. But I think it's a real challenge. I mean, gosh, I go way back to, you know, where certain dealers didn't want to didn't want to sell a diesel because they were, you know, into gas, you know, not so much in the commercial side, but maybe a little bit more on the on the consumer side when we made Scouts and pickup trucks. But, you know, I think about um the training, the tooling, um the parts support uh for multiple, for hydrogen, electric. Um, it kind of boggles my mind. It really does. It's, you know, one one reason International Harvester got in trouble is they tried to be all things to all people and they it took them a long time to focus on we're about commercial trucks. And I'm concerned that with all these different power trains and all these different solutions, it's going to be difficult to be all things to all people.
+
+<!-- timestamp: 13:47 -->
+**Mike Roeth:** Hey, you brought up the Scout. So, I got to ask you about the Scout. I mean, you and I were having a beer or bourbon years ago and you you talked about delivering Scouts. So, te tell me about your experience with the Scout and I'm also bringing it up because there Scout has a rebirth as an electric vehicle in the next few years. So, but first of all, um, you know, tell us a little bit about the Scout.
+
+<!-- timestamp: 14:05 -->
+**Rob Swim:** You know, the the Scout's got a great history from the early 60s and I think the last one was built in uh 1980. And uh you know, it when I was in college, my my dad as a International Harvester executive, they let him lease Scouts for for a song and uh and they let their kids drive it. So uh heck, I took one to college one year and all he had to do is pay $150 a month and I had to pay for the gas and the insurance was covered and it was great early in my career. I mean, I was a commission salesman for a while at a International Harvester truck dealership in Louisville, Kentucky. And you know, at 500 bucks a month, you're not going to make a lot of money. But my god, we had Scouts and we could sell those like popcorn. It It was great. You could make a lot of money, have a lot of fun. You know, take them on drives. Uh they got a little more expensive as and sophisticated. Uh I remember a customer walking into the dealership one time and looking at the window sticker and he says, "Oh my goodness, that's $10,000. What is this, a Cadillac that can climb walls?" Not that they were sophisticated uh like today's SUVs are, but uh you know, it people might not have known about International Harvester commercial trucks or buses or but they they knew about the Scout. So uh it was it was a lot of fun. I I also had an opportunity to work with uh with dealers and and the consumer business and the commercial business, I don't think mix under the same roof. And we had dealers that did really good on Scouts because they were kind of a consumer focused uh we signed up Buick dealers and Lincoln dealers and Volkswagen dealers and Oldsmobile dealers cuz they didn't have a Jeep, they didn't have a Blazer, they didn't have a Bronco to sell. So, they were hungry. These were hot at the time.
+
+<!-- timestamp: 15:58 -->
+**Mike Roeth:** Uh if Go ahead.
+
+<!-- timestamp: 16:00 -->
+**Rob Swim:** Go ahead. And some of the truck dealers, they didn't want to mess with them cuz, you know, we they didn't have a showroom for the kids to sit in and some of the consumer things that you get at the car dealerships and and their focus and and that's part of why uh kind of the business, you know, fell apart uh after a while, but it was a lot of fun.
+
+<!-- timestamp: 16:17 -->
+**Mike Roeth:** Yeah. And I find it I find it interesting. You know, there's this old saying, you got, you know, you got to be growing or you're dying. And so that, you know, businesses are always looking for like allied opportunities. And I think the Scout um you know, I had one, my dad had one when I was a kid so I grew up on a farm with all IH equipment. Uh we had IH pickup truck, um but you know, the Scout came along and uh I don't know what year we had, but uh we had one and dad was incredibly proud of the thing. I mean, he got rid of his car to haul us around to church and to the grocery store in in a Scout. I mean, that was a big deal. So, you know, we just talked about how Harvester got too diversified, but there's a nice little um success story there. Now, you know, Volkswagen, you know, buying Navastar, I mean, as I understand it, they kept the Scout brand. They're resurrecting it as a battery electric vehicle. I'm keeping my eye on that, Rob, because it's just kind of fun. Have you noticed it?
+
+<!-- timestamp: 17:14 -->
+**Rob Swim:** Oh, yeah. That was a real asset. The company had the Scout name and I'm glad they held on to it and I'm glad that Traton via Volkswagen saved my retirement and invested in the company. I think that the future is is great. Not sure how an electric only electric all-wheel drive vehicle um is going to [do] in the marketplace. I'm not sure. But, you know, if if they stay true to their to their roots, it's going to be a tough vehicle that lasts a long time that's that's built with truck components. Uh, and it's a niche. You know, they've got to compete with a lot of other electric uh SUVs or and/or off-road vehicles. We'll see.
+
+<!-- timestamp: 17:57 -->
+**Mike Roeth:** So, I'm sure you've been following electric trucks and and some of that, you know, NACFE, we're doing a lot of work there. And you know there's current situation is there you know they're really impressive vehicles but you know we need to charging infrastructure and then there's weight and cost concerns and the like. Um you know what you know and I know that you know you're not in the mix of it daily right now, but like for something that different, um you know, what's going to make it successful or not kind of looking back maybe over your career and seeing some times where there's been struggles with things or things have been successful? What's been the critical stuff to make them successful? And if you got some thoughts on electric trucks, I'd love to hear them.
+
+<!-- timestamp: 18:37 -->
+**Rob Swim:** Uh, it's got to be a good business decision. I know there's people that want to build their brand and say they're green and, you know, there's a place for that. There's nothing wrong with that, but for electric vehicles or, you know, it's somehow it's got to make make make sense. It's good to see the uh you know new people in the business, but it's also good to see the existing brands, you know, taking their vehicles and uh electrifying them and and not having to start from scratch. So so there's some commonality of scale, parts support, etc. is already there. Um, I I think there's opportunity definitely.
+
+<!-- timestamp: 19:15 -->
+**Mike Roeth:** You know, I think you bring up a really good point and we we've just finished Run on Less – Electric Depot and we interviewed 122 people uh at the facilities that are, you know, um either drivers, maintenance people, fleet leaders, utility people, charging manufacturers, and so forth. And Rob, of those 122, 60 of them were women or people of color. So, you know, we're getting a lot of um uh diversity of thought, diversity of, you know, in in all aspects. And that that those interviews and that sort of talent gave me a lot of hope that we'll figure this we'll figure out this this out, right? And where's the right duty cycles, right applications, make it work. And you know, as we started this time together, you know, we talked about how it's the people and the commitment, the focus on the customers, the the the attention to uh to cost and and you know, diesel's had a great ride, but you know, it's um now we need something different, and that different is going to look and be different, but you know, I got a lot of confidence we'll figure this out.
+
+<!-- timestamp: 20:16 -->
+**Rob Swim:** Yeah. You know, over the years, you know, there comes a new emission requirement and everybody screams and yells, you know, we can't make this uh, you know, this is going to be the end of diesels. We can't uh meet this this new standard, blah blah blah. But, uh, they find a way, you know, and and new new uh, I remember going through uh, you know, brake standards and, you know, weight standards changed, and, you know, everybody found found a way. They found a solution and and with collaboration. I think that's I think that's the key, Mike. And that's what I love about you guys is how you collaborate uh with the people that build the trucks, the people that build the components, and the people that use the products. And and uh with those three heads together, those three uh constituencies, there's bound to be a solution.
+
+<!-- timestamp: 21:05 -->
+**Mike Roeth:** There's a lot of people in our network and probably listening to this who are, you know, struggling. This is a change. I mean, they they're excited about the change. They want to make it happen, but they're like, "Oh my goodness, we got charging infrastructure. We got this. We got high cost. We got all that." So, but but they're committed to making it happen. So, given that, you got a couple of sage advice points to the industry. I mean, what how would you suggest we all get up in the morning and go get this done?
+
+<!-- timestamp: 21:34 -->
+**Rob Swim:** Well, first off, it's it's not a sprint. It's a it's a long a long hike. I had a boss one time that uh one of his favorite saying was persistence wears down resistance. I I went through a career where there were a lot of changes both internally with my company. They went out of almost went out of business two or three times and went from 105,000 employees to 15,000 employees over two years. And that's a lot of change. Uh, but you know, I I found uh people that I worked with and you know customers that supported our product stuck with us through the change. There's a way to get there and I'm I'm I'm sure we'll all find a way.
+
+<!-- timestamp: 22:13 -->
+**Mike Roeth:** Hey Rob, thank you so much. It's great to have you as a friend and uh I look forward to seeing you soon.
+
+<!-- timestamp: 22:18 -->
+**Rob Swim:** Likewise, keep on keeping on.
+
+<!-- timestamp: 22:21 -->
+Freight efficiency with NACFE's Mike Roeth and friends.

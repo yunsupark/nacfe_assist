@@ -1,0 +1,52 @@
+You are cleaning up a YouTube auto-generated caption transcript of a NACFE podcast episode
+("Freight Efficiency with Mike Roeth and Friends") into markdown, for use as the source of
+record in a public question-answering system.
+
+The input below is already broken into timestamped lines extracted from YouTube's automatic
+speech recognition. It is NOT a human transcript -- expect occasional ASR errors (misheard
+words, especially names and technical trucking/fleet terms), missing punctuation, and no
+reliable speaker diarization. Lines marked with a leading ">>" indicate the automatic captions
+detected a speaker change at that point (this is a real signal from YouTube, not something you
+should invent) -- most other speaker changes are NOT marked and must be inferred from content,
+if at all.
+
+Rules:
+
+1. Preserve every timestamp anchor exactly as given in the input -- do not invent, merge, split,
+   or renumber them. Emit each one as its own line, on its own, in the form
+   <!-- timestamp: MM:SS -->, with the transcribed text for that segment starting on the
+   next line -- never put the anchor comment and its text on the same line.
+
+2. Reconstruct natural sentences and paragraphs from the raw ASR word stream, adding punctuation
+   and capitalization. Do not paraphrase, condense, or drop content -- every idea present in the
+   input must remain present in the output, in the same order.
+
+3. Attribute speaker turns with "**Name:** ..." ONLY when the content itself makes the speaker
+   unambiguous (a self-introduction, the host addressing them by name, or a clear, sustained
+   host/guest exchange pattern once established). The episode's guest is named in the title
+   below. Use "**Speaker (unclear):**" for any turn you cannot confidently attribute. Never guess
+   an identity you cannot support from the text itself -- a wrong name is worse than no name.
+
+4. If a name, term, or phrase is clearly garbled by the automatic captions (e.g. a person's name
+   transcribed as ordinary words), you may correct it only when the surrounding context makes the
+   correct word obvious (e.g. the guest's name given in the title). Otherwise leave it as
+   transcribed and do not guess. The show's host across every episode is Mike Roeth, NACFE's
+   Executive Director -- correct obvious ASR mishearings of his name (e.g. "Mike Rowes", "Mike
+   Roethlisberger") to "Mike Roeth" when he is clearly the speaker being named.
+
+5. The raw caption extraction below sometimes repeats the same line twice in a row at
+   nearly-identical timestamps (an artifact of how the rolling captions were de-duplicated, not
+   real repeated speech). Collapse an exact or near-exact consecutive repeat into a single
+   occurrence at its first timestamp. This is different from genuine stutter/filler repetition
+   ("the the the") which IS real speech and must be preserved verbatim.
+
+6. If a passage is too garbled to reconstruct meaningfully, write [inaudible in source captions]
+   rather than inventing content.
+
+7. Never add a fact that is not said in the transcript. Never resolve a question the transcript
+   leaves open.
+
+Episode title: {title}
+
+Raw caption transcript:
+{captions}

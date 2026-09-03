@@ -1,0 +1,36 @@
+name = "nacfe-assist"
+main = "src/index.ts"
+compatibility_date = "2026-07-31"
+workers_dev = true
+
+# GEMINI_API (paid key) and GEMINI_API_FREE (a separate free-tier key, no billing linked) are
+# set as secrets, not here:
+#   wrangler secret put GEMINI_API
+#   wrangler secret put GEMINI_API_FREE
+# Every model call tries GEMINI_API_FREE first and only falls back to GEMINI_API on a quota
+# error (see generateContentWithFallback in src/gemini.ts) -- this keeps routine usage free
+# and only spills over to paid once free tier's daily quota is actually exhausted.
+# Never commit the real keys. Local dev reads them from .dev.vars (gitignored).
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "66af829d2560455c85a68770e90bdda9"
+preview_id = "378a8509c9ff47529e03091be67e4ecc"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "nacfe-assist"
+database_id = "bcd72e66-992b-4a2f-92ef-735329676803"
+
+[[r2_buckets]]
+binding = "SOURCES_BUCKET"
+bucket_name = "nacfe-assist-sources"  # wrangler r2 bucket create nacfe-assist-sources
+
+[vars]
+# Non-secret config. Hard ceiling on monthly Gemini token spend (input+output combined,
+# both stages) before the Worker degrades to cache-only. See SPEC.md 7 and 0 ($100/$50
+# cost targets) -- this is a safety valve, not a precise budget instrument.
+MONTHLY_TOKEN_CEILING = "20000000"
+ROUTE_MODEL = "gemini-3.5-flash-lite"
+ANSWER_MODEL = "gemini-3.6-flash"
+RATE_LIMIT_PER_IP_PER_HOUR = "20"
