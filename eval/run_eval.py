@@ -11,7 +11,11 @@ Usage:
     python run_eval.py [--questions eval/questions.jsonl] [--limit N] [--only-bucket prose]
     python run_eval.py --fresh   # ignore any existing results, re-run everything
 
-Requires GEMINI_API set in the environment or a .env file discoverable from cwd.
+Keys: uses GEMINI_API_FREE (free tier) when it is set, otherwise GEMINI_API (paid).
+Pass --paid to force the paid key even when a free key is present. There is deliberately
+no silent free -> paid fallback here, unlike the Worker: an eval run that quietly starts
+billing after the free quota runs out is the opposite of what a free-tier run is for.
+Set one of them in the environment or a .env file discoverable from cwd.
 Writes raw results to eval/results/two_stage_raw.jsonl.
 
 Resumable by default: if that file already exists, questions with a prior valid answer
@@ -55,6 +59,14 @@ CURRENT_YEAR = "2026"
 # instead of raising, bypassing retry entirely.
 REQUEST_TIMEOUT_MS = 180_000
 
+# The Worker strips these five fields before showing the catalog to the router, and
+# serializes compactly rather than pretty-printed (see ROUTER_CATALOG_JSON in
+# worker/src/index.ts). They are serving-side bookkeeping the router never reasons over.
+# Mirrored here so the eval measures the routing payload that actually ships -- this script
+# is a parallel implementation of the Worker, and every place the two drift is a place the
+# eval stops predicting production.
+ROUTER_DROPPED_FIELDS = ("url", "media", "token_count", "ingested", "ingest_model")
+
 JSON_FENCE_RE = re.compile(r"^```(?:json)?\s*|\s*```$", re.MULTILINE)
 RETRY_DELAY_RE = re.compile(r"'retryDelay':\s*'(\d+)s'")
 RATE_LIMIT_MAX_RETRIES = 6
@@ -63,6 +75,20 @@ RATE_LIMIT_MAX_WAIT = 65  # free-tier per-minute quotas; don't wait past that po
 
 class DailyQuotaExhausted(Exception):
     """A per-day (not per-minute) quota was hit -- retrying won't help until tomorrow."""
+
+
+def build_router_catalog_json(catalog):
+    """Serialize the catalog byte-for-byte the way the Worker does.
+
+    `separators` and `ensure_ascii=False` are what make this match JavaScript's
+    JSON.stringify: Python would otherwise emit ", "/": " separators and \\uXXXX-escape every
+    non-ASCII character, so the router would see a different (and larger) payload than
+    production sends.
+    """
+    projected = [
+        {k: v for k, v in entry.items() if k not in ROUTER_DROPPED_FIELDS} for entry in catalog
+    ]
+    return json.dumps(projected, separators=(",", ":"), ensure_ascii=False)
 
 
 def load_questions(path):
@@ -176,21 +202,43 @@ def usage_dict(usage):
     }
 
 
-def run(questions_path, limit=None, only_bucket=None, fresh=False):
-    api_key = os.getenv("GEMINI_API")
-    if not api_key:
-        print("GEMINI_API not set (checked environment and .env).", file=sys.stderr)
-        sys.exit(1)
+def resolve_api_key(force_paid=False):
+    """Free key by default, paid only when asked for (or when no free key exists)."""
+    free_key = os.getenv("GEMINI_API_FREE")
+    paid_key = os.getenv("GEMINI_API")
+
+    if not force_paid and free_key:
+        return free_key, "GEMINI_API_FREE (free tier)"
+    if paid_key:
+        if not force_paid and not free_key:
+            print("note: GEMINI_API_FREE not set, falling back to the paid GEMINI_API key.")
+        return paid_key, "GEMINI_API (paid)"
+    if free_key:
+        return free_key, "GEMINI_API_FREE (free tier)"
+
+    print("Neither GEMINI_API_FREE nor GEMINI_API is set (checked environment and .env).",
+          file=sys.stderr)
+    sys.exit(1)
+
+
+def run(questions_path, limit=None, only_bucket=None, fresh=False, paid=False):
+    api_key, key_label = resolve_api_key(force_paid=paid)
+    print(f"using {key_label}")
 
     catalog = json.loads(CATALOG_PATH.read_text())
     catalog_by_id = {entry["id"]: entry for entry in catalog}
-    catalog_json = json.dumps(catalog, indent=2)
+    catalog_json = build_router_catalog_json(catalog)
+    print(f"router catalog: {len(catalog)} entries, {len(catalog_json):,} chars")
 
-    questions = load_questions(questions_path)
+    all_questions = load_questions(questions_path)
+    questions = all_questions
     if only_bucket:
         questions = [q for q in questions if q["bucket"] == only_bucket]
     if limit:
         questions = questions[:limit]
+    if len(questions) != len(all_questions):
+        print(f"running {len(questions)} of {len(all_questions)} questions "
+              f"(results for the other {len(all_questions) - len(questions)} are preserved)")
 
     client = genai.Client(api_key=api_key, http_options=types.HttpOptions(timeout=REQUEST_TIMEOUT_MS))
 
@@ -200,6 +248,31 @@ def run(questions_path, limit=None, only_bucket=None, fresh=False):
     if prior:
         print(f"resuming: reusing {len(prior)} prior valid answer(s) from {out_path}")
 
+    # Records for questions this run isn't touching (--limit / --only-bucket), so a narrowed
+    # run updates the results file in place instead of truncating it to just its own subset.
+    running = {q["q"] for q in questions}
+    by_question = {} if fresh else {k: v for k, v in prior.items() if k not in running}
+
+    # Canonical order is questions.jsonl's, with any rows whose question is no longer in that
+    # file kept at the end rather than silently dropped -- a reworded question leaves its old
+    # answer stranded here, and losing it without a word would hide that it happened.
+    canonical = [q["q"] for q in all_questions]
+    orphans = [k for k in prior if k not in set(canonical)]
+    if orphans and not fresh:
+        print(f"note: {len(orphans)} result row(s) are for questions no longer in "
+              f"{Path(questions_path).name}; keeping them, but they are not scored against "
+              f"the current set:")
+        for k in orphans:
+            print(f"  - {k[:100]}...")
+    order = canonical + orphans
+
+    def flush():
+        with open(out_path, "w") as out_f:
+            for question_text in order:
+                if question_text in by_question:
+                    out_f.write(json.dumps(by_question[question_text]) + "\n")
+
+    route_model_exhausted = False
     answer_model_exhausted = False
     results = []
     for i, q in enumerate(questions, 1):
@@ -208,16 +281,31 @@ def run(questions_path, limit=None, only_bucket=None, fresh=False):
         if q["q"] in prior:
             print("    reusing prior result")
             results.append(prior[q["q"]])
-            with open(out_path, "w") as out_f:
-                for r in results:
-                    out_f.write(json.dumps(r) + "\n")
+            by_question[q["q"]] = prior[q["q"]]
+            flush()
             continue
 
-        try:
-            route_result, route_usage = route(client, catalog_json, q["q"])
-        except Exception as e:  # noqa: BLE001
-            print(f"    routing failed: {e}", file=sys.stderr)
-            route_result, route_usage = {"selected": [], "out_of_scope": None, "recency_warning": None, "error": str(e)}, None
+        if route_model_exhausted:
+            # Free tier caps requests per day, not just per minute. Once routing has hit that
+            # cap every remaining question would fail identically, so record them as skipped
+            # (which is_valid_result treats as not-reusable) and let a later run pick them up.
+            route_result, route_usage = {
+                "selected": [], "out_of_scope": None, "recency_warning": None,
+                "error": f"{ROUTE_MODEL} daily quota already exhausted this run",
+            }, None
+        else:
+            try:
+                route_result, route_usage = route(client, catalog_json, q["q"])
+            except DailyQuotaExhausted as e:
+                route_model_exhausted = True
+                print(f"    routing daily quota exhausted; skipping the rest of this run", file=sys.stderr)
+                route_result, route_usage = {
+                    "selected": [], "out_of_scope": None, "recency_warning": None,
+                    "error": f"{ROUTE_MODEL} daily quota exhausted: {e}",
+                }, None
+            except Exception as e:  # noqa: BLE001
+                print(f"    routing failed: {e}", file=sys.stderr)
+                route_result, route_usage = {"selected": [], "out_of_scope": None, "recency_warning": None, "error": str(e)}, None
 
         selected_ids = [s["id"] for s in route_result.get("selected", [])]
         print(f"    routed to: {selected_ids or '(none)'}" + (" [out_of_scope]" if route_result.get("out_of_scope") else ""))
@@ -238,6 +326,8 @@ def run(questions_path, limit=None, only_bucket=None, fresh=False):
                     answer_text = f"[ERROR: {e}]"
         elif route_result.get("out_of_scope"):
             answer_text = "(router flagged out_of_scope; no answer call made)"
+        elif route_result.get("error"):
+            answer_text = f"[SKIPPED: routing unavailable: {route_result['error']}]"
         else:
             answer_text = "(router selected no sources; no answer call made)"
 
@@ -254,13 +344,12 @@ def run(questions_path, limit=None, only_bucket=None, fresh=False):
             "answer_usage": usage_dict(answer_usage) if answer_usage else None,
         }
         results.append(record)
-
-        with open(out_path, "w") as out_f:
-            for r in results:
-                out_f.write(json.dumps(r) + "\n")
+        by_question[q["q"]] = record
+        flush()
 
     remaining = sum(1 for r in results if not is_reusable(r))
-    print(f"\nwrote {out_path} ({len(results) - remaining}/{len(results)} answered, {remaining} still missing)")
+    print(f"\nwrote {out_path} ({len(results) - remaining}/{len(results)} answered this run, "
+          f"{remaining} still missing; {len(by_question)} row(s) in file)")
 
 
 def main():
@@ -269,10 +358,13 @@ def main():
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--only-bucket", default=None)
     parser.add_argument("--fresh", action="store_true", help="Ignore prior results, re-run everything")
+    parser.add_argument("--paid", action="store_true",
+                        help="Force the paid GEMINI_API key even if GEMINI_API_FREE is set")
     args = parser.parse_args()
 
     load_dotenv(find_dotenv(usecwd=True))
-    run(args.questions, limit=args.limit, only_bucket=args.only_bucket, fresh=args.fresh)
+    run(args.questions, limit=args.limit, only_bucket=args.only_bucket, fresh=args.fresh,
+        paid=args.paid)
 
 
 if __name__ == "__main__":
