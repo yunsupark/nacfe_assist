@@ -145,19 +145,37 @@ export function stripJsonFence(text: string): string {
 }
 
 /**
- * Try the free-tier key first, falling back to the paid key on quota exhaustion. A KV flag
- * remembers "free tier is out for today" once we see an actual daily-quota error, so the rest
- * of the day's requests skip straight to paid instead of each eating a failed free-tier call
- * first -- free tier's own daily quota has been observed (see eval/results/two_stage_scored.md)
- * to not always reset exactly on schedule, so a flat 24h TTL from the moment we detect
- * exhaustion is more robust than trying to compute time-until-next-midnight-PT.
+ * Try the free-tier key first, falling back to the paid key when free tier can't serve the
+ * call. A KV flag remembers "don't bother with free tier for this model right now" so the
+ * rest of the affected window skips straight to paid instead of each request re-proving the
+ * same failure first.
  *
- * A plain (non-daily) rate limit -- a per-minute burst -- does NOT set that flag: it falls
- * back to paid for just this one call, since free tier should recover within the minute and
- * marking the whole day exhausted over a transient burst would be overly aggressive.
+ * The flag is keyed per model, not globally: quotas and capacity are per model per project.
+ * This project has already seen one model's free-tier daily quota stick while others on the
+ * same key kept working (see ROUTE_MODEL in eval/run_eval.py), so disabling free tier
+ * wholesale because one model ran out would give up free capacity that is still there.
+ *
+ * Two reasons to set it, with very different lifetimes:
+ *
+ *  - "daily-quota": free tier's own daily cap. 24h, because it's a flat TTL from the moment
+ *    we detect exhaustion -- free tier's daily quota has been observed (see
+ *    eval/results/two_stage_scored.md) not to reset exactly on schedule, so that is more
+ *    robust than computing time-until-next-midnight-PT.
+ *  - "outage": a 5xx that survived generateContent's own same-key retry, i.e. the model is
+ *    unavailable on the free tier specifically. Measured 2026-09-04: the routing model
+ *    returned 503 "high demand" on 5/5 free-key attempts while the identical call succeeded
+ *    on the paid key. Without this flag every uncached query pays two failed free-tier
+ *    requests plus the retry sleep (~600ms) before falling through to paid, on every query,
+ *    for as long as the outage lasts. Short TTL, since unlike a quota this is expected to
+ *    clear on its own and we want to start using free tier again promptly when it does.
+ *
+ * A plain per-minute rate limit sets no flag at all: it falls back to paid for just this one
+ * call, since free tier should recover within the minute and marking the model unusable over
+ * a transient burst would be overly aggressive.
  */
-const FREE_TIER_EXHAUSTED_KEY = "gemini_free_tier_exhausted";
-const FREE_TIER_EXHAUSTED_TTL_SECONDS = 3600 * 24;
+const freeSkipKey = (model: string) => `gemini_free_skip:${model}`;
+const FREE_TIER_QUOTA_TTL_SECONDS = 3600 * 24;
+const FREE_TIER_OUTAGE_TTL_SECONDS = 600;
 
 export async function generateContentWithFallback(
   cache: KVNamespace,
@@ -167,17 +185,21 @@ export async function generateContentWithFallback(
   prompt: string,
   signal?: AbortSignal,
 ): Promise<GeminiResult> {
-  const exhausted = await cache.get(FREE_TIER_EXHAUSTED_KEY);
-  if (!exhausted && freeApiKey) {
+  const skipKey = freeSkipKey(model);
+  const skip = freeApiKey ? await cache.get(skipKey) : "no-free-key";
+  if (!skip) {
     try {
       return await generateContent(freeApiKey, model, prompt, signal);
     } catch (err) {
       if (!(err instanceof GeminiError) || !(err.isRateLimit || err.isServerError)) throw err;
       if (err.isDailyQuota) {
-        await cache.put(FREE_TIER_EXHAUSTED_KEY, "1", { expirationTtl: FREE_TIER_EXHAUSTED_TTL_SECONDS });
+        await cache.put(skipKey, "daily-quota", { expirationTtl: FREE_TIER_QUOTA_TTL_SECONDS });
+      } else if (err.isServerError) {
+        console.error(`free tier unavailable for ${model} (${err.status}); skipping it for ${FREE_TIER_OUTAGE_TTL_SECONDS}s`);
+        await cache.put(skipKey, "outage", { expirationTtl: FREE_TIER_OUTAGE_TTL_SECONDS });
       }
       // fall through to the paid key below -- for a rate limit (daily or per-minute) or a
-      // transient server error that survived generateContent's own same-key retry
+      // server error that survived generateContent's own same-key retry
     }
   }
   return generateContent(paidApiKey, model, prompt, signal);
