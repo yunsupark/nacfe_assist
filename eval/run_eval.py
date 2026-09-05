@@ -126,6 +126,38 @@ def is_reusable(record):
     return True  # includes legit "(router flagged out_of_scope...)" / "no sources" answers
 
 
+def has_valid_route(record):
+    """Did stage 1 succeed for this record, whatever happened to stage 2?
+
+    The two stages have separate free-tier quotas and fail independently -- the answering
+    model's per-day request cap (20) runs out long before the routing model's, so a run
+    typically ends with routing done for every question and answers missing for most of
+    them. Without this, resume treats such a record as worthless and re-runs both stages,
+    re-spending ~150K routing tokens per question to reach an answer call that was the only
+    thing actually missing.
+    """
+    route = record.get("route_result")
+    if not isinstance(route, dict) or route.get("error"):
+        return False
+    return isinstance(route.get("selected"), list)
+
+
+def load_prior_routes(path):
+    """question text -> prior record, for any record whose routing stage succeeded."""
+    if not path.exists():
+        return {}
+    routes = {}
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            r = json.loads(line)
+            if has_valid_route(r):
+                routes[r["q"]] = r
+    return routes
+
+
 def call_model(client, model, prompt, retries=RATE_LIMIT_MAX_RETRIES):
     last_err = None
     for attempt in range(1, retries + 1):
@@ -245,8 +277,13 @@ def run(questions_path, limit=None, only_bucket=None, fresh=False, paid=False):
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     out_path = RESULTS_DIR / "two_stage_raw.jsonl"
     prior = {} if fresh else load_prior_results(out_path)
+    prior_routes = {} if fresh else load_prior_routes(out_path)
     if prior:
         print(f"resuming: reusing {len(prior)} prior valid answer(s) from {out_path}")
+    reroutable = sum(1 for q in questions if q["q"] not in prior and q["q"] in prior_routes)
+    if reroutable:
+        print(f"resuming: reusing {reroutable} prior routing result(s); only the answer "
+              f"stage will be re-run for those")
 
     # Records for questions this run isn't touching (--limit / --only-bucket), so a narrowed
     # run updates the results file in place instead of truncating it to just its own subset.
@@ -285,7 +322,15 @@ def run(questions_path, limit=None, only_bucket=None, fresh=False, paid=False):
             flush()
             continue
 
-        if route_model_exhausted:
+        prior_route = prior_routes.get(q["q"]) if not fresh else None
+        if prior_route is not None:
+            # Stage 1 already succeeded for this question on an earlier run; only the answer
+            # is missing. Carry the original usage figures on the record so it still
+            # describes what that question's full pipeline cost.
+            route_result = prior_route["route_result"]
+            route_usage = None
+            print("    reusing prior routing")
+        elif route_model_exhausted:
             # Free tier caps requests per day, not just per minute. Once routing has hit that
             # cap every remaining question would fail identically, so record them as skipped
             # (which is_valid_result treats as not-reusable) and let a later run pick them up.
@@ -339,7 +384,10 @@ def run(questions_path, limit=None, only_bucket=None, fresh=False, paid=False):
             "expected_source": q.get("source"),
             "expected_loc": q.get("loc"),
             "route_result": route_result,
-            "route_usage": usage_dict(route_usage) if route_usage else None,
+            "route_usage": (
+                usage_dict(route_usage) if route_usage
+                else (prior_route.get("route_usage") if prior_route else None)
+            ),
             "answer": answer_text,
             "answer_usage": usage_dict(answer_usage) if answer_usage else None,
         }
