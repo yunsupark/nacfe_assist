@@ -255,7 +255,7 @@ def resolve_api_key(force_paid=False):
     sys.exit(1)
 
 
-def run(questions_path, limit=None, only_bucket=None, fresh=False, paid=False):
+def run(questions_path, limit=None, only_bucket=None, fresh=False, paid=False, routing_only=False):
     api_key, key_label = resolve_api_key(force_paid=paid)
     print(f"using {key_label}")
 
@@ -277,7 +277,15 @@ def run(questions_path, limit=None, only_bucket=None, fresh=False, paid=False):
     client = genai.Client(api_key=api_key, http_options=types.HttpOptions(timeout=REQUEST_TIMEOUT_MS))
 
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = RESULTS_DIR / "two_stage_raw.jsonl"
+    # A routing-only run writes to its own file and always re-routes. It exists to validate a
+    # route.txt change cheaply: stage 1 runs on the routing model, which free tier throttles
+    # by tokens-per-minute but did not cap by requests-per-day in practice, so a full 52-question
+    # routing pass costs nothing and takes about an hour. Keeping it out of two_stage_raw.jsonl
+    # matters -- re-routing invalidates the answers already scored against the old selections.
+    out_path = RESULTS_DIR / ("two_stage_routing_only.jsonl" if routing_only else "two_stage_raw.jsonl")
+    if routing_only:
+        fresh = True
+        print("routing-only: stage 2 skipped; writing to", out_path.name)
     prior = {} if fresh else load_prior_results(out_path)
     prior_routes = {} if fresh else load_prior_routes(out_path)
     if prior:
@@ -358,7 +366,9 @@ def run(questions_path, limit=None, only_bucket=None, fresh=False, paid=False):
         print(f"    routed to: {selected_ids or '(none)'}" + (" [out_of_scope]" if route_result.get("out_of_scope") else ""))
 
         answer_text, answer_usage = None, None
-        if selected_ids and not route_result.get("out_of_scope"):
+        if routing_only:
+            answer_text = "(routing-only run; no answer call made)"
+        elif selected_ids and not route_result.get("out_of_scope"):
             if answer_model_exhausted:
                 answer_text = f"[SKIPPED: {ANSWER_MODEL} daily quota already exhausted this run]"
             else:
@@ -410,11 +420,15 @@ def main():
     parser.add_argument("--fresh", action="store_true", help="Ignore prior results, re-run everything")
     parser.add_argument("--paid", action="store_true",
                         help="Force the paid GEMINI_API key even if GEMINI_API_FREE is set")
+    parser.add_argument("--routing-only", action="store_true",
+                        help="Run stage 1 only, into eval/results/two_stage_routing_only.jsonl. "
+                             "Cheap way to validate a route.txt change without spending the "
+                             "answering model's daily quota or disturbing scored answers.")
     args = parser.parse_args()
 
     load_dotenv(find_dotenv(usecwd=True))
     run(args.questions, limit=args.limit, only_bucket=args.only_bucket, fresh=args.fresh,
-        paid=args.paid)
+        paid=args.paid, routing_only=args.routing_only)
 
 
 if __name__ == "__main__":

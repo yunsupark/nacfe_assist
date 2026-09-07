@@ -42,6 +42,8 @@
       "#nacfe-assist-root button:hover:not(:disabled){background:#8f1121}",
       "#nacfe-assist-root button:disabled{background:#c7c7c7;cursor:default}",
       "#nacfe-assist-root .na-hint{font-size:12px;color:#6b6b6b;margin:0 0 20px}",
+      "#nacfe-assist-root .na-turnstile{margin:0 0 10px}",
+      "#nacfe-assist-root .na-turnstile:empty{margin:0}",
       "#nacfe-assist-root .na-result{border-top:1px solid #e2e2e2;padding-top:16px;",
       "margin-top:16px;display:none}",
       "#nacfe-assist-root .na-result.na-visible{display:block}",
@@ -115,6 +117,7 @@
     '<input type="text" id="na-input" maxlength="1000" aria-label="Ask a question about NACFE\u2019s research" placeholder="e.g. What was Frito-Lay’s fuel economy in the Messy Middle demonstration?" autocomplete="off" />',
     '<button type="submit" id="na-submit">Ask</button>',
     '</form>',
+    '<div class="na-turnstile" id="na-turnstile"></div>',
     '<p class="na-hint">Answers are grounded only in NACFE’s published reports, videos, and studies — not general knowledge.</p>',
     '<div class="na-loading" id="na-loading" role="status" aria-live="polite" style="display:none">',
     '<span id="na-loading-text">Searching NACFE’s research library</span>',
@@ -173,6 +176,15 @@
   // sequential ids can't be enumerated and rated by anyone who never saw the answer.
   var currentFeedbackToken = null;
   var REQUEST_TIMEOUT_MS = 120000;
+
+  // Turnstile. The sitekey is substituted by the Worker when it serves this file, so an
+  // embedder never has to carry it; data-sitekey on the script tag overrides for local work.
+  // Empty sitekey => the widget runs unprotected, which is the state a deployment is in
+  // before the Turnstile secret is provisioned.
+  var TURNSTILE_SITEKEY =
+    (script && script.getAttribute("data-sitekey")) || "__TURNSTILE_SITEKEY__";
+  if (TURNSTILE_SITEKEY.indexOf("__TURNSTILE") === 0) TURNSTILE_SITEKEY = "";
+  var turnstileWidgetId = null;
 
   // Everything below builds DOM nodes and sets textContent rather than concatenating HTML
   // strings. The previous escapeHtml() escaped via textContent -> innerHTML, which handles
@@ -328,6 +340,42 @@
     return pump();
   }
 
+  // Rendered explicitly rather than via the auto-scanning class hook, because this page stays
+  // alive across submissions and a Turnstile token is redeemed exactly once. Keeping the
+  // widget id lets us reset it after every request so a second question gets a fresh token.
+  if (TURNSTILE_SITEKEY) {
+    var tsScript = document.createElement("script");
+    tsScript.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+    tsScript.async = true;
+    tsScript.defer = true;
+    tsScript.onload = function () {
+      if (!window.turnstile) return;
+      turnstileWidgetId = window.turnstile.render("#na-turnstile", {
+        sitekey: TURNSTILE_SITEKEY,
+        action: "query",
+      });
+    };
+    document.head.appendChild(tsScript);
+  }
+
+  function turnstileToken() {
+    if (!TURNSTILE_SITEKEY || !window.turnstile || turnstileWidgetId === null) return "";
+    try {
+      return window.turnstile.getResponse(turnstileWidgetId) || "";
+    } catch (err) {
+      return "";
+    }
+  }
+
+  function resetTurnstile() {
+    if (!TURNSTILE_SITEKEY || !window.turnstile || turnstileWidgetId === null) return;
+    try {
+      window.turnstile.reset(turnstileWidgetId);
+    } catch (err) {
+      // a reset failure shouldn't take the widget down; the next submit just re-checks
+    }
+  }
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var question = input.value.trim();
@@ -350,7 +398,10 @@
     fetch(apiUrl, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ question: question }),
+      body: JSON.stringify({
+        question: question,
+        "cf-turnstile-response": turnstileToken(),
+      }),
       signal: controller ? controller.signal : undefined,
     })
       .then(function (res) {
@@ -371,6 +422,7 @@
         if (data.error) throw new Error(data.error);
         clearTimeout(timer);
         setLoading(false);
+        resetTurnstile(); // the token just spent is dead; mint a fresh one for the next question
 
         if (data.degraded) {
           // Notice only: there is no answer, no sources and nothing to rate.
@@ -400,6 +452,7 @@
       .catch(function (err) {
         clearTimeout(timer);
         setLoading(false);
+        resetTurnstile();
         errorEl.textContent = timedOut
           ? "That took too long to answer. Please try again."
           : "Something went wrong: " + err.message;

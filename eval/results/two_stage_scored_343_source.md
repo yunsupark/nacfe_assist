@@ -130,7 +130,13 @@ Measured with the tokenizer, not estimated from bytes:
 | compact, all fields | 690,791 | 175,540 |
 | **compact, projected (now shipping)** | **629,228** | **150,778** |
 
-The alignment cut the routing payload 32.8%. Still over SPEC.md §3's ceiling ("around 40–60K
-tokens ... if it exceeds ~100K, tighten the abstracts"), which remains the outstanding work —
-`abstract` and `key_findings` are ~60% of the payload. At the §3 target, free tier would fit
-4–6 routing calls a minute instead of 1.5.
+The alignment cut the routing payload 32.8%. It is still over SPEC.md §3's ~100K ceiling, but
+§3's prescribed remedy — "tighten the abstracts" — does not apply here. Measured across all
+343 entries the abstracts average 77 words (median 79, longest 198) against §3's own 300-word
+target: not one entry exceeds it, and the longest is 34% under. There is nothing safe to cut;
+shortening further would remove fleet names, specific findings and scope details the router
+needs to distinguish similar sources.
+
+The overage is a scale problem, not a verbosity one — 343 sources, each already lean. The
+remaining cost levers are context caching of the fixed routing prefix and the KV answer
+cache, not editing the catalog.

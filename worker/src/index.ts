@@ -13,6 +13,15 @@ export interface Env {
   GEMINI_API: string;
   GEMINI_API_FREE: string;
   FEEDBACK_SECRET: string;
+  /** Turnstile secret. When unset, verification is skipped entirely so a deployment without
+   * a provisioned widget still serves -- GET /health reports which state you are in. When
+   * set, verification is mandatory and fails closed. */
+  TURNSTILE_SECRET: string;
+  /** Public sitekey, substituted into the served widget.js so embedders don't have to know it. */
+  TURNSTILE_SITEKEY: string;
+  /** Comma-separated hostnames siteverify's `hostname` must match. Must NOT contain
+   * localhost or 127.0.0.1 in a production deployment. */
+  TURNSTILE_HOSTNAMES: string;
   CACHE: KVNamespace;
   DB: D1Database;
   SOURCES_BUCKET: R2Bucket;
@@ -53,10 +62,14 @@ const CATALOG_BY_ID = new Map(CATALOG.map((c) => [c.id, c]));
  * filters and metadata"). `url` in particular is re-attached server-side by enrichSources, so
  * sending it to the model was pure waste.
  *
- * This is a mitigation, not the fix. SPEC.md 3 sets the real budget -- "should land around
- * 40-60K tokens ... if it exceeds ~100K, tighten the abstracts" -- and the catalog is
- * currently ~170K tokens, over that ceiling before any trimming here. Tightening abstracts
- * and key_findings (together ~60% of the payload) is still owed.
+ * This is a mitigation, not a full fix -- but the remaining overage is a scale problem, not a
+ * verbosity one. The abstracts were measured across all 343 entries: 77 words average, 79
+ * median, 198 longest, against SPEC.md 3's 300-word target. Not one entry exceeds it and the
+ * longest is 34% under, so there is no fat to trim -- shortening further would cut fleet
+ * names, specific findings and scope details the router needs to tell similar sources apart.
+ * The catalog is large because the corpus is large (343 sources, each already lean). Cost
+ * levers that remain are context caching of the fixed prefix and the KV answer cache, not
+ * editing abstracts.
  */
 type RouterCatalogEntry = Omit<
   CatalogEntry,
@@ -381,9 +394,58 @@ function timingSafeEqual(a: string, b: string): boolean {
   return diff === 0;
 }
 
+/** The action stamped on the widget and required back from siteverify, so a token minted for
+ * some other surface can't be replayed against the expensive endpoint. */
+const TURNSTILE_ACTION = "query";
+
+/**
+ * Canonical server-side Turnstile verification: browser -> this Worker -> siteverify, never
+ * browser -> siteverify. Fails closed on every error path, because the thing it guards is
+ * unmetered spend on someone else's API.
+ *
+ * Checks all three of success, action and hostname. `success` alone would accept a token
+ * minted on any other site using the same widget, or for a different action.
+ */
+async function verifyTurnstile(env: Env, token: unknown, clientIp: string): Promise<boolean> {
+  const expectedHostnames = new Set(
+    (env.TURNSTILE_HOSTNAMES ?? "").split(",").map((h) => h.trim()).filter(Boolean),
+  );
+  if (typeof token !== "string" || !token || token.length > 2048 || expectedHostnames.size === 0) {
+    return false;
+  }
+
+  let result: { success?: boolean; action?: string; hostname?: string; "error-codes"?: string[] };
+  try {
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      signal: AbortSignal.timeout(10_000),
+      body: new URLSearchParams({
+        secret: env.TURNSTILE_SECRET,
+        response: token,
+        remoteip: clientIp,
+      }),
+    });
+    if (!res.ok) throw new Error(`siteverify ${res.status}`);
+    result = await res.json();
+  } catch (err) {
+    console.error("turnstile siteverify failed:", err);
+    return false;
+  }
+
+  if (!result.success || result.action !== TURNSTILE_ACTION || !expectedHostnames.has(result.hostname ?? "")) {
+    console.error(
+      `turnstile rejected: success=${result.success} action=${result.action} ` +
+        `hostname=${result.hostname} codes=${(result["error-codes"] ?? []).join(",")}`,
+    );
+    return false;
+  }
+  return true;
+}
+
 async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const start = Date.now();
-  let body: { question?: string };
+  let body: { question?: string; "cf-turnstile-response"?: string };
   try {
     body = await request.json();
   } catch {
@@ -394,6 +456,17 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   if (question.length > 1000) return jsonResponse({ error: "question too long" }, 400);
 
   const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
+
+  // Before the rate limiter, the budget reservation and anything that costs money. The IP
+  // rate limit bounds one client; Turnstile is what makes a distributed script expensive to
+  // run at all (SPEC.md 7: "Add Turnstile if abused").
+  if (env.TURNSTILE_SECRET) {
+    const token = (body as { "cf-turnstile-response"?: unknown })["cf-turnstile-response"];
+    if (!(await verifyTurnstile(env, token, ip))) {
+      return jsonResponse({ error: "bot verification failed, please reload and try again" }, 403);
+    }
+  }
+
   const perHour = parseInt(env.RATE_LIMIT_PER_IP_PER_HOUR, 10) || 20;
   if (!(await checkRateLimit(env, ip, "query", perHour))) {
     return jsonResponse({ error: "rate limit exceeded, try again later" }, 429, {
@@ -658,11 +731,20 @@ export default {
     if (url.pathname === "/health") {
       // `feedback` surfaces whether FEEDBACK_SECRET actually made it into the deployment --
       // without it the widget's rating row goes quietly missing, which is easy not to notice.
-      return jsonResponse({ ok: true, sources: CATALOG.length, feedback: Boolean(env.FEEDBACK_SECRET) });
+      return jsonResponse({
+        ok: true,
+        sources: CATALOG.length,
+        feedback: Boolean(env.FEEDBACK_SECRET),
+        // Loud on purpose: "turnstile": false means the query endpoint is unprotected.
+        turnstile: Boolean(env.TURNSTILE_SECRET) && Boolean(env.TURNSTILE_HOSTNAMES),
+      });
     }
 
     if (url.pathname === "/widget.js" && request.method === "GET") {
-      return new Response(WIDGET_JS, {
+      // Substituted at serve time rather than build time so rotating the widget is a var
+      // change, not a rebuild, and embedders never carry the sitekey in their page.
+      const widgetJs = WIDGET_JS.split("__TURNSTILE_SITEKEY__").join(env.TURNSTILE_SITEKEY ?? "");
+      return new Response(widgetJs, {
         headers: corsHeaders({
           "content-type": "application/javascript; charset=utf-8",
           "cache-control": "public, max-age=3600", // an hour: cheap to bust by redeploying, not so long a fix takes all day to land
