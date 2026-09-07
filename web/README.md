@@ -72,7 +72,19 @@ openssl rand -hex 32 | npx wrangler secret put FEEDBACK_SECRET
 npx wrangler d1 execute nacfe-assist --remote --file=migrations/0001_feedback_unique_query_id.sql
 ```
 
-3. The rate limit and the monthly token ceiling are now Durable Objects (`RateLimiter`,
+3. Turnstile, protecting `POST /query` before anything that costs money. Create a **managed**
+   widget for `nacfe.org` (plus `localhost` and `127.0.0.1` for local work), then:
+
+```bash
+cd worker
+npx wrangler secret put TURNSTILE_SECRET      # the widget's secret key
+# and set TURNSTILE_SITEKEY / TURNSTILE_HOSTNAMES in wrangler.toml [vars]
+```
+
+   `TURNSTILE_HOSTNAMES` must not include `localhost` in production. Until the secret is set,
+   verification is skipped and `/health` reports `"turnstile": false`.
+
+4. The rate limit and the monthly token ceiling are now Durable Objects (`RateLimiter`,
    `Budget` in `src/counters.ts`) rather than KV counters, which were eventually consistent
    and so didn't actually hold under concurrency. `wrangler deploy` applies the `v1`
    migration in `wrangler.toml` automatically; Durable Objects must be enabled on the

@@ -728,7 +728,7 @@ export default {
       return handleFeedback(request, env);
     }
 
-    if (url.pathname === "/health") {
+    if (url.pathname === "/health" && (request.method === "GET" || request.method === "HEAD")) {
       // `feedback` surfaces whether FEEDBACK_SECRET actually made it into the deployment --
       // without it the widget's rating row goes quietly missing, which is easy not to notice.
       return jsonResponse({
@@ -740,7 +740,9 @@ export default {
       });
     }
 
-    if (url.pathname === "/widget.js" && request.method === "GET") {
+    // HEAD as well as GET: a HEAD-only route match returned 404, which monitors, link
+    // checkers and CDN revalidation all see even though browsers fetch scripts with GET.
+    if (url.pathname === "/widget.js" && (request.method === "GET" || request.method === "HEAD")) {
       // Substituted at serve time rather than build time so rotating the widget is a var
       // change, not a rebuild, and embedders never carry the sitekey in their page.
       const widgetJs = WIDGET_JS.split("__TURNSTILE_SITEKEY__").join(env.TURNSTILE_SITEKEY ?? "");

@@ -12,6 +12,11 @@ workers_dev = true
 # "feedback": false) rather than accepting ratings against guessable sequential query ids.
 # Any long random string works:
 #   openssl rand -hex 32 | wrangler secret put FEEDBACK_SECRET
+#
+# TURNSTILE_SECRET is the third secret. Verification of POST /query is skipped entirely while
+# it is unset (GET /health then reports "turnstile": false), so the Worker still serves before
+# the widget is provisioned -- but the query endpoint is unprotected in that state.
+#   wrangler secret put TURNSTILE_SECRET
 # Every model call tries GEMINI_API_FREE first and only falls back to GEMINI_API on a quota
 # error (see generateContentWithFallback in src/gemini.ts) -- this keeps routine usage free
 # and only spills over to paid once free tier's daily quota is actually exhausted.
@@ -55,6 +60,15 @@ MONTHLY_TOKEN_CEILING = "20000000"
 ROUTE_MODEL = "gemini-3.5-flash-lite"
 ANSWER_MODEL = "gemini-3.6-flash"
 RATE_LIMIT_PER_IP_PER_HOUR = "20"
+
+# Turnstile. Create the widget in the Cloudflare dashboard (or `wrangler turnstile widget
+# create`) with mode "managed", then put its public sitekey here -- the Worker substitutes it
+# into the widget.js it serves, so embedders never carry it.
+TURNSTILE_SITEKEY = ""
+# Hostnames siteverify's `hostname` field must match, comma separated. This is what stops a
+# token minted on someone else's page from being spent here, so it must NOT contain localhost
+# or 127.0.0.1 in production even though the widget itself is registered for them.
+TURNSTILE_HOSTNAMES = "nacfe.org,www.nacfe.org"
 
 # console.error had nowhere to go before this -- a public endpoint with no logs.
 [observability]
