@@ -100,7 +100,7 @@ used throughout this project's development and eval runs. Free tier limits (per 
 subject to change): a few requests per minute and a capped number of requests per day,
 shared across every call this key makes, ingest scripts included. A public embed on
 nacfe.org would very likely exhaust this within the first real day of traffic, at which
-point the Worker's `MONTHLY_TOKEN_CEILING` degrade-to-cache-only behavior (SPEC.md §7)
+point the Worker's `MONTHLY_COST_CEILING_USD` degrade-to-cache-only behavior (SPEC.md §7)
 kicks in for the wrong reason — not because the intended monthly budget was hit, but
 because the underlying key choked on rate, not spend.
 

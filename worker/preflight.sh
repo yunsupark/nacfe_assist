@@ -22,6 +22,18 @@ jqf() { printf '%s' "$health" | python3 -c "import json,sys;print(json.load(sys.
 [ "$(jqf feedback)" = "True" ]  && pass "FEEDBACK_SECRET set"          || warn "FEEDBACK_SECRET missing -- rating row will not appear"
 [ "$(jqf turnstile)" = "True" ] && pass "Turnstile configured"         || warn "Turnstile NOT configured -- /query is unprotected"
 
+status_json="$(curl -fsS --max-time 15 "$BASE/status" 2>/dev/null)" || status_json=""
+if [ -z "$status_json" ]; then
+  warn "/status unreachable -- the widget cannot warn readers before the budget runs out"
+else
+  echo "  /status -> $status_json"
+  if printf '%s' "$status_json" | grep -q '"degraded":true'; then
+    warn "budget ceiling REACHED -- only cached questions are being answered"
+  else
+    pass "within monthly budget"
+  fi
+fi
+
 # Fetch widget.js once, and treat a failed fetch as a failure of every check that reads it.
 # Grepping the empty output of a failed curl reports "placeholder absent", which is a pass for
 # the wrong reason -- the exact silent-pass shape this preflight exists to catch.

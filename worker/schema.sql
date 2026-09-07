@@ -16,7 +16,11 @@ CREATE TABLE IF NOT EXISTS queries (
   answer_tokens INTEGER,
   total_tokens INTEGER,
   latency_ms INTEGER NOT NULL,
-  degraded_cache_only INTEGER NOT NULL DEFAULT 0  -- 1 if served under the monthly ceiling
+  degraded_cache_only INTEGER NOT NULL DEFAULT 0, -- 1 if served under the monthly ceiling
+  -- What this query actually cost, in integer micro-USD (1e-6 USD). The monthly ceiling is
+  -- denominated in cost rather than tokens (see worker/src/pricing.ts), so this is what the
+  -- ceiling is actually counting, and it makes spend auditable per question. 0 for cache hits.
+  cost_micro_usd INTEGER
 );
 
 CREATE INDEX IF NOT EXISTS idx_queries_timestamp ON queries (timestamp);

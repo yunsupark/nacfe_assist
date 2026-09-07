@@ -3,8 +3,15 @@
 // See eval/run_eval.py for the local-script version this was ported from, and
 // eval/results/two_stage_scored.md for the eval this design is validated against.
 import { CATALOG, ROUTE_PROMPT, ANSWER_PROMPT, WIDGET_JS } from "./corpus_data";
-import { generateContentWithFallback, stripJsonFence, GeminiError, GeminiEmptyResponse } from "./gemini";
+import {
+  generateContentWithFallback,
+  stripJsonFence,
+  GeminiError,
+  GeminiEmptyResponse,
+  type GeminiUsage,
+} from "./gemini";
 import { fillTemplate } from "./prompt";
+import { costMicroUsd, formatUsd } from "./pricing";
 import type { CatalogEntry } from "./catalog_types";
 
 export { RateLimiter, Budget } from "./counters";
@@ -27,7 +34,10 @@ export interface Env {
   SOURCES_BUCKET: R2Bucket;
   RATE_LIMITER: DurableObjectNamespace<import("./counters").RateLimiter>;
   BUDGET: DurableObjectNamespace<import("./counters").Budget>;
-  MONTHLY_TOKEN_CEILING: string;
+  /** Monthly spend ceiling in whole US dollars, e.g. "50". Denominated in cost rather than
+   * tokens because input and output prices differ by up to 12.5x, so a token count is a poor
+   * proxy for spend (see pricing.ts). */
+  MONTHLY_COST_CEILING_USD: string;
   ROUTE_MODEL: string;
   ANSWER_MODEL: string;
   RATE_LIMIT_PER_IP_PER_HOUR: string;
@@ -82,11 +92,27 @@ const ROUTER_CATALOG_JSON = JSON.stringify(
   }),
 );
 
-/** Rough token estimate for the fixed part of a routing call, used only to reserve budget
- * before the call is made (reconciled against real usage afterwards). ~4 chars/token. */
+/** Rough token estimate for the fixed part of a routing call. ~4 chars/token. */
 const ROUTE_TOKEN_ESTIMATE = Math.ceil((ROUTE_PROMPT.length + ROUTER_CATALOG_JSON.length) / 4);
 /** Nominal allowance for the answer stage on top of routing, for the same reservation. */
 const ANSWER_TOKEN_ESTIMATE = 60_000;
+
+/** What one query is assumed to cost before it runs, reserved up front and reconciled against
+ * real usage afterwards. Measured average is ~$0.076; this errs high so a burst of concurrent
+ * requests cannot collectively overshoot the ceiling while their true costs are unknown. */
+function estimatedQueryCostMicroUsd(env: Env): number {
+  return (
+    costMicroUsd(env.ROUTE_MODEL, ROUTE_TOKEN_ESTIMATE, 500) +
+    costMicroUsd(env.ANSWER_MODEL, ANSWER_TOKEN_ESTIMATE, 1_000)
+  );
+}
+
+/** First instant of the next budget period, ISO-8601. The period is a UTC calendar month
+ * (see currentPeriod), so this is midnight UTC on the 1st -- what the widget shows readers
+ * instead of a vague "next month". */
+function periodResetsAt(now = new Date()): string {
+  return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1)).toISOString();
+}
 
 function normalizeQuestion(q: string): string {
   return q.trim().toLowerCase().replace(/\s+/g, " ").replace(/[?.!]+$/, "");
@@ -249,7 +275,7 @@ async function route(
   env: Env,
   question: string,
   signal: AbortSignal,
-): Promise<{ result: RouteResult; tokens: number }> {
+): Promise<{ result: RouteResult; usage: GeminiUsage }> {
   const prompt = fillTemplate(ROUTE_PROMPT, {
     catalog: ROUTER_CATALOG_JSON,
     question,
@@ -269,7 +295,7 @@ async function route(
     console.error(`route: model did not return parseable JSON: ${text.slice(0, 400)}`);
     parsed = null;
   }
-  return { result: validateRouteResult(parsed), tokens: usage.totalTokens };
+  return { result: validateRouteResult(parsed), usage };
 }
 
 async function fetchSource(env: Env, id: string): Promise<string | null> {
@@ -286,7 +312,7 @@ async function answer(
   question: string,
   selectedIds: string[],
   signal: AbortSignal,
-): Promise<{ text: string; tokens: number; complete: boolean }> {
+): Promise<{ text: string; usage: GeminiUsage; complete: boolean }> {
   // Fetch the (at most MAX_SELECTED_SOURCES) selected sources from R2 in parallel --
   // sequential round-trips would otherwise stack their latency on top of each other for no
   // reason. Ids are catalog-validated upstream, so these are never attacker-chosen keys.
@@ -323,7 +349,7 @@ async function answer(
   if (finishReason !== "STOP") {
     console.error(`answer: incomplete generation, finishReason=${finishReason}`);
   }
-  return { text, tokens: usage.totalTokens, complete: finishReason === "STOP" };
+  return { text, usage, complete: finishReason === "STOP" };
 }
 
 async function logQuery(
@@ -340,13 +366,15 @@ async function logQuery(
     totalTokens: number | null;
     latencyMs: number;
     degradedCacheOnly: boolean;
+    costMicroUsd: number | null;
   },
 ): Promise<number> {
   const result = await env.DB.prepare(
     `INSERT INTO queries
       (timestamp, question, normalized_question, cache_hit, out_of_scope, selected_sources,
-       recency_warning, route_tokens, answer_tokens, total_tokens, latency_ms, degraded_cache_only)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       recency_warning, route_tokens, answer_tokens, total_tokens, latency_ms, degraded_cache_only,
+       cost_micro_usd)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   )
     .bind(
       new Date().toISOString(),
@@ -361,6 +389,7 @@ async function logQuery(
       fields.totalTokens,
       fields.latencyMs,
       fields.degradedCacheOnly ? 1 : 0,
+      fields.costMicroUsd,
     )
     .run();
   return result.meta.last_row_id;
@@ -494,6 +523,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         totalTokens: null,
         latencyMs: Date.now() - start,
         degradedCacheOnly: false,
+        costMicroUsd: 0, // a cache hit spends nothing
       });
       const token = env.FEEDBACK_SECRET ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
       await write(
@@ -508,10 +538,10 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   // against real usage once the request finishes (including on the error paths, where the
   // old code silently dropped the routing tokens it had already spent).
   const period = currentPeriod();
-  const ceiling = parseInt(env.MONTHLY_TOKEN_CEILING, 10);
+  const ceilingMicroUsd = Math.round((parseFloat(env.MONTHLY_COST_CEILING_USD) || 0) * 1_000_000);
   const budget = budgetStub(env);
-  const reservation = ROUTE_TOKEN_ESTIMATE + ANSWER_TOKEN_ESTIMATE;
-  const { allowed: budgetAllowed } = await budget.reserve(period, ceiling, reservation);
+  const reservation = estimatedQueryCostMicroUsd(env);
+  const { allowed: budgetAllowed } = await budget.reserve(period, ceilingMicroUsd, reservation);
   if (!budgetAllowed) {
     // Degrade to cache-only per SPEC.md 7 -- Gemini won't stop on its own, we have to.
     ctx.waitUntil(
@@ -527,13 +557,18 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         totalTokens: null,
         latencyMs: Date.now() - start,
         degradedCacheOnly: true,
+        costMicroUsd: 0,
       }),
     );
+    // Deliberately not "try rephrasing": the cache is keyed on the normalized question, so
+    // only an effectively identical wording hits it. Telling readers to rephrase would send
+    // them round a loop that almost never works.
     return jsonResponse(
       {
         answer:
-          "This tool has reached its monthly usage budget and is temporarily answering only from previously cached questions. Please try again next month, or rephrase your question in case a similar one was already answered.",
+          "This tool has reached its monthly research budget. Questions that have been asked here before are still answered instantly; new ones resume when the budget resets.",
         degraded: true,
+        resets_at: periodResetsAt(),
       },
       503,
       { "retry-after": "86400" },
@@ -545,10 +580,11 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   const signal = AbortSignal.any([AbortSignal.timeout(QUERY_TIMEOUT_MS), request.signal]);
 
   return lineStreamResponse(ctx, async (write) => {
-    let spent = 0;
+    let spentMicroUsd = 0;
     try {
-      const { result: routeResult, tokens: routeTokens } = await route(env, question, signal);
-      spent += routeTokens;
+      const { result: routeResult, usage: routeUsage } = await route(env, question, signal);
+      const routeTokens = routeUsage.totalTokens;
+      spentMicroUsd += costMicroUsd(env.ROUTE_MODEL, routeUsage.promptTokens, routeUsage.outputTokens);
       const selectedIds = routeResult.selected.map((s) => s.id);
 
       if (selectedIds.length === 0 || routeResult.out_of_scope) {
@@ -572,6 +608,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
           totalTokens: routeTokens,
           latencyMs: Date.now() - start,
           degradedCacheOnly: false,
+          costMicroUsd: spentMicroUsd,
         });
         const token = env.FEEDBACK_SECRET ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
         await write(
@@ -588,10 +625,11 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
 
       const {
         text: answerText,
-        tokens: answerTokens,
+        usage: answerUsage,
         complete,
       } = await answer(env, question, selectedIds, signal);
-      spent += answerTokens;
+      const answerTokens = answerUsage.totalTokens;
+      spentMicroUsd += costMicroUsd(env.ANSWER_MODEL, answerUsage.promptTokens, answerUsage.outputTokens);
 
       const payload = {
         answer: answerText,
@@ -617,6 +655,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         totalTokens: routeTokens + answerTokens,
         latencyMs: Date.now() - start,
         degradedCacheOnly: false,
+        costMicroUsd: spentMicroUsd,
       });
       const token = env.FEEDBACK_SECRET ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
       await write(
@@ -644,7 +683,15 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
       // Settle the reservation against what was really spent -- refunding the unused portion,
       // or booking the overrun. Runs on every exit path, so tokens burned by a request that
       // then failed are still counted against the ceiling.
-      ctx.waitUntil(budget.add(period, spent - reservation).then(() => undefined));
+      ctx.waitUntil(
+        budget.add(period, spentMicroUsd - reservation).then((total) => {
+          if (total >= ceilingMicroUsd) {
+            console.error(
+              `monthly ceiling reached for ${period}: ${formatUsd(total)} of ${formatUsd(ceilingMicroUsd)}`,
+            );
+          }
+        }),
+      );
     }
   });
 }
@@ -726,6 +773,22 @@ export default {
 
     if (url.pathname === "/feedback" && request.method === "POST") {
       return handleFeedback(request, env);
+    }
+
+    // Lets the widget tell a reader the tool is budget-limited BEFORE they compose a
+    // question, rather than after submitting one. Kept separate from /health so uptime
+    // monitors polling liveness don't hit the Budget durable object on every check.
+    if (url.pathname === "/status" && (request.method === "GET" || request.method === "HEAD")) {
+      const period = currentPeriod();
+      const ceilingMicroUsd = Math.round((parseFloat(env.MONTHLY_COST_CEILING_USD) || 0) * 1_000_000);
+      const used = await budgetStub(env).used(period);
+      return jsonResponse(
+        { ok: true, degraded: used >= ceilingMicroUsd, resets_at: periodResetsAt() },
+        200,
+        // A minute is short enough that the banner appears promptly when the ceiling is hit,
+        // long enough that a burst of page loads doesn't hammer the durable object.
+        { "cache-control": "public, max-age=60" },
+      );
     }
 
     if (url.pathname === "/health" && (request.method === "GET" || request.method === "HEAD")) {

@@ -53,10 +53,15 @@ binding = "SOURCES_BUCKET"
 bucket_name = "nacfe-assist-sources"  # wrangler r2 bucket create nacfe-assist-sources
 
 [vars]
-# Non-secret config. Hard ceiling on monthly Gemini token spend (input+output combined,
-# both stages) before the Worker degrades to cache-only. See SPEC.md 7 and 0 ($100/$50
-# cost targets) -- this is a safety valve, not a precise budget instrument.
-MONTHLY_TOKEN_CEILING = "20000000"
+# Non-secret config. Hard ceiling on monthly Gemini spend, in US dollars, before the Worker
+# degrades to cache-only. See SPEC.md 7 and 0 ($100/$50 cost targets).
+#
+# Denominated in cost, not tokens: input and output prices differ by up to 12.5x between the
+# two stages, so the previous token ceiling was a poor proxy for spend -- 20,000,000 tokens
+# was only about $8, six times under the intended budget. Measured cost of an uncached query
+# is ~$0.076 (routing $0.046 + answering $0.030), so $50 buys roughly 650 uncached questions
+# a month; cache hits are free. Prices live in src/pricing.ts.
+MONTHLY_COST_CEILING_USD = "50"
 ROUTE_MODEL = "gemini-3.5-flash-lite"
 ANSWER_MODEL = "gemini-3.6-flash"
 RATE_LIMIT_PER_IP_PER_HOUR = "20"

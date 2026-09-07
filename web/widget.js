@@ -42,6 +42,9 @@
       "#nacfe-assist-root button:hover:not(:disabled){background:#8f1121}",
       "#nacfe-assist-root button:disabled{background:#c7c7c7;cursor:default}",
       "#nacfe-assist-root .na-hint{font-size:12px;color:#6b6b6b;margin:0 0 20px}",
+      "#nacfe-assist-root .na-notice{background:#fff5e6;border:1px solid #f0c987;",
+      "border-radius:4px;padding:10px 12px;font-size:13px;margin:0 0 14px;color:#7a4e00}",
+      "#nacfe-assist-root .na-notice b{color:#5c3b00}",
       "#nacfe-assist-root .na-turnstile{margin:0 0 10px}",
       "#nacfe-assist-root .na-turnstile:empty{margin:0}",
       "#nacfe-assist-root .na-result{border-top:1px solid #e2e2e2;padding-top:16px;",
@@ -113,6 +116,7 @@
   mount.innerHTML = [
     '<div id="nacfe-assist-root">',
     '<p class="na-label">Ask NACFE\'s Research</p>',
+    '<div class="na-notice" id="na-notice" role="status" style="display:none"></div>',
     '<form id="na-form">',
     '<input type="text" id="na-input" maxlength="1000" aria-label="Ask a question about NACFE\u2019s research" placeholder="e.g. What was Frito-Lay’s fuel economy in the Messy Middle demonstration?" autocomplete="off" />',
     '<button type="submit" id="na-submit">Ask</button>',
@@ -156,11 +160,26 @@
   var sourcesListEl = mount.querySelector("#na-sources-list");
   var feedbackEl = mount.querySelector("#na-feedback");
   var feedbackBtns = mount.querySelectorAll(".na-feedback-btn");
+  var noticeEl = mount.querySelector("#na-notice");
   var feedbackThanksEl = mount.querySelector("#na-feedback-thanks");
   // Derive /feedback from /query, matching on the path only so a data-api carrying a query
   // string or a relative path still resolves. If the path doesn't end in /query there's
   // nothing sensible to derive, so leave feedback off rather than POSTing ratings at the
   // query endpoint (which the old blind `.replace()` would have done).
+  // Same derivation as the feedback endpoint: match on path so a data-api carrying a query
+  // string still resolves.
+  function siblingEndpoint(name) {
+    try {
+      var parsed = new URL(apiUrl, document.baseURI);
+      if (!/\/query$/.test(parsed.pathname)) return null;
+      parsed.pathname = parsed.pathname.replace(/\/query$/, name);
+      return parsed.toString();
+    } catch (err) {
+      return null;
+    }
+  }
+  var statusApiUrl = siblingEndpoint("/status");
+
   var feedbackApiUrl = (function () {
     try {
       var parsed = new URL(apiUrl, document.baseURI);
@@ -193,6 +212,38 @@
 
   /** Only ever render http(s) links: a "javascript:" or "data:" url in a source record would
    * otherwise become a live link in the reader's page. */
+  // "resumes on 1 October" beats "next month": the ceiling resets at midnight UTC on the
+  // first, and a reader deciding whether to come back deserves the actual date.
+  function formatResetDate(iso) {
+    if (!iso) return null;
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return null;
+    try {
+      // Formatted in UTC, matching the budget period, which is a UTC calendar month. Local
+      // formatting renders a 1 October reset as "September 30" for any reader west of UTC --
+      // locally true, but it names the wrong month and reads as a bug.
+      return d.toLocaleDateString(undefined, { month: "long", day: "numeric", timeZone: "UTC" });
+    } catch (err) {
+      return d.toISOString().slice(0, 10);
+    }
+  }
+
+  /** The one place budget-limited state is rendered, used both by the on-load status check
+   * and by a refused query, so the reader never sees two differently-worded versions of it. */
+  function showBudgetNotice(message, resetsAt) {
+    if (!noticeEl) return;
+    noticeEl.textContent = "";
+    var strong = document.createElement("b");
+    strong.textContent = "Monthly research budget reached. ";
+    noticeEl.appendChild(strong);
+    var when = formatResetDate(resetsAt);
+    noticeEl.appendChild(document.createTextNode(
+      message || ("Questions asked here before are still answered instantly" +
+        (when ? "; new ones resume on " + when + "." : "; new ones resume when the budget resets."))
+    ));
+    noticeEl.style.display = "block";
+  }
+
   function safeHttpUrl(u) {
     return typeof u === "string" && /^https?:\/\//i.test(u) ? u : null;
   }
@@ -376,6 +427,22 @@
     }
   }
 
+  // Ask once on load whether the tool is budget-limited, so a reader finds out before
+  // composing a question rather than after submitting one. Deliberately non-blocking and
+  // silent on failure: the form stays fully usable either way, because cached questions are
+  // still answered when the budget is spent.
+  if (statusApiUrl) {
+    fetch(statusApiUrl)
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (st) { if (st && st.degraded) showBudgetNotice(null, st.resets_at); })
+      .catch(function (err) {
+        // Non-fatal: the form works regardless. Logged rather than swallowed, because an
+        // empty catch here hid a real bug once -- a redeclaration that reset the notice
+        // element to null, so the banner silently never rendered.
+        if (window.console && console.warn) console.warn("nacfe-assist: status check failed", err);
+      });
+  }
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var question = input.value.trim();
@@ -410,7 +477,12 @@
             // The monthly-budget degrade path answers 503 with {answer, degraded:true}. That
             // is a real notice written for the reader, not a failure -- surfacing it as
             // "Something went wrong: request failed (503)" threw the message away.
-            if (body && body.answer) return { answer: body.answer, degraded: true };
+            // Carry resets_at through: rebuilding the object by hand dropped it, so the
+            // refused-query banner fell back to "when the budget resets" while the on-load
+            // banner named the date.
+            if (body && body.answer) {
+              return { answer: body.answer, degraded: true, resets_at: body.resets_at };
+            }
             throw new Error(body.error || ("request failed (" + res.status + ")"));
           });
         }
@@ -425,12 +497,16 @@
         resetTurnstile(); // the token just spent is dead; mint a fresh one for the next question
 
         if (data.degraded) {
-          // Notice only: there is no answer, no sources and nothing to rate.
+          // Not an answer: no sources, nothing to rate. Rendered in the same banner the
+          // on-load check uses, above the form, so the reader sees one consistent
+          // explanation rather than an error where an answer should be.
+          // The widget's own wording, not the server's prose: the API's `answer` field is
+          // written for direct API consumers and duplicates this banner's bold prefix, and
+          // it carries no reset date. One consistent sentence, wherever the state is learned.
+          showBudgetNotice(null, data.resets_at);
           renderAnswer("");
           renderSources(null);
-          warningEl.textContent = data.answer;
-          warningEl.style.display = "block";
-          resultEl.classList.add("na-visible");
+          resultEl.classList.remove("na-visible");
           return;
         }
 
