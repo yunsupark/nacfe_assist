@@ -57,28 +57,6 @@ Rules:
 - If no source in the catalog addresses the question, return an empty selection. Do not
   stretch to find something adjacent. An empty selection is a correct answer.
 
-Before finalizing, check your selection against these four questions. Each one corresponds
-to a real routing failure against this catalog, and the rules above did not fire on their
-own once the corpus grew large:
-
-1. How many distinct things does the question ask for? A question with two anchors -- "as
-   of X" and "by Y", an older framework and whether a later result matched it, a count then
-   and a count now, two named documents -- needs a source for EACH anchor. If you have
-   selected fewer sources than the question has anchors, you are probably missing one. Go
-   back and look for it before finalizing.
-2. Does the question name a narrower context -- a numbered session, one fleet's own
-   profile, a single named event? If so, confirm your selection contains that specific
-   source, and that you are not relying on a campaign-wide overview that merely summarizes
-   it.
-3. If you selected nothing: confirm that no source's topics, abstract, key_findings or
-   data_available mentions the subject at all. An empty selection is only correct when the
-   subject is genuinely absent from the corpus. It is NOT correct merely because the
-   question names a company, product, or brand you do not recognize from the catalog
-   titles -- check the abstracts and key_findings before refusing.
-4. If the question is about cost, TCO, or economics for a particular vehicle class or duty
-   cycle, prefer the most recent source that actually studies that class over an older or
-   more general one that only touches it.
-
 Set "recency_warning" to a short warning STRING when the newest source you selected is more
 than 3 years old as of today (e.g. "The most recent source on this topic is from 2021 --
 newer developments may not be reflected."). Otherwise set it to the JSON literal null. Never
