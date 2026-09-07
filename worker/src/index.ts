@@ -284,7 +284,12 @@ async function answer(
       const title = entry?.title ?? id;
       const body = bodies[i];
       if (!body) return null;
-      return `=== SOURCE: ${title} [${id}] ===\n${body}`;
+      // Title only, no internal id: with the id in this header the answer model cited it
+      // instead of the title in 16% of eval answers, putting raw slugs like
+      // "run-on-less-messy-middle-blueprint-2025" in front of readers. All 343 catalog titles
+      // are unique, so the title alone identifies the source unambiguously. The widget still
+      // shows ids separately, from selected_sources.
+      return `=== SOURCE: ${title} ===\n${body}`;
     })
     .filter((d): d is string => d !== null)
     .join("\n\n");

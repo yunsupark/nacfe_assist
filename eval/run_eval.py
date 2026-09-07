@@ -211,7 +211,9 @@ def build_documents_block(selected_ids, catalog_by_id):
             print(f"    warning: {md_path} not found, skipping", file=sys.stderr)
             continue
         text = md_path.read_text()
-        parts.append(f"=== SOURCE: {title} [{source_id}] ===\n{text}")
+        # Title only, matching answer() in worker/src/index.ts -- the id in this header was
+        # being cited instead of the title. Keep the two in sync.
+        parts.append(f"=== SOURCE: {title} ===\n{text}")
     return "\n\n".join(parts)
 
 
