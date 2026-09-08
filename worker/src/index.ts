@@ -428,6 +428,26 @@ function timingSafeEqual(a: string, b: string): boolean {
 const TURNSTILE_ACTION = "query";
 
 /**
+ * Turnstile needs two pieces of configuration, and having only one is neither "on" nor "off".
+ *
+ * TURNSTILE_SECRET alone used to switch enforcement on while verifyTurnstile rejected every
+ * token for want of an expected-hostname list -- so every query 403'd while /health reported
+ * turnstile: false, pointing an operator away from the cause. Half-configured is its own
+ * state and is reported as such.
+ *
+ *  - "off"           no secret. Verification skipped; /query is unprotected.
+ *  - "on"            secret and hostnames both present. Enforced.
+ *  - "misconfigured" secret without hostnames. Still fails closed, because the alternative is
+ *                    serving unprotected while looking configured -- but it is named, so
+ *                    /health and preflight.sh can say what is actually wrong.
+ */
+function turnstileState(env: Env): "off" | "on" | "misconfigured" {
+  if (!env.TURNSTILE_SECRET) return "off";
+  const hostnames = (env.TURNSTILE_HOSTNAMES ?? "").split(",").map((h) => h.trim()).filter(Boolean);
+  return hostnames.length > 0 ? "on" : "misconfigured";
+}
+
+/**
  * Canonical server-side Turnstile verification: browser -> this Worker -> siteverify, never
  * browser -> siteverify. Fails closed on every error path, because the thing it guards is
  * unmetered spend on someone else's API.
@@ -489,7 +509,16 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   // Before the rate limiter, the budget reservation and anything that costs money. The IP
   // rate limit bounds one client; Turnstile is what makes a distributed script expensive to
   // run at all (SPEC.md 7: "Add Turnstile if abused").
-  if (env.TURNSTILE_SECRET) {
+  const turnstile = turnstileState(env);
+  if (turnstile === "misconfigured") {
+    console.error(
+      "TURNSTILE_SECRET is set but TURNSTILE_HOSTNAMES is empty -- every query will be " +
+        "rejected. Set TURNSTILE_HOSTNAMES in wrangler.toml [vars], or unset TURNSTILE_SECRET " +
+        "to serve without bot protection.",
+    );
+    return jsonResponse({ error: "bot verification is misconfigured on the server" }, 503);
+  }
+  if (turnstile === "on") {
     const token = (body as { "cf-turnstile-response"?: unknown })["cf-turnstile-response"];
     if (!(await verifyTurnstile(env, token, ip))) {
       return jsonResponse({ error: "bot verification failed, please reload and try again" }, 403);
@@ -798,8 +827,8 @@ export default {
         ok: true,
         sources: CATALOG.length,
         feedback: Boolean(env.FEEDBACK_SECRET),
-        // Loud on purpose: "turnstile": false means the query endpoint is unprotected.
-        turnstile: Boolean(env.TURNSTILE_SECRET) && Boolean(env.TURNSTILE_HOSTNAMES),
+        // "off" means /query is unprotected; "misconfigured" means it is rejecting everything.
+        turnstile: turnstileState(env),
       });
     }
 

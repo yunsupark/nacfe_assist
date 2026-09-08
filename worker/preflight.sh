@@ -20,7 +20,11 @@ jqf() { printf '%s' "$health" | python3 -c "import json,sys;print(json.load(sys.
 [ "$(jqf ok)" = "True" ]        && pass "worker responding"           || warn "worker not ok"
 [ "$(jqf sources)" -gt 0 ] 2>/dev/null && pass "catalog loaded ($(jqf sources) sources)" || warn "catalog empty"
 [ "$(jqf feedback)" = "True" ]  && pass "FEEDBACK_SECRET set"          || warn "FEEDBACK_SECRET missing -- rating row will not appear"
-[ "$(jqf turnstile)" = "True" ] && pass "Turnstile configured"         || warn "Turnstile NOT configured -- /query is unprotected"
+case "$(jqf turnstile)" in
+  on)            pass "Turnstile enforced" ;;
+  misconfigured) warn "Turnstile MISCONFIGURED -- TURNSTILE_SECRET set without TURNSTILE_HOSTNAMES; every query is being rejected" ;;
+  *)             warn "Turnstile off -- /query is unprotected" ;;
+esac
 
 status_json="$(curl -fsS --max-time 15 "$BASE/status" 2>/dev/null)" || status_json=""
 if [ -z "$status_json" ]; then
