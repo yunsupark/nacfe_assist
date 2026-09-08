@@ -368,6 +368,28 @@ async function logQuery(
     degradedCacheOnly: boolean;
     costMicroUsd: number | null;
   },
+): Promise<number | null> {
+  try {
+    return await insertQueryRow(env, fields);
+  } catch (err) {
+    // Logging must never take the service down. SPEC.md 7 treats the query log as an output
+    // rather than telemetry, but an unanswered question is a worse outcome than an unlogged
+    // one -- and this is awaited in the serving path, so a throw here used to surface to the
+    // reader as "internal error" for every single query.
+    //
+    // The concrete way that happens: deploying a schema-widening change before running its
+    // D1 migration. This function writes cost_micro_usd, which migration 0002 adds; against
+    // an unmigrated database every insert fails. A D1 outage or a quota exhaustion does the
+    // same. The answer is still served; the row is lost and the reader gets no feedback
+    // buttons, because there is no query id to attach a rating to.
+    console.error("logQuery failed (serving continues; this query is not logged):", err);
+    return null;
+  }
+}
+
+async function insertQueryRow(
+  env: Env,
+  fields: Parameters<typeof logQuery>[1],
 ): Promise<number> {
   const result = await env.DB.prepare(
     `INSERT INTO queries
@@ -554,7 +576,8 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         degradedCacheOnly: false,
         costMicroUsd: 0, // a cache hit spends nothing
       });
-      const token = env.FEEDBACK_SECRET ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
+      const token =
+        env.FEEDBACK_SECRET && queryId !== null ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
       await write(
         `DATA:${JSON.stringify({ ...(cached as object), cached: true, query_id: queryId, feedback_token: token })}`,
       );
@@ -639,7 +662,8 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
           degradedCacheOnly: false,
           costMicroUsd: spentMicroUsd,
         });
-        const token = env.FEEDBACK_SECRET ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
+        const token =
+        env.FEEDBACK_SECRET && queryId !== null ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
         await write(
           `DATA:${JSON.stringify({ ...payload, cached: false, query_id: queryId, feedback_token: token })}`,
         );
@@ -686,7 +710,8 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         degradedCacheOnly: false,
         costMicroUsd: spentMicroUsd,
       });
-      const token = env.FEEDBACK_SECRET ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
+      const token =
+        env.FEEDBACK_SECRET && queryId !== null ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
       await write(
         `DATA:${JSON.stringify({ ...payload, cached: false, query_id: queryId, feedback_token: token })}`,
       );
