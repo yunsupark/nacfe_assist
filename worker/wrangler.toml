@@ -69,7 +69,7 @@ RATE_LIMIT_PER_IP_PER_HOUR = "20"
 # Turnstile. Create the widget in the Cloudflare dashboard (or `wrangler turnstile widget
 # create`) with mode "managed", then put its public sitekey here -- the Worker substitutes it
 # into the widget.js it serves, so embedders never carry it.
-TURNSTILE_SITEKEY = ""
+TURNSTILE_SITEKEY = "0x4AAAAAAEtBM3ecA6Uw7iiB"
 # Hostnames siteverify's `hostname` field must match, comma separated. This is what stops a
 # token minted on someone else's page from being spent here, so it must NOT contain localhost
 # or 127.0.0.1 in production even though the widget itself is registered for them.
