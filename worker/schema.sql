@@ -39,7 +39,7 @@ CREATE INDEX IF NOT EXISTS idx_queries_normalized_question ON queries (normalize
 CREATE TABLE IF NOT EXISTS feedback (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   query_id INTEGER NOT NULL REFERENCES queries (id),
-  rating TEXT NOT NULL CHECK (rating IN ('correct', 'partial', 'wrong')),
+  rating TEXT NOT NULL CHECK (rating IN ('yes', 'partly', 'no')),  -- helpfulness, not accuracy
   timestamp TEXT NOT NULL  -- ISO 8601
 );
 

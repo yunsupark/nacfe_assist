@@ -850,7 +850,17 @@ async function handleEvent(request: Request, env: Env, ctx: ExecutionContext): P
   return new Response(null, { status: 204, headers: corsHeaders() });
 }
 
-const VALID_RATINGS = ["correct", "partial", "wrong"];
+/**
+ * Helpfulness, not accuracy -- see migrations/0005. The public cannot grade correctness of an
+ * answer they asked for because they did not know it; the expert eval measures that instead.
+ *
+ * The legacy accuracy vocabulary is still accepted and mapped, because widget.js is served
+ * with max-age=3600: for an hour after any deploy, browsers and CDNs keep running the previous
+ * copy, which posts the old words. Rejecting those would silently drop an hour of real
+ * feedback after every release.
+ */
+const VALID_RATINGS = ["yes", "partly", "no"];
+const LEGACY_RATINGS: Record<string, string> = { correct: "yes", partial: "partly", wrong: "no" };
 /** Generous next to the query limit -- a reader rates at most once per answer -- but finite,
  * where this endpoint previously had no limit at all. */
 const FEEDBACK_RATE_LIMIT_PER_HOUR = 60;
@@ -880,7 +890,9 @@ async function handleFeedback(request: Request, env: Env): Promise<Response> {
   if (!Number.isInteger(queryId) || (queryId as number) <= 0) {
     return jsonResponse({ error: "missing or invalid 'query_id'" }, 400);
   }
-  if (!rating || !VALID_RATINGS.includes(rating)) {
+  const normalizedRating =
+    typeof rating === "string" ? (LEGACY_RATINGS[rating] ?? rating) : "";
+  if (!normalizedRating || !VALID_RATINGS.includes(normalizedRating)) {
     return jsonResponse({ error: `'rating' must be one of: ${VALID_RATINGS.join(", ")}` }, 400);
   }
   const expected = await feedbackToken(env.FEEDBACK_SECRET, queryId as number);
@@ -895,7 +907,7 @@ async function handleFeedback(request: Request, env: Env): Promise<Response> {
       `INSERT INTO feedback (query_id, rating, timestamp) VALUES (?, ?, ?)
        ON CONFLICT (query_id) DO UPDATE SET rating = excluded.rating, timestamp = excluded.timestamp`,
     )
-      .bind(queryId, rating, new Date().toISOString())
+      .bind(queryId, normalizedRating, new Date().toISOString())
       .run();
   } catch (err) {
     // Most likely an unknown query_id hitting the foreign key. Previously this escaped as a

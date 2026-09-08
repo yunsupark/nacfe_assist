@@ -80,15 +80,20 @@
       "border-color:#ab1428;opacity:1}",
       "#nacfe-assist-root .na-feedback-thanks{font-size:13px;color:#6b6b6b;",
       "font-style:italic}",
-      "#nacfe-assist-root .na-loading{font-size:14px;color:#6b6b6b;padding:12px 0}",
-      "#nacfe-assist-root .na-dots{display:inline-flex;gap:3px;margin-left:6px;",
-      "vertical-align:middle}",
-      "#nacfe-assist-root .na-dots span{width:5px;height:5px;border-radius:50%;",
-      "background:#ab1428;animation:na-pulse 1.2s ease-in-out infinite}",
-      "#nacfe-assist-root .na-dots span:nth-child(2){animation-delay:.2s}",
-      "#nacfe-assist-root .na-dots span:nth-child(3){animation-delay:.4s}",
-      "@keyframes na-pulse{0%,80%,100%{opacity:.25;transform:scale(.8)}",
-      "40%{opacity:1;transform:scale(1)}}",
+      // A query genuinely takes 20-45s (median 21s, p90 46s measured in production), so this
+      // has to read as deliberate work in progress rather than a stalled page. A moving bar
+      // plus an elapsed counter is far more legible at that duration than three small dots.
+      "#nacfe-assist-root .na-loading{margin:16px 0;padding:16px;border:1px solid #e2d2d4;",
+      "border-radius:6px;background:#fdf7f8}",
+      "#nacfe-assist-root .na-loading-bar{height:4px;border-radius:2px;background:#f0dfe2;",
+      "overflow:hidden;margin:0 0 12px}",
+      "#nacfe-assist-root .na-loading-fill{height:100%;width:40%;border-radius:2px;",
+      "background:#ab1428;animation:na-sweep 1.4s ease-in-out infinite}",
+      "@keyframes na-sweep{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}",
+      "#nacfe-assist-root .na-loading-text{margin:0;font-size:15px;font-weight:600;color:#1a1a1a}",
+      "#nacfe-assist-root .na-loading-sub{margin:4px 0 0;font-size:13px;color:#6b6b6b}",
+      "@media (prefers-reduced-motion:reduce){",
+      "#nacfe-assist-root .na-loading-fill{animation:none;width:100%;opacity:.5}}",
       "#nacfe-assist-root .na-error{font-size:14px;color:#ab1428;padding:12px 0}",
       "#nacfe-assist-root .na-footer{font-size:11px;color:#9a9a9a;margin-top:18px}",
       "#nacfe-assist-root .na-footer a{color:#001961}",
@@ -106,8 +111,7 @@
       "#nacfe-assist-root .na-warning{font-size:15px}",
       "#nacfe-assist-root .na-sources-label{font-size:14px}",
       "#nacfe-assist-root .na-source{font-size:15px;padding:10px 12px}",
-      "#nacfe-assist-root .na-loading{font-size:16px}",
-      "#nacfe-assist-root .na-dots span{width:6px;height:6px}",
+      "#nacfe-assist-root .na-loading-text{font-size:17px}",
       "#nacfe-assist-root .na-error{font-size:16px}",
       "#nacfe-assist-root .na-feedback-label{font-size:15px}",
       "#nacfe-assist-root .na-feedback-btn{font-size:15px;padding:8px 16px}",
@@ -129,8 +133,9 @@
     '<div class="na-turnstile" id="na-turnstile"></div>',
     '<p class="na-hint">Answers are grounded only in NACFE’s published reports, videos, and studies — not general knowledge.</p>',
     '<div class="na-loading" id="na-loading" role="status" aria-live="polite" style="display:none">',
-    '<span id="na-loading-text">Searching NACFE’s research library</span>',
-    '<span class="na-dots"><span></span><span></span><span></span></span>',
+    '<div class="na-loading-bar"><div class="na-loading-fill"></div></div>',
+    '<p class="na-loading-text" id="na-loading-text">Searching NACFE’s research library</p>',
+    '<p class="na-loading-sub">Reading full reports takes a moment — usually 20–45 seconds.<span id="na-loading-elapsed"></span></p>',
     '</div>',
     '<div class="na-error" id="na-error" role="alert" style="display:none"></div>',
     '<div class="na-result" id="na-result" aria-live="polite">',
@@ -141,10 +146,10 @@
     '<div id="na-sources-list"></div>',
     '</div>',
     '<div class="na-feedback" id="na-feedback" style="display:none">',
-    '<span class="na-feedback-label">Was this answer accurate?</span>',
-    '<button type="button" class="na-feedback-btn" data-rating="correct">Correct</button>',
-    '<button type="button" class="na-feedback-btn" data-rating="partial">Partially correct</button>',
-    '<button type="button" class="na-feedback-btn" data-rating="wrong">Wrong</button>',
+    '<span class="na-feedback-label">Was this helpful?</span>',
+    '<button type="button" class="na-feedback-btn" data-rating="yes">Yes</button>',
+    '<button type="button" class="na-feedback-btn" data-rating="partly">Partly</button>',
+    '<button type="button" class="na-feedback-btn" data-rating="no">No</button>',
     '<span class="na-feedback-thanks" id="na-feedback-thanks" style="display:none">Thanks for the feedback!</span>',
     '</div>',
     '</div>',
@@ -158,6 +163,7 @@
   var submitBtn = mount.querySelector("#na-submit");
   var loadingEl = mount.querySelector("#na-loading");
   var loadingTextEl = mount.querySelector("#na-loading-text");
+  var elapsedEl = mount.querySelector("#na-loading-elapsed");
   var errorEl = mount.querySelector("#na-error");
   var resultEl = mount.querySelector("#na-result");
   var warningEl = mount.querySelector("#na-warning");
@@ -393,12 +399,30 @@
     reading: "Reading the reports and writing your answer",
   };
 
+  var elapsedTimer = null;
+
   function setLoading(isLoading) {
     loadingEl.style.display = isLoading ? "block" : "none";
     submitBtn.disabled = isLoading;
     input.disabled = isLoading;
+
+    if (elapsedTimer) { clearInterval(elapsedTimer); elapsedTimer = null; }
+    if (!elapsedEl) return;
+
     if (isLoading) {
       loadingTextEl.textContent = "Searching NACFE’s research library";
+      elapsedEl.textContent = "";
+      // A ticking counter is the part that actually proves the page is alive. At a median of
+      // 21s and a p90 of 46s, a reader watching a static indicator concludes it has hung --
+      // so show the time passing rather than only animating. Starts at 5s to avoid flashing
+      // a counter at anyone whose question hits the cache and returns almost immediately.
+      var started = Date.now();
+      elapsedTimer = setInterval(function () {
+        var secs = Math.round((Date.now() - started) / 1000);
+        elapsedEl.textContent = secs >= 5 ? " " + secs + "s elapsed." : "";
+      }, 1000);
+    } else {
+      elapsedEl.textContent = "";
     }
   }
 
