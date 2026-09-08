@@ -45,6 +45,11 @@
       "#nacfe-assist-root .na-notice{background:#fff5e6;border:1px solid #f0c987;",
       "border-radius:4px;padding:10px 12px;font-size:13px;margin:0 0 14px;color:#7a4e00}",
       "#nacfe-assist-root .na-notice b{color:#5c3b00}",
+      "#nacfe-assist-root .na-sponsor{display:flex;align-items:center;gap:10px;",
+      "font-size:13px;color:#6b6b6b;margin:18px 0 0;padding-top:14px;",
+      "border-top:1px solid #e2e2e2}",
+      "#nacfe-assist-root .na-sponsor b{color:#333;font-weight:600}",
+      "#nacfe-assist-root .na-sponsor a{color:#001961}",
       "#nacfe-assist-root .na-turnstile{margin:0 0 10px}",
       "#nacfe-assist-root .na-turnstile:empty{margin:0}",
       "#nacfe-assist-root .na-result{border-top:1px solid #e2e2e2;padding-top:16px;",
@@ -143,6 +148,7 @@
     '<span class="na-feedback-thanks" id="na-feedback-thanks" style="display:none">Thanks for the feedback!</span>',
     '</div>',
     '</div>',
+    '<p class="na-sponsor" id="na-sponsor" style="display:none"></p>',
     '<p class="na-footer">Powered by NACFE’s research library. Answers cite specific reports and demonstrations — verify against the original source for critical decisions. Questions are logged (without any identifying information) to help NACFE see what the industry is asking; please don’t enter personal or confidential details.</p>',
     '</div>',
   ].join("");
@@ -161,6 +167,7 @@
   var feedbackEl = mount.querySelector("#na-feedback");
   var feedbackBtns = mount.querySelectorAll(".na-feedback-btn");
   var noticeEl = mount.querySelector("#na-notice");
+  var sponsorEl = mount.querySelector("#na-sponsor");
   var feedbackThanksEl = mount.querySelector("#na-feedback-thanks");
   // Derive /feedback from /query, matching on the path only so a data-api carrying a query
   // string or a relative path still resolves. If the path doesn't end in /query there's
@@ -179,6 +186,36 @@
     }
   }
   var statusApiUrl = siblingEndpoint("/status");
+  var eventApiUrl = siblingEndpoint("/event");
+
+  /**
+   * Fire-and-forget analytics beacon. sendBeacon survives the page navigating away, which a
+   * plain fetch does not -- without it the sponsor click, whose whole purpose is to be
+   * followed by a navigation, would be the one event most likely to go unrecorded.
+   */
+  function sendEvent(type) {
+    if (!eventApiUrl) {
+      // Audible rather than silent: this returning early is exactly how a broken analytics
+      // wire-up looks from the outside -- everything renders, nothing is ever counted.
+      if (window.console && console.warn) console.warn("nacfe-assist: no /event endpoint; not counting " + type);
+      return;
+    }
+    var payload = JSON.stringify({ type: type, page_url: location.origin + location.pathname });
+    try {
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(eventApiUrl, new Blob([payload], { type: "application/json" }));
+        return;
+      }
+      fetch(eventApiUrl, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: payload,
+        keepalive: true,
+      }).catch(function () {});
+    } catch (err) {
+      // analytics must never break the widget
+    }
+  }
 
   var feedbackApiUrl = (function () {
     try {
@@ -204,6 +241,12 @@
     (script && script.getAttribute("data-sitekey")) || "__TURNSTILE_SITEKEY__";
   if (TURNSTILE_SITEKEY.indexOf("__TURNSTILE") === 0) TURNSTILE_SITEKEY = "";
   var turnstileWidgetId = null;
+
+  // Substituted by the Worker when it serves this file, same as the sitekey. Empty name means
+  // there is no sponsor, so no block renders and no click tracking exists.
+  var SPONSOR = { name: "__SPONSOR_NAME__", tagline: "__SPONSOR_TAGLINE__", url: "__SPONSOR_URL__" };
+  if (SPONSOR.name.indexOf("__SPONSOR") === 0) SPONSOR = { name: "", tagline: "", url: "" };
+
 
   // Everything below builds DOM nodes and sets textContent rather than concatenating HTML
   // strings. The previous escapeHtml() escaped via textContent -> innerHTML, which handles
@@ -426,6 +469,41 @@
       // a reset failure shouldn't take the widget down; the next submit just re-checks
     }
   }
+
+  // The sponsor block exists only when a sponsor is configured. Built from DOM nodes with
+  // textContent rather than markup, so a name or tagline containing markup renders as text.
+  if (SPONSOR.name) {
+    var sponsorText = document.createElement("span");
+    var sponsorName = document.createElement("b");
+    sponsorName.textContent = SPONSOR.name;
+    sponsorText.appendChild(sponsorName);
+    if (SPONSOR.tagline) {
+      sponsorText.appendChild(document.createTextNode(" \u2014 " + SPONSOR.tagline));
+    }
+    sponsorEl.appendChild(document.createTextNode("Sponsored by "));
+    sponsorEl.appendChild(sponsorText);
+
+    var sponsorHref = safeHttpUrl(SPONSOR.url);
+    if (sponsorHref) {
+      var sponsorLink = document.createElement("a");
+      sponsorLink.setAttribute("href", sponsorHref);
+      sponsorLink.setAttribute("target", "_blank");
+      // noopener is what stops the sponsor's page reaching back through window.opener;
+      // sponsored links also carry rel="sponsored" per Google's link-attribution guidance.
+      sponsorLink.setAttribute("rel", "noopener noreferrer sponsored");
+      sponsorLink.textContent = "Learn more";
+      sponsorLink.addEventListener("click", function () {
+        sendEvent("sponsor_click");
+      });
+      sponsorEl.appendChild(document.createTextNode(" "));
+      sponsorEl.appendChild(sponsorLink);
+    }
+    sponsorEl.style.display = "flex";
+  }
+
+  // One impression per widget load. This is the number a sponsor actually buys, and it is far
+  // larger than the question count -- most readers never type anything.
+  sendEvent("impression");
 
   // Ask once on load whether the tool is budget-limited, so a reader finds out before
   // composing a question rather than after submitting one. Deliberately non-blocking and

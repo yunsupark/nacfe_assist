@@ -38,6 +38,13 @@ else
   fi
 fi
 
+# The impressions beacon is the reach number a sponsor is quoted; silent failure means
+# under-reporting, so confirm the endpoint exists rather than assuming it deployed.
+ev_code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 -X POST "$BASE/event" \
+  -H 'content-type: application/json' --data '{"type":"impression"}' 2>/dev/null)" || ev_code=000
+[ "$ev_code" = "204" ] && pass "/event accepts impressions" \
+  || warn "/event returned $ev_code (expected 204) -- impressions are not being counted"
+
 # Fetch widget.js once, and treat a failed fetch as a failure of every check that reads it.
 # Grepping the empty output of a failed curl reports "placeholder absent", which is a pass for
 # the wrong reason -- the exact silent-pass shape this preflight exists to catch.

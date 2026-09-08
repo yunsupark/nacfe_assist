@@ -44,3 +44,19 @@ CREATE TABLE IF NOT EXISTS feedback (
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS idx_feedback_query_id ON feedback (query_id);
+
+-- Widget-level events: impressions (widget loads) and sponsor-link clicks. See
+-- migrations/0003_events.sql for why this is separate from the query log, and why it
+-- deliberately carries no visitor identifier.
+
+CREATE TABLE IF NOT EXISTS events (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  timestamp TEXT NOT NULL,             -- ISO 8601
+  day TEXT NOT NULL,                   -- YYYY-MM-DD, denormalized so daily rollups don't scan
+  type TEXT NOT NULL CHECK (type IN ('impression', 'sponsor_click')),
+  page_url TEXT,                       -- embedding page, scheme+host+path only (no query string)
+  country TEXT                         -- 2-letter code from Cloudflare, or null
+);
+
+CREATE INDEX IF NOT EXISTS idx_events_day_type ON events (day, type);
+CREATE INDEX IF NOT EXISTS idx_events_type_timestamp ON events (type, timestamp);

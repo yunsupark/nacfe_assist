@@ -29,6 +29,11 @@ export interface Env {
   /** Comma-separated hostnames siteverify's `hostname` must match. Must NOT contain
    * localhost or 127.0.0.1 in a production deployment. */
   TURNSTILE_HOSTNAMES: string;
+  /** Sponsor slot. Empty SPONSOR_NAME means no sponsor block is rendered at all and no click
+   * tracking exists -- the state this ships in until there is a sponsor to name. */
+  SPONSOR_NAME: string;
+  SPONSOR_TAGLINE: string;
+  SPONSOR_URL: string;
   CACHE: KVNamespace;
   DB: D1Database;
   SOURCES_BUCKET: R2Bucket;
@@ -174,6 +179,21 @@ function enrichSources(
   selected: Array<{ id: string; why: string }>,
 ): Array<{ id: string; why: string; url: string | null }> {
   return selected.map((s) => ({ ...s, url: CATALOG_BY_ID.get(s.id)?.url ?? null }));
+}
+
+/**
+ * Escape a config value for interpolation into a JavaScript string literal in the served
+ * widget. These come from wrangler vars rather than user input, but a stray quote or a
+ * newline in a sponsor tagline would otherwise produce a syntax error that breaks the whole
+ * widget for every reader -- and a "</script>" would break out of the tag entirely.
+ */
+function jsStringLiteralSafe(value: string | undefined): string {
+  return (value ?? "")
+    .replace(/\\/g, "\\\\")
+    .replace(/"/g, '\\"')
+    .replace(/\r?\n/g, " ")
+    .replace(/</g, "\\u003c")
+    .slice(0, 300);
 }
 
 function corsHeaders(extra: Record<string, string> = {}): Record<string, string> {
@@ -750,6 +770,86 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   });
 }
 
+const VALID_EVENT_TYPES = ["impression", "sponsor_click"];
+/** Generous -- a reader legitimately generates one impression per page load and might open
+ * several pages -- but finite. This endpoint is unauthenticated and its output is the reach
+ * number a sponsor would be quoted, so leaving it uncapped would make those numbers trivially
+ * inflatable by anyone with a loop. */
+const EVENT_RATE_LIMIT_PER_HOUR = 120;
+
+/**
+ * Reduce a client-supplied page URL to scheme + host + path.
+ *
+ * The value comes from the browser, so it is untrusted, and embedding pages carry query
+ * strings that can hold UTM tags, session ids or worse -- the existing logged rows include a
+ * "?r=837291". Only http(s) is accepted, and the result is length-capped, so this column
+ * cannot become a dumping ground for arbitrary client text.
+ */
+function normalizePageUrl(raw: unknown): string | null {
+  if (typeof raw !== "string" || !raw || raw.length > 2048) return null;
+  try {
+    const u = new URL(raw);
+    if (u.protocol !== "https:" && u.protocol !== "http:") return null;
+    return `${u.origin}${u.pathname}`.slice(0, 512);
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Records widget-level events: an impression per widget load, and a click on the sponsor link.
+ *
+ * Impressions are the number a sponsor actually buys, and questions are a poor proxy for them
+ * -- most readers who see the widget never type anything, so reporting reach from the query
+ * log alone would understate it substantially.
+ *
+ * Writes are fire-and-forget from the browser's point of view: the response is a 204 and the
+ * D1 insert failing never surfaces to the reader, because an analytics write must not be able
+ * to break the page it is measuring.
+ */
+async function handleEvent(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+  let body: { type?: unknown; page_url?: unknown };
+  try {
+    body = await request.json();
+  } catch {
+    return jsonResponse({ error: "invalid JSON body" }, 400);
+  }
+
+  const type = typeof body.type === "string" ? body.type : "";
+  if (!VALID_EVENT_TYPES.includes(type)) {
+    return jsonResponse({ error: `'type' must be one of: ${VALID_EVENT_TYPES.join(", ")}` }, 400);
+  }
+
+  const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
+  if (!(await checkRateLimit(env, ip, "event", EVENT_RATE_LIMIT_PER_HOUR))) {
+    // 204 rather than 429: the widget neither retries nor reports this, and a rate-limited
+    // beacon is not a problem the reader can do anything about.
+    return new Response(null, { status: 204, headers: corsHeaders() });
+  }
+
+  const now = new Date();
+  const country = (request as { cf?: { country?: string } }).cf?.country ?? null;
+  ctx.waitUntil(
+    env.DB.prepare(
+      `INSERT INTO events (timestamp, day, type, page_url, country) VALUES (?, ?, ?, ?, ?)`,
+    )
+      .bind(
+        now.toISOString(),
+        now.toISOString().slice(0, 10),
+        type,
+        normalizePageUrl(body.page_url),
+        typeof country === "string" ? country.slice(0, 2) : null,
+      )
+      .run()
+      .then(() => undefined)
+      .catch((err) => {
+        console.error("event insert failed (ignored):", err);
+      }),
+  );
+
+  return new Response(null, { status: 204, headers: corsHeaders() });
+}
+
 const VALID_RATINGS = ["correct", "partial", "wrong"];
 /** Generous next to the query limit -- a reader rates at most once per answer -- but finite,
  * where this endpoint previously had no limit at all. */
@@ -825,6 +925,10 @@ export default {
       return handleQuery(request, env, ctx);
     }
 
+    if (url.pathname === "/event" && request.method === "POST") {
+      return handleEvent(request, env, ctx);
+    }
+
     if (url.pathname === "/feedback" && request.method === "POST") {
       return handleFeedback(request, env);
     }
@@ -862,7 +966,17 @@ export default {
     if (url.pathname === "/widget.js" && (request.method === "GET" || request.method === "HEAD")) {
       // Substituted at serve time rather than build time so rotating the widget is a var
       // change, not a rebuild, and embedders never carry the sitekey in their page.
-      const widgetJs = WIDGET_JS.split("__TURNSTILE_SITEKEY__").join(env.TURNSTILE_SITEKEY ?? "");
+      // Sponsor details are substituted at serve time alongside the sitekey, so adding or
+      // changing a sponsor is a vars edit and a redeploy -- embedders change nothing, and no
+      // sponsor block exists in the served file at all until SPONSOR_NAME is set.
+      const widgetJs = WIDGET_JS.split("__TURNSTILE_SITEKEY__")
+        .join(env.TURNSTILE_SITEKEY ?? "")
+        .split("__SPONSOR_NAME__")
+        .join(jsStringLiteralSafe(env.SPONSOR_NAME))
+        .split("__SPONSOR_TAGLINE__")
+        .join(jsStringLiteralSafe(env.SPONSOR_TAGLINE))
+        .split("__SPONSOR_URL__")
+        .join(jsStringLiteralSafe(env.SPONSOR_URL));
       return new Response(widgetJs, {
         headers: corsHeaders({
           "content-type": "application/javascript; charset=utf-8",

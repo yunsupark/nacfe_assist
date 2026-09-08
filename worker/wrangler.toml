@@ -75,6 +75,14 @@ TURNSTILE_SITEKEY = "0x4AAAAAAEtBM3ecA6Uw7iiB"
 # or 127.0.0.1 in production even though the widget itself is registered for them.
 TURNSTILE_HOSTNAMES = "nacfe.org,www.nacfe.org"
 
+# Sponsor slot. Leave SPONSOR_NAME empty and no sponsor block is rendered and no click
+# tracking exists -- impressions are still counted, which is what builds the reach figure a
+# sponsor will eventually be quoted. Set all three and redeploy to light it up; embedders
+# change nothing. Values are escaped into the served widget, but keep them plain text.
+SPONSOR_NAME = ""
+SPONSOR_TAGLINE = ""
+SPONSOR_URL = ""
+
 # console.error had nowhere to go before this -- a public endpoint with no logs.
 [observability]
 enabled = true
