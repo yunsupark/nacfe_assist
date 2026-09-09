@@ -20,7 +20,10 @@ CREATE TABLE IF NOT EXISTS queries (
   -- What this query actually cost, in integer micro-USD (1e-6 USD). The monthly ceiling is
   -- denominated in cost rather than tokens (see worker/src/pricing.ts), so this is what the
   -- ceiling is actually counting, and it makes spend auditable per question. 0 for cache hits.
-  cost_micro_usd INTEGER
+  cost_micro_usd INTEGER,
+  -- Failure reason, null on success. Failed queries are logged too: without a row, the
+  -- failure rate is invisible and a reported timeout leaves nothing to diagnose from.
+  error TEXT
 );
 
 CREATE INDEX IF NOT EXISTS idx_queries_timestamp ON queries (timestamp);

@@ -176,6 +176,21 @@ export function stripJsonFence(text: string): string {
 const freeSkipKey = (model: string) => `gemini_free_skip:${model}`;
 const FREE_TIER_QUOTA_TTL_SECONDS = 3600 * 24;
 const FREE_TIER_OUTAGE_TTL_SECONDS = 600;
+/**
+ * How long a single free-tier attempt may run before it is abandoned in favour of the paid key.
+ *
+ * The free attempt used to be handed the caller's whole deadline. A free call that STALLS --
+ * as opposed to returning 503 promptly, which is the failure this project usually sees -- then
+ * consumes the entire request budget, and the paid fallback never runs at all. The request
+ * fails with a timeout even though the paid key would have answered in ~20s. That is the
+ * likely shape of the timeout observed on 2026-09-09, whose retry succeeded in 31.5s once the
+ * skip flag had already routed it straight to paid.
+ *
+ * 35s is generous against observed healthy latency (routing ~8-20s, answering ~10-30s) so it
+ * only trips on a genuine stall, and it still leaves the majority of a 90s request budget for
+ * the paid attempt that follows.
+ */
+const FREE_TIER_ATTEMPT_TIMEOUT_MS = 35_000;
 
 export async function generateContentWithFallback(
   cache: KVNamespace,
@@ -188,18 +203,32 @@ export async function generateContentWithFallback(
   const skipKey = freeSkipKey(model);
   const skip = freeApiKey ? await cache.get(skipKey) : "no-free-key";
   if (!skip) {
+    // The free attempt runs against its own shorter deadline, so a stalled free call cannot
+    // spend the caller's entire budget and starve the paid fallback.
+    const freeDeadline = AbortSignal.timeout(FREE_TIER_ATTEMPT_TIMEOUT_MS);
+    const freeSignal = signal ? AbortSignal.any([signal, freeDeadline]) : freeDeadline;
     try {
-      return await generateContent(freeApiKey, model, prompt, signal);
+      return await generateContent(freeApiKey, model, prompt, freeSignal);
     } catch (err) {
-      if (!(err instanceof GeminiError) || !(err.isRateLimit || err.isServerError)) throw err;
-      if (err.isDailyQuota) {
+      // The caller's own deadline expired or the client went away: this is not a free-tier
+      // problem and retrying on the paid key would only bill for an answer nobody waits for.
+      if (signal?.aborted) throw err;
+
+      if (freeDeadline.aborted) {
+        console.error(
+          `free tier stalled for ${model} (no response in ${FREE_TIER_ATTEMPT_TIMEOUT_MS}ms); ` +
+            `abandoning it for ${FREE_TIER_OUTAGE_TTL_SECONDS}s and using the paid key`,
+        );
+        await cache.put(skipKey, "stalled", { expirationTtl: FREE_TIER_OUTAGE_TTL_SECONDS });
+      } else if (!(err instanceof GeminiError) || !(err.isRateLimit || err.isServerError)) {
+        throw err;
+      } else if (err.isDailyQuota) {
         await cache.put(skipKey, "daily-quota", { expirationTtl: FREE_TIER_QUOTA_TTL_SECONDS });
       } else if (err.isServerError) {
         console.error(`free tier unavailable for ${model} (${err.status}); skipping it for ${FREE_TIER_OUTAGE_TTL_SECONDS}s`);
         await cache.put(skipKey, "outage", { expirationTtl: FREE_TIER_OUTAGE_TTL_SECONDS });
       }
-      // fall through to the paid key below -- for a rate limit (daily or per-minute) or a
-      // server error that survived generateContent's own same-key retry
+      // fall through to the paid key below
     }
   }
   return generateContent(paidApiKey, model, prompt, signal);

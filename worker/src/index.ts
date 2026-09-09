@@ -63,6 +63,11 @@ const MAX_SELECTED_SOURCES = 6;
 /** How long a single query may occupy the pipeline before we give up, in ms. Bounds a hung
  * upstream so the widget doesn't spin forever and the Worker doesn't bill for a stalled call. */
 const QUERY_TIMEOUT_MS = 90_000;
+/** Per-source R2 read budget. Sources are fetched in parallel, so this bounds the whole
+ * fetch stage, and a source that does not arrive is simply left out of the prompt. */
+const R2_TIMEOUT_MS = 15_000;
+/** Query-log write budget. Logging is already non-fatal; this makes it non-blocking too. */
+const D1_LOG_TIMEOUT_MS = 5_000;
 
 const CATALOG_BY_ID = new Map(CATALOG.map((c) => [c.id, c]));
 
@@ -136,6 +141,27 @@ function sanitizeQuestion(q: string): string {
     .replace(/<\/?question>/gi, " ")
     .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, " ")
     .trim();
+}
+
+/**
+ * Stop waiting on a promise after `ms`, yielding null instead.
+ *
+ * The request's abort signal only reaches the Gemini fetches. R2 gets and D1 writes take no
+ * AbortSignal at all, so before this a stalled bucket read or database write hung the request
+ * indefinitely -- past the 90s "timeout", which was never a bound on the request as a whole,
+ * until the widget gave up at 120s. Neither operation can actually be cancelled, so this
+ * abandons the wait rather than the work; both callers already tolerate a null.
+ */
+function withTimeout<T>(work: Promise<T>, ms: number, label: string): Promise<T | null> {
+  return Promise.race([
+    work,
+    new Promise<null>((resolve) =>
+      setTimeout(() => {
+        console.error(`${label} exceeded ${ms}ms; continuing without it`);
+        resolve(null);
+      }, ms),
+    ),
+  ]);
 }
 
 async function sha256Hex(input: string): Promise<string> {
@@ -319,9 +345,9 @@ async function route(
 }
 
 async function fetchSource(env: Env, id: string): Promise<string | null> {
-  const obj = await env.SOURCES_BUCKET.get(`${id}.md`);
+  const obj = await withTimeout(env.SOURCES_BUCKET.get(`${id}.md`), R2_TIMEOUT_MS, `R2 get ${id}.md`);
   if (!obj) {
-    console.error(`source not found in R2: ${id}.md`);
+    console.error(`source unavailable from R2: ${id}.md`);
     return null;
   }
   return obj.text();
@@ -387,10 +413,11 @@ async function logQuery(
     latencyMs: number;
     degradedCacheOnly: boolean;
     costMicroUsd: number | null;
+    error?: string | null;
   },
 ): Promise<number | null> {
   try {
-    return await insertQueryRow(env, fields);
+    return await withTimeout(insertQueryRow(env, fields), D1_LOG_TIMEOUT_MS, "query log write");
   } catch (err) {
     // Logging must never take the service down. SPEC.md 7 treats the query log as an output
     // rather than telemetry, but an unanswered question is a worse outcome than an unlogged
@@ -415,8 +442,8 @@ async function insertQueryRow(
     `INSERT INTO queries
       (timestamp, question, normalized_question, cache_hit, out_of_scope, selected_sources,
        recency_warning, route_tokens, answer_tokens, total_tokens, latency_ms, degraded_cache_only,
-       cost_micro_usd)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       cost_micro_usd, error)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   )
     .bind(
       new Date().toISOString(),
@@ -432,6 +459,7 @@ async function insertQueryRow(
       fields.latencyMs,
       fields.degradedCacheOnly ? 1 : 0,
       fields.costMicroUsd,
+      fields.error ?? null,
     )
     .run();
   return result.meta.last_row_id;
@@ -736,23 +764,41 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         `DATA:${JSON.stringify({ ...payload, cached: false, query_id: queryId, feedback_token: token })}`,
       );
     } catch (err) {
-      if (err instanceof GeminiError && (err.isRateLimit || err.isDailyQuota || err.isServerError)) {
-        await write(`DATA:${JSON.stringify({ error: "upstream model is temporarily unavailable, try again shortly" })}`);
-        return;
-      }
-      if (err instanceof GeminiEmptyResponse) {
-        console.error(err);
-        await write(
-          `DATA:${JSON.stringify({ error: "the model could not produce an answer for that question" })}`,
-        );
-        return;
-      }
-      if (err instanceof Error && (err.name === "AbortError" || err.name === "TimeoutError")) {
-        console.error(`query aborted: ${err.name}`);
-        await write(`DATA:${JSON.stringify({ error: "the request timed out, try again shortly" })}`);
-        return;
-      }
-      throw err; // handled generically (logged + {"error":"internal error"}) by lineStreamResponse
+      // Every failure gets a row. Previously these branches streamed a message and returned
+      // without logging, so failed queries left no trace at all: the failure rate was
+      // unmeasurable, and a timeout reported on 2026-09-09 had to be reconstructed by tailing
+      // live logs afterwards because nothing had been recorded.
+      const failure =
+        err instanceof GeminiError && (err.isRateLimit || err.isDailyQuota || err.isServerError)
+          ? { reason: `upstream ${err.status}${err.isDailyQuota ? " daily-quota" : err.isRateLimit ? " rate-limit" : ""}`,
+              message: "upstream model is temporarily unavailable, try again shortly" }
+          : err instanceof GeminiEmptyResponse
+            ? { reason: `empty-response: ${err.reason}`, message: "the model could not produce an answer for that question" }
+            : err instanceof Error && (err.name === "AbortError" || err.name === "TimeoutError")
+              ? { reason: `timeout after ${Date.now() - start}ms`, message: "the request timed out, try again shortly" }
+              : null;
+
+      if (!failure) throw err; // handled generically ({"error":"internal error"}) by lineStreamResponse
+
+      console.error(`query failed (${failure.reason}):`, err);
+      ctx.waitUntil(
+        logQuery(env, {
+          question,
+          normalizedQuestion: normalized,
+          cacheHit: false,
+          outOfScope: null,
+          selectedSources: null,
+          recencyWarning: null,
+          routeTokens: null,
+          answerTokens: null,
+          totalTokens: null,
+          latencyMs: Date.now() - start,
+          degradedCacheOnly: false,
+          costMicroUsd: spentMicroUsd,
+          error: failure.reason,
+        }).then(() => undefined),
+      );
+      await write(`DATA:${JSON.stringify({ error: failure.message })}`);
     } finally {
       // Settle the reservation against what was really spent -- refunding the unused portion,
       // or booking the overrun. Runs on every exit path, so tokens burned by a request that
