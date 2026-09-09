@@ -34,6 +34,9 @@ export interface Env {
   SPONSOR_NAME: string;
   SPONSOR_TAGLINE: string;
   SPONSOR_URL: string;
+  /** Secret used to derive the pseudonymous monthly visitor id. When unset, no visitor id is
+   * recorded at all -- an identifier is never created by accident, only by configuration. */
+  VISITOR_SALT: string;
   CACHE: KVNamespace;
   DB: D1Database;
   SOURCES_BUCKET: R2Bucket;
@@ -167,6 +170,38 @@ function withTimeout<T>(work: Promise<T>, ms: number, label: string): Promise<T 
 async function sha256Hex(input: string): Promise<string> {
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(input));
   return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+/**
+ * A pseudonymous visitor id, scoped to one calendar month.
+ *
+ * Sponsors ask for monthly unique visitors, and neither of the obvious approaches fits: a
+ * persistent id in the browser is a durable device identifier that needs consent in the EU,
+ * and a daily-rotating hash cannot produce a monthly number honestly (summing daily uniques
+ * overcounts anyone who returns).
+ *
+ * The period is part of the hashed message, so the id changes at every month boundary on its
+ * own, with no salt rotation to schedule and nothing to remember. Within a month
+ * COUNT(DISTINCT visitor_id) is a true unique count; across months the values are unlinkable,
+ * so there is no durable identifier for anyone in the data.
+ *
+ * The raw IP is never stored, and without VISITOR_SALT nothing is derived at all. Truncated to
+ * 16 hex characters: ample to avoid collisions at any plausible traffic, and short enough that
+ * the stored value carries little on its own. Note the honest limit -- an office behind one
+ * NAT counts once, and one person on phone and laptop counts twice.
+ */
+async function monthlyVisitorId(env: Env, ip: string, period: string): Promise<string | null> {
+  if (!env.VISITOR_SALT || !ip || ip === "unknown") return null;
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    "raw",
+    enc.encode(env.VISITOR_SALT),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const sig = await crypto.subtle.sign("HMAC", key, enc.encode(`visitor:${period}:${ip}`));
+  return [...new Uint8Array(sig).slice(0, 8)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
 /**
@@ -414,6 +449,9 @@ async function logQuery(
     degradedCacheOnly: boolean;
     costMicroUsd: number | null;
     error?: string | null;
+    visitorId?: string | null;
+    country?: string | null;
+    pageUrl?: string | null;
   },
 ): Promise<number | null> {
   try {
@@ -442,8 +480,8 @@ async function insertQueryRow(
     `INSERT INTO queries
       (timestamp, question, normalized_question, cache_hit, out_of_scope, selected_sources,
        recency_warning, route_tokens, answer_tokens, total_tokens, latency_ms, degraded_cache_only,
-       cost_micro_usd, error)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       cost_micro_usd, error, visitor_id, country, page_url)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   )
     .bind(
       new Date().toISOString(),
@@ -460,6 +498,9 @@ async function insertQueryRow(
       fields.degradedCacheOnly ? 1 : 0,
       fields.costMicroUsd,
       fields.error ?? null,
+      fields.visitorId ?? null,
+      fields.country ?? null,
+      fields.pageUrl ?? null,
     )
     .run();
   return result.meta.last_row_id;
@@ -564,7 +605,7 @@ async function verifyTurnstile(env: Env, token: unknown, clientIp: string): Prom
 
 async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const start = Date.now();
-  let body: { question?: string; "cf-turnstile-response"?: string };
+  let body: { question?: string; "cf-turnstile-response"?: string; page_url?: unknown };
   try {
     body = await request.json();
   } catch {
@@ -579,6 +620,13 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   // Before the rate limiter, the budget reservation and anything that costs money. The IP
   // rate limit bounds one client; Turnstile is what makes a distributed script expensive to
   // run at all (SPEC.md 7: "Add Turnstile if abused").
+  // Request context recorded with every query row: a month-scoped pseudonymous visitor id,
+  // Cloudflare's country, and the embedding page reduced to scheme+host+path.
+  const period = currentPeriod();
+  const visitorId = await monthlyVisitorId(env, ip, period);
+  const country = ((request as { cf?: { country?: string } }).cf?.country ?? null)?.slice(0, 2) ?? null;
+  const pageUrl = normalizePageUrl(body.page_url);
+
   const turnstile = turnstileState(env);
   if (turnstile === "misconfigured") {
     console.error(
@@ -623,6 +671,9 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         latencyMs: Date.now() - start,
         degradedCacheOnly: false,
         costMicroUsd: 0, // a cache hit spends nothing
+        visitorId,
+        country,
+        pageUrl,
       });
       const token =
         env.FEEDBACK_SECRET && queryId !== null ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
@@ -637,7 +688,6 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   // same pre-spend total and sailed past the ceiling together. The reservation is reconciled
   // against real usage once the request finishes (including on the error paths, where the
   // old code silently dropped the routing tokens it had already spent).
-  const period = currentPeriod();
   const ceilingMicroUsd = Math.round((parseFloat(env.MONTHLY_COST_CEILING_USD) || 0) * 1_000_000);
   const budget = budgetStub(env);
   const reservation = estimatedQueryCostMicroUsd(env);
@@ -658,6 +708,9 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         latencyMs: Date.now() - start,
         degradedCacheOnly: true,
         costMicroUsd: 0,
+        visitorId,
+        country,
+        pageUrl,
       }),
     );
     // Deliberately not "try rephrasing": the cache is keyed on the normalized question, so
@@ -709,6 +762,9 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
           latencyMs: Date.now() - start,
           degradedCacheOnly: false,
           costMicroUsd: spentMicroUsd,
+          visitorId,
+          country,
+          pageUrl,
         });
         const token =
         env.FEEDBACK_SECRET && queryId !== null ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
@@ -757,6 +813,9 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         latencyMs: Date.now() - start,
         degradedCacheOnly: false,
         costMicroUsd: spentMicroUsd,
+        visitorId,
+        country,
+        pageUrl,
       });
       const token =
         env.FEEDBACK_SECRET && queryId !== null ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
@@ -795,6 +854,9 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
           latencyMs: Date.now() - start,
           degradedCacheOnly: false,
           costMicroUsd: spentMicroUsd,
+          visitorId,
+          country,
+          pageUrl,
           error: failure.reason,
         }).then(() => undefined),
       );

@@ -13,6 +13,12 @@ workers_dev = true
 # Any long random string works:
 #   openssl rand -hex 32 | wrangler secret put FEEDBACK_SECRET
 #
+# VISITOR_SALT derives the month-scoped pseudonymous visitor id used for monthly unique
+# counts. While it is unset, no visitor id is recorded at all -- an identifier is never
+# created by accident, only by deliberate configuration. Do not rotate it mid-month: every
+# visitor would be counted twice for that month.
+#   openssl rand -hex 32 | wrangler secret put VISITOR_SALT
+#
 # TURNSTILE_SECRET is the third secret. Verification of POST /query is skipped entirely while
 # it is unset (GET /health then reports "turnstile": false), so the Worker still serves before
 # the widget is provisioned -- but the query endpoint is unprotected in that state.

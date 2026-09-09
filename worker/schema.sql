@@ -23,7 +23,19 @@ CREATE TABLE IF NOT EXISTS queries (
   cost_micro_usd INTEGER,
   -- Failure reason, null on success. Failed queries are logged too: without a row, the
   -- failure rate is invisible and a reported timeout leaves nothing to diagnose from.
-  error TEXT
+  error TEXT,
+
+  -- Request context. These existed in the production database for months without appearing
+  -- here, so a database built from this file did not match the deployed one -- they are
+  -- declared now so the two agree.
+  --
+  -- visitor_id is an HMAC over (month, IP) under VISITOR_SALT. The month is part of the
+  -- hashed message, so the value rotates by itself and is unlinkable across months: within a
+  -- month COUNT(DISTINCT visitor_id) is a true unique count, across months it is nothing.
+  -- The raw IP is never stored, and with VISITOR_SALT unset nothing is derived at all.
+  visitor_id TEXT,
+  country TEXT,                        -- 2-letter code from Cloudflare
+  page_url TEXT                        -- embedding page, scheme+host+path, no query string
 );
 
 CREATE INDEX IF NOT EXISTS idx_queries_timestamp ON queries (timestamp);

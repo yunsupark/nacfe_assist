@@ -570,6 +570,9 @@
       body: JSON.stringify({
         question: question,
         "cf-turnstile-response": turnstileToken(),
+        // Which NACFE page the question came from. Sent without its query string; the Worker
+        // re-normalizes anyway, since anything from the browser is untrusted.
+        page_url: location.origin + location.pathname,
       }),
       signal: controller ? controller.signal : undefined,
     })
