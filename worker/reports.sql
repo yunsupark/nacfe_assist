@@ -22,14 +22,20 @@ FROM events WHERE page_url IS NOT NULL GROUP BY page_url ORDER BY impressions DE
 -- visitor_id is month-scoped by construction, so DISTINCT within a month is a true unique
 -- count. Never sum it across months -- the ids are unlinkable between them by design, so a
 -- returning visitor is a different id in each and the total would be meaningless.
+-- LENGTH(visitor_id) = 16 selects only the month-scoped HMAC scheme. The database also holds
+-- persistent per-browser UUIDs (36 and 17 characters) written by the previous tracking code
+-- up to 2026-09-03. Those are a different thing: durable across months, so counting them
+-- alongside these would mix two incompatible definitions of "unique visitor" and silently
+-- inflate the figure -- it reported 2 for 2026-09 when only 1 row used this scheme.
 SELECT substr(timestamp, 1, 7)     AS month,
        COUNT(DISTINCT visitor_id)  AS unique_visitors,
        COUNT(*)                    AS questions,
        ROUND(1.0 * COUNT(*) / NULLIF(COUNT(DISTINCT visitor_id), 0), 1) AS questions_per_visitor
-FROM queries WHERE visitor_id IS NOT NULL GROUP BY month ORDER BY month DESC;
+FROM queries WHERE LENGTH(visitor_id) = 16 GROUP BY month ORDER BY month DESC;
 
 -- === Which NACFE pages the questions come from ============================================
-SELECT page_url, COUNT(*) AS questions, COUNT(DISTINCT visitor_id) AS unique_visitors
+SELECT page_url, COUNT(*) AS questions,
+       COUNT(DISTINCT CASE WHEN LENGTH(visitor_id) = 16 THEN visitor_id END) AS unique_visitors
 FROM queries WHERE page_url IS NOT NULL GROUP BY page_url ORDER BY questions DESC LIMIT 20;
 
 -- === Failures =============================================================================
@@ -37,7 +43,8 @@ SELECT substr(timestamp,1,10) AS day, error, COUNT(*) n
 FROM queries WHERE error IS NOT NULL GROUP BY day, error ORDER BY day DESC;
 
 -- === Geography =============================================================================
-SELECT country, COUNT(*) AS questions, COUNT(DISTINCT visitor_id) AS unique_visitors
+SELECT country, COUNT(*) AS questions,
+       COUNT(DISTINCT CASE WHEN LENGTH(visitor_id) = 16 THEN visitor_id END) AS unique_visitors
 FROM queries WHERE country IS NOT NULL GROUP BY country ORDER BY questions DESC;
 
 -- === Engagement: what share of impressions became questions ================================
