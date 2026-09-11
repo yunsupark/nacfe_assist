@@ -31,7 +31,7 @@ PROMPT_PATH = Path(__file__).resolve().parent / "prompts" / "transcribe_video.tx
 SOURCES_DIR = REPO_ROOT / "corpus" / "sources"
 LOG_PATH = Path(__file__).resolve().parent / "ingest_log.jsonl"
 
-DEFAULT_MODEL = "gemini-3.5-flash-lite"
+DEFAULT_MODEL = "gemini-3.6-flash"
 # See ingest_pdf.py for why this exists: without it, a stalled connection hangs forever
 # instead of raising, bypassing retry entirely. Video calls run longer than PDF calls, so
 # the budget is more generous.
@@ -212,6 +212,12 @@ def call_gemini(client, model, prompt, media_part, retries=6):
         except Exception as e:  # noqa: BLE001 - real network/API errors, log and retry
             last_err = e
             is_rate_limit = "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e)
+            # A per-day quota (e.g. 'GenerateRequestsPerDayPerProjectPerModel-FreeTier') won't
+            # clear for hours -- retrying 6 times with ~60s waits just burns ~6 minutes per
+            # call for nothing. Fail immediately so a batch driver can detect it and stop
+            # rather than grinding through every remaining item the same way.
+            if is_rate_limit and "PerDay" in str(e):
+                raise
             m = RETRY_DELAY_RE.search(str(e))
             if m:
                 wait = min(int(m.group(1)) + 2, RATE_LIMIT_MAX_WAIT)
@@ -242,7 +248,7 @@ def log_call(source_id, source_ref, model, usage):
 
 
 
-def ingest(url_or_id, source_id, title, model, force=False, audio_file=None):
+def ingest(url_or_id, source_id, title, model, force=False, audio_file=None, skip_comparison=False):
     out_path = SOURCES_DIR / f"{source_id}.md"
     if out_path.exists() and not force:
         print(f"{out_path} already exists. Pass --force to overwrite.", file=sys.stderr)
@@ -315,7 +321,7 @@ def ingest(url_or_id, source_id, title, model, force=False, audio_file=None):
         print(f"  WARNING: best of {attempts} attempts still has issues ({summary}) -- flagging for manual review", file=sys.stderr)
         note += f" [WARNING: transcript quality issues ({summary}) after {attempts} attempts -- needs manual review]"
 
-    if out_path.exists():
+    if out_path.exists() and not skip_comparison:
         existing_issues = transcript_quality_issues(out_path.read_text())
         new_issues = best_issues if best_issues is not None else transcript_quality_issues(response.text)
         if len(existing_issues) <= len(new_issues):
@@ -345,10 +351,23 @@ def main():
             "persistent RECITATION block, or for non-YouTube audio per SPEC.md 2.2."
         ),
     )
+    parser.add_argument(
+        "--skip-comparison",
+        action="store_true",
+        help=(
+            "Always overwrite the existing file, bypassing the quality-issue regression "
+            "check. The check only catches corruption (repeat loops), not incompleteness, "
+            "so it can't tell a deliberate model upgrade is better -- use this when you "
+            "already know the new run should win (e.g. a known-better model)."
+        ),
+    )
     args = parser.parse_args()
 
     load_dotenv(find_dotenv(usecwd=True))
-    ingest(args.url_or_id, args.source_id, args.title, args.model, force=args.force, audio_file=args.audio_file)
+    ingest(
+        args.url_or_id, args.source_id, args.title, args.model,
+        force=args.force, audio_file=args.audio_file, skip_comparison=args.skip_comparison,
+    )
 
 
 if __name__ == "__main__":

@@ -39,8 +39,8 @@ Rules:
 7. Never add a fact that is not on the page. Never resolve a question the page leaves
    open. If text is illegible, write [illegible] rather than guessing.
 
-8. Never use LaTeX or math markup (no $...$, \ge, \frac{}{}, subscripts/superscripts with
-   _ or ^, etc.). This corpus is rendered as plain markdown with no math-rendering layer, so
-   LaTeX shows up verbatim in answers. Write formulas and symbols in plain text/Unicode
-   instead: >= not \ge, <= not \le, CO2 not CO_2, x2 or x^2 written as "x squared" or "x2",
-   ~ not \sim, x not \times.
+8. Never use LaTeX or math markup (no $...$, \ge, \frac, subscripts/superscripts with _ or
+   ^, etc.). This corpus is rendered as plain markdown with no math-rendering layer, so LaTeX
+   shows up verbatim in answers. Write formulas and symbols in plain text/Unicode instead:
+   >= not \ge, <= not \le, CO2 not CO_2, x2 or x^2 written as "x squared" or "x2", ~ not
+   \sim, x not \times.

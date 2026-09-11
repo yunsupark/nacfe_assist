@@ -3,221 +3,106 @@
 <!-- source: YouTube video, https://www.youtube.com/watch?v=--t10Rsb2xM -->
 
 <!-- timestamp: 00:00 -->
-> **Slide/Figure — NACFE logo**
-> Type: logo
-> Notes: NACFE NORTH AMERICAN COUNCIL FOR FREIGHT EFFICIENCY
 
-<!-- timestamp: 00:03 -->
-> **Slide/Figure — Run on Less timeline 2017 to 2025**
-> Type: timeline
-> Notes: 2017 RUN ON LESS; 2019 RUN ON LESS REGIONAL; 2021 RUN ON LESS ELECTRIC; 2023 RUN ON LESS ELECTRIC DEPOT; 2025 RUN ON LESS MESSY MIDDLE
+**Mike Roeth:** So Run on Less is something that we do every two years. It brings the best of the best in different aspects of trucking where we're trying to be much greener and cleaner in moving goods around North America.
 
-<!-- timestamp: 00:16 -->
-> **Slide/Figure — The Messy Middle: A Time for Action**
-> Type: photograph
-> Notes: NACFE; THE MESSY MIDDLE: A TIME FOR ACTION
+> **Slide/Figure — Timeline of Run on Less Events**
+> Type: animated graphic timeline
+> Notes:
+> 2017: RUN ON LESS
+> 2019: RUN ON LESS REGIONAL
+> 2021: RUN ON LESS ELECTRIC
+> 2023: RUN ON LESS ELECTRIC DEPOT
+> 2025: RUN ON LESS MESSY MIDDLE
 
-<!-- timestamp: 00:19 -->
-> **Slide/Figure — Heavy-Duty Regional Haul Tractors The Use Case**
-> Type: video clip
-> Notes: HEAVY-DUTY REGIONAL HAUL TRACTORS THE USE CASE
+> **Slide/Figure — Title Card**
+> Type: title graphic
+> Notes: THE MESSY MIDDLE: A TIME FOR ACTION
 
-<!-- timestamp: 00:22 -->
-> **Slide/Figure — Which Duty Cycles Would Be A Good Fit For Hydrogen?**
-> Type: slide text
-> Notes: NACFE; WHICH DUTY CYCLES WOULD BE A GOOD FIT FOR HYDROGEN?
-
-<!-- timestamp: 00:23 -->
-> **Slide/Figure — Rob Reich introduction**
-> Type: video clip
-> Notes: ROB REICH EVP, Schneider Board Chair, NACFE
-
-<!-- timestamp: 00:25 -->
-> **Slide/Figure — RUN ON LESS by NACFE**
-> Type: logo
-> Notes: RUN ON LESS by NACFE NORTH AMERICAN COUNCIL FOR FREIGHT EFFICIENCY
-
-<!-- timestamp: 00:26 -->
-> **Slide/Figure — RUN ON LESS REGIONAL**
-> Type: logo
-> Notes: RUN ON LESS REGIONAL
-
-<!-- timestamp: 00:28 -->
-> **Slide/Figure — RUN ON LESS ELECTRIC DEPOT**
-> Type: logo
-> Notes: RUN ON LESS ELECTRIC DEPOT
+**Rob Reich:** This is our fifth Run on Less. We've gotten into the right things that the industry is absolutely interested in. Run on Less is a wonderful example of that. At each successive Run on Less, we've been working on the things that the industry is just starting to think about. And I think that's the difference, and I think that's where we've exceeded the founder's vision, is it's not just about current state and what you can do, it's about what's coming and help you think about what's coming.
 
 <!-- timestamp: 00:32 -->
-> **Slide/Figure — Trends in Regional Haul**
-> Type: video clip with callout boxes
-> Notes: TRENDS IN REGIONAL HAUL; LOAD MATCHING SYSTEMS; ASSET TRACKING SYSTEMS; GROWTH IN E-COMMERCE; ALTERNATIVE FUELS
 
-<!-- timestamp: 00:37 -->
-> **Slide/Figure — Mike Roeth introduction**
-> Type: video clip
-> Notes: MIKE ROETH Executive Director, NACFE
+**Mike Roeth:** Run on Less, the first one in 2017, included seven tractors and trailers outfitted with amazing technologies for high fuel economy and freight efficiency. These drivers performed extraordinarily well, delivering high fuel economy, actually 10.1 miles per gallon over 50,000 miles in a three-week time period. Very impressive.
 
-<!-- timestamp: 00:57 -->
-> **Slide/Figure — Henry Albert introduction**
-> Type: video clip
-> Notes: HENRY ALBERT Albert Transport
+**Henry Albert:** At the end of the day, if we burn less fuel, that's a good thing.
 
-<!-- timestamp: 01:22 -->
-> **Slide/Figure — All Results dashboard**
-> Type: dashboard screenshot
-> Notes: ALL RESULTS; RESULTS BY FLEET; TODAY: DAY 2 OF 18; Average MPG; Gallons Saved TODAY 73 CUMULATIVE 237; Dollars Saved TODAY $219 CUMULATIVE $711; Tons CO2 Saved TODAY 0.7 CUMULATIVE 2.4; Distance by Speed TODAY CUMULATIVE; Ton Miles per Gallon TODAY 85 CUMULATIVE 54; Total Miles TODAY 1,670 CUMULATIVE 5,093; Number of Deliveries TODAY 8 CUMULATIVE 33; Ave Speed (MPH) TODAY 53 CUMULATIVE 56
+<!-- timestamp: 01:00 -->
 
-<!-- timestamp: 01:38 -->
-> **Slide/Figure — Metrics | Data | Insights**
-> Type: video clip with superimposed 3D graph overlay over New York City skyline
-> Notes: Metrics | Data | Insights
+**Mike Roeth:** In 2019, we did Run on Less Regional, as we were discovering there was more freight being moved in a hub-and-spoke model. Getting high fuel economy is difficult in return-to-base operations, where many times the tractors and trailers are in cities or in two-lane highways with more start and stop, more challenging conditions for high fuel economy. Run on Less Regional proved that with the right technologies, and training of drivers, and experience, and incentives, you can actually do very well in regional haul.
 
-<!-- timestamp: 01:52 -->
-> **Slide/Figure — A real-world demonstration to show how Fleets are scaling their electric depots.**
-> Type: video clip with text overlay
-> Notes: 2023; A real-world demonstration to show how | Fleets are scaling their electric depots.
+<!-- timestamp: 01:31 -->
 
-<!-- timestamp: 02:07 -->
-> **Slide/Figure — RUN ON LESS MESSY MIDDLE**
-> Type: logo
-> Notes: RUN ON LESS MESSY MIDDLE
+**Mike Roeth:** In 2021 and 2023, we had battery electric trucks only, and they were operating in Class 3 all the way up to Class 8. We really found some extraordinary information here, and we conducted many interviews over both of those runs with the people who are actually making electric trucks work in their operations.
 
-<!-- timestamp: 02:20 -->
-> **Slide/Figure — Zero Emission / Battery Electric / Hydrogen Fuel Cell**
-> Type: video clip with text overlays
-> Notes: Zero Emission; Battery Electric; Hydrogen Fuel Cell
+> **Slide/Figure — Run on Less Electric Depot Title**
+> Type: text overlay on video
+> Notes: 2023 — A real-world demonstration to show how fleets are scaling their electric depots.
 
-<!-- timestamp: 02:27 -->
-> **Slide/Figure — Biodiesel / Renewable Diesel / Hybridization**
-> Type: video clip with text overlays
-> Notes: Biodiesel; Renewable Diesel; Hybridization
+In 2023, with Run on Less Electric Depot, in fact, we followed 291 electric trucks at 10 sites. Each site had at least 15 electric trucks. So here we got into really understanding how did they change a depot from diesel trucks to electric, which required a lot of work with their utilities, and to put the charging infrastructure in at that site.
 
-<!-- timestamp: 02:33 -->
-> **Slide/Figure — Natural Gas / Renewable Natural Gas**
-> Type: video clip with text overlays
-> Notes: Natural Gas; Renewable Natural Gas
+<!-- timestamp: 02:08 -->
 
-<!-- timestamp: 02:38 -->
-> **Slide/Figure — Battery Electric / Hydrogen Fuel Cell**
-> Type: video clip with text overlays
-> Notes: Battery Electric; Hydrogen Fuel Cell
+**Mike Roeth:** So we're calling this run Run on Less Messy Middle. It could also be called Run on Less Heavy Duty Long-Haul. We chose Messy Middle because that's what we're talking about here: a lot of different solutions, not just zero emission like battery electric trucks or hydrogen fuel cell trucks, but also a number of emerging technologies. Those would include biodiesel and renewable diesel drop-in fuels, as well as maybe hybridization of diesel trucks. Also included are natural gas trucks, and in particular trucks that use renewable natural gas. And then also battery electric vehicles and hydrogen fuel cell vehicles, both of which are kind of nascent in their technology adoption, but are becoming very promising even in long-haul. All of the things that you like about Run on Less is back here in 2025 with Run on Less Messy Middle.
 
 <!-- timestamp: 02:54 -->
-> **Slide/Figure — Messy Middle Bootcamp schedule stats**
-> Type: slide text
-> Notes: MESSY MIDDLE BOOTCAMP; 13 Bootcamps; 9 Webinars; 4 Virtual Workshops
 
-<!-- timestamp: 03:23 -->
-> **Slide/Figure — May June July Site Visits**
-> Type: slide text
-> Notes: MAY JUNE JULY; Site Visits; RUN ON LESS MESSY MIDDLE
+> **Slide/Figure — MESSY MIDDLE BOOTCAMP**
+> Type: text graphic
+> Notes:
+> MESSY MIDDLE BOOTCAMP
+> 13 Bootcamps
+> 9 Webinars
+> 4 Virtual Workshops
 
-<!-- timestamp: 03:30 -->
+**Mike Roeth:** Over a six-month period, we will have 13 different bootcamp sessions, nine of which will be webinars where experts will talk about various technologies and approaches to be able to get sustainability in long-haul trucking. There will be four virtual workshops. This is a place where you can interact with us a little bit more. We will talk about what we've learned in the three prior bootcamp sessions, and we'll really dig into what we're learning throughout the bootcamp session. All of this will culminate in July, getting ready for the run in August and September.
+
+> **Slide/Figure — Site Visits Schedule**
+> Type: text graphic
+> Notes:
+> MAY JUNE JULY
+> Site Visits
+
+In May, June, and July, the NACFE team will be visiting all of these sites and learning what they've done to be more sustainable in their operations.
+
+<!-- timestamp: 03:29 -->
+
 > **Slide/Figure — THE FLEETS**
-> Type: slide text
-> Notes: RUN ON LESS MESSY MIDDLE; THE FLEETS
-
-<!-- timestamp: 03:32 -->
-> **Slide/Figure — Albert Transport Inc. Diesel Freightliner Laredo, TX**
-> Type: slide graphic
-> Notes: ALBERT TRANSPORT INCORPORATED; DIESEL Freightliner; Laredo, TX
-
-<!-- timestamp: 03:34 -->
-> **Slide/Figure — Esilla Valley Transportation Diesel International Las Cruces, NM**
-> Type: slide graphic
-> Notes: ESILLA VALLEY TRANSPORTATION; DIESEL International; Las Cruces, NM
-
-<!-- timestamp: 03:36 -->
-> **Slide/Figure — Frito Lay Biodiesel Volvo Topeka, KS**
-> Type: slide graphic
-> Notes: Frito Lay Good fun!; BIODIESEL Volvo; Topeka, KS
-
-<!-- timestamp: 03:38 -->
-> **Slide/Figure — J.B. Hunt Renewable Diesel International Perris, CA**
-> Type: slide graphic
-> Notes: J.B. HUNT; RENEWABLE DIESEL International; Perris, CA
-
-<!-- timestamp: 03:41 -->
-> **Slide/Figure — Kleysen Group Ltd. Natural Gas Kenworth Edmonton, AB**
-> Type: slide graphic
-> Notes: KleySen GROUP LTD.; NATURAL GAS Kenworth; Edmonton, AB
-
-<!-- timestamp: 03:43 -->
-> **Slide/Figure — UPS Natural Gas Kenworth Salt Lake City, UT**
-> Type: slide graphic
-> Notes: ups; NATURAL GAS Kenworth; Salt Lake City, UT
-
-<!-- timestamp: 03:45 -->
-> **Slide/Figure — Wegmans Natural Gas Peterbilt Rochester, NY**
-> Type: slide graphic
-> Notes: Wegmans; NATURAL GAS Peterbilt; Rochester, NY
-
-<!-- timestamp: 03:47 -->
-> **Slide/Figure — 4Gen Logistics Electric Volvo Rialto, CA**
-> Type: slide graphic
-> Notes: 4GEN LOGISTICS; ELECTRIC Volvo; Rialto, CA
-
-<!-- timestamp: 03:49 -->
-> **Slide/Figure — Joyride Logistics LLC Electric Windrose Phoenix, AZ**
-> Type: slide graphic
-> Notes: r JOYRIDE LOGISTICS LLC; ELECTRIC Windrose; Phoenix, AZ
-
-<!-- timestamp: 03:51 -->
-> **Slide/Figure — Nevoya Electric Freightliner Colton, CA**
-> Type: slide graphic
-> Notes: nevoya; ELECTRIC Freightliner; Colton, CA
-
-<!-- timestamp: 03:54 -->
-> **Slide/Figure — Saia LTL Freight Electric Tesla Stockton, CA**
-> Type: slide graphic
-> Notes: SAIA LTL FREIGHT; ELECTRIC Tesla; Stockton, CA
-
-<!-- timestamp: 03:56 -->
-> **Slide/Figure — Penske Fuel Cell Hyundai Lancaster, TX**
-> Type: slide graphic
-> Notes: PENSKE; FUEL CELL Hyundai; Lancaster, TX
-
-<!-- timestamp: 03:58 -->
-> **Slide/Figure — Pilot Fuel Cell Hyundai Bloomington, CA**
-> Type: slide graphic
-> Notes: Pilot.; FUEL CELL Hyundai; Bloomington, CA
+> Type: title and fleet cards graphic
+> Notes:
+> Participating fleets and vehicle types in 2025 Run on Less Messy Middle:
+> - Albert Transport Incorporated: DIESEL Freightliner (Laredo, TX)
+> - Mesilla Valley Transportation: DIESEL International (Las Cruces, NM)
+> - Frito-Lay: BIODIESEL Volvo (Topeka, KS)
+> - J.B. Hunt: RENEWABLE DIESEL International (Perris, CA)
+> - Kleysen Group Ltd.: NATURAL GAS Kenworth (Edmonton, AB)
+> - UPS: NATURAL GAS Kenworth (Salt Lake City, UT)
+> - Wegmans: NATURAL GAS Peterbilt (Rochester, NY)
+> - 4Gen Logistics: ELECTRIC Volvo (Rialto, CA)
+> - Joyride Logistics LLC: ELECTRIC Windrose (Phoenix, AZ)
+> - nevoya: ELECTRIC Freightliner (Colton, CA)
+> - Saia LTL Freight: ELECTRIC Tesla (Stockton, CA)
+> - Penske: FUEL CELL Hyundai (Lancaster, TX)
+> - Pilot: FUEL CELL Hyundai (Bloomington, CA)
 
 <!-- timestamp: 04:00 -->
-> **Slide/Figure — August Profiles**
-> Type: slide text
-> Notes: AUGUST; Profiles; RUN ON LESS MESSY MIDDLE
 
-<!-- timestamp: 04:07 -->
-> **Slide/Figure — September The Run 18 days Data Stories**
-> Type: slide text
-> Notes: SEPTEMBER; The Run; 18 days; The Run Data; The Run Stories; RUN ON LESS MESSY MIDDLE
+> **Slide/Figure — Run Timeline & Reporting**
+> Type: text graphics
+> Notes:
+> AUGUST: Profiles
+> SEPTEMBER: The Run (18 days, Data, Stories)
+> OCT - JUNE 2026: Reports (Total Cost of Ownership (TCO), Environmental Impact, Operational Impact)
 
-<!-- timestamp: 04:24 -->
-> **Slide/Figure — Oct - June 2026 Reports Total Cost of Ownership (TCO) Environmental Impact Operational Impact**
-> Type: slide text
-> Notes: OCT - JUNE 2026; Reports; Total Cost of Ownership (TCO); Environmental Impact; Operational Impact; RUN ON LESS MESSY MIDDLE
+**Mike Roeth:** In August, we will publish profiles of all of these fleets, including their support organizations that are making it happen. September will bring the run itself: 18 days of highly packed information. We will be streaming data from the trucks, and we'll be telling stories about how they're making it happen. The run will conclude at the end of September, but that's not it for Run on Less Messy Middle. From October all the way to June of the next year, we'll be out in the industry sharing what we've learned. We'll be delivering reports on our findings. We will be sharing information about the total cost of ownership of these trucks, the environmental impact of them, and how these different technologies affected the fleet's operations.
 
-<!-- timestamp: 04:53 -->
-> **Slide/Figure — Findings comic-style summary**
-> Type: slide illustration / graphic
-> Notes: FINDINGS; Small depots are ready for electrification now. Electrification at large depots is gaining momentum.; There have been big improvements in trucks and chargers since Run on Less - Electric in 2021.; The industry needs cost and weight reductions to improve the total cost of ownership.; It's still taking too long for power to be delivered and infrastructure to be installed which is driving the use of portable/temporary charging.; Range can be extended with multiple charges per shift at the depot and en route.; The diversity, passion and capability of the people helping is scaling electric trucks.; RUN ON LESS MESSY MIDDLE; NACFE; GULP
+<!-- timestamp: 04:37 -->
 
-<!-- timestamp: 04:55 -->
-> **Slide/Figure — Data Workshop March 2024**
-> Type: photograph
-> Notes: DATA WORKSHOP; MARCH 2024
+**Mike Roeth:** So what started as one event in 2017, a convening of some of the best of the best truckers with their equipment and their training to get 10.1 miles per gallon, has now turned into our fifth Run on Less. NACFE is thrilled to bring Run on Less and this learning to the industry, but it takes you and everyone sharing with us and supporting us in that effort. I often say Run on Less is us hosting the industry to tell your stories. I'm certain you'll learn something that'll help you in your work. We're ready to make it happen.
 
-<!-- timestamp: 04:56 -->
-> **Slide/Figure — Run on Less reports book covers**
-> Type: publication covers
-> Notes: RUN ON LESS NACFE REPORT; ELECTRIC TRUCK DEPOTS ARE EVOLVING: How 10 Fleets Grew Their BEV Population; RUN ON LESS - ELECTRIC DEPOTS: SCALING BEVs IN THE REAL WORLD; NACFE
-
-<!-- timestamp: 05:05 -->
-> **Slide/Figure — RUN ON LESS MESSY MIDDLE www.runonless.com**
-> Type: logo and web address
-> Notes: RUN ON LESS MESSY MIDDLE; www.runonless.com
-
-<!-- timestamp: 05:09 -->
-> **Slide/Figure — NACFE and Cummins / Shell logos**
-> Type: logo screen
-> Notes: NACFE NORTH AMERICAN COUNCIL FOR FREIGHT EFFICIENCY; Cummins; Shell
+> **Slide/Figure — Closing Graphic**
+> Type: logo and website display
+> Notes:
+> RUN ON LESS MESSY MIDDLE
+> www.runonless.com
+> Sponsors/Partners: NACFE, Cummins, Shell
