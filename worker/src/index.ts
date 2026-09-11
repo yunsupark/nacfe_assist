@@ -34,6 +34,7 @@ export interface Env {
   SPONSOR_NAME: string;
   SPONSOR_TAGLINE: string;
   SPONSOR_URL: string;
+  SPONSOR_LOGO_URL: string;
   /** Secret used to derive the pseudonymous monthly visitor id. When unset, no visitor id is
    * recorded at all -- an identifier is never created by accident, only by configuration. */
   VISITOR_SALT: string;
@@ -257,18 +258,32 @@ function jsStringLiteralSafe(value: string | undefined): string {
     .slice(0, 300);
 }
 
-function corsHeaders(extra: Record<string, string> = {}): Record<string, string> {
+/**
+ * `origin`, when given, is echoed back instead of using a blanket "*" -- required for /event,
+ * whose sendBeacon() calls always carry credentials per the Beacon spec (the page has no way to
+ * opt out of that), and browsers refuse a credentialed response whose Allow-Origin is the
+ * wildcard. Nothing here varies by cookie or session -- visitor_id is derived server-side from
+ * the IP, never from a cookie -- so echoing the caller's own origin grants no one anything a
+ * blanket "*" didn't already.
+ */
+function corsHeaders(extra: Record<string, string> = {}, origin?: string | null): Record<string, string> {
   return {
     // the embeddable widget (SPEC.md /web/) is meant to be embedded cross-origin
-    "access-control-allow-origin": "*",
+    "access-control-allow-origin": origin || "*",
+    ...(origin ? { "access-control-allow-credentials": "true" } : {}),
     ...extra,
   };
 }
 
-function jsonResponse(body: unknown, status = 200, extraHeaders: Record<string, string> = {}): Response {
+function jsonResponse(
+  body: unknown,
+  status = 200,
+  extraHeaders: Record<string, string> = {},
+  origin?: string | null,
+): Response {
   return new Response(JSON.stringify(body), {
     status,
-    headers: corsHeaders({ "content-type": "application/json", ...extraHeaders }),
+    headers: corsHeaders({ "content-type": "application/json", ...extraHeaders }, origin),
   });
 }
 
@@ -288,6 +303,7 @@ function jsonResponse(body: unknown, status = 200, extraHeaders: Record<string, 
 function lineStreamResponse(
   ctx: ExecutionContext,
   run: (write: (line: string) => Promise<void>) => Promise<void>,
+  origin?: string | null,
 ): Response {
   const { readable, writable } = new TransformStream();
   const writer = writable.getWriter();
@@ -316,10 +332,13 @@ function lineStreamResponse(
   );
 
   return new Response(readable, {
-    headers: corsHeaders({
-      "content-type": "text/plain; charset=utf-8",
-      "cache-control": "no-store",
-    }),
+    headers: corsHeaders(
+      {
+        "content-type": "text/plain; charset=utf-8",
+        "cache-control": "no-store",
+      },
+      origin,
+    ),
   });
 }
 
@@ -605,15 +624,16 @@ async function verifyTurnstile(env: Env, token: unknown, clientIp: string): Prom
 
 async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const start = Date.now();
+  const origin = request.headers.get("origin");
   let body: { question?: string; "cf-turnstile-response"?: string; page_url?: unknown };
   try {
     body = await request.json();
   } catch {
-    return jsonResponse({ error: "invalid JSON body" }, 400);
+    return jsonResponse({ error: "invalid JSON body" }, 400, {}, origin);
   }
   const question = sanitizeQuestion((body.question ?? "").trim());
-  if (!question) return jsonResponse({ error: "missing 'question'" }, 400);
-  if (question.length > 1000) return jsonResponse({ error: "question too long" }, 400);
+  if (!question) return jsonResponse({ error: "missing 'question'" }, 400, {}, origin);
+  if (question.length > 1000) return jsonResponse({ error: "question too long" }, 400, {}, origin);
 
   const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
 
@@ -634,20 +654,23 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         "rejected. Set TURNSTILE_HOSTNAMES in wrangler.toml [vars], or unset TURNSTILE_SECRET " +
         "to serve without bot protection.",
     );
-    return jsonResponse({ error: "bot verification is misconfigured on the server" }, 503);
+    return jsonResponse({ error: "bot verification is misconfigured on the server" }, 503, {}, origin);
   }
   if (turnstile === "on") {
     const token = (body as { "cf-turnstile-response"?: unknown })["cf-turnstile-response"];
     if (!(await verifyTurnstile(env, token, ip))) {
-      return jsonResponse({ error: "bot verification failed, please reload and try again" }, 403);
+      return jsonResponse({ error: "bot verification failed, please reload and try again" }, 403, {}, origin);
     }
   }
 
   const perHour = parseInt(env.RATE_LIMIT_PER_IP_PER_HOUR, 10) || 20;
   if (!(await checkRateLimit(env, ip, "query", perHour))) {
-    return jsonResponse({ error: "rate limit exceeded, try again later" }, 429, {
-      "retry-after": "3600",
-    });
+    return jsonResponse(
+      { error: "rate limit exceeded, try again later" },
+      429,
+      { "retry-after": "3600" },
+      origin,
+    );
   }
 
   const normalized = normalizeQuestion(question);
@@ -657,7 +680,9 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   const cacheKey = `answer:${await sha256Hex(normalized)}`;
   const cached = await env.CACHE.get(cacheKey, "json");
   if (cached) {
-    return lineStreamResponse(ctx, async (write) => {
+    return lineStreamResponse(
+      ctx,
+      async (write) => {
       const queryId = await logQuery(env, {
         question,
         normalizedQuestion: normalized,
@@ -680,7 +705,9 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
       await write(
         `DATA:${JSON.stringify({ ...(cached as object), cached: true, query_id: queryId, feedback_token: token })}`,
       );
-    });
+      },
+      origin,
+    );
   }
 
   // Reserve budget up front rather than checking-then-spending: the check and the spend used
@@ -725,6 +752,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
       },
       503,
       { "retry-after": "86400" },
+      origin,
     );
   }
 
@@ -732,7 +760,9 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   // fire-and-forget request still bills for a full two-stage generation nobody will read.
   const signal = AbortSignal.any([AbortSignal.timeout(QUERY_TIMEOUT_MS), request.signal]);
 
-  return lineStreamResponse(ctx, async (write) => {
+  return lineStreamResponse(
+    ctx,
+    async (write) => {
     let spentMicroUsd = 0;
     try {
       const { result: routeResult, usage: routeUsage } = await route(env, question, signal);
@@ -875,10 +905,12 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         }),
       );
     }
-  });
+    },
+    origin,
+  );
 }
 
-const VALID_EVENT_TYPES = ["impression", "sponsor_click"];
+const VALID_EVENT_TYPES = ["impression", "sponsor_click", "widget_expand"];
 /** Generous -- a reader legitimately generates one impression per page load and might open
  * several pages -- but finite. This endpoint is unauthenticated and its output is the reach
  * number a sponsor would be quoted, so leaving it uncapped would make those numbers trivially
@@ -916,23 +948,26 @@ function normalizePageUrl(raw: unknown): string | null {
  * to break the page it is measuring.
  */
 async function handleEvent(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+  // sendBeacon() (used for every event type) always sends credentials, so this response must
+  // echo the caller's origin rather than "*" -- see corsHeaders().
+  const origin = request.headers.get("origin");
   let body: { type?: unknown; page_url?: unknown };
   try {
     body = await request.json();
   } catch {
-    return jsonResponse({ error: "invalid JSON body" }, 400);
+    return jsonResponse({ error: "invalid JSON body" }, 400, {}, origin);
   }
 
   const type = typeof body.type === "string" ? body.type : "";
   if (!VALID_EVENT_TYPES.includes(type)) {
-    return jsonResponse({ error: `'type' must be one of: ${VALID_EVENT_TYPES.join(", ")}` }, 400);
+    return jsonResponse({ error: `'type' must be one of: ${VALID_EVENT_TYPES.join(", ")}` }, 400, {}, origin);
   }
 
   const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
   if (!(await checkRateLimit(env, ip, "event", EVENT_RATE_LIMIT_PER_HOUR))) {
     // 204 rather than 429: the widget neither retries nor reports this, and a rate-limited
     // beacon is not a problem the reader can do anything about.
-    return new Response(null, { status: 204, headers: corsHeaders() });
+    return new Response(null, { status: 204, headers: corsHeaders({}, origin) });
   }
 
   const now = new Date();
@@ -955,7 +990,7 @@ async function handleEvent(request: Request, env: Env, ctx: ExecutionContext): P
       }),
   );
 
-  return new Response(null, { status: 204, headers: corsHeaders() });
+  return new Response(null, { status: 204, headers: corsHeaders({}, origin) });
 }
 
 /**
@@ -974,38 +1009,42 @@ const LEGACY_RATINGS: Record<string, string> = { correct: "yes", partial: "partl
 const FEEDBACK_RATE_LIMIT_PER_HOUR = 60;
 
 async function handleFeedback(request: Request, env: Env): Promise<Response> {
+  const origin = request.headers.get("origin");
   if (!env.FEEDBACK_SECRET) {
     console.error("handleFeedback: FEEDBACK_SECRET is not set; feedback is disabled");
-    return jsonResponse({ error: "feedback is not configured" }, 503);
+    return jsonResponse({ error: "feedback is not configured" }, 503, {}, origin);
   }
 
   let body: { query_id?: number; rating?: string; token?: string };
   try {
     body = await request.json();
   } catch {
-    return jsonResponse({ error: "invalid JSON body" }, 400);
+    return jsonResponse({ error: "invalid JSON body" }, 400, {}, origin);
   }
 
   const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
   if (!(await checkRateLimit(env, ip, "feedback", FEEDBACK_RATE_LIMIT_PER_HOUR))) {
-    return jsonResponse({ error: "rate limit exceeded, try again later" }, 429, {
-      "retry-after": "3600",
-    });
+    return jsonResponse(
+      { error: "rate limit exceeded, try again later" },
+      429,
+      { "retry-after": "3600" },
+      origin,
+    );
   }
 
   const queryId = body.query_id;
   const rating = body.rating;
   if (!Number.isInteger(queryId) || (queryId as number) <= 0) {
-    return jsonResponse({ error: "missing or invalid 'query_id'" }, 400);
+    return jsonResponse({ error: "missing or invalid 'query_id'" }, 400, {}, origin);
   }
   const normalizedRating =
     typeof rating === "string" ? (LEGACY_RATINGS[rating] ?? rating) : "";
   if (!normalizedRating || !VALID_RATINGS.includes(normalizedRating)) {
-    return jsonResponse({ error: `'rating' must be one of: ${VALID_RATINGS.join(", ")}` }, 400);
+    return jsonResponse({ error: `'rating' must be one of: ${VALID_RATINGS.join(", ")}` }, 400, {}, origin);
   }
   const expected = await feedbackToken(env.FEEDBACK_SECRET, queryId as number);
   if (typeof body.token !== "string" || !timingSafeEqual(body.token, expected)) {
-    return jsonResponse({ error: "missing or invalid 'token'" }, 403);
+    return jsonResponse({ error: "missing or invalid 'token'" }, 403, {}, origin);
   }
 
   try {
@@ -1021,23 +1060,27 @@ async function handleFeedback(request: Request, env: Env): Promise<Response> {
     // Most likely an unknown query_id hitting the foreign key. Previously this escaped as a
     // bare 500 with no CORS headers, which the widget could only report as a network failure.
     console.error(err);
-    return jsonResponse({ error: "could not record feedback" }, 400);
+    return jsonResponse({ error: "could not record feedback" }, 400, {}, origin);
   }
 
-  return jsonResponse({ ok: true });
+  return jsonResponse({ ok: true }, 200, {}, origin);
 }
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+    const origin = request.headers.get("origin");
 
     if (request.method === "OPTIONS") {
       return new Response(null, {
-        headers: corsHeaders({
-          "access-control-allow-methods": "POST, GET, OPTIONS",
-          "access-control-allow-headers": "content-type",
-          "access-control-max-age": "86400",
-        }),
+        headers: corsHeaders(
+          {
+            "access-control-allow-methods": "POST, GET, OPTIONS",
+            "access-control-allow-headers": "content-type",
+            "access-control-max-age": "86400",
+          },
+          origin,
+        ),
       });
     }
 
@@ -1066,19 +1109,25 @@ export default {
         // A minute is short enough that the banner appears promptly when the ceiling is hit,
         // long enough that a burst of page loads doesn't hammer the durable object.
         { "cache-control": "public, max-age=60" },
+        origin,
       );
     }
 
     if (url.pathname === "/health" && (request.method === "GET" || request.method === "HEAD")) {
       // `feedback` surfaces whether FEEDBACK_SECRET actually made it into the deployment --
       // without it the widget's rating row goes quietly missing, which is easy not to notice.
-      return jsonResponse({
-        ok: true,
-        sources: CATALOG.length,
-        feedback: Boolean(env.FEEDBACK_SECRET),
-        // "off" means /query is unprotected; "misconfigured" means it is rejecting everything.
-        turnstile: turnstileState(env),
-      });
+      return jsonResponse(
+        {
+          ok: true,
+          sources: CATALOG.length,
+          feedback: Boolean(env.FEEDBACK_SECRET),
+          // "off" means /query is unprotected; "misconfigured" means it is rejecting everything.
+          turnstile: turnstileState(env),
+        },
+        200,
+        {},
+        origin,
+      );
     }
 
     // HEAD as well as GET: a HEAD-only route match returned 404, which monitors, link
@@ -1096,15 +1145,20 @@ export default {
         .split("__SPONSOR_TAGLINE__")
         .join(jsStringLiteralSafe(env.SPONSOR_TAGLINE))
         .split("__SPONSOR_URL__")
-        .join(jsStringLiteralSafe(env.SPONSOR_URL));
+        .join(jsStringLiteralSafe(env.SPONSOR_URL))
+        .split("__SPONSOR_LOGO_URL__")
+        .join(jsStringLiteralSafe(env.SPONSOR_LOGO_URL));
       return new Response(widgetJs, {
-        headers: corsHeaders({
-          "content-type": "application/javascript; charset=utf-8",
-          "cache-control": "public, max-age=3600", // an hour: cheap to bust by redeploying, not so long a fix takes all day to land
-        }),
+        headers: corsHeaders(
+          {
+            "content-type": "application/javascript; charset=utf-8",
+            "cache-control": "public, max-age=3600", // an hour: cheap to bust by redeploying, not so long a fix takes all day to land
+          },
+          origin,
+        ),
       });
     }
 
-    return jsonResponse({ error: "not found" }, 404);
+    return jsonResponse({ error: "not found" }, 404, {}, origin);
   },
 };

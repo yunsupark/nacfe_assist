@@ -83,11 +83,15 @@ TURNSTILE_HOSTNAMES = "nacfe.org,www.nacfe.org"
 
 # Sponsor slot. Leave SPONSOR_NAME empty and no sponsor block is rendered and no click
 # tracking exists -- impressions are still counted, which is what builds the reach figure a
-# sponsor will eventually be quoted. Set all three and redeploy to light it up; embedders
-# change nothing. Values are escaped into the served widget, but keep them plain text.
-SPONSOR_NAME = ""
-SPONSOR_TAGLINE = ""
-SPONSOR_URL = ""
+# sponsor will eventually be quoted. Set SPONSOR_NAME/TAGLINE/URL and redeploy to light it
+# up; embedders change nothing. SPONSOR_LOGO_URL is optional -- leave it empty for a
+# text-only sponsor line, or set it to a small (roughly square) image URL. A broken or
+# unreachable logo just drops silently rather than leaving a broken-image icon. Values are
+# escaped into the served widget, but keep them plain text.
+SPONSOR_NAME = "Example Sponsor Name"
+SPONSOR_TAGLINE = "Moving freight forward"
+SPONSOR_URL = "https://example.com"
+SPONSOR_LOGO_URL = "https://placehold.co/48x48/ab1428/fff?text=ES"
 
 # console.error had nowhere to go before this -- a public endpoint with no logs.
 [observability]

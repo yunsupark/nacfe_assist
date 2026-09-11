@@ -30,7 +30,18 @@
       "max-width:720px;margin:0 auto;box-sizing:border-box}",
       "#nacfe-assist-root *{box-sizing:border-box}",
       "#nacfe-assist-root .na-label{font-size:13px;font-weight:700;letter-spacing:.04em;",
-      "text-transform:uppercase;color:#ab1428;margin:0 0 8px}",
+      "text-transform:uppercase;color:#ab1428;margin:0}",
+      "#nacfe-assist-root .na-label-row{display:flex;align-items:center;",
+      "justify-content:space-between;gap:8px;margin:0 0 8px}",
+      "#nacfe-assist-root .na-info-btn{width:18px;height:18px;flex-shrink:0;border-radius:50%;",
+      "border:1px solid #c7c7c7;background:#fff;color:#6b6b6b;font-size:12px;font-weight:700;",
+      "line-height:1;cursor:pointer;padding:0;display:flex;align-items:center;",
+      "justify-content:center;font-family:Georgia,'Times New Roman',serif;font-style:italic}",
+      "#nacfe-assist-root .na-info-btn:hover{border-color:#ab1428;color:#ab1428}",
+      "#nacfe-assist-root .na-info{font-size:13px;line-height:1.6;color:#444;",
+      "background:#f7f7f7;border-radius:4px;padding:10px 12px;margin:0 0 14px}",
+      "#nacfe-assist-root .na-info p{margin:0 0 8px}",
+      "#nacfe-assist-root .na-info p:last-child{margin-bottom:0}",
       "#nacfe-assist-root form{display:flex;gap:8px;margin:0 0 4px}",
       "#nacfe-assist-root input[type=text]{flex:1;padding:11px 14px;font-size:15px;",
       "border:1px solid #c7c7c7;border-radius:4px;font-family:inherit;outline:none}",
@@ -50,6 +61,8 @@
       "border-top:1px solid #e2e2e2}",
       "#nacfe-assist-root .na-sponsor b{color:#333;font-weight:600}",
       "#nacfe-assist-root .na-sponsor a{color:#001961}",
+      "#nacfe-assist-root .na-sponsor img{width:24px;height:24px;border-radius:4px;",
+      "object-fit:contain;flex-shrink:0}",
       "#nacfe-assist-root .na-turnstile{margin:0 0 10px}",
       "#nacfe-assist-root .na-turnstile:empty{margin:0}",
       "#nacfe-assist-root .na-result{border-top:1px solid #e2e2e2;padding-top:16px;",
@@ -107,6 +120,7 @@
       "#nacfe-assist-root input[type=text]{font-size:17px;padding:13px 16px}",
       "#nacfe-assist-root button{font-size:17px;padding:13px 24px}",
       "#nacfe-assist-root .na-hint{font-size:14px}",
+      "#nacfe-assist-root .na-info{font-size:14px}",
       "#nacfe-assist-root .na-answer{font-size:18px;line-height:1.7}",
       "#nacfe-assist-root .na-warning{font-size:15px}",
       "#nacfe-assist-root .na-sources-label{font-size:14px}",
@@ -124,7 +138,14 @@
 
   mount.innerHTML = [
     '<div id="nacfe-assist-root">',
+    '<div class="na-label-row">',
     '<p class="na-label">Ask NACFE\'s Research</p>',
+    '<button type="button" class="na-info-btn" id="na-info-btn" aria-expanded="false" aria-controls="na-info" aria-label="About this tool">i</button>',
+    '</div>',
+    '<div class="na-info" id="na-info" style="display:none">',
+    '<p>Answers are drawn only from NACFE’s published research: Confidence Reports, Guidance Reports, Run on Less demonstration studies, and NACFE webinars and podcast episodes — nothing else.</p>',
+    '<p>Every answer cites the specific report, video, or episode it came from, so you can check it against the source. If NACFE hasn’t published on a topic, the assistant says so rather than guessing from general knowledge.</p>',
+    '</div>',
     '<div class="na-notice" id="na-notice" role="status" style="display:none"></div>',
     '<form id="na-form">',
     '<input type="text" id="na-input" maxlength="1000" aria-label="Ask a question about NACFE\u2019s research" placeholder="e.g. What was Frito-Lay’s fuel economy in the Messy Middle demonstration?" autocomplete="off" />',
@@ -173,6 +194,8 @@
   var feedbackEl = mount.querySelector("#na-feedback");
   var feedbackBtns = mount.querySelectorAll(".na-feedback-btn");
   var noticeEl = mount.querySelector("#na-notice");
+  var infoBtn = mount.querySelector("#na-info-btn");
+  var infoEl = mount.querySelector("#na-info");
   var sponsorEl = mount.querySelector("#na-sponsor");
   var feedbackThanksEl = mount.querySelector("#na-feedback-thanks");
   // Derive /feedback from /query, matching on the path only so a data-api carrying a query
@@ -250,8 +273,11 @@
 
   // Substituted by the Worker when it serves this file, same as the sitekey. Empty name means
   // there is no sponsor, so no block renders and no click tracking exists.
-  var SPONSOR = { name: "__SPONSOR_NAME__", tagline: "__SPONSOR_TAGLINE__", url: "__SPONSOR_URL__" };
-  if (SPONSOR.name.indexOf("__SPONSOR") === 0) SPONSOR = { name: "", tagline: "", url: "" };
+  var SPONSOR = {
+    name: "__SPONSOR_NAME__", tagline: "__SPONSOR_TAGLINE__", url: "__SPONSOR_URL__",
+    logoUrl: "__SPONSOR_LOGO_URL__",
+  };
+  if (SPONSOR.name.indexOf("__SPONSOR") === 0) SPONSOR = { name: "", tagline: "", url: "", logoUrl: "" };
 
 
   // Everything below builds DOM nodes and sets textContent rather than concatenating HTML
@@ -497,6 +523,18 @@
   // The sponsor block exists only when a sponsor is configured. Built from DOM nodes with
   // textContent rather than markup, so a name or tagline containing markup renders as text.
   if (SPONSOR.name) {
+    var sponsorLogoSrc = safeHttpUrl(SPONSOR.logoUrl);
+    if (sponsorLogoSrc) {
+      var sponsorLogo = document.createElement("img");
+      sponsorLogo.setAttribute("src", sponsorLogoSrc);
+      sponsorLogo.setAttribute("alt", SPONSOR.name + " logo");
+      // A broken/unreachable logo shouldn't leave a broken-image icon sitting in the row --
+      // just drop it and keep the text, same as if no logo had been configured at all.
+      sponsorLogo.addEventListener("error", function () {
+        sponsorLogo.remove();
+      });
+      sponsorEl.appendChild(sponsorLogo);
+    }
     var sponsorText = document.createElement("span");
     var sponsorName = document.createElement("b");
     sponsorName.textContent = SPONSOR.name;
@@ -523,6 +561,14 @@
       sponsorEl.appendChild(sponsorLink);
     }
     sponsorEl.style.display = "flex";
+  }
+
+  if (infoBtn && infoEl) {
+    infoBtn.addEventListener("click", function () {
+      var open = infoEl.style.display !== "none";
+      infoEl.style.display = open ? "none" : "block";
+      infoBtn.setAttribute("aria-expanded", String(!open));
+    });
   }
 
   // One impression per widget load. This is the number a sponsor actually buys, and it is far
