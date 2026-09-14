@@ -181,6 +181,7 @@
     '<p class="na-loading-sub">Reading full reports takes a moment — usually 20–45 seconds.<span id="na-loading-elapsed"></span></p>',
     '</div>',
     '<div class="na-error" id="na-error" role="alert" style="display:none"></div>',
+    '<div class="na-history" id="na-history"></div>',
     '<div class="na-result" id="na-result" aria-live="polite">',
     '<div class="na-warning" id="na-warning" style="display:none"></div>',
     '<div class="na-answer" id="na-answer"></div>',
@@ -196,7 +197,6 @@
     '<span class="na-feedback-thanks" id="na-feedback-thanks" style="display:none">Thanks for the feedback!</span>',
     '</div>',
     '</div>',
-    '<div class="na-history" id="na-history"></div>',
     '<p class="na-sponsor" id="na-sponsor" style="display:none"></p>',
     '<p class="na-footer">Powered by NACFE’s research library. Answers cite specific reports and demonstrations — verify against the original source for critical decisions. Questions are logged (without any identifying information) to help NACFE see what the industry is asking; please don’t enter personal or confidential details.</p>',
     '</div>',
@@ -427,7 +427,10 @@
     body.appendChild(stripIds(answerEl.cloneNode(true)));
     if (sourcesEl.style.display !== "none") body.appendChild(stripIds(sourcesEl.cloneNode(true)));
     item.appendChild(body);
-    historyEl.insertBefore(item, historyEl.firstChild);
+    // Appended, not prepended: history now sits above the live answer (see template order),
+    // so oldest-to-newest top-to-bottom keeps the most recent prior turn directly above the
+    // current one, and a new question always lands at the very bottom of the panel.
+    historyEl.appendChild(item);
   }
 
   // Reset the feedback row to its clickable, unanswered state -- called before showing a new
