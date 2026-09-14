@@ -95,6 +95,14 @@
       "border-color:#ab1428;opacity:1}",
       "#nacfe-assist-root .na-feedback-thanks{font-size:13px;color:#6b6b6b;",
       "font-style:italic}",
+      "#nacfe-assist-root .na-history{margin-top:14px}",
+      "#nacfe-assist-root .na-history-item{border-top:1px solid #e2e2e2;padding:10px 0}",
+      "#nacfe-assist-root .na-history-item summary{cursor:pointer;font-size:14px;",
+      "font-weight:600;color:#333;list-style:none}",
+      "#nacfe-assist-root .na-history-item summary::-webkit-details-marker{display:none}",
+      "#nacfe-assist-root .na-history-item summary:before{content:\"\\25B8\\A0\";color:#ab1428}",
+      "#nacfe-assist-root .na-history-item[open] summary:before{content:\"\\25BE\\A0\"}",
+      "#nacfe-assist-root .na-history-body{margin-top:10px}",
       // A query genuinely takes 20-45s (median 21s, p90 46s measured in production), so this
       // has to read as deliberate work in progress rather than a stalled page. A moving bar
       // plus an elapsed counter is far more legible at that duration than three small dots.
@@ -131,6 +139,7 @@
       "#nacfe-assist-root .na-error{font-size:16px}",
       "#nacfe-assist-root .na-feedback-label{font-size:15px}",
       "#nacfe-assist-root .na-feedback-btn{font-size:15px;padding:8px 16px}",
+      "#nacfe-assist-root .na-history-item summary{font-size:16px}",
       "#nacfe-assist-root .na-feedback-thanks{font-size:15px}",
       "#nacfe-assist-root .na-footer{font-size:13px}",
       "}",
@@ -187,6 +196,7 @@
     '<span class="na-feedback-thanks" id="na-feedback-thanks" style="display:none">Thanks for the feedback!</span>',
     '</div>',
     '</div>',
+    '<div class="na-history" id="na-history"></div>',
     '<p class="na-sponsor" id="na-sponsor" style="display:none"></p>',
     '<p class="na-footer">Powered by NACFE’s research library. Answers cite specific reports and demonstrations — verify against the original source for critical decisions. Questions are logged (without any identifying information) to help NACFE see what the industry is asking; please don’t enter personal or confidential details.</p>',
     '</div>',
@@ -204,6 +214,7 @@
   var answerEl = mount.querySelector("#na-answer");
   var sourcesEl = mount.querySelector("#na-sources");
   var sourcesListEl = mount.querySelector("#na-sources-list");
+  var historyEl = mount.querySelector("#na-history");
   var feedbackEl = mount.querySelector("#na-feedback");
   var feedbackBtns = mount.querySelectorAll(".na-feedback-btn");
   var noticeEl = mount.querySelector("#na-notice");
@@ -274,6 +285,17 @@
   // sequential ids can't be enumerated and rated by anyone who never saw the answer.
   var currentFeedbackToken = null;
   var REQUEST_TIMEOUT_MS = 120000;
+  // The question behind whatever answer is currently shown in #na-result, if any -- needed to
+  // label it when the next submit archives it into history.
+  var shownQuestion = null;
+  // Prior turns sent to the API so a follow-up like "what about cng" can be answered with
+  // awareness of what it's following up on. In-memory only -- lost on page reload, same as
+  // the collapsed history above. Capped client-side (server enforces its own, independent
+  // cap): unlike the free display history, every turn here gets replayed into the routing and
+  // answering prompts on every later question, so an uncapped list would make a long
+  // conversation's later questions progressively more expensive and slower.
+  var CONVERSATION_TURNS_SENT = 4;
+  var conversationHistory = [];
 
   // Turnstile. The sitekey is substituted by the Worker when it serves this file, so an
   // embedder never has to carry it; data-sitekey on the script tag overrides for local work.
@@ -378,6 +400,34 @@
       sourcesListEl.appendChild(row);
     }
     sourcesEl.style.display = "block";
+  }
+
+  // Nothing here is ever sent back to the server -- the API is stateless per question and has
+  // no notion of a conversation, so this history is a purely client-side scrollback with no
+  // per-turn cost and no cap needed on how many turns it holds.
+  function stripIds(el) {
+    el.removeAttribute("id");
+    var withIds = el.querySelectorAll("[id]");
+    for (var i = 0; i < withIds.length; i++) withIds[i].removeAttribute("id");
+    return el;
+  }
+
+  // Snapshots the answer currently on screen into a collapsed entry before it's overwritten by
+  // the next question. Cloned rather than re-rendered from the API response, so the archived
+  // copy always matches exactly what the reader saw.
+  function archivePreviousAnswer(question) {
+    var item = document.createElement("details");
+    item.className = "na-history-item";
+    var summary = document.createElement("summary");
+    summary.textContent = question;
+    item.appendChild(summary);
+    var body = document.createElement("div");
+    body.className = "na-history-body";
+    if (warningEl.style.display !== "none") body.appendChild(stripIds(warningEl.cloneNode(true)));
+    body.appendChild(stripIds(answerEl.cloneNode(true)));
+    if (sourcesEl.style.display !== "none") body.appendChild(stripIds(sourcesEl.cloneNode(true)));
+    item.appendChild(body);
+    historyEl.insertBefore(item, historyEl.firstChild);
   }
 
   // Reset the feedback row to its clickable, unanswered state -- called before showing a new
@@ -609,6 +659,10 @@
     var question = input.value.trim();
     if (!question) return;
 
+    if (resultEl.classList.contains("na-visible") && shownQuestion) {
+      archivePreviousAnswer(shownQuestion);
+    }
+
     errorEl.style.display = "none";
     resultEl.classList.remove("na-visible");
     resetFeedback();
@@ -632,6 +686,7 @@
         // Which NACFE page the question came from. Sent without its query string; the Worker
         // re-normalizes anyway, since anything from the browser is untrusted.
         page_url: location.origin + location.pathname,
+        history: conversationHistory,
       }),
       signal: controller ? controller.signal : undefined,
     })
@@ -688,6 +743,11 @@
           feedbackEl.style.display = "flex";
         }
         resultEl.classList.add("na-visible");
+        shownQuestion = question;
+        conversationHistory.push({ question: question, answer: data.answer || "" });
+        if (conversationHistory.length > CONVERSATION_TURNS_SENT) {
+          conversationHistory.splice(0, conversationHistory.length - CONVERSATION_TURNS_SENT);
+        }
       })
       .catch(function (err) {
         clearTimeout(timer);
