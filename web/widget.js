@@ -255,13 +255,19 @@
     }
     var payload = JSON.stringify({ type: type, page_url: location.origin + location.pathname });
     try {
+      // text/plain, not application/json: it's CORS-safelisted, so this never triggers a
+      // preflight. sendBeacon forces credentialed mode unconditionally with no way to opt out,
+      // and a credentialed cross-origin preflight requires the server to echo back a specific
+      // Allow-Credentials -- avoiding the preflight avoids needing that entirely. The server
+      // parses the body as JSON regardless of this header, which only ever describes a body
+      // nothing but this endpoint reads.
       if (navigator.sendBeacon) {
-        navigator.sendBeacon(eventApiUrl, new Blob([payload], { type: "application/json" }));
+        navigator.sendBeacon(eventApiUrl, new Blob([payload], { type: "text/plain" }));
         return;
       }
       fetch(eventApiUrl, {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "text/plain" },
         body: payload,
         keepalive: true,
       }).catch(function () {});
