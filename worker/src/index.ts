@@ -310,18 +310,27 @@ function jsStringLiteralSafe(value: string | undefined): string {
 }
 
 /**
- * `origin`, when given, is echoed back instead of using a blanket "*" -- required for /event,
- * whose sendBeacon() calls always carry credentials per the Beacon spec (the page has no way to
- * opt out of that), and browsers refuse a credentialed response whose Allow-Origin is the
- * wildcard. Nothing here varies by cookie or session -- visitor_id is derived server-side from
- * the IP, never from a cookie -- so echoing the caller's own origin grants no one anything a
- * blanket "*" didn't already.
+ * `origin`, when given, is echoed back instead of using a blanket "*" so that /event's
+ * sendBeacon() calls (which always carry credentials per the Beacon spec -- the page has no
+ * way to opt out) can succeed cross-origin: browsers refuse a credentialed response whose
+ * Allow-Origin is the wildcard. Echoing the origin alone is harmless for every route here --
+ * nothing varies by cookie or session, visitor_id is derived server-side from the IP, never a
+ * cookie -- but `access-control-allow-credentials` is a DIFFERENT, stronger claim ("a
+ * credentialed cross-origin read of this exact response is fine") and must stay opt-in per
+ * call, not implied by origin being present. Only /event's two response sites pass
+ * `allowCredentials: true` -- every other route (and the shared OPTIONS preflight for every
+ * path except /event) must never set it, since nothing else here is credentialed and reflecting
+ * an arbitrary origin plus blanket allow-credentials is the textbook CORS misconfiguration.
  */
-function corsHeaders(extra: Record<string, string> = {}, origin?: string | null): Record<string, string> {
+function corsHeaders(
+  extra: Record<string, string> = {},
+  origin?: string | null,
+  allowCredentials = false,
+): Record<string, string> {
   return {
     // the embeddable widget (SPEC.md /web/) is meant to be embedded cross-origin
     "access-control-allow-origin": origin || "*",
-    ...(origin ? { "access-control-allow-credentials": "true" } : {}),
+    ...(allowCredentials && origin ? { "access-control-allow-credentials": "true" } : {}),
     ...extra,
   };
 }
@@ -331,10 +340,11 @@ function jsonResponse(
   status = 200,
   extraHeaders: Record<string, string> = {},
   origin?: string | null,
+  allowCredentials = false,
 ): Response {
   return new Response(JSON.stringify(body), {
     status,
-    headers: corsHeaders({ "content-type": "application/json", ...extraHeaders }, origin),
+    headers: corsHeaders({ "content-type": "application/json", ...extraHeaders }, origin, allowCredentials),
   });
 }
 
@@ -1018,26 +1028,27 @@ function normalizePageUrl(raw: unknown): string | null {
  * to break the page it is measuring.
  */
 async function handleEvent(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-  // sendBeacon() (used for every event type) always sends credentials, so this response must
-  // echo the caller's origin rather than "*" -- see corsHeaders().
+  // sendBeacon() (used for every event type) always sends credentials, so every response from
+  // this handler specifically (and only this handler) must pass allowCredentials: true -- see
+  // corsHeaders().
   const origin = request.headers.get("origin");
   let body: { type?: unknown; page_url?: unknown };
   try {
     body = await request.json();
   } catch {
-    return jsonResponse({ error: "invalid JSON body" }, 400, {}, origin);
+    return jsonResponse({ error: "invalid JSON body" }, 400, {}, origin, true);
   }
 
   const type = typeof body.type === "string" ? body.type : "";
   if (!VALID_EVENT_TYPES.includes(type)) {
-    return jsonResponse({ error: `'type' must be one of: ${VALID_EVENT_TYPES.join(", ")}` }, 400, {}, origin);
+    return jsonResponse({ error: `'type' must be one of: ${VALID_EVENT_TYPES.join(", ")}` }, 400, {}, origin, true);
   }
 
   const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
   if (!(await checkRateLimit(env, ip, "event", EVENT_RATE_LIMIT_PER_HOUR))) {
     // 204 rather than 429: the widget neither retries nor reports this, and a rate-limited
     // beacon is not a problem the reader can do anything about.
-    return new Response(null, { status: 204, headers: corsHeaders({}, origin) });
+    return new Response(null, { status: 204, headers: corsHeaders({}, origin, true) });
   }
 
   const now = new Date();
@@ -1060,7 +1071,7 @@ async function handleEvent(request: Request, env: Env, ctx: ExecutionContext): P
       }),
   );
 
-  return new Response(null, { status: 204, headers: corsHeaders({}, origin) });
+  return new Response(null, { status: 204, headers: corsHeaders({}, origin, true) });
 }
 
 /**
@@ -1150,6 +1161,9 @@ export default {
             "access-control-max-age": "86400",
           },
           origin,
+          // Only /event's sendBeacon() forces credentialed mode; every other path's actual
+          // fetch() calls never send credentials, so their preflight must not claim to allow them.
+          url.pathname === "/event",
         ),
       });
     }
