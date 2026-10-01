@@ -30,7 +30,20 @@
       "max-width:720px;margin:0 auto;box-sizing:border-box}",
       "#nacfe-assist-root *{box-sizing:border-box}",
       "#nacfe-assist-root .na-label{font-size:13px;font-weight:700;letter-spacing:.04em;",
-      "text-transform:uppercase;color:#ab1428;margin:0 0 8px}",
+      "text-transform:uppercase;color:#ab1428;margin:0}",
+      "#nacfe-assist-root .na-label-row{display:flex;align-items:center;",
+      "justify-content:space-between;gap:8px;margin:0 0 8px}",
+      "#nacfe-assist-root .na-info-btn{width:18px;height:18px;flex-shrink:0;border-radius:50%;",
+      "border:1px solid #c7c7c7;background:#fff;color:#6b6b6b;font-size:12px;font-weight:700;",
+      "line-height:1;cursor:pointer;padding:0;display:flex;align-items:center;",
+      "justify-content:center;font-family:Georgia,'Times New Roman',serif;font-style:italic}",
+      "#nacfe-assist-root .na-info-btn:hover{border-color:#ab1428;color:#ab1428}",
+      "#nacfe-assist-root .na-info{font-size:13px;line-height:1.6;color:#444;",
+      "background:#f7f7f7;border-radius:4px;padding:10px 12px;margin:0 0 14px}",
+      "#nacfe-assist-root .na-info p{margin:0 0 8px}",
+      "#nacfe-assist-root .na-info p:last-child{margin-bottom:0}",
+      "#nacfe-assist-root .na-info ul{margin:0 0 8px;padding-left:20px}",
+      "#nacfe-assist-root .na-info li{margin:0 0 2px}",
       "#nacfe-assist-root form{display:flex;gap:8px;margin:0 0 4px}",
       "#nacfe-assist-root input[type=text]{flex:1;padding:11px 14px;font-size:15px;",
       "border:1px solid #c7c7c7;border-radius:4px;font-family:inherit;outline:none}",
@@ -50,6 +63,8 @@
       "border-top:1px solid #e2e2e2}",
       "#nacfe-assist-root .na-sponsor b{color:#333;font-weight:600}",
       "#nacfe-assist-root .na-sponsor a{color:#001961}",
+      "#nacfe-assist-root .na-sponsor img{width:24px;height:24px;border-radius:4px;",
+      "object-fit:contain;flex-shrink:0}",
       "#nacfe-assist-root .na-turnstile{margin:0 0 10px}",
       "#nacfe-assist-root .na-turnstile:empty{margin:0}",
       "#nacfe-assist-root .na-result{border-top:1px solid #e2e2e2;padding-top:16px;",
@@ -80,6 +95,14 @@
       "border-color:#ab1428;opacity:1}",
       "#nacfe-assist-root .na-feedback-thanks{font-size:13px;color:#6b6b6b;",
       "font-style:italic}",
+      "#nacfe-assist-root .na-history{margin-top:14px}",
+      "#nacfe-assist-root .na-history-item{border-top:1px solid #e2e2e2;padding:10px 0}",
+      "#nacfe-assist-root .na-history-item summary{cursor:pointer;font-size:14px;",
+      "font-weight:600;color:#333;list-style:none}",
+      "#nacfe-assist-root .na-history-item summary::-webkit-details-marker{display:none}",
+      "#nacfe-assist-root .na-history-item summary:before{content:\"\\25B8\\A0\";color:#ab1428}",
+      "#nacfe-assist-root .na-history-item[open] summary:before{content:\"\\25BE\\A0\"}",
+      "#nacfe-assist-root .na-history-body{margin-top:10px}",
       // A query genuinely takes 20-45s (median 21s, p90 46s measured in production), so this
       // has to read as deliberate work in progress rather than a stalled page. A moving bar
       // plus an elapsed counter is far more legible at that duration than three small dots.
@@ -107,6 +130,7 @@
       "#nacfe-assist-root input[type=text]{font-size:17px;padding:13px 16px}",
       "#nacfe-assist-root button{font-size:17px;padding:13px 24px}",
       "#nacfe-assist-root .na-hint{font-size:14px}",
+      "#nacfe-assist-root .na-info{font-size:14px}",
       "#nacfe-assist-root .na-answer{font-size:18px;line-height:1.7}",
       "#nacfe-assist-root .na-warning{font-size:15px}",
       "#nacfe-assist-root .na-sources-label{font-size:14px}",
@@ -115,6 +139,7 @@
       "#nacfe-assist-root .na-error{font-size:16px}",
       "#nacfe-assist-root .na-feedback-label{font-size:15px}",
       "#nacfe-assist-root .na-feedback-btn{font-size:15px;padding:8px 16px}",
+      "#nacfe-assist-root .na-history-item summary{font-size:16px}",
       "#nacfe-assist-root .na-feedback-thanks{font-size:15px}",
       "#nacfe-assist-root .na-footer{font-size:13px}",
       "}",
@@ -124,7 +149,25 @@
 
   mount.innerHTML = [
     '<div id="nacfe-assist-root">',
+    '<div class="na-label-row">',
     '<p class="na-label">Ask NACFE\'s Research</p>',
+    '<button type="button" class="na-info-btn" id="na-info-btn" aria-expanded="false" aria-controls="na-info" aria-label="About this tool">i</button>',
+    '</div>',
+    '<div class="na-info" id="na-info" style="display:none">',
+    '<p>Answers are drawn from these NACFE published sources:</p>',
+    '<ul>',
+    '<li>Current Technology (Confidence Reports)</li>',
+    '<li>Emerging Technology (Guidance Reports)</li>',
+    '<li>Fleet Efficiency Study (latest)</li>',
+    '<li>Run on Less Reports</li>',
+    '<li>Thought Leadership Reports</li>',
+    '<li>Collaboration Reports</li>',
+    '<li>Mike &amp; Friends Podcasts</li>',
+    '<li>Run on Less Messy Middle Bootcamps</li>',
+    '<li>Run on Less fleet profile videos</li>',
+    '</ul>',
+    '<p>Source library last updated 07/2026.</p>',
+    '</div>',
     '<div class="na-notice" id="na-notice" role="status" style="display:none"></div>',
     '<form id="na-form">',
     '<input type="text" id="na-input" maxlength="1000" aria-label="Ask a question about NACFE\u2019s research" placeholder="e.g. What was Frito-Lay’s fuel economy in the Messy Middle demonstration?" autocomplete="off" />',
@@ -138,6 +181,7 @@
     '<p class="na-loading-sub">Reading full reports takes a moment — usually 20–45 seconds.<span id="na-loading-elapsed"></span></p>',
     '</div>',
     '<div class="na-error" id="na-error" role="alert" style="display:none"></div>',
+    '<div class="na-history" id="na-history"></div>',
     '<div class="na-result" id="na-result" aria-live="polite">',
     '<div class="na-warning" id="na-warning" style="display:none"></div>',
     '<div class="na-answer" id="na-answer"></div>',
@@ -170,9 +214,12 @@
   var answerEl = mount.querySelector("#na-answer");
   var sourcesEl = mount.querySelector("#na-sources");
   var sourcesListEl = mount.querySelector("#na-sources-list");
+  var historyEl = mount.querySelector("#na-history");
   var feedbackEl = mount.querySelector("#na-feedback");
   var feedbackBtns = mount.querySelectorAll(".na-feedback-btn");
   var noticeEl = mount.querySelector("#na-notice");
+  var infoBtn = mount.querySelector("#na-info-btn");
+  var infoEl = mount.querySelector("#na-info");
   var sponsorEl = mount.querySelector("#na-sponsor");
   var feedbackThanksEl = mount.querySelector("#na-feedback-thanks");
   // Derive /feedback from /query, matching on the path only so a data-api carrying a query
@@ -238,6 +285,17 @@
   // sequential ids can't be enumerated and rated by anyone who never saw the answer.
   var currentFeedbackToken = null;
   var REQUEST_TIMEOUT_MS = 120000;
+  // The question behind whatever answer is currently shown in #na-result, if any -- needed to
+  // label it when the next submit archives it into history.
+  var shownQuestion = null;
+  // Prior turns sent to the API so a follow-up like "what about cng" can be answered with
+  // awareness of what it's following up on. In-memory only -- lost on page reload, same as
+  // the collapsed history above. Capped client-side (server enforces its own, independent
+  // cap): unlike the free display history, every turn here gets replayed into the routing and
+  // answering prompts on every later question, so an uncapped list would make a long
+  // conversation's later questions progressively more expensive and slower.
+  var CONVERSATION_TURNS_SENT = 4;
+  var conversationHistory = [];
 
   // Turnstile. The sitekey is substituted by the Worker when it serves this file, so an
   // embedder never has to carry it; data-sitekey on the script tag overrides for local work.
@@ -250,8 +308,11 @@
 
   // Substituted by the Worker when it serves this file, same as the sitekey. Empty name means
   // there is no sponsor, so no block renders and no click tracking exists.
-  var SPONSOR = { name: "__SPONSOR_NAME__", tagline: "__SPONSOR_TAGLINE__", url: "__SPONSOR_URL__" };
-  if (SPONSOR.name.indexOf("__SPONSOR") === 0) SPONSOR = { name: "", tagline: "", url: "" };
+  var SPONSOR = {
+    name: "__SPONSOR_NAME__", tagline: "__SPONSOR_TAGLINE__", url: "__SPONSOR_URL__",
+    logoUrl: "__SPONSOR_LOGO_URL__",
+  };
+  if (SPONSOR.name.indexOf("__SPONSOR") === 0) SPONSOR = { name: "", tagline: "", url: "", logoUrl: "" };
 
 
   // Everything below builds DOM nodes and sets textContent rather than concatenating HTML
@@ -339,6 +400,37 @@
       sourcesListEl.appendChild(row);
     }
     sourcesEl.style.display = "block";
+  }
+
+  // Nothing here is ever sent back to the server -- the API is stateless per question and has
+  // no notion of a conversation, so this history is a purely client-side scrollback with no
+  // per-turn cost and no cap needed on how many turns it holds.
+  function stripIds(el) {
+    el.removeAttribute("id");
+    var withIds = el.querySelectorAll("[id]");
+    for (var i = 0; i < withIds.length; i++) withIds[i].removeAttribute("id");
+    return el;
+  }
+
+  // Snapshots the answer currently on screen into a collapsed entry before it's overwritten by
+  // the next question. Cloned rather than re-rendered from the API response, so the archived
+  // copy always matches exactly what the reader saw.
+  function archivePreviousAnswer(question) {
+    var item = document.createElement("details");
+    item.className = "na-history-item";
+    var summary = document.createElement("summary");
+    summary.textContent = question;
+    item.appendChild(summary);
+    var body = document.createElement("div");
+    body.className = "na-history-body";
+    if (warningEl.style.display !== "none") body.appendChild(stripIds(warningEl.cloneNode(true)));
+    body.appendChild(stripIds(answerEl.cloneNode(true)));
+    if (sourcesEl.style.display !== "none") body.appendChild(stripIds(sourcesEl.cloneNode(true)));
+    item.appendChild(body);
+    // Appended, not prepended: history now sits above the live answer (see template order),
+    // so oldest-to-newest top-to-bottom keeps the most recent prior turn directly above the
+    // current one, and a new question always lands at the very bottom of the panel.
+    historyEl.appendChild(item);
   }
 
   // Reset the feedback row to its clickable, unanswered state -- called before showing a new
@@ -497,6 +589,18 @@
   // The sponsor block exists only when a sponsor is configured. Built from DOM nodes with
   // textContent rather than markup, so a name or tagline containing markup renders as text.
   if (SPONSOR.name) {
+    var sponsorLogoSrc = safeHttpUrl(SPONSOR.logoUrl);
+    if (sponsorLogoSrc) {
+      var sponsorLogo = document.createElement("img");
+      sponsorLogo.setAttribute("src", sponsorLogoSrc);
+      sponsorLogo.setAttribute("alt", SPONSOR.name + " logo");
+      // A broken/unreachable logo shouldn't leave a broken-image icon sitting in the row --
+      // just drop it and keep the text, same as if no logo had been configured at all.
+      sponsorLogo.addEventListener("error", function () {
+        sponsorLogo.remove();
+      });
+      sponsorEl.appendChild(sponsorLogo);
+    }
     var sponsorText = document.createElement("span");
     var sponsorName = document.createElement("b");
     sponsorName.textContent = SPONSOR.name;
@@ -525,6 +629,14 @@
     sponsorEl.style.display = "flex";
   }
 
+  if (infoBtn && infoEl) {
+    infoBtn.addEventListener("click", function () {
+      var open = infoEl.style.display !== "none";
+      infoEl.style.display = open ? "none" : "block";
+      infoBtn.setAttribute("aria-expanded", String(!open));
+    });
+  }
+
   // One impression per widget load. This is the number a sponsor actually buys, and it is far
   // larger than the question count -- most readers never type anything.
   sendEvent("impression");
@@ -550,6 +662,10 @@
     var question = input.value.trim();
     if (!question) return;
 
+    if (resultEl.classList.contains("na-visible") && shownQuestion) {
+      archivePreviousAnswer(shownQuestion);
+    }
+
     errorEl.style.display = "none";
     resultEl.classList.remove("na-visible");
     resetFeedback();
@@ -573,6 +689,7 @@
         // Which NACFE page the question came from. Sent without its query string; the Worker
         // re-normalizes anyway, since anything from the browser is untrusted.
         page_url: location.origin + location.pathname,
+        history: conversationHistory,
       }),
       signal: controller ? controller.signal : undefined,
     })
@@ -629,6 +746,11 @@
           feedbackEl.style.display = "flex";
         }
         resultEl.classList.add("na-visible");
+        shownQuestion = question;
+        conversationHistory.push({ question: question, answer: data.answer || "" });
+        if (conversationHistory.length > CONVERSATION_TURNS_SENT) {
+          conversationHistory.splice(0, conversationHistory.length - CONVERSATION_TURNS_SENT);
+        }
       })
       .catch(function (err) {
         clearTimeout(timer);

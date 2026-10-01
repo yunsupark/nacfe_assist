@@ -191,9 +191,12 @@ def parse_route_response(text):
 
 
 def route(client, catalog_json, question):
+    # {{history}} always renders empty here: eval questions are standalone, matching the
+    # Worker's own formatHistory([]) == "" for a no-history request (see worker/src/index.ts).
     prompt = (
         ROUTE_PROMPT_PATH.read_text()
         .replace("{{catalog}}", catalog_json)
+        .replace("{{history}}", "")
         .replace("{{question}}", question)
     )
     response = call_model(client, ROUTE_MODEL, prompt)
@@ -222,6 +225,7 @@ def answer(client, documents_block, question):
         ANSWER_PROMPT_PATH.read_text()
         .replace("{{current_year}}", CURRENT_YEAR)
         .replace("{{documents}}", documents_block)
+        .replace("{{history}}", "")
         .replace("{{question}}", question)
     )
     response = call_model(client, ANSWER_MODEL, prompt)
