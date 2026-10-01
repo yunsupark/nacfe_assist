@@ -40,7 +40,7 @@ function base64Url(buf) {
   return buf.toString("base64").replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 }
 
-const payload = JSON.stringify({ email, iat, jti });
+const payload = JSON.stringify({ typ: "handoff", email, iat, jti });
 const b64 = base64Url(Buffer.from(payload, "utf-8"));
 const sig = createHmac("sha256", secret).update(b64).digest("hex");
 const token = `${b64}.${sig}`;

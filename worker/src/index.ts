@@ -714,7 +714,17 @@ function timingSafeEqual(a: string, b: string): boolean {
  * signature rather than feedbackToken's 16-byte truncation above: this gates write access and
  * lives for hours, not a one-time low-value rating gate.
  */
+/**
+ * `typ` is load-bearing, not decorative: without it, a handoff token (which also has a valid
+ * signature, shape, and a recent `iat`) would pass verifySessionToken's checks unchanged,
+ * letting it be sent directly as the session cookie -- skipping /admin/login entirely, which
+ * means skipping the jti single-use check (only enforced there), AND stretching its effective
+ * lifetime from the 30-minute handoff TTL to the 8-hour session TTL. Each verifier below checks
+ * its own exact `typ`; neither accepts the other's shape just because the signature is valid.
+ */
+type AdminTokenType = "handoff" | "session";
 interface AdminTokenPayload {
+  typ: AdminTokenType;
   email: string;
   iat: number;
   jti?: string;
@@ -726,10 +736,15 @@ function base64UrlEncode(bytes: Uint8Array): string {
   return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 }
 
+/** Decodes through TextDecoder, not a raw atob binary-string -> JSON.parse -- the latter treats
+ * each decoded byte as one UTF-16 code unit, which is wrong for any non-ASCII byte and produces
+ * mojibake for a non-ASCII email instead of the real value. */
 function base64UrlDecode(s: string): string {
   const padded = s.replace(/-/g, "+").replace(/_/g, "/");
   const pad = padded.length % 4 === 0 ? "" : "=".repeat(4 - (padded.length % 4));
-  return atob(padded + pad);
+  const binary = atob(padded + pad);
+  const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
 }
 
 async function hmacHex(secret: string, message: string): Promise<string> {
@@ -772,13 +787,19 @@ async function parseAdminToken(secret: string, token: string): Promise<AdminToke
     typeof payload !== "object" ||
     payload === null ||
     typeof (payload as Record<string, unknown>).email !== "string" ||
-    typeof (payload as Record<string, unknown>).iat !== "number"
+    typeof (payload as Record<string, unknown>).iat !== "number" ||
+    ((payload as Record<string, unknown>).typ !== "handoff" && (payload as Record<string, unknown>).typ !== "session")
   ) {
     return null;
   }
-  const { email, iat, jti } = payload as Record<string, unknown>;
+  const { typ, email, iat, jti } = payload as Record<string, unknown>;
   if ((iat as number) > Math.floor(Date.now() / 1000) + ADMIN_TOKEN_CLOCK_SKEW_SECONDS) return null;
-  return { email: email as string, iat: iat as number, jti: typeof jti === "string" ? jti : undefined };
+  return {
+    typ: typ as AdminTokenType,
+    email: email as string,
+    iat: iat as number,
+    jti: typeof jti === "string" ? jti : undefined,
+  };
 }
 
 const HANDOFF_TOKEN_TTL_SECONDS = 1800; // 30 min
@@ -789,7 +810,7 @@ const SESSION_TOKEN_TTL_SECONDS = 8 * 3600; // 8 hours, a normal admin working s
  * one still well within its TTL) returns null the second time. */
 async function verifyHandoffToken(env: Env, token: string): Promise<{ email: string } | null> {
   const payload = await parseAdminToken(env.ADMIN_TOKEN_SECRET, token);
-  if (!payload || !payload.jti) return null;
+  if (!payload || payload.typ !== "handoff" || !payload.jti) return null;
   if (Math.floor(Date.now() / 1000) - payload.iat > HANDOFF_TOKEN_TTL_SECONDS) return null;
   const usedKey = `admin-jti-used:${payload.jti}`;
   if (await env.CACHE.get(usedKey)) return null;
@@ -801,7 +822,7 @@ async function verifyHandoffToken(env: Env, token: string): Promise<{ email: str
  * jti/replay tracking since this token is meant to be presented on every request. */
 async function verifySessionToken(env: Env, token: string): Promise<{ email: string } | null> {
   const payload = await parseAdminToken(env.ADMIN_TOKEN_SECRET, token);
-  if (!payload) return null;
+  if (!payload || payload.typ !== "session") return null;
   if (Math.floor(Date.now() / 1000) - payload.iat > SESSION_TOKEN_TTL_SECONDS) return null;
   return { email: payload.email };
 }
@@ -1476,13 +1497,16 @@ async function handleAdminLogin(request: Request, env: Env): Promise<Response> {
     return new Response(ADMIN_EXPIRED_HTML, { status: 200, headers: { "content-type": "text/html; charset=utf-8" } });
   }
   const sessionToken = await signAdminToken(env.ADMIN_TOKEN_SECRET, {
+    typ: "session",
     email: verified.email,
     iat: Math.floor(Date.now() / 1000),
   });
   const headers = new Headers({ location: "/admin" });
+  // Path=/admin, not /: nothing outside /admin* ever reads this cookie, so there's no reason
+  // for the browser to attach it anywhere else.
   headers.append(
     "set-cookie",
-    `${ADMIN_SESSION_COOKIE}=${sessionToken}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=${SESSION_TOKEN_TTL_SECONDS}`,
+    `${ADMIN_SESSION_COOKIE}=${sessionToken}; HttpOnly; Secure; SameSite=Lax; Path=/admin; Max-Age=${SESSION_TOKEN_TTL_SECONDS}`,
   );
   return new Response(null, { status: 302, headers });
 }
@@ -1690,7 +1714,17 @@ async function handleAdminIngest(request: Request, env: Env, actorEmail: string)
   }
   const sourceUrl = typeof body.url === "string" ? body.url : "";
   if (!isValidHttpUrl(sourceUrl)) return adminJsonResponse({ error: "'url' must be a valid http(s) URL" }, 400);
-  const titleHint = typeof body.title_hint === "string" ? body.title_hint.slice(0, 300) : "";
+  // Deliberately restrictive, not just length-capped: this value is passed as a GitHub Actions
+  // workflow_dispatch input and ends up in a shell script (see ingest-source.yml). The
+  // workflow itself now routes every input through env: + "$VAR" rather than inline ${{ }}
+  // interpolation (which is its own, separate fix for shell/script injection there regardless
+  // of what reaches it) -- but this allowlist means nothing resembling a shell metacharacter
+  // is ever sent in the first place, as defense in depth. The slug step discards anything
+  // outside [a-z0-9-] anyway, so nothing of value is lost.
+  const titleHint = typeof body.title_hint === "string" ? body.title_hint.slice(0, 120) : "";
+  if (titleHint && !/^[\w .,-]*$/.test(titleHint)) {
+    return adminJsonResponse({ error: "'title_hint' may only contain letters, numbers, spaces, and . , -" }, 400);
+  }
 
   const result = await githubDispatchWorkflow(env, "ingest-source.yml", {
     type,

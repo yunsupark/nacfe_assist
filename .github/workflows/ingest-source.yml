@@ -47,8 +47,17 @@ jobs:
 
       - name: Derive a source id
         id: slug
+        # SECURITY: every input is passed via env: and read as "$VAR", never inlined as
+        # ${{ inputs.* }} in the run: script. ${{ }} is substituted as raw text by the runner
+        # BEFORE the shell parses the line, so a value containing a quote or semicolon would
+        # otherwise break out and run as arbitrary shell commands in a job with contents:write,
+        # pull-requests:write, and the Gemini keys in its environment. title_hint comes from an
+        # authenticated admin, but "authenticated" is not "trusted to write this job's shell
+        # script" -- treat it exactly like any other untrusted input.
+        env:
+          RAW_TITLE_HINT: ${{ inputs.title_hint }}
         run: |
-          RAW="${{ inputs.title_hint }}"
+          RAW="$RAW_TITLE_HINT"
           if [ -z "$RAW" ]; then RAW="source-$(date +%s)"; fi
           YEAR=$(date +%Y)
           # Lowercase, replace anything non-alphanumeric with a hyphen, collapse repeats, trim,
@@ -61,13 +70,16 @@ jobs:
         env:
           GEMINI_API: ${{ secrets.GEMINI_API }}
           GEMINI_API_FREE: ${{ secrets.GEMINI_API_FREE }}
+          SOURCE_ID: ${{ steps.slug.outputs.id }}
+          INGEST_TYPE: ${{ inputs.type }}
+          SOURCE_URL: ${{ inputs.url }}
+          TITLE_HINT: ${{ inputs.title_hint }}
         run: |
           cd ingest
-          SOURCE_ID="${{ steps.slug.outputs.id }}"
-          if [ "${{ inputs.type }}" = "youtube" ]; then
-            python ingest_youtube.py "${{ inputs.url }}" --id "$SOURCE_ID" --title "${{ inputs.title_hint }}"
+          if [ "$INGEST_TYPE" = "youtube" ]; then
+            python ingest_youtube.py "$SOURCE_URL" --id "$SOURCE_ID" --title "$TITLE_HINT"
           else
-            curl -fsSL -o /tmp/report.pdf "${{ inputs.url }}"
+            curl -fsSL -o /tmp/report.pdf "$SOURCE_URL"
             python ingest_pdf.py /tmp/report.pdf --id "$SOURCE_ID"
           fi
 
@@ -75,9 +87,10 @@ jobs:
         env:
           GEMINI_API: ${{ secrets.GEMINI_API }}
           GEMINI_API_FREE: ${{ secrets.GEMINI_API_FREE }}
+          SOURCE_ID: ${{ steps.slug.outputs.id }}
         run: |
           cd ingest
-          python draft_catalog_entry.py "${{ steps.slug.outputs.id }}"
+          python draft_catalog_entry.py "$SOURCE_ID"
 
       - name: Open pull request
         env:
