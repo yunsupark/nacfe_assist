@@ -1,0 +1,425 @@
+<title>NACFE Assist — Admin</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f7f7f7; color: #1a1a1a;
+  }
+  header {
+    background: #ab1428; color: #fff; padding: 16px 24px; display: flex;
+    align-items: center; justify-content: space-between;
+  }
+  header h1 { font-size: 16px; font-weight: 700; margin: 0; letter-spacing: .02em; }
+  header span { font-size: 13px; opacity: .85; }
+  nav { display: flex; gap: 4px; padding: 0 24px; background: #fff; border-bottom: 1px solid #e2e2e2; }
+  nav button {
+    border: none; background: none; padding: 14px 16px; font-size: 14px; font-weight: 600;
+    color: #6b6b6b; cursor: pointer; border-bottom: 2px solid transparent; font-family: inherit;
+  }
+  nav button.active { color: #ab1428; border-bottom-color: #ab1428; }
+  main { max-width: 960px; margin: 0 auto; padding: 24px; }
+  section { display: none; }
+  section.active { display: block; }
+  .card {
+    background: #fff; border: 1px solid #e2e2e2; border-radius: 8px; padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  .card h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: #6b6b6b; margin: 0 0 14px; }
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; }
+  .stat { }
+  .stat .n { font-size: 24px; font-weight: 700; }
+  .stat .l { font-size: 12px; color: #6b6b6b; margin-top: 2px; }
+  .bar-track { background: #eee; border-radius: 4px; height: 8px; overflow: hidden; margin-top: 8px; }
+  .bar-fill { background: #ab1428; height: 100%; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; padding: 8px 10px; font-size: 11px; text-transform: uppercase; color: #6b6b6b; border-bottom: 1px solid #e2e2e2; }
+  td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  tr.hidden-row { opacity: .5; }
+  .table-wrap { overflow-x: auto; }
+  input[type=text], input[type=url], select {
+    padding: 8px 10px; font-size: 14px; border: 1px solid #c7c7c7; border-radius: 4px;
+    font-family: inherit; width: 100%;
+  }
+  label { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 4px; }
+  button.btn {
+    padding: 8px 16px; font-size: 13px; font-weight: 600; background: #ab1428; color: #fff;
+    border: none; border-radius: 4px; cursor: pointer; font-family: inherit;
+  }
+  button.btn:hover:not(:disabled) { background: #8f1121; }
+  button.btn:disabled { background: #c7c7c7; cursor: default; }
+  button.btn-secondary { background: #fff; color: #333; border: 1px solid #c7c7c7; }
+  button.btn-small { padding: 4px 10px; font-size: 12px; }
+  button.btn-danger { background: #fff; color: #ab1428; border: 1px solid #ab1428; }
+  .row { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 14px; }
+  .row > * { flex: 1; min-width: 140px; }
+  .msg { font-size: 13px; padding: 8px 12px; border-radius: 4px; margin: 0 0 14px; display: none; }
+  .msg.ok { background: #e7f6ec; color: #1a7a3a; display: block; }
+  .msg.err { background: #fdeceb; color: #ab1428; display: block; }
+  .muted { color: #6b6b6b; font-size: 12px; }
+  #expired { max-width: 480px; margin: 80px auto; text-align: center; padding: 0 20px; }
+</style>
+
+<div id="app">
+  <header>
+    <h1>NACFE Assist — Admin</h1>
+    <span id="whoami"></span>
+  </header>
+  <nav>
+    <button type="button" data-tab="usage" class="active">Usage</button>
+    <button type="button" data-tab="sponsor">Sponsor</button>
+    <button type="button" data-tab="sources">Sources</button>
+  </nav>
+  <main>
+    <section id="tab-usage" class="active">
+      <div class="card">
+        <h2>This month</h2>
+        <div class="stat-grid" id="usage-stats"></div>
+      </div>
+      <div class="card">
+        <h2>Monthly spend</h2>
+        <div class="stat"><span class="n" id="spend-label"></span></div>
+        <div class="bar-track"><div class="bar-fill" id="spend-bar" style="width:0%"></div></div>
+      </div>
+      <div class="card">
+        <h2>Feedback (this month)</h2>
+        <div class="stat-grid" id="feedback-stats"></div>
+      </div>
+      <div class="card">
+        <h2>Events (this month)</h2>
+        <div class="stat-grid" id="event-stats"></div>
+      </div>
+      <div class="card">
+        <h2>Recent questions</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>When</th><th>Question</th><th>Cached</th><th>Cost</th></tr></thead>
+            <tbody id="recent-queries"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-sponsor">
+      <div class="card">
+        <h2>Sponsor</h2>
+        <div class="msg" id="sponsor-msg"></div>
+        <label>Name</label>
+        <input type="text" id="sponsor_name" maxlength="300" />
+        <label>Tagline</label>
+        <input type="text" id="sponsor_tagline" maxlength="300" />
+        <label>URL</label>
+        <input type="url" id="sponsor_url" maxlength="300" placeholder="https://" />
+        <label>Logo URL</label>
+        <input type="url" id="sponsor_logo_url" maxlength="300" placeholder="https://" />
+        <p class="muted" id="sponsor-meta"></p>
+        <button type="button" class="btn" id="sponsor-save" style="margin-top:10px">Save</button>
+        <p class="muted" style="margin-top:10px">Takes effect within the hour (the widget's own cache lifetime) -- no deploy needed.</p>
+      </div>
+    </section>
+
+    <section id="tab-sources">
+      <div class="card">
+        <h2>Add a source</h2>
+        <div class="msg" id="ingest-msg"></div>
+        <div class="row">
+          <div>
+            <label>Type</label>
+            <select id="ingest-type">
+              <option value="youtube">Video / podcast (YouTube URL)</option>
+              <option value="pdf">Report (PDF URL)</option>
+            </select>
+          </div>
+          <div>
+            <label>URL</label>
+            <input type="url" id="ingest-url" placeholder="https://" />
+          </div>
+          <div>
+            <label>Title hint (optional)</label>
+            <input type="text" id="ingest-title" />
+          </div>
+          <div style="flex:0 0 auto;min-width:0">
+            <button type="button" class="btn" id="ingest-submit">Start</button>
+          </div>
+        </div>
+        <p class="muted">Runs the real ingestion pipeline in CI and opens a pull request with a draft catalog entry for human review -- nothing goes live until that PR is merged and deployed.</p>
+      </div>
+      <div class="card">
+        <h2>Pending (open PRs)</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>PR</th><th>Status</th><th>Opened</th></tr></thead>
+            <tbody id="pending-list"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Catalog (<span id="source-count">0</span> sources)</h2>
+        <div class="row">
+          <input type="text" id="source-filter" placeholder="Filter by title or id" />
+          <select id="type-filter"><option value="">All types</option></select>
+          <select id="status-filter"><option value="">All statuses</option></select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Title</th><th>Type</th><th>Published</th><th>Status</th><th>Hidden</th><th></th></tr></thead>
+            <tbody id="sources-list"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="expired" style="display:none">
+  <h1>Session expired</h1>
+  <p>Go back to the WordPress dashboard and click the admin console link again.</p>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  function el(tag, attrs, children) {
+    var e = document.createElement(tag);
+    for (var k in attrs || {}) {
+      if (k === "text") e.textContent = attrs[k];
+      else e.setAttribute(k, attrs[k]);
+    }
+    (children || []).forEach(function (c) { e.appendChild(c); });
+    return e;
+  }
+  function text(s) { return document.createTextNode(s == null ? "" : String(s)); }
+
+  function showExpired() {
+    document.getElementById("app").style.display = "none";
+    document.getElementById("expired").style.display = "block";
+  }
+
+  function adminFetch(path, opts) {
+    return fetch(path, opts).then(function (res) {
+      if (res.status === 401) {
+        showExpired();
+        throw new Error("unauthorized");
+      }
+      return res.json().then(function (data) {
+        if (!res.ok) throw new Error((data && data.error) || "request failed");
+        return data;
+      });
+    });
+  }
+
+  // Tabs
+  var tabs = document.querySelectorAll("nav button");
+  tabs.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      tabs.forEach(function (b) { b.classList.remove("active"); });
+      document.querySelectorAll("main section").forEach(function (s) { s.classList.remove("active"); });
+      btn.classList.add("active");
+      document.getElementById("tab-" + btn.getAttribute("data-tab")).classList.add("active");
+    });
+  });
+
+  function statTile(n, label) {
+    return el("div", { class: "stat" }, [
+      el("div", { class: "n", text: n }),
+      el("div", { class: "l", text: label }),
+    ]);
+  }
+
+  function loadUsage() {
+    adminFetch("/admin/api/usage").then(function (d) {
+      document.getElementById("whoami").textContent = d.actor_email ? "signed in as " + d.actor_email : "";
+
+      var stats = document.getElementById("usage-stats");
+      stats.innerHTML = "";
+      stats.appendChild(statTile(d.queries.total, "Questions"));
+      stats.appendChild(statTile(d.queries.cache_hits, "Cache hits"));
+      stats.appendChild(statTile(d.queries.degraded, "Budget-limited"));
+
+      document.getElementById("spend-label").textContent = d.spend.used_usd + " of " + d.spend.ceiling_usd;
+      var pct = d.spend.ceiling_micro_usd > 0 ? Math.min(100, (d.spend.used_micro_usd / d.spend.ceiling_micro_usd) * 100) : 0;
+      document.getElementById("spend-bar").style.width = pct + "%";
+
+      var fb = document.getElementById("feedback-stats");
+      fb.innerHTML = "";
+      fb.appendChild(statTile(d.feedback.yes, "Yes"));
+      fb.appendChild(statTile(d.feedback.partly, "Partly"));
+      fb.appendChild(statTile(d.feedback.no, "No"));
+
+      var ev = document.getElementById("event-stats");
+      ev.innerHTML = "";
+      ev.appendChild(statTile(d.events.impression, "Impressions"));
+      ev.appendChild(statTile(d.events.sponsor_click, "Sponsor clicks"));
+      ev.appendChild(statTile(d.events.widget_expand, "Widget opens"));
+
+      var tbody = document.getElementById("recent-queries");
+      tbody.innerHTML = "";
+      (d.recent_queries || []).forEach(function (q) {
+        tbody.appendChild(el("tr", {}, [
+          el("td", {}, [text(new Date(q.timestamp).toLocaleString())]),
+          el("td", {}, [text(q.question)]),
+          el("td", {}, [text(q.cache_hit ? "yes" : "no")]),
+          el("td", {}, [text(q.cost_usd)]),
+        ]));
+      });
+    }).catch(function (e) { console.error(e); });
+  }
+
+  function loadSponsor() {
+    adminFetch("/admin/api/sponsor").then(function (d) {
+      document.getElementById("sponsor_name").value = d.sponsor_name || "";
+      document.getElementById("sponsor_tagline").value = d.sponsor_tagline || "";
+      document.getElementById("sponsor_url").value = d.sponsor_url || "";
+      document.getElementById("sponsor_logo_url").value = d.sponsor_logo_url || "";
+      var meta = document.getElementById("sponsor-meta");
+      meta.textContent = d.updated_at ? "Last updated " + new Date(d.updated_at).toLocaleString() + (d.updated_by ? " by " + d.updated_by : "") : "Never configured";
+    }).catch(function (e) { console.error(e); });
+  }
+
+  document.getElementById("sponsor-save").addEventListener("click", function () {
+    var msg = document.getElementById("sponsor-msg");
+    msg.className = "msg";
+    var body = {
+      sponsor_name: document.getElementById("sponsor_name").value,
+      sponsor_tagline: document.getElementById("sponsor_tagline").value,
+      sponsor_url: document.getElementById("sponsor_url").value,
+      sponsor_logo_url: document.getElementById("sponsor_logo_url").value,
+    };
+    adminFetch("/admin/api/sponsor", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+    }).then(function (d) {
+      msg.textContent = "Saved.";
+      msg.className = "msg ok";
+      loadSponsor();
+    }).catch(function (e) {
+      msg.textContent = e.message;
+      msg.className = "msg err";
+    });
+  });
+
+  var allSources = [];
+
+  function populateFilterOptions(sources) {
+    var types = {}, statuses = {};
+    sources.forEach(function (s) { types[s.type] = true; statuses[s.status] = true; });
+    var typeSel = document.getElementById("type-filter");
+    var statusSel = document.getElementById("status-filter");
+    typeSel.innerHTML = '<option value="">All types</option>';
+    statusSel.innerHTML = '<option value="">All statuses</option>';
+    Object.keys(types).sort().forEach(function (t) { typeSel.appendChild(el("option", { value: t, text: t })); });
+    Object.keys(statuses).sort().forEach(function (s) { statusSel.appendChild(el("option", { value: s, text: s })); });
+  }
+
+  function renderSources() {
+    var filter = document.getElementById("source-filter").value.toLowerCase();
+    var typeFilter = document.getElementById("type-filter").value;
+    var statusFilter = document.getElementById("status-filter").value;
+    var tbody = document.getElementById("sources-list");
+    tbody.innerHTML = "";
+    var shown = allSources.filter(function (s) {
+      if (typeFilter && s.type !== typeFilter) return false;
+      if (statusFilter && s.status !== statusFilter) return false;
+      if (filter && s.title.toLowerCase().indexOf(filter) === -1 && s.id.toLowerCase().indexOf(filter) === -1) return false;
+      return true;
+    });
+    document.getElementById("source-count").textContent = shown.length + " of " + allSources.length;
+    shown.forEach(function (s) {
+      var hideBtn = el("button", { type: "button", class: "btn btn-small btn-secondary" }, [text(s.hidden ? "Unhide" : "Hide")]);
+      hideBtn.addEventListener("click", function () { toggleHide(s.id, s.hidden ? "unhide" : "hide"); });
+      var retireBtn = el("button", { type: "button", class: "btn btn-small btn-danger", style: "margin-left:6px" }, [text("Retire")]);
+      retireBtn.addEventListener("click", function () { retireSource(s.id, s.title); });
+      var actions = el("td", {}, [hideBtn, retireBtn]);
+      var row = el("tr", { class: s.hidden ? "hidden-row" : "" }, [
+        el("td", {}, [text(s.title)]),
+        el("td", {}, [text(s.type)]),
+        el("td", {}, [text(s.published)]),
+        el("td", {}, [text(s.status)]),
+        el("td", {}, [text(s.hidden ? "yes" : "")]),
+        actions,
+      ]);
+      tbody.appendChild(row);
+    });
+  }
+
+  function loadSources() {
+    adminFetch("/admin/api/sources").then(function (d) {
+      allSources = d.sources || [];
+      populateFilterOptions(allSources);
+      renderSources();
+    }).catch(function (e) { console.error(e); });
+  }
+
+  function toggleHide(id, action) {
+    adminFetch("/admin/api/sources/" + encodeURIComponent(id) + "/" + action, { method: "POST" })
+      .then(function () { loadSources(); })
+      .catch(function (e) { alert(e.message); });
+  }
+
+  function retireSource(id, title) {
+    if (!window.confirm('Retire "' + title + '"? This opens a PR that permanently removes it from the catalog.')) return;
+    adminFetch("/admin/api/sources/" + encodeURIComponent(id) + "/retire", { method: "POST" })
+      .then(function (d) {
+        alert("Retirement PR opened: " + d.pr_url);
+        loadPending();
+      })
+      .catch(function (e) { alert(e.message); });
+  }
+
+  ["source-filter", "type-filter", "status-filter"].forEach(function (id) {
+    document.getElementById(id).addEventListener("input", renderSources);
+    document.getElementById(id).addEventListener("change", renderSources);
+  });
+
+  document.getElementById("ingest-submit").addEventListener("click", function () {
+    var msg = document.getElementById("ingest-msg");
+    msg.className = "msg";
+    var body = {
+      type: document.getElementById("ingest-type").value,
+      url: document.getElementById("ingest-url").value,
+      title_hint: document.getElementById("ingest-title").value,
+    };
+    if (!body.url) {
+      msg.textContent = "URL is required.";
+      msg.className = "msg err";
+      return;
+    }
+    adminFetch("/admin/api/sources/ingest", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+    }).then(function (d) {
+      msg.textContent = "Started. Check the Pending list below for progress.";
+      msg.className = "msg ok";
+      document.getElementById("ingest-url").value = "";
+      document.getElementById("ingest-title").value = "";
+      loadPending();
+    }).catch(function (e) {
+      msg.textContent = e.message;
+      msg.className = "msg err";
+    });
+  });
+
+  function loadPending() {
+    adminFetch("/admin/api/sources/pending").then(function (d) {
+      var tbody = document.getElementById("pending-list");
+      tbody.innerHTML = "";
+      (d.pending || []).forEach(function (p) {
+        var link = el("a", { href: p.html_url, target: "_blank", rel: "noopener noreferrer" }, [text("#" + p.number + " " + p.title)]);
+        tbody.appendChild(el("tr", {}, [
+          el("td", {}, [link]),
+          el("td", {}, [text(p.label)]),
+          el("td", {}, [text(new Date(p.created_at).toLocaleString())]),
+        ]));
+      });
+    }).catch(function (e) { console.error(e); });
+  }
+
+  loadUsage();
+  loadSponsor();
+  loadSources();
+  loadPending();
+})();
+</script>

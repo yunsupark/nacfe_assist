@@ -76,3 +76,29 @@ CREATE TABLE IF NOT EXISTS events (
 
 CREATE INDEX IF NOT EXISTS idx_events_day_type ON events (day, type);
 CREATE INDEX IF NOT EXISTS idx_events_type_timestamp ON events (type, timestamp);
+
+-- Admin console (see web/admin.html and the /admin* routes in src/index.ts). See
+-- migrations/0011_admin_console.sql for the full rationale; no seed insert here since a fresh,
+-- empty admin_config table already degrades to the correct "no sponsor configured" default.
+
+CREATE TABLE IF NOT EXISTS admin_config (
+  key TEXT PRIMARY KEY,
+  value TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  updated_by TEXT
+);
+
+CREATE TABLE IF NOT EXISTS hidden_sources (
+  source_id TEXT PRIMARY KEY,
+  hidden_at TEXT NOT NULL,
+  hidden_by TEXT
+);
+
+CREATE TABLE IF NOT EXISTS admin_log (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  timestamp TEXT NOT NULL,
+  actor_email TEXT NOT NULL,
+  action TEXT NOT NULL,
+  target TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_admin_log_timestamp ON admin_log (timestamp);

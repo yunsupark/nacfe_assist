@@ -1,0 +1,112 @@
+name: Ingest source (admin console)
+
+# Triggered by POST /admin/api/sources/ingest (see worker/src/index.ts's githubDispatchWorkflow)
+# via the GitHub Actions API, authenticated with GITHUB_ACTIONS_TOKEN -- never run by hand
+# against a real report/video unless you're deliberately testing this workflow itself.
+#
+# Runs the existing, unmodified ingest_youtube.py/ingest_pdf.py (the same scripts used for
+# every one of the 343 sources already in the catalog) and the new draft_catalog_entry.py, then
+# opens a PR with the result. Nothing here touches corpus/catalog.json directly -- the drafted
+# fields land in corpus/pending/<id>.json, and a human moves them into the real catalog as part
+# of reviewing and merging the PR (see SPEC.md 3 on why status/supersedes/superseded_by must
+# stay human-curated).
+on:
+  workflow_dispatch:
+    inputs:
+      type:
+        description: "youtube (video or podcast) or pdf (report)"
+        required: true
+        type: choice
+        options: [youtube, pdf]
+      url:
+        description: "Source URL"
+        required: true
+      title_hint:
+        description: "Optional title hint, used to derive a source id"
+        required: false
+      requested_by:
+        description: "Admin email that requested this (for the PR body only)"
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install google-genai python-dotenv pypdf
+
+      - name: Derive a source id
+        id: slug
+        run: |
+          RAW="${{ inputs.title_hint }}"
+          if [ -z "$RAW" ]; then RAW="source-$(date +%s)"; fi
+          YEAR=$(date +%Y)
+          # Lowercase, replace anything non-alphanumeric with a hyphen, collapse repeats, trim,
+          # cap length, append the year -- good enough for a draft a human can rename during PR
+          # review; this is not trying to match the catalog's existing naming conventions exactly.
+          SLUG=$(echo "$RAW" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g' | cut -c1-60)
+          echo "id=${SLUG}-${YEAR}" >> "$GITHUB_OUTPUT"
+
+      - name: Run ingestion
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API }}
+          GEMINI_API_FREE: ${{ secrets.GEMINI_API_FREE }}
+        run: |
+          cd ingest
+          SOURCE_ID="${{ steps.slug.outputs.id }}"
+          if [ "${{ inputs.type }}" = "youtube" ]; then
+            python ingest_youtube.py "${{ inputs.url }}" --id "$SOURCE_ID" --title "${{ inputs.title_hint }}"
+          else
+            curl -fsSL -o /tmp/report.pdf "${{ inputs.url }}"
+            python ingest_pdf.py /tmp/report.pdf --id "$SOURCE_ID"
+          fi
+
+      - name: Draft catalog entry
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API }}
+          GEMINI_API_FREE: ${{ secrets.GEMINI_API_FREE }}
+        run: |
+          cd ingest
+          python draft_catalog_entry.py "${{ steps.slug.outputs.id }}"
+
+      - name: Open pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SOURCE_ID: ${{ steps.slug.outputs.id }}
+          SOURCE_URL: ${{ inputs.url }}
+          REQUESTED_BY: ${{ inputs.requested_by }}
+        run: |
+          git config user.name "nacfe-assist-bot"
+          git config user.email "noreply@nacfe-assist.invalid"
+          BRANCH="admin/ingest-${SOURCE_ID}"
+          git checkout -b "$BRANCH"
+          git add "corpus/sources/${SOURCE_ID}.md" "corpus/pending/${SOURCE_ID}.json" ingest/ingest_log.jsonl
+          git commit -m "Ingest ${SOURCE_ID} (admin console, pending review)"
+          git push origin "$BRANCH"
+          gh label create pending-source --color FBCA04 --description "Awaiting catalog review" 2>/dev/null || true
+          # Built line-by-line via printf (not a multi-line string literal) so nothing here is
+          # sensitive to this YAML file's own indentation.
+          printf '%s\n' \
+            "Requested via the admin console by ${REQUESTED_BY}." \
+            "" \
+            "Source: ${SOURCE_URL}" \
+            "" \
+            "This PR contains the ingested document (\`corpus/sources/${SOURCE_ID}.md\`) and an **AI-drafted** catalog entry (\`corpus/pending/${SOURCE_ID}.json\`) for review -- nothing here is live yet." \
+            "" \
+            "Before merging:" \
+            "- [ ] Check the drafted abstract, topics, and key_findings against the real document" \
+            "- [ ] Set \`status\`, \`supersedes\`, \`superseded_by\` by hand -- these need checking against the rest of the live catalog and are deliberately left for a human (see SPEC.md 3)" \
+            "- [ ] Move the reviewed fields into \`corpus/catalog.json\`, delete \`corpus/pending/${SOURCE_ID}.json\`" \
+            "- [ ] After merging, run \`npm run deploy\` from \`worker/\` to make it live" \
+            > /tmp/pr_body.md
+          gh pr create --title "Add pending source: ${SOURCE_ID}" --label pending-source --body-file /tmp/pr_body.md
