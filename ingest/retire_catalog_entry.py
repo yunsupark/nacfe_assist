@@ -24,7 +24,11 @@ def main():
     if len(remaining) == len(catalog):
         print(f"no catalog entry with id {source_id!r} -- nothing removed", file=sys.stderr)
         sys.exit(1)
-    CATALOG_PATH.write_text(json.dumps(remaining, indent=2) + "\n")
+    # ensure_ascii=False: the catalog's real titles carry en-dashes and curly quotes, and
+    # json.dumps's default (ensure_ascii=True) would escape every one of them into \uXXXX --
+    # rewriting ~740 lines that didn't actually change and burying the one real removal in
+    # noise a PR reviewer can't see through.
+    CATALOG_PATH.write_text(json.dumps(remaining, indent=2, ensure_ascii=False) + "\n")
     print(f"removed {source_id!r} from {CATALOG_PATH}")
 
 

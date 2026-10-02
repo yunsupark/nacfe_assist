@@ -81,7 +81,11 @@ def main():
 
     PENDING_DIR.mkdir(exist_ok=True)
     out_path = PENDING_DIR / f"{args.source_id}.json"
-    out_path.write_text(json.dumps(entry, indent=2) + "\n")
+    # ensure_ascii=False for consistency with retire_catalog_entry.py -- this writes a fresh
+    # small file rather than rewriting an existing one, so the default wouldn't cause spurious
+    # diff noise here, but there's no reason for a drafted entry's readable titles/quotes to be
+    # escaped into \uXXXX either.
+    out_path.write_text(json.dumps(entry, indent=2, ensure_ascii=False) + "\n")
     print(f"wrote {out_path} -- AI-drafted, review before moving into corpus/catalog.json")
 
 

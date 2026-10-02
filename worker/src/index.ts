@@ -487,23 +487,40 @@ async function getSponsorConfig(env: Env): Promise<SponsorConfig> {
  * every /query call. Fails open (empty set, epoch "0", logged) on any D1 error: a transient
  * hiccup here must never fail the query it would otherwise just skip filtering for.
  */
-async function getAdminState(env: Env): Promise<{ hidden: Set<string>; epoch: string }> {
+/**
+ * `epoch: null` means "D1 state is unknown right now" -- NOT "treat this as epoch 0". A hiccup
+ * that defaulted to a sentinel epoch would make the Worker both read from and write into
+ * whatever namespace epoch "0" was, which after even one hide/unhide is a stale, already-
+ * superseded cache namespace: a reader could get served a pre-hide cached answer, AND a fresh
+ * answer written during the hiccup would live in that stale namespace for the full 30-day TTL,
+ * well past the hiccup itself. The caller (handleQuery) must skip the cache entirely -- neither
+ * read nor write -- whenever epoch is null, degrading to "always call the model fresh" rather
+ * than "silently reuse the wrong cache". The hidden-id set has no equivalent failure mode (an
+ * empty set on failure just means unfiltered routing for that one request, not a durable write
+ * into the wrong place), so it stays a plain empty Set rather than null.
+ */
+async function getAdminState(env: Env): Promise<{ hidden: Set<string>; epoch: string | null }> {
   try {
-    const [hiddenRows, epochRow] = await withTimeout(
+    const result = await withTimeout(
       Promise.all([
         env.DB.prepare(`SELECT source_id FROM hidden_sources`).all<{ source_id: string }>(),
         env.DB.prepare(`SELECT value FROM admin_config WHERE key = 'catalog_epoch'`).first<{ value: string }>(),
       ]),
       D1_LOG_TIMEOUT_MS,
       "getAdminState",
-    ) ?? [null, null];
+    );
+    if (!result) {
+      console.error("getAdminState timed out; skipping the answer cache for this request");
+      return { hidden: new Set(), epoch: null };
+    }
+    const [hiddenRows, epochRow] = result;
     return {
-      hidden: new Set((hiddenRows?.results ?? []).map((r) => r.source_id)),
+      hidden: new Set(hiddenRows.results.map((r) => r.source_id)),
       epoch: epochRow?.value ?? "0",
     };
   } catch (err) {
-    console.error("getAdminState failed (ignored, routing unfiltered):", err);
-    return { hidden: new Set(), epoch: "0" };
+    console.error("getAdminState failed; skipping the answer cache for this request:", err);
+    return { hidden: new Set(), epoch: null };
   }
 }
 
@@ -1009,11 +1026,15 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   // this, a source hidden for being wrong could still be cited from cache for up to a month
   // (see admin_config.catalog_epoch and POST /admin/api/sources/<id>/hide).
   const cacheKey = `answer:${adminState.epoch}:${await sha256Hex(normalized)}`;
-  // A follow-up's correct answer depends on the conversation it's following, so the same
-  // literal text can mean different things turn to turn -- caching by question text alone
-  // would serve someone else's follow-up answer to a person asking the same thing standalone,
-  // or vice versa. Only ever cache (read or write) a question asked with no history.
-  const cached = history.length === 0 ? await env.CACHE.get(cacheKey, "json") : null;
+  // Caching requires BOTH a standalone question (a follow-up's correct answer depends on the
+  // conversation it's following, so the same literal text can mean different things turn to
+  // turn) AND a known epoch. A null epoch means getAdminState couldn't confirm D1 state for
+  // this request -- reading or writing under a guessed epoch would risk serving a pre-hide
+  // answer, or pinning a fresh one into a stale, already-superseded cache namespace for 30
+  // days. Skipping the cache entirely just means this one request is answered fresh, which is
+  // the correct, if slower, degradation.
+  const cacheable = history.length === 0 && adminState.epoch !== null;
+  const cached = cacheable ? await env.CACHE.get(cacheKey, "json") : null;
   if (cached) {
     return lineStreamResponse(
       ctx,
@@ -1119,7 +1140,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
           out_of_scope: true,
           recency_warning: routeResult.recency_warning,
         };
-        if (history.length === 0) {
+        if (cacheable) {
           ctx.waitUntil(env.CACHE.put(cacheKey, JSON.stringify(payload), { expirationTtl: 3600 * 24 * 30 }));
         }
         const queryId = await logQuery(env, {
@@ -1170,7 +1191,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
       // Only cache a generation the model actually finished. A MAX_TOKENS truncation or a
       // safety stop otherwise gets pinned for 30 days and served to everyone who asks this
       // question again.
-      if (complete && history.length === 0) {
+      if (complete && cacheable) {
         ctx.waitUntil(env.CACHE.put(cacheKey, JSON.stringify(payload), { expirationTtl: 3600 * 24 * 30 }));
       }
       const queryId = await logQuery(env, {
@@ -1511,14 +1532,32 @@ async function handleAdminLogin(request: Request, env: Env): Promise<Response> {
   return new Response(null, { status: 302, headers });
 }
 
+// admin.html has zero external subresources (same self-contained-file philosophy as
+// widget.js), so a strict CSP costs nothing functionally. frame-ancestors 'none' is the part
+// that actually matters here -- it stops the console from ever being framed at all, rather
+// than relying on SameSite=Lax (which already stops the session cookie reaching a cross-site
+// iframe, but there's no reason to depend on that alone when blocking the embed outright is
+// free). 'unsafe-inline' is needed for the page's inline <script>/<style> -- there's no
+// per-request templating into admin.html for an attacker to inject through either one.
+const ADMIN_CSP =
+  "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; " +
+  "connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'";
+
 async function handleAdminPage(request: Request, env: Env): Promise<Response> {
   const session = await requireAdminSession(request, env);
   if (!session) {
-    return new Response(ADMIN_EXPIRED_HTML, { status: 200, headers: { "content-type": "text/html; charset=utf-8" } });
+    return new Response(ADMIN_EXPIRED_HTML, {
+      status: 200,
+      headers: { "content-type": "text/html; charset=utf-8", "content-security-policy": ADMIN_CSP },
+    });
   }
   return new Response(ADMIN_HTML, {
     status: 200,
-    headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" },
+    headers: {
+      "content-type": "text/html; charset=utf-8",
+      "cache-control": "no-store",
+      "content-security-policy": ADMIN_CSP,
+    },
   });
 }
 
