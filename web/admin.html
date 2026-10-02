@@ -362,7 +362,7 @@
     if (!window.confirm('Retire "' + title + '"? This opens a PR that permanently removes it from the catalog.')) return;
     adminFetch("/admin/api/sources/" + encodeURIComponent(id) + "/retire", { method: "POST" })
       .then(function (d) {
-        alert("Retirement PR opened: " + d.pr_url);
+        alert("Retirement requested. The pull request is opened by a CI job and takes a minute or two to appear -- reload this page and check the Pending list.");
         loadPending();
       })
       .catch(function (e) { alert(e.message); });
@@ -391,7 +391,7 @@
       headers: { "content-type": "application/json" },
       body: JSON.stringify(body),
     }).then(function (d) {
-      msg.textContent = "Started. Check the Pending list below for progress.";
+      msg.textContent = "Started. A CI job runs the ingestion and opens a pull request in a few minutes -- reload this page to see it appear under Pending.";
       msg.className = "msg ok";
       document.getElementById("ingest-url").value = "";
       document.getElementById("ingest-title").value = "";
