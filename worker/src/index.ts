@@ -1764,6 +1764,12 @@ async function handleAdminIngest(request: Request, env: Env, actorEmail: string)
   if (titleHint && !/^[\w .,-]*$/.test(titleHint)) {
     return adminJsonResponse({ error: "'title_hint' may only contain letters, numbers, spaces, and . , -" }, 400);
   }
+  // ingest_youtube.py requires --title (it becomes the document's heading and goes into the
+  // transcription prompt), so a video/podcast with no title would ingest with a blank one.
+  // PDFs don't take a title at all -- title_hint only seeds the source id there.
+  if (type === "youtube" && !titleHint.trim()) {
+    return adminJsonResponse({ error: "'title_hint' is required for video/podcast sources" }, 400);
+  }
 
   const result = await githubDispatchWorkflow(env, "ingest-source.yml", {
     type,
