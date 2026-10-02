@@ -26,6 +26,20 @@ workers_dev = true
 # Every model call tries GEMINI_API_FREE first and only falls back to GEMINI_API on a quota
 # error (see generateContentWithFallback in src/gemini.ts) -- this keeps routine usage free
 # and only spills over to paid once free tier's daily quota is actually exhausted.
+#
+# ADMIN_TOKEN_SECRET signs the admin console's handoff and session tokens (see web/admin.html
+# and the /admin* routes in src/index.ts). While unset, every /admin* request is treated as
+# invalid (GET /health reports "admin": false) -- the console is off, not broken. Must match
+# the NACFE_ADMIN_TOKEN_SECRET constant set in the WordPress plugin's wp-config.php.
+#   openssl rand -hex 32 | wrangler secret put ADMIN_TOKEN_SECRET
+#
+# GITHUB_ACTIONS_TOKEN is a GitHub fine-grained personal access token, scoped to ONLY this repo,
+# with "Actions: write" (to dispatch ingest-source.yml/retire-source.yml) and "Pull requests:
+# read" (to list pending PRs for the console) -- nothing broader. Used server-side only; it
+# never reaches the browser. If it expires, POST /admin/api/sources/ingest and .../retire
+# return a clear error naming the problem rather than failing silently.
+#   wrangler secret put GITHUB_ACTIONS_TOKEN
+#
 # Never commit the real keys. Local dev reads them from .dev.vars (gitignored).
 
 [[kv_namespaces]]

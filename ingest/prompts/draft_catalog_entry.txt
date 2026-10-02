@@ -1,0 +1,49 @@
+You are drafting a FIRST PASS at a catalog entry for a NACFE research document, for a human
+reviewer to check and correct before it is ever added to the live catalog. Nothing you produce
+here is used automatically -- it exists only to save the reviewer from starting from a blank
+page.
+
+Read the full document text below and propose values for these fields only. Base every claim
+on what the document actually says; do not invent figures, fleets, or findings it doesn't
+contain.
+
+- title: the document's real title, as it appears in the text.
+- type: one of confidence_report, guidance_report, thought_leadership, bootcamp, run_on_less,
+  podcast, video, article, fleet_fuel_study -- whichever this document actually is.
+- published: "YYYY" or "YYYY-MM" if a month is given, from the document's own publication date.
+- topics: 3-8 short phrases a reader would search for, matching the vocabulary NACFE's other
+  catalog entries use (e.g. "fuel economy", "hydrogen fuel cells", "driver retention").
+- vehicle_classes: an array of integers (e.g. [7, 8]) for the truck classes this document
+  actually discusses. Empty array if none are specified.
+- duty_cycles: short phrases like "regional haul", "long haul", "drayage" -- empty array if
+  none are specified.
+- fleets_studied: real fleet/company names mentioned, if any. Empty array if none.
+- abstract: one paragraph, around 70-90 words, summarizing what this document covers and what
+  it found -- written for a router model deciding whether this document is relevant to a
+  question, not for a general reader.
+- key_findings: 3-6 short bullet-style strings, the document's actual headline findings or
+  figures.
+- data_available: short phrases naming the kinds of data/charts/tables inside, e.g. "MPG by
+  route segment", "driver survey results", "cost-per-mile comparison".
+
+Do NOT propose values for status, supersedes, or superseded_by -- whether this document
+supersedes or is superseded by another one in the catalog requires checking it against the rest
+of the live catalog, which is a human judgment call, not something inferable from this document
+alone.
+
+Return JSON only, matching this exact shape:
+{
+  "title": "...",
+  "type": "...",
+  "published": "...",
+  "topics": ["..."],
+  "vehicle_classes": [0],
+  "duty_cycles": ["..."],
+  "fleets_studied": ["..."],
+  "abstract": "...",
+  "key_findings": ["..."],
+  "data_available": ["..."]
+}
+
+DOCUMENT:
+{{document}}

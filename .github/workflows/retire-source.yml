@@ -1,0 +1,66 @@
+name: Retire source (admin console)
+
+# Triggered by POST /admin/api/sources/<id>/retire (see worker/src/index.ts's
+# githubDispatchWorkflow). Permanent, git-visible removal -- distinct from the instant,
+# reversible "hide" that the admin console also offers (see hidden_sources in
+# migrations/0011_admin_console.sql), which doesn't touch git at all. Opens a PR rather than
+# committing directly, same reviewed-change bar as adding a source.
+on:
+  workflow_dispatch:
+    inputs:
+      id:
+        description: "Catalog source id to retire"
+        required: true
+      requested_by:
+        description: "Admin email that requested this (for the PR body only)"
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  retire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Remove source
+        env:
+          SOURCE_ID: ${{ inputs.id }}
+        run: |
+          if [ ! -f "corpus/sources/${SOURCE_ID}.md" ]; then
+            echo "corpus/sources/${SOURCE_ID}.md not found -- already retired?" >&2
+            exit 1
+          fi
+          git rm "corpus/sources/${SOURCE_ID}.md"
+          python3 ingest/retire_catalog_entry.py "${SOURCE_ID}"
+          git add corpus/catalog.json
+
+      - name: Open pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SOURCE_ID: ${{ inputs.id }}
+          REQUESTED_BY: ${{ inputs.requested_by }}
+        run: |
+          git config user.name "nacfe-assist-bot"
+          git config user.email "noreply@nacfe-assist.invalid"
+          BRANCH="admin/retire-${SOURCE_ID}"
+          git checkout -b "$BRANCH"
+          git commit -m "Retire ${SOURCE_ID} (admin console, pending review)"
+          git push origin "$BRANCH"
+          gh label create pending-retirement --color D93F0B --description "Awaiting retirement review" 2>/dev/null || true
+          printf '%s\n' \
+            "Requested via the admin console by ${REQUESTED_BY}." \
+            "" \
+            "Removes \`corpus/sources/${SOURCE_ID}.md\` and its \`corpus/catalog.json\` entry." \
+            "" \
+            "Before merging:" \
+            "- [ ] Check no other catalog entry's \`supersedes\`/\`superseded_by\` still points at this id -- \`npm run build:corpus\` (from \`worker/\`) will fail loudly if one does, so merging a broken reference can't silently ship" \
+            "- [ ] After merging, run \`npm run deploy\` from \`worker/\` to make the removal live -- the document also stays in R2 until the next deploy re-syncs it, and this PR doesn't delete it from there" \
+            > /tmp/pr_body.md
+          gh pr create --title "Retire source: ${SOURCE_ID}" --label pending-retirement --body-file /tmp/pr_body.md

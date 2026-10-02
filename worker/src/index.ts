@@ -2,7 +2,7 @@
 // the full catalog, then a stronger model answering from the selected sources' full text.
 // See eval/run_eval.py for the local-script version this was ported from, and
 // eval/results/two_stage_scored.md for the eval this design is validated against.
-import { CATALOG, ROUTE_PROMPT, ANSWER_PROMPT, WIDGET_JS } from "./corpus_data";
+import { CATALOG, ROUTE_PROMPT, ANSWER_PROMPT, WIDGET_JS, ADMIN_HTML } from "./corpus_data";
 import {
   generateContentWithFallback,
   stripJsonFence,
@@ -50,6 +50,13 @@ export interface Env {
   ROUTE_MODEL: string;
   ANSWER_MODEL: string;
   RATE_LIMIT_PER_IP_PER_HOUR: string;
+  /** Signs admin handoff/session tokens minted by the WordPress plugin. When unset, every
+   * /admin* route treats every token as invalid -- the console is off, not broken. */
+  ADMIN_TOKEN_SECRET: string;
+  /** Fine-grained GitHub PAT scoped to this repo only (Actions: write, Pull requests: read),
+   * used server-side to dispatch ingest/retire workflow runs and list pending PRs. Never
+   * reaches the browser. */
+  GITHUB_ACTIONS_TOKEN: string;
 }
 
 interface RouteResult {
@@ -99,12 +106,13 @@ type RouterCatalogEntry = Omit<
   CatalogEntry,
   "url" | "media" | "token_count" | "ingested" | "ingest_model"
 >;
-const ROUTER_CATALOG_JSON = JSON.stringify(
-  CATALOG.map((c): RouterCatalogEntry => {
-    const { url, media, token_count, ingested, ingest_model, ...rest } = c;
-    return rest;
-  }),
-);
+/** Extracted so the per-request hidden-sources-filtered path in route() can build the exact
+ * same projection as this module-load-time constant, rather than drifting out of sync with it. */
+function toRouterCatalogEntry(c: CatalogEntry): RouterCatalogEntry {
+  const { url, media, token_count, ingested, ingest_model, ...rest } = c;
+  return rest;
+}
+const ROUTER_CATALOG_JSON = JSON.stringify(CATALOG.map(toRouterCatalogEntry));
 
 /** Rough token estimate for the fixed part of a routing call. ~4 chars/token. */
 const ROUTE_TOKEN_ESTIMATE = Math.ceil((ROUTE_PROMPT.length + ROUTER_CATALOG_JSON.length) / 4);
@@ -405,13 +413,22 @@ async function hashIp(ip: string): Promise<string> {
 
 /**
  * Atomic per-IP rate limit. `scope` keeps separate budgets for separate endpoints so feedback
- * spam can't consume a reader's question allowance (and vice versa).
+ * spam can't consume a reader's question allowance (and vice versa). `windowMs` defaults to an
+ * hour; the ingest-dispatch scope uses a day-long window instead, since that's what actually
+ * bounds worst-case Gemini spend for an endpoint the $50 monthly ceiling doesn't govern at all
+ * (see POST /admin/api/sources/ingest).
  */
-async function checkRateLimit(env: Env, ip: string, scope: string, limit: number): Promise<boolean> {
+async function checkRateLimit(
+  env: Env,
+  ip: string,
+  scope: string,
+  limit: number,
+  windowMs = 3_600_000,
+): Promise<boolean> {
   const ipHash = await hashIp(ip);
   const stub = env.RATE_LIMITER.get(env.RATE_LIMITER.idFromName(`${scope}:${ipHash}`));
-  const hourBucket = String(Math.floor(Date.now() / 3_600_000));
-  const { allowed } = await stub.checkAndIncrement(hourBucket, limit);
+  const bucket = String(Math.floor(Date.now() / windowMs));
+  const { allowed } = await stub.checkAndIncrement(bucket, limit);
   return allowed;
 }
 
@@ -423,14 +440,106 @@ function currentPeriod(): string {
   return new Date().toISOString().slice(0, 7); // YYYY-MM
 }
 
+const SPONSOR_KEYS = ["sponsor_name", "sponsor_tagline", "sponsor_url", "sponsor_logo_url"] as const;
+type SponsorConfig = Record<(typeof SPONSOR_KEYS)[number], string>;
+
+/**
+ * Reads the four sponsor fields from admin_config (set via the admin console -- see POST
+ * /admin/api/sponsor). Fails open to all-empty on ANY problem, not just a missing row: an actual
+ * D1 exception here must never take down /widget.js itself, which is public and has zero other
+ * runtime dependency today. All-empty is exactly today's "no sponsor configured" default, so
+ * failing open degrades to the same state a fresh, never-migrated table would already be in.
+ */
+async function getSponsorConfig(env: Env): Promise<SponsorConfig> {
+  const empty: SponsorConfig = {
+    sponsor_name: "",
+    sponsor_tagline: "",
+    sponsor_url: "",
+    sponsor_logo_url: "",
+  };
+  try {
+    const placeholders = SPONSOR_KEYS.map(() => "?").join(",");
+    const result = await withTimeout(
+      env.DB.prepare(`SELECT key, value FROM admin_config WHERE key IN (${placeholders})`)
+        .bind(...SPONSOR_KEYS)
+        .all<{ key: string; value: string }>(),
+      D1_LOG_TIMEOUT_MS,
+      "getSponsorConfig",
+    );
+    if (!result) return empty;
+    const out = { ...empty };
+    for (const row of result.results) {
+      if ((SPONSOR_KEYS as readonly string[]).includes(row.key)) {
+        out[row.key as keyof SponsorConfig] = row.value;
+      }
+    }
+    return out;
+  } catch (err) {
+    console.error("getSponsorConfig failed (ignored, serving as unsponsored):", err);
+    return empty;
+  }
+}
+
+/**
+ * Hidden-source ids (admin "hide" -- see POST /admin/api/sources/<id>/hide) and the current
+ * catalog_epoch (bumped on every hide/unhide so the 30-day answer cache gets invalidated along
+ * with routing -- see the cache key construction in handleQuery). One D1 round trip, read on
+ * every /query call. Fails open (empty set, epoch "0", logged) on any D1 error: a transient
+ * hiccup here must never fail the query it would otherwise just skip filtering for.
+ */
+/**
+ * `epoch: null` means "D1 state is unknown right now" -- NOT "treat this as epoch 0". A hiccup
+ * that defaulted to a sentinel epoch would make the Worker both read from and write into
+ * whatever namespace epoch "0" was, which after even one hide/unhide is a stale, already-
+ * superseded cache namespace: a reader could get served a pre-hide cached answer, AND a fresh
+ * answer written during the hiccup would live in that stale namespace for the full 30-day TTL,
+ * well past the hiccup itself. The caller (handleQuery) must skip the cache entirely -- neither
+ * read nor write -- whenever epoch is null, degrading to "always call the model fresh" rather
+ * than "silently reuse the wrong cache". The hidden-id set has no equivalent failure mode (an
+ * empty set on failure just means unfiltered routing for that one request, not a durable write
+ * into the wrong place), so it stays a plain empty Set rather than null.
+ */
+async function getAdminState(env: Env): Promise<{ hidden: Set<string>; epoch: string | null }> {
+  try {
+    const result = await withTimeout(
+      Promise.all([
+        env.DB.prepare(`SELECT source_id FROM hidden_sources`).all<{ source_id: string }>(),
+        env.DB.prepare(`SELECT value FROM admin_config WHERE key = 'catalog_epoch'`).first<{ value: string }>(),
+      ]),
+      D1_LOG_TIMEOUT_MS,
+      "getAdminState",
+    );
+    if (!result) {
+      console.error("getAdminState timed out; skipping the answer cache for this request");
+      return { hidden: new Set(), epoch: null };
+    }
+    const [hiddenRows, epochRow] = result;
+    return {
+      hidden: new Set(hiddenRows.results.map((r) => r.source_id)),
+      epoch: epochRow?.value ?? "0",
+    };
+  } catch (err) {
+    console.error("getAdminState failed; skipping the answer cache for this request:", err);
+    return { hidden: new Set(), epoch: null };
+  }
+}
+
 async function route(
   env: Env,
   question: string,
   history: HistoryTurn[],
+  hidden: Set<string>,
   signal: AbortSignal,
 ): Promise<{ result: RouteResult; usage: GeminiUsage }> {
+  // The common case (nothing hidden) reuses the module-load-time precomputed JSON verbatim --
+  // zero added cost. Only when an admin has actually hidden something is the catalog filtered
+  // and re-serialized for this one request (see POST /admin/api/sources/<id>/hide).
+  const catalogJson =
+    hidden.size === 0
+      ? ROUTER_CATALOG_JSON
+      : JSON.stringify(CATALOG.filter((c) => !hidden.has(c.id)).map(toRouterCatalogEntry));
   const prompt = fillTemplate(ROUTE_PROMPT, {
-    catalog: ROUTER_CATALOG_JSON,
+    catalog: catalogJson,
     history: formatHistory(history),
     question,
   });
@@ -609,6 +718,176 @@ function timingSafeEqual(a: string, b: string): boolean {
   return diff === 0;
 }
 
+/**
+ * Admin token helpers for the admin console (see web/admin.html and the /admin* routes below).
+ * Two distinct tokens share this machinery but enforce different rules:
+ *  - a "handoff" token, minted by the WordPress plugin right after it confirms a WP login,
+ *    single-use, short-lived (30 min), carrying a `jti` so GET /admin/login can reject replay;
+ *  - a "session" token, minted by this Worker on successful handoff and carried in a cookie,
+ *    longer-lived (8h), re-verified on every request, no `jti`/replay-tracking since it's
+ *    *meant* to be presented repeatedly, unlike the handoff token.
+ * Format: <base64url(JSON payload)>.<hex HMAC-SHA256 signature over the base64url string>. Not
+ * a JWT -- no algorithm-negotiation header to ever downgrade. Keeps the full 32-byte/64-hex-char
+ * signature rather than feedbackToken's 16-byte truncation above: this gates write access and
+ * lives for hours, not a one-time low-value rating gate.
+ */
+/**
+ * `typ` is load-bearing, not decorative: without it, a handoff token (which also has a valid
+ * signature, shape, and a recent `iat`) would pass verifySessionToken's checks unchanged,
+ * letting it be sent directly as the session cookie -- skipping /admin/login entirely, which
+ * means skipping the jti single-use check (only enforced there), AND stretching its effective
+ * lifetime from the 30-minute handoff TTL to the 8-hour session TTL. Each verifier below checks
+ * its own exact `typ`; neither accepts the other's shape just because the signature is valid.
+ */
+type AdminTokenType = "handoff" | "session";
+interface AdminTokenPayload {
+  typ: AdminTokenType;
+  email: string;
+  iat: number;
+  jti?: string;
+}
+
+function base64UrlEncode(bytes: Uint8Array): string {
+  let bin = "";
+  for (const b of bytes) bin += String.fromCharCode(b);
+  return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+
+/** Decodes through TextDecoder, not a raw atob binary-string -> JSON.parse -- the latter treats
+ * each decoded byte as one UTF-16 code unit, which is wrong for any non-ASCII byte and produces
+ * mojibake for a non-ASCII email instead of the real value. */
+function base64UrlDecode(s: string): string {
+  const padded = s.replace(/-/g, "+").replace(/_/g, "/");
+  const pad = padded.length % 4 === 0 ? "" : "=".repeat(4 - (padded.length % 4));
+  const binary = atob(padded + pad);
+  const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+}
+
+async function hmacHex(secret: string, message: string): Promise<string> {
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(message));
+  return [...new Uint8Array(sig)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function signAdminToken(secret: string, payload: AdminTokenPayload): Promise<string> {
+  const b64 = base64UrlEncode(new TextEncoder().encode(JSON.stringify(payload)));
+  return `${b64}.${await hmacHex(secret, b64)}`;
+}
+
+const ADMIN_TOKEN_CLOCK_SKEW_SECONDS = 60;
+
+/** Verifies signature + basic shape only -- TTL and jti/replay checks are the caller's job,
+ * since handoff and session tokens enforce different rules on top of this. Every failure path
+ * (bad signature, malformed base64/JSON, missing fields, future-dated beyond clock skew) returns
+ * the same null, so there's no oracle distinguishing "wrong secret" from "just malformed". */
+async function parseAdminToken(secret: string, token: string): Promise<AdminTokenPayload | null> {
+  if (!secret) return null;
+  const dot = token.indexOf(".");
+  if (dot < 0) return null;
+  const b64 = token.slice(0, dot);
+  const sigHex = token.slice(dot + 1);
+  if (!timingSafeEqual(sigHex, await hmacHex(secret, b64))) return null;
+  let payload: unknown;
+  try {
+    payload = JSON.parse(base64UrlDecode(b64));
+  } catch {
+    return null;
+  }
+  if (
+    typeof payload !== "object" ||
+    payload === null ||
+    typeof (payload as Record<string, unknown>).email !== "string" ||
+    typeof (payload as Record<string, unknown>).iat !== "number" ||
+    ((payload as Record<string, unknown>).typ !== "handoff" && (payload as Record<string, unknown>).typ !== "session")
+  ) {
+    return null;
+  }
+  const { typ, email, iat, jti } = payload as Record<string, unknown>;
+  if ((iat as number) > Math.floor(Date.now() / 1000) + ADMIN_TOKEN_CLOCK_SKEW_SECONDS) return null;
+  return {
+    typ: typ as AdminTokenType,
+    email: email as string,
+    iat: iat as number,
+    jti: typeof jti === "string" ? jti : undefined,
+  };
+}
+
+const HANDOFF_TOKEN_TTL_SECONDS = 1800; // 30 min
+const SESSION_TOKEN_TTL_SECONDS = 8 * 3600; // 8 hours, a normal admin working session
+
+/** Verifies a WordPress-minted handoff token: signature, shape, TTL, and single-use via a KV
+ * marker keyed on its jti. Marks it used on success -- a second call with the same token (even
+ * one still well within its TTL) returns null the second time. */
+async function verifyHandoffToken(env: Env, token: string): Promise<{ email: string } | null> {
+  const payload = await parseAdminToken(env.ADMIN_TOKEN_SECRET, token);
+  if (!payload || payload.typ !== "handoff" || !payload.jti) return null;
+  if (Math.floor(Date.now() / 1000) - payload.iat > HANDOFF_TOKEN_TTL_SECONDS) return null;
+  const usedKey = `admin-jti-used:${payload.jti}`;
+  if (await env.CACHE.get(usedKey)) return null;
+  await env.CACHE.put(usedKey, "1", { expirationTtl: HANDOFF_TOKEN_TTL_SECONDS });
+  return { email: payload.email };
+}
+
+/** Verifies the session cookie minted at handoff -- same signature check, longer TTL, no
+ * jti/replay tracking since this token is meant to be presented on every request. */
+async function verifySessionToken(env: Env, token: string): Promise<{ email: string } | null> {
+  const payload = await parseAdminToken(env.ADMIN_TOKEN_SECRET, token);
+  if (!payload || payload.typ !== "session") return null;
+  if (Math.floor(Date.now() / 1000) - payload.iat > SESSION_TOKEN_TTL_SECONDS) return null;
+  return { email: payload.email };
+}
+
+const ADMIN_SESSION_COOKIE = "nacfe_admin";
+
+/** Pulls a named cookie's value out of the raw Cookie header, or null if absent. Minimal on
+ * purpose -- this Worker only ever needs to read the one admin session cookie it sets itself. */
+function getCookie(request: Request, name: string): string | null {
+  const header = request.headers.get("cookie");
+  if (!header) return null;
+  for (const part of header.split(";")) {
+    const eq = part.indexOf("=");
+    if (eq < 0) continue;
+    if (part.slice(0, eq).trim() === name) return part.slice(eq + 1).trim();
+  }
+  return null;
+}
+
+async function requireAdminSession(request: Request, env: Env): Promise<{ email: string } | null> {
+  const token = getCookie(request, ADMIN_SESSION_COOKIE);
+  if (!token) return null;
+  return verifySessionToken(env, token);
+}
+
+/** Admin API responses never need CORS headers at all -- admin.html is served by this same
+ * Worker and only ever calls these routes same-origin. Omitting Access-Control-Allow-Origin
+ * entirely (rather than echoing the caller's origin, as the public jsonResponse() does for the
+ * embeddable widget) means a cross-origin page simply can't read these responses, full stop. */
+function adminJsonResponse(body: unknown, status = 200): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "content-type": "application/json", "cache-control": "no-store" },
+  });
+}
+
+async function logAdminAction(env: Env, actorEmail: string, action: string, target: string | null): Promise<void> {
+  try {
+    await env.DB.prepare(`INSERT INTO admin_log (timestamp, actor_email, action, target) VALUES (?, ?, ?, ?)`)
+      .bind(new Date().toISOString(), actorEmail, action, target)
+      .run();
+  } catch (err) {
+    // An audit-log write failing must never block the action it's logging -- same fail-open
+    // stance as logQuery().
+    console.error(`admin_log insert failed (ignored) for action="${action}":`, err);
+  }
+}
+
 /** The action stamped on the widget and required back from siteverify, so a token minted for
  * some other surface can't be replayed against the expensive endpoint. */
 const TURNSTILE_ACTION = "query";
@@ -739,15 +1018,23 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   }
 
   const normalized = normalizeQuestion(question);
+  const adminState = await getAdminState(env);
   // Hashed rather than raw: KV keys cap at 512 bytes and questions are allowed up to 1000
   // characters, so a long question used to throw here -- outside any try/catch, surfacing as
-  // a bare 500 with no CORS headers.
-  const cacheKey = `answer:${await sha256Hex(normalized)}`;
-  // A follow-up's correct answer depends on the conversation it's following, so the same
-  // literal text can mean different things turn to turn -- caching by question text alone
-  // would serve someone else's follow-up answer to a person asking the same thing standalone,
-  // or vice versa. Only ever cache (read or write) a question asked with no history.
-  const cached = history.length === 0 ? await env.CACHE.get(cacheKey, "json") : null;
+  // a bare 500 with no CORS headers. The epoch is folded in so that hiding/unhiding a source
+  // (which bumps it) invalidates the entire 30-day answer cache along with routing -- without
+  // this, a source hidden for being wrong could still be cited from cache for up to a month
+  // (see admin_config.catalog_epoch and POST /admin/api/sources/<id>/hide).
+  const cacheKey = `answer:${adminState.epoch}:${await sha256Hex(normalized)}`;
+  // Caching requires BOTH a standalone question (a follow-up's correct answer depends on the
+  // conversation it's following, so the same literal text can mean different things turn to
+  // turn) AND a known epoch. A null epoch means getAdminState couldn't confirm D1 state for
+  // this request -- reading or writing under a guessed epoch would risk serving a pre-hide
+  // answer, or pinning a fresh one into a stale, already-superseded cache namespace for 30
+  // days. Skipping the cache entirely just means this one request is answered fresh, which is
+  // the correct, if slower, degradation.
+  const cacheable = history.length === 0 && adminState.epoch !== null;
+  const cached = cacheable ? await env.CACHE.get(cacheKey, "json") : null;
   if (cached) {
     return lineStreamResponse(
       ctx,
@@ -834,7 +1121,13 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
     async (write) => {
     let spentMicroUsd = 0;
     try {
-      const { result: routeResult, usage: routeUsage } = await route(env, question, history, signal);
+      const { result: routeResult, usage: routeUsage } = await route(
+        env,
+        question,
+        history,
+        adminState.hidden,
+        signal,
+      );
       const routeTokens = routeUsage.totalTokens;
       spentMicroUsd += costMicroUsd(env.ROUTE_MODEL, routeUsage.promptTokens, routeUsage.outputTokens);
       const selectedIds = routeResult.selected.map((s) => s.id);
@@ -847,7 +1140,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
           out_of_scope: true,
           recency_warning: routeResult.recency_warning,
         };
-        if (history.length === 0) {
+        if (cacheable) {
           ctx.waitUntil(env.CACHE.put(cacheKey, JSON.stringify(payload), { expirationTtl: 3600 * 24 * 30 }));
         }
         const queryId = await logQuery(env, {
@@ -898,7 +1191,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
       // Only cache a generation the model actually finished. A MAX_TOKENS truncation or a
       // safety stop otherwise gets pinned for 30 days and served to everyone who asks this
       // question again.
-      if (complete && history.length === 0) {
+      if (complete && cacheable) {
         ctx.waitUntil(env.CACHE.put(cacheKey, JSON.stringify(payload), { expirationTtl: 3600 * 24 * 30 }));
       }
       const queryId = await logQuery(env, {
@@ -1135,6 +1428,418 @@ async function handleFeedback(request: Request, env: Env): Promise<Response> {
   return jsonResponse({ ok: true }, 200, {}, origin);
 }
 
+// ---------------------------------------------------------------------------------------------
+// Admin console. See web/admin.html for the client, and the plan this was built from for the
+// full design rationale (auth handoff/session split, why source add/retire goes through GitHub
+// Actions + a reviewed PR rather than acting directly on the deployed catalog).
+// ---------------------------------------------------------------------------------------------
+
+const ADMIN_RATE_LIMIT_PER_HOUR = 120;
+/** Ingestion runs real Gemini calls (a whole PDF or video) in GitHub Actions, on a path the
+ * $50/month MONTHLY_COST_CEILING_USD does not govern at all -- this is the only thing bounding
+ * worst-case spend from a console that can one-click-trigger it. A day-long window, not the
+ * default hour (see checkRateLimit's windowMs param). */
+const INGEST_RATE_LIMIT_PER_DAY = 10;
+const GITHUB_REPO = "yunsupark/nacfe_assist";
+
+const ADMIN_EXPIRED_HTML = `<!doctype html>
+<html><head><meta charset="utf-8"><title>NACFE Assist — Admin</title></head>
+<body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:480px;margin:96px auto;padding:0 20px;color:#1a1a1a;text-align:center">
+<h1 style="font-size:20px">Session expired</h1>
+<p>This admin link is no longer valid -- it may have expired, already been used, or the admin console may not be configured. Go back to the WordPress dashboard and click the admin console link again.</p>
+</body></html>`;
+
+/** Every call to GitHub's API from here uses this token server-side only -- it never reaches
+ * the browser. Thrown errors are caught by the calling handler and surfaced to the admin
+ * console as a real error rather than a bare 500, per the "don't fail silently" note on
+ * GITHUB_ACTIONS_TOKEN in the Env interface above. */
+async function githubApi(env: Env, path: string, init: RequestInit = {}): Promise<Response> {
+  return fetch(`https://api.github.com${path}`, {
+    ...init,
+    headers: {
+      authorization: `Bearer ${env.GITHUB_ACTIONS_TOKEN}`,
+      accept: "application/vnd.github+json",
+      "x-github-api-version": "2022-11-28",
+      ...(init.headers as Record<string, string> | undefined),
+    },
+  });
+}
+
+async function githubDispatchWorkflow(
+  env: Env,
+  workflowFile: string,
+  inputs: Record<string, string>,
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const res = await githubApi(env, `/repos/${GITHUB_REPO}/actions/workflows/${workflowFile}/dispatches`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ ref: "main", inputs }),
+  });
+  if (res.status === 204) return { ok: true };
+  const detail = await res.text().catch(() => "");
+  console.error(`githubDispatchWorkflow(${workflowFile}) failed: ${res.status} ${detail.slice(0, 300)}`);
+  return { ok: false, error: `GitHub dispatch failed (${res.status}) -- check GITHUB_ACTIONS_TOKEN hasn't expired` };
+}
+
+interface PendingItem {
+  number: number;
+  title: string;
+  html_url: string;
+  created_at: string;
+  label: string;
+}
+
+async function githubListPendingByLabel(env: Env, label: string): Promise<PendingItem[]> {
+  const res = await githubApi(
+    env,
+    `/repos/${GITHUB_REPO}/issues?state=open&labels=${encodeURIComponent(label)}&per_page=50`,
+  );
+  if (!res.ok) {
+    console.error(`githubListPendingByLabel(${label}) failed: ${res.status}`);
+    return [];
+  }
+  const issues = (await res.json()) as Array<{
+    number: number;
+    title: string;
+    html_url: string;
+    created_at: string;
+    pull_request?: unknown;
+  }>;
+  return issues
+    .filter((i) => i.pull_request) // the issues endpoint also returns plain issues; keep only PRs
+    .map((i) => ({ number: i.number, title: i.title, html_url: i.html_url, created_at: i.created_at, label }));
+}
+
+async function handleAdminLogin(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const token = url.searchParams.get("token");
+  const verified = token ? await verifyHandoffToken(env, token) : null;
+  if (!verified) {
+    return new Response(ADMIN_EXPIRED_HTML, { status: 200, headers: { "content-type": "text/html; charset=utf-8" } });
+  }
+  const sessionToken = await signAdminToken(env.ADMIN_TOKEN_SECRET, {
+    typ: "session",
+    email: verified.email,
+    iat: Math.floor(Date.now() / 1000),
+  });
+  const headers = new Headers({ location: "/admin" });
+  // Path=/admin, not /: nothing outside /admin* ever reads this cookie, so there's no reason
+  // for the browser to attach it anywhere else.
+  headers.append(
+    "set-cookie",
+    `${ADMIN_SESSION_COOKIE}=${sessionToken}; HttpOnly; Secure; SameSite=Lax; Path=/admin; Max-Age=${SESSION_TOKEN_TTL_SECONDS}`,
+  );
+  return new Response(null, { status: 302, headers });
+}
+
+// admin.html has zero external subresources (same self-contained-file philosophy as
+// widget.js), so a strict CSP costs nothing functionally. frame-ancestors 'none' is the part
+// that actually matters here -- it stops the console from ever being framed at all, rather
+// than relying on SameSite=Lax (which already stops the session cookie reaching a cross-site
+// iframe, but there's no reason to depend on that alone when blocking the embed outright is
+// free). 'unsafe-inline' is needed for the page's inline <script>/<style> -- there's no
+// per-request templating into admin.html for an attacker to inject through either one.
+const ADMIN_CSP =
+  "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; " +
+  "connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'";
+
+async function handleAdminPage(request: Request, env: Env): Promise<Response> {
+  const session = await requireAdminSession(request, env);
+  if (!session) {
+    return new Response(ADMIN_EXPIRED_HTML, {
+      status: 200,
+      headers: { "content-type": "text/html; charset=utf-8", "content-security-policy": ADMIN_CSP },
+    });
+  }
+  return new Response(ADMIN_HTML, {
+    status: 200,
+    headers: {
+      "content-type": "text/html; charset=utf-8",
+      "cache-control": "no-store",
+      "content-security-policy": ADMIN_CSP,
+    },
+  });
+}
+
+async function handleAdminUsage(env: Env, actorEmail: string): Promise<Response> {
+  const period = currentPeriod();
+  const likePeriod = `${period}%`;
+  const [queryRow, feedbackRow, eventRow, recentRows, ceilingMicroUsd, usedMicroUsd] = await Promise.all([
+    env.DB.prepare(
+      `SELECT COUNT(*) AS total, SUM(cache_hit) AS cache_hits, SUM(degraded_cache_only) AS degraded
+       FROM queries WHERE timestamp LIKE ?`,
+    )
+      .bind(likePeriod)
+      .first<{ total: number; cache_hits: number | null; degraded: number | null }>(),
+    env.DB.prepare(
+      `SELECT rating, COUNT(*) AS n FROM feedback WHERE timestamp LIKE ? GROUP BY rating`,
+    )
+      .bind(likePeriod)
+      .all<{ rating: string; n: number }>(),
+    env.DB.prepare(`SELECT type, COUNT(*) AS n FROM events WHERE day LIKE ? GROUP BY type`)
+      .bind(likePeriod)
+      .all<{ type: string; n: number }>(),
+    env.DB.prepare(
+      `SELECT id, timestamp, question, cache_hit, cost_micro_usd FROM queries ORDER BY id DESC LIMIT 50`,
+    ).all<{ id: number; timestamp: string; question: string; cache_hit: number; cost_micro_usd: number | null }>(),
+    Promise.resolve(Math.round((parseFloat(env.MONTHLY_COST_CEILING_USD) || 0) * 1_000_000)),
+    budgetStub(env).used(period),
+  ]);
+
+  const feedback = { yes: 0, partly: 0, no: 0 };
+  for (const row of feedbackRow.results) {
+    if (row.rating === "yes" || row.rating === "partly" || row.rating === "no") feedback[row.rating] = row.n;
+  }
+  const events = { impression: 0, sponsor_click: 0, widget_expand: 0 };
+  for (const row of eventRow.results) {
+    if (row.type in events) events[row.type as keyof typeof events] = row.n;
+  }
+
+  return adminJsonResponse({
+    actor_email: actorEmail,
+    period,
+    queries: {
+      total: queryRow?.total ?? 0,
+      cache_hits: queryRow?.cache_hits ?? 0,
+      degraded: queryRow?.degraded ?? 0,
+    },
+    spend: {
+      used_micro_usd: usedMicroUsd,
+      ceiling_micro_usd: ceilingMicroUsd,
+      used_usd: formatUsd(usedMicroUsd),
+      ceiling_usd: formatUsd(ceilingMicroUsd),
+    },
+    feedback,
+    events,
+    recent_queries: recentRows.results.map((r) => ({
+      id: r.id,
+      timestamp: r.timestamp,
+      question: r.question,
+      cache_hit: Boolean(r.cache_hit),
+      cost_usd: formatUsd(r.cost_micro_usd ?? 0),
+    })),
+  });
+}
+
+async function handleAdminSponsorGet(env: Env): Promise<Response> {
+  const rows = await env.DB.prepare(
+    `SELECT key, value, updated_at, updated_by FROM admin_config WHERE key IN (${SPONSOR_KEYS.map(() => "?").join(",")})`,
+  )
+    .bind(...SPONSOR_KEYS)
+    .all<{ key: string; value: string; updated_at: string; updated_by: string | null }>();
+  const out: Record<string, string> = { sponsor_name: "", sponsor_tagline: "", sponsor_url: "", sponsor_logo_url: "" };
+  let updatedAt: string | null = null;
+  let updatedBy: string | null = null;
+  for (const row of rows.results) {
+    out[row.key] = row.value;
+    if (!updatedAt || row.updated_at > updatedAt) {
+      updatedAt = row.updated_at;
+      updatedBy = row.updated_by;
+    }
+  }
+  return adminJsonResponse({ ...out, updated_at: updatedAt, updated_by: updatedBy });
+}
+
+function isValidHttpUrl(value: string): boolean {
+  try {
+    const u = new URL(value);
+    return u.protocol === "http:" || u.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+async function handleAdminSponsorPost(request: Request, env: Env, actorEmail: string): Promise<Response> {
+  let body: Record<string, unknown>;
+  try {
+    body = await request.json();
+  } catch {
+    return adminJsonResponse({ error: "invalid JSON body" }, 400);
+  }
+  const values: Record<string, string> = {};
+  for (const key of SPONSOR_KEYS) {
+    const v = body[key];
+    if (typeof v !== "string" || v.length > 300) {
+      return adminJsonResponse({ error: `'${key}' must be a string of at most 300 characters` }, 400);
+    }
+    if ((key === "sponsor_url" || key === "sponsor_logo_url") && v && !isValidHttpUrl(v)) {
+      return adminJsonResponse({ error: `'${key}' must be a valid http(s) URL` }, 400);
+    }
+    values[key] = v;
+  }
+  const now = new Date().toISOString();
+  await Promise.all(
+    SPONSOR_KEYS.map((key) =>
+      env.DB.prepare(
+        `INSERT INTO admin_config (key, value, updated_at, updated_by) VALUES (?, ?, ?, ?)
+         ON CONFLICT (key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at, updated_by = excluded.updated_by`,
+      )
+        .bind(key, values[key], now, actorEmail)
+        .run(),
+    ),
+  );
+  await logAdminAction(env, actorEmail, "sponsor_update", null);
+  return adminJsonResponse({ ...values, updated_at: now, updated_by: actorEmail });
+}
+
+async function handleAdminSources(env: Env): Promise<Response> {
+  const hiddenRows = await env.DB.prepare(`SELECT source_id, hidden_at, hidden_by FROM hidden_sources`).all<{
+    source_id: string;
+    hidden_at: string;
+    hidden_by: string | null;
+  }>();
+  const hiddenMap = new Map(hiddenRows.results.map((r) => [r.source_id, r]));
+  const sources = CATALOG.map((c) => {
+    const h = hiddenMap.get(c.id);
+    return {
+      id: c.id,
+      title: c.title,
+      type: c.type,
+      published: c.published,
+      status: c.status,
+      hidden: Boolean(h),
+      hidden_at: h?.hidden_at ?? null,
+      hidden_by: h?.hidden_by ?? null,
+    };
+  });
+  return adminJsonResponse({ sources });
+}
+
+/** Bumps catalog_epoch so the 30-day answer cache is invalidated along with routing -- see the
+ * cache key construction in handleQuery and the comment on admin_config.catalog_epoch. */
+async function bumpCatalogEpoch(env: Env): Promise<void> {
+  await env.DB.prepare(
+    `INSERT INTO admin_config (key, value, updated_at, updated_by) VALUES ('catalog_epoch', '1', ?, NULL)
+     ON CONFLICT (key) DO UPDATE SET value = CAST(CAST(value AS INTEGER) + 1 AS TEXT), updated_at = excluded.updated_at`,
+  )
+    .bind(new Date().toISOString())
+    .run();
+}
+
+async function handleAdminHideUnhide(
+  id: string,
+  action: "hide" | "unhide",
+  env: Env,
+  actorEmail: string,
+): Promise<Response> {
+  if (!CATALOG_BY_ID.has(id)) return adminJsonResponse({ error: "unknown source id" }, 404);
+  if (action === "hide") {
+    await env.DB.prepare(
+      `INSERT INTO hidden_sources (source_id, hidden_at, hidden_by) VALUES (?, ?, ?)
+       ON CONFLICT (source_id) DO UPDATE SET hidden_at = excluded.hidden_at, hidden_by = excluded.hidden_by`,
+    )
+      .bind(id, new Date().toISOString(), actorEmail)
+      .run();
+  } else {
+    await env.DB.prepare(`DELETE FROM hidden_sources WHERE source_id = ?`).bind(id).run();
+  }
+  await bumpCatalogEpoch(env);
+  await logAdminAction(env, actorEmail, action, id);
+  return adminJsonResponse({ ok: true, id, hidden: action === "hide" });
+}
+
+const VALID_INGEST_TYPES = ["youtube", "pdf"];
+
+async function handleAdminIngest(request: Request, env: Env, actorEmail: string): Promise<Response> {
+  let body: { type?: unknown; url?: unknown; title_hint?: unknown };
+  try {
+    body = await request.json();
+  } catch {
+    return adminJsonResponse({ error: "invalid JSON body" }, 400);
+  }
+  const type = typeof body.type === "string" ? body.type : "";
+  if (!VALID_INGEST_TYPES.includes(type)) {
+    return adminJsonResponse({ error: `'type' must be one of: ${VALID_INGEST_TYPES.join(", ")}` }, 400);
+  }
+  const sourceUrl = typeof body.url === "string" ? body.url : "";
+  if (!isValidHttpUrl(sourceUrl)) return adminJsonResponse({ error: "'url' must be a valid http(s) URL" }, 400);
+  // Deliberately restrictive, not just length-capped: this value is passed as a GitHub Actions
+  // workflow_dispatch input and ends up in a shell script (see ingest-source.yml). The
+  // workflow itself now routes every input through env: + "$VAR" rather than inline ${{ }}
+  // interpolation (which is its own, separate fix for shell/script injection there regardless
+  // of what reaches it) -- but this allowlist means nothing resembling a shell metacharacter
+  // is ever sent in the first place, as defense in depth. The slug step discards anything
+  // outside [a-z0-9-] anyway, so nothing of value is lost.
+  const titleHint = typeof body.title_hint === "string" ? body.title_hint.slice(0, 120) : "";
+  if (titleHint && !/^[\w .,-]*$/.test(titleHint)) {
+    return adminJsonResponse({ error: "'title_hint' may only contain letters, numbers, spaces, and . , -" }, 400);
+  }
+
+  const result = await githubDispatchWorkflow(env, "ingest-source.yml", {
+    type,
+    url: sourceUrl,
+    title_hint: titleHint,
+    requested_by: actorEmail,
+  });
+  if (!result.ok) return adminJsonResponse({ error: result.error }, 502);
+  await logAdminAction(env, actorEmail, "ingest_requested", sourceUrl);
+  return adminJsonResponse({ ok: true }, 202);
+}
+
+async function handleAdminRetire(id: string, env: Env, actorEmail: string): Promise<Response> {
+  if (!CATALOG_BY_ID.has(id)) return adminJsonResponse({ error: "unknown source id" }, 404);
+  const result = await githubDispatchWorkflow(env, "retire-source.yml", { id, requested_by: actorEmail });
+  if (!result.ok) return adminJsonResponse({ error: result.error }, 502);
+  await logAdminAction(env, actorEmail, "retire_requested", id);
+  return adminJsonResponse({ ok: true }, 202);
+}
+
+async function handleAdminPending(env: Env): Promise<Response> {
+  const [sourcePrs, retirePrs] = await Promise.all([
+    githubListPendingByLabel(env, "pending-source"),
+    githubListPendingByLabel(env, "pending-retirement"),
+  ]);
+  const pending = [...sourcePrs, ...retirePrs].sort((a, b) => b.number - a.number);
+  return adminJsonResponse({ pending });
+}
+
+/**
+ * Dispatches every /admin* route. Centralizes the rate limit and session check here rather than
+ * repeating both in each handler -- GET /admin/login and GET /admin are the two exceptions
+ * (the former verifies a handoff token, not a session, since no session exists yet; the latter
+ * serves HTML, not JSON, so it has its own not-logged-in handling).
+ */
+async function handleAdmin(request: Request, env: Env, path: string): Promise<Response> {
+  const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
+
+  if (path === "/admin/login" && request.method === "GET") {
+    return handleAdminLogin(request, env);
+  }
+  if (path === "/admin" && (request.method === "GET" || request.method === "HEAD")) {
+    return handleAdminPage(request, env);
+  }
+
+  if (!(await checkRateLimit(env, ip, "admin", ADMIN_RATE_LIMIT_PER_HOUR))) {
+    return adminJsonResponse({ error: "rate limit exceeded, try again later" }, 429);
+  }
+
+  const session = await requireAdminSession(request, env);
+  if (!session) return adminJsonResponse({ error: "unauthorized" }, 401);
+
+  if (path === "/admin/api/usage" && request.method === "GET") return handleAdminUsage(env, session.email);
+  if (path === "/admin/api/sponsor" && request.method === "GET") return handleAdminSponsorGet(env);
+  if (path === "/admin/api/sponsor" && request.method === "POST") {
+    return handleAdminSponsorPost(request, env, session.email);
+  }
+  if (path === "/admin/api/sources" && request.method === "GET") return handleAdminSources(env);
+  if (path === "/admin/api/sources/pending" && request.method === "GET") return handleAdminPending(env);
+  if (path === "/admin/api/sources/ingest" && request.method === "POST") {
+    if (!(await checkRateLimit(env, ip, "ingest", INGEST_RATE_LIMIT_PER_DAY, 24 * 3_600_000))) {
+      return adminJsonResponse({ error: "ingestion rate limit exceeded, try again tomorrow" }, 429);
+    }
+    return handleAdminIngest(request, env, session.email);
+  }
+  // The one route that can't be a flat equality check: /admin/api/sources/<id>/<hide|unhide|retire>.
+  const sourceAction = path.match(/^\/admin\/api\/sources\/([^/]+)\/(hide|unhide|retire)$/);
+  if (sourceAction && request.method === "POST") {
+    const [, id, action] = sourceAction;
+    if (action === "retire") return handleAdminRetire(id, env, session.email);
+    return handleAdminHideUnhide(id, action as "hide" | "unhide", env, session.email);
+  }
+
+  return adminJsonResponse({ error: "not found" }, 404);
+}
+
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
@@ -1195,6 +1900,9 @@ export default {
           feedback: Boolean(env.FEEDBACK_SECRET),
           // "off" means /query is unprotected; "misconfigured" means it is rejecting everything.
           turnstile: turnstileState(env),
+          // false means every /admin* request is treated as invalid -- the console is off, not
+          // broken (same convention as `feedback` above).
+          admin: Boolean(env.ADMIN_TOKEN_SECRET),
         },
         200,
         {},
@@ -1205,21 +1913,21 @@ export default {
     // HEAD as well as GET: a HEAD-only route match returned 404, which monitors, link
     // checkers and CDN revalidation all see even though browsers fetch scripts with GET.
     if (url.pathname === "/widget.js" && (request.method === "GET" || request.method === "HEAD")) {
-      // Substituted at serve time rather than build time so rotating the widget is a var
-      // change, not a rebuild, and embedders never carry the sitekey in their page.
-      // Sponsor details are substituted at serve time alongside the sitekey, so adding or
-      // changing a sponsor is a vars edit and a redeploy -- embedders change nothing, and no
-      // sponsor block exists in the served file at all until SPONSOR_NAME is set.
+      // Substituted at serve time rather than build time so rotating the sitekey is a secret
+      // change, not a rebuild, and embedders never carry it in their page. Sponsor values come
+      // from admin_config (see getSponsorConfig) instead of env vars, so an admin console edit
+      // takes effect within the hour (this response's own cache-control) with no redeploy.
+      const sponsor = await getSponsorConfig(env);
       const widgetJs = WIDGET_JS.split("__TURNSTILE_SITEKEY__")
         .join(env.TURNSTILE_SITEKEY ?? "")
         .split("__SPONSOR_NAME__")
-        .join(jsStringLiteralSafe(env.SPONSOR_NAME))
+        .join(jsStringLiteralSafe(sponsor.sponsor_name))
         .split("__SPONSOR_TAGLINE__")
-        .join(jsStringLiteralSafe(env.SPONSOR_TAGLINE))
+        .join(jsStringLiteralSafe(sponsor.sponsor_tagline))
         .split("__SPONSOR_URL__")
-        .join(jsStringLiteralSafe(env.SPONSOR_URL))
+        .join(jsStringLiteralSafe(sponsor.sponsor_url))
         .split("__SPONSOR_LOGO_URL__")
-        .join(jsStringLiteralSafe(env.SPONSOR_LOGO_URL));
+        .join(jsStringLiteralSafe(sponsor.sponsor_logo_url));
       return new Response(widgetJs, {
         headers: corsHeaders(
           {
@@ -1229,6 +1937,10 @@ export default {
           origin,
         ),
       });
+    }
+
+    if (url.pathname === "/admin" || url.pathname.startsWith("/admin/")) {
+      return handleAdmin(request, env, url.pathname);
     }
 
     return jsonResponse({ error: "not found" }, 404, {}, origin);
