@@ -1799,6 +1799,20 @@ async function handleAdminPending(env: Env): Promise<Response> {
   return adminJsonResponse({ pending });
 }
 
+/** The audit trail written by logAdminAction(): newest first, capped so one page load stays small.
+ * Every column is text the UI renders via textContent, never HTML (`target` can be a
+ * caller-supplied URL for ingest requests). */
+const ADMIN_ACTIVITY_LIMIT = 200;
+
+async function handleAdminActivity(env: Env): Promise<Response> {
+  const rows = await env.DB.prepare(
+    `SELECT id, timestamp, actor_email, action, target FROM admin_log ORDER BY id DESC LIMIT ?`,
+  )
+    .bind(ADMIN_ACTIVITY_LIMIT)
+    .all<{ id: number; timestamp: string; actor_email: string; action: string; target: string | null }>();
+  return adminJsonResponse({ entries: rows.results, limit: ADMIN_ACTIVITY_LIMIT });
+}
+
 /**
  * Dispatches every /admin* route. Centralizes the rate limit and session check here rather than
  * repeating both in each handler -- GET /admin/login and GET /admin are the two exceptions
@@ -1823,6 +1837,7 @@ async function handleAdmin(request: Request, env: Env, path: string): Promise<Re
   if (!session) return adminJsonResponse({ error: "unauthorized" }, 401);
 
   if (path === "/admin/api/usage" && request.method === "GET") return handleAdminUsage(env, session.email);
+  if (path === "/admin/api/activity" && request.method === "GET") return handleAdminActivity(env);
   if (path === "/admin/api/sponsor" && request.method === "GET") return handleAdminSponsorGet(env);
   if (path === "/admin/api/sponsor" && request.method === "POST") {
     return handleAdminSponsorPost(request, env, session.email);

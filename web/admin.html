@@ -69,6 +69,7 @@
     <button type="button" data-tab="usage" class="active">Usage</button>
     <button type="button" data-tab="sponsor">Sponsor</button>
     <button type="button" data-tab="sources">Sources</button>
+    <button type="button" data-tab="activity">Activity</button>
   </nav>
   <main>
     <section id="tab-usage" class="active">
@@ -168,6 +169,18 @@
         </div>
       </div>
     </section>
+    <section id="tab-activity">
+      <div class="card">
+        <h2>Admin activity</h2>
+        <p class="muted">Every change made in this console, newest first. Showing up to the last 200 actions.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>When</th><th>Who</th><th>Action</th><th>Target</th></tr></thead>
+            <tbody id="activity-list"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
   </main>
 </div>
 
@@ -217,6 +230,7 @@
       document.querySelectorAll("main section").forEach(function (s) { s.classList.remove("active"); });
       btn.classList.add("active");
       document.getElementById("tab-" + btn.getAttribute("data-tab")).classList.add("active");
+      if (btn.getAttribute("data-tab") === "activity") loadActivity();
     });
   });
 
@@ -417,9 +431,38 @@
     }).catch(function (e) { console.error(e); });
   }
 
+  var ACTION_LABELS = {
+    hide: "Hid a source",
+    unhide: "Unhid a source",
+    sponsor_update: "Updated the sponsor",
+    ingest_requested: "Requested a new source",
+    retire_requested: "Requested retiring a source"
+  };
+
+  function loadActivity() {
+    adminFetch("/admin/api/activity").then(function (d) {
+      var tbody = document.getElementById("activity-list");
+      tbody.innerHTML = "";
+      var entries = d.entries || [];
+      if (!entries.length) {
+        tbody.appendChild(el("tr", {}, [el("td", { colspan: "4", text: "No admin actions recorded yet." })]));
+        return;
+      }
+      entries.forEach(function (a) {
+        tbody.appendChild(el("tr", {}, [
+          el("td", {}, [text(new Date(a.timestamp).toLocaleString())]),
+          el("td", {}, [text(a.actor_email)]),
+          el("td", {}, [text(ACTION_LABELS[a.action] || a.action)]),
+          el("td", {}, [text(a.target || "")]),
+        ]));
+      });
+    }).catch(function (e) { console.error(e); });
+  }
+
   loadUsage();
   loadSponsor();
   loadSources();
   loadPending();
+  loadActivity();
 })();
 </script>
