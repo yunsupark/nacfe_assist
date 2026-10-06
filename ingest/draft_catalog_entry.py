@@ -41,13 +41,25 @@ JSON_FENCE_RE = re.compile(r"^```(?:json)?\s*|\s*```$", re.MULTILINE)
 # fields that most need their own judgment.
 HUMAN_ONLY_FIELDS = {"status": "current", "supersedes": None, "superseded_by": None}
 
+# SPEC.md 3's `type` values. When the admin console's "Add source" form passes one, it overrides
+# the model's guess -- the person adding the source knows what it is, the model is only guessing
+# from the text.
+CATALOG_TYPES = [
+    "confidence_report", "guidance_report", "thought_leadership", "bootcamp", "run_on_less",
+    "podcast", "video", "article", "fleet_fuel_study",
+]
 
-def draft(client, model, source_id, document_text):
+
+def draft(client, model, source_id, document_text, type_override=None, published_override=None):
     prompt = PROMPT_PATH.read_text().replace("{{document}}", document_text)
     response = call_gemini(client, model, prompt, media_part=None)
     log_call(source_id, source_id, model, response.usage_metadata)
     cleaned = JSON_FENCE_RE.sub("", response.text.strip())
     fields = json.loads(cleaned)
+    if type_override:
+        fields["type"] = type_override
+    if published_override:
+        fields["published"] = published_override
     return {
         "id": source_id,
         **fields,
@@ -61,6 +73,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("source_id")
     parser.add_argument("--model", default=DEFAULT_MODEL)
+    parser.add_argument("--type", dest="catalog_type", choices=CATALOG_TYPES, default=None,
+                        help="catalog type chosen by the person adding the source; overrides the model's guess")
+    parser.add_argument("--published", default=None, help="YYYY or YYYY-MM; overrides the model's guess")
     args = parser.parse_args()
 
     load_dotenv(find_dotenv(usecwd=True))
@@ -77,7 +92,7 @@ def main():
         sys.exit(1)
 
     client = genai.Client(api_key=api_key)
-    entry = draft(client, args.model, args.source_id, source_path.read_text())
+    entry = draft(client, args.model, args.source_id, source_path.read_text(), args.catalog_type, args.published)
 
     PENDING_DIR.mkdir(exist_ok=True)
     out_path = PENDING_DIR / f"{args.source_id}.json"

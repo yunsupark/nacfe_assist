@@ -125,25 +125,48 @@
         <div class="msg" id="ingest-msg"></div>
         <div class="row">
           <div>
-            <label>Type</label>
-            <select id="ingest-type">
-              <option value="youtube">Video / podcast (YouTube URL)</option>
+            <label>What are you adding?</label>
+            <select id="ingest-kind">
+              <option value="video">Video (YouTube)</option>
+              <option value="podcast">Podcast episode (YouTube)</option>
               <option value="pdf">Report (PDF URL)</option>
             </select>
+          </div>
+          <div>
+            <label>Catalog type</label>
+            <select id="ingest-catalog-type"></select>
           </div>
           <div>
             <label>URL</label>
             <input type="url" id="ingest-url" placeholder="https://" />
           </div>
+        </div>
+        <div class="row" id="ingest-title-row">
           <div>
-            <label>Title (required for video/podcast)</label>
+            <label id="ingest-title-label">Title (required)</label>
             <input type="text" id="ingest-title" />
           </div>
+        </div>
+        <div class="row" id="ingest-podcast-row" style="display:none">
+          <div style="flex:0 0 120px;min-width:0">
+            <label>Episode number</label>
+            <input type="number" id="ingest-episode" min="1" max="9999" step="1" style="width:100%" />
+          </div>
+          <div>
+            <label>Guest</label>
+            <input type="text" id="ingest-guest" />
+          </div>
+          <div>
+            <label>Guest's organization</label>
+            <input type="text" id="ingest-org" />
+          </div>
+        </div>
+        <div class="row">
           <div style="flex:0 0 auto;min-width:0">
             <button type="button" class="btn" id="ingest-submit">Start</button>
           </div>
         </div>
-        <p class="muted">Runs the real ingestion pipeline in CI and opens a pull request with a draft catalog entry for human review -- nothing goes live until that PR is merged and deployed.</p>
+        <p class="muted">Runs the real ingestion pipeline in CI and opens a pull request with a draft catalog entry for human review -- nothing goes live until that PR is merged and deployed. The catalog type you pick is used as-is in the draft. Podcast episodes use YouTube's captions (the standard podcast path), not the audio.</p>
       </div>
       <div class="card">
         <h2>Pending (open PRs)</h2>
@@ -387,14 +410,57 @@
     document.getElementById(id).addEventListener("change", renderSources);
   });
 
+  // "Kind" decides how the source is fetched and processed; the catalog type is what it is in the
+  // catalog. Keep both lists in step with CATALOG_TYPES_BY_KIND in worker/src/index.ts.
+  var CATALOG_TYPES_BY_KIND = {
+    video: ["video", "bootcamp"],
+    podcast: ["podcast"],
+    pdf: ["confidence_report", "guidance_report", "thought_leadership", "run_on_less", "article", "fleet_fuel_study"]
+  };
+  var CATALOG_TYPE_LABELS = {
+    video: "Video / webinar",
+    bootcamp: "Bootcamp recording",
+    podcast: "Podcast episode",
+    confidence_report: "Confidence report",
+    guidance_report: "Guidance report",
+    thought_leadership: "Thought leadership",
+    run_on_less: "Run on Less report",
+    article: "Article",
+    fleet_fuel_study: "Fleet fuel study"
+  };
+
+  function updateIngestForm() {
+    var kind = document.getElementById("ingest-kind").value;
+    var typeSel = document.getElementById("ingest-catalog-type");
+    typeSel.innerHTML = "";
+    CATALOG_TYPES_BY_KIND[kind].forEach(function (t) {
+      typeSel.appendChild(el("option", { value: t, text: CATALOG_TYPE_LABELS[t] || t }));
+    });
+    var isPodcast = kind === "podcast";
+    document.getElementById("ingest-podcast-row").style.display = isPodcast ? "" : "none";
+    document.getElementById("ingest-title-row").style.display = isPodcast ? "none" : "";
+    document.getElementById("ingest-title-label").textContent =
+      kind === "video" ? "Title (required)" : "Title (optional, used for the file name)";
+  }
+  document.getElementById("ingest-kind").addEventListener("change", updateIngestForm);
+  updateIngestForm();
+
   document.getElementById("ingest-submit").addEventListener("click", function () {
     var msg = document.getElementById("ingest-msg");
     msg.className = "msg";
+    var kind = document.getElementById("ingest-kind").value;
     var body = {
-      type: document.getElementById("ingest-type").value,
+      kind: kind,
+      catalog_type: document.getElementById("ingest-catalog-type").value,
       url: document.getElementById("ingest-url").value,
-      title_hint: document.getElementById("ingest-title").value,
     };
+    if (kind === "podcast") {
+      body.episode_num = document.getElementById("ingest-episode").value;
+      body.guest = document.getElementById("ingest-guest").value;
+      body.org = document.getElementById("ingest-org").value;
+    } else {
+      body.title_hint = document.getElementById("ingest-title").value;
+    }
     if (!body.url) {
       msg.textContent = "URL is required.";
       msg.className = "msg err";
@@ -407,8 +473,9 @@
     }).then(function (d) {
       msg.textContent = "Started. A CI job runs the ingestion and opens a pull request in a few minutes -- reload this page to see it appear under Pending.";
       msg.className = "msg ok";
-      document.getElementById("ingest-url").value = "";
-      document.getElementById("ingest-title").value = "";
+      ["ingest-url", "ingest-title", "ingest-episode", "ingest-guest", "ingest-org"].forEach(function (id) {
+        document.getElementById(id).value = "";
+      });
       loadPending();
     }).catch(function (e) {
       msg.textContent = e.message;

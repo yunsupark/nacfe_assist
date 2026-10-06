@@ -1738,45 +1738,92 @@ async function handleAdminHideUnhide(
   return adminJsonResponse({ ok: true, id, hidden: action === "hide" });
 }
 
-const VALID_INGEST_TYPES = ["youtube", "pdf"];
+/**
+ * How a source is fetched and processed ("kind") versus what it is in the catalog ("catalog
+ * type", SPEC.md 3). The form asks for both: the kind picks the ingest script, the type is the
+ * person's own classification and overrides the draft model's guess. Kept in step with
+ * ingest/draft_catalog_entry.py's CATALOG_TYPES and the workflow's `kind` options.
+ */
+const CATALOG_TYPES_BY_KIND: Record<string, string[]> = {
+  video: ["video", "bootcamp"],
+  podcast: ["podcast"],
+  pdf: ["confidence_report", "guidance_report", "thought_leadership", "run_on_less", "article", "fleet_fuel_study"],
+};
+// Letters (any script), digits, spaces and . , ' - only: these values reach a GitHub Actions
+// workflow input and from there a shell script (always via env:, see ingest-source.yml), so
+// nothing resembling a shell metacharacter is ever sent in the first place.
+const PODCAST_NAME_RE = /^[\p{L}\p{N} .,'\u2019-]+$/u;
 
-async function handleAdminIngest(request: Request, env: Env, actorEmail: string): Promise<Response> {
-  let body: { type?: unknown; url?: unknown; title_hint?: unknown };
+async function handleAdminIngest(request: Request, env: Env, actorEmail: string, ip: string): Promise<Response> {
+  let body: {
+    kind?: unknown;
+    catalog_type?: unknown;
+    url?: unknown;
+    title_hint?: unknown;
+    episode_num?: unknown;
+    guest?: unknown;
+    org?: unknown;
+  };
   try {
     body = await request.json();
   } catch {
     return adminJsonResponse({ error: "invalid JSON body" }, 400);
   }
-  const type = typeof body.type === "string" ? body.type : "";
-  if (!VALID_INGEST_TYPES.includes(type)) {
-    return adminJsonResponse({ error: `'type' must be one of: ${VALID_INGEST_TYPES.join(", ")}` }, 400);
+  const kind = typeof body.kind === "string" ? body.kind : "";
+  const allowedTypes = CATALOG_TYPES_BY_KIND[kind];
+  if (!allowedTypes) {
+    return adminJsonResponse({ error: `'kind' must be one of: ${Object.keys(CATALOG_TYPES_BY_KIND).join(", ")}` }, 400);
+  }
+  const catalogType = typeof body.catalog_type === "string" ? body.catalog_type : "";
+  if (!allowedTypes.includes(catalogType)) {
+    return adminJsonResponse({ error: `'catalog_type' for a ${kind} source must be one of: ${allowedTypes.join(", ")}` }, 400);
   }
   const sourceUrl = typeof body.url === "string" ? body.url : "";
   if (!isValidHttpUrl(sourceUrl)) return adminJsonResponse({ error: "'url' must be a valid http(s) URL" }, 400);
-  // Deliberately restrictive, not just length-capped: this value is passed as a GitHub Actions
-  // workflow_dispatch input and ends up in a shell script (see ingest-source.yml). The
-  // workflow itself now routes every input through env: + "$VAR" rather than inline ${{ }}
-  // interpolation (which is its own, separate fix for shell/script injection there regardless
-  // of what reaches it) -- but this allowlist means nothing resembling a shell metacharacter
-  // is ever sent in the first place, as defense in depth. The slug step discards anything
-  // outside [a-z0-9-] anyway, so nothing of value is lost.
+
   const titleHint = typeof body.title_hint === "string" ? body.title_hint.slice(0, 120) : "";
   if (titleHint && !/^[\w .,-]*$/.test(titleHint)) {
     return adminJsonResponse({ error: "'title_hint' may only contain letters, numbers, spaces, and . , -" }, 400);
   }
   // ingest_youtube.py requires --title (it becomes the document's heading and goes into the
-  // transcription prompt), so a video/podcast with no title would ingest with a blank one.
-  // PDFs don't take a title at all -- title_hint only seeds the source id there.
-  if (type === "youtube" && !titleHint.trim()) {
-    return adminJsonResponse({ error: "'title_hint' is required for video/podcast sources" }, 400);
+  // transcription prompt), so a video with no title would ingest with a blank one. PDFs don't
+  // take a title at all -- title_hint only seeds the source id there. Podcasts build their title
+  // from the episode number, guest and organization instead.
+  if (kind === "video" && !titleHint.trim()) {
+    return adminJsonResponse({ error: "'title_hint' is required for video sources" }, 400);
   }
 
-  const result = await githubDispatchWorkflow(env, "ingest-source.yml", {
-    type,
+  const inputs: Record<string, string> = {
+    kind,
+    catalog_type: catalogType,
     url: sourceUrl,
     title_hint: titleHint,
     requested_by: actorEmail,
-  });
+  };
+
+  if (kind === "podcast") {
+    const episodeNum = typeof body.episode_num === "number" ? body.episode_num : Number(body.episode_num);
+    if (!Number.isInteger(episodeNum) || episodeNum < 1 || episodeNum > 9999) {
+      return adminJsonResponse({ error: "'episode_num' must be a whole number between 1 and 9999" }, 400);
+    }
+    const guest = typeof body.guest === "string" ? body.guest.trim().slice(0, 80) : "";
+    const org = typeof body.org === "string" ? body.org.trim().slice(0, 80) : "";
+    if (!guest || !org) return adminJsonResponse({ error: "'guest' and 'org' are required for podcast episodes" }, 400);
+    if (!PODCAST_NAME_RE.test(guest) || !PODCAST_NAME_RE.test(org)) {
+      return adminJsonResponse({ error: "'guest' and 'org' may only contain letters, numbers, spaces, and . , ' -" }, 400);
+    }
+    inputs.episode_num = String(episodeNum);
+    inputs.guest = guest;
+    inputs.org = org;
+  }
+
+  // Checked only now, after validation: a mistyped form never reaches GitHub or costs anything, so
+  // it shouldn't burn one of the day's runs. This limit exists to bound real ingestion spend.
+  if (!(await checkRateLimit(env, ip, "ingest", INGEST_RATE_LIMIT_PER_DAY, 24 * 3_600_000))) {
+    return adminJsonResponse({ error: "ingestion rate limit exceeded, try again tomorrow" }, 429);
+  }
+
+  const result = await githubDispatchWorkflow(env, "ingest-source.yml", inputs);
   if (!result.ok) return adminJsonResponse({ error: result.error }, 502);
   await logAdminAction(env, actorEmail, "ingest_requested", sourceUrl);
   return adminJsonResponse({ ok: true }, 202);
@@ -1845,10 +1892,7 @@ async function handleAdmin(request: Request, env: Env, path: string): Promise<Re
   if (path === "/admin/api/sources" && request.method === "GET") return handleAdminSources(env);
   if (path === "/admin/api/sources/pending" && request.method === "GET") return handleAdminPending(env);
   if (path === "/admin/api/sources/ingest" && request.method === "POST") {
-    if (!(await checkRateLimit(env, ip, "ingest", INGEST_RATE_LIMIT_PER_DAY, 24 * 3_600_000))) {
-      return adminJsonResponse({ error: "ingestion rate limit exceeded, try again tomorrow" }, 429);
-    }
-    return handleAdminIngest(request, env, session.email);
+    return handleAdminIngest(request, env, session.email, ip);
   }
   // The one route that can't be a flat equality check: /admin/api/sources/<id>/<hide|unhide|retire>.
   const sourceAction = path.match(/^\/admin\/api\/sources\/([^/]+)\/(hide|unhide|retire)$/);
