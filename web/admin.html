@@ -68,6 +68,8 @@
   <nav>
     <button type="button" data-tab="usage" class="active">Usage</button>
     <button type="button" data-tab="sponsor">Sponsor</button>
+    <button type="button" data-tab="info">Info text</button>
+    <button type="button" data-tab="feedback">Feedback</button>
     <button type="button" data-tab="sources">Sources</button>
     <button type="button" data-tab="activity">Activity</button>
   </nav>
@@ -116,6 +118,42 @@
         <p class="muted" id="sponsor-meta"></p>
         <button type="button" class="btn" id="sponsor-save" style="margin-top:10px">Save</button>
         <p class="muted" style="margin-top:10px">Takes effect within the hour (the widget's own cache lifetime) -- no deploy needed.</p>
+      </div>
+    </section>
+
+    <section id="tab-info">
+      <div class="card">
+        <h2>Text behind the (i) button</h2>
+        <div class="msg" id="info-msg"></div>
+        <p class="muted">Shown to readers when they click the (i) next to the question box. Leave a blank line between paragraphs, and start a line with "- " for a bullet. Plain text only: no links or formatting.</p>
+        <textarea id="info-text" rows="14" style="width:100%;font:inherit;padding:10px;border:1px solid #c7c7c7;border-radius:4px"></textarea>
+        <p class="muted" id="info-meta"></p>
+        <button type="button" class="btn" id="info-save" style="margin-top:6px">Save</button>
+        <button type="button" class="btn btn-secondary" id="info-reset" style="margin-top:6px;margin-left:8px">Reset to default</button>
+        <p class="muted" style="margin-top:10px">Takes effect within the hour (the widget's own cache lifetime) -- no deploy needed.</p>
+      </div>
+    </section>
+
+    <section id="tab-feedback">
+      <div class="card">
+        <h2>Reader feedback</h2>
+        <div class="stat-grid" id="feedback-totals"></div>
+        <div class="row" style="margin-top:14px">
+          <div>
+            <label>Show</label>
+            <select id="feedback-filter">
+              <option value="not_yes">Partly and no (default)</option>
+              <option value="all">All ratings, including yes</option>
+            </select>
+          </div>
+        </div>
+        <p class="muted">Newest first, up to 200. Click a question to see the answer the reader was given. Answers are recorded from the date this feature was deployed; older ratings have no answer on file.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>When</th><th>Rating</th><th>Question and answer</th></tr></thead>
+            <tbody id="feedback-list"></tbody>
+          </table>
+        </div>
       </div>
     </section>
 
@@ -254,6 +292,7 @@
       btn.classList.add("active");
       document.getElementById("tab-" + btn.getAttribute("data-tab")).classList.add("active");
       if (btn.getAttribute("data-tab") === "activity") loadActivity();
+      if (btn.getAttribute("data-tab") === "feedback") loadFeedback();
     });
   });
 
@@ -502,6 +541,8 @@
     hide: "Hid a source",
     unhide: "Unhid a source",
     sponsor_update: "Updated the sponsor",
+    info_update: "Edited the (i) text",
+    info_reset: "Reset the (i) text to default",
     ingest_requested: "Requested a new source",
     retire_requested: "Requested retiring a source"
   };
@@ -526,10 +567,85 @@
     }).catch(function (e) { console.error(e); });
   }
 
+  function loadInfo() {
+    adminFetch("/admin/api/info").then(function (d) {
+      document.getElementById("info-text").value = d.text || "";
+      document.getElementById("info-text").setAttribute("maxlength", String(d.max_chars || 2000));
+      var meta = document.getElementById("info-meta");
+      meta.textContent = d.is_default
+        ? "Showing the built-in default text."
+        : "Last edited " + new Date(d.updated_at).toLocaleString() + (d.updated_by ? " by " + d.updated_by : "");
+    }).catch(function (e) { console.error(e); });
+  }
+  function saveInfo(text, doneMsg) {
+    var msg = document.getElementById("info-msg");
+    msg.className = "msg";
+    adminFetch("/admin/api/info", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ text: text }),
+    }).then(function () {
+      msg.textContent = doneMsg;
+      msg.className = "msg ok";
+      loadInfo();
+    }).catch(function (e) {
+      msg.textContent = e.message;
+      msg.className = "msg err";
+    });
+  }
+  document.getElementById("info-save").addEventListener("click", function () {
+    var text = document.getElementById("info-text").value;
+    if (!text.trim()) {
+      document.getElementById("info-msg").textContent = "The text is empty. Use Reset to default to restore the built-in text.";
+      document.getElementById("info-msg").className = "msg err";
+      return;
+    }
+    saveInfo(text, "Saved.");
+  });
+  document.getElementById("info-reset").addEventListener("click", function () {
+    if (window.confirm("Replace your text with the built-in default?")) saveInfo("", "Reset to the default text.");
+  });
+
+  var RATING_LABELS = { yes: "Yes", partly: "Partly", no: "No" };
+  function loadFeedback() {
+    var filter = document.getElementById("feedback-filter").value;
+    adminFetch("/admin/api/feedback?filter=" + encodeURIComponent(filter)).then(function (d) {
+      var totals = document.getElementById("feedback-totals");
+      totals.innerHTML = "";
+      totals.appendChild(statTile(d.totals.yes, "Yes"));
+      totals.appendChild(statTile(d.totals.partly, "Partly"));
+      totals.appendChild(statTile(d.totals.no, "No"));
+      var tbody = document.getElementById("feedback-list");
+      tbody.innerHTML = "";
+      var entries = d.entries || [];
+      if (!entries.length) {
+        tbody.appendChild(el("tr", {}, [el("td", { colspan: "3", text: "No feedback to show." })]));
+        return;
+      }
+      entries.forEach(function (f) {
+        var answerText = f.answer
+          ? f.answer + (f.answer_truncated ? "\n\n[answer cut off for display]" : "")
+          : "No answer on file for this one (it was rated before answers were recorded).";
+        var details = el("details", {}, [
+          el("summary", { text: f.question }),
+          el("div", { style: "white-space:pre-wrap;margin-top:8px;padding:10px;background:#f7f7f7;border-radius:4px;font-size:13px;line-height:1.5", text: answerText }),
+        ]);
+        tbody.appendChild(el("tr", {}, [
+          el("td", {}, [text(new Date(f.timestamp).toLocaleString())]),
+          el("td", {}, [text(RATING_LABELS[f.rating] || f.rating)]),
+          el("td", {}, [details]),
+        ]));
+      });
+    }).catch(function (e) { console.error(e); });
+  }
+  document.getElementById("feedback-filter").addEventListener("change", loadFeedback);
+
   loadUsage();
   loadSponsor();
   loadSources();
   loadPending();
   loadActivity();
+  loadInfo();
+  loadFeedback();
 })();
 </script>

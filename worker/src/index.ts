@@ -440,6 +440,53 @@ function currentPeriod(): string {
   return new Date().toISOString().slice(0, 7); // YYYY-MM
 }
 
+/** Text behind the widget's (i) button until an admin saves their own (admin_config key
+ * info_text). Format: blank line = new paragraph, line starting "- " = bullet. The single source
+ * of truth for the default; web/widget.js only has a one-line fallback for non-Worker previews. */
+const INFO_TEXT_KEY = "info_text";
+const INFO_TEXT_MAX_CHARS = 2000;
+const DEFAULT_INFO_TEXT = [
+  "Answers are drawn from these NACFE published sources:",
+  "",
+  "- Current Technology (Confidence Reports)",
+  "- Emerging Technology (Guidance Reports)",
+  "- Fleet Efficiency Study (latest)",
+  "- Run on Less Reports",
+  "- Thought Leadership Reports",
+  "- Collaboration Reports",
+  "- Mike & Friends Podcasts",
+  "- Run on Less Messy Middle Bootcamps",
+  "- Run on Less fleet profile videos",
+  "",
+  "Source library last updated 07/2026.",
+].join("\n");
+
+/** The saved info text, or the default when none is saved or D1 fails (fail-open, like
+ * getSponsorConfig: a D1 blip must never take the public widget down). */
+async function getInfoText(env: Env): Promise<string> {
+  try {
+    const row = await withTimeout(
+      env.DB.prepare(`SELECT value FROM admin_config WHERE key = ?`).bind(INFO_TEXT_KEY).first<{ value: string }>(),
+      D1_LOG_TIMEOUT_MS,
+      "getInfoText",
+    );
+    return row && row.value.trim() ? row.value : DEFAULT_INFO_TEXT;
+  } catch (err) {
+    console.error("getInfoText failed (ignored, serving the default text):", err);
+    return DEFAULT_INFO_TEXT;
+  }
+}
+
+/** Escapes text for placement INSIDE a double-quoted JS string literal in the served widget.js.
+ * Unlike jsStringLiteralSafe this keeps newlines (as \n) and allows the longer info text. */
+function jsLongStringLiteralSafe(value: string): string {
+  return JSON.stringify(value)
+    .slice(1, -1)
+    .replace(/</g, "\\u003c")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
+}
+
 const SPONSOR_KEYS = ["sponsor_name", "sponsor_tagline", "sponsor_url", "sponsor_logo_url"] as const;
 type SponsorConfig = Record<(typeof SPONSOR_KEYS)[number], string>;
 
@@ -633,6 +680,7 @@ async function logQuery(
     degradedCacheOnly: boolean;
     costMicroUsd: number | null;
     error?: string | null;
+    answer?: string | null;
     visitorId?: string | null;
     country?: string | null;
     pageUrl?: string | null;
@@ -656,6 +704,9 @@ async function logQuery(
   }
 }
 
+/** Caps the stored answer text; the full answer is still served to the reader. */
+const MAX_STORED_ANSWER_CHARS = 20_000;
+
 async function insertQueryRow(
   env: Env,
   fields: Parameters<typeof logQuery>[1],
@@ -664,8 +715,8 @@ async function insertQueryRow(
     `INSERT INTO queries
       (timestamp, question, normalized_question, cache_hit, out_of_scope, selected_sources,
        recency_warning, route_tokens, answer_tokens, total_tokens, latency_ms, degraded_cache_only,
-       cost_micro_usd, error, visitor_id, country, page_url)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       cost_micro_usd, error, answer, visitor_id, country, page_url)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   )
     .bind(
       new Date().toISOString(),
@@ -682,6 +733,7 @@ async function insertQueryRow(
       fields.degradedCacheOnly ? 1 : 0,
       fields.costMicroUsd,
       fields.error ?? null,
+      fields.answer ? fields.answer.slice(0, MAX_STORED_ANSWER_CHARS) : null,
       fields.visitorId ?? null,
       fields.country ?? null,
       fields.pageUrl ?? null,
@@ -1052,6 +1104,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         latencyMs: Date.now() - start,
         degradedCacheOnly: false,
         costMicroUsd: 0, // a cache hit spends nothing
+        answer: (cached as { answer?: string }).answer ?? null,
         visitorId,
         country,
         pageUrl,
@@ -1156,6 +1209,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
           latencyMs: Date.now() - start,
           degradedCacheOnly: false,
           costMicroUsd: spentMicroUsd,
+          answer: payload.answer,
           visitorId,
           country,
           pageUrl,
@@ -1207,6 +1261,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         latencyMs: Date.now() - start,
         degradedCacheOnly: false,
         costMicroUsd: spentMicroUsd,
+        answer: payload.answer,
         visitorId,
         country,
         pageUrl,
@@ -1846,6 +1901,98 @@ async function handleAdminPending(env: Env): Promise<Response> {
   return adminJsonResponse({ pending });
 }
 
+async function handleAdminInfoGet(env: Env): Promise<Response> {
+  const row = await env.DB.prepare(`SELECT value, updated_at, updated_by FROM admin_config WHERE key = ?`)
+    .bind(INFO_TEXT_KEY)
+    .first<{ value: string; updated_at: string; updated_by: string | null }>();
+  const saved = row && row.value.trim() ? row : null;
+  return adminJsonResponse({
+    text: saved ? saved.value : DEFAULT_INFO_TEXT,
+    is_default: !saved,
+    default_text: DEFAULT_INFO_TEXT,
+    max_chars: INFO_TEXT_MAX_CHARS,
+    updated_at: saved ? saved.updated_at : null,
+    updated_by: saved ? saved.updated_by : null,
+  });
+}
+
+async function handleAdminInfoPost(request: Request, env: Env, actorEmail: string): Promise<Response> {
+  let body: { text?: unknown };
+  try {
+    body = await request.json();
+  } catch {
+    return adminJsonResponse({ error: "invalid JSON body" }, 400);
+  }
+  if (typeof body.text !== "string") return adminJsonResponse({ error: "'text' must be a string" }, 400);
+  const text = body.text.replace(/\r\n/g, "\n").trim();
+  if (text.length > INFO_TEXT_MAX_CHARS) {
+    return adminJsonResponse({ error: `'text' must be at most ${INFO_TEXT_MAX_CHARS} characters` }, 400);
+  }
+  const now = new Date().toISOString();
+  if (!text) {
+    // Blank = go back to the built-in default text.
+    await env.DB.prepare(`DELETE FROM admin_config WHERE key = ?`).bind(INFO_TEXT_KEY).run();
+    await logAdminAction(env, actorEmail, "info_reset", null);
+    return adminJsonResponse({ text: DEFAULT_INFO_TEXT, is_default: true, updated_at: null, updated_by: null });
+  }
+  await env.DB.prepare(
+    `INSERT INTO admin_config (key, value, updated_at, updated_by) VALUES (?, ?, ?, ?)
+     ON CONFLICT (key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at, updated_by = excluded.updated_by`,
+  )
+    .bind(INFO_TEXT_KEY, text, now, actorEmail)
+    .run();
+  await logAdminAction(env, actorEmail, "info_update", null);
+  return adminJsonResponse({ text, is_default: false, updated_at: now, updated_by: actorEmail });
+}
+
+/** Reader feedback joined to the question and the answer that was served. Newest first. By
+ * default only "partly" and "no" ratings -- the ones worth reading -- since an answer rated yes
+ * rarely needs a second look; ?filter=all includes yes. Answers are text the UI renders via
+ * textContent; capped so one load stays small. */
+const ADMIN_FEEDBACK_LIMIT = 200;
+const ADMIN_FEEDBACK_ANSWER_CHARS = 6000;
+
+async function handleAdminFeedback(url: URL, env: Env): Promise<Response> {
+  const filter = url.searchParams.get("filter") === "all" ? "all" : "not_yes";
+  const rows = await env.DB.prepare(
+    `SELECT f.id AS id, f.rating AS rating, f.timestamp AS timestamp,
+            q.id AS query_id, q.question AS question, q.answer AS answer,
+            q.cache_hit AS cache_hit, q.out_of_scope AS out_of_scope
+       FROM feedback f JOIN queries q ON q.id = f.query_id
+      ${filter === "all" ? "" : "WHERE f.rating != 'yes'"}
+      ORDER BY f.id DESC LIMIT ?`,
+  )
+    .bind(ADMIN_FEEDBACK_LIMIT)
+    .all<{
+      id: number; rating: string; timestamp: string; query_id: number; question: string;
+      answer: string | null; cache_hit: number; out_of_scope: number | null;
+    }>();
+  const counts = await env.DB.prepare(`SELECT rating, COUNT(*) AS n FROM feedback GROUP BY rating`).all<{
+    rating: string;
+    n: number;
+  }>();
+  const totals = { yes: 0, partly: 0, no: 0 };
+  for (const c of counts.results) {
+    if (c.rating === "yes" || c.rating === "partly" || c.rating === "no") totals[c.rating] = c.n;
+  }
+  return adminJsonResponse({
+    filter,
+    totals,
+    limit: ADMIN_FEEDBACK_LIMIT,
+    entries: rows.results.map((r) => ({
+      id: r.id,
+      query_id: r.query_id,
+      rating: r.rating,
+      timestamp: r.timestamp,
+      question: r.question,
+      answer: r.answer ? r.answer.slice(0, ADMIN_FEEDBACK_ANSWER_CHARS) : null,
+      answer_truncated: Boolean(r.answer && r.answer.length > ADMIN_FEEDBACK_ANSWER_CHARS),
+      cache_hit: Boolean(r.cache_hit),
+      out_of_scope: r.out_of_scope === null ? null : Boolean(r.out_of_scope),
+    })),
+  });
+}
+
 /** The audit trail written by logAdminAction(): newest first, capped so one page load stays small.
  * Every column is text the UI renders via textContent, never HTML (`target` can be a
  * caller-supplied URL for ingest requests). */
@@ -1885,6 +2032,9 @@ async function handleAdmin(request: Request, env: Env, path: string): Promise<Re
 
   if (path === "/admin/api/usage" && request.method === "GET") return handleAdminUsage(env, session.email);
   if (path === "/admin/api/activity" && request.method === "GET") return handleAdminActivity(env);
+  if (path === "/admin/api/info" && request.method === "GET") return handleAdminInfoGet(env);
+  if (path === "/admin/api/info" && request.method === "POST") return handleAdminInfoPost(request, env, session.email);
+  if (path === "/admin/api/feedback" && request.method === "GET") return handleAdminFeedback(new URL(request.url), env);
   if (path === "/admin/api/sponsor" && request.method === "GET") return handleAdminSponsorGet(env);
   if (path === "/admin/api/sponsor" && request.method === "POST") {
     return handleAdminSponsorPost(request, env, session.email);
@@ -1982,7 +2132,7 @@ export default {
       // change, not a rebuild, and embedders never carry it in their page. Sponsor values come
       // from admin_config (see getSponsorConfig) instead of env vars, so an admin console edit
       // takes effect within the hour (this response's own cache-control) with no redeploy.
-      const sponsor = await getSponsorConfig(env);
+      const [sponsor, infoText] = await Promise.all([getSponsorConfig(env), getInfoText(env)]);
       const widgetJs = WIDGET_JS.split("__TURNSTILE_SITEKEY__")
         .join(env.TURNSTILE_SITEKEY ?? "")
         .split("__SPONSOR_NAME__")
@@ -1992,7 +2142,9 @@ export default {
         .split("__SPONSOR_URL__")
         .join(jsStringLiteralSafe(sponsor.sponsor_url))
         .split("__SPONSOR_LOGO_URL__")
-        .join(jsStringLiteralSafe(sponsor.sponsor_logo_url));
+        .join(jsStringLiteralSafe(sponsor.sponsor_logo_url))
+        .split("__INFO_TEXT__")
+        .join(jsLongStringLiteralSafe(infoText));
       return new Response(widgetJs, {
         headers: corsHeaders(
           {
