@@ -29,10 +29,8 @@
       "#nacfe-assist-root{font-family:Roboto,Helvetica,Arial,sans-serif;color:#1a1a1a;",
       "max-width:720px;margin:0 auto;box-sizing:border-box}",
       "#nacfe-assist-root *{box-sizing:border-box}",
-      "#nacfe-assist-root .na-label{font-size:13px;font-weight:700;letter-spacing:.04em;",
-      "text-transform:uppercase;color:#ab1428;margin:0}",
       "#nacfe-assist-root .na-label-row{display:flex;align-items:center;",
-      "justify-content:space-between;gap:8px;margin:0 0 8px}",
+      "justify-content:flex-end;gap:8px;margin:0 0 8px}",
       "#nacfe-assist-root .na-info-btn{width:18px;height:18px;flex-shrink:0;border-radius:50%;",
       "border:1px solid #c7c7c7;background:#fff;color:#6b6b6b;font-size:12px;font-weight:700;",
       "line-height:1;cursor:pointer;padding:0;display:flex;align-items:center;",
@@ -126,7 +124,6 @@
       // stay mobile-sized so phones/narrow embeds aren't affected.
       "@media (min-width:640px){",
       "#nacfe-assist-root{max-width:900px}",
-      "#nacfe-assist-root .na-label{font-size:15px}",
       "#nacfe-assist-root input[type=text]{font-size:17px;padding:13px 16px}",
       "#nacfe-assist-root button{font-size:17px;padding:13px 24px}",
       "#nacfe-assist-root .na-hint{font-size:14px}",
@@ -150,7 +147,6 @@
   mount.innerHTML = [
     '<div id="nacfe-assist-root">',
     '<div class="na-label-row">',
-    '<p class="na-label">Ask NACFE\'s Research</p>',
     '<button type="button" class="na-info-btn" id="na-info-btn" aria-expanded="false" aria-controls="na-info" aria-label="About this tool">i</button>',
     '</div>',
     '<div class="na-info" id="na-info" style="display:none">',
