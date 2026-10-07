@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: NACFE Assist Launcher
- * Description: Adds the floating "Ask NACFE's Research" button and chat panel to front-end pages
+ * Description: Adds the floating "Ask NACFE" logo button and chat panel to front-end pages
  *              site-wide, with an on/off switch and include/exclude page lists
  *              (Settings > NACFE Assist Launcher). Contains no secrets and no per-user data, so
  *              page caching is safe.
- * Version:     1.0.0
+ * Version:     1.1.0
  */
 
 if (!defined('ABSPATH')) {
@@ -95,16 +95,16 @@ add_action('wp_footer', function () {
         return;
     }
     $base = esc_url_raw(NACFE_ASSIST_BASE);
+    $logo = plugins_url('assets/ask-nacfe-logo.png', __FILE__);
     ?>
 <!-- NACFE Assist Launcher -->
 <style id="na-launcher-style">
   #na-teaser {
     position: fixed; bottom: 24px; right: 24px; z-index: 9999;
-    display: flex; align-items: center; gap: 12px;
-    background: #fff; border-radius: 30px; padding: 12px 20px 12px 14px;
-    box-shadow: 0 4px 14px rgba(0,0,0,.18); cursor: pointer; max-width: 320px;
-    overflow: hidden;
-    transition: box-shadow .15s ease, transform .15s ease, width .3s ease, padding .3s ease;
+    box-sizing: border-box; width: 234px; padding: 12px;
+    background: #fff; border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,.18); cursor: pointer;
+    transition: box-shadow .15s ease, transform .15s ease;
     font-family: Roboto, Helvetica, Arial, sans-serif;
   }
   #na-teaser:hover { box-shadow: 0 6px 20px rgba(0,0,0,.24); transform: translateY(-1px); }
@@ -113,18 +113,20 @@ add_action('wp_footer', function () {
     0%, 100% { box-shadow: 0 4px 14px rgba(0,0,0,.18), 0 0 0px rgba(171,20,40,0); }
     50%      { box-shadow: 0 4px 14px rgba(0,0,0,.18), 0 0 16px 4px rgba(171,20,40,.45); }
   }
-  #na-teaser-icon {
-    width: 42px; height: 42px; border-radius: 50%; background: #ab1428;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  #na-teaser-logo { display: block; width: 210px; height: auto; }
+  /* Sponsor name only (no logo or tagline while closed); two lines at most. */
+  #na-teaser-sponsor {
+    font-size: 11px; color: #6b6b6b; margin-top: 6px; line-height: 1.25;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
   }
-  #na-teaser-icon svg { width: 20px; height: 20px; }
-  #na-teaser-text { display: flex; flex-direction: column; line-height: 1.3; min-width: 0; transition: width .2s ease, opacity .2s ease; }
-  #na-teaser-label { font-size: 14px; font-weight: 700; color: #292d2d; white-space: nowrap; }
-  #na-teaser-sponsor { font-size: 12px; color: #6b6b6b; margin-top: 1px; white-space: normal; line-height: 1.25; }
-  #na-teaser-sponsor b { color: #444; font-weight: 600; }
   #na-teaser.na-hidden { display: none; }
-  #na-teaser.na-mini { width: 52px; padding: 5px; gap: 0; }
-  #na-teaser.na-mini #na-teaser-text { width: 0; opacity: 0; overflow: hidden; }
+  @media (max-width: 640px) {
+    #na-teaser {
+      right: 16px; bottom: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+      width: 170px; padding: 10px;
+    }
+    #na-teaser-logo { width: 150px; }
+  }
 
   #na-launcher-panel {
     position: fixed; bottom: 24px; right: 24px; width: 640px; height: 840px;
@@ -137,10 +139,11 @@ add_action('wp_footer', function () {
   #na-launcher-panel.na-open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
   #na-launcher-header {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 12px 16px; border-bottom: 1px solid #e2e2e2; flex-shrink: 0;
+    padding: 10px 16px; border-bottom: 1px solid #e2e2e2; flex-shrink: 0;
     font-family: Roboto, Helvetica, Arial, sans-serif;
   }
-  #na-launcher-header span { font-size: 14px; font-weight: 700; letter-spacing: .02em; color: #292d2d; }
+  #na-launcher-logo { display: block; height: 56px; width: auto; }
+  @media (max-width: 640px) { #na-launcher-logo { height: 44px; } }
   #na-launcher-close { background: none; border: none; cursor: pointer; color: #6b6b6b; font-size: 20px; line-height: 1; padding: 4px; }
   #na-launcher-close:hover { color: #292d2d; }
   #na-launcher-body { padding: 14px 16px 18px; overflow-y: auto; flex: 1; min-height: 0; }
@@ -153,17 +156,17 @@ add_action('wp_footer', function () {
   window.__naLauncherLoaded = true;
 
   var BASE = <?php echo wp_json_encode(untrailingslashit($base)); ?>;
+  var LOGO = <?php echo wp_json_encode($logo); ?>;
 
   var wrap = document.createElement("div");
   wrap.innerHTML =
     '<div id="na-teaser" role="button" tabindex="0" aria-label="Ask NACFE’s Research">' +
-      '<div id="na-teaser-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-        '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>' +
-      '<div id="na-teaser-text"><span id="na-teaser-label">Ask NACFE’s Research</span>' +
-        '<span id="na-teaser-sponsor" style="display:none"></span></div>' +
+      '<img id="na-teaser-logo" src="' + LOGO + '" alt="Ask NACFE" width="210" height="54">' +
+      '<div id="na-teaser-sponsor" style="display:none"></div>' +
     '</div>' +
-    '<div id="na-launcher-panel">' +
-      '<div id="na-launcher-header"><span>Ask NACFE’s Research</span>' +
+    '<div id="na-launcher-panel" role="dialog" aria-label="Ask NACFE’s Research">' +
+      '<div id="na-launcher-header">' +
+        '<img id="na-launcher-logo" src="' + LOGO + '" alt="Ask NACFE" width="219" height="56">' +
         '<button id="na-launcher-close" aria-label="Close">×</button></div>' +
       '<div id="na-launcher-body"><div id="nacfe-assist"></div></div>' +
     '</div>';
@@ -230,20 +233,6 @@ add_action('wp_footer', function () {
   document.body.appendChild(s);
 
   setTimeout(function () { teaser.classList.add("na-glow"); }, 900);
-
-  // Phones: after 4s collapse the teaser to just the round icon so it stays out of the way.
-  if (window.matchMedia("(max-width: 640px)").matches) {
-    setTimeout(function () {
-      teaser.style.width = teaser.offsetWidth + "px";
-      void teaser.offsetHeight;
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          teaser.classList.add("na-mini");
-          teaser.style.width = "";
-        });
-      });
-    }, 4000);
-  }
 })();
 </script>
     <?php
