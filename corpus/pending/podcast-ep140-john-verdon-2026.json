@@ -1,0 +1,37 @@
+{
+  "id": "podcast-ep140-john-verdon-2026",
+  "title": "Ep. 140: John Verdon – Nevoya",
+  "type": "podcast",
+  "published": "2026-08",
+  "topics": [
+    "electric trucks",
+    "battery electric vehicles",
+    "charging infrastructure",
+    "fleet operations",
+    "Tesla Semi",
+    "book and claim",
+    "total cost of ownership"
+  ],
+  "vehicle_classes": [
+    8
+  ],
+  "duty_cycles": [
+    "regional haul"
+  ],
+  "fleets_studied": [
+    "Nevoya"
+  ],
+  "abstract": "In this podcast episode, NACFE's Mike Roeth interviews John Verdon, co-founder and Chief Commercial Officer of Nevoya, a fully electric truckload carrier operating Class 8 battery electric trucks across California, Arizona, and Texas. Verdon discusses building an electric fleet from the ground up, key operational differences between diesel and electric powertrains, and strategies for maximizing asset utilization. He shares insights on deploying Tesla Semis, leveraging book-and-claim accounting structures, and overcoming charging infrastructure challenges in high-density freight corridors like Dallas-Houston.",
+  "key_findings": [
+    "Nevoya operates 55 to 60 battery electric Class 8 trucks across California, Arizona, and Texas.",
+    "Tesla Semis in Nevoya's fleet operate 30% to 40% cheaper per mile than diesel on longer lengths of haul with heavy payloads.",
+    "Electric truck economics invert traditional diesel fleet logic: fixed asset costs dominate over fuel, requiring maximization of time-based utilization rather than revenue-per-mile optimization.",
+    "Book-and-claim financial mechanisms enable multi-year offtake agreements that support charging infrastructure deployment and corridor expansion in markets like Texas."
+  ],
+  "data_available": [],
+  "status": "current",
+  "supersedes": null,
+  "superseded_by": null,
+  "_draft": true,
+  "_draft_model": "gemini-3.6-flash"
+}

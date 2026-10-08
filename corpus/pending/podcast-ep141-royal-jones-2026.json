@@ -1,0 +1,43 @@
+{
+  "id": "podcast-ep141-royal-jones-2026",
+  "title": "Ep. 141: Royal Jones – Mesilla Valley Transportation",
+  "type": "podcast",
+  "published": "2026-09",
+  "topics": [
+    "fuel economy",
+    "aerodynamics",
+    "tire selection",
+    "driver incentives",
+    "idle reduction",
+    "team driving",
+    "preventive maintenance"
+  ],
+  "vehicle_classes": [
+    8
+  ],
+  "duty_cycles": [
+    "long haul",
+    "regional haul"
+  ],
+  "fleets_studied": [
+    "Mesilla Valley Transportation"
+  ],
+  "abstract": "In this podcast episode, NACFE's Mike Roeth interviews Royal Jones, founder and CEO of Mesilla Valley Transportation (MVT). Jones shares insights on achieving fleet fuel efficiency across MVT's 1,700 tractors and 6,500 trailers. He highlights the impact of aerodynamics, proper tire matching, trailer alignment, speed management, and driver competition in reaching a fleet average of 9.27 MPG (excluding local trucks and owner-operators) and 10.3% idle time. Jones also discusses team driving dynamics, maintenance habits, technology ROI during high fuel prices, and the role of MVT Solutions.",
+  "key_findings": [
+    "Royal Jones reported Mesilla Valley Transportation's fleet fuel economy at 9.27 MPG on the morning of the interview (excluding local trucks and owner-operators) and fleetwide idle time of 10.3%, which he attributes to a culture of driver competition, coaching, and monitoring.",
+    "Proper trailer alignment and matching dual tire diameters are critical maintenance factors, as misaligned trailers and unequal dual tires create severe drag and extra fuel consumption.",
+    "Fuel efficiency is driven by minimizing rolling resistance, parasitic drag, and excess speed rather than limiting engine horsepower.",
+    "Team driving enables fleets to run at lower, more fuel-efficient speeds without losing overall transit time against hours-of-service limits.",
+    "Higher fuel prices accelerate the return on investment for efficiency retrofits such as aerodynamic eco-flaps."
+  ],
+  "data_available": [
+    "fleet fuel economy average",
+    "fleet idle time percentage",
+    "retrofit ROI payback period estimates"
+  ],
+  "status": "current",
+  "supersedes": null,
+  "superseded_by": null,
+  "_draft": true,
+  "_draft_model": "gemini-3.6-flash"
+}

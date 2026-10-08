@@ -1,0 +1,48 @@
+{
+  "id": "webinar-shore-power-hybrid-electric-trus-2025",
+  "title": "Reducing Costs & Emissions with Shore Power and the Shift to Hybrid Electric TRUs",
+  "type": "video",
+  "published": "2025-10",
+  "topics": [
+    "shore power",
+    "transport refrigeration",
+    "eTRUs",
+    "hybrid electric TRUs",
+    "Low Carbon Fuel Standard",
+    "yard energy management",
+    "fuel savings"
+  ],
+  "vehicle_classes": [
+    6,
+    7,
+    8
+  ],
+  "duty_cycles": [
+    "distribution",
+    "yard operations",
+    "regional transport"
+  ],
+  "fleets_studied": [
+    "Martin Brower"
+  ],
+  "abstract": "This webinar transcript examines the operational, financial, and environmental benefits of transitioning transport refrigeration units (TRUs) to diesel-electric hybrid operation and shore power connectivity. Presenters from NACFE, Thermo King, Ndustrial, SRECTrade, and Martin Brower discuss eTRU duty cycles, shore power connector standards, yard energy management, demand response, and monetizing Low Carbon Fuel Standard (LCFS) credits. A case study from Martin Brower details real-world implementation, demonstrating fuel savings of approximately one gallon per hour on shore power, reduced maintenance costs, and lower carbon emissions.",
+  "key_findings": [
+    "Approximately 15% of all trucks are outfitted with TRUs, which consume significant fuel during extended stationary periods in yards and distribution centers.",
+    "Operating a TRU on shore power saves approximately one gallon of diesel fuel per hour, delivering direct fuel cost savings and emission reductions.",
+    "Pre-cooling cargo and holding staged loads consume the majority of TRU energy, making yard and facility shore power the primary target for electrification.",
+    "The 480VAC 3-phase 30A IEC 60309 pin-and-sleeve connector is recommended for new TRU shore power installations, whereas legacy twist-lock connectors are discouraged.",
+    "California LCFS rule changes beginning in 2025 assign credit generation rights directly to the charger facility operator rather than the TRU owner, streamlining monetization."
+  ],
+  "data_available": [
+    "TRU duty cycle energy profile chart",
+    "eTRU vs diesel cost and emissions case study",
+    "shore power connector specifications",
+    "LCFS clean fuel program state map",
+    "fleet shore power implementation kaizen process"
+  ],
+  "status": "current",
+  "supersedes": null,
+  "superseded_by": null,
+  "_draft": true,
+  "_draft_model": "gemini-3.6-flash"
+}
