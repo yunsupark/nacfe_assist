@@ -1,0 +1,51 @@
+{
+  "id": "webinar-charging-as-a-service-report-review-2025",
+  "title": "Charging-as-a-Service Report Review: What We Know Now",
+  "type": "video",
+  "published": "2025-05",
+  "topics": [
+    "charging-as-a-service",
+    "fleet electrification",
+    "charging infrastructure",
+    "battery electric vehicles",
+    "utility engagement",
+    "total cost of ownership",
+    "operational effectiveness"
+  ],
+  "vehicle_classes": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "duty_cycles": [
+    "local",
+    "regional haul",
+    "long haul"
+  ],
+  "fleets_studied": [
+    "Penske"
+  ],
+  "abstract": "In this webinar video, NACFE and Electrada review findings from their joint survey report on fleet perspectives regarding Charging-as-a-Service (CaaS) and commercial fleet electrification. Featuring industry commentary from Penske, the presentation details responses from 175 participants across fleets, OEMs, utilities, and suppliers. The document highlights that fleets prioritize operational effectiveness over initial TCO, identifies utility coordination as the primary barrier to electric vehicle deployment, and details how CaaS business models help fleets mitigate financial and operational risks across Classes 1 through 8.",
+  "key_findings": [
+    "Working with electric utilities is the leading barrier to fleet electrification, cited by 24% of fleets and 29% of broader industry respondents.",
+    "Fleets rank operational effectiveness (4.4 out of 5) as their top criterion for BEV program success, slightly ahead of total cost of ownership (4.1 out of 5).",
+    "Key perceived benefits of Charging-as-a-Service include financial risk transfer, streamlined infrastructure implementation, and long-term uptime guarantees.",
+    "Among survey respondents, 67% have implemented or are implementing electric vehicle projects, with 25% managing multi-location deployments."
+  ],
+  "data_available": [
+    "survey respondent profile by industry segment",
+    "barriers to fleet electrification comparison chart",
+    "fleet vs. industry definitions of EV program success",
+    "perceived benefits of Charging-as-a-Service breakdown"
+  ],
+  "status": "current",
+  "supersedes": null,
+  "superseded_by": null,
+  "_draft": true,
+  "_draft_model": "gemini-3.6-flash"
+}
