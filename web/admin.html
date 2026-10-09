@@ -83,6 +83,19 @@
         <h2>Monthly spend</h2>
         <div class="stat"><span class="n" id="spend-label"></span></div>
         <div class="bar-track"><div class="bar-fill" id="spend-bar" style="width:0%"></div></div>
+        <div class="msg" id="budget-msg" style="margin-top:12px"></div>
+        <div class="row" style="margin:12px 0 4px">
+          <div style="flex:0 0 160px;min-width:0">
+            <label>Monthly limit (USD)</label>
+            <input type="number" id="budget-input" min="1" max="1000" step="1" style="width:100%" />
+          </div>
+          <div style="flex:0 0 auto;min-width:0">
+            <button type="button" class="btn" id="budget-save">Save limit</button>
+            <button type="button" class="btn btn-secondary" id="budget-reset" style="margin-left:8px">Reset to default</button>
+          </div>
+        </div>
+        <p class="muted" id="budget-meta"></p>
+        <p class="muted">Takes effect on the next question. The limit caps what the assistant spends on new answers each month; cached answers are free and keep working after it's reached. Lowering it below what's already been spent switches the tool to cached answers only until next month. Allowed range: $1 to $1,000.</p>
       </div>
       <div class="card">
         <h2>Feedback (this month)</h2>
@@ -541,6 +554,8 @@
     hide: "Hid a source",
     unhide: "Unhid a source",
     sponsor_update: "Updated the sponsor",
+    budget_update: "Changed the monthly spend limit",
+    budget_reset: "Reset the monthly spend limit to default",
     info_update: "Edited the (i) text",
     info_reset: "Reset the (i) text to default",
     ingest_requested: "Requested a new source",
@@ -640,6 +655,49 @@
   }
   document.getElementById("feedback-filter").addEventListener("change", loadFeedback);
 
+  function loadBudget() {
+    adminFetch("/admin/api/budget").then(function (d) {
+      document.getElementById("budget-input").value = d.ceiling_usd;
+      document.getElementById("budget-input").setAttribute("min", String(d.min_usd));
+      document.getElementById("budget-input").setAttribute("max", String(d.max_usd));
+      var meta = document.getElementById("budget-meta");
+      meta.textContent = d.is_default
+        ? "Using the default limit of $" + d.default_usd + "."
+        : "Set by " + (d.updated_by || "an admin") + " on " + new Date(d.updated_at).toLocaleString() + ". The default is $" + d.default_usd + ".";
+    }).catch(function (e) { console.error(e); });
+  }
+  function saveBudget(value, doneMsg) {
+    var msg = document.getElementById("budget-msg");
+    msg.className = "msg";
+    adminFetch("/admin/api/budget", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ ceiling_usd: value }),
+    }).then(function () {
+      msg.textContent = doneMsg;
+      msg.className = "msg ok";
+      loadBudget();
+      loadUsage();
+    }).catch(function (e) {
+      msg.textContent = e.message;
+      msg.className = "msg err";
+    });
+  }
+  document.getElementById("budget-save").addEventListener("click", function () {
+    var raw = document.getElementById("budget-input").value;
+    var n = Number(raw);
+    var msg = document.getElementById("budget-msg");
+    if (raw === "" || !isFinite(n)) {
+      msg.textContent = "Enter a dollar amount.";
+      msg.className = "msg err";
+      return;
+    }
+    if (window.confirm("Set the monthly spend limit to $" + n + "?")) saveBudget(n, "Saved. New limit: $" + n + ".");
+  });
+  document.getElementById("budget-reset").addEventListener("click", function () {
+    if (window.confirm("Go back to the default monthly limit?")) saveBudget(null, "Reset to the default limit.");
+  });
+
   loadUsage();
   loadSponsor();
   loadSources();
@@ -647,5 +705,6 @@
   loadActivity();
   loadInfo();
   loadFeedback();
+  loadBudget();
 })();
 </script>

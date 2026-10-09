@@ -535,6 +535,43 @@ async function getSponsorConfig(env: Env): Promise<SponsorConfig> {
  * hiccup here must never fail the query it would otherwise just skip filtering for.
  */
 /**
+ * The monthly spend ceiling. An admin can set it from the console (admin_config key
+ * monthly_cost_ceiling_usd, within MIN..MAX below); with nothing saved, or anything unreadable,
+ * it falls back to MONTHLY_COST_CEILING_USD in wrangler.toml. Falling back to the configured
+ * default -- never to "no limit" -- is deliberate: a D1 blip must not remove the cost cap.
+ */
+const BUDGET_CEILING_KEY = "monthly_cost_ceiling_usd";
+const BUDGET_CEILING_MIN_USD = 1;
+const BUDGET_CEILING_MAX_USD = 1000;
+
+function envCeilingUsd(env: Env): number {
+  return parseFloat(env.MONTHLY_COST_CEILING_USD) || 0;
+}
+
+function ceilingMicroUsdFrom(savedUsd: string | null, env: Env): number {
+  const saved = savedUsd === null ? NaN : parseFloat(savedUsd);
+  const usd =
+    Number.isFinite(saved) && saved >= BUDGET_CEILING_MIN_USD && saved <= BUDGET_CEILING_MAX_USD
+      ? saved
+      : envCeilingUsd(env);
+  return Math.round(usd * 1_000_000);
+}
+
+async function getCeilingMicroUsd(env: Env): Promise<number> {
+  try {
+    const row = await withTimeout(
+      env.DB.prepare(`SELECT value FROM admin_config WHERE key = ?`).bind(BUDGET_CEILING_KEY).first<{ value: string }>(),
+      D1_LOG_TIMEOUT_MS,
+      "getCeilingMicroUsd",
+    );
+    return ceilingMicroUsdFrom(row?.value ?? null, env);
+  } catch (err) {
+    console.error("getCeilingMicroUsd failed (ignored, using the configured default):", err);
+    return ceilingMicroUsdFrom(null, env);
+  }
+}
+
+/**
  * `epoch: null` means "D1 state is unknown right now" -- NOT "treat this as epoch 0". A hiccup
  * that defaulted to a sentinel epoch would make the Worker both read from and write into
  * whatever namespace epoch "0" was, which after even one hide/unhide is a stale, already-
@@ -546,28 +583,32 @@ async function getSponsorConfig(env: Env): Promise<SponsorConfig> {
  * empty set on failure just means unfiltered routing for that one request, not a durable write
  * into the wrong place), so it stays a plain empty Set rather than null.
  */
-async function getAdminState(env: Env): Promise<{ hidden: Set<string>; epoch: string | null }> {
+async function getAdminState(
+  env: Env,
+): Promise<{ hidden: Set<string>; epoch: string | null; savedCeilingUsd: string | null }> {
   try {
     const result = await withTimeout(
       Promise.all([
         env.DB.prepare(`SELECT source_id FROM hidden_sources`).all<{ source_id: string }>(),
         env.DB.prepare(`SELECT value FROM admin_config WHERE key = 'catalog_epoch'`).first<{ value: string }>(),
+        env.DB.prepare(`SELECT value FROM admin_config WHERE key = ?`).bind(BUDGET_CEILING_KEY).first<{ value: string }>(),
       ]),
       D1_LOG_TIMEOUT_MS,
       "getAdminState",
     );
     if (!result) {
       console.error("getAdminState timed out; skipping the answer cache for this request");
-      return { hidden: new Set(), epoch: null };
+      return { hidden: new Set(), epoch: null, savedCeilingUsd: null };
     }
-    const [hiddenRows, epochRow] = result;
+    const [hiddenRows, epochRow, ceilingRow] = result;
     return {
       hidden: new Set(hiddenRows.results.map((r) => r.source_id)),
       epoch: epochRow?.value ?? "0",
+      savedCeilingUsd: ceilingRow?.value ?? null,
     };
   } catch (err) {
     console.error("getAdminState failed; skipping the answer cache for this request:", err);
-    return { hidden: new Set(), epoch: null };
+    return { hidden: new Set(), epoch: null, savedCeilingUsd: null };
   }
 }
 
@@ -1124,7 +1165,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   // same pre-spend total and sailed past the ceiling together. The reservation is reconciled
   // against real usage once the request finishes (including on the error paths, where the
   // old code silently dropped the routing tokens it had already spent).
-  const ceilingMicroUsd = Math.round((parseFloat(env.MONTHLY_COST_CEILING_USD) || 0) * 1_000_000);
+  const ceilingMicroUsd = ceilingMicroUsdFrom(adminState.savedCeilingUsd, env);
   const budget = budgetStub(env);
   const reservation = estimatedQueryCostMicroUsd(env);
   const { allowed: budgetAllowed } = await budget.reserve(period, ceilingMicroUsd, reservation);
@@ -1637,7 +1678,7 @@ async function handleAdminUsage(env: Env, actorEmail: string): Promise<Response>
     env.DB.prepare(
       `SELECT id, timestamp, question, cache_hit, cost_micro_usd FROM queries ORDER BY id DESC LIMIT 50`,
     ).all<{ id: number; timestamp: string; question: string; cache_hit: number; cost_micro_usd: number | null }>(),
-    Promise.resolve(Math.round((parseFloat(env.MONTHLY_COST_CEILING_USD) || 0) * 1_000_000)),
+    getCeilingMicroUsd(env),
     budgetStub(env).used(period),
   ]);
 
@@ -1993,6 +2034,57 @@ async function handleAdminFeedback(url: URL, env: Env): Promise<Response> {
   });
 }
 
+async function handleAdminBudgetGet(env: Env): Promise<Response> {
+  const row = await env.DB.prepare(`SELECT value, updated_at, updated_by FROM admin_config WHERE key = ?`)
+    .bind(BUDGET_CEILING_KEY)
+    .first<{ value: string; updated_at: string; updated_by: string | null }>();
+  const ceilingMicro = await getCeilingMicroUsd(env);
+  const used = await budgetStub(env).used(currentPeriod());
+  const saved = row && Number.isFinite(parseFloat(row.value)) ? row : null;
+  return adminJsonResponse({
+    ceiling_usd: ceilingMicro / 1_000_000,
+    is_default: !saved,
+    default_usd: envCeilingUsd(env),
+    min_usd: BUDGET_CEILING_MIN_USD,
+    max_usd: BUDGET_CEILING_MAX_USD,
+    used_usd: used / 1_000_000,
+    updated_at: saved ? saved.updated_at : null,
+    updated_by: saved ? saved.updated_by : null,
+  });
+}
+
+/** Sets (or, with null, clears) the monthly spend ceiling. Takes effect on the next question. */
+async function handleAdminBudgetPost(request: Request, env: Env, actorEmail: string): Promise<Response> {
+  let body: { ceiling_usd?: unknown };
+  try {
+    body = await request.json();
+  } catch {
+    return adminJsonResponse({ error: "invalid JSON body" }, 400);
+  }
+  if (body.ceiling_usd === null) {
+    await env.DB.prepare(`DELETE FROM admin_config WHERE key = ?`).bind(BUDGET_CEILING_KEY).run();
+    await logAdminAction(env, actorEmail, "budget_reset", String(envCeilingUsd(env)));
+    return handleAdminBudgetGet(env);
+  }
+  const value = typeof body.ceiling_usd === "number" ? body.ceiling_usd : NaN;
+  if (!Number.isFinite(value) || value < BUDGET_CEILING_MIN_USD || value > BUDGET_CEILING_MAX_USD) {
+    return adminJsonResponse(
+      { error: `'ceiling_usd' must be a number between ${BUDGET_CEILING_MIN_USD} and ${BUDGET_CEILING_MAX_USD}` },
+      400,
+    );
+  }
+  const rounded = Math.round(value * 100) / 100;
+  const now = new Date().toISOString();
+  await env.DB.prepare(
+    `INSERT INTO admin_config (key, value, updated_at, updated_by) VALUES (?, ?, ?, ?)
+     ON CONFLICT (key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at, updated_by = excluded.updated_by`,
+  )
+    .bind(BUDGET_CEILING_KEY, String(rounded), now, actorEmail)
+    .run();
+  await logAdminAction(env, actorEmail, "budget_update", String(rounded));
+  return handleAdminBudgetGet(env);
+}
+
 /** The audit trail written by logAdminAction(): newest first, capped so one page load stays small.
  * Every column is text the UI renders via textContent, never HTML (`target` can be a
  * caller-supplied URL for ingest requests). */
@@ -2032,6 +2124,8 @@ async function handleAdmin(request: Request, env: Env, path: string): Promise<Re
 
   if (path === "/admin/api/usage" && request.method === "GET") return handleAdminUsage(env, session.email);
   if (path === "/admin/api/activity" && request.method === "GET") return handleAdminActivity(env);
+  if (path === "/admin/api/budget" && request.method === "GET") return handleAdminBudgetGet(env);
+  if (path === "/admin/api/budget" && request.method === "POST") return handleAdminBudgetPost(request, env, session.email);
   if (path === "/admin/api/info" && request.method === "GET") return handleAdminInfoGet(env);
   if (path === "/admin/api/info" && request.method === "POST") return handleAdminInfoPost(request, env, session.email);
   if (path === "/admin/api/feedback" && request.method === "GET") return handleAdminFeedback(new URL(request.url), env);
@@ -2093,7 +2187,7 @@ export default {
     // monitors polling liveness don't hit the Budget durable object on every check.
     if (url.pathname === "/status" && (request.method === "GET" || request.method === "HEAD")) {
       const period = currentPeriod();
-      const ceilingMicroUsd = Math.round((parseFloat(env.MONTHLY_COST_CEILING_USD) || 0) * 1_000_000);
+      const ceilingMicroUsd = await getCeilingMicroUsd(env);
       const used = await budgetStub(env).used(period);
       return jsonResponse(
         { ok: true, degraded: used >= ceilingMicroUsd, resets_at: periodResetsAt() },
