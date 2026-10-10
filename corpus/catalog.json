@@ -14485,5 +14485,521 @@
     "token_count": 6192,
     "ingested": "2026-08-13",
     "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "podcast-ep140-john-verdon-2026",
+    "title": "Ep. 140: John Verdon – Nevoya",
+    "type": "podcast",
+    "published": "2026-08",
+    "url": "https://www.youtube.com/watch?v=_Qg5S-9XevM",
+    "media": {
+      "kind": "audio",
+      "minutes": 27
+    },
+    "topics": [
+      "electric trucks",
+      "battery electric vehicles",
+      "charging infrastructure",
+      "fleet operations",
+      "Tesla Semi",
+      "book and claim",
+      "total cost of ownership"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [
+      "regional haul"
+    ],
+    "fleets_studied": [
+      "Nevoya"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "In this podcast episode, NACFE's Mike Roeth interviews John Verdon, co-founder and Chief Commercial Officer of Nevoya, a fully electric truckload carrier operating Class 8 battery electric trucks across California, Arizona, and Texas. Verdon discusses building an electric fleet from the ground up, key operational differences between diesel and electric powertrains, and strategies for maximizing asset utilization. He shares insights on deploying Tesla Semis, leveraging book-and-claim accounting structures, and overcoming charging infrastructure challenges in high-density freight corridors like Dallas-Houston.",
+    "key_findings": [
+      "Nevoya operates 55 to 60 battery electric Class 8 trucks across California, Arizona, and Texas.",
+      "Tesla Semis in Nevoya's fleet operate 30% to 40% cheaper per mile than diesel on longer lengths of haul with heavy payloads.",
+      "Electric truck economics invert traditional diesel fleet logic: fixed asset costs dominate over fuel, requiring maximization of time-based utilization rather than revenue-per-mile optimization.",
+      "Book-and-claim financial mechanisms enable multi-year offtake agreements that support charging infrastructure deployment and corridor expansion in markets like Texas."
+    ],
+    "data_available": [],
+    "token_count": 8092,
+    "ingested": "2026-10-06",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "podcast-ep141-royal-jones-2026",
+    "title": "Ep. 141: Royal Jones – Mesilla Valley Transportation",
+    "type": "podcast",
+    "published": "2026-09",
+    "url": "https://www.youtube.com/watch?v=bkdKBLNb0xM",
+    "media": {
+      "kind": "audio",
+      "minutes": 23
+    },
+    "topics": [
+      "fuel economy",
+      "aerodynamics",
+      "tire selection",
+      "driver incentives",
+      "idle reduction",
+      "team driving",
+      "preventive maintenance"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [
+      "long haul",
+      "regional haul"
+    ],
+    "fleets_studied": [
+      "Mesilla Valley Transportation"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "In this podcast episode, NACFE's Mike Roeth interviews Royal Jones, founder and CEO of Mesilla Valley Transportation (MVT). Jones shares insights on achieving fleet fuel efficiency across MVT's 1,700 tractors and 6,500 trailers. He highlights the impact of aerodynamics, proper tire matching, trailer alignment, speed management, and driver competition in reaching a fleet average of 9.27 MPG (excluding local trucks and owner-operators) and 10.3% idle time. Jones also discusses team driving dynamics, maintenance habits, technology ROI during high fuel prices, and the role of MVT Solutions.",
+    "key_findings": [
+      "Royal Jones reported Mesilla Valley Transportation's fleet fuel economy at 9.27 MPG on the morning of the interview (excluding local trucks and owner-operators) and fleetwide idle time of 10.3%, which he attributes to a culture of driver competition, coaching, and monitoring.",
+      "Proper trailer alignment and matching dual tire diameters are critical maintenance factors, as misaligned trailers and unequal dual tires create severe drag and extra fuel consumption.",
+      "Fuel efficiency is driven by minimizing rolling resistance, parasitic drag, and excess speed rather than limiting engine horsepower.",
+      "Team driving enables fleets to run at lower, more fuel-efficient speeds without losing overall transit time against hours-of-service limits.",
+      "Higher fuel prices accelerate the return on investment for efficiency retrofits such as aerodynamic eco-flaps."
+    ],
+    "data_available": [
+      "fleet fuel economy average",
+      "fleet idle time percentage",
+      "retrofit ROI payback period estimates"
+    ],
+    "token_count": 6849,
+    "ingested": "2026-10-06",
+    "ingest_model": "gemini-3.5-flash-lite"
+  },
+  {
+    "id": "webinar-propane-mid-range-trucks-2026",
+    "title": "Webinar: Using Propane in Mid-Range Trucks",
+    "type": "video",
+    "published": "2026-07",
+    "url": "https://www.youtube.com/watch?v=4vkmsEyAxKI",
+    "media": {
+      "kind": "video",
+      "minutes": 60
+    },
+    "topics": [
+      "propane autogas",
+      "medium-duty trucks",
+      "alternative fuels",
+      "total cost of ownership",
+      "renewable propane",
+      "fueling infrastructure",
+      "emissions reduction"
+    ],
+    "vehicle_classes": [
+      5,
+      7
+    ],
+    "duty_cycles": [
+      "return to base",
+      "route delivery",
+      "inner-city runs"
+    ],
+    "fleets_studied": [
+      "Bimbo Bakeries USA",
+      "Office Depot",
+      "McAbee Trucking"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "This webinar hosted by NACFE examines the operational, financial, and environmental performance of propane autogas in mid-range medium-duty truck fleets. Featuring fleet leaders from Bimbo Bakeries USA, Office Depot, and McAbee Trucking alongside PERC experts, the presentation covers total cost of ownership, lower maintenance demands compared to diesel emissions systems, fueling infrastructure setups, and renewable propane (rLPG) adoption. Findings show propane delivers stable fuel costs ($2.89/DGE vs $5.01/diesel), near-zero NOx emissions, simple three-way catalyst aftertreatment, and quick ROI without grant dependencies.",
+    "key_findings": [
+      "Propane fuel cost averaged $1.91/gallon ($2.89/DGE), representing over a $2.00/DGE savings compared to diesel ($5.01/DGE).",
+      "Propane engines certified at 0.02 g/bhp-hr NOx easily surpass upcoming EPA27 requirements (0.035 g/bhp-hr) using simple three-way catalysts instead of complex SCR/DEF systems.",
+      "Bimbo Bakeries USA operates over 623 active LPG route trucks, utilizing self-contained mobile fueling stations and expanding renewable propane (rLPG) blends.",
+      "McAbee Trucking fully converted its box truck fleet to propane autogas, reporting engine replacement costs of $16,500 compared to $40,000 for diesel.",
+      "PERC announced an incentive program offering $7,500 per propane vehicle and $10,000 toward site preparation for fueling infrastructure starting September 2026."
+    ],
+    "data_available": [
+      "fuel price comparison by diesel gallon equivalent",
+      "fleet alternative fuel vehicle counts",
+      "NOx emissions comparison vs EPA27 standards",
+      "engine replacement and maintenance cost comparisons"
+    ],
+    "token_count": 17430,
+    "ingested": "2026-10-07",
+    "ingest_model": "gemini-3.6-flash"
+  },
+  {
+    "id": "webinar-shore-power-hybrid-electric-trus-2025",
+    "title": "Reducing Costs & Emissions with Shore Power and the Shift to Hybrid Electric TRUs",
+    "type": "video",
+    "published": "2025-10",
+    "url": "https://www.youtube.com/watch?v=Tg7GouK7KXU",
+    "media": {
+      "kind": "video",
+      "minutes": 59
+    },
+    "topics": [
+      "shore power",
+      "transport refrigeration",
+      "eTRUs",
+      "hybrid electric TRUs",
+      "Low Carbon Fuel Standard",
+      "yard energy management",
+      "fuel savings"
+    ],
+    "vehicle_classes": [
+      6,
+      7,
+      8
+    ],
+    "duty_cycles": [
+      "distribution",
+      "yard operations",
+      "regional transport"
+    ],
+    "fleets_studied": [
+      "Martin Brower"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "This webinar transcript examines the operational, financial, and environmental benefits of transitioning transport refrigeration units (TRUs) to diesel-electric hybrid operation and shore power connectivity. Presenters from NACFE, Thermo King, Ndustrial, SRECTrade, and Martin Brower discuss eTRU duty cycles, shore power connector standards, yard energy management, demand response, and monetizing Low Carbon Fuel Standard (LCFS) credits. A case study from Martin Brower details real-world implementation, demonstrating fuel savings of approximately one gallon per hour on shore power, reduced maintenance costs, and lower carbon emissions.",
+    "key_findings": [
+      "Approximately 15% of all trucks are outfitted with TRUs, which consume significant fuel during extended stationary periods in yards and distribution centers.",
+      "Operating a TRU on shore power saves approximately one gallon of diesel fuel per hour, delivering direct fuel cost savings and emission reductions.",
+      "Pre-cooling cargo and holding staged loads consume the majority of TRU energy, making yard and facility shore power the primary target for electrification.",
+      "The 480VAC 3-phase 30A IEC 60309 pin-and-sleeve connector is recommended for new TRU shore power installations, whereas legacy twist-lock connectors are discouraged.",
+      "California LCFS rule changes beginning in 2025 assign credit generation rights directly to the charger facility operator rather than the TRU owner, streamlining monetization."
+    ],
+    "data_available": [
+      "TRU duty cycle energy profile chart",
+      "eTRU vs diesel cost and emissions case study",
+      "shore power connector specifications",
+      "LCFS clean fuel program state map",
+      "fleet shore power implementation kaizen process"
+    ],
+    "token_count": 18704,
+    "ingested": "2026-10-07",
+    "ingest_model": "gemini-3.6-flash"
+  },
+  {
+    "id": "webinar-charging-as-a-service-report-review-2025",
+    "title": "Charging-as-a-Service Report Review: What We Know Now",
+    "type": "video",
+    "published": "2025-05",
+    "url": "https://www.youtube.com/watch?v=9u5bkXbe-N8",
+    "media": {
+      "kind": "video",
+      "minutes": 47
+    },
+    "topics": [
+      "charging-as-a-service",
+      "fleet electrification",
+      "charging infrastructure",
+      "battery electric vehicles",
+      "utility engagement",
+      "total cost of ownership",
+      "operational effectiveness"
+    ],
+    "vehicle_classes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "duty_cycles": [
+      "local",
+      "regional haul",
+      "long haul"
+    ],
+    "fleets_studied": [
+      "Penske"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "In this webinar video, NACFE and Electrada review findings from their joint survey report on fleet perspectives regarding Charging-as-a-Service (CaaS) and commercial fleet electrification. Featuring industry commentary from Penske, the presentation details responses from 175 participants across fleets, OEMs, utilities, and suppliers. The document highlights that fleets prioritize operational effectiveness over initial TCO, identifies utility coordination as the primary barrier to electric vehicle deployment, and details how CaaS business models help fleets mitigate financial and operational risks across Classes 1 through 8.",
+    "key_findings": [
+      "Working with electric utilities is the leading barrier to fleet electrification, cited by 24% of fleets and 29% of broader industry respondents.",
+      "Fleets rank operational effectiveness (4.4 out of 5) as their top criterion for BEV program success, slightly ahead of total cost of ownership (4.1 out of 5).",
+      "Key perceived benefits of Charging-as-a-Service include financial risk transfer, streamlined infrastructure implementation, and long-term uptime guarantees.",
+      "Among survey respondents, 67% have implemented or are implementing electric vehicle projects, with 25% managing multi-location deployments."
+    ],
+    "data_available": [
+      "survey respondent profile by industry segment",
+      "barriers to fleet electrification comparison chart",
+      "fleet vs. industry definitions of EV program success",
+      "perceived benefits of Charging-as-a-Service breakdown"
+    ],
+    "token_count": 13549,
+    "ingested": "2026-10-08",
+    "ingest_model": "gemini-3.6-flash"
+  },
+  {
+    "id": "eaton-current-thinking-commercial-ev-ecosystem-2026",
+    "title": "Eaton – Current Thinking – Simplifying the Commercial EV Ecosystem Through Collaboration",
+    "type": "video",
+    "published": "2026",
+    "url": "https://www.youtube.com/watch?v=SG6x0XmBxJY",
+    "media": {
+      "kind": "video",
+      "minutes": 48
+    },
+    "topics": [
+      "fleet electrification",
+      "charging infrastructure",
+      "total cost of ownership",
+      "medium-duty EVs",
+      "heavy-duty EVs",
+      "depot charging",
+      "grid integration"
+    ],
+    "vehicle_classes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "duty_cycles": [
+      "middle-mile",
+      "vocational",
+      "urban delivery",
+      "return-to-base",
+      "refuse",
+      "street sweeping"
+    ],
+    "fleets_studied": [
+      "City of Long Beach",
+      "Frito-Lay",
+      "Nevoya"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "This panel discussion transcript from ACT Expo features experts from Eaton, ChargePoint, NACFE, the City of Long Beach, and Harbinger Motors discussing strategies to simplify commercial electric vehicle adoption through collaboration. Key topics include scaling depot charging infrastructure, utility coordination, matching battery capacity to duty cycles, onboard circuit protection, export power, and driver experience. Discussions highlight that rightsizing batteries and chargers significantly lowers equipment and demand costs, and NACFE TCO modeling projects Class 8 electric tractors will cost less than diesel by 2035.",
+    "key_findings": [
+      "NACFE TCO modeling predicts Class 8 electric tractors will achieve a lower total cost of ownership than diesel equivalents by 2035.",
+      "Rightsizing battery sizes and charging equipment to match actual route duty cycles prevents over-purchasing and reduces electricity demand charges.",
+      "Cross-industry collaboration between infrastructure providers and vehicle OEMs reduces integration risk, rework, and installation timelines.",
+      "Medium-duty vocational EVs are incorporating export power capabilities (such as 15 kW) to run tools directly off the vehicle battery system.",
+      "Drivers report higher satisfaction and reduced physical fatigue in electric trucks due to quieter operation, lower vibration, and advanced driver assistance systems."
+    ],
+    "data_available": [
+      "Express Grid charging architecture schematic",
+      "Depot charging power breakdown callouts",
+      "Eaton circuit protection (BrakTor) diagram"
+    ],
+    "token_count": 13484,
+    "ingested": "2026-10-08",
+    "ingest_model": "gemini-3.6-flash"
+  },
+  {
+    "id": "buckendale-lecture-video-2020",
+    "title": "Transformational Technologies Reshaping Transportation – An Industry Perspective (lecture video)",
+    "type": "video",
+    "published": "2020",
+    "url": "https://www.youtube.com/watch?v=s6YwAgZQcZ0",
+    "media": {
+      "kind": "video",
+      "minutes": 47
+    },
+    "topics": [
+      "electric trucks",
+      "technology adoption",
+      "fuel economy",
+      "total cost of ownership",
+      "alternative fuels",
+      "regional haul"
+    ],
+    "vehicle_classes": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "duty_cycles": [
+      "long haul",
+      "regional haul",
+      "drayage",
+      "urban delivery"
+    ],
+    "fleets_studied": [
+      "PepsiCo",
+      "UPS",
+      "NFI"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "In the 2020 L. Ray Buckendale Lecture, NACFE Executive Director Mike Roeth examines transformational technologies in commercial transportation, focusing on truck development processes, technology adoption curves, and fleet decarbonization. The presentation outlines the historical progression of fleet fuel efficiency, total cost of ownership dynamics, and the messy middle transition from diesel to electric powertrains. Case studies of early adopters PepsiCo, UPS, and NFI highlight real-world strategies for deploying battery electric, natural gas, and regional haul solutions, alongside recommendations for managing hard and soft costs.",
+    "key_findings": [
+      "Fleet decarbonization requires traversing a 'messy middle' period featuring multiple alternative fuel and hybrid technology bridges before reaching an electric future.",
+      "Leading fleets in NACFE's Annual Fleet Fuel Study achieved a 2% year-over-year fleetwide MPG improvement over a 15-year period.",
+      "Driver wages and benefits (42%) and fuel (24%) represent the largest per-mile operating expenses for Class 8 tractor-trailers.",
+      "Case studies highlight distinct fleet deployment models: PepsiCo converting entire depot locations, UPS matching diverse powertrains to specific duty cycles, and NFI focusing electric day cabs on regional haul and drayage.",
+      "Comprehensive Total Cost of Ownership (TCO) models must monetize both hard costs and soft costs/benefits, such as eliminated indoor exhaust requirements at distribution centers."
+    ],
+    "data_available": [
+      "North American truck production history by vehicle class (1999-2019)",
+      "Class 8 tractor-trailer cost-per-mile breakdown",
+      "85-technology adoption S-curves across major fleets",
+      "Fleetwide MPG trends over time (2003-2018)",
+      "Alternative fuel technology bridge timeline",
+      "Retail fuel and electricity price comparison trends"
+    ],
+    "token_count": 16054,
+    "ingested": "2026-10-08",
+    "ingest_model": "gemini-3.6-flash"
+  },
+  {
+    "id": "mats-2020-mike-roeth-presentation",
+    "title": "What's Different About Your Dad's Truck, Your Truck and Your Kids' or Even Grandkid's Trucks?",
+    "type": "video",
+    "published": "2020-03",
+    "url": "https://www.youtube.com/watch?v=v9hvn3ZeD_k",
+    "media": {
+      "kind": "video",
+      "minutes": 13
+    },
+    "topics": [
+      "fuel economy",
+      "aerodynamics",
+      "electric trucks",
+      "hydrogen fuel cells",
+      "autonomous vehicles",
+      "total cost of ownership",
+      "emissions regulations"
+    ],
+    "vehicle_classes": [],
+    "duty_cycles": [
+      "drayage",
+      "regional haul",
+      "long haul"
+    ],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "This presentation prepared for the 2020 Mid-America Trucking Show examines the technological evolution of heavy commercial trucks across generations, contrasting pre-emissions classic trucks with modern aerodynamic models and future zero-emission and autonomous vehicles. It analyzes the financial and efficiency penalties of legacy components like external air cleaners and exhaust stacks, tracks historical diesel fuel price volatility, and discusses the adoption trajectory of emerging technologies including battery electric, hydrogen fuel cell, platooning, and camera-based vision systems to lower total cost of ownership.",
+    "key_findings": [
+      "External air cleaners on older classic trucks create aerodynamic drag costing $1,500 to $2,500 annually in excess fuel at $3 per gallon.",
+      "Legacy pre-emissions trucks were roughly 15% less fuel-efficient than modern aerodynamic tractor designs.",
+      "Modern emissions controls require 70 contemporary trucks to equal the NOx and particulate matter output of a single pre-2002 truck.",
+      "Battery electric trucks are projected to scale from port drayage and regional day-cab routes into long-haul operations as battery technology improves.",
+      "Total cost of ownership (TCO) remains the primary driver for technology adoption across fleets and owner-operators."
+    ],
+    "data_available": [
+      "historical diesel retail price chart (1994-2020)",
+      "aerodynamic component drag cost estimates",
+      "emissions reduction comparison figures"
+    ],
+    "token_count": 4520,
+    "ingested": "2026-10-10",
+    "ingest_model": "gemini-3.6-flash"
+  },
+  {
+    "id": "trucking-through-uncertainty-2020",
+    "title": "Trucking Through Uncertainty",
+    "type": "video",
+    "published": "2020-03",
+    "url": "https://www.youtube.com/watch?v=ZFpoiPUImCE",
+    "media": {
+      "kind": "video",
+      "minutes": 9
+    },
+    "topics": [
+      "COVID-19 response",
+      "supply chain",
+      "truck parking",
+      "traffic congestion",
+      "driver perspective",
+      "fleet operations"
+    ],
+    "vehicle_classes": [],
+    "duty_cycles": [
+      "long haul",
+      "over-the-road"
+    ],
+    "fleets_studied": [
+      "Hirschbach Motor Lines",
+      "Meijer",
+      "Nussbaum Transportation"
+    ],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "This video captures perspectives from fleet representatives, truck drivers, technology suppliers, and industry analysts during the early COVID-19 pandemic in 2020. Speakers detail operational changes including shifting freight demand, reduced highway congestion, emergency regulatory relief, facility access challenges, and rest area closures impacting truck parking. Findings emphasize the role of clear driver communication, financial emergency planning for carriers, supply chain self-sufficiency, and potential long-term benefits from reduced congestion, improved air quality, and adoption of efficiency technologies.",
+    "key_findings": [
+      "Reduced highway traffic temporarily improved traffic flow and truck fuel economy.",
+      "Federal emergency declarations provided regulatory relief, including weight exemptions and hours-of-service flexibility for essential goods.",
+      "State rest area closures and restricted shipper/receiver access intensified truck parking and operational difficulties.",
+      "Industry participants stressed the importance of emergency financial reserves and domestic supply chain self-sufficiency for future disruptions."
+    ],
+    "data_available": [
+      "driver and fleet operator interviews",
+      "industry analyst commentary"
+    ],
+    "token_count": 3003,
+    "ingested": "2026-10-10",
+    "ingest_model": "gemini-3.6-flash"
+  },
+  {
+    "id": "supertruck-2-empowering-future-trucking-video-2025",
+    "title": "SuperTruck 2: Empowering Future Trucking",
+    "type": "video",
+    "published": "2025-03",
+    "url": "https://www.youtube.com/watch?v=-_C2T9jOACk",
+    "media": {
+      "kind": "video",
+      "minutes": 10
+    },
+    "topics": [
+      "SuperTruck 2",
+      "freight efficiency",
+      "fuel economy",
+      "brake thermal efficiency",
+      "aerodynamics",
+      "lightweighting",
+      "diesel engines",
+      "hybridization"
+    ],
+    "vehicle_classes": [
+      8
+    ],
+    "duty_cycles": [
+      "long haul"
+    ],
+    "fleets_studied": [],
+    "supersedes": null,
+    "superseded_by": null,
+    "status": "current",
+    "abstract": "This video summary reviews the outcomes of the Department of Energy's SuperTruck 2 initiative, evaluated in a NACFE report. Five OEM teams—Cummins/Peterbilt, Daimler, Navistar, Volvo, and PACCAR—exceeded the project's goal of a 100% freight ton efficiency improvement over 2009 baselines, achieving overall improvements up to 134% and fuel economy of 14–16 MPG. Key advancements highlighted include 51–55% engine brake thermal efficiency, aggressive lightweighting, optimized aerodynamics, mild-hybridization, and driver-focused cab designs tested in real-world operating conditions.",
+    "key_findings": [
+      "All five OEM teams significantly exceeded the goal of a 100% freight ton efficiency improvement over Model Year 2009 baselines.",
+      "Demonstrated Class 8 truck fuel economy of 14 to 16 miles per gallon carrying representative payloads in real-world driving conditions.",
+      "Engine development achieved 51% to 55% brake thermal efficiency (BTE), supporting requirements for 2027 Phase 3 Greenhouse Gas regulations.",
+      "Efficiency gains were driven by lightweighting, optimized aerodynamics, 4x2 axle configurations, central drive positioning, and mild-hybrid electrification."
+    ],
+    "data_available": [
+      "freight ton efficiency improvement by OEM team",
+      "brake thermal efficiency targets"
+    ],
+    "token_count": 3135,
+    "ingested": "2026-10-10",
+    "ingest_model": "gemini-3.6-flash"
   }
 ]
