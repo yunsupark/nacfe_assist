@@ -1,0 +1,54 @@
+{
+  "id": "buckendale-lecture-video-2020",
+  "title": "Transformational Technologies Reshaping Transportation – An Industry Perspective (lecture video)",
+  "type": "thought_leadership",
+  "published": "2020",
+  "topics": [
+    "electric trucks",
+    "technology adoption",
+    "fuel economy",
+    "total cost of ownership",
+    "alternative fuels",
+    "regional haul"
+  ],
+  "vehicle_classes": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "duty_cycles": [
+    "long haul",
+    "regional haul",
+    "drayage",
+    "urban delivery"
+  ],
+  "fleets_studied": [
+    "PepsiCo",
+    "UPS",
+    "NFI"
+  ],
+  "abstract": "In the 2020 L. Ray Buckendale Lecture, NACFE Executive Director Mike Roeth examines transformational technologies in commercial transportation, focusing on truck development processes, technology adoption curves, and fleet decarbonization. The presentation outlines the historical progression of fleet fuel efficiency, total cost of ownership dynamics, and the messy middle transition from diesel to electric powertrains. Case studies of early adopters PepsiCo, UPS, and NFI highlight real-world strategies for deploying battery electric, natural gas, and regional haul solutions, alongside recommendations for managing hard and soft costs.",
+  "key_findings": [
+    "Fleet decarbonization requires traversing a 'messy middle' period featuring multiple alternative fuel and hybrid technology bridges before reaching an electric future.",
+    "Leading fleets in NACFE's Annual Fleet Fuel Study achieved a 2% year-over-year fleetwide MPG improvement over a 15-year period.",
+    "Driver wages and benefits (42%) and fuel (24%) represent the largest per-mile operating expenses for Class 8 tractor-trailers.",
+    "Case studies highlight distinct fleet deployment models: PepsiCo converting entire depot locations, UPS matching diverse powertrains to specific duty cycles, and NFI focusing electric day cabs on regional haul and drayage.",
+    "Comprehensive Total Cost of Ownership (TCO) models must monetize both hard costs and soft costs/benefits, such as eliminated indoor exhaust requirements at distribution centers."
+  ],
+  "data_available": [
+    "North American truck production history by vehicle class (1999-2019)",
+    "Class 8 tractor-trailer cost-per-mile breakdown",
+    "85-technology adoption S-curves across major fleets",
+    "Fleetwide MPG trends over time (2003-2018)",
+    "Alternative fuel technology bridge timeline",
+    "Retail fuel and electricity price comparison trends"
+  ],
+  "status": "current",
+  "supersedes": null,
+  "superseded_by": null,
+  "_draft": true,
+  "_draft_model": "gemini-3.6-flash"
+}

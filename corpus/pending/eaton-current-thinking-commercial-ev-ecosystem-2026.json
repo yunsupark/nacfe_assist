@@ -1,0 +1,56 @@
+{
+  "id": "eaton-current-thinking-commercial-ev-ecosystem-2026",
+  "title": "Eaton – Current Thinking – Simplifying the Commercial EV Ecosystem Through Collaboration",
+  "type": "video",
+  "published": "2026",
+  "topics": [
+    "fleet electrification",
+    "charging infrastructure",
+    "total cost of ownership",
+    "medium-duty EVs",
+    "heavy-duty EVs",
+    "depot charging",
+    "grid integration"
+  ],
+  "vehicle_classes": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "duty_cycles": [
+    "middle-mile",
+    "vocational",
+    "urban delivery",
+    "return-to-base",
+    "refuse",
+    "street sweeping"
+  ],
+  "fleets_studied": [
+    "City of Long Beach",
+    "Frito-Lay",
+    "Nevoya"
+  ],
+  "abstract": "This panel discussion transcript from ACT Expo features experts from Eaton, ChargePoint, NACFE, the City of Long Beach, and Harbinger Motors discussing strategies to simplify commercial electric vehicle adoption through collaboration. Key topics include scaling depot charging infrastructure, utility coordination, matching battery capacity to duty cycles, onboard circuit protection, export power, and driver experience. Discussions highlight that rightsizing batteries and chargers significantly lowers equipment and demand costs, and NACFE TCO modeling projects Class 8 electric tractors will cost less than diesel by 2035.",
+  "key_findings": [
+    "NACFE TCO modeling predicts Class 8 electric tractors will achieve a lower total cost of ownership than diesel equivalents by 2035.",
+    "Rightsizing battery sizes and charging equipment to match actual route duty cycles prevents over-purchasing and reduces electricity demand charges.",
+    "Cross-industry collaboration between infrastructure providers and vehicle OEMs reduces integration risk, rework, and installation timelines.",
+    "Medium-duty vocational EVs are incorporating export power capabilities (such as 15 kW) to run tools directly off the vehicle battery system.",
+    "Drivers report higher satisfaction and reduced physical fatigue in electric trucks due to quieter operation, lower vibration, and advanced driver assistance systems."
+  ],
+  "data_available": [
+    "Express Grid charging architecture schematic",
+    "Depot charging power breakdown callouts",
+    "Eaton circuit protection (BrakTor) diagram"
+  ],
+  "status": "current",
+  "supersedes": null,
+  "superseded_by": null,
+  "_draft": true,
+  "_draft_model": "gemini-3.6-flash"
+}

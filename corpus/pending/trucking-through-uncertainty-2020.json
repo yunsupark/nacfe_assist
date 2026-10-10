@@ -1,0 +1,40 @@
+{
+  "id": "trucking-through-uncertainty-2020",
+  "title": "Trucking Through Uncertainty",
+  "type": "video",
+  "published": "2020-03",
+  "topics": [
+    "COVID-19 response",
+    "supply chain",
+    "truck parking",
+    "traffic congestion",
+    "driver perspective",
+    "fleet operations"
+  ],
+  "vehicle_classes": [],
+  "duty_cycles": [
+    "long haul",
+    "over-the-road"
+  ],
+  "fleets_studied": [
+    "Hirschbach Motor Lines",
+    "Meijer",
+    "Nussbaum Transportation"
+  ],
+  "abstract": "This video captures perspectives from fleet representatives, truck drivers, technology suppliers, and industry analysts during the early COVID-19 pandemic in 2020. Speakers detail operational changes including shifting freight demand, reduced highway congestion, emergency regulatory relief, facility access challenges, and rest area closures impacting truck parking. Findings emphasize the role of clear driver communication, financial emergency planning for carriers, supply chain self-sufficiency, and potential long-term benefits from reduced congestion, improved air quality, and adoption of efficiency technologies.",
+  "key_findings": [
+    "Reduced highway traffic temporarily improved traffic flow and truck fuel economy.",
+    "Federal emergency declarations provided regulatory relief, including weight exemptions and hours-of-service flexibility for essential goods.",
+    "State rest area closures and restricted shipper/receiver access intensified truck parking and operational difficulties.",
+    "Industry participants stressed the importance of emergency financial reserves and domestic supply chain self-sufficiency for future disruptions."
+  ],
+  "data_available": [
+    "driver and fleet operator interviews",
+    "industry analyst commentary"
+  ],
+  "status": "current",
+  "supersedes": null,
+  "superseded_by": null,
+  "_draft": true,
+  "_draft_model": "gemini-3.6-flash"
+}
