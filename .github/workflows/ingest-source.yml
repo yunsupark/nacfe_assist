@@ -4,25 +4,37 @@ name: Ingest source (admin console)
 # via the GitHub Actions API, authenticated with GITHUB_ACTIONS_TOKEN -- never run by hand
 # against a real report/video unless you're deliberately testing this workflow itself.
 #
-# Runs the existing, unmodified ingest_youtube.py/ingest_pdf.py (the same scripts used for
-# every one of the 343 sources already in the catalog) and the new draft_catalog_entry.py, then
-# opens a PR with the result. Nothing here touches corpus/catalog.json directly -- the drafted
+# Runs the existing ingest scripts -- ingest_youtube.py (video), ingest_podcast_captions.py
+# (podcast, the standard caption path; direct audio transcription is prone to repetition loops),
+# ingest_pdf.py (report) -- and draft_catalog_entry.py, then opens a PR with the result. Nothing here touches corpus/catalog.json directly -- the drafted
 # fields land in corpus/pending/<id>.json, and a human moves them into the real catalog as part
 # of reviewing and merging the PR (see SPEC.md 3 on why status/supersedes/superseded_by must
 # stay human-curated).
 on:
   workflow_dispatch:
     inputs:
-      type:
-        description: "youtube (video or podcast) or pdf (report)"
+      kind:
+        description: "How to ingest: video (YouTube, with slides), podcast (YouTube captions), or pdf (report)"
         required: true
         type: choice
-        options: [youtube, pdf]
+        options: [video, podcast, pdf]
+      catalog_type:
+        description: "Catalog type (SPEC.md 3), chosen by the person adding the source"
+        required: true
       url:
         description: "Source URL"
         required: true
       title_hint:
-        description: "Optional title hint, used to derive a source id"
+        description: "Title (video: required; pdf: seeds the source id; ignored for podcasts)"
+        required: false
+      episode_num:
+        description: "Podcast episode number (podcast only)"
+        required: false
+      guest:
+        description: "Podcast guest (podcast only)"
+        required: false
+      org:
+        description: "Podcast guest's organization (podcast only)"
         required: false
       requested_by:
         description: "Admin email that requested this (for the PR body only)"
@@ -43,7 +55,27 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install google-genai python-dotenv pypdf
+        run: pip install google-genai python-dotenv pypdf yt-dlp
+
+      - name: Fetch podcast metadata
+        if: inputs.kind == 'podcast'
+        id: meta
+        env:
+          SOURCE_URL: ${{ inputs.url }}
+        run: |
+          # Upload date and duration come from YouTube itself rather than the form, so the
+          # published date can't drift from the real episode. A runner that YouTube refuses to
+          # serve (datacenter IPs are sometimes challenged) fails here, before any Gemini spend.
+          yt-dlp --skip-download --print "%(id)s|%(upload_date)s|%(duration)s" "$SOURCE_URL" > /tmp/meta.txt
+          IFS='|' read -r VIDEO_ID UPLOAD_DATE DURATION < /tmp/meta.txt
+          if [ -z "$VIDEO_ID" ] || [ -z "$UPLOAD_DATE" ]; then
+            echo "could not read video metadata for $SOURCE_URL" >&2
+            exit 1
+          fi
+          echo "video_id=${VIDEO_ID}" >> "$GITHUB_OUTPUT"
+          echo "published=${UPLOAD_DATE:0:4}-${UPLOAD_DATE:4:2}-${UPLOAD_DATE:6:2}" >> "$GITHUB_OUTPUT"
+          echo "published_month=${UPLOAD_DATE:0:4}-${UPLOAD_DATE:4:2}" >> "$GITHUB_OUTPUT"
+          echo "duration=${DURATION%.*}" >> "$GITHUB_OUTPUT"
 
       - name: Derive a source id
         id: slug
@@ -51,33 +83,52 @@ jobs:
         # ${{ inputs.* }} in the run: script. ${{ }} is substituted as raw text by the runner
         # BEFORE the shell parses the line, so a value containing a quote or semicolon would
         # otherwise break out and run as arbitrary shell commands in a job with contents:write,
-        # pull-requests:write, and the Gemini keys in its environment. title_hint comes from an
+        # pull-requests:write, and the Gemini keys in its environment. These values come from an
         # authenticated admin, but "authenticated" is not "trusted to write this job's shell
-        # script" -- treat it exactly like any other untrusted input.
+        # script" -- treat them exactly like any other untrusted input.
         env:
+          KIND: ${{ inputs.kind }}
           RAW_TITLE_HINT: ${{ inputs.title_hint }}
+          EPISODE_NUM: ${{ inputs.episode_num }}
+          GUEST: ${{ inputs.guest }}
+          PUBLISHED: ${{ steps.meta.outputs.published }}
         run: |
-          RAW="$RAW_TITLE_HINT"
-          if [ -z "$RAW" ]; then RAW="source-$(date +%s)"; fi
-          YEAR=$(date +%Y)
-          # Lowercase, replace anything non-alphanumeric with a hyphen, collapse repeats, trim,
-          # cap length, append the year -- good enough for a draft a human can rename during PR
-          # review; this is not trying to match the catalog's existing naming conventions exactly.
-          SLUG=$(echo "$RAW" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g' | cut -c1-60)
-          echo "id=${SLUG}-${YEAR}" >> "$GITHUB_OUTPUT"
+          slugify() { echo "$1" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g' | cut -c1-60; }
+          if [ "$KIND" = "podcast" ]; then
+            # Matches the existing ids, e.g. podcast-ep140-john-verdon-2026.
+            echo "id=podcast-ep${EPISODE_NUM}-$(slugify "$GUEST")-${PUBLISHED:0:4}" >> "$GITHUB_OUTPUT"
+          else
+            RAW="$RAW_TITLE_HINT"
+            if [ -z "$RAW" ]; then RAW="source-$(date +%s)"; fi
+            # Lowercase, replace anything non-alphanumeric with a hyphen, collapse repeats, trim,
+            # cap length, append the year -- good enough for a draft a human can rename during PR
+            # review; this is not trying to match the catalog's existing naming conventions exactly.
+            echo "id=$(slugify "$RAW")-$(date +%Y)" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Run ingestion
         env:
           GEMINI_API: ${{ secrets.GEMINI_API }}
           GEMINI_API_FREE: ${{ secrets.GEMINI_API_FREE }}
           SOURCE_ID: ${{ steps.slug.outputs.id }}
-          INGEST_TYPE: ${{ inputs.type }}
+          KIND: ${{ inputs.kind }}
           SOURCE_URL: ${{ inputs.url }}
           TITLE_HINT: ${{ inputs.title_hint }}
+          EPISODE_NUM: ${{ inputs.episode_num }}
+          GUEST: ${{ inputs.guest }}
+          ORG: ${{ inputs.org }}
+          VIDEO_ID: ${{ steps.meta.outputs.video_id }}
+          PUBLISHED: ${{ steps.meta.outputs.published }}
+          DURATION: ${{ steps.meta.outputs.duration }}
         run: |
           cd ingest
-          if [ "$INGEST_TYPE" = "youtube" ]; then
+          if [ "$KIND" = "video" ]; then
             python ingest_youtube.py "$SOURCE_URL" --id "$SOURCE_ID" --title "$TITLE_HINT"
+          elif [ "$KIND" = "podcast" ]; then
+            python add_podcast_episode.py --id "$SOURCE_ID" --video-id "$VIDEO_ID" \
+              --title "Ep. ${EPISODE_NUM}: ${GUEST} – ${ORG}" --episode "$EPISODE_NUM" \
+              --guest "$GUEST" --org "$ORG" --published "$PUBLISHED" --duration "$DURATION"
+            python ingest_podcast_captions.py "$SOURCE_ID"
           else
             curl -fsSL -o /tmp/report.pdf "$SOURCE_URL"
             python ingest_pdf.py /tmp/report.pdf --id "$SOURCE_ID"
@@ -88,9 +139,13 @@ jobs:
           GEMINI_API: ${{ secrets.GEMINI_API }}
           GEMINI_API_FREE: ${{ secrets.GEMINI_API_FREE }}
           SOURCE_ID: ${{ steps.slug.outputs.id }}
+          CATALOG_TYPE: ${{ inputs.catalog_type }}
+          PUBLISHED_MONTH: ${{ steps.meta.outputs.published_month }}
         run: |
           cd ingest
-          python draft_catalog_entry.py "$SOURCE_ID"
+          # --type is the person's choice from the form; --published is only known for podcasts
+          # (from YouTube), otherwise the draft reads it from the document.
+          python draft_catalog_entry.py "$SOURCE_ID" --type "$CATALOG_TYPE" ${PUBLISHED_MONTH:+--published "$PUBLISHED_MONTH"}
 
       - name: Open pull request
         env:
@@ -103,7 +158,7 @@ jobs:
           git config user.email "noreply@nacfe-assist.invalid"
           BRANCH="admin/ingest-${SOURCE_ID}"
           git checkout -b "$BRANCH"
-          git add "corpus/sources/${SOURCE_ID}.md" "corpus/pending/${SOURCE_ID}.json" ingest/ingest_log.jsonl
+          git add "corpus/sources/${SOURCE_ID}.md" "corpus/pending/${SOURCE_ID}.json" ingest/ingest_log.jsonl ingest/podcast_episodes.json
           git commit -m "Ingest ${SOURCE_ID} (admin console, pending review)"
           git push origin "$BRANCH"
           gh label create pending-source --color FBCA04 --description "Awaiting catalog review" 2>/dev/null || true

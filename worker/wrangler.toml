@@ -81,6 +81,8 @@ bucket_name = "nacfe-assist-sources"  # wrangler r2 bucket create nacfe-assist-s
 # was only about $8, six times under the intended budget. Measured cost of an uncached query
 # is ~$0.076 (routing $0.046 + answering $0.030), so $50 buys roughly 650 uncached questions
 # a month; cache hits are free. Prices live in src/pricing.ts.
+# This is the DEFAULT. An admin can override it from the console (Usage tab), within $1-$1000;
+# clearing the override or any D1 trouble falls back to this value, never to "no limit".
 MONTHLY_COST_CEILING_USD = "50"
 ROUTE_MODEL = "gemini-3.5-flash-lite"
 ANSWER_MODEL = "gemini-3.6-flash"

@@ -440,6 +440,53 @@ function currentPeriod(): string {
   return new Date().toISOString().slice(0, 7); // YYYY-MM
 }
 
+/** Text behind the widget's (i) button until an admin saves their own (admin_config key
+ * info_text). Format: blank line = new paragraph, line starting "- " = bullet. The single source
+ * of truth for the default; web/widget.js only has a one-line fallback for non-Worker previews. */
+const INFO_TEXT_KEY = "info_text";
+const INFO_TEXT_MAX_CHARS = 2000;
+const DEFAULT_INFO_TEXT = [
+  "Answers are drawn from these NACFE published sources:",
+  "",
+  "- Current Technology (Confidence Reports)",
+  "- Emerging Technology (Guidance Reports)",
+  "- Fleet Efficiency Study (latest)",
+  "- Run on Less Reports",
+  "- Thought Leadership Reports",
+  "- Collaboration Reports",
+  "- Mike & Friends Podcasts",
+  "- Run on Less Messy Middle Bootcamps",
+  "- Run on Less fleet profile videos",
+  "",
+  "Source library last updated 07/2026.",
+].join("\n");
+
+/** The saved info text, or the default when none is saved or D1 fails (fail-open, like
+ * getSponsorConfig: a D1 blip must never take the public widget down). */
+async function getInfoText(env: Env): Promise<string> {
+  try {
+    const row = await withTimeout(
+      env.DB.prepare(`SELECT value FROM admin_config WHERE key = ?`).bind(INFO_TEXT_KEY).first<{ value: string }>(),
+      D1_LOG_TIMEOUT_MS,
+      "getInfoText",
+    );
+    return row && row.value.trim() ? row.value : DEFAULT_INFO_TEXT;
+  } catch (err) {
+    console.error("getInfoText failed (ignored, serving the default text):", err);
+    return DEFAULT_INFO_TEXT;
+  }
+}
+
+/** Escapes text for placement INSIDE a double-quoted JS string literal in the served widget.js.
+ * Unlike jsStringLiteralSafe this keeps newlines (as \n) and allows the longer info text. */
+function jsLongStringLiteralSafe(value: string): string {
+  return JSON.stringify(value)
+    .slice(1, -1)
+    .replace(/</g, "\\u003c")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
+}
+
 const SPONSOR_KEYS = ["sponsor_name", "sponsor_tagline", "sponsor_url", "sponsor_logo_url"] as const;
 type SponsorConfig = Record<(typeof SPONSOR_KEYS)[number], string>;
 
@@ -488,6 +535,43 @@ async function getSponsorConfig(env: Env): Promise<SponsorConfig> {
  * hiccup here must never fail the query it would otherwise just skip filtering for.
  */
 /**
+ * The monthly spend ceiling. An admin can set it from the console (admin_config key
+ * monthly_cost_ceiling_usd, within MIN..MAX below); with nothing saved, or anything unreadable,
+ * it falls back to MONTHLY_COST_CEILING_USD in wrangler.toml. Falling back to the configured
+ * default -- never to "no limit" -- is deliberate: a D1 blip must not remove the cost cap.
+ */
+const BUDGET_CEILING_KEY = "monthly_cost_ceiling_usd";
+const BUDGET_CEILING_MIN_USD = 1;
+const BUDGET_CEILING_MAX_USD = 1000;
+
+function envCeilingUsd(env: Env): number {
+  return parseFloat(env.MONTHLY_COST_CEILING_USD) || 0;
+}
+
+function ceilingMicroUsdFrom(savedUsd: string | null, env: Env): number {
+  const saved = savedUsd === null ? NaN : parseFloat(savedUsd);
+  const usd =
+    Number.isFinite(saved) && saved >= BUDGET_CEILING_MIN_USD && saved <= BUDGET_CEILING_MAX_USD
+      ? saved
+      : envCeilingUsd(env);
+  return Math.round(usd * 1_000_000);
+}
+
+async function getCeilingMicroUsd(env: Env): Promise<number> {
+  try {
+    const row = await withTimeout(
+      env.DB.prepare(`SELECT value FROM admin_config WHERE key = ?`).bind(BUDGET_CEILING_KEY).first<{ value: string }>(),
+      D1_LOG_TIMEOUT_MS,
+      "getCeilingMicroUsd",
+    );
+    return ceilingMicroUsdFrom(row?.value ?? null, env);
+  } catch (err) {
+    console.error("getCeilingMicroUsd failed (ignored, using the configured default):", err);
+    return ceilingMicroUsdFrom(null, env);
+  }
+}
+
+/**
  * `epoch: null` means "D1 state is unknown right now" -- NOT "treat this as epoch 0". A hiccup
  * that defaulted to a sentinel epoch would make the Worker both read from and write into
  * whatever namespace epoch "0" was, which after even one hide/unhide is a stale, already-
@@ -499,28 +583,32 @@ async function getSponsorConfig(env: Env): Promise<SponsorConfig> {
  * empty set on failure just means unfiltered routing for that one request, not a durable write
  * into the wrong place), so it stays a plain empty Set rather than null.
  */
-async function getAdminState(env: Env): Promise<{ hidden: Set<string>; epoch: string | null }> {
+async function getAdminState(
+  env: Env,
+): Promise<{ hidden: Set<string>; epoch: string | null; savedCeilingUsd: string | null }> {
   try {
     const result = await withTimeout(
       Promise.all([
         env.DB.prepare(`SELECT source_id FROM hidden_sources`).all<{ source_id: string }>(),
         env.DB.prepare(`SELECT value FROM admin_config WHERE key = 'catalog_epoch'`).first<{ value: string }>(),
+        env.DB.prepare(`SELECT value FROM admin_config WHERE key = ?`).bind(BUDGET_CEILING_KEY).first<{ value: string }>(),
       ]),
       D1_LOG_TIMEOUT_MS,
       "getAdminState",
     );
     if (!result) {
       console.error("getAdminState timed out; skipping the answer cache for this request");
-      return { hidden: new Set(), epoch: null };
+      return { hidden: new Set(), epoch: null, savedCeilingUsd: null };
     }
-    const [hiddenRows, epochRow] = result;
+    const [hiddenRows, epochRow, ceilingRow] = result;
     return {
       hidden: new Set(hiddenRows.results.map((r) => r.source_id)),
       epoch: epochRow?.value ?? "0",
+      savedCeilingUsd: ceilingRow?.value ?? null,
     };
   } catch (err) {
     console.error("getAdminState failed; skipping the answer cache for this request:", err);
-    return { hidden: new Set(), epoch: null };
+    return { hidden: new Set(), epoch: null, savedCeilingUsd: null };
   }
 }
 
@@ -633,6 +721,7 @@ async function logQuery(
     degradedCacheOnly: boolean;
     costMicroUsd: number | null;
     error?: string | null;
+    answer?: string | null;
     visitorId?: string | null;
     country?: string | null;
     pageUrl?: string | null;
@@ -656,6 +745,9 @@ async function logQuery(
   }
 }
 
+/** Caps the stored answer text; the full answer is still served to the reader. */
+const MAX_STORED_ANSWER_CHARS = 20_000;
+
 async function insertQueryRow(
   env: Env,
   fields: Parameters<typeof logQuery>[1],
@@ -664,8 +756,8 @@ async function insertQueryRow(
     `INSERT INTO queries
       (timestamp, question, normalized_question, cache_hit, out_of_scope, selected_sources,
        recency_warning, route_tokens, answer_tokens, total_tokens, latency_ms, degraded_cache_only,
-       cost_micro_usd, error, visitor_id, country, page_url)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       cost_micro_usd, error, answer, visitor_id, country, page_url)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   )
     .bind(
       new Date().toISOString(),
@@ -682,6 +774,7 @@ async function insertQueryRow(
       fields.degradedCacheOnly ? 1 : 0,
       fields.costMicroUsd,
       fields.error ?? null,
+      fields.answer ? fields.answer.slice(0, MAX_STORED_ANSWER_CHARS) : null,
       fields.visitorId ?? null,
       fields.country ?? null,
       fields.pageUrl ?? null,
@@ -1052,6 +1145,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         latencyMs: Date.now() - start,
         degradedCacheOnly: false,
         costMicroUsd: 0, // a cache hit spends nothing
+        answer: (cached as { answer?: string }).answer ?? null,
         visitorId,
         country,
         pageUrl,
@@ -1071,7 +1165,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   // same pre-spend total and sailed past the ceiling together. The reservation is reconciled
   // against real usage once the request finishes (including on the error paths, where the
   // old code silently dropped the routing tokens it had already spent).
-  const ceilingMicroUsd = Math.round((parseFloat(env.MONTHLY_COST_CEILING_USD) || 0) * 1_000_000);
+  const ceilingMicroUsd = ceilingMicroUsdFrom(adminState.savedCeilingUsd, env);
   const budget = budgetStub(env);
   const reservation = estimatedQueryCostMicroUsd(env);
   const { allowed: budgetAllowed } = await budget.reserve(period, ceilingMicroUsd, reservation);
@@ -1156,6 +1250,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
           latencyMs: Date.now() - start,
           degradedCacheOnly: false,
           costMicroUsd: spentMicroUsd,
+          answer: payload.answer,
           visitorId,
           country,
           pageUrl,
@@ -1207,6 +1302,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         latencyMs: Date.now() - start,
         degradedCacheOnly: false,
         costMicroUsd: spentMicroUsd,
+        answer: payload.answer,
         visitorId,
         country,
         pageUrl,
@@ -1582,7 +1678,7 @@ async function handleAdminUsage(env: Env, actorEmail: string): Promise<Response>
     env.DB.prepare(
       `SELECT id, timestamp, question, cache_hit, cost_micro_usd FROM queries ORDER BY id DESC LIMIT 50`,
     ).all<{ id: number; timestamp: string; question: string; cache_hit: number; cost_micro_usd: number | null }>(),
-    Promise.resolve(Math.round((parseFloat(env.MONTHLY_COST_CEILING_USD) || 0) * 1_000_000)),
+    getCeilingMicroUsd(env),
     budgetStub(env).used(period),
   ]);
 
@@ -1738,45 +1834,92 @@ async function handleAdminHideUnhide(
   return adminJsonResponse({ ok: true, id, hidden: action === "hide" });
 }
 
-const VALID_INGEST_TYPES = ["youtube", "pdf"];
+/**
+ * How a source is fetched and processed ("kind") versus what it is in the catalog ("catalog
+ * type", SPEC.md 3). The form asks for both: the kind picks the ingest script, the type is the
+ * person's own classification and overrides the draft model's guess. Kept in step with
+ * ingest/draft_catalog_entry.py's CATALOG_TYPES and the workflow's `kind` options.
+ */
+const CATALOG_TYPES_BY_KIND: Record<string, string[]> = {
+  video: ["video", "bootcamp"],
+  podcast: ["podcast"],
+  pdf: ["confidence_report", "guidance_report", "thought_leadership", "run_on_less", "article", "fleet_fuel_study"],
+};
+// Letters (any script), digits, spaces and . , ' - only: these values reach a GitHub Actions
+// workflow input and from there a shell script (always via env:, see ingest-source.yml), so
+// nothing resembling a shell metacharacter is ever sent in the first place.
+const PODCAST_NAME_RE = /^[\p{L}\p{N} .,'\u2019-]+$/u;
 
-async function handleAdminIngest(request: Request, env: Env, actorEmail: string): Promise<Response> {
-  let body: { type?: unknown; url?: unknown; title_hint?: unknown };
+async function handleAdminIngest(request: Request, env: Env, actorEmail: string, ip: string): Promise<Response> {
+  let body: {
+    kind?: unknown;
+    catalog_type?: unknown;
+    url?: unknown;
+    title_hint?: unknown;
+    episode_num?: unknown;
+    guest?: unknown;
+    org?: unknown;
+  };
   try {
     body = await request.json();
   } catch {
     return adminJsonResponse({ error: "invalid JSON body" }, 400);
   }
-  const type = typeof body.type === "string" ? body.type : "";
-  if (!VALID_INGEST_TYPES.includes(type)) {
-    return adminJsonResponse({ error: `'type' must be one of: ${VALID_INGEST_TYPES.join(", ")}` }, 400);
+  const kind = typeof body.kind === "string" ? body.kind : "";
+  const allowedTypes = CATALOG_TYPES_BY_KIND[kind];
+  if (!allowedTypes) {
+    return adminJsonResponse({ error: `'kind' must be one of: ${Object.keys(CATALOG_TYPES_BY_KIND).join(", ")}` }, 400);
+  }
+  const catalogType = typeof body.catalog_type === "string" ? body.catalog_type : "";
+  if (!allowedTypes.includes(catalogType)) {
+    return adminJsonResponse({ error: `'catalog_type' for a ${kind} source must be one of: ${allowedTypes.join(", ")}` }, 400);
   }
   const sourceUrl = typeof body.url === "string" ? body.url : "";
   if (!isValidHttpUrl(sourceUrl)) return adminJsonResponse({ error: "'url' must be a valid http(s) URL" }, 400);
-  // Deliberately restrictive, not just length-capped: this value is passed as a GitHub Actions
-  // workflow_dispatch input and ends up in a shell script (see ingest-source.yml). The
-  // workflow itself now routes every input through env: + "$VAR" rather than inline ${{ }}
-  // interpolation (which is its own, separate fix for shell/script injection there regardless
-  // of what reaches it) -- but this allowlist means nothing resembling a shell metacharacter
-  // is ever sent in the first place, as defense in depth. The slug step discards anything
-  // outside [a-z0-9-] anyway, so nothing of value is lost.
+
   const titleHint = typeof body.title_hint === "string" ? body.title_hint.slice(0, 120) : "";
   if (titleHint && !/^[\w .,-]*$/.test(titleHint)) {
     return adminJsonResponse({ error: "'title_hint' may only contain letters, numbers, spaces, and . , -" }, 400);
   }
   // ingest_youtube.py requires --title (it becomes the document's heading and goes into the
-  // transcription prompt), so a video/podcast with no title would ingest with a blank one.
-  // PDFs don't take a title at all -- title_hint only seeds the source id there.
-  if (type === "youtube" && !titleHint.trim()) {
-    return adminJsonResponse({ error: "'title_hint' is required for video/podcast sources" }, 400);
+  // transcription prompt), so a video with no title would ingest with a blank one. PDFs don't
+  // take a title at all -- title_hint only seeds the source id there. Podcasts build their title
+  // from the episode number, guest and organization instead.
+  if (kind === "video" && !titleHint.trim()) {
+    return adminJsonResponse({ error: "'title_hint' is required for video sources" }, 400);
   }
 
-  const result = await githubDispatchWorkflow(env, "ingest-source.yml", {
-    type,
+  const inputs: Record<string, string> = {
+    kind,
+    catalog_type: catalogType,
     url: sourceUrl,
     title_hint: titleHint,
     requested_by: actorEmail,
-  });
+  };
+
+  if (kind === "podcast") {
+    const episodeNum = typeof body.episode_num === "number" ? body.episode_num : Number(body.episode_num);
+    if (!Number.isInteger(episodeNum) || episodeNum < 1 || episodeNum > 9999) {
+      return adminJsonResponse({ error: "'episode_num' must be a whole number between 1 and 9999" }, 400);
+    }
+    const guest = typeof body.guest === "string" ? body.guest.trim().slice(0, 80) : "";
+    const org = typeof body.org === "string" ? body.org.trim().slice(0, 80) : "";
+    if (!guest || !org) return adminJsonResponse({ error: "'guest' and 'org' are required for podcast episodes" }, 400);
+    if (!PODCAST_NAME_RE.test(guest) || !PODCAST_NAME_RE.test(org)) {
+      return adminJsonResponse({ error: "'guest' and 'org' may only contain letters, numbers, spaces, and . , ' -" }, 400);
+    }
+    inputs.episode_num = String(episodeNum);
+    inputs.guest = guest;
+    inputs.org = org;
+  }
+
+  // Checked only now, after validation: a mistyped form never reaches GitHub or costs anything, so
+  // it shouldn't burn one of the day's runs. This limit exists to bound real ingestion spend.
+  if (!(await checkRateLimit(env, ip, "ingest", INGEST_RATE_LIMIT_PER_DAY, 24 * 3_600_000))) {
+    return adminJsonResponse({ error: "ingestion rate limit exceeded, try again tomorrow" }, 429);
+  }
+
+  const result = await githubDispatchWorkflow(env, "ingest-source.yml", inputs);
   if (!result.ok) return adminJsonResponse({ error: result.error }, 502);
   await logAdminAction(env, actorEmail, "ingest_requested", sourceUrl);
   return adminJsonResponse({ ok: true }, 202);
@@ -1797,6 +1940,163 @@ async function handleAdminPending(env: Env): Promise<Response> {
   ]);
   const pending = [...sourcePrs, ...retirePrs].sort((a, b) => b.number - a.number);
   return adminJsonResponse({ pending });
+}
+
+async function handleAdminInfoGet(env: Env): Promise<Response> {
+  const row = await env.DB.prepare(`SELECT value, updated_at, updated_by FROM admin_config WHERE key = ?`)
+    .bind(INFO_TEXT_KEY)
+    .first<{ value: string; updated_at: string; updated_by: string | null }>();
+  const saved = row && row.value.trim() ? row : null;
+  return adminJsonResponse({
+    text: saved ? saved.value : DEFAULT_INFO_TEXT,
+    is_default: !saved,
+    default_text: DEFAULT_INFO_TEXT,
+    max_chars: INFO_TEXT_MAX_CHARS,
+    updated_at: saved ? saved.updated_at : null,
+    updated_by: saved ? saved.updated_by : null,
+  });
+}
+
+async function handleAdminInfoPost(request: Request, env: Env, actorEmail: string): Promise<Response> {
+  let body: { text?: unknown };
+  try {
+    body = await request.json();
+  } catch {
+    return adminJsonResponse({ error: "invalid JSON body" }, 400);
+  }
+  if (typeof body.text !== "string") return adminJsonResponse({ error: "'text' must be a string" }, 400);
+  const text = body.text.replace(/\r\n/g, "\n").trim();
+  if (text.length > INFO_TEXT_MAX_CHARS) {
+    return adminJsonResponse({ error: `'text' must be at most ${INFO_TEXT_MAX_CHARS} characters` }, 400);
+  }
+  const now = new Date().toISOString();
+  if (!text) {
+    // Blank = go back to the built-in default text.
+    await env.DB.prepare(`DELETE FROM admin_config WHERE key = ?`).bind(INFO_TEXT_KEY).run();
+    await logAdminAction(env, actorEmail, "info_reset", null);
+    return adminJsonResponse({ text: DEFAULT_INFO_TEXT, is_default: true, updated_at: null, updated_by: null });
+  }
+  await env.DB.prepare(
+    `INSERT INTO admin_config (key, value, updated_at, updated_by) VALUES (?, ?, ?, ?)
+     ON CONFLICT (key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at, updated_by = excluded.updated_by`,
+  )
+    .bind(INFO_TEXT_KEY, text, now, actorEmail)
+    .run();
+  await logAdminAction(env, actorEmail, "info_update", null);
+  return adminJsonResponse({ text, is_default: false, updated_at: now, updated_by: actorEmail });
+}
+
+/** Reader feedback joined to the question and the answer that was served. Newest first. By
+ * default only "partly" and "no" ratings -- the ones worth reading -- since an answer rated yes
+ * rarely needs a second look; ?filter=all includes yes. Answers are text the UI renders via
+ * textContent; capped so one load stays small. */
+const ADMIN_FEEDBACK_LIMIT = 200;
+const ADMIN_FEEDBACK_ANSWER_CHARS = 6000;
+
+async function handleAdminFeedback(url: URL, env: Env): Promise<Response> {
+  const filter = url.searchParams.get("filter") === "all" ? "all" : "not_yes";
+  const rows = await env.DB.prepare(
+    `SELECT f.id AS id, f.rating AS rating, f.timestamp AS timestamp,
+            q.id AS query_id, q.question AS question, q.answer AS answer,
+            q.cache_hit AS cache_hit, q.out_of_scope AS out_of_scope
+       FROM feedback f JOIN queries q ON q.id = f.query_id
+      ${filter === "all" ? "" : "WHERE f.rating != 'yes'"}
+      ORDER BY f.id DESC LIMIT ?`,
+  )
+    .bind(ADMIN_FEEDBACK_LIMIT)
+    .all<{
+      id: number; rating: string; timestamp: string; query_id: number; question: string;
+      answer: string | null; cache_hit: number; out_of_scope: number | null;
+    }>();
+  const counts = await env.DB.prepare(`SELECT rating, COUNT(*) AS n FROM feedback GROUP BY rating`).all<{
+    rating: string;
+    n: number;
+  }>();
+  const totals = { yes: 0, partly: 0, no: 0 };
+  for (const c of counts.results) {
+    if (c.rating === "yes" || c.rating === "partly" || c.rating === "no") totals[c.rating] = c.n;
+  }
+  return adminJsonResponse({
+    filter,
+    totals,
+    limit: ADMIN_FEEDBACK_LIMIT,
+    entries: rows.results.map((r) => ({
+      id: r.id,
+      query_id: r.query_id,
+      rating: r.rating,
+      timestamp: r.timestamp,
+      question: r.question,
+      answer: r.answer ? r.answer.slice(0, ADMIN_FEEDBACK_ANSWER_CHARS) : null,
+      answer_truncated: Boolean(r.answer && r.answer.length > ADMIN_FEEDBACK_ANSWER_CHARS),
+      cache_hit: Boolean(r.cache_hit),
+      out_of_scope: r.out_of_scope === null ? null : Boolean(r.out_of_scope),
+    })),
+  });
+}
+
+async function handleAdminBudgetGet(env: Env): Promise<Response> {
+  const row = await env.DB.prepare(`SELECT value, updated_at, updated_by FROM admin_config WHERE key = ?`)
+    .bind(BUDGET_CEILING_KEY)
+    .first<{ value: string; updated_at: string; updated_by: string | null }>();
+  const ceilingMicro = await getCeilingMicroUsd(env);
+  const used = await budgetStub(env).used(currentPeriod());
+  const saved = row && Number.isFinite(parseFloat(row.value)) ? row : null;
+  return adminJsonResponse({
+    ceiling_usd: ceilingMicro / 1_000_000,
+    is_default: !saved,
+    default_usd: envCeilingUsd(env),
+    min_usd: BUDGET_CEILING_MIN_USD,
+    max_usd: BUDGET_CEILING_MAX_USD,
+    used_usd: used / 1_000_000,
+    updated_at: saved ? saved.updated_at : null,
+    updated_by: saved ? saved.updated_by : null,
+  });
+}
+
+/** Sets (or, with null, clears) the monthly spend ceiling. Takes effect on the next question. */
+async function handleAdminBudgetPost(request: Request, env: Env, actorEmail: string): Promise<Response> {
+  let body: { ceiling_usd?: unknown };
+  try {
+    body = await request.json();
+  } catch {
+    return adminJsonResponse({ error: "invalid JSON body" }, 400);
+  }
+  if (body.ceiling_usd === null) {
+    await env.DB.prepare(`DELETE FROM admin_config WHERE key = ?`).bind(BUDGET_CEILING_KEY).run();
+    await logAdminAction(env, actorEmail, "budget_reset", String(envCeilingUsd(env)));
+    return handleAdminBudgetGet(env);
+  }
+  const value = typeof body.ceiling_usd === "number" ? body.ceiling_usd : NaN;
+  if (!Number.isFinite(value) || value < BUDGET_CEILING_MIN_USD || value > BUDGET_CEILING_MAX_USD) {
+    return adminJsonResponse(
+      { error: `'ceiling_usd' must be a number between ${BUDGET_CEILING_MIN_USD} and ${BUDGET_CEILING_MAX_USD}` },
+      400,
+    );
+  }
+  const rounded = Math.round(value * 100) / 100;
+  const now = new Date().toISOString();
+  await env.DB.prepare(
+    `INSERT INTO admin_config (key, value, updated_at, updated_by) VALUES (?, ?, ?, ?)
+     ON CONFLICT (key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at, updated_by = excluded.updated_by`,
+  )
+    .bind(BUDGET_CEILING_KEY, String(rounded), now, actorEmail)
+    .run();
+  await logAdminAction(env, actorEmail, "budget_update", String(rounded));
+  return handleAdminBudgetGet(env);
+}
+
+/** The audit trail written by logAdminAction(): newest first, capped so one page load stays small.
+ * Every column is text the UI renders via textContent, never HTML (`target` can be a
+ * caller-supplied URL for ingest requests). */
+const ADMIN_ACTIVITY_LIMIT = 200;
+
+async function handleAdminActivity(env: Env): Promise<Response> {
+  const rows = await env.DB.prepare(
+    `SELECT id, timestamp, actor_email, action, target FROM admin_log ORDER BY id DESC LIMIT ?`,
+  )
+    .bind(ADMIN_ACTIVITY_LIMIT)
+    .all<{ id: number; timestamp: string; actor_email: string; action: string; target: string | null }>();
+  return adminJsonResponse({ entries: rows.results, limit: ADMIN_ACTIVITY_LIMIT });
 }
 
 /**
@@ -1823,6 +2123,12 @@ async function handleAdmin(request: Request, env: Env, path: string): Promise<Re
   if (!session) return adminJsonResponse({ error: "unauthorized" }, 401);
 
   if (path === "/admin/api/usage" && request.method === "GET") return handleAdminUsage(env, session.email);
+  if (path === "/admin/api/activity" && request.method === "GET") return handleAdminActivity(env);
+  if (path === "/admin/api/budget" && request.method === "GET") return handleAdminBudgetGet(env);
+  if (path === "/admin/api/budget" && request.method === "POST") return handleAdminBudgetPost(request, env, session.email);
+  if (path === "/admin/api/info" && request.method === "GET") return handleAdminInfoGet(env);
+  if (path === "/admin/api/info" && request.method === "POST") return handleAdminInfoPost(request, env, session.email);
+  if (path === "/admin/api/feedback" && request.method === "GET") return handleAdminFeedback(new URL(request.url), env);
   if (path === "/admin/api/sponsor" && request.method === "GET") return handleAdminSponsorGet(env);
   if (path === "/admin/api/sponsor" && request.method === "POST") {
     return handleAdminSponsorPost(request, env, session.email);
@@ -1830,10 +2136,7 @@ async function handleAdmin(request: Request, env: Env, path: string): Promise<Re
   if (path === "/admin/api/sources" && request.method === "GET") return handleAdminSources(env);
   if (path === "/admin/api/sources/pending" && request.method === "GET") return handleAdminPending(env);
   if (path === "/admin/api/sources/ingest" && request.method === "POST") {
-    if (!(await checkRateLimit(env, ip, "ingest", INGEST_RATE_LIMIT_PER_DAY, 24 * 3_600_000))) {
-      return adminJsonResponse({ error: "ingestion rate limit exceeded, try again tomorrow" }, 429);
-    }
-    return handleAdminIngest(request, env, session.email);
+    return handleAdminIngest(request, env, session.email, ip);
   }
   // The one route that can't be a flat equality check: /admin/api/sources/<id>/<hide|unhide|retire>.
   const sourceAction = path.match(/^\/admin\/api\/sources\/([^/]+)\/(hide|unhide|retire)$/);
@@ -1884,7 +2187,7 @@ export default {
     // monitors polling liveness don't hit the Budget durable object on every check.
     if (url.pathname === "/status" && (request.method === "GET" || request.method === "HEAD")) {
       const period = currentPeriod();
-      const ceilingMicroUsd = Math.round((parseFloat(env.MONTHLY_COST_CEILING_USD) || 0) * 1_000_000);
+      const ceilingMicroUsd = await getCeilingMicroUsd(env);
       const used = await budgetStub(env).used(period);
       return jsonResponse(
         { ok: true, degraded: used >= ceilingMicroUsd, resets_at: periodResetsAt() },
@@ -1923,7 +2226,7 @@ export default {
       // change, not a rebuild, and embedders never carry it in their page. Sponsor values come
       // from admin_config (see getSponsorConfig) instead of env vars, so an admin console edit
       // takes effect within the hour (this response's own cache-control) with no redeploy.
-      const sponsor = await getSponsorConfig(env);
+      const [sponsor, infoText] = await Promise.all([getSponsorConfig(env), getInfoText(env)]);
       const widgetJs = WIDGET_JS.split("__TURNSTILE_SITEKEY__")
         .join(env.TURNSTILE_SITEKEY ?? "")
         .split("__SPONSOR_NAME__")
@@ -1933,7 +2236,9 @@ export default {
         .split("__SPONSOR_URL__")
         .join(jsStringLiteralSafe(sponsor.sponsor_url))
         .split("__SPONSOR_LOGO_URL__")
-        .join(jsStringLiteralSafe(sponsor.sponsor_logo_url));
+        .join(jsStringLiteralSafe(sponsor.sponsor_logo_url))
+        .split("__INFO_TEXT__")
+        .join(jsLongStringLiteralSafe(infoText));
       return new Response(widgetJs, {
         headers: corsHeaders(
           {

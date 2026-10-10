@@ -29,15 +29,11 @@
       "#nacfe-assist-root{font-family:Roboto,Helvetica,Arial,sans-serif;color:#1a1a1a;",
       "max-width:720px;margin:0 auto;box-sizing:border-box}",
       "#nacfe-assist-root *{box-sizing:border-box}",
-      "#nacfe-assist-root .na-label{font-size:13px;font-weight:700;letter-spacing:.04em;",
-      "text-transform:uppercase;color:#ab1428;margin:0}",
-      "#nacfe-assist-root .na-label-row{display:flex;align-items:center;",
-      "justify-content:space-between;gap:8px;margin:0 0 8px}",
-      "#nacfe-assist-root .na-info-btn{width:18px;height:18px;flex-shrink:0;border-radius:50%;",
+      "#nacfe-assist-root .na-info-btn{width:20px;height:20px;flex-shrink:0;border-radius:50%;align-self:center;",
       "border:1px solid #c7c7c7;background:#fff;color:#6b6b6b;font-size:12px;font-weight:700;",
       "line-height:1;cursor:pointer;padding:0;display:flex;align-items:center;",
       "justify-content:center;font-family:Georgia,'Times New Roman',serif;font-style:italic}",
-      "#nacfe-assist-root .na-info-btn:hover{border-color:#ab1428;color:#ab1428}",
+      "#nacfe-assist-root .na-info-btn:hover:not(:disabled){border-color:#ab1428;color:#ab1428;background:#fff}",
       "#nacfe-assist-root .na-info{font-size:13px;line-height:1.6;color:#444;",
       "background:#f7f7f7;border-radius:4px;padding:10px 12px;margin:0 0 14px}",
       "#nacfe-assist-root .na-info p{margin:0 0 8px}",
@@ -126,7 +122,6 @@
       // stay mobile-sized so phones/narrow embeds aren't affected.
       "@media (min-width:640px){",
       "#nacfe-assist-root{max-width:900px}",
-      "#nacfe-assist-root .na-label{font-size:15px}",
       "#nacfe-assist-root input[type=text]{font-size:17px;padding:13px 16px}",
       "#nacfe-assist-root button{font-size:17px;padding:13px 24px}",
       "#nacfe-assist-root .na-hint{font-size:14px}",
@@ -149,29 +144,12 @@
 
   mount.innerHTML = [
     '<div id="nacfe-assist-root">',
-    '<div class="na-label-row">',
-    '<p class="na-label">Ask NACFE\'s Research</p>',
-    '<button type="button" class="na-info-btn" id="na-info-btn" aria-expanded="false" aria-controls="na-info" aria-label="About this tool">i</button>',
-    '</div>',
-    '<div class="na-info" id="na-info" style="display:none">',
-    '<p>Answers are drawn from these NACFE published sources:</p>',
-    '<ul>',
-    '<li>Current Technology (Confidence Reports)</li>',
-    '<li>Emerging Technology (Guidance Reports)</li>',
-    '<li>Fleet Efficiency Study (latest)</li>',
-    '<li>Run on Less Reports</li>',
-    '<li>Thought Leadership Reports</li>',
-    '<li>Collaboration Reports</li>',
-    '<li>Mike &amp; Friends Podcasts</li>',
-    '<li>Run on Less Messy Middle Bootcamps</li>',
-    '<li>Run on Less fleet profile videos</li>',
-    '</ul>',
-    '<p>Source library last updated 07/2026.</p>',
-    '</div>',
+    '<div class="na-info" id="na-info" style="display:none"></div>',
     '<div class="na-notice" id="na-notice" role="status" style="display:none"></div>',
     '<form id="na-form">',
     '<input type="text" id="na-input" maxlength="1000" aria-label="Ask a question about NACFE\u2019s research" placeholder="e.g. What was Frito-Lay’s fuel economy in the Messy Middle demonstration?" autocomplete="off" />',
     '<button type="submit" id="na-submit">Ask</button>',
+    '<button type="button" class="na-info-btn" id="na-info-btn" aria-expanded="false" aria-controls="na-info" aria-label="About this tool">i</button>',
     '</form>',
     '<div class="na-turnstile" id="na-turnstile"></div>',
     '<p class="na-hint">Answers are grounded only in NACFE’s published reports, videos, and studies — not general knowledge.</p>',
@@ -198,7 +176,7 @@
     '</div>',
     '</div>',
     '<p class="na-sponsor" id="na-sponsor" style="display:none"></p>',
-    '<p class="na-footer">Powered by NACFE’s research library. Answers cite specific reports and demonstrations — verify against the original source for critical decisions. Questions are logged (without any identifying information) to help NACFE see what the industry is asking; please don’t enter personal or confidential details.</p>',
+    '<p class="na-footer">Powered by NACFE’s research library. Answers cite specific reports and demonstrations — verify against the original source for critical decisions. Questions and answers are logged (without any identifying information) to help NACFE see what the industry is asking; please don’t enter personal or confidential details.</p>',
     '</div>',
   ].join("");
 
@@ -311,6 +289,33 @@
     (script && script.getAttribute("data-sitekey")) || "__TURNSTILE_SITEKEY__";
   if (TURNSTILE_SITEKEY.indexOf("__TURNSTILE") === 0) TURNSTILE_SITEKEY = "";
   var turnstileWidgetId = null;
+
+  // The text behind the (i) button, edited in the admin console and substituted by the Worker
+  // when it serves this file. Blank line = new paragraph; a line starting "- " = bullet. Always
+  // rendered with textContent, never as HTML. The fallback only shows when the file is served
+  // without the Worker (e.g. a local preview).
+  var INFO_TEXT = "__INFO_TEXT__";
+  if (INFO_TEXT.indexOf("__INFO_TEXT") === 0) {
+    INFO_TEXT = "Answers are drawn from NACFE\u2019s published reports, videos, and podcasts.";
+  }
+  function renderInfo(container, text) {
+    var list = null;
+    text.split(/\r?\n/).forEach(function (line) {
+      var trimmed = line.trim();
+      if (!trimmed) { list = null; return; }
+      if (trimmed.indexOf("- ") === 0) {
+        if (!list) { list = document.createElement("ul"); container.appendChild(list); }
+        var li = document.createElement("li");
+        li.textContent = trimmed.slice(2);
+        list.appendChild(li);
+      } else {
+        list = null;
+        var para = document.createElement("p");
+        para.textContent = trimmed;
+        container.appendChild(para);
+      }
+    });
+  }
 
   // Substituted by the Worker when it serves this file, same as the sitekey. Empty name means
   // there is no sponsor, so no block renders and no click tracking exists.
@@ -636,6 +641,7 @@
   }
 
   if (infoBtn && infoEl) {
+    renderInfo(infoEl, INFO_TEXT);
     infoBtn.addEventListener("click", function () {
       var open = infoEl.style.display !== "none";
       infoEl.style.display = open ? "none" : "block";

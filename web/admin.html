@@ -68,7 +68,10 @@
   <nav>
     <button type="button" data-tab="usage" class="active">Usage</button>
     <button type="button" data-tab="sponsor">Sponsor</button>
+    <button type="button" data-tab="info">Info text</button>
+    <button type="button" data-tab="feedback">Feedback</button>
     <button type="button" data-tab="sources">Sources</button>
+    <button type="button" data-tab="activity">Activity</button>
   </nav>
   <main>
     <section id="tab-usage" class="active">
@@ -80,6 +83,19 @@
         <h2>Monthly spend</h2>
         <div class="stat"><span class="n" id="spend-label"></span></div>
         <div class="bar-track"><div class="bar-fill" id="spend-bar" style="width:0%"></div></div>
+        <div class="msg" id="budget-msg" style="margin-top:12px"></div>
+        <div class="row" style="margin:12px 0 4px">
+          <div style="flex:0 0 160px;min-width:0">
+            <label>Monthly limit (USD)</label>
+            <input type="number" id="budget-input" min="1" max="1000" step="1" style="width:100%" />
+          </div>
+          <div style="flex:0 0 auto;min-width:0">
+            <button type="button" class="btn" id="budget-save">Save limit</button>
+            <button type="button" class="btn btn-secondary" id="budget-reset" style="margin-left:8px">Reset to default</button>
+          </div>
+        </div>
+        <p class="muted" id="budget-meta"></p>
+        <p class="muted">Takes effect on the next question. The limit caps what the assistant spends on new answers each month; cached answers are free and keep working after it's reached. Lowering it below what's already been spent switches the tool to cached answers only until next month. Allowed range: $1 to $1,000.</p>
       </div>
       <div class="card">
         <h2>Feedback (this month)</h2>
@@ -118,31 +134,90 @@
       </div>
     </section>
 
+    <section id="tab-info">
+      <div class="card">
+        <h2>Text behind the (i) button</h2>
+        <div class="msg" id="info-msg"></div>
+        <p class="muted">Shown to readers when they click the (i) next to the question box. Leave a blank line between paragraphs, and start a line with "- " for a bullet. Plain text only: no links or formatting.</p>
+        <textarea id="info-text" rows="14" style="width:100%;font:inherit;padding:10px;border:1px solid #c7c7c7;border-radius:4px"></textarea>
+        <p class="muted" id="info-meta"></p>
+        <button type="button" class="btn" id="info-save" style="margin-top:6px">Save</button>
+        <button type="button" class="btn btn-secondary" id="info-reset" style="margin-top:6px;margin-left:8px">Reset to default</button>
+        <p class="muted" style="margin-top:10px">Takes effect within the hour (the widget's own cache lifetime) -- no deploy needed.</p>
+      </div>
+    </section>
+
+    <section id="tab-feedback">
+      <div class="card">
+        <h2>Reader feedback</h2>
+        <div class="stat-grid" id="feedback-totals"></div>
+        <div class="row" style="margin-top:14px">
+          <div>
+            <label>Show</label>
+            <select id="feedback-filter">
+              <option value="not_yes">Partly and no (default)</option>
+              <option value="all">All ratings, including yes</option>
+            </select>
+          </div>
+        </div>
+        <p class="muted">Newest first, up to 200. Click a question to see the answer the reader was given. Answers are recorded from the date this feature was deployed; older ratings have no answer on file.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>When</th><th>Rating</th><th>Question and answer</th></tr></thead>
+            <tbody id="feedback-list"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <section id="tab-sources">
       <div class="card">
         <h2>Add a source</h2>
         <div class="msg" id="ingest-msg"></div>
         <div class="row">
           <div>
-            <label>Type</label>
-            <select id="ingest-type">
-              <option value="youtube">Video / podcast (YouTube URL)</option>
+            <label>What are you adding?</label>
+            <select id="ingest-kind">
+              <option value="video">Video (YouTube)</option>
+              <option value="podcast">Podcast episode (YouTube)</option>
               <option value="pdf">Report (PDF URL)</option>
             </select>
+          </div>
+          <div>
+            <label>Catalog type</label>
+            <select id="ingest-catalog-type"></select>
           </div>
           <div>
             <label>URL</label>
             <input type="url" id="ingest-url" placeholder="https://" />
           </div>
+        </div>
+        <div class="row" id="ingest-title-row">
           <div>
-            <label>Title (required for video/podcast)</label>
+            <label id="ingest-title-label">Title (required)</label>
             <input type="text" id="ingest-title" />
           </div>
+        </div>
+        <div class="row" id="ingest-podcast-row" style="display:none">
+          <div style="flex:0 0 120px;min-width:0">
+            <label>Episode number</label>
+            <input type="number" id="ingest-episode" min="1" max="9999" step="1" style="width:100%" />
+          </div>
+          <div>
+            <label>Guest</label>
+            <input type="text" id="ingest-guest" />
+          </div>
+          <div>
+            <label>Guest's organization</label>
+            <input type="text" id="ingest-org" />
+          </div>
+        </div>
+        <div class="row">
           <div style="flex:0 0 auto;min-width:0">
             <button type="button" class="btn" id="ingest-submit">Start</button>
           </div>
         </div>
-        <p class="muted">Runs the real ingestion pipeline in CI and opens a pull request with a draft catalog entry for human review -- nothing goes live until that PR is merged and deployed.</p>
+        <p class="muted">Runs the real ingestion pipeline in CI and opens a pull request with a draft catalog entry for human review -- nothing goes live until that PR is merged and deployed. The catalog type you pick is used as-is in the draft. Podcast episodes use YouTube's captions (the standard podcast path), not the audio.</p>
       </div>
       <div class="card">
         <h2>Pending (open PRs)</h2>
@@ -164,6 +239,18 @@
           <table>
             <thead><tr><th>Title</th><th>Type</th><th>Published</th><th>Status</th><th>Hidden</th><th></th></tr></thead>
             <tbody id="sources-list"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section id="tab-activity">
+      <div class="card">
+        <h2>Admin activity</h2>
+        <p class="muted">Every change made in this console, newest first. Showing up to the last 200 actions.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>When</th><th>Who</th><th>Action</th><th>Target</th></tr></thead>
+            <tbody id="activity-list"></tbody>
           </table>
         </div>
       </div>
@@ -217,6 +304,8 @@
       document.querySelectorAll("main section").forEach(function (s) { s.classList.remove("active"); });
       btn.classList.add("active");
       document.getElementById("tab-" + btn.getAttribute("data-tab")).classList.add("active");
+      if (btn.getAttribute("data-tab") === "activity") loadActivity();
+      if (btn.getAttribute("data-tab") === "feedback") loadFeedback();
     });
   });
 
@@ -373,14 +462,57 @@
     document.getElementById(id).addEventListener("change", renderSources);
   });
 
+  // "Kind" decides how the source is fetched and processed; the catalog type is what it is in the
+  // catalog. Keep both lists in step with CATALOG_TYPES_BY_KIND in worker/src/index.ts.
+  var CATALOG_TYPES_BY_KIND = {
+    video: ["video", "bootcamp"],
+    podcast: ["podcast"],
+    pdf: ["confidence_report", "guidance_report", "thought_leadership", "run_on_less", "article", "fleet_fuel_study"]
+  };
+  var CATALOG_TYPE_LABELS = {
+    video: "Video / webinar",
+    bootcamp: "Bootcamp recording",
+    podcast: "Podcast episode",
+    confidence_report: "Confidence report",
+    guidance_report: "Guidance report",
+    thought_leadership: "Thought leadership",
+    run_on_less: "Run on Less report",
+    article: "Article",
+    fleet_fuel_study: "Fleet fuel study"
+  };
+
+  function updateIngestForm() {
+    var kind = document.getElementById("ingest-kind").value;
+    var typeSel = document.getElementById("ingest-catalog-type");
+    typeSel.innerHTML = "";
+    CATALOG_TYPES_BY_KIND[kind].forEach(function (t) {
+      typeSel.appendChild(el("option", { value: t, text: CATALOG_TYPE_LABELS[t] || t }));
+    });
+    var isPodcast = kind === "podcast";
+    document.getElementById("ingest-podcast-row").style.display = isPodcast ? "" : "none";
+    document.getElementById("ingest-title-row").style.display = isPodcast ? "none" : "";
+    document.getElementById("ingest-title-label").textContent =
+      kind === "video" ? "Title (required)" : "Title (optional, used for the file name)";
+  }
+  document.getElementById("ingest-kind").addEventListener("change", updateIngestForm);
+  updateIngestForm();
+
   document.getElementById("ingest-submit").addEventListener("click", function () {
     var msg = document.getElementById("ingest-msg");
     msg.className = "msg";
+    var kind = document.getElementById("ingest-kind").value;
     var body = {
-      type: document.getElementById("ingest-type").value,
+      kind: kind,
+      catalog_type: document.getElementById("ingest-catalog-type").value,
       url: document.getElementById("ingest-url").value,
-      title_hint: document.getElementById("ingest-title").value,
     };
+    if (kind === "podcast") {
+      body.episode_num = document.getElementById("ingest-episode").value;
+      body.guest = document.getElementById("ingest-guest").value;
+      body.org = document.getElementById("ingest-org").value;
+    } else {
+      body.title_hint = document.getElementById("ingest-title").value;
+    }
     if (!body.url) {
       msg.textContent = "URL is required.";
       msg.className = "msg err";
@@ -393,8 +525,9 @@
     }).then(function (d) {
       msg.textContent = "Started. A CI job runs the ingestion and opens a pull request in a few minutes -- reload this page to see it appear under Pending.";
       msg.className = "msg ok";
-      document.getElementById("ingest-url").value = "";
-      document.getElementById("ingest-title").value = "";
+      ["ingest-url", "ingest-title", "ingest-episode", "ingest-guest", "ingest-org"].forEach(function (id) {
+        document.getElementById(id).value = "";
+      });
       loadPending();
     }).catch(function (e) {
       msg.textContent = e.message;
@@ -417,9 +550,161 @@
     }).catch(function (e) { console.error(e); });
   }
 
+  var ACTION_LABELS = {
+    hide: "Hid a source",
+    unhide: "Unhid a source",
+    sponsor_update: "Updated the sponsor",
+    budget_update: "Changed the monthly spend limit",
+    budget_reset: "Reset the monthly spend limit to default",
+    info_update: "Edited the (i) text",
+    info_reset: "Reset the (i) text to default",
+    ingest_requested: "Requested a new source",
+    retire_requested: "Requested retiring a source"
+  };
+
+  function loadActivity() {
+    adminFetch("/admin/api/activity").then(function (d) {
+      var tbody = document.getElementById("activity-list");
+      tbody.innerHTML = "";
+      var entries = d.entries || [];
+      if (!entries.length) {
+        tbody.appendChild(el("tr", {}, [el("td", { colspan: "4", text: "No admin actions recorded yet." })]));
+        return;
+      }
+      entries.forEach(function (a) {
+        tbody.appendChild(el("tr", {}, [
+          el("td", {}, [text(new Date(a.timestamp).toLocaleString())]),
+          el("td", {}, [text(a.actor_email)]),
+          el("td", {}, [text(ACTION_LABELS[a.action] || a.action)]),
+          el("td", {}, [text(a.target || "")]),
+        ]));
+      });
+    }).catch(function (e) { console.error(e); });
+  }
+
+  function loadInfo() {
+    adminFetch("/admin/api/info").then(function (d) {
+      document.getElementById("info-text").value = d.text || "";
+      document.getElementById("info-text").setAttribute("maxlength", String(d.max_chars || 2000));
+      var meta = document.getElementById("info-meta");
+      meta.textContent = d.is_default
+        ? "Showing the built-in default text."
+        : "Last edited " + new Date(d.updated_at).toLocaleString() + (d.updated_by ? " by " + d.updated_by : "");
+    }).catch(function (e) { console.error(e); });
+  }
+  function saveInfo(text, doneMsg) {
+    var msg = document.getElementById("info-msg");
+    msg.className = "msg";
+    adminFetch("/admin/api/info", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ text: text }),
+    }).then(function () {
+      msg.textContent = doneMsg;
+      msg.className = "msg ok";
+      loadInfo();
+    }).catch(function (e) {
+      msg.textContent = e.message;
+      msg.className = "msg err";
+    });
+  }
+  document.getElementById("info-save").addEventListener("click", function () {
+    var text = document.getElementById("info-text").value;
+    if (!text.trim()) {
+      document.getElementById("info-msg").textContent = "The text is empty. Use Reset to default to restore the built-in text.";
+      document.getElementById("info-msg").className = "msg err";
+      return;
+    }
+    saveInfo(text, "Saved.");
+  });
+  document.getElementById("info-reset").addEventListener("click", function () {
+    if (window.confirm("Replace your text with the built-in default?")) saveInfo("", "Reset to the default text.");
+  });
+
+  var RATING_LABELS = { yes: "Yes", partly: "Partly", no: "No" };
+  function loadFeedback() {
+    var filter = document.getElementById("feedback-filter").value;
+    adminFetch("/admin/api/feedback?filter=" + encodeURIComponent(filter)).then(function (d) {
+      var totals = document.getElementById("feedback-totals");
+      totals.innerHTML = "";
+      totals.appendChild(statTile(d.totals.yes, "Yes"));
+      totals.appendChild(statTile(d.totals.partly, "Partly"));
+      totals.appendChild(statTile(d.totals.no, "No"));
+      var tbody = document.getElementById("feedback-list");
+      tbody.innerHTML = "";
+      var entries = d.entries || [];
+      if (!entries.length) {
+        tbody.appendChild(el("tr", {}, [el("td", { colspan: "3", text: "No feedback to show." })]));
+        return;
+      }
+      entries.forEach(function (f) {
+        var answerText = f.answer
+          ? f.answer + (f.answer_truncated ? "\n\n[answer cut off for display]" : "")
+          : "No answer on file for this one (it was rated before answers were recorded).";
+        var details = el("details", {}, [
+          el("summary", { text: f.question }),
+          el("div", { style: "white-space:pre-wrap;margin-top:8px;padding:10px;background:#f7f7f7;border-radius:4px;font-size:13px;line-height:1.5", text: answerText }),
+        ]);
+        tbody.appendChild(el("tr", {}, [
+          el("td", {}, [text(new Date(f.timestamp).toLocaleString())]),
+          el("td", {}, [text(RATING_LABELS[f.rating] || f.rating)]),
+          el("td", {}, [details]),
+        ]));
+      });
+    }).catch(function (e) { console.error(e); });
+  }
+  document.getElementById("feedback-filter").addEventListener("change", loadFeedback);
+
+  function loadBudget() {
+    adminFetch("/admin/api/budget").then(function (d) {
+      document.getElementById("budget-input").value = d.ceiling_usd;
+      document.getElementById("budget-input").setAttribute("min", String(d.min_usd));
+      document.getElementById("budget-input").setAttribute("max", String(d.max_usd));
+      var meta = document.getElementById("budget-meta");
+      meta.textContent = d.is_default
+        ? "Using the default limit of $" + d.default_usd + "."
+        : "Set by " + (d.updated_by || "an admin") + " on " + new Date(d.updated_at).toLocaleString() + ". The default is $" + d.default_usd + ".";
+    }).catch(function (e) { console.error(e); });
+  }
+  function saveBudget(value, doneMsg) {
+    var msg = document.getElementById("budget-msg");
+    msg.className = "msg";
+    adminFetch("/admin/api/budget", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ ceiling_usd: value }),
+    }).then(function () {
+      msg.textContent = doneMsg;
+      msg.className = "msg ok";
+      loadBudget();
+      loadUsage();
+    }).catch(function (e) {
+      msg.textContent = e.message;
+      msg.className = "msg err";
+    });
+  }
+  document.getElementById("budget-save").addEventListener("click", function () {
+    var raw = document.getElementById("budget-input").value;
+    var n = Number(raw);
+    var msg = document.getElementById("budget-msg");
+    if (raw === "" || !isFinite(n)) {
+      msg.textContent = "Enter a dollar amount.";
+      msg.className = "msg err";
+      return;
+    }
+    if (window.confirm("Set the monthly spend limit to $" + n + "?")) saveBudget(n, "Saved. New limit: $" + n + ".");
+  });
+  document.getElementById("budget-reset").addEventListener("click", function () {
+    if (window.confirm("Go back to the default monthly limit?")) saveBudget(null, "Reset to the default limit.");
+  });
+
   loadUsage();
   loadSponsor();
   loadSources();
   loadPending();
+  loadActivity();
+  loadInfo();
+  loadFeedback();
+  loadBudget();
 })();
 </script>
