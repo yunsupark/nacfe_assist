@@ -7611,8 +7611,8 @@
       "NFI"
     ],
     "supersedes": null,
-    "superseded_by": null,
-    "status": "current",
+    "superseded_by": "buckendale-lecture-video-2020",
+    "status": "superseded",
     "abstract": "2020 SAE L. Ray Buckendale Lecture by Mike Roeth (NACFE Executive Director), the third in an SAE series on transformational change in commercial trucking (following 2018 government and 2019 academia perspectives), giving an industry view. Covers electrification (BEV and hydrogen fuel cell), levels of automation/autonomy, platooning, connected vehicles, the DOE SuperTruck I/II programs, and factors driving fleet technology adoption (S-curve dynamics, residual value, regulation, risk, vehicle life expectancy, operating costs, fuel price volatility). Includes 2020 case studies of PepsiCo/Frito-Lay's Transforming Modesto project, UPS's Rolling Laboratory and CNG/RNG fleet, and NFI's Chino, California battery-electric drayage pilot.",
     "key_findings": [
       "NACFE's 2017 Run on Less demonstration of 7 Class 8 tractors averaged 10.1 mpg over 17 days and 50,107 miles at an average GVW of 55,498 lbs., more than double the roughly 5.9-6.0 mpg U.S. average for combination trucks at the time.",
@@ -14842,7 +14842,9 @@
       "UPS",
       "NFI"
     ],
-    "supersedes": null,
+    "supersedes": [
+      "buckendale-lecture-2020"
+    ],
     "superseded_by": null,
     "status": "current",
     "abstract": "In the 2020 L. Ray Buckendale Lecture, NACFE Executive Director Mike Roeth examines transformational technologies in commercial transportation, focusing on truck development processes, technology adoption curves, and fleet decarbonization. The presentation outlines the historical progression of fleet fuel efficiency, total cost of ownership dynamics, and the messy middle transition from diesel to electric powertrains. Case studies of early adopters PepsiCo, UPS, and NFI highlight real-world strategies for deploying battery electric, natural gas, and regional haul solutions, alongside recommendations for managing hard and soft costs.",
