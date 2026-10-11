@@ -66,6 +66,11 @@
       "#nacfe-assist-root .na-result{border-top:1px solid #e2e2e2;padding-top:16px;",
       "margin-top:16px;display:none}",
       "#nacfe-assist-root .na-result.na-visible{display:block}",
+      "#nacfe-assist-root .na-question{font-size:15px;font-weight:700;color:#292d2d;margin:0 0 10px}",
+      "#nacfe-assist-root .na-clear-row{display:flex;justify-content:flex-end;margin:6px 0 8px}",
+      "#nacfe-assist-root .na-link{background:none;border:none;padding:0;font-size:13px;",
+      "font-weight:400;color:#6b6b6b;text-decoration:underline;cursor:pointer;font-family:inherit}",
+      "#nacfe-assist-root .na-link:hover:not(:disabled){background:none;color:#ab1428}",
       "#nacfe-assist-root .na-answer{font-size:15px;line-height:1.6;white-space:pre-wrap}",
       "#nacfe-assist-root .na-answer p{margin:0 0 12px}",
       "#nacfe-assist-root .na-warning{background:#fff5e6;border:1px solid #f0c987;",
@@ -125,6 +130,8 @@
       "#nacfe-assist-root input[type=text]{font-size:17px;padding:13px 16px}",
       "#nacfe-assist-root button{font-size:17px;padding:13px 24px}",
       "#nacfe-assist-root .na-hint{font-size:14px}",
+      "#nacfe-assist-root .na-question{font-size:17px}",
+      "#nacfe-assist-root .na-link{font-size:14px}",
       "#nacfe-assist-root .na-info{font-size:14px}",
       "#nacfe-assist-root .na-answer{font-size:18px;line-height:1.7}",
       "#nacfe-assist-root .na-warning{font-size:15px}",
@@ -151,6 +158,7 @@
     '<button type="submit" id="na-submit">Ask</button>',
     '<button type="button" class="na-info-btn" id="na-info-btn" aria-expanded="false" aria-controls="na-info" aria-label="About this tool">i</button>',
     '</form>',
+    '<div class="na-clear-row" id="na-clear-row" style="display:none"><button type="button" class="na-link" id="na-clear">Start a new conversation</button></div>',
     '<div class="na-turnstile" id="na-turnstile"></div>',
     '<p class="na-hint">Answers are grounded only in NACFE’s published reports, videos, and studies — not general knowledge.</p>',
     '<div class="na-loading" id="na-loading" role="status" aria-live="polite" style="display:none">',
@@ -161,6 +169,7 @@
     '<div class="na-error" id="na-error" role="alert" style="display:none"></div>',
     '<div class="na-history" id="na-history"></div>',
     '<div class="na-result" id="na-result" aria-live="polite">',
+    '<p class="na-question" id="na-question"></p>',
     '<div class="na-warning" id="na-warning" style="display:none"></div>',
     '<div class="na-answer" id="na-answer"></div>',
     '<div class="na-sources" id="na-sources" style="display:none">',
@@ -193,6 +202,9 @@
   var sourcesEl = mount.querySelector("#na-sources");
   var sourcesListEl = mount.querySelector("#na-sources-list");
   var historyEl = mount.querySelector("#na-history");
+  var questionEl = mount.querySelector("#na-question");
+  var clearRow = mount.querySelector("#na-clear-row");
+  var clearBtn = mount.querySelector("#na-clear");
   var feedbackEl = mount.querySelector("#na-feedback");
   var feedbackBtns = mount.querySelectorAll(".na-feedback-btn");
   var noticeEl = mount.querySelector("#na-notice");
@@ -669,6 +681,30 @@
       });
   }
 
+  // "Start a new conversation" shows once there is anything to clear.
+  function updateClearRow() {
+    var hasContent = resultEl.classList.contains("na-visible") || historyEl.children.length > 0;
+    clearRow.style.display = hasContent ? "flex" : "none";
+  }
+
+  // Clears the answer, the collapsed history, AND what the assistant remembers for follow-ups
+  // (conversationHistory), so a new topic isn't answered in the context of the old one.
+  clearBtn.addEventListener("click", function () {
+    historyEl.innerHTML = "";
+    resultEl.classList.remove("na-visible");
+    questionEl.textContent = "";
+    renderAnswer("");
+    renderSources(null);
+    warningEl.style.display = "none";
+    errorEl.style.display = "none";
+    resetFeedback();
+    shownQuestion = null;
+    conversationHistory = [];
+    input.value = "";
+    updateClearRow();
+    input.focus();
+  });
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var question = input.value.trim();
@@ -758,6 +794,11 @@
           feedbackEl.style.display = "flex";
         }
         resultEl.classList.add("na-visible");
+        // The answer now carries its own question label, so the box can be emptied ready for a
+        // follow-up. Only on success: after an error the text stays so the reader can retry.
+        questionEl.textContent = question;
+        input.value = "";
+        updateClearRow();
         shownQuestion = question;
         conversationHistory.push({ question: question, answer: data.answer || "" });
         if (conversationHistory.length > CONVERSATION_TURNS_SENT) {
