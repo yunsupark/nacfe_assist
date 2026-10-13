@@ -5,7 +5,7 @@
  *              site-wide, with an on/off switch and include/exclude page lists
  *              (Settings > NACFE Assist Launcher). Contains no secrets and no per-user data, so
  *              page caching is safe.
- * Version:     1.2.0
+ * Version:     1.2.1
  */
 
 if (!defined('ABSPATH')) {
@@ -264,6 +264,14 @@ add_action('wp_footer', function () {
 </script>
     <?php
 }, 99);
+
+// A "Settings" link on the Plugins page row, so the settings are one click from where the plugin is
+// listed (the page itself lives under the Settings menu, not as a top-level item).
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), function ($links) {
+    $url = admin_url('options-general.php?page=nacfe-assist-launcher');
+    array_unshift($links, '<a href="' . esc_url($url) . '">Settings</a>');
+    return $links;
+});
 
 // ---- Settings page: Settings > NACFE Assist Launcher ----
 
