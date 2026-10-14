@@ -36,7 +36,10 @@
       "#nacfe-assist-root .na-info-btn:hover:not(:disabled){border-color:#ab1428;color:#ab1428;background:#fff}",
       "#nacfe-assist-root .na-info{font-size:13px;line-height:1.6;color:#444;",
       "background:#f7f7f7;border-radius:4px;padding:10px 12px;margin:0 0 14px}",
-      "#nacfe-assist-root .na-info{cursor:pointer}",
+      "#nacfe-assist-root .na-info{cursor:pointer;margin:0 0 14px}",
+      "#nacfe-assist-root .na-hint .na-info-btn{display:inline-flex;width:18px;height:18px;",
+      "font-size:11px;margin:0 6px 2px 0;vertical-align:middle}",
+      "#nacfe-assist-root .na-hint .na-info-link{color:#ab1428;font-weight:500;font-size:inherit}",
       "#nacfe-assist-root .na-info p{margin:0 0 8px}",
       "#nacfe-assist-root .na-info p.na-info-hint{margin:10px 0 0;font-size:12px;color:#8a8a8a;text-align:right}",
       "#nacfe-assist-root .na-info p:last-child{margin-bottom:0}",
@@ -153,16 +156,19 @@
 
   mount.innerHTML = [
     '<div id="nacfe-assist-root">',
-    '<div class="na-info" id="na-info" style="display:none"></div>',
     '<div class="na-notice" id="na-notice" role="status" style="display:none"></div>',
     '<form id="na-form">',
     '<input type="text" id="na-input" maxlength="1000" aria-label="Ask a question about NACFE\u2019s research" placeholder="e.g. What was Frito-Lay’s fuel economy in the Messy Middle demonstration?" autocomplete="off" />',
     '<button type="submit" id="na-submit">Ask</button>',
-    '<button type="button" class="na-info-btn" id="na-info-btn" aria-expanded="false" aria-controls="na-info" aria-label="About this tool">i</button>',
     '</form>',
     '<div class="na-clear-row" id="na-clear-row" style="display:none"><button type="button" class="na-link" id="na-clear">Start a new conversation</button></div>',
     '<div class="na-turnstile" id="na-turnstile"></div>',
-    '<p class="na-hint">Answers are grounded only in NACFE’s published reports, videos, and studies — not general knowledge.</p>',
+    '<p class="na-hint">',
+    '<button type="button" class="na-info-btn na-info-trigger" id="na-info-icon" aria-expanded="false" aria-controls="na-info" aria-label="About this tool">i</button>',
+    'Answers are grounded only in NACFE’s published reports, videos, and studies — not general knowledge. ',
+    '<button type="button" class="na-link na-info-link na-info-trigger" id="na-info-link" aria-expanded="false" aria-controls="na-info">What’s included?</button>',
+    '</p>',
+    '<div class="na-info" id="na-info" style="display:none"></div>',
     '<div class="na-loading" id="na-loading" role="status" aria-live="polite" style="display:none">',
     '<div class="na-loading-bar"><div class="na-loading-fill"></div></div>',
     '<p class="na-loading-text" id="na-loading-text">Searching NACFE’s research library</p>',
@@ -210,7 +216,7 @@
   var feedbackEl = mount.querySelector("#na-feedback");
   var feedbackBtns = mount.querySelectorAll(".na-feedback-btn");
   var noticeEl = mount.querySelector("#na-notice");
-  var infoBtn = mount.querySelector("#na-info-btn");
+  var infoTriggers = mount.querySelectorAll(".na-info-trigger");
   var infoEl = mount.querySelector("#na-info");
   var sponsorEl = mount.querySelector("#na-sponsor");
   var feedbackThanksEl = mount.querySelector("#na-feedback-thanks");
@@ -654,15 +660,20 @@
     sponsorEl.style.display = "flex";
   }
 
-  if (infoBtn && infoEl) {
+  if (infoTriggers.length && infoEl) {
     renderInfo(infoEl, INFO_TEXT);
     function setInfoOpen(open) {
       infoEl.style.display = open ? "block" : "none";
-      infoBtn.setAttribute("aria-expanded", String(open));
+      for (var i = 0; i < infoTriggers.length; i++) infoTriggers[i].setAttribute("aria-expanded", String(open));
+      // The pane opens right under the line that was clicked; make sure it is not cut off by the
+      // bottom of a scrolling panel.
+      if (open && infoEl.scrollIntoView) infoEl.scrollIntoView({ block: "nearest", behavior: "smooth" });
     }
-    infoBtn.addEventListener("click", function () {
-      setInfoOpen(infoEl.style.display === "none");
-    });
+    for (var t = 0; t < infoTriggers.length; t++) {
+      infoTriggers[t].addEventListener("click", function () {
+        setInfoOpen(infoEl.style.display === "none");
+      });
+    }
     // Click anywhere inside the open pane to close it (the pane is plain text, so there is nothing
     // else to click), with a visible hint so readers know. Escape closes it too.
     var infoHint = document.createElement("p");
