@@ -545,6 +545,36 @@ async function getSponsorConfig(env: Env): Promise<SponsorConfig> {
  * it falls back to MONTHLY_COST_CEILING_USD in wrangler.toml. Falling back to the configured
  * default -- never to "no limit" -- is deliberate: a D1 blip must not remove the cost cap.
  */
+/**
+ * Staff pass: a short-lived signed token the WordPress launcher plugin issues to a logged-in
+ * NACFE staff member and the widget sends with each question. It marks the question 'internal'
+ * for analytics. Same HMAC scheme and secret as the admin console tokens, but its own `typ`
+ * ("staff") and no identity at all -- it says "staff", never who -- so the two kinds can't be
+ * swapped for one another (the admin verifier requires an email and typ handoff/session; this
+ * one requires typ staff). Reusable within its hour rather than single-use: it grants nothing
+ * but a label today. If staff are ever treated differently (say, higher rate limits) revisit that.
+ */
+const STAFF_PASS_TTL_SECONDS = 3600;
+
+async function verifyStaffPass(env: Env, token: unknown): Promise<boolean> {
+  if (!env.ADMIN_TOKEN_SECRET || typeof token !== "string" || token.length > 600) return false;
+  const dot = token.indexOf(".");
+  if (dot < 0) return false;
+  const b64 = token.slice(0, dot);
+  if (!timingSafeEqual(token.slice(dot + 1), await hmacHex(env.ADMIN_TOKEN_SECRET, b64))) return false;
+  let payload: unknown;
+  try {
+    payload = JSON.parse(base64UrlDecode(b64));
+  } catch {
+    return false;
+  }
+  if (typeof payload !== "object" || payload === null) return false;
+  const { typ, iat } = payload as Record<string, unknown>;
+  if (typ !== "staff" || typeof iat !== "number") return false;
+  const now = Math.floor(Date.now() / 1000);
+  return iat <= now + ADMIN_TOKEN_CLOCK_SKEW_SECONDS && now - iat <= STAFF_PASS_TTL_SECONDS;
+}
+
 const BUDGET_CEILING_KEY = "monthly_cost_ceiling_usd";
 const BUDGET_CEILING_MIN_USD = 1;
 const BUDGET_CEILING_MAX_USD = 1000;
@@ -728,6 +758,9 @@ async function logQuery(
     error?: string | null;
     answer?: string | null;
     followups?: number | null;
+    audience?: string | null;
+    city?: string | null;
+    region?: string | null;
     visitorId?: string | null;
     country?: string | null;
     pageUrl?: string | null;
@@ -767,8 +800,8 @@ async function insertQueryRow(
     `INSERT INTO queries
       (timestamp, question, normalized_question, cache_hit, out_of_scope, selected_sources,
        recency_warning, route_tokens, answer_tokens, total_tokens, latency_ms, degraded_cache_only,
-       cost_micro_usd, error, answer, followups, visitor_id, country, page_url)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       cost_micro_usd, error, answer, followups, audience, city, region, visitor_id, country, page_url)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   )
     .bind(
       new Date().toISOString(),
@@ -787,6 +820,9 @@ async function insertQueryRow(
       fields.error ?? null,
       fields.answer ? fields.answer.slice(0, MAX_STORED_ANSWER_CHARS) : null,
       fields.followups ?? null,
+      fields.audience ?? null,
+      fields.city ?? null,
+      fields.region ?? null,
       fields.visitorId ?? null,
       fields.country ?? null,
       fields.pageUrl ?? null,
@@ -1071,6 +1107,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
     page_url?: unknown;
     history?: unknown;
     followups?: unknown;
+    audience_token?: unknown;
   };
   try {
     body = await request.json();
@@ -1103,6 +1140,11 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   const period = currentPeriod();
   const visitorId = await monthlyVisitorId(env, ip, period);
   const country = ((request as { cf?: { country?: string } }).cf?.country ?? null)?.slice(0, 2) ?? null;
+  // Approximate, IP-based, city-level only. Cloudflare may not know it (VPNs, some carriers).
+  const cfGeo = (request as { cf?: { city?: string; region?: string } }).cf;
+  const city = cfGeo?.city ? cfGeo.city.slice(0, 80) : null;
+  const region = cfGeo?.region ? cfGeo.region.slice(0, 80) : null;
+  const audience = (await verifyStaffPass(env, body.audience_token)) ? "internal" : "public";
   const pageUrl = normalizePageUrl(body.page_url);
 
   const turnstile = turnstileState(env);
@@ -1171,6 +1213,9 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         country,
         pageUrl,
         followups,
+        audience,
+        city,
+        region,
       });
       const token =
         env.FEEDBACK_SECRET && queryId !== null ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
@@ -1211,6 +1256,9 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         country,
         pageUrl,
         followups,
+        audience,
+        city,
+        region,
       }),
     );
     // Deliberately not "try rephrasing": the cache is keyed on the normalized question, so
@@ -1278,6 +1326,9 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
           country,
           pageUrl,
           followups,
+          audience,
+          city,
+          region,
         });
         const token =
         env.FEEDBACK_SECRET && queryId !== null ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
@@ -1331,6 +1382,9 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         country,
         pageUrl,
         followups,
+        audience,
+        city,
+        region,
       });
       const token =
         env.FEEDBACK_SECRET && queryId !== null ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
@@ -1373,6 +1427,9 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
           country,
           pageUrl,
           followups,
+          audience,
+          city,
+          region,
           error: failure.reason,
         }).then(() => undefined),
       );
@@ -1683,18 +1740,37 @@ async function handleAdminPage(request: Request, env: Env): Promise<Response> {
   });
 }
 
-async function handleAdminUsage(env: Env, actorEmail: string): Promise<Response> {
+/** Which questions the Usage and Feedback views include. Rows from before audience tracking have
+ * a NULL audience and count as public. 'public' is the default so staff testing doesn't skew the
+ * numbers; the clauses below are built from this closed set, never from request text. */
+type AudienceFilter = "public" | "internal" | "all";
+
+function parseAudience(url: URL): AudienceFilter {
+  const a = url.searchParams.get("audience");
+  return a === "internal" || a === "all" ? a : "public";
+}
+
+function audienceClause(filter: AudienceFilter, alias: string): string {
+  if (filter === "all") return "";
+  const col = alias ? `${alias}.audience` : "audience";
+  return filter === "internal" ? `AND ${col} = 'internal'` : `AND COALESCE(${col}, 'public') = 'public'`;
+}
+
+async function handleAdminUsage(env: Env, actorEmail: string, audience: AudienceFilter): Promise<Response> {
   const period = currentPeriod();
   const likePeriod = `${period}%`;
-  const [queryRow, feedbackRow, eventRow, recentRows, ceilingMicroUsd, usedMicroUsd, perfRow] = await Promise.all([
+  const aud = audienceClause(audience, "");
+  const audQ = audienceClause(audience, "q");
+  const [queryRow, feedbackRow, eventRow, recentRows, ceilingMicroUsd, usedMicroUsd, perfRow, staffRow, locationRows] = await Promise.all([
     env.DB.prepare(
       `SELECT COUNT(*) AS total, SUM(cache_hit) AS cache_hits, SUM(degraded_cache_only) AS degraded
-       FROM queries WHERE timestamp LIKE ?`,
+       FROM queries WHERE timestamp LIKE ? ${aud}`,
     )
       .bind(likePeriod)
       .first<{ total: number; cache_hits: number | null; degraded: number | null }>(),
     env.DB.prepare(
-      `SELECT rating, COUNT(*) AS n FROM feedback WHERE timestamp LIKE ? GROUP BY rating`,
+      `SELECT f.rating AS rating, COUNT(*) AS n FROM feedback f JOIN queries q ON q.id = f.query_id
+        WHERE f.timestamp LIKE ? ${audQ} GROUP BY f.rating`,
     )
       .bind(likePeriod)
       .all<{ rating: string; n: number }>(),
@@ -1702,8 +1778,9 @@ async function handleAdminUsage(env: Env, actorEmail: string): Promise<Response>
       .bind(likePeriod)
       .all<{ type: string; n: number }>(),
     env.DB.prepare(
-      `SELECT id, timestamp, question, cache_hit, cost_micro_usd, latency_ms, followups
-         FROM queries ORDER BY id DESC LIMIT 50`,
+      `SELECT id, timestamp, question, cache_hit, cost_micro_usd, latency_ms, followups,
+              audience, city, region, country
+         FROM queries WHERE 1 = 1 ${aud} ORDER BY id DESC LIMIT 50`,
     ).all<{
       id: number;
       timestamp: string;
@@ -1712,6 +1789,10 @@ async function handleAdminUsage(env: Env, actorEmail: string): Promise<Response>
       cost_micro_usd: number | null;
       latency_ms: number | null;
       followups: number | null;
+      audience: string | null;
+      city: string | null;
+      region: string | null;
+      country: string | null;
     }>(),
     getCeilingMicroUsd(env),
     budgetStub(env).used(period),
@@ -1727,7 +1808,7 @@ async function handleAdminUsage(env: Env, actorEmail: string): Promise<Response>
          COUNT(followups)                                           AS with_followup_data,
          SUM(CASE WHEN followups > 0 THEN 1 ELSE 0 END)             AS followup_count
        FROM queries
-       WHERE timestamp LIKE ? AND error IS NULL AND degraded_cache_only = 0`,
+       WHERE timestamp LIKE ? AND error IS NULL AND degraded_cache_only = 0 ${aud}`,
     )
       .bind(likePeriod)
       .first<{
@@ -1737,6 +1818,18 @@ async function handleAdminUsage(env: Env, actorEmail: string): Promise<Response>
         with_followup_data: number;
         followup_count: number | null;
       }>(),
+    // Always the staff total, whatever the filter, so it is visible even while hidden from the rest.
+    env.DB.prepare(`SELECT COUNT(*) AS n FROM queries WHERE timestamp LIKE ? AND audience = 'internal'`)
+      .bind(likePeriod)
+      .first<{ n: number }>(),
+    // Where this month's questions came from (approximate, IP-based), for the selected audience.
+    env.DB.prepare(
+      `SELECT country, region, city, COUNT(*) AS n FROM queries
+        WHERE timestamp LIKE ? AND error IS NULL AND degraded_cache_only = 0 ${aud}
+        GROUP BY country, region, city ORDER BY n DESC LIMIT 15`,
+    )
+      .bind(likePeriod)
+      .all<{ country: string | null; region: string | null; city: string | null; n: number }>(),
   ]);
 
   const feedback = { yes: 0, partly: 0, no: 0 };
@@ -1764,6 +1857,9 @@ async function handleAdminUsage(env: Env, actorEmail: string): Promise<Response>
     },
     feedback,
     events,
+    audience,
+    staff_questions: staffRow?.n ?? 0,
+    locations: locationRows.results,
     performance: {
       new_answers: perfRow?.new_count ?? 0,
       new_avg_ms: perfRow?.new_avg_ms == null ? null : Math.round(perfRow.new_avg_ms),
@@ -1779,6 +1875,10 @@ async function handleAdminUsage(env: Env, actorEmail: string): Promise<Response>
       cost_usd: formatUsd(r.cost_micro_usd ?? 0),
       latency_ms: r.latency_ms,
       followups: r.followups,
+      audience: r.audience === "internal" ? "internal" : "public",
+      city: r.city,
+      region: r.region,
+      country: r.country,
     })),
   });
 }
@@ -2061,13 +2161,16 @@ const ADMIN_FEEDBACK_ANSWER_CHARS = 6000;
 
 async function handleAdminFeedback(url: URL, env: Env): Promise<Response> {
   const filter = url.searchParams.get("filter") === "all" ? "all" : "not_yes";
+  const audience = parseAudience(url);
+  const audQ = audienceClause(audience, "q");
   const rows = await env.DB.prepare(
     `SELECT f.id AS id, f.rating AS rating, f.timestamp AS timestamp,
             q.id AS query_id, q.question AS question, q.answer AS answer,
             q.cache_hit AS cache_hit, q.out_of_scope AS out_of_scope,
-            q.latency_ms AS latency_ms, q.followups AS followups
+            q.latency_ms AS latency_ms, q.followups AS followups,
+            q.audience AS audience, q.city AS city, q.region AS region
        FROM feedback f JOIN queries q ON q.id = f.query_id
-      ${filter === "all" ? "" : "WHERE f.rating != 'yes'"}
+      WHERE 1 = 1 ${filter === "all" ? "" : "AND f.rating != 'yes'"} ${audQ}
       ORDER BY f.id DESC LIMIT ?`,
   )
     .bind(ADMIN_FEEDBACK_LIMIT)
@@ -2075,8 +2178,12 @@ async function handleAdminFeedback(url: URL, env: Env): Promise<Response> {
       id: number; rating: string; timestamp: string; query_id: number; question: string;
       answer: string | null; cache_hit: number; out_of_scope: number | null;
       latency_ms: number | null; followups: number | null;
+      audience: string | null; city: string | null; region: string | null;
     }>();
-  const counts = await env.DB.prepare(`SELECT rating, COUNT(*) AS n FROM feedback GROUP BY rating`).all<{
+  const counts = await env.DB.prepare(
+    `SELECT f.rating AS rating, COUNT(*) AS n FROM feedback f JOIN queries q ON q.id = f.query_id
+      WHERE 1 = 1 ${audQ} GROUP BY f.rating`,
+  ).all<{
     rating: string;
     n: number;
   }>();
@@ -2090,11 +2197,12 @@ async function handleAdminFeedback(url: URL, env: Env): Promise<Response> {
   const unrated = await env.DB.prepare(
     `SELECT COUNT(*) AS n FROM queries q
       WHERE q.error IS NULL AND q.degraded_cache_only = 0
-        AND q.timestamp >= COALESCE((SELECT MIN(timestamp) FROM feedback), '9999')
+        AND q.timestamp >= COALESCE((SELECT MIN(timestamp) FROM feedback), '9999') ${audQ}
         AND NOT EXISTS (SELECT 1 FROM feedback f WHERE f.query_id = q.id)`,
   ).first<{ n: number }>();
   return adminJsonResponse({
     filter,
+    audience,
     totals,
     no_feedback: unrated?.n ?? 0,
     limit: ADMIN_FEEDBACK_LIMIT,
@@ -2110,6 +2218,9 @@ async function handleAdminFeedback(url: URL, env: Env): Promise<Response> {
       out_of_scope: r.out_of_scope === null ? null : Boolean(r.out_of_scope),
       latency_ms: r.latency_ms,
       followups: r.followups,
+      audience: r.audience === "internal" ? "internal" : "public",
+      city: r.city,
+      region: r.region,
     })),
   });
 }
@@ -2202,7 +2313,7 @@ async function handleAdmin(request: Request, env: Env, path: string): Promise<Re
   const session = await requireAdminSession(request, env);
   if (!session) return adminJsonResponse({ error: "unauthorized" }, 401);
 
-  if (path === "/admin/api/usage" && request.method === "GET") return handleAdminUsage(env, session.email);
+  if (path === "/admin/api/usage" && request.method === "GET") return handleAdminUsage(env, session.email, parseAudience(new URL(request.url)));
   if (path === "/admin/api/activity" && request.method === "GET") return handleAdminActivity(env);
   if (path === "/admin/api/budget" && request.method === "GET") return handleAdminBudgetGet(env);
   if (path === "/admin/api/budget" && request.method === "POST") return handleAdminBudgetPost(request, env, session.email);

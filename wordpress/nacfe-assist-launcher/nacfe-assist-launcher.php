@@ -5,7 +5,7 @@
  *              site-wide, with an on/off switch and include/exclude page lists
  *              (Settings > NACFE Assist Launcher). Contains no secrets and no per-user data, so
  *              page caching is safe.
- * Version:     1.2.1
+ * Version:     1.3.0
  */
 
 if (!defined('ABSPATH')) {
@@ -68,6 +68,21 @@ function nacfe_assist_launcher_matches($path, $patterns)
     return false;
 }
 
+/** Which WordPress capability marks a logged-in user as NACFE staff. 'edit_posts' (authors and
+ * above) by default; override with define('NACFE_ASSIST_STAFF_CAPABILITY', '...') in wp-config.php. */
+function nacfe_assist_launcher_staff_capability()
+{
+    return defined('NACFE_ASSIST_STAFF_CAPABILITY') ? NACFE_ASSIST_STAFF_CAPABILITY : 'edit_posts';
+}
+
+/** True for a logged-in staff user when the shared secret is configured (otherwise the staff pass
+ * feature is simply off). Uses the same NACFE_ADMIN_TOKEN_SECRET constant as the console plugin. */
+function nacfe_assist_launcher_is_staff()
+{
+    return defined('NACFE_ADMIN_TOKEN_SECRET') && NACFE_ADMIN_TOKEN_SECRET !== ''
+        && is_user_logged_in() && current_user_can(nacfe_assist_launcher_staff_capability());
+}
+
 function nacfe_assist_launcher_should_show()
 {
     if (is_admin() || is_feed() || is_embed() || is_customize_preview() || is_404()
@@ -95,6 +110,11 @@ add_action('wp_footer', function () {
         return;
     }
     $base = esc_url_raw(NACFE_ASSIST_BASE);
+    // Is this visitor possibly NACFE staff? Decided here, at render time, so ordinary visitors
+    // never make the extra request. If a page cache hands a logged-in render to someone else,
+    // the pass request simply returns no token for them.
+    $maybe_staff = nacfe_assist_launcher_is_staff();
+    $ajax_url = admin_url('admin-ajax.php');
     $logo = plugins_url('assets/ask-nacfe-logo.png', __FILE__);
     ?>
 <!-- NACFE Assist Launcher -->
@@ -167,6 +187,8 @@ add_action('wp_footer', function () {
 
   var BASE = <?php echo wp_json_encode(untrailingslashit($base)); ?>;
   var LOGO = <?php echo wp_json_encode($logo); ?>;
+  var MAYBE_STAFF = <?php echo $maybe_staff ? 'true' : 'false'; ?>;
+  var AJAX_URL = <?php echo wp_json_encode($ajax_url); ?>;
 
   var wrap = document.createElement("div");
   wrap.innerHTML =
@@ -259,11 +281,44 @@ add_action('wp_footer', function () {
     }
   }, 100);
 
+  // Staff pass: for logged-in NACFE staff, fetch a short-lived signed pass from WordPress (nothing
+  // in this cached page) and expose it for the widget to send with each question, so the
+  // assistant's analytics can separate staff from the public. The pass says "staff" and nothing
+  // else -- no name, no email. Refreshed before its one-hour life ends.
+  function refreshStaffPass() {
+    try {
+      fetch(AJAX_URL + "?action=nacfe_assist_staff_pass", { credentials: "same-origin", cache: "no-store" })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) { window.NACFE_ASSIST_PASS = d && d.token ? d.token : ""; })
+        .catch(function () {});
+    } catch (e) {}
+  }
+  if (MAYBE_STAFF) {
+    refreshStaffPass();
+    setInterval(refreshStaffPass, 25 * 60 * 1000);
+  }
+
   setTimeout(function () { teaser.classList.add("na-glow"); }, 900);
 })();
 </script>
     <?php
 }, 99);
+
+/**
+ * Issues the staff pass: base64url(JSON{typ:"staff", iat}) + "." + hex(HMAC-SHA256(secret, that
+ * string)), the same scheme as the admin console handoff token but with typ "staff" and no
+ * identity. Only logged-in users reach this (wp_ajax_ without a nopriv twin), and only staff get a
+ * token; everyone else gets {"token":null}. Never cached.
+ */
+add_action('wp_ajax_nacfe_assist_staff_pass', function () {
+    nocache_headers();
+    if (!nacfe_assist_launcher_is_staff()) {
+        wp_send_json(['token' => null]);
+    }
+    $payload = wp_json_encode(['typ' => 'staff', 'iat' => time()]);
+    $b64 = rtrim(strtr(base64_encode($payload), '+/', '-_'), '=');
+    wp_send_json(['token' => $b64 . '.' . hash_hmac('sha256', $b64, NACFE_ADMIN_TOKEN_SECRET)]);
+});
 
 // A "Settings" link on the Plugins page row, so the settings are one click from where the plugin is
 // listed (the page itself lives under the Settings menu, not as a top-level item).

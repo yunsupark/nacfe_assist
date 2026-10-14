@@ -193,7 +193,7 @@
     '</div>',
     '</div>',
     '<p class="na-sponsor" id="na-sponsor" style="display:none"></p>',
-    '<p class="na-footer">Powered by NACFE’s research library. Answers cite specific reports and demonstrations — verify against the original source for critical decisions. Questions and answers are logged to help NACFE see what the industry is asking; please don’t enter personal or confidential details.</p>',
+    '<p class="na-footer">Powered by NACFE’s research library. Answers cite specific reports and demonstrations — verify against the original source for critical decisions. Questions, answers, and approximate location (city) are logged to help NACFE see what the industry is asking; please don’t enter personal or confidential details.</p>',
     '</div>',
   ].join("");
 
@@ -769,6 +769,9 @@
         page_url: location.origin + location.pathname,
         history: conversationHistory,
         followups: conversationTurns,
+        // A short-lived signed "NACFE staff" pass, set on the page by the WordPress launcher plugin
+        // for logged-in staff. Absent for everyone else (undefined is dropped from the JSON).
+        audience_token: typeof window.NACFE_ASSIST_PASS === "string" && window.NACFE_ASSIST_PASS ? window.NACFE_ASSIST_PASS : undefined,
       }),
       signal: controller ? controller.signal : undefined,
     })
