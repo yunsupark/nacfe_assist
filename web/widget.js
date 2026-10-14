@@ -36,7 +36,9 @@
       "#nacfe-assist-root .na-info-btn:hover:not(:disabled){border-color:#ab1428;color:#ab1428;background:#fff}",
       "#nacfe-assist-root .na-info{font-size:13px;line-height:1.6;color:#444;",
       "background:#f7f7f7;border-radius:4px;padding:10px 12px;margin:0 0 14px}",
+      "#nacfe-assist-root .na-info{cursor:pointer}",
       "#nacfe-assist-root .na-info p{margin:0 0 8px}",
+      "#nacfe-assist-root .na-info p.na-info-hint{margin:10px 0 0;font-size:12px;color:#8a8a8a;text-align:right}",
       "#nacfe-assist-root .na-info p:last-child{margin-bottom:0}",
       "#nacfe-assist-root .na-info ul{margin:0 0 8px;padding-left:20px}",
       "#nacfe-assist-root .na-info li{margin:0 0 2px}",
@@ -654,10 +656,22 @@
 
   if (infoBtn && infoEl) {
     renderInfo(infoEl, INFO_TEXT);
+    function setInfoOpen(open) {
+      infoEl.style.display = open ? "block" : "none";
+      infoBtn.setAttribute("aria-expanded", String(open));
+    }
     infoBtn.addEventListener("click", function () {
-      var open = infoEl.style.display !== "none";
-      infoEl.style.display = open ? "none" : "block";
-      infoBtn.setAttribute("aria-expanded", String(!open));
+      setInfoOpen(infoEl.style.display === "none");
+    });
+    // Click anywhere inside the open pane to close it (the pane is plain text, so there is nothing
+    // else to click), with a visible hint so readers know. Escape closes it too.
+    var infoHint = document.createElement("p");
+    infoHint.className = "na-info-hint";
+    infoHint.textContent = "Click anywhere in this box to close";
+    infoEl.appendChild(infoHint);
+    infoEl.addEventListener("click", function () { setInfoOpen(false); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && infoEl.style.display !== "none") setInfoOpen(false);
     });
   }
 
