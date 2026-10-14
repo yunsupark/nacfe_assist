@@ -19,6 +19,11 @@ export { RateLimiter, Budget } from "./counters";
 export interface Env {
   GEMINI_API: string;
   GEMINI_API_FREE: string;
+  /** "true" = try the free-tier key before the paid one (the original behaviour). Anything else,
+   * including unset, goes straight to the paid key: the free tier is rate-limited to a few
+   * requests a day and often overloaded, and a failed or stalled free attempt (up to 35s) was
+   * adding long delays before the paid call even started. */
+  USE_FREE_API_FIRST?: string;
   FEEDBACK_SECRET: string;
   /** Turnstile secret. When unset, verification is skipped entirely so a deployment without
    * a provisioned widget still serves -- GET /health reports which state you are in. When
@@ -633,7 +638,7 @@ async function route(
   });
   const { text, usage } = await generateContentWithFallback(
     env.CACHE,
-    env.GEMINI_API_FREE,
+    freeKeyFor(env),
     env.GEMINI_API,
     env.ROUTE_MODEL,
     prompt,
@@ -693,7 +698,7 @@ async function answer(
   });
   const { text, usage, finishReason } = await generateContentWithFallback(
     env.CACHE,
-    env.GEMINI_API_FREE,
+    freeKeyFor(env),
     env.GEMINI_API,
     env.ANSWER_MODEL,
     prompt,
@@ -722,6 +727,7 @@ async function logQuery(
     costMicroUsd: number | null;
     error?: string | null;
     answer?: string | null;
+    followups?: number | null;
     visitorId?: string | null;
     country?: string | null;
     pageUrl?: string | null;
@@ -748,6 +754,11 @@ async function logQuery(
 /** Caps the stored answer text; the full answer is still served to the reader. */
 const MAX_STORED_ANSWER_CHARS = 20_000;
 
+/** The free-tier key to try first, or "" to skip the free tier entirely (see USE_FREE_API_FIRST). */
+function freeKeyFor(env: Env): string {
+  return env.USE_FREE_API_FIRST === "true" ? env.GEMINI_API_FREE : "";
+}
+
 async function insertQueryRow(
   env: Env,
   fields: Parameters<typeof logQuery>[1],
@@ -756,8 +767,8 @@ async function insertQueryRow(
     `INSERT INTO queries
       (timestamp, question, normalized_question, cache_hit, out_of_scope, selected_sources,
        recency_warning, route_tokens, answer_tokens, total_tokens, latency_ms, degraded_cache_only,
-       cost_micro_usd, error, answer, visitor_id, country, page_url)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       cost_micro_usd, error, answer, followups, visitor_id, country, page_url)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   )
     .bind(
       new Date().toISOString(),
@@ -775,6 +786,7 @@ async function insertQueryRow(
       fields.costMicroUsd,
       fields.error ?? null,
       fields.answer ? fields.answer.slice(0, MAX_STORED_ANSWER_CHARS) : null,
+      fields.followups ?? null,
       fields.visitorId ?? null,
       fields.country ?? null,
       fields.pageUrl ?? null,
@@ -1058,6 +1070,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
     "cf-turnstile-response"?: string;
     page_url?: unknown;
     history?: unknown;
+    followups?: unknown;
   };
   try {
     body = await request.json();
@@ -1071,6 +1084,14 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   // question). Untrusted like everything else in the body -- sanitizeHistory caps length and
   // strips anything that could break out of the <conversation_history> delimiter.
   const history = sanitizeHistory(body.history);
+  // Analytics only: how many earlier questions came before this one in the reader's conversation.
+  // The widget counts them itself (the history it sends is capped at a few turns, which would
+  // flatten longer conversations); an older widget that doesn't report it falls back to the
+  // number of prior turns it sent. Clamped, never trusted for anything but this number.
+  const followups =
+    typeof body.followups === "number" && Number.isInteger(body.followups)
+      ? Math.max(0, Math.min(body.followups, 500))
+      : history.length;
 
   const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
 
@@ -1149,6 +1170,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         visitorId,
         country,
         pageUrl,
+        followups,
       });
       const token =
         env.FEEDBACK_SECRET && queryId !== null ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
@@ -1188,6 +1210,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         visitorId,
         country,
         pageUrl,
+        followups,
       }),
     );
     // Deliberately not "try rephrasing": the cache is keyed on the normalized question, so
@@ -1254,6 +1277,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
           visitorId,
           country,
           pageUrl,
+          followups,
         });
         const token =
         env.FEEDBACK_SECRET && queryId !== null ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
@@ -1306,6 +1330,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
         visitorId,
         country,
         pageUrl,
+        followups,
       });
       const token =
         env.FEEDBACK_SECRET && queryId !== null ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
@@ -1347,6 +1372,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
           visitorId,
           country,
           pageUrl,
+          followups,
           error: failure.reason,
         }).then(() => undefined),
       );
@@ -1660,7 +1686,7 @@ async function handleAdminPage(request: Request, env: Env): Promise<Response> {
 async function handleAdminUsage(env: Env, actorEmail: string): Promise<Response> {
   const period = currentPeriod();
   const likePeriod = `${period}%`;
-  const [queryRow, feedbackRow, eventRow, recentRows, ceilingMicroUsd, usedMicroUsd] = await Promise.all([
+  const [queryRow, feedbackRow, eventRow, recentRows, ceilingMicroUsd, usedMicroUsd, perfRow] = await Promise.all([
     env.DB.prepare(
       `SELECT COUNT(*) AS total, SUM(cache_hit) AS cache_hits, SUM(degraded_cache_only) AS degraded
        FROM queries WHERE timestamp LIKE ?`,
@@ -1676,10 +1702,41 @@ async function handleAdminUsage(env: Env, actorEmail: string): Promise<Response>
       .bind(likePeriod)
       .all<{ type: string; n: number }>(),
     env.DB.prepare(
-      `SELECT id, timestamp, question, cache_hit, cost_micro_usd FROM queries ORDER BY id DESC LIMIT 50`,
-    ).all<{ id: number; timestamp: string; question: string; cache_hit: number; cost_micro_usd: number | null }>(),
+      `SELECT id, timestamp, question, cache_hit, cost_micro_usd, latency_ms, followups
+         FROM queries ORDER BY id DESC LIMIT 50`,
+    ).all<{
+      id: number;
+      timestamp: string;
+      question: string;
+      cache_hit: number;
+      cost_micro_usd: number | null;
+      latency_ms: number | null;
+      followups: number | null;
+    }>(),
     getCeilingMicroUsd(env),
     budgetStub(env).used(period),
+    // Response time is server time from request to answer (not the reader's network or the
+    // bot check). Averaged separately for new answers and cached ones, since a cache hit is
+    // near-instant and would hide how long a fresh answer takes. Errors and budget-limited
+    // replies are excluded: they aren't answers.
+    env.DB.prepare(
+      `SELECT
+         COUNT(CASE WHEN cache_hit = 0 THEN 1 END)                  AS new_count,
+         AVG(CASE WHEN cache_hit = 0 THEN latency_ms END)           AS new_avg_ms,
+         AVG(CASE WHEN cache_hit = 1 THEN latency_ms END)           AS cached_avg_ms,
+         COUNT(followups)                                           AS with_followup_data,
+         SUM(CASE WHEN followups > 0 THEN 1 ELSE 0 END)             AS followup_count
+       FROM queries
+       WHERE timestamp LIKE ? AND error IS NULL AND degraded_cache_only = 0`,
+    )
+      .bind(likePeriod)
+      .first<{
+        new_count: number;
+        new_avg_ms: number | null;
+        cached_avg_ms: number | null;
+        with_followup_data: number;
+        followup_count: number | null;
+      }>(),
   ]);
 
   const feedback = { yes: 0, partly: 0, no: 0 };
@@ -1707,12 +1764,21 @@ async function handleAdminUsage(env: Env, actorEmail: string): Promise<Response>
     },
     feedback,
     events,
+    performance: {
+      new_answers: perfRow?.new_count ?? 0,
+      new_avg_ms: perfRow?.new_avg_ms == null ? null : Math.round(perfRow.new_avg_ms),
+      cached_avg_ms: perfRow?.cached_avg_ms == null ? null : Math.round(perfRow.cached_avg_ms),
+      followup_count: perfRow?.followup_count ?? 0,
+      followup_known: perfRow?.with_followup_data ?? 0,
+    },
     recent_queries: recentRows.results.map((r) => ({
       id: r.id,
       timestamp: r.timestamp,
       question: r.question,
       cache_hit: Boolean(r.cache_hit),
       cost_usd: formatUsd(r.cost_micro_usd ?? 0),
+      latency_ms: r.latency_ms,
+      followups: r.followups,
     })),
   });
 }
@@ -1998,7 +2064,8 @@ async function handleAdminFeedback(url: URL, env: Env): Promise<Response> {
   const rows = await env.DB.prepare(
     `SELECT f.id AS id, f.rating AS rating, f.timestamp AS timestamp,
             q.id AS query_id, q.question AS question, q.answer AS answer,
-            q.cache_hit AS cache_hit, q.out_of_scope AS out_of_scope
+            q.cache_hit AS cache_hit, q.out_of_scope AS out_of_scope,
+            q.latency_ms AS latency_ms, q.followups AS followups
        FROM feedback f JOIN queries q ON q.id = f.query_id
       ${filter === "all" ? "" : "WHERE f.rating != 'yes'"}
       ORDER BY f.id DESC LIMIT ?`,
@@ -2007,6 +2074,7 @@ async function handleAdminFeedback(url: URL, env: Env): Promise<Response> {
     .all<{
       id: number; rating: string; timestamp: string; query_id: number; question: string;
       answer: string | null; cache_hit: number; out_of_scope: number | null;
+      latency_ms: number | null; followups: number | null;
     }>();
   const counts = await env.DB.prepare(`SELECT rating, COUNT(*) AS n FROM feedback GROUP BY rating`).all<{
     rating: string;
@@ -2016,9 +2084,19 @@ async function handleAdminFeedback(url: URL, env: Env): Promise<Response> {
   for (const c of counts.results) {
     if (c.rating === "yes" || c.rating === "partly" || c.rating === "no") totals[c.rating] = c.n;
   }
+  // Answers a reader could have rated but didn't. Counted only from the first rating onward, so
+  // answers served before the rating buttons existed don't inflate it; errors and budget-limited
+  // replies aren't answers.
+  const unrated = await env.DB.prepare(
+    `SELECT COUNT(*) AS n FROM queries q
+      WHERE q.error IS NULL AND q.degraded_cache_only = 0
+        AND q.timestamp >= COALESCE((SELECT MIN(timestamp) FROM feedback), '9999')
+        AND NOT EXISTS (SELECT 1 FROM feedback f WHERE f.query_id = q.id)`,
+  ).first<{ n: number }>();
   return adminJsonResponse({
     filter,
     totals,
+    no_feedback: unrated?.n ?? 0,
     limit: ADMIN_FEEDBACK_LIMIT,
     entries: rows.results.map((r) => ({
       id: r.id,
@@ -2030,6 +2108,8 @@ async function handleAdminFeedback(url: URL, env: Env): Promise<Response> {
       answer_truncated: Boolean(r.answer && r.answer.length > ADMIN_FEEDBACK_ANSWER_CHARS),
       cache_hit: Boolean(r.cache_hit),
       out_of_scope: r.out_of_scope === null ? null : Boolean(r.out_of_scope),
+      latency_ms: r.latency_ms,
+      followups: r.followups,
     })),
   });
 }

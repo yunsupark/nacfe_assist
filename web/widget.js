@@ -193,7 +193,7 @@
     '</div>',
     '</div>',
     '<p class="na-sponsor" id="na-sponsor" style="display:none"></p>',
-    '<p class="na-footer">Powered by NACFE’s research library. Answers cite specific reports and demonstrations — verify against the original source for critical decisions. Questions and answers are logged (without any identifying information) to help NACFE see what the industry is asking; please don’t enter personal or confidential details.</p>',
+    '<p class="na-footer">Powered by NACFE’s research library. Answers cite specific reports and demonstrations — verify against the original source for critical decisions. Questions and answers are logged to help NACFE see what the industry is asking; please don’t enter personal or confidential details.</p>',
     '</div>',
   ].join("");
 
@@ -300,6 +300,10 @@
   // conversation's later questions progressively more expensive and slower.
   var CONVERSATION_TURNS_SENT = 4;
   var conversationHistory = [];
+  // Questions already answered in this conversation (reset by "Start a new conversation"); sent
+  // with each question so the admin console can show how many follow-ups readers ask. Unlike
+  // conversationHistory it is not capped, so long conversations are counted accurately.
+  var conversationTurns = 0;
 
   // Turnstile. The sitekey is substituted by the Worker when it serves this file, so an
   // embedder never has to carry it; data-sitekey on the script tag overrides for local work.
@@ -725,6 +729,7 @@
     resetFeedback();
     shownQuestion = null;
     conversationHistory = [];
+    conversationTurns = 0;
     input.value = "";
     updateClearRow();
     input.focus();
@@ -763,6 +768,7 @@
         // re-normalizes anyway, since anything from the browser is untrusted.
         page_url: location.origin + location.pathname,
         history: conversationHistory,
+        followups: conversationTurns,
       }),
       signal: controller ? controller.signal : undefined,
     })
@@ -826,6 +832,7 @@
         updateClearRow();
         shownQuestion = question;
         conversationHistory.push({ question: question, answer: data.answer || "" });
+        conversationTurns++;
         if (conversationHistory.length > CONVERSATION_TURNS_SENT) {
           conversationHistory.splice(0, conversationHistory.length - CONVERSATION_TURNS_SENT);
         }

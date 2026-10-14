@@ -23,9 +23,11 @@ workers_dev = true
 # it is unset (GET /health then reports "turnstile": false), so the Worker still serves before
 # the widget is provisioned -- but the query endpoint is unprotected in that state.
 #   wrangler secret put TURNSTILE_SECRET
-# Every model call tries GEMINI_API_FREE first and only falls back to GEMINI_API on a quota
-# error (see generateContentWithFallback in src/gemini.ts) -- this keeps routine usage free
-# and only spills over to paid once free tier's daily quota is actually exhausted.
+# By default model calls go straight to GEMINI_API (the paid key). Set USE_FREE_API_FIRST = "true"
+# in [vars] below to restore the old behaviour: try GEMINI_API_FREE first and fall back to
+# GEMINI_API on a quota error, overload or stall (see generateContentWithFallback in
+# src/gemini.ts). Free-first was dropped as the default because the free tier allows only a few
+# requests a day, is often overloaded, and a failed attempt could add up to 35s per call.
 #
 # ADMIN_TOKEN_SECRET signs the admin console's handoff and session tokens (see web/admin.html
 # and the /admin* routes in src/index.ts). While unset, every /admin* request is treated as
@@ -84,6 +86,7 @@ bucket_name = "nacfe-assist-sources"  # wrangler r2 bucket create nacfe-assist-s
 # This is the DEFAULT. An admin can override it from the console (Usage tab), within $1-$1000;
 # clearing the override or any D1 trouble falls back to this value, never to "no limit".
 MONTHLY_COST_CEILING_USD = "50"
+USE_FREE_API_FIRST = "false"
 ROUTE_MODEL = "gemini-3.5-flash-lite"
 ANSWER_MODEL = "gemini-3.6-flash"
 RATE_LIMIT_PER_IP_PER_HOUR = "20"
