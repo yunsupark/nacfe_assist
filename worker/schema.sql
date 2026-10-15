@@ -26,6 +26,9 @@ CREATE TABLE IF NOT EXISTS queries (
   error TEXT,
   answer TEXT,                           -- the answer text served (migration 0012); null for degraded/failed/pre-migration rows
   followups INTEGER,                    -- earlier questions in the same conversation (migration 0013); null for older rows
+  audience TEXT,                         -- 'internal' (valid staff pass) or 'public'; null on older rows = public (migration 0014)
+  city TEXT,                             -- approximate, IP-based (migration 0014)
+  region TEXT,                           -- approximate, IP-based (migration 0014)
 
   -- Request context. These existed in the production database for months without appearing
   -- here, so a database built from this file did not match the deployed one -- they are

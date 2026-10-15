@@ -77,6 +77,17 @@
     <section id="tab-usage" class="active">
       <div class="card">
         <h2>This month</h2>
+        <div class="row" style="margin:0 0 14px">
+          <div>
+            <label>Questions from</label>
+            <select class="audience-filter">
+              <option value="public">The public (default)</option>
+              <option value="internal">NACFE staff only</option>
+              <option value="all">Everyone</option>
+            </select>
+          </div>
+        </div>
+        <p class="muted" id="audience-note"></p>
         <div class="stat-grid" id="usage-stats"></div>
       </div>
       <div class="card">
@@ -106,10 +117,20 @@
         <div class="stat-grid" id="event-stats"></div>
       </div>
       <div class="card">
+        <h2>Where questions come from (this month)</h2>
+        <p class="muted">Approximate location from each visitor's connection, so VPNs and some mobile networks can be off. Top 15 places for the selected audience.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Country</th><th>Region</th><th>City</th><th>Questions</th></tr></thead>
+            <tbody id="locations-list"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
         <h2>Recent questions</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>When</th><th>Question</th><th>Cached</th><th>Response</th><th>Follow-up</th><th>Cost</th></tr></thead>
+            <thead><tr><th>When</th><th>Who</th><th>Where</th><th>Question</th><th>Cached</th><th>Response</th><th>Follow-up</th><th>Cost</th></tr></thead>
             <tbody id="recent-queries"></tbody>
           </table>
         </div>
@@ -150,6 +171,16 @@
     <section id="tab-feedback">
       <div class="card">
         <h2>Reader feedback</h2>
+        <div class="row" style="margin:0 0 14px">
+          <div>
+            <label>Questions from</label>
+            <select class="audience-filter">
+              <option value="public">The public (default)</option>
+              <option value="internal">NACFE staff only</option>
+              <option value="all">Everyone</option>
+            </select>
+          </div>
+        </div>
         <div class="stat-grid" id="feedback-totals"></div>
         <div class="row" style="margin-top:14px">
           <div>
@@ -163,7 +194,7 @@
         <p class="muted">"No feedback" counts answers readers didn't rate, from the first rating onward. Newest first, up to 200. Click a question to see the answer the reader was given. Answers are recorded from the date this feature was deployed; older ratings have no answer on file.</p>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>When</th><th>Rating</th><th>Response</th><th>Follow-up</th><th>Question and answer</th></tr></thead>
+            <thead><tr><th>When</th><th>Who</th><th>Where</th><th>Rating</th><th>Response</th><th>Follow-up</th><th>Question and answer</th></tr></thead>
             <tbody id="feedback-list"></tbody>
           </table>
         </div>
@@ -319,6 +350,23 @@
     return n === 0 ? "New" : "Follow-up " + n;
   }
 
+  var audience = "public";
+  function fmtWho(a) { return a === "internal" ? "Staff" : "Public"; }
+  function fmtWhere(country, region, city) {
+    var parts = [city, region, country].filter(function (x) { return x; });
+    return parts.length ? parts.join(", ") : "\u2014";
+  }
+  // One audience choice shared by the Usage and Feedback tabs.
+  function setAudience(value) {
+    audience = value;
+    document.querySelectorAll(".audience-filter").forEach(function (s) { s.value = value; });
+    loadUsage();
+    loadFeedback();
+  }
+  document.querySelectorAll(".audience-filter").forEach(function (s) {
+    s.addEventListener("change", function () { setAudience(s.value); });
+  });
+
   function statTile(n, label) {
     return el("div", { class: "stat" }, [
       el("div", { class: "n", text: n }),
@@ -327,7 +375,7 @@
   }
 
   function loadUsage() {
-    adminFetch("/admin/api/usage").then(function (d) {
+    adminFetch("/admin/api/usage?audience=" + encodeURIComponent(audience)).then(function (d) {
       document.getElementById("whoami").textContent = d.actor_email ? "signed in as " + d.actor_email : "";
 
       var stats = document.getElementById("usage-stats");
@@ -341,6 +389,21 @@
       var fu = perf.followup_count || 0;
       var fuShare = perf.followup_known ? " (" + Math.round((fu / perf.followup_known) * 100) + "%)" : "";
       stats.appendChild(statTile(fu + fuShare, "Follow-up questions"));
+      stats.appendChild(statTile(d.staff_questions, "NACFE staff questions"));
+      document.getElementById("audience-note").textContent = d.audience === "public"
+        ? "Showing public questions. Staff questions are counted in the last tile but left out of everything else here."
+        : d.audience === "internal" ? "Showing only questions asked by logged-in NACFE staff." : "Showing everyone, staff included.";
+      var locBody = document.getElementById("locations-list");
+      locBody.innerHTML = "";
+      (d.locations || []).forEach(function (l) {
+        locBody.appendChild(el("tr", {}, [
+          el("td", {}, [text(l.country || "\u2014")]),
+          el("td", {}, [text(l.region || "\u2014")]),
+          el("td", {}, [text(l.city || "\u2014")]),
+          el("td", {}, [text(l.n)]),
+        ]));
+      });
+      if (!(d.locations || []).length) locBody.appendChild(el("tr", {}, [el("td", { colspan: "4", text: "No questions yet." })]));
 
       document.getElementById("spend-label").textContent = d.spend.used_usd + " of " + d.spend.ceiling_usd;
       var pct = d.spend.ceiling_micro_usd > 0 ? Math.min(100, (d.spend.used_micro_usd / d.spend.ceiling_micro_usd) * 100) : 0;
@@ -363,6 +426,8 @@
       (d.recent_queries || []).forEach(function (q) {
         tbody.appendChild(el("tr", {}, [
           el("td", {}, [text(new Date(q.timestamp).toLocaleString())]),
+          el("td", {}, [text(fmtWho(q.audience))]),
+          el("td", {}, [text(fmtWhere(q.country, q.region, q.city))]),
           el("td", {}, [text(q.question)]),
           el("td", {}, [text(q.cache_hit ? "yes" : "no")]),
           el("td", {}, [text(fmtSeconds(q.latency_ms))]),
@@ -642,7 +707,7 @@
   var RATING_LABELS = { yes: "Yes", partly: "Partly", no: "No" };
   function loadFeedback() {
     var filter = document.getElementById("feedback-filter").value;
-    adminFetch("/admin/api/feedback?filter=" + encodeURIComponent(filter)).then(function (d) {
+    adminFetch("/admin/api/feedback?filter=" + encodeURIComponent(filter) + "&audience=" + encodeURIComponent(audience)).then(function (d) {
       var totals = document.getElementById("feedback-totals");
       totals.innerHTML = "";
       totals.appendChild(statTile(d.totals.yes, "Yes"));
@@ -653,7 +718,7 @@
       tbody.innerHTML = "";
       var entries = d.entries || [];
       if (!entries.length) {
-        tbody.appendChild(el("tr", {}, [el("td", { colspan: "5", text: "No feedback to show." })]));
+        tbody.appendChild(el("tr", {}, [el("td", { colspan: "7", text: "No feedback to show." })]));
         return;
       }
       entries.forEach(function (f) {
@@ -666,6 +731,8 @@
         ]);
         tbody.appendChild(el("tr", {}, [
           el("td", {}, [text(new Date(f.timestamp).toLocaleString())]),
+          el("td", {}, [text(fmtWho(f.audience))]),
+          el("td", {}, [text(fmtWhere(null, f.region, f.city))]),
           el("td", {}, [text(RATING_LABELS[f.rating] || f.rating)]),
           el("td", {}, [text(fmtSeconds(f.latency_ms))]),
           el("td", {}, [text(fmtFollowup(f.followups))]),
