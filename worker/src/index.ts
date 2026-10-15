@@ -34,12 +34,6 @@ export interface Env {
   /** Comma-separated hostnames siteverify's `hostname` must match. Must NOT contain
    * localhost or 127.0.0.1 in a production deployment. */
   TURNSTILE_HOSTNAMES: string;
-  /** Sponsor slot. Empty SPONSOR_NAME means no sponsor block is rendered at all and no click
-   * tracking exists -- the state this ships in until there is a sponsor to name. */
-  SPONSOR_NAME: string;
-  SPONSOR_TAGLINE: string;
-  SPONSOR_URL: string;
-  SPONSOR_LOGO_URL: string;
   /** Secret used to derive the pseudonymous monthly visitor id. When unset, no visitor id is
    * recorded at all -- an identifier is never created by accident, only by configuration. */
   VISITOR_SALT: string;
@@ -303,8 +297,13 @@ function validateRouteResult(parsed: unknown): RouteResult {
  * render a real link instead of plain text. */
 function enrichSources(
   selected: Array<{ id: string; why: string }>,
-): Array<{ id: string; why: string; url: string | null }> {
-  return selected.map((s) => ({ ...s, url: CATALOG_BY_ID.get(s.id)?.url ?? null }));
+): Array<{ id: string; why: string; title: string | null; url: string | null }> {
+  // The catalog title is what readers should see in the Sources list; the id is an internal name.
+  return selected.map((s) => ({
+    ...s,
+    title: CATALOG_BY_ID.get(s.id)?.title ?? null,
+    url: CATALOG_BY_ID.get(s.id)?.url ?? null,
+  }));
 }
 
 /**
@@ -1220,7 +1219,17 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
       const token =
         env.FEEDBACK_SECRET && queryId !== null ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
       await write(
-        `DATA:${JSON.stringify({ ...(cached as object), cached: true, query_id: queryId, feedback_token: token })}`,
+        // Cached payloads predate source titles (and hold whatever url the catalog had when they
+        // were cached), so the sources are re-attached from the current catalog on every serve.
+        `DATA:${JSON.stringify({
+          ...(cached as object),
+          selected_sources: Array.isArray((cached as { selected_sources?: unknown }).selected_sources)
+            ? enrichSources((cached as { selected_sources: Array<{ id: string; why: string }> }).selected_sources)
+            : (cached as { selected_sources?: unknown }).selected_sources,
+          cached: true,
+          query_id: queryId,
+          feedback_token: token,
+        })}`,
       );
       },
       origin,

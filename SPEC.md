@@ -24,7 +24,7 @@ Two-stage architecture: catalog-level routing, then full-document answering.
   ingest_pdf.py
   ingest_video.py
   ingest_article.py
-  build_catalog.py
+  draft_catalog_entry.py    # first-pass catalog entries for human review (replaced build_catalog.py)
   prompts/
     transcribe_page.txt
     build_abstract.txt
