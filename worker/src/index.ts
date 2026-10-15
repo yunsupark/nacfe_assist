@@ -2,7 +2,7 @@
 // the full catalog, then a stronger model answering from the selected sources' full text.
 // See eval/run_eval.py for the local-script version this was ported from, and
 // eval/results/two_stage_scored.md for the eval this design is validated against.
-import { CATALOG, ROUTE_PROMPT, ANSWER_PROMPT, WIDGET_JS, ADMIN_HTML } from "./corpus_data";
+import { CATALOG, CONTENT_VERSION, ROUTE_PROMPT, ANSWER_PROMPT, WIDGET_JS, ADMIN_HTML } from "./corpus_data";
 import {
   generateContentWithFallback,
   stripJsonFence,
@@ -1176,11 +1176,13 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
   const adminState = await getAdminState(env);
   // Hashed rather than raw: KV keys cap at 512 bytes and questions are allowed up to 1000
   // characters, so a long question used to throw here -- outside any try/catch, surfacing as
-  // a bare 500 with no CORS headers. The epoch is folded in so that hiding/unhiding a source
-  // (which bumps it) invalidates the entire 30-day answer cache along with routing -- without
-  // this, a source hidden for being wrong could still be cited from cache for up to a month
-  // (see admin_config.catalog_epoch and POST /admin/api/sources/<id>/hide).
-  const cacheKey = `answer:${adminState.epoch}:${await sha256Hex(normalized)}`;
+  // a bare 500 with no CORS headers. Two version stamps are folded in. The epoch is bumped by
+  // hiding/unhiding a source, which invalidates the entire 30-day answer cache along with routing
+  // (see admin_config.catalog_epoch and POST /admin/api/sources/<id>/hide). CONTENT_VERSION is a
+  // build-time hash of the catalog and both prompts, so a deploy that retires or adds a source, or
+  // changes a prompt, does the same without anyone remembering to -- without it a retired source
+  // could still be cited from cache for up to a month.
+  const cacheKey = `answer:${CONTENT_VERSION}:${adminState.epoch}:${await sha256Hex(normalized)}`;
   // Caching requires BOTH a standalone question (a follow-up's correct answer depends on the
   // conversation it's following, so the same literal text can mean different things turn to
   // turn) AND a known epoch. A null epoch means getAdminState couldn't confirm D1 state for

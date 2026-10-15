@@ -5,7 +5,7 @@
  *              site-wide, with an on/off switch and include/exclude page lists
  *              (Settings > NACFE Assist Launcher). Contains no secrets and no per-user data, so
  *              page caching is safe.
- * Version:     1.3.1
+ * Version:     1.3.2
  */
 
 if (!defined('ABSPATH')) {
@@ -175,10 +175,10 @@ add_action('wp_footer', function () {
   if (document.getElementById("na-teaser") || window.__naLauncherLoaded) { return; }
   window.__naLauncherLoaded = true;
 
-  var BASE = <?php echo wp_json_encode(untrailingslashit($base)); ?>;
-  var LOGO = <?php echo wp_json_encode($logo); ?>;
+  var BASE = <?php echo wp_json_encode(untrailingslashit($base), JSON_HEX_TAG | JSON_HEX_AMP); ?>;
+  var LOGO = <?php echo wp_json_encode($logo, JSON_HEX_TAG | JSON_HEX_AMP); ?>;
   var MAYBE_STAFF = <?php echo $maybe_staff ? 'true' : 'false'; ?>;
-  var AJAX_URL = <?php echo wp_json_encode($ajax_url); ?>;
+  var AJAX_URL = <?php echo wp_json_encode($ajax_url, JSON_HEX_TAG | JSON_HEX_AMP); ?>;
 
   var wrap = document.createElement("div");
   wrap.innerHTML =
