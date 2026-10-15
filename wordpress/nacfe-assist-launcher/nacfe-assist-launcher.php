@@ -5,7 +5,7 @@
  *              site-wide, with an on/off switch and include/exclude page lists
  *              (Settings > NACFE Assist Launcher). Contains no secrets and no per-user data, so
  *              page caching is safe.
- * Version:     1.3.0
+ * Version:     1.3.1
  */
 
 if (!defined('ABSPATH')) {
@@ -162,17 +162,7 @@ add_action('wp_footer', function () {
     padding: 10px 16px; border-bottom: 1px solid #e2e2e2; flex-shrink: 0;
     font-family: Roboto, Helvetica, Arial, sans-serif;
   }
-  #na-launcher-brand { display: flex; align-items: center; gap: 12px; }
   #na-launcher-logo { display: block; height: 56px; width: auto; }
-  /* The widget's (i) button is moved here beside the logo once the widget has loaded; it is outside
-     the widget's own scoped styles by then, so it is styled in full here. */
-  #na-launcher-header .na-info-btn {
-    width: 24px; height: 24px; flex-shrink: 0; border-radius: 50%; padding: 0;
-    border: 1px solid #c7c7c7; background: #fff; color: #6b6b6b; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font: italic 700 14px/1 Georgia, "Times New Roman", serif;
-  }
-  #na-launcher-header .na-info-btn:hover { border-color: #ab1428; color: #ab1428; }
   @media (max-width: 640px) { #na-launcher-logo { height: 44px; } }
   #na-launcher-close { background: none; border: none; cursor: pointer; color: #6b6b6b; font-size: 20px; line-height: 1; padding: 4px; }
   #na-launcher-close:hover { color: #292d2d; }
@@ -198,9 +188,7 @@ add_action('wp_footer', function () {
     '</div>' +
     '<div id="na-launcher-panel" role="dialog" aria-label="Ask NACFE’s Research">' +
       '<div id="na-launcher-header">' +
-        '<div id="na-launcher-brand">' +
-          '<img id="na-launcher-logo" src="' + LOGO + '" alt="Ask NACFE" width="219" height="56">' +
-        '</div>' +
+        '<img id="na-launcher-logo" src="' + LOGO + '" alt="Ask NACFE" width="219" height="56">' +
         '<button id="na-launcher-close" aria-label="Close">×</button></div>' +
       '<div id="na-launcher-body"><div id="nacfe-assist"></div></div>' +
     '</div>';
@@ -208,7 +196,6 @@ add_action('wp_footer', function () {
   var panel = wrap.querySelector("#na-launcher-panel");
   var teaserSponsor = wrap.querySelector("#na-teaser-sponsor");
   var closeBtn = wrap.querySelector("#na-launcher-close");
-  var brand = wrap.querySelector("#na-launcher-brand");
 
   // Both are appended straight to <body>: themes that put a transform on a wrapper element break
   // position:fixed for anything inside it.
@@ -266,20 +253,6 @@ add_action('wp_footer', function () {
   s.src = BASE + "/widget.js";
   s.defer = true;
   document.body.appendChild(s);
-
-  // Move the widget's (i) button from the question row to sit beside the logo. The node keeps its
-  // click handler, so it still toggles the info text; if the widget never loads, nothing moves.
-  var infoAttempts = 0;
-  var infoPoll = setInterval(function () {
-    infoAttempts++;
-    var infoBtn = document.getElementById("na-info-btn");
-    if (infoBtn) {
-      brand.appendChild(infoBtn);
-      clearInterval(infoPoll);
-    } else if (infoAttempts > 100) {
-      clearInterval(infoPoll);
-    }
-  }, 100);
 
   // Staff pass: for logged-in NACFE staff, fetch a short-lived signed pass from WordPress (nothing
   // in this cached page) and expose it for the widget to send with each question, so the

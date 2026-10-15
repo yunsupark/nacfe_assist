@@ -407,6 +407,13 @@
     }
   }
 
+  // Fallback only: the API sends each source's catalog title. If one is ever missing, make the id
+  // readable ("run-on-less-electric-2021" -> "Run On Less Electric 2021") rather than show a slug.
+  function sourceLabel(s) {
+    if (s.title) return String(s.title);
+    return String(s.id || "").replace(/-/g, " ").replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); });
+  }
+
   function renderSources(sources) {
     sourcesListEl.textContent = "";
     if (!sources || !sources.length) {
@@ -425,10 +432,10 @@
         link.setAttribute("href", url);
         link.setAttribute("target", "_blank");
         link.setAttribute("rel", "noopener noreferrer");
-        link.textContent = String(s.id || "");
+        link.textContent = sourceLabel(s);
         name.appendChild(link);
       } else {
-        name.textContent = String(s.id || "");
+        name.textContent = sourceLabel(s);
       }
       row.appendChild(name);
       row.appendChild(document.createTextNode(" \u2014 " + String(s.why || "")));

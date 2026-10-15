@@ -28,7 +28,9 @@ about **$8** — roughly 100 questions, six times under the $50 target in SPEC �
 under-sizing is a reason to fix the unit, not to remove the cap: input and output prices differ
 by up to 12.5x across the two stages, so a token count is a poor proxy for spend. `$50` buys
 ~650 uncached questions; cache hits are free. `/status`, the widget's budget banner and the
-`Budget` durable object all depend on this existing.
+`Budget` durable object all depend on this existing. `$50` is only the default: an admin can set
+the limit from the console's Usage tab ($1-$1,000); anything unreadable falls back to the default,
+never to "no limit".
 
 **Prompt templates use `fillTemplate`, never `String.replace`.** With a string replacement,
 `$&`, `` $` `` and `$'` in the *replacement* are substitution patterns. Six corpus sources
@@ -74,8 +76,12 @@ Useful queries live in `worker/reports.sql`.
 
 ## Secrets
 
-`GEMINI_API`, `GEMINI_API_FREE`, `FEEDBACK_SECRET`, `TURNSTILE_SECRET`, `VISITOR_SALT`. All
-set. Secrets take effect immediately without a redeploy. Do not rotate `VISITOR_SALT`
+`GEMINI_API` (paid; used by default), `GEMINI_API_FREE` (optional; only tried first when
+`USE_FREE_API_FIRST = "true"` in `wrangler.toml`, off by default because the free tier is slow and
+rate-limited), `FEEDBACK_SECRET`, `TURNSTILE_SECRET`, `VISITOR_SALT`, `ADMIN_TOKEN_SECRET` (admin
+console and staff-pass tokens; must equal `NACFE_ADMIN_TOKEN_SECRET` in wp-config.php) and
+`GITHUB_ACTIONS_TOKEN` (the console's Add source / Retire buttons). All set. Secrets take effect
+immediately without a redeploy. Do not rotate `VISITOR_SALT`
 mid-month — every visitor would be counted twice.
 
 ## Measured numbers, so they are not re-derived by guess
@@ -92,4 +98,4 @@ SPEC §3's 300-word target, so there is nothing safe to trim.
 
 Whether 90s is the right request ceiling (a recent real query took 46s). Whether to keep the
 `events` impressions table now that GA covers reach — the sponsor-click half is not something
-GA gives you. Sponsor slot ships dormant; set `SPONSOR_NAME`/`SPONSOR_TAGLINE`/`SPONSOR_URL`.
+GA gives you. The sponsor slot is managed from the admin console's Sponsor tab (no env vars).
