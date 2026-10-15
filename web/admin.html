@@ -109,7 +109,7 @@
         <h2>Recent questions</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>When</th><th>Question</th><th>Cached</th><th>Cost</th></tr></thead>
+            <thead><tr><th>When</th><th>Question</th><th>Cached</th><th>Response</th><th>Follow-up</th><th>Cost</th></tr></thead>
             <tbody id="recent-queries"></tbody>
           </table>
         </div>
@@ -160,10 +160,10 @@
             </select>
           </div>
         </div>
-        <p class="muted">Newest first, up to 200. Click a question to see the answer the reader was given. Answers are recorded from the date this feature was deployed; older ratings have no answer on file.</p>
+        <p class="muted">"No feedback" counts answers readers didn't rate, from the first rating onward. Newest first, up to 200. Click a question to see the answer the reader was given. Answers are recorded from the date this feature was deployed; older ratings have no answer on file.</p>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>When</th><th>Rating</th><th>Question and answer</th></tr></thead>
+            <thead><tr><th>When</th><th>Rating</th><th>Response</th><th>Follow-up</th><th>Question and answer</th></tr></thead>
             <tbody id="feedback-list"></tbody>
           </table>
         </div>
@@ -309,6 +309,16 @@
     });
   });
 
+  // Server time from request to answer, shown in seconds; "—" when not recorded.
+  function fmtSeconds(ms) {
+    return ms == null ? "\u2014" : (ms / 1000).toFixed(1) + " s";
+  }
+  // followups = earlier questions in the same conversation: 0 is a fresh question.
+  function fmtFollowup(n) {
+    if (n == null) return "\u2014";
+    return n === 0 ? "New" : "Follow-up " + n;
+  }
+
   function statTile(n, label) {
     return el("div", { class: "stat" }, [
       el("div", { class: "n", text: n }),
@@ -325,6 +335,12 @@
       stats.appendChild(statTile(d.queries.total, "Questions"));
       stats.appendChild(statTile(d.queries.cache_hits, "Cache hits"));
       stats.appendChild(statTile(d.queries.degraded, "Budget-limited"));
+      var perf = d.performance || {};
+      stats.appendChild(statTile(fmtSeconds(perf.new_avg_ms), "Avg response, new answers"));
+      stats.appendChild(statTile(fmtSeconds(perf.cached_avg_ms), "Avg response, cached"));
+      var fu = perf.followup_count || 0;
+      var fuShare = perf.followup_known ? " (" + Math.round((fu / perf.followup_known) * 100) + "%)" : "";
+      stats.appendChild(statTile(fu + fuShare, "Follow-up questions"));
 
       document.getElementById("spend-label").textContent = d.spend.used_usd + " of " + d.spend.ceiling_usd;
       var pct = d.spend.ceiling_micro_usd > 0 ? Math.min(100, (d.spend.used_micro_usd / d.spend.ceiling_micro_usd) * 100) : 0;
@@ -349,6 +365,8 @@
           el("td", {}, [text(new Date(q.timestamp).toLocaleString())]),
           el("td", {}, [text(q.question)]),
           el("td", {}, [text(q.cache_hit ? "yes" : "no")]),
+          el("td", {}, [text(fmtSeconds(q.latency_ms))]),
+          el("td", {}, [text(fmtFollowup(q.followups))]),
           el("td", {}, [text(q.cost_usd)]),
         ]));
       });
@@ -630,11 +648,12 @@
       totals.appendChild(statTile(d.totals.yes, "Yes"));
       totals.appendChild(statTile(d.totals.partly, "Partly"));
       totals.appendChild(statTile(d.totals.no, "No"));
+      totals.appendChild(statTile(d.no_feedback, "No feedback"));
       var tbody = document.getElementById("feedback-list");
       tbody.innerHTML = "";
       var entries = d.entries || [];
       if (!entries.length) {
-        tbody.appendChild(el("tr", {}, [el("td", { colspan: "3", text: "No feedback to show." })]));
+        tbody.appendChild(el("tr", {}, [el("td", { colspan: "5", text: "No feedback to show." })]));
         return;
       }
       entries.forEach(function (f) {
@@ -648,6 +667,8 @@
         tbody.appendChild(el("tr", {}, [
           el("td", {}, [text(new Date(f.timestamp).toLocaleString())]),
           el("td", {}, [text(RATING_LABELS[f.rating] || f.rating)]),
+          el("td", {}, [text(fmtSeconds(f.latency_ms))]),
+          el("td", {}, [text(fmtFollowup(f.followups))]),
           el("td", {}, [details]),
         ]));
       });

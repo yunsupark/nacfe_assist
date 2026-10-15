@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS queries (
   -- failure rate is invisible and a reported timeout leaves nothing to diagnose from.
   error TEXT,
   answer TEXT,                           -- the answer text served (migration 0012); null for degraded/failed/pre-migration rows
+  followups INTEGER,                    -- earlier questions in the same conversation (migration 0013); null for older rows
 
   -- Request context. These existed in the production database for months without appearing
   -- here, so a database built from this file did not match the deployed one -- they are
