@@ -193,7 +193,7 @@
     '</div>',
     '</div>',
     '<p class="na-sponsor" id="na-sponsor" style="display:none"></p>',
-    '<p class="na-footer">Powered by NACFE’s research library. Answers cite specific reports and demonstrations — verify against the original source for critical decisions. Questions, answers, and approximate location (city) are logged to help NACFE see what the industry is asking; please don’t enter personal or confidential details.</p>',
+    '<p class="na-footer">Powered by NACFE’s research library. Answers cite specific reports and demonstrations — verify against the original source for critical decisions. Questions, answers, and approximate location (city and region) are logged to help NACFE see what the industry is asking; please don’t enter personal or confidential details.</p>',
     '</div>',
   ].join("");
 
