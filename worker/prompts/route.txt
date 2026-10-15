@@ -49,6 +49,21 @@ Rules:
   report and the question gives no year or campaign name to disambiguate, include the
   current/most recent one by default plus the other plausible candidate(s), rather than
   guessing a single older one.
+- If the question is about an organization's involvement, participation, or history with
+  NACFE or its programs (e.g. "what has Schneider's involvement been?", "how has UPS taken
+  part in Run on Less?", "what is Frito-Lay's history with NACFE?", or just "what about
+  Schneider"), the documents that answer it are that organization's OWN documents: in this
+  catalog, its fleet profiles, one per program or year it took part in (the id and title
+  name the fleet, and `fleets_studied` lists it). Run on Less has run five times -- 2017,
+  2019 (Regional), 2021 (Electric), 2023 (Electric DEPOT) and 2025 (Messy Middle) -- and a
+  long-standing participant may appear in several; check every one of them, including the
+  earliest (2017) and the oldest-looking ids, not just the newest. Select that
+  organization's own profile from EACH program it appears in, up to the 6-source limit;
+  where a program has no profile for it, use that program's main report instead. Add a broad
+  overview only if there is room. A broad overview mentions many fleets briefly; it is not a
+  substitute for the fleet's own profiles. This rule takes precedence over the "most recent
+  plus at most one earlier one" rule above and over "fewer is better": involvement is a
+  history question, so a single newest source would leave out most of it.
 - A superlative in the question ("longest," "highest," "most," "first," "best," etc.)
   about something demonstrated across a repeating series of campaigns or events (e.g. Run
   on Less) is not answered by the newest entry in that series alone -- the record could
