@@ -5,7 +5,7 @@
  *              site-wide, with an on/off switch and include/exclude page lists
  *              (Settings > NACFE Assist Launcher). Contains no secrets and no per-user data, so
  *              page caching is safe.
- * Version:     1.3.2
+ * Version:     1.4.0
  */
 
 if (!defined('ABSPATH')) {
@@ -216,11 +216,23 @@ add_action('wp_footer', function () {
     } catch (e) {}
   }
 
-  function setOpen(open) {
+  // Remembers, for this browser tab only, that the panel was left open so it stays open as the
+  // visitor moves between pages (the widget restores the conversation itself). Storage can be
+  // blocked or full, so every access is wrapped. Re-opening on a new page is not a fresh expand,
+  // so it is not counted as one.
+  var OPEN_KEY = "nacfe-assist-panel-open";
+  function setOpen(open, restoring) {
     panel.classList.toggle("na-open", open);
     teaser.classList.toggle("na-hidden", open);
-    if (open) { naSendEvent("widget_expand"); }
+    if (open && !restoring) { naSendEvent("widget_expand"); }
+    try {
+      if (open) { window.sessionStorage.setItem(OPEN_KEY, "1"); }
+      else { window.sessionStorage.removeItem(OPEN_KEY); }
+    } catch (e) {}
   }
+  try {
+    if (window.sessionStorage.getItem(OPEN_KEY) === "1") { setOpen(true, true); }
+  } catch (e) {}
   teaser.addEventListener("click", function () { setOpen(true); });
   teaser.addEventListener("keydown", function (e) {
     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setOpen(true); }

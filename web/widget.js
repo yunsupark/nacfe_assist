@@ -193,7 +193,7 @@
     '</div>',
     '</div>',
     '<p class="na-sponsor" id="na-sponsor" style="display:none"></p>',
-    '<p class="na-footer">Powered by NACFE’s research library. Answers cite specific reports and demonstrations — verify against the original source for critical decisions. Questions, answers, and approximate location (city and region) are logged to help NACFE see what the industry is asking; please don’t enter personal or confidential details.</p>',
+    '<p class="na-footer">Powered by NACFE’s research library. Answers cite specific reports and demonstrations — verify against the original source for critical decisions. Questions, answers, and approximate location (city and region) are logged to help NACFE see what the industry is asking; please don’t enter personal or confidential details. Your conversation is kept in this browser tab until you close it or start a new one.</p>',
     '</div>',
   ].join("");
 
@@ -717,6 +717,108 @@
       });
   }
 
+  // ---- Conversation memory across pages ----
+  // The conversation is kept in sessionStorage (this browser tab only; gone when the tab closes)
+  // so it survives moving between pages of the host site. Nothing here is sent anywhere new: the
+  // follow-up context still goes to the API exactly as before. Everything read back is treated as
+  // untrusted -- any script on the host page can write to this origin's storage -- so it is
+  // validated and rendered only through the same textContent-based helpers as live answers.
+  // Every storage call is wrapped: private modes and blocked storage must never break the widget.
+  var MEMORY_KEY = "nacfe-assist-conversation-v1";
+  var MEMORY_MAX_TURNS = 20;
+  var MEMORY_MAX_AGE_MS = 2 * 60 * 60 * 1000;
+  var savedTurns = [];
+
+  function memorySave() {
+    try {
+      window.sessionStorage.setItem(MEMORY_KEY, JSON.stringify({
+        t: Date.now(),
+        count: conversationTurns,
+        turns: savedTurns,
+      }));
+    } catch (e) {}
+  }
+
+  function memoryClear() {
+    savedTurns = [];
+    try { window.sessionStorage.removeItem(MEMORY_KEY); } catch (e) {}
+  }
+
+  function memoryStr(v, max) {
+    return typeof v === "string" ? v.slice(0, max) : "";
+  }
+
+  // Returns {count, turns} or null. Anything malformed or stale is dropped (and removed).
+  function memoryRead() {
+    try {
+      var raw = window.sessionStorage.getItem(MEMORY_KEY);
+      if (!raw) return null;
+      var d = JSON.parse(raw);
+      if (!d || typeof d !== "object" || typeof d.t !== "number" || !Array.isArray(d.turns) ||
+          Date.now() - d.t > MEMORY_MAX_AGE_MS || d.t > Date.now() + 60000) {
+        window.sessionStorage.removeItem(MEMORY_KEY);
+        return null;
+      }
+      var turns = [];
+      for (var i = Math.max(0, d.turns.length - MEMORY_MAX_TURNS); i < d.turns.length; i++) {
+        var t = d.turns[i];
+        if (!t || typeof t !== "object" || typeof t.question !== "string" || typeof t.answer !== "string") continue;
+        var sources = [];
+        if (Array.isArray(t.sources)) {
+          for (var j = 0; j < t.sources.length && sources.length < 10; j++) {
+            var s = t.sources[j];
+            if (!s || typeof s !== "object") continue;
+            sources.push({
+              id: memoryStr(s.id, 200), why: memoryStr(s.why, 1000),
+              title: memoryStr(s.title, 400), url: memoryStr(s.url, 1000),
+            });
+          }
+        }
+        turns.push({
+          question: memoryStr(t.question, 1000),
+          answer: memoryStr(t.answer, 20000),
+          sources: sources,
+          warning: typeof t.warning === "string" && t.warning ? t.warning.slice(0, 1000) : null,
+        });
+      }
+      if (!turns.length) return null;
+      var count = Number.isInteger(d.count) && d.count >= 0 && d.count <= 500 ? d.count : turns.length;
+      return { count: count, turns: turns };
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // Rebuilds the panel as it was: earlier turns as collapsed history, the latest as the live
+  // answer, and the follow-up context the API needs. The feedback row stays hidden -- a rating
+  // belongs to the moment the answer arrives, and its one-time token is not stored.
+  function restoreConversation() {
+    var saved = memoryRead();
+    if (!saved) return;
+    for (var i = 0; i < saved.turns.length; i++) {
+      var turn = saved.turns[i];
+      if (i > 0) archivePreviousAnswer(saved.turns[i - 1].question);
+      renderAnswer(turn.answer);
+      renderSources(turn.sources);
+      if (turn.warning) {
+        warningEl.textContent = turn.warning;
+        warningEl.style.display = "block";
+      } else {
+        warningEl.style.display = "none";
+      }
+    }
+    var last = saved.turns[saved.turns.length - 1];
+    questionEl.textContent = last.question;
+    shownQuestion = last.question;
+    resultEl.classList.add("na-visible");
+    savedTurns = saved.turns;
+    conversationTurns = saved.count;
+    conversationHistory = saved.turns.slice(-CONVERSATION_TURNS_SENT).map(function (t) {
+      return { question: t.question, answer: t.answer };
+    });
+    updateClearRow();
+  }
+
   // "Start a new conversation" shows once there is anything to clear.
   function updateClearRow() {
     var hasContent = resultEl.classList.contains("na-visible") || historyEl.children.length > 0;
@@ -737,10 +839,13 @@
     shownQuestion = null;
     conversationHistory = [];
     conversationTurns = 0;
+    memoryClear();
     input.value = "";
     updateClearRow();
     input.focus();
   });
+
+  restoreConversation();
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -846,6 +951,17 @@
         if (conversationHistory.length > CONVERSATION_TURNS_SENT) {
           conversationHistory.splice(0, conversationHistory.length - CONVERSATION_TURNS_SENT);
         }
+        savedTurns.push({
+          question: question,
+          answer: data.answer || "",
+          sources: (Array.isArray(data.selected_sources) ? data.selected_sources : []).map(function (s) {
+            s = s || {};
+            return { id: s.id, why: s.why, title: s.title, url: s.url };
+          }),
+          warning: data.recency_warning || null,
+        });
+        if (savedTurns.length > MEMORY_MAX_TURNS) savedTurns.splice(0, savedTurns.length - MEMORY_MAX_TURNS);
+        memorySave();
       })
       .catch(function (err) {
         clearTimeout(timer);
