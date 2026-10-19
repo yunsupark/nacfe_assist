@@ -1774,11 +1774,12 @@ async function handleAdminUsage(env: Env, actorEmail: string, audience: Audience
   const audQ = audienceClause(audience, "q");
   const [queryRow, feedbackRow, eventRow, recentRows, ceilingMicroUsd, usedMicroUsd, perfRow, staffRow, locationRows] = await Promise.all([
     env.DB.prepare(
-      `SELECT COUNT(*) AS total, SUM(cache_hit) AS cache_hits, SUM(degraded_cache_only) AS degraded
+      `SELECT COUNT(*) AS total, SUM(cache_hit) AS cache_hits, SUM(degraded_cache_only) AS degraded,
+              SUM(CASE WHEN error IS NOT NULL THEN 1 ELSE 0 END) AS errors
        FROM queries WHERE timestamp LIKE ? ${aud}`,
     )
       .bind(likePeriod)
-      .first<{ total: number; cache_hits: number | null; degraded: number | null }>(),
+      .first<{ total: number; cache_hits: number | null; degraded: number | null; errors: number | null }>(),
     env.DB.prepare(
       `SELECT f.rating AS rating, COUNT(*) AS n FROM feedback f JOIN queries q ON q.id = f.query_id
         WHERE f.timestamp LIKE ? ${audQ} GROUP BY f.rating`,
@@ -1790,7 +1791,7 @@ async function handleAdminUsage(env: Env, actorEmail: string, audience: Audience
       .all<{ type: string; n: number }>(),
     env.DB.prepare(
       `SELECT id, timestamp, question, cache_hit, cost_micro_usd, latency_ms, followups,
-              audience, city, region, country
+              audience, city, region, country, error
          FROM queries WHERE 1 = 1 ${aud} ORDER BY id DESC LIMIT 50`,
     ).all<{
       id: number;
@@ -1804,6 +1805,7 @@ async function handleAdminUsage(env: Env, actorEmail: string, audience: Audience
       city: string | null;
       region: string | null;
       country: string | null;
+      error: string | null;
     }>(),
     getCeilingMicroUsd(env),
     budgetStub(env).used(period),
@@ -1859,6 +1861,7 @@ async function handleAdminUsage(env: Env, actorEmail: string, audience: Audience
       total: queryRow?.total ?? 0,
       cache_hits: queryRow?.cache_hits ?? 0,
       degraded: queryRow?.degraded ?? 0,
+      errors: queryRow?.errors ?? 0,
     },
     spend: {
       used_micro_usd: usedMicroUsd,
@@ -1890,6 +1893,8 @@ async function handleAdminUsage(env: Env, actorEmail: string, audience: Audience
       city: r.city,
       region: r.region,
       country: r.country,
+      // Why a question failed (e.g. "upstream 503", "timeout after 30000ms"); null on success.
+      error: r.error,
     })),
   });
 }
