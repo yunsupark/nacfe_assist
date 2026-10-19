@@ -130,7 +130,7 @@
         <h2>Recent questions</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>When</th><th>Who</th><th>Where</th><th>Question</th><th>Cached</th><th>Response</th><th>Follow-up</th><th>Cost</th></tr></thead>
+            <thead><tr><th>When</th><th>Who</th><th>Where</th><th>Question</th><th>Cached</th><th>Response</th><th>Follow-up</th><th>Cost</th><th>Error</th></tr></thead>
             <tbody id="recent-queries"></tbody>
           </table>
         </div>
@@ -383,6 +383,7 @@
       stats.appendChild(statTile(d.queries.total, "Questions"));
       stats.appendChild(statTile(d.queries.cache_hits, "Cache hits"));
       stats.appendChild(statTile(d.queries.degraded, "Budget-limited"));
+      stats.appendChild(statTile(d.queries.errors || 0, "Errors"));
       var perf = d.performance || {};
       stats.appendChild(statTile(fmtSeconds(perf.new_avg_ms), "Avg response, new answers"));
       stats.appendChild(statTile(fmtSeconds(perf.cached_avg_ms), "Avg response, cached"));
@@ -433,6 +434,7 @@
           el("td", {}, [text(fmtSeconds(q.latency_ms))]),
           el("td", {}, [text(fmtFollowup(q.followups))]),
           el("td", {}, [text(q.cost_usd)]),
+          el("td", {}, [text(q.error || "\u2014")]),
         ]));
       });
     }).catch(function (e) { console.error(e); });
