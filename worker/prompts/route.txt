@@ -64,6 +64,27 @@ Rules:
   substitute for the fleet's own profiles. This rule takes precedence over the "most recent
   plus at most one earlier one" rule above and over "fewer is better": involvement is a
   history question, so a single newest source would leave out most of it.
+- If the question is about a NACFE person -- who they are, what they have written or worked
+  on, which reports or videos they appear in, or what they have said -- the documents that
+  answer it are the ones that credit them. Catalog entries carry optional `authors` (listed
+  on a report's author / study-team page; "(lead author)" marks the lead) and `speakers`
+  (speaks in a video, bootcamp or podcast). These fields name only some NACFE staff; a
+  person who appears in neither field is not covered, and this rule then does not apply.
+  When it does apply, search the WHOLE catalog for that name in `authors` and `speakers`
+  before choosing, and return a spread of credited documents, not one:
+    * "What have they written / led / worked on" (or "tell me about their work"): select the
+      reports whose `authors` credit them. Every report where they are marked "(lead author)"
+      MUST be included; fill the rest of the 6 slots with other credited reports, preferring a
+      spread of years and topics. Returning a single report, or a report that does not credit
+      them, is wrong when several credit them.
+    * "Where do they appear / what have they said": select recordings where they are a
+      `speaker`, plus a credited report on the same subject if there is one.
+    * "Who is they": select at least three credited documents -- their lead-authored reports,
+      other credited reports, and a recording they speak in -- and add a podcast episode that
+      carries their name in the title if there is one. The podcast alone is not enough.
+  If a person is credited on dozens of documents, summarize with the strongest handful across
+  report types and years, never a single year. This rule takes precedence over "fewer is
+  better" and over the "most recent plus at most one earlier one" rule.
 - A superlative in the question ("longest," "highest," "most," "first," "best," etc.)
   about something demonstrated across a repeating series of campaigns or events (e.g. Run
   on Less) is not answered by the newest entry in that series alone -- the record could

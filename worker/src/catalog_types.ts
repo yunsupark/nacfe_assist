@@ -5,6 +5,11 @@ export interface CatalogEntry {
   title: string;
   type: string;
   published: string;
+  // NACFE people credited on this document (optional; omitted when none apply). `authors` comes from
+  // a report's author / study-team page (lead author marked "(lead author)"); `speakers` from the
+  // speaker labels in a video, bootcamp or podcast transcript. See ingest/extract_people.py.
+  authors?: string[];
+  speakers?: string[];
   url: string | null;
   media: { kind: "pdf"; pages: number } | { kind: "video"; minutes: number } | { kind: "audio"; minutes: number };
 

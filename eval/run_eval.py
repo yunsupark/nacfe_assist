@@ -216,7 +216,13 @@ def build_documents_block(selected_ids, catalog_by_id):
         text = md_path.read_text()
         # Title only, matching answer() in worker/src/index.ts -- the id in this header was
         # being cited instead of the title. Keep the two in sync.
-        parts.append(f"=== SOURCE: {title} ===\n{text}")
+        credits = []
+        if entry and entry.get("authors"):
+            credits.append("listed on the author / study-team page: " + ", ".join(entry["authors"]))
+        if entry and entry.get("speakers"):
+            credits.append("speaks in this recording: " + ", ".join(entry["speakers"]))
+        credits_line = f"NACFE credits -- {'; '.join(credits)}\n" if credits else ""
+        parts.append(f"=== SOURCE: {title} ===\n{credits_line}{text}")
     return "\n\n".join(parts)
 
 

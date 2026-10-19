@@ -4,6 +4,10 @@
     "title": "The Messy Middle: A Time for Action",
     "type": "thought_leadership",
     "published": "2023-02",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": "https://nacfe.org/research/thought-leadership/the-messy-middle/",
     "media": {
       "kind": "pdf",
@@ -56,6 +60,10 @@
     "title": "Electric Truck Depots Are Evolving: How 10 Fleets Grew Their BEV Populations",
     "type": "run_on_less",
     "published": "2024-05",
+    "authors": [
+      "Mike Roeth",
+      "Yunsu Park"
+    ],
     "url": "https://nacfe.org/research/run-on-less/run-on-less-electric-depot/",
     "media": {
       "kind": "pdf",
@@ -119,6 +127,10 @@
     "title": "How NACFE Helped Bring Clarity to the Messy Middle",
     "type": "run_on_less",
     "published": "2026-01",
+    "authors": [
+      "Mike Roeth",
+      "Yunsu Park"
+    ],
     "url": "https://nacfe.org/research/run-on-less/messy-middle/",
     "media": {
       "kind": "pdf",
@@ -186,6 +198,11 @@
     "title": "Terrain, Technology, and Telematics: The Messy Middle Operations Report",
     "type": "run_on_less",
     "published": "2026-03",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic",
+      "Yunsu Park"
+    ],
     "url": "https://nacfe.org/research/run-on-less/messy-middle/operations-report/",
     "media": {
       "kind": "pdf",
@@ -254,6 +271,11 @@
     "title": "Forecasting the TCO of Powertrain Alternatives: The Messy Middle Cost Report",
     "type": "run_on_less",
     "published": "2026-04",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic",
+      "Yunsu Park"
+    ],
     "url": "https://nacfe.org/research/run-on-less/messy-middle/tco-report/",
     "media": {
       "kind": "pdf",
@@ -309,6 +331,10 @@
     "title": "Charting the Course for Early Truck Electrification",
     "type": "thought_leadership",
     "published": "2022-04",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/charting-the-course-for-early-truck-electrification/",
     "media": {
       "kind": "pdf",
@@ -359,6 +385,12 @@
     "title": "Electric Trucks Have Arrived: The Use Case for Medium-Duty Box Trucks",
     "type": "confidence_report",
     "published": "2022-06",
+    "authors": [
+      "Mike Roeth",
+      "Dave Schaller (lead author)",
+      "Rick Mihelic",
+      "Yunsu Park"
+    ],
     "url": "https://nacfe.org/research/run-on-less/run-on-less-electric/md-box-trucks/",
     "media": {
       "kind": "pdf",
@@ -409,6 +441,12 @@
     "title": "Electric Trucks Have Arrived: The Use Case for Heavy-Duty Regional Haul Tractors",
     "type": "confidence_report",
     "published": "2022-05",
+    "authors": [
+      "Mike Roeth",
+      "Dave Schaller",
+      "Rick Mihelic (lead author)",
+      "Yunsu Park"
+    ],
     "url": "https://nacfe.org/research/run-on-less/run-on-less-electric/hd-regional-haul-tractors/",
     "media": {
       "kind": "pdf",
@@ -458,6 +496,12 @@
     "title": "Electric Trucks Have Arrived: The Use Case for Terminal Tractors",
     "type": "confidence_report",
     "published": "2022-03",
+    "authors": [
+      "Mike Roeth",
+      "Dave Schaller",
+      "Rick Mihelic",
+      "Yunsu Park"
+    ],
     "url": "https://nacfe.org/research/run-on-less/run-on-less-electric/terminal-tractors/",
     "media": {
       "kind": "pdf",
@@ -503,6 +547,12 @@
     "title": "Electric Trucks Have Arrived: The Use Case for Vans and Step Vans",
     "type": "confidence_report",
     "published": "2022-04",
+    "authors": [
+      "Mike Roeth",
+      "Dave Schaller",
+      "Rick Mihelic",
+      "Yunsu Park"
+    ],
     "url": "https://nacfe.org/research/run-on-less/run-on-less-electric/vans-step-vans/",
     "media": {
       "kind": "pdf",
@@ -583,6 +633,10 @@
     "title": "Amping Up: Charging Infrastructure for Electric Trucks",
     "type": "guidance_report",
     "published": "2019-03",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/charging-infrastructure/",
     "media": {
       "kind": "pdf",
@@ -677,6 +731,9 @@
     "title": "Charging Forward with Electric Trucks",
     "type": "guidance_report",
     "published": "2023-06",
+    "authors": [
+      "Dave Schaller"
+    ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/charging-infrastructure/",
     "media": {
       "kind": "pdf",
@@ -723,6 +780,10 @@
     "title": "Making Sense of Heavy-Duty Hydrogen Fuel Cell Tractors",
     "type": "guidance_report",
     "published": "2020-12",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": null,
     "media": {
       "kind": "pdf",
@@ -764,6 +825,12 @@
     "title": "Hydrogen Trucks: Long Haul's Future?",
     "type": "guidance_report",
     "published": "2023-04",
+    "authors": [
+      "Mike Roeth",
+      "Dave Schaller",
+      "Rick Mihelic (lead author)",
+      "Yunsu Park"
+    ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/hydrogen/",
     "media": {
       "kind": "pdf",
@@ -809,6 +876,10 @@
     "title": "Intermodal & Drayage: An Opportunity to Reduce Freight Emissions",
     "type": "guidance_report",
     "published": "2023-12",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic (lead author)"
+    ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/intermodal-drayage/",
     "media": {
       "kind": "pdf",
@@ -859,6 +930,10 @@
     "title": "Medium-Duty Electric Trucks – Cost of Ownership",
     "type": "guidance_report",
     "published": "2018-10",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/medium-duty-electric-trucks/",
     "media": {
       "kind": "pdf",
@@ -904,6 +979,10 @@
     "title": "Viable Class 7/8 Electric, Hybrid and Alternative Fuel Tractors",
     "type": "guidance_report",
     "published": "2019-12",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/viable-heavy-duty-electric-tractors/",
     "media": {
       "kind": "pdf",
@@ -950,6 +1029,11 @@
     "title": "Run on Less",
     "type": "run_on_less",
     "published": "2018-02",
+    "authors": [
+      "Mike Roeth",
+      "Dave Schaller",
+      "Yunsu Park"
+    ],
     "url": "https://nacfe.org/research/run-on-less/run-on-less-2017/",
     "media": {
       "kind": "pdf",
@@ -1000,6 +1084,12 @@
     "title": "Electric Trucks Have Arrived: Documenting A Real-World Electric Trucking Demonstration",
     "type": "run_on_less",
     "published": "2022-01",
+    "authors": [
+      "Mike Roeth",
+      "Dave Schaller",
+      "Rick Mihelic",
+      "Yunsu Park"
+    ],
     "url": "https://nacfe.org/research/run-on-less/run-on-less-electric/",
     "media": {
       "kind": "pdf",
@@ -1062,6 +1152,10 @@
     "title": "Run on Less – Electric DEPOT: Scaling BEVs in the Real World",
     "type": "run_on_less",
     "published": "2024-07",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic (lead author)"
+    ],
     "url": "https://nacfe.org/research/scaling-bevs/",
     "media": {
       "kind": "pdf",
@@ -1122,6 +1216,12 @@
     "title": "Run on Less Regional",
     "type": "run_on_less",
     "published": "2020-06",
+    "authors": [
+      "Mike Roeth",
+      "Dave Schaller",
+      "Rick Mihelic",
+      "Yunsu Park"
+    ],
     "url": "https://nacfe.org/research/run-on-less/run-on-less-regional/",
     "media": {
       "kind": "pdf",
@@ -1262,6 +1362,9 @@
     "title": "Confidence Report on Idle-Reduction Technologies",
     "type": "confidence_report",
     "published": "2019-07",
+    "authors": [
+      "Mike Roeth"
+    ],
     "url": null,
     "media": {
       "kind": "pdf",
@@ -1342,6 +1445,10 @@
     "title": "Confidence Report on Low Rolling Resistance Tires",
     "type": "confidence_report",
     "published": "2020-10",
+    "authors": [
+      "Mike Roeth",
+      "Yunsu Park"
+    ],
     "url": "https://nacfe.org/research/technology/tires-rolling-resistance/low-rolling-resistance/",
     "media": {
       "kind": "pdf",
@@ -1382,6 +1489,10 @@
     "title": "Confidence Report: Tire Pressure Systems",
     "type": "confidence_report",
     "published": "2020-05",
+    "authors": [
+      "Mike Roeth",
+      "Dave Schaller"
+    ],
     "url": "https://nacfe.org/research/technology/tires-rolling-resistance/tire-pressure-monitoring/",
     "media": {
       "kind": "pdf",
@@ -1422,6 +1533,9 @@
     "title": "Trucking Efficiency Confidence Report: Downspeeding",
     "type": "confidence_report",
     "published": "2015-10",
+    "authors": [
+      "Mike Roeth"
+    ],
     "url": "https://nacfe.org/research/technology/powertrain/downspeeding/",
     "media": {
       "kind": "pdf",
@@ -1502,6 +1616,9 @@
     "title": "Trucking Efficiency Confidence Report: Electronically Controlled Transmissions",
     "type": "confidence_report",
     "published": "2014-12",
+    "authors": [
+      "Mike Roeth"
+    ],
     "url": "https://nacfe.org/research/technology/powertrain/automated-manual-transmissions/",
     "media": {
       "kind": "pdf",
@@ -1541,6 +1658,10 @@
     "title": "Trucking Efficiency Confidence Report: Low-Viscosity Engine Lubricants",
     "type": "confidence_report",
     "published": "2016-06",
+    "authors": [
+      "Mike Roeth",
+      "Yunsu Park"
+    ],
     "url": "https://nacfe.org/research/technology/powertrain/low-viscosity-lubricant/",
     "media": {
       "kind": "pdf",
@@ -1580,6 +1701,9 @@
     "title": "Trucking Efficiency Confidence Report: Maintenance",
     "type": "confidence_report",
     "published": "2015-12",
+    "authors": [
+      "Mike Roeth"
+    ],
     "url": "https://nacfe.org/research/technology/operational-practices/preventive-maintenance/",
     "media": {
       "kind": "pdf",
@@ -1619,6 +1743,9 @@
     "title": "Confidence Report on Solar for Trucks and Trailers",
     "type": "confidence_report",
     "published": "2018-06",
+    "authors": [
+      "Mike Roeth"
+    ],
     "url": "https://nacfe.org/research/technology/idle-reduction/solar-panels-tractors/",
     "media": {
       "kind": "pdf",
@@ -1697,6 +1824,10 @@
     "title": "Confidence Report: Variable Engine-Driven Accessories",
     "type": "confidence_report",
     "published": "2017-02",
+    "authors": [
+      "Mike Roeth",
+      "Dave Schaller"
+    ],
     "url": "https://nacfe.org/research/technology/powertrain/electrically-driven-accessories/",
     "media": {
       "kind": "pdf",
@@ -1736,6 +1867,12 @@
     "title": "Fleet Fuel Study",
     "type": "fleet_fuel_study",
     "published": "2024-12",
+    "authors": [
+      "Mike Roeth",
+      "Dave Schaller",
+      "Rick Mihelic",
+      "Yunsu Park (lead author)"
+    ],
     "url": "https://nacfe.org/research/affs/",
     "media": {
       "kind": "pdf",
@@ -1854,6 +1991,9 @@
     "title": "Run on Less 2017 Panel - TMC 2018",
     "type": "video",
     "published": "2018-03",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=4c8BHT5Shsc",
     "media": {
       "kind": "video",
@@ -2036,6 +2176,9 @@
     "title": "Messy Middle Bootcamp #6 – Charging Depots, Networks, & the Economics of Fleet Electrification",
     "type": "bootcamp",
     "published": "2025-05",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/bootcamp/charging-depots-networks-the-economics-of-fleet-electrification/",
     "media": {
       "kind": "video",
@@ -2083,6 +2226,9 @@
     "title": "Messy Middle Bootcamp #5 – Strategizing Successful HD BEV Adoption",
     "type": "bootcamp",
     "published": "2025-04",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/bootcamp/strategizing-successful-hd-bev-adoption/",
     "media": {
       "kind": "video",
@@ -2131,6 +2277,9 @@
     "title": "Messy Middle Bootcamp #4 – The Current State of HD BEV: Technologies and Capabilities",
     "type": "bootcamp",
     "published": "2025-04",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/bootcamp/the-current-state-of-hd-bev-technologies-and-capabilities/",
     "media": {
       "kind": "video",
@@ -2176,6 +2325,9 @@
     "title": "Messy Middle Bootcamp #3 – Future Prices & Availability of Existing Infrastructure: What's Next",
     "type": "bootcamp",
     "published": "2025-03",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/bootcamp/future-prices-availability-of-existing-infrastructure-whats-next/",
     "media": {
       "kind": "video",
@@ -2229,6 +2381,9 @@
     "title": "Messy Middle Bootcamp #2 – Decarbonizing with Natural Gas",
     "type": "bootcamp",
     "published": "2025-02",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/bootcamp/decarbonizing-with-natural-gas/",
     "media": {
       "kind": "video",
@@ -2280,6 +2435,9 @@
     "title": "Messy Middle Bootcamp #1 – Diesel Drop-In Alternatives: Ultra-Low Sulfur, Bio-, and Renewable",
     "type": "bootcamp",
     "published": "2025-02",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/bootcamp/diesel-drop-in-alternatives-ultra-low-sulfur-bio-and-renewable/",
     "media": {
       "kind": "video",
@@ -2649,6 +2807,9 @@
     "title": "Frito-Lay: Run on Less – Messy Middle Fleet Profile",
     "type": "video",
     "published": "2025-08",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/participants-2025/frito-lay/",
     "media": {
       "kind": "video",
@@ -2723,6 +2884,9 @@
     "title": "JoyRide Logistics: Run on Less – Messy Middle Fleet Profile",
     "type": "video",
     "published": "2025-08",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/participants-2025/joyride/",
     "media": {
       "kind": "video",
@@ -2759,6 +2923,9 @@
     "title": "Albert Transport: Run on Less – Messy Middle Fleet Profile",
     "type": "video",
     "published": "2025-08",
+    "speakers": [
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/participants-2025/albert/",
     "media": {
       "kind": "video",
@@ -2835,6 +3002,9 @@
     "title": "4Gen: Run on Less – Messy Middle Fleet Profile",
     "type": "video",
     "published": "2025-08",
+    "speakers": [
+      "Rick Mihelic"
+    ],
     "url": "https://runonless.com/participants-2025/4gen/",
     "media": {
       "kind": "video",
@@ -2873,6 +3043,9 @@
     "title": "Saia: Run on Less – Messy Middle Fleet Profile",
     "type": "video",
     "published": "2025-08",
+    "speakers": [
+      "Rick Mihelic"
+    ],
     "url": "https://runonless.com/participants-2025/saia/",
     "media": {
       "kind": "video",
@@ -3065,6 +3238,9 @@
     "title": "Regional Stories – Connectivity Technology Day",
     "type": "video",
     "published": "2019-10",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
       "kind": "video",
@@ -3100,6 +3276,10 @@
     "title": "Run on Less 2017 – Mike Roeth and Dave Schaller Introduction",
     "type": "video",
     "published": "2017-09",
+    "speakers": [
+      "Mike Roeth",
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
       "kind": "video",
@@ -3221,6 +3401,9 @@
     "title": "2017 Stories – Wind",
     "type": "video",
     "published": "2017-09",
+    "speakers": [
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
       "kind": "video",
@@ -3263,6 +3446,10 @@
     "title": "Run on Less 2017 – TV Coverage",
     "type": "video",
     "published": "2017-09",
+    "speakers": [
+      "Mike Roeth",
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
       "kind": "video",
@@ -3302,6 +3489,9 @@
     "title": "Run On Less 2017 – NYC Mid Run Results",
     "type": "video",
     "published": "2017-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
       "kind": "video",
@@ -3338,6 +3528,9 @@
     "title": "2017 Stories – Drop and Hook",
     "type": "video",
     "published": "2017-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
       "kind": "video",
@@ -3378,6 +3571,9 @@
     "title": "Run On Less 2017 – Kick-Off",
     "type": "video",
     "published": "2017-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
       "kind": "video",
@@ -3413,6 +3609,9 @@
     "title": "2017 Stories – Supertrucks",
     "type": "video",
     "published": "2017-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
       "kind": "video",
@@ -3450,6 +3649,9 @@
     "title": "2017 Stories – Solar",
     "type": "video",
     "published": "2017-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=kTAi6ivma4s",
     "media": {
       "kind": "video",
@@ -3486,6 +3688,10 @@
     "title": "Run On Less 2017 – NBC Coverage",
     "type": "video",
     "published": "2017-09",
+    "speakers": [
+      "Mike Roeth",
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
       "kind": "video",
@@ -3520,6 +3726,9 @@
     "title": "2017 Stories – Traffic & Congestion",
     "type": "video",
     "published": "2017-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
       "kind": "video",
@@ -3557,6 +3766,9 @@
     "title": "2017 Stories – Team Drivers",
     "type": "video",
     "published": "2017-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
       "kind": "video",
@@ -3630,6 +3842,9 @@
     "title": "2017 Stories – Freight Efficiency",
     "type": "video",
     "published": "2017-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
       "kind": "video",
@@ -3668,6 +3883,9 @@
     "title": "Run On Less – Messy Middle Breakfast at ACT Expo",
     "type": "video",
     "published": "2025-05",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/videos/messy-middle-breakfast-at-act-expo/",
     "media": {
       "kind": "video",
@@ -3726,6 +3944,9 @@
     "title": "2025 Run on Less – Messy Middle",
     "type": "video",
     "published": "2025-04",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=--t10Rsb2xM",
     "media": {
       "kind": "video",
@@ -3771,6 +3992,9 @@
     "title": "2017 Stories – Fuel Economy on Older Equipment",
     "type": "video",
     "published": "2017-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
       "kind": "video",
@@ -3809,6 +4033,9 @@
     "title": "2017 Stories – Trucking Efficiency Operation",
     "type": "video",
     "published": "2017-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
       "kind": "video",
@@ -4116,6 +4343,11 @@
     "title": "Run on Less 2017 – Recap",
     "type": "video",
     "published": "2017-09",
+    "speakers": [
+      "Mike Roeth",
+      "Dave Schaller",
+      "Yunsu Park"
+    ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
       "kind": "video",
@@ -4153,6 +4385,11 @@
     "title": "Regional Stories – Growth in Regional Haul",
     "type": "video",
     "published": "2019-10",
+    "speakers": [
+      "Mike Roeth",
+      "Dave Schaller",
+      "Rick Mihelic"
+    ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
       "kind": "video",
@@ -4187,6 +4424,10 @@
     "title": "Regional Stories – Measuring Efficiency",
     "type": "video",
     "published": "2019-10",
+    "speakers": [
+      "Mike Roeth",
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
       "kind": "video",
@@ -4225,6 +4466,9 @@
     "title": "Regional Stories – Various Duty Cycles",
     "type": "video",
     "published": "2019-10",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
       "kind": "video",
@@ -4259,6 +4503,10 @@
     "title": "Regional Stories – Drivers Like Regional Haul",
     "type": "video",
     "published": "2019-10",
+    "speakers": [
+      "Mike Roeth",
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
       "kind": "video",
@@ -4295,6 +4543,9 @@
     "title": "Regional Stories – Maintenance in Regional Haul",
     "type": "video",
     "published": "2019-10",
+    "speakers": [
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
       "kind": "video",
@@ -4330,6 +4581,9 @@
     "title": "Regional Stories – Powertrain Technologies",
     "type": "video",
     "published": "2019-10",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
       "kind": "video",
@@ -4366,6 +4620,9 @@
     "title": "Regional Stories – Sleepers vs. Daycabs in Regional",
     "type": "video",
     "published": "2019-10",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
       "kind": "video",
@@ -4402,6 +4659,9 @@
     "title": "Regional Stories – Backhauls in Regional Haul",
     "type": "video",
     "published": "2019-10",
+    "speakers": [
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
       "kind": "video",
@@ -4438,6 +4698,9 @@
     "title": "Regional Stories – Customer Service in Regional Haul",
     "type": "video",
     "published": "2019-10",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
       "kind": "video",
@@ -4474,6 +4737,10 @@
     "title": "Regional Stories – Aerodynamics at Lower Speeds",
     "type": "video",
     "published": "2019-10",
+    "speakers": [
+      "Mike Roeth",
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
       "kind": "video",
@@ -4511,6 +4778,9 @@
     "title": "Regional Stories – Drop and Hook in Regional Haul",
     "type": "video",
     "published": "2019-10",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
       "kind": "video",
@@ -4549,6 +4819,10 @@
     "title": "Regional Stories – Technologies to Help Drivers Get Better MPG",
     "type": "video",
     "published": "2019-10",
+    "speakers": [
+      "Mike Roeth",
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
       "kind": "video",
@@ -4588,6 +4862,11 @@
     "title": "Regional – Finale",
     "type": "video",
     "published": "2019-10",
+    "speakers": [
+      "Mike Roeth",
+      "Rick Mihelic",
+      "Yunsu Park"
+    ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
       "kind": "video",
@@ -5070,6 +5349,10 @@
     "title": "Electric Stories – Range & Weight Anxiety",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": "https://runonless.com/videos/range-weight-anxiety/",
     "media": {
       "kind": "video",
@@ -5300,6 +5583,9 @@
     "title": "Electric Stories – Grid Resilience & Capacity",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Rick Mihelic"
+    ],
     "url": "https://runonless.com/videos/grid-capacity-readiness/",
     "media": {
       "kind": "video",
@@ -5445,6 +5731,9 @@
     "title": "Electric Stories – Battery Technology",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Rick Mihelic"
+    ],
     "url": "https://runonless.com/videos/battery-technology/",
     "media": {
       "kind": "video",
@@ -5556,6 +5845,9 @@
     "title": "Electric Stories – Diving into Data",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Yunsu Park"
+    ],
     "url": "https://runonless.com/videos/diving-into-data/",
     "media": {
       "kind": "video",
@@ -5596,6 +5888,9 @@
     "title": "Electric Use Cases – Vans and Step Vans",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/videos/the-use-case-for-vans-step-vans/",
     "media": {
       "kind": "video",
@@ -5637,6 +5932,10 @@
     "title": "Electric Use Cases – Heavy-Duty Regional Haul Tractors",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": "https://runonless.com/videos/the-use-case-for-hd-regional-haul-tractors/",
     "media": {
       "kind": "video",
@@ -5677,6 +5976,9 @@
     "title": "Electric Use Cases – Terminal Tractors",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/videos/the-use-case-for-terminal-tractors/",
     "media": {
       "kind": "video",
@@ -5716,6 +6018,10 @@
     "title": "Electric Use Cases – Medium-Duty Box Trucks",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Mike Roeth",
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/videos/the-use-case-for-md-box-trucks/",
     "media": {
       "kind": "video",
@@ -5757,6 +6063,9 @@
     "title": "Electric Profiles – Servall Electric",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/videos/servall-electric-and-workhorse/",
     "media": {
       "kind": "video",
@@ -5841,6 +6150,9 @@
     "title": "Electric Profiles – Roush Fenway Racing",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/videos/roush-fenway-racing-and-roush-cleantruck/",
     "media": {
       "kind": "video",
@@ -5882,6 +6194,9 @@
     "title": "Electric Profiles – Biagi Bros",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/videos/biagi-bros-and-peterbilt/",
     "media": {
       "kind": "video",
@@ -5920,6 +6235,9 @@
     "title": "Electric Profiles – Ruan",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/videos/ruan-and-orangeev/",
     "media": {
       "kind": "video",
@@ -6005,6 +6323,9 @@
     "title": "Electric Profiles – Ryder",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/videos/ryder-and-lonestar-specialty-vehicles/",
     "media": {
       "kind": "video",
@@ -6087,6 +6408,9 @@
     "title": "Electric Profiles – DHL",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/videos/dhl-and-lightning-emotors/",
     "media": {
       "kind": "video",
@@ -6128,6 +6452,9 @@
     "title": "Electric Profiles – NFI Terminal",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/videos/nfi-industries-and-kalmar/",
     "media": {
       "kind": "video",
@@ -6168,6 +6495,9 @@
     "title": "Electric Profiles – Penske",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/videos/penske-and-freightliner/",
     "media": {
       "kind": "video",
@@ -6208,6 +6538,9 @@
     "title": "Electric Profiles – Frito-Lay",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/videos/frito-lay-and-cummins/",
     "media": {
       "kind": "video",
@@ -6287,6 +6620,9 @@
     "title": "Electric – Finale",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/videos/finale/",
     "media": {
       "kind": "video",
@@ -6370,6 +6706,11 @@
     "title": "Regional – Recap",
     "type": "video",
     "published": "2019-10",
+    "speakers": [
+      "Mike Roeth",
+      "Rick Mihelic",
+      "Yunsu Park"
+    ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
       "kind": "video",
@@ -6409,6 +6750,9 @@
     "title": "Run on Less – Electric Finale – June 2022",
     "type": "video",
     "published": "2022-06",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=5Orb5Ugb4zE",
     "media": {
       "kind": "video",
@@ -6446,6 +6790,9 @@
     "title": "Electric DEPOT – Initial Findings",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/videos/initial-findings/",
     "media": {
       "kind": "video",
@@ -6620,6 +6967,9 @@
     "title": "Electric DEPOT Profiles – Penske",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/roled-profiles/penske/",
     "media": {
       "kind": "video",
@@ -6662,6 +7012,9 @@
     "title": "Electric DEPOT Profiles – PepsiCo",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/roled-profiles/pepsico/",
     "media": {
       "kind": "video",
@@ -6712,6 +7065,9 @@
     "title": "Electric DEPOT Profiles – Performance Team",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/roled-profiles/performance-team/",
     "media": {
       "kind": "video",
@@ -6756,6 +7112,9 @@
     "title": "Electric DEPOT Profiles – Purolator",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Rick Mihelic"
+    ],
     "url": "https://runonless.com/roled-profiles/purolator/",
     "media": {
       "kind": "video",
@@ -6845,6 +7204,9 @@
     "title": "Electric DEPOT Profiles – UPS",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/roled-profiles/ups-2/",
     "media": {
       "kind": "video",
@@ -6979,6 +7341,9 @@
     "title": "Electric DEPOT Profiles – Frito-Lay",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/roled-profiles/frito-lay/",
     "media": {
       "kind": "video",
@@ -7021,6 +7386,9 @@
     "title": "Electric DEPOT Profiles – US Foods",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/roled-profiles/us-foods/",
     "media": {
       "kind": "video",
@@ -7064,6 +7432,9 @@
     "title": "Electric DEPOT Stories – Environmental Justice",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/videos/environmental-justice-2/",
     "media": {
       "kind": "video",
@@ -7104,6 +7475,9 @@
     "title": "Electric DEPOT Stories – Drivers",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/videos/drivers/",
     "media": {
       "kind": "video",
@@ -7144,6 +7518,9 @@
     "title": "Electric DEPOT Stories – Lessons Learned with Utilities",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/videos/lessons-learned-with-utilites/",
     "media": {
       "kind": "video",
@@ -7186,6 +7563,9 @@
     "title": "Electric DEPOT Stories – Extended Range",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/videos/extended-range/",
     "media": {
       "kind": "video",
@@ -7231,6 +7611,9 @@
     "title": "Electric DEPOT Stories – Servicing EVs",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/videos/servicing-evs/",
     "media": {
       "kind": "video",
@@ -7273,6 +7656,9 @@
     "title": "Electric DEPOT Stories – Shippers and Zero Emissions",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/videos/shippers-and-zero-emissions/",
     "media": {
       "kind": "video",
@@ -7315,6 +7701,10 @@
     "title": "Electric DEPOT Stories – Managed Charging",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Mike Roeth",
+      "Dave Schaller"
+    ],
     "url": "https://runonless.com/videos/managed-charging/",
     "media": {
       "kind": "video",
@@ -7363,6 +7753,9 @@
     "title": "Electric DEPOT Stories – Total Cost of Ownership",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://runonless.com/videos/total-cost-of-ownership-2/",
     "media": {
       "kind": "video",
@@ -7405,6 +7798,10 @@
     "title": "Messy Middle Powertrain Service & Maintenance",
     "type": "confidence_report",
     "published": "2026-06",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": "https://nacfe.org/research/technology/operational-practices/mm-service-maintenance/",
     "media": {
       "kind": "pdf",
@@ -7459,6 +7856,11 @@
     "title": "The Feasibility of Intentional Pairing: Heavy-Duty Tractors and Trailers",
     "type": "thought_leadership",
     "published": "2019-07",
+    "authors": [
+      "Mike Roeth",
+      "Dave Schaller",
+      "Rick Mihelic"
+    ],
     "url": "https://nacfe.org/research/thought-leadership/intentional-pairing/",
     "media": {
       "kind": "pdf",
@@ -7517,6 +7919,11 @@
     "title": "Confidence Report: Determining Efficiency",
     "type": "confidence_report",
     "published": "2016-01",
+    "authors": [
+      "Mike Roeth",
+      "Dave Schaller",
+      "Rick Mihelic"
+    ],
     "url": "https://nacfe.org/research/thought-leadership/determining-efficiency/",
     "media": {
       "kind": "pdf",
@@ -7636,6 +8043,9 @@
     "title": "Costs and Adoption Rates of Fuel-Saving Technologies for Trailers in the North American On-Road Freight Sector",
     "type": "article",
     "published": "2014-02",
+    "authors": [
+      "Mike Roeth"
+    ],
     "url": "https://nacfe.org/research/collaboration-reports/na-trailer-fuel-efficiency-technologies-with-icct/",
     "media": {
       "kind": "pdf",
@@ -7810,6 +8220,10 @@
     "title": "From Source to Highway: The Messy Middle Emissions Report",
     "type": "run_on_less",
     "published": "2026-07",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": "https://nacfe.org/research/run-on-less/messy-middle/emissions-report/",
     "media": {
       "kind": "pdf",
@@ -7877,6 +8291,10 @@
     "title": "Natural Gas' Role in Decarbonizing Trucking",
     "type": "confidence_report",
     "published": "2024-03",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": "https://nacfe.org/research/technology/powertrain/natural-gas-role-in-decarbonizing-trucking/",
     "media": {
       "kind": "pdf",
@@ -7935,6 +8353,10 @@
     "title": "Empowering Future Trucks: SuperTruck 2",
     "type": "thought_leadership",
     "published": "2024-03",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic (lead author)"
+    ],
     "url": "https://nacfe.org/research/thought-leadership/supertruck-2-empowering-future-trucking/",
     "media": {
       "kind": "pdf",
@@ -7982,6 +8404,11 @@
     "title": "Defining Production",
     "type": "thought_leadership",
     "published": "2019-12",
+    "authors": [
+      "Mike Roeth",
+      "Dave Schaller",
+      "Rick Mihelic"
+    ],
     "url": "https://nacfe.org/research/thought-leadership/defining-production/",
     "media": {
       "kind": "pdf",
@@ -8029,6 +8456,10 @@
     "title": "Confidence Report: 6x2 Axles Update",
     "type": "confidence_report",
     "published": "2017-07",
+    "authors": [
+      "Mike Roeth",
+      "Yunsu Park"
+    ],
     "url": "https://nacfe.org/research/technology/chassis/6x2-axles/",
     "media": {
       "kind": "pdf",
@@ -8241,6 +8672,9 @@
     "title": "The Idle-Reduction Playbook: Operational Strategies for Modern Trucking Fleets",
     "type": "confidence_report",
     "published": "2025-12",
+    "authors": [
+      "Mike Roeth"
+    ],
     "url": "https://nacfe.org/research/technology/idle-reduction/",
     "media": {
       "kind": "pdf",
@@ -8304,6 +8738,10 @@
     "title": "More Regional Haul: An Opportunity for Trucking?",
     "type": "thought_leadership",
     "published": "2019-04",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": "https://nacfe.org/research/thought-leadership/more-regional-haul/",
     "media": {
       "kind": "pdf",
@@ -8408,6 +8846,9 @@
     "title": "Decarbonizing Truck & Trailer Refrigeration: Zero-Emission Temperature Control in Trucking",
     "type": "guidance_report",
     "published": "2024-10",
+    "authors": [
+      "Mike Roeth"
+    ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/decarbonizing-truck-and-trailer-refrigeration/",
     "media": {
       "kind": "pdf",
@@ -8460,6 +8901,9 @@
     "title": "High-Potential Regions for Electric Truck Deployments",
     "type": "guidance_report",
     "published": "2020-11",
+    "authors": [
+      "Mike Roeth"
+    ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/high-potential-regions-for-electric-truck-deployments/",
     "media": {
       "kind": "pdf",
@@ -8508,6 +8952,9 @@
     "title": "Development of Specifications for Heavy-Duty Tractor Trucks in Canada and the United States",
     "type": "article",
     "published": "2018-10",
+    "authors": [
+      "Dave Schaller"
+    ],
     "url": "https://nacfe.org/research/collaboration-reports/establishing-vehicle-specifications-with-icct/",
     "media": {
       "kind": "pdf",
@@ -8557,6 +9004,10 @@
     "title": "Fleet Perspectives on Charging-as-a-Service",
     "type": "thought_leadership",
     "published": "2025-03",
+    "authors": [
+      "Mike Roeth",
+      "Yunsu Park"
+    ],
     "url": "https://nacfe.org/research/collaboration-reports/caas-report/",
     "media": {
       "kind": "pdf",
@@ -8604,6 +9055,10 @@
     "title": "Navigating the Messy Middle",
     "type": "thought_leadership",
     "published": "2025",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": "https://nacfe.org/research/thought-leadership/navigating-the-messy-middle/",
     "media": {
       "kind": "pdf",
@@ -8740,6 +9195,9 @@
     "title": "Ep 70: Michelle Buffington – California Air Resources Board",
     "type": "podcast",
     "published": "2023-02",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=thwLDLcjJ-Y",
     "media": {
       "kind": "audio",
@@ -8819,6 +9277,9 @@
     "title": "Ep. 135: Steve Mignardi – NACFE Board Chairman",
     "type": "podcast",
     "published": "2026-05",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=cPXWF27HAfs",
     "media": {
       "kind": "audio",
@@ -8896,6 +9357,9 @@
     "title": "Ep. 76: Jason Cannon – CCJ",
     "type": "podcast",
     "published": "2023-05",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=oD8wmxSJDmA",
     "media": {
       "kind": "audio",
@@ -8933,6 +9397,9 @@
     "title": "Ep. 24: Michael Berube – US Department of Energy",
     "type": "podcast",
     "published": "2021-02",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=Y39xNNE4esg",
     "media": {
       "kind": "audio",
@@ -9072,6 +9539,9 @@
     "title": "Ep 48: Britta Gross –RMI",
     "type": "podcast",
     "published": "2022-03",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=nRzWcB1v7lI",
     "media": {
       "kind": "audio",
@@ -9113,6 +9583,9 @@
     "title": "Ep 63: Erik Neandross – Gladstein, Neandross & Associates",
     "type": "podcast",
     "published": "2022-08",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=eu5UkRq9QsY",
     "media": {
       "kind": "audio",
@@ -9165,6 +9638,9 @@
     "title": "Ep. 133: Tom Lincoln – Dana",
     "type": "podcast",
     "published": "2026-04",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=O05Psp129G4",
     "media": {
       "kind": "audio",
@@ -9211,6 +9687,9 @@
     "title": "Ep 41: Rob Ulsh – Great Dane",
     "type": "podcast",
     "published": "2022-01",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=7DT3o4E_uOk",
     "media": {
       "kind": "audio",
@@ -9295,6 +9774,9 @@
     "title": "Ep. 79: Brady Matoian – OK Produce",
     "type": "podcast",
     "published": "2023-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=lmk4hn-w_AM",
     "media": {
       "kind": "audio",
@@ -9380,6 +9862,9 @@
     "title": "Ep. 27: Greg Hintler – The Mobility House",
     "type": "podcast",
     "published": "2021-04",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=YPn06kfsatc",
     "media": {
       "kind": "audio",
@@ -9420,6 +9905,9 @@
     "title": "Ep. 92: John Hroncich – BAE Systems",
     "type": "podcast",
     "published": "2024-07",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=1G_B-naAT6g",
     "media": {
       "kind": "audio",
@@ -9461,6 +9949,9 @@
     "title": "Ep. 3: Jennifer Rumsey – Cummins Inc.",
     "type": "podcast",
     "published": "2020-07",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=bov30yEpfug",
     "media": {
       "kind": "audio",
@@ -9499,6 +9990,9 @@
     "title": "Ep. 53: Jennifer Wheeler – NACFE",
     "type": "podcast",
     "published": "2022-04",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=JGvSeK77HOc",
     "media": {
       "kind": "audio",
@@ -9590,6 +10084,9 @@
     "title": "Ep. 123: Don Baldwin – Retired from Michelin",
     "type": "podcast",
     "published": "2025-11",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=ZEbcrgR9pYM",
     "media": {
       "kind": "audio",
@@ -9710,6 +10207,9 @@
     "title": "Ep. 44: Paul Rosa – Penske",
     "type": "podcast",
     "published": "2022-02",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=_h4eNRQnmmk",
     "media": {
       "kind": "audio",
@@ -9759,6 +10259,9 @@
     "title": "Ep. 86: Amanda Devoe – PepsiCo",
     "type": "podcast",
     "published": "2024-01",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=iPX3rwRiA_4",
     "media": {
       "kind": "audio",
@@ -9812,6 +10315,9 @@
     "title": "Ep. 54: Sean Larkin – Amply Power",
     "type": "podcast",
     "published": "2022-05",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=pK0ajVvng7U",
     "media": {
       "kind": "audio",
@@ -9848,6 +10354,9 @@
     "title": "Ep 40: Randy Cornell – CFI",
     "type": "podcast",
     "published": "2022-01",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=UYFRZh6hoqw",
     "media": {
       "kind": "audio",
@@ -9892,6 +10401,9 @@
     "title": "Ep. 100: Mike Roeth – NACFE",
     "type": "podcast",
     "published": "2024-11",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=Fy0HsEP6HMc",
     "media": {
       "kind": "audio",
@@ -9936,6 +10448,9 @@
     "title": "Ep. 66: Kenny Vieth – ACT Research",
     "type": "podcast",
     "published": "2022-10",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=KLFV2yUQ4o4",
     "media": {
       "kind": "audio",
@@ -9973,6 +10488,9 @@
     "title": "Ep. 114: Jason Morgan – Fleet Equipment",
     "type": "podcast",
     "published": "2025-07",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=xRh5v9vbdqc",
     "media": {
       "kind": "audio",
@@ -10009,6 +10527,9 @@
     "title": "Ep. 78: Ed Chipalowsky – NACFE",
     "type": "podcast",
     "published": "2023-07",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=aZCPtda5n_I",
     "media": {
       "kind": "audio",
@@ -10090,6 +10611,9 @@
     "title": "Ep 62: Glen Kedzie – American Trucking Associations",
     "type": "podcast",
     "published": "2022-08",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=1HfQVP1wZsg",
     "media": {
       "kind": "audio",
@@ -10165,6 +10689,9 @@
     "title": "Ep. 120: Dan Gage – The Transport Project",
     "type": "podcast",
     "published": "2025-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=C2qWlHubb2o",
     "media": {
       "kind": "audio",
@@ -10287,6 +10814,9 @@
     "title": "Ep. 137: Emily Long – NACFE",
     "type": "podcast",
     "published": "2026-06",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=b-uk0k_drFM",
     "media": {
       "kind": "audio",
@@ -10327,6 +10857,9 @@
     "title": "Ep. 12: Jeff Baer – LinkeDrive",
     "type": "podcast",
     "published": "2020-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=mq6-ObJi2-o",
     "media": {
       "kind": "audio",
@@ -10369,6 +10902,9 @@
     "title": "Ep. 38: Avra Brahma – Locomation",
     "type": "podcast",
     "published": "2021-12",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=1jWx0uodxU8",
     "media": {
       "kind": "audio",
@@ -10411,6 +10947,9 @@
     "title": "Ep. 9: Quin Garcia – Autotech Ventures",
     "type": "podcast",
     "published": "2020-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=eMVDd00aJ8Y",
     "media": {
       "kind": "audio",
@@ -10487,6 +11026,9 @@
     "title": "Ep. 99: Jim Castelaz – Motiv Electric Trucks",
     "type": "podcast",
     "published": "2024-11",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=AT68U6H2bis",
     "media": {
       "kind": "audio",
@@ -10538,6 +11080,9 @@
     "title": "Ep. 130: Chris Guerrero – ENGIE Resources",
     "type": "podcast",
     "published": "2026-02",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=PqcC2rpp-Go",
     "media": {
       "kind": "audio",
@@ -10614,6 +11159,9 @@
     "title": "Ep. 131: Chris Hammond – Great Dane",
     "type": "podcast",
     "published": "2026-03",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=mM8wOUAZb7Q",
     "media": {
       "kind": "audio",
@@ -10655,6 +11203,9 @@
     "title": "Ep. 60: Chet Ciesielski – International",
     "type": "podcast",
     "published": "2022-07",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=Yc1BjuizbJQ",
     "media": {
       "kind": "audio",
@@ -10696,6 +11247,9 @@
     "title": "Ep. 117: John Walters – Valvoline",
     "type": "podcast",
     "published": "2025-08",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=RQd78j1qbuw",
     "media": {
       "kind": "audio",
@@ -10734,6 +11288,9 @@
     "title": "Ep. 139: Josh Fisher – Fleet Owner",
     "type": "podcast",
     "published": "2026-07",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=fe0r93mn31s",
     "media": {
       "kind": "audio",
@@ -10776,6 +11333,9 @@
     "title": "Ep. 116: Leia Guccione – RMI",
     "type": "podcast",
     "published": "2025-08",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=TIjSFMjTMIk",
     "media": {
       "kind": "audio",
@@ -10815,6 +11375,9 @@
     "title": "Ep. 59: Anthony Eggert – Climate Works Foundation",
     "type": "podcast",
     "published": "2022-07",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=s5BmhLkGRFg",
     "media": {
       "kind": "audio",
@@ -10894,6 +11457,9 @@
     "title": "Ep. 85: Scott Perry – Industry Executive and former NACFE board chairman",
     "type": "podcast",
     "published": "2024-01",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=l9ZxjYo2pBY",
     "media": {
       "kind": "audio",
@@ -10932,6 +11498,9 @@
     "title": "Ep. 103: Yann Kulp – Driivz",
     "type": "podcast",
     "published": "2025-01",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=tlrHMnHt8Fs",
     "media": {
       "kind": "audio",
@@ -11014,6 +11583,9 @@
     "title": "Ep. 2: Rob Reich – Schneider",
     "type": "podcast",
     "published": "2020-07",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=1I4L8cAzU30",
     "media": {
       "kind": "audio",
@@ -11062,6 +11634,9 @@
     "title": "Ep. 58: Alison Conway – The City College of New York",
     "type": "podcast",
     "published": "2022-07",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=d9QNMKuKbck",
     "media": {
       "kind": "audio",
@@ -11100,6 +11675,9 @@
     "title": "Ep. 89: James Menzies – Today’s Trucking",
     "type": "podcast",
     "published": "2024-04",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=1NOCD53rbYM",
     "media": {
       "kind": "audio",
@@ -11188,6 +11766,9 @@
     "title": "Ep. 23: Paul Stith – Black & Veatch",
     "type": "podcast",
     "published": "2021-02",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=FtwyKwxQI5A",
     "media": {
       "kind": "audio",
@@ -11240,6 +11821,9 @@
     "title": "Ep. 16: Jack Roberts – Senior Trucking Editor and Freight Futurist",
     "type": "podcast",
     "published": "2020-11",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=xt51fKWEMMI",
     "media": {
       "kind": "audio",
@@ -11284,6 +11868,9 @@
     "title": "Ep. 8: Jay Lau – TuSimple",
     "type": "podcast",
     "published": "2020-08",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=Hf0XVgwwJCg",
     "media": {
       "kind": "audio",
@@ -11327,6 +11914,9 @@
     "title": "Ep. 47: Henry Albert – Albert Transport",
     "type": "podcast",
     "published": "2022-03",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=0ElPS1eiT_0",
     "media": {
       "kind": "audio",
@@ -11370,6 +11960,9 @@
     "title": "Ep. 65: Graham Doorley – Solo Advanced Vehicle Technologies",
     "type": "podcast",
     "published": "2022-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=PDAIslU-FJI",
     "media": {
       "kind": "audio",
@@ -11410,6 +12003,9 @@
     "title": "Ep. 50: Bill Bliem – NFI Industries",
     "type": "podcast",
     "published": "2022-03",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=uUX06Y2oVOg",
     "media": {
       "kind": "audio",
@@ -11456,6 +12052,9 @@
     "title": "Ep. 21: Patrick Molloy – Rocky Mountain Institute",
     "type": "podcast",
     "published": "2021-01",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=TKElxMf34Bo",
     "media": {
       "kind": "audio",
@@ -11494,6 +12093,10 @@
     "title": "Ep. 20: Rick Mihelic – Mihelic Vehicle Consulting & NACFE",
     "type": "podcast",
     "published": "2020-12",
+    "speakers": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": "https://www.youtube.com/watch?v=-iRiA7PXRyk",
     "media": {
       "kind": "audio",
@@ -11537,6 +12140,10 @@
     "title": "Ep. 95: Yunsu Park – NACFE",
     "type": "podcast",
     "published": "2024-09",
+    "speakers": [
+      "Mike Roeth",
+      "Yunsu Park"
+    ],
     "url": "https://www.youtube.com/watch?v=Trci7VEGpiw",
     "media": {
       "kind": "audio",
@@ -11574,6 +12181,9 @@
     "title": "Ep. 112: Deborah Lockridge – Heavy Duty Trucking",
     "type": "podcast",
     "published": "2025-06",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=4Z2j7JO-0VA",
     "media": {
       "kind": "audio",
@@ -11611,6 +12221,9 @@
     "title": "Ep. 56: Kevin Beaty – YUNEV LLC",
     "type": "podcast",
     "published": "2022-06",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=7lMc3qTIU8w",
     "media": {
       "kind": "audio",
@@ -11651,6 +12264,9 @@
     "title": "Ep. 136: Matt Srnec – Thermo King",
     "type": "podcast",
     "published": "2026-06",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=-PYa-IhQiEE",
     "media": {
       "kind": "audio",
@@ -11844,6 +12460,9 @@
     "title": "Ep. 57: Jose “Pepe” Gutierrez – NACFE LATAM",
     "type": "podcast",
     "published": "2022-06",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=WzAWPdhgm-w",
     "media": {
       "kind": "audio",
@@ -11921,6 +12540,9 @@
     "title": "Ep. 93: Bruce Stockton – Wilson Logistics",
     "type": "podcast",
     "published": "2024-08",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=51OIg_y7_Vc",
     "media": {
       "kind": "audio",
@@ -12008,6 +12630,9 @@
     "title": "Ep. 51: Allen Schaeffer – Diesel Technology Forum",
     "type": "podcast",
     "published": "2022-04",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=fn99pkz4ayA",
     "media": {
       "kind": "audio",
@@ -12047,6 +12672,9 @@
     "title": "Ep. 125: Adam Klauber – World Energy",
     "type": "podcast",
     "published": "2025-12",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=IVGLk0MAAco",
     "media": {
       "kind": "audio",
@@ -12137,6 +12765,9 @@
     "title": "Ep. 32: Gary Gaussoin – Silver Eagle Manufacturing",
     "type": "podcast",
     "published": "2021-07",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=hd975gRsUrM",
     "media": {
       "kind": "audio",
@@ -12215,6 +12846,9 @@
     "title": "Ep 55: Venkatesan Murali – Merlin Solar",
     "type": "podcast",
     "published": "2022-05",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=kind8V2Rtvg",
     "media": {
       "kind": "audio",
@@ -12255,6 +12889,9 @@
     "title": "Ep. 111: Giorgio Rizzoni – The Ohio State University and the Center for Automotive Research",
     "type": "podcast",
     "published": "2025-05",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=NqIh_A-yrQc",
     "media": {
       "kind": "audio",
@@ -12337,6 +12974,9 @@
     "title": "Ep. 49: Sam Spofforth – NREL",
     "type": "podcast",
     "published": "2022-03",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=3hfM-VWwQpY",
     "media": {
       "kind": "audio",
@@ -12378,6 +13018,9 @@
     "title": "Ep. 98: Dave Mullaney – TruCurrent",
     "type": "podcast",
     "published": "2024-10",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=j9DU8tg18-w",
     "media": {
       "kind": "audio",
@@ -12419,6 +13062,9 @@
     "title": "Ep. 77: Matt McLelland – Covenant",
     "type": "podcast",
     "published": "2023-06",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=H5gWhEZR6Ek",
     "media": {
       "kind": "audio",
@@ -12470,6 +13116,9 @@
     "title": "Ep. 26: Muffi Ghadiali – Electriphi",
     "type": "podcast",
     "published": "2021-03",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=oVvousR1F6Y",
     "media": {
       "kind": "audio",
@@ -12507,6 +13156,9 @@
     "title": "Ep. 31: Thomas Healy – Hyliion",
     "type": "podcast",
     "published": "2021-06",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=Y9nSnjwJ_GQ",
     "media": {
       "kind": "audio",
@@ -12552,6 +13204,9 @@
     "title": "Ep. 72: Dan Burrows – TruckLabs",
     "type": "podcast",
     "published": "2023-03",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=yYi5OYM7-Ww",
     "media": {
       "kind": "audio",
@@ -12595,6 +13250,9 @@
     "title": "Ep. 30: Chris Nordh – Workhorse Group, Inc.",
     "type": "podcast",
     "published": "2021-05",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=Uzb-hmMOQMM",
     "media": {
       "kind": "audio",
@@ -12638,6 +13296,9 @@
     "title": "Ep. 91: Rob Swim – Trucking Industry Veteran",
     "type": "podcast",
     "published": "2024-06",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=i9EKV0pMfaA",
     "media": {
       "kind": "audio",
@@ -12677,6 +13338,9 @@
     "title": "Ep. 19: Steve Ernest – Jacobs Vehicle Systems",
     "type": "podcast",
     "published": "2020-12",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=60VMQC-cDtw",
     "media": {
       "kind": "audio",
@@ -12721,6 +13385,9 @@
     "title": "Ep. 61: Jigar Shah – United States Department of Energy",
     "type": "podcast",
     "published": "2022-08",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=t1kzqmv4h1A",
     "media": {
       "kind": "audio",
@@ -12763,6 +13430,9 @@
     "title": "Ep. 22: Denise Rondini, Rondini Communications & NACFE",
     "type": "podcast",
     "published": "2021-01",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=rPrGDgdmIc0",
     "media": {
       "kind": "audio",
@@ -12799,6 +13469,9 @@
     "title": "Ep. 35: Taki Darakos – Pitt Ohio",
     "type": "podcast",
     "published": "2021-11",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=4Rg7-15hWzw",
     "media": {
       "kind": "audio",
@@ -12884,6 +13557,9 @@
     "title": "Ep 37: Selda Gunsel – Shell Global Solutions",
     "type": "podcast",
     "published": "2021-12",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=CBv78e9_XV8",
     "media": {
       "kind": "audio",
@@ -12930,6 +13606,9 @@
     "title": "Ep. 43: Tim Reeser – Lightning eMotors",
     "type": "podcast",
     "published": "2022-02",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=597-vNEwANU",
     "media": {
       "kind": "audio",
@@ -13016,6 +13695,9 @@
     "title": "Ep. 25: Jules Kortenhorst – RMI",
     "type": "podcast",
     "published": "2021-03",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=3u0DEko_ABY",
     "media": {
       "kind": "audio",
@@ -13058,6 +13740,9 @@
     "title": "Ep. 42: George Miller – BYD",
     "type": "podcast",
     "published": "2022-01",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=5zj-RnlbpYA",
     "media": {
       "kind": "audio",
@@ -13104,6 +13789,9 @@
     "title": "Ep. 108: Andrew Halonen – Mayflower Consulting",
     "type": "podcast",
     "published": "2025-04",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=0h3gbaKKFKY",
     "media": {
       "kind": "audio",
@@ -13262,6 +13950,9 @@
     "title": "Ep. 97: Michele Calbi –Team DriveAway",
     "type": "podcast",
     "published": "2024-10",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=vscvYaS7YTE",
     "media": {
       "kind": "audio",
@@ -13309,6 +14000,9 @@
     "title": "Ep. 1: Joel Morrow – Ploger Transportation",
     "type": "podcast",
     "published": "2020-07",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=Xk7V0bO6Clo",
     "media": {
       "kind": "audio",
@@ -13354,6 +14048,9 @@
     "title": "Ep. 11: Steve Slesinski – Dana Commercial Vehicle",
     "type": "podcast",
     "published": "2020-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=S8d4x0Nn5sM",
     "media": {
       "kind": "audio",
@@ -13404,6 +14101,9 @@
     "title": "Ep. 69: Rob Kelly – Forum Mobility",
     "type": "podcast",
     "published": "2023-02",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=ByNAkU8nmAM",
     "media": {
       "kind": "audio",
@@ -13446,6 +14146,9 @@
     "title": "Ep. 118: Dan Priestley – Tesla",
     "type": "podcast",
     "published": "2025-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=v_7kKUoo3d4",
     "media": {
       "kind": "audio",
@@ -13493,6 +14196,9 @@
     "title": "Ep. 119: Rachael Nealer – U.S. Joint Office of Energy and Transportation",
     "type": "podcast",
     "published": "2025-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=CWGnPvcLU_A",
     "media": {
       "kind": "audio",
@@ -13536,6 +14242,9 @@
     "title": "Ep. 94: Jordan Spradling – Pilot Flying J",
     "type": "podcast",
     "published": "2024-08",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=hSTyLm9Q6_s",
     "media": {
       "kind": "audio",
@@ -13697,6 +14406,9 @@
     "title": "Ep. 13: Jessie Lund – Rocky Mountain Institute",
     "type": "podcast",
     "published": "2020-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=ZlgOBvzQxdc",
     "media": {
       "kind": "audio",
@@ -13737,6 +14449,9 @@
     "title": "Ep. 128: Blair Hefty – Coyne PR",
     "type": "podcast",
     "published": "2026-01",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=ODTxpyjcnYI",
     "media": {
       "kind": "audio",
@@ -13773,6 +14488,9 @@
     "title": "Ep. 138: Vinny Riscica – Con Edison",
     "type": "podcast",
     "published": "2026-06",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=QT7MZyjVLAo",
     "media": {
       "kind": "audio",
@@ -13911,6 +14629,9 @@
     "title": "Ep. 124: Matt Schrap – Forum Mobility",
     "type": "podcast",
     "published": "2025-11",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=ZaiB-_iK37Y",
     "media": {
       "kind": "audio",
@@ -14082,6 +14803,9 @@
     "title": "Ep. 36: Todd Mouw – Roush CleanTech",
     "type": "podcast",
     "published": "2021-12",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=Q-qdzXUyUKc",
     "media": {
       "kind": "audio",
@@ -14213,6 +14937,9 @@
     "title": "Ep. 110: Mike Rowand – Energy and Electric Transportation Consultant",
     "type": "podcast",
     "published": "2025-05",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=wrNmocdBeD0",
     "media": {
       "kind": "audio",
@@ -14255,6 +14982,9 @@
     "title": "Ep. 84: Rachel Ellenberger – Green Seed Collective and NACFE",
     "type": "podcast",
     "published": "2024-01",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=hHnoWv8cECc",
     "media": {
       "kind": "audio",
@@ -14323,6 +15053,9 @@
     "title": "Ep. 126: Zhe Wang – RMI",
     "type": "podcast",
     "published": "2025-12",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=U60Dkw9w8gI",
     "media": {
       "kind": "audio",
@@ -14370,6 +15103,9 @@
     "title": "Ep. 113: Kim Ehrenhaft – NACFE",
     "type": "podcast",
     "published": "2025-06",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=NatKxVkQPtI",
     "media": {
       "kind": "audio",
@@ -14405,6 +15141,9 @@
     "title": "Ep. 67: Marc-Andre Page – The Lion Electric",
     "type": "podcast",
     "published": "2022-11",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=qsJPCQT5DWw",
     "media": {
       "kind": "audio",
@@ -14448,6 +15187,9 @@
     "title": "Ep. 68: Ken Marko – US Foods",
     "type": "podcast",
     "published": "2022-12",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=Q2Q_J5tnxAU",
     "media": {
       "kind": "audio",
@@ -14491,6 +15233,9 @@
     "title": "Ep. 140: John Verdon – Nevoya",
     "type": "podcast",
     "published": "2026-08",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=_Qg5S-9XevM",
     "media": {
       "kind": "audio",
@@ -14534,6 +15279,9 @@
     "title": "Ep. 141: Royal Jones – Mesilla Valley Transportation",
     "type": "podcast",
     "published": "2026-09",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=bkdKBLNb0xM",
     "media": {
       "kind": "audio",
@@ -14583,6 +15331,9 @@
     "title": "Webinar: Using Propane in Mid-Range Trucks",
     "type": "video",
     "published": "2026-07",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=4vkmsEyAxKI",
     "media": {
       "kind": "video",
@@ -14691,6 +15442,10 @@
     "title": "Charging-as-a-Service Report Review: What We Know Now",
     "type": "video",
     "published": "2025-05",
+    "speakers": [
+      "Mike Roeth",
+      "Yunsu Park"
+    ],
     "url": "https://www.youtube.com/watch?v=9u5bkXbe-N8",
     "media": {
       "kind": "video",
@@ -14810,6 +15565,9 @@
     "title": "Transformational Technologies Reshaping Transportation – An Industry Perspective (lecture video)",
     "type": "video",
     "published": "2020",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=s6YwAgZQcZ0",
     "media": {
       "kind": "video",
@@ -14872,6 +15630,9 @@
     "title": "What's Different About Your Dad's Truck, Your Truck and Your Kids' or Even Grandkid's Trucks?",
     "type": "video",
     "published": "2020-03",
+    "speakers": [
+      "Mike Roeth"
+    ],
     "url": "https://www.youtube.com/watch?v=v9hvn3ZeD_k",
     "media": {
       "kind": "video",
@@ -14918,6 +15679,12 @@
     "title": "Trucking Through Uncertainty",
     "type": "video",
     "published": "2020-03",
+    "speakers": [
+      "Mike Roeth",
+      "Dave Schaller",
+      "Rick Mihelic",
+      "Yunsu Park"
+    ],
     "url": "https://www.youtube.com/watch?v=ZFpoiPUImCE",
     "media": {
       "kind": "video",
@@ -14964,6 +15731,10 @@
     "title": "SuperTruck 2: Empowering Future Trucking",
     "type": "video",
     "published": "2025-03",
+    "speakers": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": "https://www.youtube.com/watch?v=-_C2T9jOACk",
     "media": {
       "kind": "video",

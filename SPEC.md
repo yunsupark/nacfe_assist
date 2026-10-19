@@ -171,6 +171,15 @@ sees; everything else is filters and metadata.
 `type` values: `guidance_report`, `confidence_report`, `run_on_less`, `bootcamp`,
 `podcast`, `video`, `article`, `thought_leadership`, `fleet_fuel_study`.
 
+Optional people fields, omitted when empty: `authors` (names listed on a report's author /
+study-team page, with "(lead author)" marking the lead) and `speakers` (people who speak in a
+video, bootcamp or podcast). They exist so the router can find documents by person; the
+ingested report text does not carry the author page (the ingest collapses it), so the Worker
+also passes them to the answer stage as a "NACFE credits" header line. They are filled by
+`ingest/extract_people.py` for a chosen list of people (currently Mike Roeth, Dave Schaller,
+Rick Mihelic, Yunsu Park -- a trial) from the original report PDFs and the transcripts; reports
+whose PDF cannot be matched or has no credits block are left without `authors`, never guessed.
+
 `supersedes` / `superseded_by` / `status` must be curated by a human, not inferred by the
 model. This is a half-day of work across 100 items and it is the highest-leverage half-day
 in the project.

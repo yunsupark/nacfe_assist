@@ -111,6 +111,16 @@ function toRouterCatalogEntry(c: CatalogEntry): RouterCatalogEntry {
   const { url, media, token_count, ingested, ingest_model, ...rest } = c;
   return rest;
 }
+/** One header line naming the NACFE people credited on a source, for the answer stage. The
+ * author / study-team page is not in the ingested report text (the ingest collapses it), so
+ * without this line the model cannot say who wrote a report. Empty when the entry has none. */
+function creditsLine(entry: CatalogEntry | undefined): string {
+  const parts: string[] = [];
+  if (entry?.authors?.length) parts.push(`listed on the author / study-team page: ${entry.authors.join(", ")}`);
+  if (entry?.speakers?.length) parts.push(`speaks in this recording: ${entry.speakers.join(", ")}`);
+  return parts.length ? `NACFE credits -- ${parts.join("; ")}\n` : "";
+}
+
 const ROUTER_CATALOG_JSON = JSON.stringify(CATALOG.map(toRouterCatalogEntry));
 
 /** Rough token estimate for the fixed part of a routing call. ~4 chars/token. */
@@ -714,7 +724,7 @@ async function answer(
       // "run-on-less-messy-middle-blueprint-2025" in front of readers. All 343 catalog titles
       // are unique, so the title alone identifies the source unambiguously. The widget still
       // shows ids separately, from selected_sources.
-      return `=== SOURCE: ${title} ===\n${body}`;
+      return `=== SOURCE: ${title} ===\n${creditsLine(entry)}${body}`;
     })
     .filter((d): d is string => d !== null)
     .join("\n\n");
