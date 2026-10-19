@@ -1,0 +1,14 @@
+{
+  "_about": "Hand-curated inputs for ingest/extract_people.py, for the cases the automatic steps cannot settle. 'pdf_for' pairs a catalog entry with its original PDF when the body-text match is not confident (each pairing checked by cover title and page count). 'authors' sets authorship directly where a document carries a byline instead of a study-team page. Names outside the --people list of a run are ignored.",
+  "pdf_for": {
+    "guidance-report-electric-trucks-where-they-make-sense-2018": "NACFE_CBEV_FULL_050118_compressed.pdf",
+    "confidence-report-tractor-aerodynamic-devices-2020": "FullAeroTractorConfidenceReport2020.pdf",
+    "confidence-report-lightweighting-2021": "Lightweighting-Confidence-Report-Feb2021_compressed.pdf",
+    "confidence-report-electronic-engine-parameters-2015": "electronic-engine-parameters-confidence-report_compressed.pdf",
+    "confidence-report-two-truck-platooning-2016": "two-truck-platooning-confidence-report.pdf"
+  },
+  "authors": {
+    "redefining-long-haul-2025": ["Mike Roeth"],
+    "xstream-fuel-test-2016": ["Mike Roeth"]
+  }
+}

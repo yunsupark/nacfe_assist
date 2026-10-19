@@ -28,6 +28,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CATALOG_PATH = REPO_ROOT / "corpus" / "catalog.json"
 SOURCES_DIR = REPO_ROOT / "corpus" / "sources"
+OVERRIDES_PATH = Path(__file__).resolve().parent / "people_overrides.json"
 
 # Where a credits block starts, and what ends it. Layouts vary: a "STUDY TEAM" heading on its own
 # line (recent reports) or inline ("Acknowledgements: Study Team: Name, Title Name, Title ...",
@@ -147,11 +148,29 @@ def main():
     docs = [e for e in catalog if e["media"]["kind"] == "pdf"]
     pdf_for = match_pdfs(args.reports_dir, docs)
 
+    # Hand-curated overrides win over the automatic match (see people_overrides.json).
+    overrides = json.loads(OVERRIDES_PATH.read_text()) if OVERRIDES_PATH.exists() else {}
+    ids = {e["id"] for e in catalog}
+    for eid, name in overrides.get("pdf_for", {}).items():
+        path = Path(args.reports_dir) / name
+        if eid not in ids or not path.exists():
+            sys.exit(f"people_overrides.json: pdf_for entry {eid!r} -> {name!r}: unknown id or missing file")
+        pdf_for[eid] = path
+    manual_authors = {}
+    for eid, names in overrides.get("authors", {}).items():
+        if eid not in ids:
+            sys.exit(f"people_overrides.json: authors entry {eid!r} is not a catalog id")
+        kept = [n for n in names if n in people]
+        if kept:
+            manual_authors[eid] = kept
+
     report, changed = [], 0
     for e in catalog:
         e.pop("authors", None)
         e.pop("speakers", None)
-        if e["media"]["kind"] == "pdf":
+        if e["id"] in manual_authors:
+            e["authors"] = manual_authors[e["id"]]
+        elif e["media"]["kind"] == "pdf":
             pdf = pdf_for.get(e["id"])
             if pdf is None:
                 report.append(f"NO CONFIDENT PDF MATCH   {e['id']}")

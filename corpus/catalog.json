@@ -682,6 +682,10 @@
     "title": "Electric Trucks: Where They Make Sense",
     "type": "guidance_report",
     "published": "2018-05",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/electric-trucks-where-they-make-sense/",
     "media": {
       "kind": "pdf",
@@ -1322,6 +1326,11 @@
     "title": "Confidence Report on Tractor Aerodynamic Devices",
     "type": "confidence_report",
     "published": "2020-09",
+    "authors": [
+      "Mike Roeth",
+      "Dave Schaller",
+      "Rick Mihelic"
+    ],
     "url": "https://nacfe.org/research/technology/tractor-aerodynamics/",
     "media": {
       "kind": "pdf",
@@ -1405,6 +1414,9 @@
     "title": "NACFE Confidence Report on Lightweighting",
     "type": "confidence_report",
     "published": "2021-02",
+    "authors": [
+      "Mike Roeth"
+    ],
     "url": "https://nacfe.org/research/technology/chassis/lightweighting/",
     "media": {
       "kind": "pdf",
@@ -1576,6 +1588,10 @@
     "title": "Trucking Efficiency Confidence Report: Programmable Engine Parameters",
     "type": "confidence_report",
     "published": "2015-02",
+    "authors": [
+      "Mike Roeth",
+      "Dave Schaller"
+    ],
     "url": "https://nacfe.org/research/technology/powertrain/electronic-engine-parameters/",
     "media": {
       "kind": "pdf",
@@ -1785,6 +1801,10 @@
     "title": "Confidence Report: Two-Truck Platooning",
     "type": "confidence_report",
     "published": "2016-09",
+    "authors": [
+      "Mike Roeth",
+      "Rick Mihelic"
+    ],
     "url": "https://nacfe.org/research/technology/operational-practices/two-truck-platooning/",
     "media": {
       "kind": "pdf",
@@ -8138,6 +8158,9 @@
     "title": "A Need to Redefine Class 8 Long-Haul Trucking",
     "type": "thought_leadership",
     "published": "2025",
+    "authors": [
+      "Mike Roeth"
+    ],
     "url": "https://nacfe.org/research/thought-leadership/redefining-long-haul-trucking/",
     "media": {
       "kind": "pdf",
@@ -8633,6 +8656,9 @@
     "title": "XStream Trucking On-Highway Fuel Economy Test",
     "type": "article",
     "published": "2016-06",
+    "authors": [
+      "Mike Roeth"
+    ],
     "url": "https://nacfe.org/research/collaboration-reports/tractor-trailer-gap-closure-with-trucklabs/",
     "media": {
       "kind": "pdf",
