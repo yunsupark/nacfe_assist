@@ -6,6 +6,7 @@
     "published": "2023-02",
     "authors": [
       "Mike Roeth",
+      "Jeff Seger (lead author)",
       "Rick Mihelic"
     ],
     "url": "https://nacfe.org/research/thought-leadership/the-messy-middle/",
@@ -62,7 +63,9 @@
     "published": "2024-05",
     "authors": [
       "Mike Roeth",
-      "Yunsu Park"
+      "Rylie Buch (lead author)",
+      "Yunsu Park",
+      "James Brown"
     ],
     "url": "https://nacfe.org/research/run-on-less/run-on-less-electric-depot/",
     "media": {
@@ -129,7 +132,9 @@
     "published": "2026-01",
     "authors": [
       "Mike Roeth",
-      "Yunsu Park"
+      "Denise Rondini (lead author)",
+      "Yunsu Park",
+      "James Brown"
     ],
     "url": "https://nacfe.org/research/run-on-less/messy-middle/",
     "media": {
@@ -200,8 +205,9 @@
     "published": "2026-03",
     "authors": [
       "Mike Roeth",
-      "Rick Mihelic",
-      "Yunsu Park"
+      "Dean Bushey (lead author)",
+      "Yunsu Park",
+      "Rick Mihelic"
     ],
     "url": "https://nacfe.org/research/run-on-less/messy-middle/operations-report/",
     "media": {
@@ -273,8 +279,15 @@
     "published": "2026-04",
     "authors": [
       "Mike Roeth",
+      "Emilia Sibley (lead author)",
+      "Rob Graff",
+      "Jeff Seger",
+      "Yunsu Park",
       "Rick Mihelic",
-      "Yunsu Park"
+      "Nick Pesta",
+      "Nocona Sanders",
+      "Gerard Westhoff",
+      "James Brown"
     ],
     "url": "https://nacfe.org/research/run-on-less/messy-middle/tco-report/",
     "media": {
@@ -332,8 +345,10 @@
     "type": "thought_leadership",
     "published": "2022-04",
     "authors": [
-      "Mike Roeth",
-      "Rick Mihelic"
+      "Jessie Lund",
+      "Dave Mullaney",
+      "Emily Porter",
+      "John Schroeder"
     ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/charting-the-course-for-early-truck-electrification/",
     "media": {
@@ -389,7 +404,11 @@
       "Mike Roeth",
       "Dave Schaller (lead author)",
       "Rick Mihelic",
-      "Yunsu Park"
+      "Kevin Otto",
+      "Yunsu Park",
+      "Jennifer Wheeler",
+      "John Richardson",
+      "James Brown"
     ],
     "url": "https://nacfe.org/research/run-on-less/run-on-less-electric/md-box-trucks/",
     "media": {
@@ -443,9 +462,14 @@
     "published": "2022-05",
     "authors": [
       "Mike Roeth",
-      "Dave Schaller",
       "Rick Mihelic (lead author)",
-      "Yunsu Park"
+      "Kevin Otto",
+      "Dave Schaller",
+      "Yunsu Park",
+      "Jennifer Wheeler",
+      "John Richardson",
+      "Rob Graff",
+      "James Brown"
     ],
     "url": "https://nacfe.org/research/run-on-less/run-on-less-electric/hd-regional-haul-tractors/",
     "media": {
@@ -498,9 +522,14 @@
     "published": "2022-03",
     "authors": [
       "Mike Roeth",
-      "Dave Schaller",
+      "Kevin Otto (lead author)",
       "Rick Mihelic",
-      "Yunsu Park"
+      "Dave Schaller",
+      "Jessie Lund",
+      "Yunsu Park",
+      "Jennifer Wheeler",
+      "John Richardson",
+      "James Brown"
     ],
     "url": "https://nacfe.org/research/run-on-less/run-on-less-electric/terminal-tractors/",
     "media": {
@@ -549,9 +578,13 @@
     "published": "2022-04",
     "authors": [
       "Mike Roeth",
-      "Dave Schaller",
+      "Jennifer Wheeler (lead author)",
       "Rick Mihelic",
-      "Yunsu Park"
+      "Kevin Otto",
+      "Dave Schaller",
+      "Yunsu Park",
+      "John Richardson",
+      "James Brown"
     ],
     "url": "https://nacfe.org/research/run-on-less/run-on-less-electric/vans-step-vans/",
     "media": {
@@ -634,8 +667,9 @@
     "type": "guidance_report",
     "published": "2019-03",
     "authors": [
-      "Mike Roeth",
-      "Rick Mihelic"
+      "Jessie Lund",
+      "Rick Mihelic",
+      "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/charging-infrastructure/",
     "media": {
@@ -683,8 +717,8 @@
     "type": "guidance_report",
     "published": "2018-05",
     "authors": [
-      "Mike Roeth",
-      "Rick Mihelic"
+      "Rick Mihelic",
+      "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/electric-trucks-where-they-make-sense/",
     "media": {
@@ -736,7 +770,13 @@
     "type": "guidance_report",
     "published": "2023-06",
     "authors": [
-      "Dave Schaller"
+      "Mike Roeth",
+      "Rob Graff (lead author)",
+      "Ari Kahn",
+      "Rick Mihelic",
+      "John Richardson",
+      "Dave Schaller",
+      "Jessie Lund (lead author)"
     ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/charging-infrastructure/",
     "media": {
@@ -785,8 +825,11 @@
     "type": "guidance_report",
     "published": "2020-12",
     "authors": [
-      "Mike Roeth",
-      "Rick Mihelic"
+      "Rick Mihelic",
+      "Kevin Otto",
+      "Jessie Lund",
+      "Jennifer Wheeler",
+      "Mike Roeth"
     ],
     "url": null,
     "media": {
@@ -831,9 +874,12 @@
     "published": "2023-04",
     "authors": [
       "Mike Roeth",
-      "Dave Schaller",
       "Rick Mihelic (lead author)",
-      "Yunsu Park"
+      "Kevin Otto",
+      "Jeff Seger",
+      "Dave Schaller",
+      "Yunsu Park",
+      "Rob Graff"
     ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/hydrogen/",
     "media": {
@@ -881,8 +927,9 @@
     "type": "guidance_report",
     "published": "2023-12",
     "authors": [
+      "Rick Mihelic (lead author)",
       "Mike Roeth",
-      "Rick Mihelic (lead author)"
+      "Nocona Sanders"
     ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/intermodal-drayage/",
     "media": {
@@ -935,8 +982,10 @@
     "type": "guidance_report",
     "published": "2018-10",
     "authors": [
+      "Rick Mihelic",
       "Mike Roeth",
-      "Rick Mihelic"
+      "Brian Ballschmidt",
+      "Jessie Lund"
     ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/medium-duty-electric-trucks/",
     "media": {
@@ -984,8 +1033,10 @@
     "type": "guidance_report",
     "published": "2019-12",
     "authors": [
-      "Mike Roeth",
-      "Rick Mihelic"
+      "Rick Mihelic",
+      "Kevin Otto",
+      "Jessie Lund",
+      "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/viable-heavy-duty-electric-tractors/",
     "media": {
@@ -1034,9 +1085,11 @@
     "type": "run_on_less",
     "published": "2018-02",
     "authors": [
+      "Yunsu Park",
       "Mike Roeth",
+      "Denise Rondini",
       "Dave Schaller",
-      "Yunsu Park"
+      "Bianca Wachtel"
     ],
     "url": "https://nacfe.org/research/run-on-less/run-on-less-2017/",
     "media": {
@@ -1089,10 +1142,14 @@
     "type": "run_on_less",
     "published": "2022-01",
     "authors": [
-      "Mike Roeth",
-      "Dave Schaller",
       "Rick Mihelic",
-      "Yunsu Park"
+      "Dave Schaller",
+      "Jessie Lund",
+      "Yunsu Park",
+      "Jennifer Wheeler",
+      "Kevin Otto",
+      "James Brown",
+      "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/run-on-less/run-on-less-electric/",
     "media": {
@@ -1157,8 +1214,8 @@
     "type": "run_on_less",
     "published": "2024-07",
     "authors": [
-      "Mike Roeth",
-      "Rick Mihelic (lead author)"
+      "Rick Mihelic (lead author)",
+      "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/scaling-bevs/",
     "media": {
@@ -1221,10 +1278,12 @@
     "type": "run_on_less",
     "published": "2020-06",
     "authors": [
-      "Mike Roeth",
-      "Dave Schaller",
       "Rick Mihelic",
-      "Yunsu Park"
+      "Dave Schaller",
+      "Yunsu Park",
+      "Kevin Otto",
+      "Mike Roeth",
+      "Denise Rondini"
     ],
     "url": "https://nacfe.org/research/run-on-less/run-on-less-regional/",
     "media": {
@@ -1327,9 +1386,11 @@
     "type": "confidence_report",
     "published": "2020-09",
     "authors": [
+      "Rick Mihelic",
       "Mike Roeth",
       "Dave Schaller",
-      "Rick Mihelic"
+      "Frank A. Bio",
+      "Denise Rondini"
     ],
     "url": "https://nacfe.org/research/technology/tractor-aerodynamics/",
     "media": {
@@ -1372,6 +1433,8 @@
     "type": "confidence_report",
     "published": "2019-07",
     "authors": [
+      "Kevin Otto",
+      "Denise Rondini",
       "Mike Roeth"
     ],
     "url": null,
@@ -1415,7 +1478,11 @@
     "type": "confidence_report",
     "published": "2021-02",
     "authors": [
-      "Mike Roeth"
+      "Andrew Halonen",
+      "Rob Swim",
+      "Mike Roeth",
+      "Frank A. Bio",
+      "Denise Rondini"
     ],
     "url": "https://nacfe.org/research/technology/chassis/lightweighting/",
     "media": {
@@ -1458,8 +1525,12 @@
     "type": "confidence_report",
     "published": "2020-10",
     "authors": [
+      "Yunsu Park",
+      "Jim Rogers",
+      "Jim Park",
       "Mike Roeth",
-      "Yunsu Park"
+      "Frank A. Bio",
+      "Denise Rondini"
     ],
     "url": "https://nacfe.org/research/technology/tires-rolling-resistance/low-rolling-resistance/",
     "media": {
@@ -1502,7 +1573,12 @@
     "type": "confidence_report",
     "published": "2020-05",
     "authors": [
+      "Janelle Liechty",
+      "Sue Nelson",
       "Mike Roeth",
+      "Suzanne Slick",
+      "Frank A. Bio",
+      "Denise Rondini",
       "Dave Schaller"
     ],
     "url": "https://nacfe.org/research/technology/tires-rolling-resistance/tire-pressure-monitoring/",
@@ -1546,6 +1622,8 @@
     "type": "confidence_report",
     "published": "2015-10",
     "authors": [
+      "John Baxter",
+      "Denise Rondini",
       "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/technology/powertrain/downspeeding/",
@@ -1589,8 +1667,9 @@
     "type": "confidence_report",
     "published": "2015-02",
     "authors": [
-      "Mike Roeth",
-      "Dave Schaller"
+      "Dave Schaller",
+      "Robert Weimer",
+      "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/technology/powertrain/electronic-engine-parameters/",
     "media": {
@@ -1633,6 +1712,9 @@
     "type": "confidence_report",
     "published": "2014-12",
     "authors": [
+      "Paul Menig",
+      "Rob Swim",
+      "Robert Weimer",
       "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/technology/powertrain/automated-manual-transmissions/",
@@ -1675,8 +1757,10 @@
     "type": "confidence_report",
     "published": "2016-06",
     "authors": [
-      "Mike Roeth",
-      "Yunsu Park"
+      "Yunsu Park",
+      "Robert Weimer",
+      "John Baxter",
+      "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/technology/powertrain/low-viscosity-lubricant/",
     "media": {
@@ -1718,6 +1802,8 @@
     "type": "confidence_report",
     "published": "2015-12",
     "authors": [
+      "Jim Rogers",
+      "Denise Rondini",
       "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/technology/operational-practices/preventive-maintenance/",
@@ -1760,6 +1846,8 @@
     "type": "confidence_report",
     "published": "2018-06",
     "authors": [
+      "Kevin Otto",
+      "Jessie Lund",
       "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/technology/idle-reduction/solar-panels-tractors/",
@@ -1802,8 +1890,9 @@
     "type": "confidence_report",
     "published": "2016-09",
     "authors": [
-      "Mike Roeth",
-      "Rick Mihelic"
+      "Jack Roberts",
+      "Rick Mihelic",
+      "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/technology/operational-practices/two-truck-platooning/",
     "media": {
@@ -1845,8 +1934,10 @@
     "type": "confidence_report",
     "published": "2017-02",
     "authors": [
-      "Mike Roeth",
-      "Dave Schaller"
+      "Kevin Otto",
+      "Steven Hampson",
+      "Dave Schaller",
+      "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/technology/powertrain/electrically-driven-accessories/",
     "media": {
@@ -1888,10 +1979,10 @@
     "type": "fleet_fuel_study",
     "published": "2024-12",
     "authors": [
+      "Yunsu Park (lead author)",
       "Mike Roeth",
-      "Dave Schaller",
       "Rick Mihelic",
-      "Yunsu Park (lead author)"
+      "Dave Schaller"
     ],
     "url": "https://nacfe.org/research/affs/",
     "media": {
@@ -2197,6 +2288,7 @@
     "type": "bootcamp",
     "published": "2025-05",
     "speakers": [
+      "Emilia Sibley",
       "Mike Roeth"
     ],
     "url": "https://runonless.com/bootcamp/charging-depots-networks-the-economics-of-fleet-electrification/",
@@ -2247,7 +2339,9 @@
     "type": "bootcamp",
     "published": "2025-04",
     "speakers": [
-      "Mike Roeth"
+      "Mike Roeth",
+      "Rachel Ellenberger",
+      "Dave Mullaney"
     ],
     "url": "https://runonless.com/bootcamp/strategizing-successful-hd-bev-adoption/",
     "media": {
@@ -2298,7 +2392,8 @@
     "type": "bootcamp",
     "published": "2025-04",
     "speakers": [
-      "Mike Roeth"
+      "Mike Roeth",
+      "Rachel Ellenberger"
     ],
     "url": "https://runonless.com/bootcamp/the-current-state-of-hd-bev-technologies-and-capabilities/",
     "media": {
@@ -2346,7 +2441,8 @@
     "type": "bootcamp",
     "published": "2025-03",
     "speakers": [
-      "Mike Roeth"
+      "Mike Roeth",
+      "Rachel Ellenberger"
     ],
     "url": "https://runonless.com/bootcamp/future-prices-availability-of-existing-infrastructure-whats-next/",
     "media": {
@@ -2402,7 +2498,8 @@
     "type": "bootcamp",
     "published": "2025-02",
     "speakers": [
-      "Mike Roeth"
+      "Mike Roeth",
+      "Rachel Ellenberger"
     ],
     "url": "https://runonless.com/bootcamp/decarbonizing-with-natural-gas/",
     "media": {
@@ -2456,7 +2553,9 @@
     "type": "bootcamp",
     "published": "2025-02",
     "speakers": [
-      "Mike Roeth"
+      "Jeff Seger",
+      "Mike Roeth",
+      "Rachel Ellenberger"
     ],
     "url": "https://runonless.com/bootcamp/diesel-drop-in-alternatives-ultra-low-sulfur-bio-and-renewable/",
     "media": {
@@ -2503,6 +2602,10 @@
     "title": "Stories from the Run: The Future",
     "type": "video",
     "published": "2025-09",
+    "speakers": [
+      "Nocona Sanders",
+      "Ben Sharpe"
+    ],
     "url": "https://runonless.com/videos/the-future/",
     "media": {
       "kind": "video",
@@ -2539,6 +2642,9 @@
     "title": "Stories from the Run: Sustainability",
     "type": "video",
     "published": "2025-09",
+    "speakers": [
+      "Ben Sharpe"
+    ],
     "url": "https://runonless.com/videos/sustainability/",
     "media": {
       "kind": "video",
@@ -2575,6 +2681,10 @@
     "title": "Stories from the Run: TCO",
     "type": "video",
     "published": "2025-09",
+    "speakers": [
+      "Gerard Westhoff",
+      "Ben Sharpe"
+    ],
     "url": "https://runonless.com/videos/total-cost-of-ownership-3/",
     "media": {
       "kind": "video",
@@ -2646,6 +2756,9 @@
     "title": "Stories from the Run: The Importance of Data",
     "type": "video",
     "published": "2025-09",
+    "speakers": [
+      "Gerard Westhoff"
+    ],
     "url": "https://runonless.com/videos/the-importance-of-data/",
     "media": {
       "kind": "video",
@@ -2680,6 +2793,9 @@
     "title": "Penske: Run on Less – Messy Middle Fleet Profile",
     "type": "video",
     "published": "2025-09",
+    "speakers": [
+      "Kevin Otto"
+    ],
     "url": "https://runonless.com/participants-2025/penske/",
     "media": {
       "kind": "video",
@@ -2716,6 +2832,9 @@
     "title": "Kleysen Group: Run on Less – Messy Middle Fleet Profile",
     "type": "video",
     "published": "2025-09",
+    "speakers": [
+      "Ken North"
+    ],
     "url": "https://runonless.com/participants-2025/kleysen/",
     "media": {
       "kind": "video",
@@ -2984,6 +3103,10 @@
     "title": "Nevoya: Run on Less – Messy Middle Fleet Profile",
     "type": "video",
     "published": "2025-08",
+    "speakers": [
+      "Gerard Westhoff",
+      "Nocona Sanders"
+    ],
     "url": "https://runonless.com/participants-2025/nevoya/",
     "media": {
       "kind": "video",
@@ -3064,7 +3187,9 @@
     "type": "video",
     "published": "2025-08",
     "speakers": [
-      "Rick Mihelic"
+      "Nocona Sanders",
+      "Rick Mihelic",
+      "Ben Sharpe"
     ],
     "url": "https://runonless.com/participants-2025/saia/",
     "media": {
@@ -3104,6 +3229,9 @@
     "title": "Pilot: Run on Less – Messy Middle Fleet Profile",
     "type": "video",
     "published": "2025-08",
+    "speakers": [
+      "Dean Bushey"
+    ],
     "url": "https://runonless.com/participants-2025/pilot/",
     "media": {
       "kind": "video",
@@ -3140,6 +3268,9 @@
     "title": "Wegmans: Run on Less – Messy Middle Fleet Profile",
     "type": "video",
     "published": "2025-08",
+    "speakers": [
+      "Jeff Seger"
+    ],
     "url": "https://runonless.com/participants-2025/wegmans/",
     "media": {
       "kind": "video",
@@ -3182,6 +3313,9 @@
     "title": "Regional Stories – Hydrogen Technology Day",
     "type": "video",
     "published": "2019-10",
+    "speakers": [
+      "Jessie Lund"
+    ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
       "kind": "video",
@@ -3297,8 +3431,8 @@
     "type": "video",
     "published": "2017-09",
     "speakers": [
-      "Mike Roeth",
-      "Dave Schaller"
+      "Dave Schaller",
+      "Mike Roeth"
     ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
@@ -3467,8 +3601,8 @@
     "type": "video",
     "published": "2017-09",
     "speakers": [
-      "Mike Roeth",
-      "Dave Schaller"
+      "Dave Schaller",
+      "Mike Roeth"
     ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
@@ -3709,8 +3843,8 @@
     "type": "video",
     "published": "2017-09",
     "speakers": [
-      "Mike Roeth",
-      "Dave Schaller"
+      "Dave Schaller",
+      "Mike Roeth"
     ],
     "url": "https://runonless.com/stories-2017/",
     "media": {
@@ -3904,6 +4038,7 @@
     "type": "video",
     "published": "2025-05",
     "speakers": [
+      "Ken North",
       "Mike Roeth"
     ],
     "url": "https://runonless.com/videos/messy-middle-breakfast-at-act-expo/",
@@ -4364,8 +4499,9 @@
     "type": "video",
     "published": "2017-09",
     "speakers": [
-      "Mike Roeth",
+      "Bianca Wachtel",
       "Dave Schaller",
+      "Mike Roeth",
       "Yunsu Park"
     ],
     "url": "https://runonless.com/stories-2017/",
@@ -4406,8 +4542,8 @@
     "type": "video",
     "published": "2019-10",
     "speakers": [
-      "Mike Roeth",
       "Dave Schaller",
+      "Mike Roeth",
       "Rick Mihelic"
     ],
     "url": "https://runonless.com/regional-stories/",
@@ -4445,8 +4581,8 @@
     "type": "video",
     "published": "2019-10",
     "speakers": [
-      "Mike Roeth",
-      "Dave Schaller"
+      "Dave Schaller",
+      "Mike Roeth"
     ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
@@ -4524,8 +4660,8 @@
     "type": "video",
     "published": "2019-10",
     "speakers": [
-      "Mike Roeth",
-      "Dave Schaller"
+      "Dave Schaller",
+      "Mike Roeth"
     ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
@@ -4758,8 +4894,8 @@
     "type": "video",
     "published": "2019-10",
     "speakers": [
-      "Mike Roeth",
-      "Dave Schaller"
+      "Dave Schaller",
+      "Mike Roeth"
     ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
@@ -4840,8 +4976,8 @@
     "type": "video",
     "published": "2019-10",
     "speakers": [
-      "Mike Roeth",
-      "Dave Schaller"
+      "Dave Schaller",
+      "Mike Roeth"
     ],
     "url": "https://runonless.com/regional-stories/",
     "media": {
@@ -4883,6 +5019,7 @@
     "type": "video",
     "published": "2019-10",
     "speakers": [
+      "Jessie Lund",
       "Mike Roeth",
       "Rick Mihelic",
       "Yunsu Park"
@@ -5413,6 +5550,9 @@
     "title": "Electric Stories – Maintenance & Uptime",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Kevin Otto"
+    ],
     "url": "https://runonless.com/videos/maintenance-uptime/",
     "media": {
       "kind": "video",
@@ -5485,6 +5625,9 @@
     "title": "Electric Stories – Charging Infrastructure",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Jessie Lund"
+    ],
     "url": "https://runonless.com/videos/charging-infrastructure/",
     "media": {
       "kind": "video",
@@ -5521,6 +5664,9 @@
     "title": "Electric Stories – Early Adopters",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Jessie Lund"
+    ],
     "url": "https://runonless.com/videos/early-adopters/",
     "media": {
       "kind": "video",
@@ -5560,6 +5706,9 @@
     "title": "Electric Stories – Total Cost of Ownership",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Jennifer Wheeler"
+    ],
     "url": "https://runonless.com/videos/total-cost-of-ownership/",
     "media": {
       "kind": "video",
@@ -5604,6 +5753,7 @@
     "type": "video",
     "published": "2021-09",
     "speakers": [
+      "Jessie Lund",
       "Rick Mihelic"
     ],
     "url": "https://runonless.com/videos/grid-capacity-readiness/",
@@ -5646,6 +5796,9 @@
     "title": "Electric Stories – Temperature",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Kevin Otto"
+    ],
     "url": "https://runonless.com/videos/temperature/",
     "media": {
       "kind": "video",
@@ -5683,6 +5836,9 @@
     "title": "Electric Stories – Warehouse Planning",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Jennifer Wheeler"
+    ],
     "url": "https://runonless.com/videos/warehouse-planning/",
     "media": {
       "kind": "video",
@@ -5717,6 +5873,9 @@
     "title": "Electric Stories – Charging Business Models",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Jessie Lund"
+    ],
     "url": "https://runonless.com/videos/charging-business-models/",
     "media": {
       "kind": "video",
@@ -5752,6 +5911,7 @@
     "type": "video",
     "published": "2021-09",
     "speakers": [
+      "Andrew Halonen",
       "Rick Mihelic"
     ],
     "url": "https://runonless.com/videos/battery-technology/",
@@ -5826,6 +5986,9 @@
     "title": "Electric Stories – Environmental Justice",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Jennifer Wheeler"
+    ],
     "url": "https://runonless.com/videos/environmental-justice/",
     "media": {
       "kind": "video",
@@ -5866,7 +6029,8 @@
     "type": "video",
     "published": "2021-09",
     "speakers": [
-      "Yunsu Park"
+      "Yunsu Park",
+      "Ben Sharpe"
     ],
     "url": "https://runonless.com/videos/diving-into-data/",
     "media": {
@@ -5909,7 +6073,8 @@
     "type": "video",
     "published": "2021-09",
     "speakers": [
-      "Dave Schaller"
+      "Dave Schaller",
+      "Jennifer Wheeler"
     ],
     "url": "https://runonless.com/videos/the-use-case-for-vans-step-vans/",
     "media": {
@@ -5997,7 +6162,8 @@
     "type": "video",
     "published": "2021-09",
     "speakers": [
-      "Dave Schaller"
+      "Dave Schaller",
+      "Kevin Otto"
     ],
     "url": "https://runonless.com/videos/the-use-case-for-terminal-tractors/",
     "media": {
@@ -6039,8 +6205,8 @@
     "type": "video",
     "published": "2021-09",
     "speakers": [
-      "Mike Roeth",
-      "Dave Schaller"
+      "Dave Schaller",
+      "Mike Roeth"
     ],
     "url": "https://runonless.com/videos/the-use-case-for-md-box-trucks/",
     "media": {
@@ -6128,6 +6294,9 @@
     "title": "Electric Profiles – NFI Freight",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Jessie Lund"
+    ],
     "url": "https://runonless.com/videos/nfi-industries-and-volvo-trucks/",
     "media": {
       "kind": "video",
@@ -6603,6 +6772,9 @@
     "title": "Electric Profiles – Anheuser-Busch",
     "type": "video",
     "published": "2021-09",
+    "speakers": [
+      "Jessie Lund"
+    ],
     "url": "https://runonless.com/videos/anheuser-busch-and-byd/",
     "media": {
       "kind": "video",
@@ -6727,6 +6899,7 @@
     "type": "video",
     "published": "2019-10",
     "speakers": [
+      "Jessie Lund",
       "Mike Roeth",
       "Rick Mihelic",
       "Yunsu Park"
@@ -7033,7 +7206,9 @@
     "type": "video",
     "published": "2023-09",
     "speakers": [
-      "Mike Roeth"
+      "Mike Roeth",
+      "Ben Sharpe",
+      "Emily Porter"
     ],
     "url": "https://runonless.com/roled-profiles/pepsico/",
     "media": {
@@ -7181,6 +7356,9 @@
     "title": "Electric DEPOT Profiles – Schneider",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "John Richardson"
+    ],
     "url": "https://runonless.com/roled-profiles/schneider/",
     "media": {
       "kind": "video",
@@ -7274,6 +7452,9 @@
     "title": "Electric DEPOT Profiles – WattEV",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "John Richardson"
+    ],
     "url": "https://runonless.com/roled-profiles/wattev/",
     "media": {
       "kind": "video",
@@ -7317,6 +7498,9 @@
     "title": "Electric DEPOT Profiles – OK Produce",
     "type": "video",
     "published": "2023-09",
+    "speakers": [
+      "Emily Porter"
+    ],
     "url": "https://runonless.com/roled-profiles/ok-produce/",
     "media": {
       "kind": "video",
@@ -7722,8 +7906,8 @@
     "type": "video",
     "published": "2023-09",
     "speakers": [
-      "Mike Roeth",
-      "Dave Schaller"
+      "Dave Schaller",
+      "Mike Roeth"
     ],
     "url": "https://runonless.com/videos/managed-charging/",
     "media": {
@@ -7820,6 +8004,7 @@
     "published": "2026-06",
     "authors": [
       "Mike Roeth",
+      "Marcos Alvarez (lead author)",
       "Rick Mihelic"
     ],
     "url": "https://nacfe.org/research/technology/operational-practices/mm-service-maintenance/",
@@ -7877,9 +8062,9 @@
     "type": "thought_leadership",
     "published": "2019-07",
     "authors": [
+      "Rick Mihelic",
       "Mike Roeth",
-      "Dave Schaller",
-      "Rick Mihelic"
+      "Dave Schaller"
     ],
     "url": "https://nacfe.org/research/thought-leadership/intentional-pairing/",
     "media": {
@@ -7940,9 +8125,10 @@
     "type": "confidence_report",
     "published": "2016-01",
     "authors": [
+      "Rick Mihelic",
+      "Denise Rondini",
       "Mike Roeth",
-      "Dave Schaller",
-      "Rick Mihelic"
+      "Dave Schaller"
     ],
     "url": "https://nacfe.org/research/thought-leadership/determining-efficiency/",
     "media": {
@@ -8002,6 +8188,9 @@
     "title": "Transformational Technologies Reshaping Transportation – An Industry Perspective",
     "type": "thought_leadership",
     "published": "2020",
+    "authors": [
+      "Mike Roeth"
+    ],
     "url": "https://nacfe.org/research/thought-leadership/mike-roeths-buckendale-lecture/",
     "media": {
       "kind": "pdf",
@@ -8064,6 +8253,7 @@
     "type": "article",
     "published": "2014-02",
     "authors": [
+      "Ben Sharpe",
       "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/collaboration-reports/na-trailer-fuel-efficiency-technologies-with-icct/",
@@ -8245,7 +8435,12 @@
     "published": "2026-07",
     "authors": [
       "Mike Roeth",
-      "Rick Mihelic"
+      "Ken North (lead author)",
+      "Kevin Otto",
+      "Rachel Ellenberger",
+      "Nocona Sanders",
+      "Rick Mihelic",
+      "James Brown"
     ],
     "url": "https://nacfe.org/research/run-on-less/messy-middle/emissions-report/",
     "media": {
@@ -8315,6 +8510,9 @@
     "type": "confidence_report",
     "published": "2024-03",
     "authors": [
+      "Jeff Seger (lead author)",
+      "Kevin Otto",
+      "Steve Phillips",
       "Mike Roeth",
       "Rick Mihelic"
     ],
@@ -8377,8 +8575,8 @@
     "type": "thought_leadership",
     "published": "2024-03",
     "authors": [
-      "Mike Roeth",
-      "Rick Mihelic (lead author)"
+      "Rick Mihelic (lead author)",
+      "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/thought-leadership/supertruck-2-empowering-future-trucking/",
     "media": {
@@ -8428,9 +8626,10 @@
     "type": "thought_leadership",
     "published": "2019-12",
     "authors": [
-      "Mike Roeth",
+      "Rick Mihelic",
+      "Kevin Otto",
       "Dave Schaller",
-      "Rick Mihelic"
+      "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/thought-leadership/defining-production/",
     "media": {
@@ -8480,8 +8679,11 @@
     "type": "confidence_report",
     "published": "2017-07",
     "authors": [
-      "Mike Roeth",
-      "Yunsu Park"
+      "Yunsu Park",
+      "Sue Nelson",
+      "Steve Sturgess",
+      "Rob Swim",
+      "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/technology/chassis/6x2-axles/",
     "media": {
@@ -8699,6 +8901,8 @@
     "type": "confidence_report",
     "published": "2025-12",
     "authors": [
+      "Dean Bushey (lead author)",
+      "Kevin Otto",
       "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/technology/idle-reduction/",
@@ -8765,8 +8969,8 @@
     "type": "thought_leadership",
     "published": "2019-04",
     "authors": [
-      "Mike Roeth",
-      "Rick Mihelic"
+      "Rick Mihelic",
+      "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/thought-leadership/more-regional-haul/",
     "media": {
@@ -8873,6 +9077,8 @@
     "type": "guidance_report",
     "published": "2024-10",
     "authors": [
+      "Rob Graff (lead author)",
+      "Rachel Ellenberger",
       "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/decarbonizing-truck-and-trailer-refrigeration/",
@@ -8928,6 +9134,7 @@
     "type": "guidance_report",
     "published": "2020-11",
     "authors": [
+      "Jessie Lund",
       "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/emerging-technologies/electric-trucks/high-potential-regions-for-electric-truck-deployments/",
@@ -8979,6 +9186,7 @@
     "type": "article",
     "published": "2018-10",
     "authors": [
+      "Ben Sharpe",
       "Dave Schaller"
     ],
     "url": "https://nacfe.org/research/collaboration-reports/establishing-vehicle-specifications-with-icct/",
@@ -9031,8 +9239,13 @@
     "type": "thought_leadership",
     "published": "2025-03",
     "authors": [
+      "Rachel Ellenberger (lead author)",
+      "Yunsu Park",
+      "Kevin Otto",
       "Mike Roeth",
-      "Yunsu Park"
+      "Denise Rondini",
+      "Matt Scott",
+      "Alex Twersky"
     ],
     "url": "https://nacfe.org/research/collaboration-reports/caas-report/",
     "media": {
@@ -9082,8 +9295,7 @@
     "type": "thought_leadership",
     "published": "2025",
     "authors": [
-      "Mike Roeth",
-      "Rick Mihelic"
+      "Mike Roeth"
     ],
     "url": "https://nacfe.org/research/thought-leadership/navigating-the-messy-middle/",
     "media": {
@@ -10017,6 +10229,7 @@
     "type": "podcast",
     "published": "2022-04",
     "speakers": [
+      "Jennifer Wheeler",
       "Mike Roeth"
     ],
     "url": "https://www.youtube.com/watch?v=JGvSeK77HOc",
@@ -11848,6 +12061,7 @@
     "type": "podcast",
     "published": "2020-11",
     "speakers": [
+      "Jack Roberts",
       "Mike Roeth"
     ],
     "url": "https://www.youtube.com/watch?v=xt51fKWEMMI",
@@ -13045,7 +13259,8 @@
     "type": "podcast",
     "published": "2024-10",
     "speakers": [
-      "Mike Roeth"
+      "Mike Roeth",
+      "Dave Mullaney"
     ],
     "url": "https://www.youtube.com/watch?v=j9DU8tg18-w",
     "media": {
@@ -13323,7 +13538,8 @@
     "type": "podcast",
     "published": "2024-06",
     "speakers": [
-      "Mike Roeth"
+      "Mike Roeth",
+      "Rob Swim"
     ],
     "url": "https://www.youtube.com/watch?v=i9EKV0pMfaA",
     "media": {
@@ -13457,6 +13673,7 @@
     "type": "podcast",
     "published": "2021-01",
     "speakers": [
+      "Denise Rondini",
       "Mike Roeth"
     ],
     "url": "https://www.youtube.com/watch?v=rPrGDgdmIc0",
@@ -13816,6 +14033,7 @@
     "type": "podcast",
     "published": "2025-04",
     "speakers": [
+      "Andrew Halonen",
       "Mike Roeth"
     ],
     "url": "https://www.youtube.com/watch?v=0h3gbaKKFKY",
@@ -14433,6 +14651,7 @@
     "type": "podcast",
     "published": "2020-09",
     "speakers": [
+      "Jessie Lund",
       "Mike Roeth"
     ],
     "url": "https://www.youtube.com/watch?v=ZlgOBvzQxdc",
@@ -15009,7 +15228,8 @@
     "type": "podcast",
     "published": "2024-01",
     "speakers": [
-      "Mike Roeth"
+      "Mike Roeth",
+      "Rachel Ellenberger"
     ],
     "url": "https://www.youtube.com/watch?v=hHnoWv8cECc",
     "media": {
@@ -15358,6 +15578,7 @@
     "type": "video",
     "published": "2026-07",
     "speakers": [
+      "Jeff Seger",
       "Mike Roeth"
     ],
     "url": "https://www.youtube.com/watch?v=4vkmsEyAxKI",
@@ -15414,6 +15635,9 @@
     "title": "Reducing Costs & Emissions with Shore Power and the Shift to Hybrid Electric TRUs",
     "type": "video",
     "published": "2025-10",
+    "speakers": [
+      "Rob Graff"
+    ],
     "url": "https://www.youtube.com/watch?v=Tg7GouK7KXU",
     "media": {
       "kind": "video",
@@ -15529,6 +15753,9 @@
     "title": "Eaton – Current Thinking – Simplifying the Commercial EV Ecosystem Through Collaboration",
     "type": "video",
     "published": "2026",
+    "speakers": [
+      "Rob Graff"
+    ],
     "url": "https://www.youtube.com/watch?v=SG6x0XmBxJY",
     "media": {
       "kind": "video",
@@ -15706,8 +15933,9 @@
     "type": "video",
     "published": "2020-03",
     "speakers": [
-      "Mike Roeth",
       "Dave Schaller",
+      "Kevin Otto",
+      "Mike Roeth",
       "Rick Mihelic",
       "Yunsu Park"
     ],

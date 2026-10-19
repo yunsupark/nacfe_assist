@@ -1,23 +1,28 @@
-"""Add `authors` and `speakers` to corpus/catalog.json for a chosen set of NACFE people.
+"""Add `authors` and `speakers` to corpus/catalog.json from the study-team roster.
 
 The router only reads the catalog, and the catalog had no people information, so a question
-about a staffer could not find the reports they wrote or the videos they appeared in. This
-script fills two optional fields, restricted to the people named on the command line:
+about a person could not find the reports they wrote or the recordings they spoke in. This script
+fills two optional fields:
 
-  authors   -- from a report PDF's "STUDY TEAM" block (the lead author is marked "(lead author)").
-               The ingested .md files don't carry that block (transcribe_page.txt rule 6 collapses
-               author pages to one line), so it is read from the original PDFs, matched to catalog
-               entries by comparing body text -- never by filename guesses.
-  speakers  -- from the "**Name:**" speaker labels in video / podcast / bootcamp transcripts.
+  authors   -- people listed on a report's study-team page (lead author marked "(lead author)").
+               The ingested .md files don't carry that page (transcribe_page.txt rule 6 collapses
+               author pages to one line), so the names come from ingest/people_study_team.json,
+               built from the original PDFs by build_study_team_roster.py. Editors, reviewers and
+               advisory-committee members are not included. Hand-curated additions and PDF pairings
+               live in ingest/people_overrides.json.
+  speakers  -- anyone from that roster who has a "**Name:**" speaker label in a video / bootcamp /
+               podcast transcript.
 
-Reports whose PDF has no recognisable study-team block, or whose PDF can't be matched confidently,
-are listed and left without `authors` rather than guessed.
+Reports with no roster entry (no credits page found, or the PDF could not be matched) are left
+without `authors` rather than guessed. This script does not call a model or read PDFs.
 
 Usage:
-    python ingest/extract_people.py --reports-dir /path/to/reports \
-        --people "Mike Roeth,Dave Schaller|David Schaller,Rick Mihelic,Yunsu Park" [--write]
+    python ingest/extract_people.py [--people "Mike Roeth,Dave Schaller"] [--write]
 
-Without --write it only prints what it would change.
+--people limits the run to a subset of the roster (canonical names). Without --write it only
+prints what it would change.
+
+This module also holds the PDF helpers (pdf_text, match_pdfs) that build_study_team_roster.py uses.
 """
 import argparse
 import json
@@ -29,20 +34,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 CATALOG_PATH = REPO_ROOT / "corpus" / "catalog.json"
 SOURCES_DIR = REPO_ROOT / "corpus" / "sources"
 OVERRIDES_PATH = Path(__file__).resolve().parent / "people_overrides.json"
-
-# Where a credits block starts, and what ends it. Layouts vary: a "STUDY TEAM" heading on its own
-# line (recent reports) or inline ("Acknowledgements: Study Team: Name, Title Name, Title ...",
-# older ones), so the first pages are flattened to one line of text before searching.
-TEAM_ANCHOR_RE = re.compile(
-    r"(?i)(?:\bnacfe\s+)?\b(?:study|report|project)\s+team\s*:?|\bauthors?\b(?:\s*&\s*acknowledg\w+)?\s*:?"
-)
-TEAM_END_RE = re.compile(
-    r"(?i)\b(?:study\s+editors?|editors?:|peer\s+review\w*|contacts?\b|nacfe\s+technical\s+advisory|"
-    r"technical\s+advisory|table\s+of\s+(?:contents|figures)|electrada\s+(?:study|report)\s+team|"
-    r"acknowledg\w+|about\s+us|fiscal\s+support|sponsors?\b)"
-)
-BLOCK_MAX_CHARS = 1800
-PAGES_FOR_CREDITS = 10   # credits are always on the first few pages
+ROSTER_PATH = Path(__file__).resolve().parent / "people_study_team.json"
 PAGES_FOR_MATCHING = range(7, 30)  # body text used to identify which PDF is which entry
 
 SPEAKER_LABEL_RE = re.compile(r"\*\*([A-Z][A-Za-z.'\- ]{2,40}):\*\*")
@@ -101,68 +93,41 @@ def match_pdfs(reports_dir, entries):
     return {eid: Path(reports_dir) / name for eid, (name, _) in matches.items()}
 
 
-def credits_for(pdf_path, people):
-    """Returns (saw_a_credits_block, authors). `people` maps canonical name -> alias list.
-    The first credits block that names any of the people wins; a block that names none (another
-    organisation's team, say) is skipped."""
-    flat = re.sub(r"\s+", " ", pdf_text(pdf_path, range(0, PAGES_FOR_CREDITS)))
-    saw_block = False
-    for m in TEAM_ANCHOR_RE.finditer(flat):
-        rest = flat[m.end(): m.end() + BLOCK_MAX_CHARS]
-        end = TEAM_END_RE.search(rest)
-        block = rest[: end.start()] if end else rest
-        if len(block.strip()) < 25:
-            continue
-        saw_block = True
-        found = []
-        for canonical, aliases in people.items():
-            hit = next((a for a in aliases if a in block), None)
-            if hit:
-                lead = re.search(re.escape(hit) + r",?\s*(?:co-)?lead authors?", block, re.I)
-                found.append(f"{canonical} (lead author)" if lead else canonical)
-        if found:
-            return True, found
-    return saw_block, []
-
-
 def speakers_for(entry, people):
     f = SOURCES_DIR / f"{entry['id']}.md"
     labels = set(SPEAKER_LABEL_RE.findall(f.read_text(errors="ignore")))
-    return [canonical for canonical, aliases in people.items() if any(a in labels for a in aliases)]
+    return [canonical for canonical, spellings in people.items() if any(s in labels for s in spellings)]
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--reports-dir", required=True)
-    ap.add_argument("--people", required=True, help="comma-separated names as written in the documents; alternate spellings joined with |")
+    ap.add_argument("--people", help="comma-separated canonical names to limit the run to a subset of the roster")
     ap.add_argument("--write", action="store_true")
     args = ap.parse_args()
-    # "Dave Schaller|David Schaller" -> canonical name first, then other spellings seen in documents.
-    people = {}
-    for item in args.people.split(","):
-        names = [n.strip() for n in item.split("|") if n.strip()]
-        if names:
-            people[names[0]] = names
+
+    roster = json.loads(ROSTER_PATH.read_text())
+    people = roster["people"]  # canonical name -> spellings seen in documents
+    if args.people:
+        wanted = {p.strip() for p in args.people.split(",") if p.strip()}
+        unknown = wanted - set(people)
+        if unknown:
+            sys.exit(f"not in the roster: {sorted(unknown)}")
+        people = {c: s for c, s in people.items() if c in wanted}
 
     catalog = json.loads(CATALOG_PATH.read_text())
-    docs = [e for e in catalog if e["media"]["kind"] == "pdf"]
-    pdf_for = match_pdfs(args.reports_dir, docs)
-
-    # Hand-curated overrides win over the automatic match (see people_overrides.json).
-    overrides = json.loads(OVERRIDES_PATH.read_text()) if OVERRIDES_PATH.exists() else {}
     ids = {e["id"] for e in catalog}
-    for eid, name in overrides.get("pdf_for", {}).items():
-        path = Path(args.reports_dir) / name
-        if eid not in ids or not path.exists():
-            sys.exit(f"people_overrides.json: pdf_for entry {eid!r} -> {name!r}: unknown id or missing file")
-        pdf_for[eid] = path
+    overrides = json.loads(OVERRIDES_PATH.read_text()) if OVERRIDES_PATH.exists() else {}
     manual_authors = {}
     for eid, names in overrides.get("authors", {}).items():
         if eid not in ids:
             sys.exit(f"people_overrides.json: authors entry {eid!r} is not a catalog id")
-        kept = [n for n in names if n in people]
-        if kept:
-            manual_authors[eid] = kept
+        if args.people:  # a subset run only keeps the subset's names
+            names = [n for n in names if n in people]
+        else:  # a byline can name someone who is on no study-team page; they join the people list
+            for n in names:
+                people.setdefault(n, [n])
+        if names:
+            manual_authors[eid] = names
 
     report, changed = [], 0
     for e in catalog:
@@ -171,16 +136,17 @@ def main():
         if e["id"] in manual_authors:
             e["authors"] = manual_authors[e["id"]]
         elif e["media"]["kind"] == "pdf":
-            pdf = pdf_for.get(e["id"])
-            if pdf is None:
-                report.append(f"NO CONFIDENT PDF MATCH   {e['id']}")
-                continue
-            saw_block, authors = credits_for(pdf, people)
-            if not saw_block:
-                report.append(f"NO CREDITS BLOCK FOUND   {e['id']}  ({pdf.name})")
-                continue
-            if authors:
-                e["authors"] = authors
+            entry_people = roster["entries"].get(e["id"])
+            if entry_people is None:
+                report.append(f"NO ROSTER ENTRY (no credits page / PDF unmatched)   {e['id']}")
+            else:
+                authors = [
+                    f"{p['name']} (lead author)" if p.get("lead") else p["name"]
+                    for p in entry_people
+                    if p["name"] in people
+                ]
+                if authors:
+                    e["authors"] = authors
         else:
             speakers = speakers_for(e, people)
             if speakers:
@@ -203,8 +169,7 @@ def main():
                     new["speakers"] = e["speakers"]
         ordered.append(new)
 
-    print(f"people: {list(people)}")
-    print(f"PDFs confidently matched: {len(pdf_for)} of {len(docs)} document entries")
+    print(f"people in this run: {len(people)}")
     print(f"entries with authors or speakers set: {changed}")
     for line in report:
         print("  " + line)

@@ -1,5 +1,5 @@
 {
-  "_about": "Hand-curated inputs for ingest/extract_people.py, for the cases the automatic steps cannot settle. 'pdf_for' pairs a catalog entry with its original PDF when the body-text match is not confident (each pairing checked by cover title and page count). 'authors' sets authorship directly where a document carries a byline instead of a study-team page. Names outside the --people list of a run are ignored.",
+  "_about": "Hand-curated inputs for ingest/build_study_team_roster.py and ingest/extract_people.py, for cases the credits-page extraction cannot settle. 'pdf_for' pairs a catalog entry with its original PDF when the body-text match is not confident (each pairing checked by cover title and page count). 'authors' sets authorship directly where a document carries a byline ('By ...', 'Authors: ...') instead of a study-team page; names there need not be in the roster, and each was read from the document itself.",
   "pdf_for": {
     "guidance-report-electric-trucks-where-they-make-sense-2018": "NACFE_CBEV_FULL_050118_compressed.pdf",
     "confidence-report-tractor-aerodynamic-devices-2020": "FullAeroTractorConfidenceReport2020.pdf",
@@ -9,6 +9,11 @@
   },
   "authors": {
     "redefining-long-haul-2025": ["Mike Roeth"],
-    "xstream-fuel-test-2016": ["Mike Roeth"]
+    "xstream-fuel-test-2016": ["Mike Roeth"],
+    "navigating-messy-middle-2025": ["Mike Roeth"],
+    "buckendale-lecture-2020": ["Mike Roeth"],
+    "trailer-tech-costs-2014": ["Ben Sharpe", "Mike Roeth"],
+    "hd-truck-specifications-2018": ["Ben Sharpe", "Dave Schaller"],
+    "charting-course-early-truck-electrification-2022": ["Jessie Lund", "Dave Mullaney", "Emily Porter", "John Schroeder"]
   }
 }
