@@ -171,6 +171,20 @@ sees; everything else is filters and metadata.
 `type` values: `guidance_report`, `confidence_report`, `run_on_less`, `bootcamp`,
 `podcast`, `video`, `article`, `thought_leadership`, `fleet_fuel_study`.
 
+Optional people fields, omitted when empty: `authors` (everyone listed on a report's study /
+report / update team page, or named in its byline, with "(lead author)" marking the lead;
+editors, peer reviewers and advisory-committee members are excluded) and `speakers` (people
+from that roster who speak in a video, bootcamp or podcast). They exist so the router can find
+documents by person -- staff, former staff and outside contributors alike; the mechanism looks
+at names, never at employment status. The ingested report text does not carry the author page
+(the ingest collapses it), so the Worker also passes them to the answer stage as a "NACFE
+credits" header line. Generation is two steps: `ingest/build_study_team_roster.py` reads each
+report's credits page from the original PDFs with a model (every name must appear verbatim in
+the page) into the reviewable `ingest/people_study_team.json`; `ingest/extract_people.py` then
+applies that roster to the catalog without calling a model. Documents with a plain byline
+instead of a team page are set by hand in `ingest/people_overrides.json`. Reports whose PDF
+cannot be matched or has no credits are left without `authors`, never guessed.
+
 `supersedes` / `superseded_by` / `status` must be curated by a human, not inferred by the
 model. This is a half-day of work across 100 items and it is the highest-leverage half-day
 in the project.

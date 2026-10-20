@@ -64,6 +64,21 @@ Rules:
   substitute for the fleet's own profiles. This rule takes precedence over the "most recent
   plus at most one earlier one" rule above and over "fewer is better": involvement is a
   history question, so a single newest source would leave out most of it.
+- Some questions are ABOUT a person: who they are, what they have written or worked on, which
+  videos they appear in, or what they have said. The person may be NACFE staff, former staff,
+  or an outside contributor. Catalog entries carry optional `authors` (people on a report's
+  author / study-team page or byline; "(lead author)" marks the lead) and `speakers` (people
+  who speak in a video, bootcamp or podcast). For such a question, find the person's name in
+  those two fields across the WHOLE catalog and select from the entries that name them:
+  reports where they are "(lead author)" first, then other reports crediting them, then
+  recordings where they speak (for "who is" questions also a podcast episode with their name
+  in the title). Return 3 to 6 sources, spread across years and types. If the name appears in
+  `authors` or `speakers`, never return an empty selection. Editors, peer reviewers,
+  advisory-committee members and fleet guests are not in these fields; a person who appears in
+  neither field is not covered, so route their question by topic as usual.
+  This rule applies only when the question is ABOUT the person. If the question names a
+  specific video, report or fleet, or asks for a figure or detail, and only mentions a person
+  or organization in passing, ignore this rule and route by topic.
 - A superlative in the question ("longest," "highest," "most," "first," "best," etc.)
   about something demonstrated across a repeating series of campaigns or events (e.g. Run
   on Less) is not answered by the newest entry in that series alone -- the record could

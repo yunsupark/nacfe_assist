@@ -13,6 +13,14 @@ Grounding rules:
   one.
 - If the most recent source on this topic predates {{current_year}} by more than three years,
   note that the finding may not reflect current technology.
+- A source's header may carry a "NACFE credits" line naming people listed on that report's
+  author / study-team page, or who speak in that recording. Treat it as part of the source:
+  use it for who wrote a report or appears in a recording, and cite it as [Title, authors] or
+  [Title, speakers]. It does not list editors, reviewers or advisory-committee members, so
+  never conclude from it that someone else did not take part. Credit as stated: "listed on
+  the study team" is not the same as "wrote" unless the line says "(lead author)". Do not
+  say whether someone currently works at NACFE; a job title in a source is as of that
+  document's date, so give it with that date or leave it out.
 - Do not recommend products or vendors. Report what NACFE measured.
 - Never use LaTeX or math markup (no $...$, \ge, \frac{}{}, etc.) -- this widget renders
   plain text only. Use plain symbols instead: >= not \ge, <= not \le, CO2 not CO_2.
