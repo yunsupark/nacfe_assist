@@ -2,7 +2,7 @@
 // the full catalog, then a stronger model answering from the selected sources' full text.
 // See eval/run_eval.py for the local-script version this was ported from, and
 // eval/results/two_stage_scored.md for the eval this design is validated against.
-import { CATALOG, CONTENT_VERSION, ROUTE_PROMPT, ANSWER_PROMPT, WIDGET_JS, ADMIN_HTML } from "./corpus_data";
+import { CATALOG, CONTENT_VERSION, ROUTE_PROMPT, ANSWER_PROMPT, MESSAGE_PROMPT, WIDGET_JS, ADMIN_HTML } from "./corpus_data";
 import {
   generateContentWithFallback,
   stripJsonFence,
@@ -24,6 +24,8 @@ export interface Env {
    * requests a day and often overloaded, and a failed or stalled free attempt (up to 35s) was
    * adding long delays before the paid call even started. */
   USE_FREE_API_FIRST?: string;
+  /** Where visitors with a message for NACFE are pointed (optional; DEFAULT_CONTACT_URL otherwise). */
+  CONTACT_URL?: string;
   FEEDBACK_SECRET: string;
   /** Turnstile secret. When unset, verification is skipped entirely so a deployment without
    * a provisioned widget still serves -- GET /health reports which state you are in. When
@@ -63,6 +65,16 @@ interface RouteResult {
   out_of_scope: boolean;
   recency_warning: string | null;
 }
+
+/** Where a visitor with a message for NACFE is pointed. CONTACT_URL in wrangler.toml overrides it. */
+const DEFAULT_CONTACT_URL = "https://nacfe.org/contact-us/";
+
+/** The reply to a message for NACFE. Says plainly what the assistant can't do (pass messages along)
+ * and what the visitor can do instead (use the contact link the widget shows under this text). It
+ * makes no promise that anyone will read the message: it is logged for the console's Messages tab,
+ * but that is not the same as delivering it. */
+const MESSAGE_REPLY =
+  "Thank you for trying to bring this to our attention. I'm here to answer questions about NACFE's research, so I can't pass messages along. If you would be so kind as to use the contact link below to send this to the team directly, it would be appreciated.";
 
 /** Hard cap on how many sources the answer stage will ever open. route.txt asks the model for
  * "between 1 and 6", but a prompt instruction is not an enforcement mechanism: a confused or
@@ -693,6 +705,33 @@ async function route(
   return { result: validateRouteResult(parsed), usage };
 }
 
+/** Decides whether a question the router found no sources for is a message meant for NACFE's people
+ * (a hacked social account, a broken link, "how do I reach someone") rather than just off-topic.
+ * A separate, catalog-free call that runs only for that rare case, so the router's prompt -- which
+ * the people and entity routing were tuned against -- is untouched. Fails closed: any error, bad
+ * JSON or timeout means "not a message" and the visitor gets the ordinary out-of-scope reply. */
+async function classifyMessage(
+  env: Env,
+  question: string,
+  signal: AbortSignal,
+): Promise<{ isMessage: boolean; usage: GeminiUsage | null }> {
+  try {
+    const { text, usage } = await generateContentWithFallback(
+      env.CACHE,
+      freeKeyFor(env),
+      env.GEMINI_API,
+      env.ROUTE_MODEL,
+      fillTemplate(MESSAGE_PROMPT, { question }),
+      signal,
+    );
+    const parsed = JSON.parse(stripJsonFence(text)) as { message_for_nacfe?: unknown };
+    return { isMessage: parsed.message_for_nacfe === true, usage };
+  } catch (err) {
+    console.error("classifyMessage failed (treating as not a message):", err);
+    return { isMessage: false, usage: null };
+  }
+}
+
 async function fetchSource(env: Env, id: string): Promise<string | null> {
   const obj = await withTimeout(env.SOURCES_BUCKET.get(`${id}.md`), R2_TIMEOUT_MS, `R2 get ${id}.md`);
   if (!obj) {
@@ -770,6 +809,7 @@ async function logQuery(
     audience?: string | null;
     city?: string | null;
     region?: string | null;
+    messageForNacfe?: boolean;
     visitorId?: string | null;
     country?: string | null;
     pageUrl?: string | null;
@@ -809,8 +849,9 @@ async function insertQueryRow(
     `INSERT INTO queries
       (timestamp, question, normalized_question, cache_hit, out_of_scope, selected_sources,
        recency_warning, route_tokens, answer_tokens, total_tokens, latency_ms, degraded_cache_only,
-       cost_micro_usd, error, answer, followups, audience, city, region, visitor_id, country, page_url)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       cost_micro_usd, error, answer, followups, audience, city, region, message_for_nacfe,
+       visitor_id, country, page_url)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   )
     .bind(
       new Date().toISOString(),
@@ -832,6 +873,7 @@ async function insertQueryRow(
       fields.audience ?? null,
       fields.city ?? null,
       fields.region ?? null,
+      fields.messageForNacfe ? 1 : null,
       fields.visitorId ?? null,
       fields.country ?? null,
       fields.pageUrl ?? null,
@@ -1319,14 +1361,25 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
       const selectedIds = routeResult.selected.map((s) => s.id);
 
       if (selectedIds.length === 0 || routeResult.out_of_scope) {
+        // Off-topic, or a message for NACFE's people? Only asked here, after routing found nothing.
+        const classified = await classifyMessage(env, question, signal);
+        const isMessage = classified.isMessage;
+        if (classified.usage) {
+          spentMicroUsd += costMicroUsd(env.ROUTE_MODEL, classified.usage.promptTokens, classified.usage.outputTokens);
+        }
         const payload = {
-          answer:
-            "NACFE hasn't published research that addresses this question. This is a correct answer, not a limitation of this tool -- see nacfe.org for the full library of what NACFE has studied.",
+          answer: isMessage
+            ? MESSAGE_REPLY
+            : "NACFE hasn't published research that addresses this question. This is a correct answer, not a limitation of this tool -- see nacfe.org for the full library of what NACFE has studied.",
           selected_sources: [],
           out_of_scope: true,
           recency_warning: routeResult.recency_warning,
+          // The widget shows a "Contact NACFE" link when this is present.
+          ...(isMessage ? { message_for_nacfe: true, contact_url: env.CONTACT_URL || DEFAULT_CONTACT_URL } : {}),
         };
-        if (cacheable) {
+        // A message is never cached: a cached copy would be served without logging, so a repeat of
+        // the same message from another visitor would never reach the Messages list.
+        if (cacheable && !isMessage) {
           ctx.waitUntil(env.CACHE.put(cacheKey, JSON.stringify(payload), { expirationTtl: 3600 * 24 * 30 }));
         }
         const queryId = await logQuery(env, {
@@ -1338,7 +1391,7 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
           recencyWarning: routeResult.recency_warning,
           routeTokens,
           answerTokens: null,
-          totalTokens: routeTokens,
+          totalTokens: routeTokens + (classified.usage?.totalTokens ?? 0),
           latencyMs: Date.now() - start,
           degradedCacheOnly: false,
           costMicroUsd: spentMicroUsd,
@@ -1350,9 +1403,11 @@ async function handleQuery(request: Request, env: Env, ctx: ExecutionContext): P
           audience,
           city,
           region,
+          messageForNacfe: isMessage,
         });
+        // No rating buttons on a message reply: "was this helpful" does not apply to it.
         const token =
-        env.FEEDBACK_SECRET && queryId !== null ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
+          !isMessage && env.FEEDBACK_SECRET && queryId !== null ? await feedbackToken(env.FEEDBACK_SECRET, queryId) : null;
         await write(
           `DATA:${JSON.stringify({ ...payload, cached: false, query_id: queryId, feedback_token: token })}`,
         );
@@ -2335,6 +2390,37 @@ async function handleAdminBudgetPost(request: Request, env: Env, actorEmail: str
  * Every column is text the UI renders via textContent, never HTML (`target` can be a
  * caller-supplied URL for ingest requests). */
 const ADMIN_ACTIVITY_LIMIT = 200;
+const ADMIN_MESSAGES_LIMIT = 200;
+
+/** Messages for NACFE's people that visitors typed into the assistant (a problem report, a request to
+ * reach someone). Newest first. The text is visitor-controlled, so the console renders it as text. */
+async function handleAdminMessages(url: URL, env: Env): Promise<Response> {
+  const audience = parseAudience(url);
+  const rows = await env.DB.prepare(
+    `SELECT id, timestamp, question, page_url, audience, city, region, country
+       FROM queries WHERE message_for_nacfe = 1 ${audienceClause(audience, "")}
+      ORDER BY id DESC LIMIT ?`,
+  )
+    .bind(ADMIN_MESSAGES_LIMIT)
+    .all<{
+      id: number; timestamp: string; question: string; page_url: string | null;
+      audience: string | null; city: string | null; region: string | null; country: string | null;
+    }>();
+  return adminJsonResponse({
+    audience,
+    limit: ADMIN_MESSAGES_LIMIT,
+    messages: rows.results.map((r) => ({
+      id: r.id,
+      timestamp: r.timestamp,
+      message: r.question,
+      page_url: r.page_url,
+      audience: r.audience === "internal" ? "internal" : "public",
+      city: r.city,
+      region: r.region,
+      country: r.country,
+    })),
+  });
+}
 
 async function handleAdminActivity(env: Env): Promise<Response> {
   const rows = await env.DB.prepare(
@@ -2378,6 +2464,7 @@ async function handleAdmin(request: Request, env: Env, path: string): Promise<Re
   if (path === "/admin/api/info" && request.method === "GET") return handleAdminInfoGet(env);
   if (path === "/admin/api/info" && request.method === "POST") return handleAdminInfoPost(request, env, session.email);
   if (path === "/admin/api/feedback" && request.method === "GET") return handleAdminFeedback(new URL(request.url), env);
+  if (path === "/admin/api/messages" && request.method === "GET") return handleAdminMessages(new URL(request.url), env);
   if (path === "/admin/api/sponsor" && request.method === "GET") return handleAdminSponsorGet(env);
   if (path === "/admin/api/sponsor" && request.method === "POST") {
     return handleAdminSponsorPost(request, env, session.email);

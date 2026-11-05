@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS queries (
   audience TEXT,                         -- 'internal' (valid staff pass) or 'public'; null on older rows = public (migration 0014)
   city TEXT,                             -- approximate, IP-based (migration 0014)
   region TEXT,                           -- approximate, IP-based (migration 0014)
+  message_for_nacfe INTEGER,             -- 1 = a message for NACFE's people, not a research question (migration 0015)
 
   -- Request context. These existed in the production database for months without appearing
   -- here, so a database built from this file did not match the deployed one -- they are
@@ -44,6 +45,7 @@ CREATE TABLE IF NOT EXISTS queries (
 );
 
 CREATE INDEX IF NOT EXISTS idx_queries_timestamp ON queries (timestamp);
+CREATE INDEX IF NOT EXISTS idx_queries_message ON queries (message_for_nacfe, timestamp);
 CREATE INDEX IF NOT EXISTS idx_queries_normalized_question ON queries (normalized_question);
 
 -- Widget feedback, one row per rating a reader submits. Linked to the specific queries row
