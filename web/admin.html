@@ -76,8 +76,18 @@
   <main>
     <section id="tab-usage" class="active">
       <div class="card">
-        <h2>This month</h2>
+        <h2 id="usage-title">This month</h2>
         <div class="row" style="margin:0 0 14px">
+          <div>
+            <label>Period</label>
+            <select id="usage-range">
+              <option value="month">This month</option>
+              <option value="30d">Last 30 days</option>
+              <option value="90d">Last 90 days</option>
+              <option value="365d">Last 12 months</option>
+              <option value="all">All time</option>
+            </select>
+          </div>
           <div>
             <label>Questions from</label>
             <select class="audience-filter">
@@ -92,6 +102,7 @@
       </div>
       <div class="card">
         <h2>Monthly spend</h2>
+        <p class="muted">Always the current month, whatever period is chosen above: the limit is monthly.</p>
         <div class="stat"><span class="n" id="spend-label"></span></div>
         <div class="bar-track"><div class="bar-fill" id="spend-bar" style="width:0%"></div></div>
         <div class="msg" id="budget-msg" style="margin-top:12px"></div>
@@ -109,15 +120,15 @@
         <p class="muted">Takes effect on the next question. The limit caps what the assistant spends on new answers each month; cached answers are free and keep working after it's reached. Lowering it below what's already been spent switches the tool to cached answers only until next month. Allowed range: $1 to $1,000.</p>
       </div>
       <div class="card">
-        <h2>Feedback (this month)</h2>
+        <h2 id="feedback-usage-title">Feedback (this month)</h2>
         <div class="stat-grid" id="feedback-stats"></div>
       </div>
       <div class="card">
-        <h2>Events (this month)</h2>
+        <h2 id="events-title">Events (this month)</h2>
         <div class="stat-grid" id="event-stats"></div>
       </div>
       <div class="card">
-        <h2>Where questions come from (this month)</h2>
+        <h2 id="locations-title">Where questions come from (this month)</h2>
         <p class="muted">Approximate location from each visitor's connection, so VPNs and some mobile networks can be off. Top 15 places for the selected audience.</p>
         <div class="table-wrap">
           <table>
@@ -127,7 +138,7 @@
         </div>
       </div>
       <div class="card">
-        <h2>Recent questions</h2>
+        <h2 id="recent-title">Recent questions</h2>
         <div class="table-wrap">
           <table>
             <thead><tr><th>When</th><th>Who</th><th>Where</th><th>Question</th><th>Cached</th><th>Response</th><th>Follow-up</th><th>Cost</th><th>Error</th></tr></thead>
@@ -367,6 +378,24 @@
     s.addEventListener("change", function () { setAudience(s.value); });
   });
 
+  // How far back the Usage tab looks. The monthly spend meter is unaffected (the limit is monthly).
+  var RANGE_LABELS = {
+    month: "this month", "30d": "last 30 days", "90d": "last 90 days", "365d": "last 12 months", all: "all time",
+  };
+  var usageRange = "month";
+  try {
+    var savedRange = window.sessionStorage.getItem("nacfe-admin-range");
+    if (savedRange && RANGE_LABELS[savedRange]) usageRange = savedRange;
+  } catch (e) {}
+  var rangeSelect = document.getElementById("usage-range");
+  rangeSelect.value = usageRange;
+  rangeSelect.addEventListener("change", function () {
+    usageRange = RANGE_LABELS[rangeSelect.value] ? rangeSelect.value : "month";
+    try { window.sessionStorage.setItem("nacfe-admin-range", usageRange); } catch (e) {}
+    loadUsage();
+  });
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
   function statTile(n, label) {
     return el("div", { class: "stat" }, [
       el("div", { class: "n", text: n }),
@@ -375,8 +404,14 @@
   }
 
   function loadUsage() {
-    adminFetch("/admin/api/usage?audience=" + encodeURIComponent(audience)).then(function (d) {
+    adminFetch("/admin/api/usage?audience=" + encodeURIComponent(audience) + "&range=" + encodeURIComponent(usageRange)).then(function (d) {
       document.getElementById("whoami").textContent = d.actor_email ? "signed in as " + d.actor_email : "";
+      var rl = RANGE_LABELS[d.range] || RANGE_LABELS.month;
+      document.getElementById("usage-title").textContent = cap(rl);
+      document.getElementById("feedback-usage-title").textContent = "Feedback (" + rl + ")";
+      document.getElementById("events-title").textContent = "Events (" + rl + ")";
+      document.getElementById("locations-title").textContent = "Where questions come from (" + rl + ")";
+      document.getElementById("recent-title").textContent = "Recent questions (50 most recent, " + rl + ")";
 
       var stats = document.getElementById("usage-stats");
       stats.innerHTML = "";

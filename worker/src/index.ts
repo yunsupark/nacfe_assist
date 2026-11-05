@@ -1777,33 +1777,60 @@ function audienceClause(filter: AudienceFilter, alias: string): string {
   return filter === "internal" ? `AND ${col} = 'internal'` : `AND COALESCE(${col}, 'public') = 'public'`;
 }
 
-async function handleAdminUsage(env: Env, actorEmail: string, audience: AudienceFilter): Promise<Response> {
-  const period = currentPeriod();
-  const likePeriod = `${period}%`;
+/** How far back the Usage tab looks. A closed set, like AudienceFilter: the lower bound below is
+ * computed from it, never from request text. The monthly spend meter ignores it -- the limit is
+ * monthly, so that number is always the current month. */
+type UsageRange = "month" | "30d" | "90d" | "365d" | "all";
+const USAGE_RANGE_DAYS: Record<"30d" | "90d" | "365d", number> = { "30d": 30, "90d": 90, "365d": 365 };
+
+function parseRange(url: URL): UsageRange {
+  const r = url.searchParams.get("range");
+  return r === "30d" || r === "90d" || r === "365d" || r === "all" ? r : "month";
+}
+
+/** Inclusive ISO lower bound for a range. Timestamps are stored as ISO-8601 UTC, so a plain string
+ * comparison orders them correctly. */
+function rangeStart(range: UsageRange, now = new Date()): string {
+  if (range === "all") return "0000-01-01T00:00:00.000Z";
+  if (range === "month") return `${now.toISOString().slice(0, 7)}-01T00:00:00.000Z`;
+  return new Date(now.getTime() - USAGE_RANGE_DAYS[range] * 86_400_000).toISOString();
+}
+
+async function handleAdminUsage(
+  env: Env,
+  actorEmail: string,
+  audience: AudienceFilter,
+  range: UsageRange,
+): Promise<Response> {
+  const period = currentPeriod(); // the spend meter only: the budget is monthly whatever range is shown
+  const since = rangeStart(range);
+  const sinceDay = since.slice(0, 10); // events are bucketed by day (YYYY-MM-DD)
   const aud = audienceClause(audience, "");
   const audQ = audienceClause(audience, "q");
   const [queryRow, feedbackRow, eventRow, recentRows, ceilingMicroUsd, usedMicroUsd, perfRow, staffRow, locationRows] = await Promise.all([
     env.DB.prepare(
       `SELECT COUNT(*) AS total, SUM(cache_hit) AS cache_hits, SUM(degraded_cache_only) AS degraded,
               SUM(CASE WHEN error IS NOT NULL THEN 1 ELSE 0 END) AS errors
-       FROM queries WHERE timestamp LIKE ? ${aud}`,
+       FROM queries WHERE timestamp >= ? ${aud}`,
     )
-      .bind(likePeriod)
+      .bind(since)
       .first<{ total: number; cache_hits: number | null; degraded: number | null; errors: number | null }>(),
     env.DB.prepare(
       `SELECT f.rating AS rating, COUNT(*) AS n FROM feedback f JOIN queries q ON q.id = f.query_id
-        WHERE f.timestamp LIKE ? ${audQ} GROUP BY f.rating`,
+        WHERE f.timestamp >= ? ${audQ} GROUP BY f.rating`,
     )
-      .bind(likePeriod)
+      .bind(since)
       .all<{ rating: string; n: number }>(),
-    env.DB.prepare(`SELECT type, COUNT(*) AS n FROM events WHERE day LIKE ? GROUP BY type`)
-      .bind(likePeriod)
+    env.DB.prepare(`SELECT type, COUNT(*) AS n FROM events WHERE day >= ? GROUP BY type`)
+      .bind(sinceDay)
       .all<{ type: string; n: number }>(),
     env.DB.prepare(
       `SELECT id, timestamp, question, cache_hit, cost_micro_usd, latency_ms, followups,
               audience, city, region, country, error
-         FROM queries WHERE 1 = 1 ${aud} ORDER BY id DESC LIMIT 50`,
-    ).all<{
+         FROM queries WHERE timestamp >= ? ${aud} ORDER BY id DESC LIMIT 50`,
+    )
+      .bind(since)
+      .all<{
       id: number;
       timestamp: string;
       question: string;
@@ -1831,9 +1858,9 @@ async function handleAdminUsage(env: Env, actorEmail: string, audience: Audience
          COUNT(followups)                                           AS with_followup_data,
          SUM(CASE WHEN followups > 0 THEN 1 ELSE 0 END)             AS followup_count
        FROM queries
-       WHERE timestamp LIKE ? AND error IS NULL AND degraded_cache_only = 0 ${aud}`,
+       WHERE timestamp >= ? AND error IS NULL AND degraded_cache_only = 0 ${aud}`,
     )
-      .bind(likePeriod)
+      .bind(since)
       .first<{
         new_count: number;
         new_avg_ms: number | null;
@@ -1842,16 +1869,16 @@ async function handleAdminUsage(env: Env, actorEmail: string, audience: Audience
         followup_count: number | null;
       }>(),
     // Always the staff total, whatever the filter, so it is visible even while hidden from the rest.
-    env.DB.prepare(`SELECT COUNT(*) AS n FROM queries WHERE timestamp LIKE ? AND audience = 'internal'`)
-      .bind(likePeriod)
+    env.DB.prepare(`SELECT COUNT(*) AS n FROM queries WHERE timestamp >= ? AND audience = 'internal'`)
+      .bind(since)
       .first<{ n: number }>(),
-    // Where this month's questions came from (approximate, IP-based), for the selected audience.
+    // Where the questions in this range came from (approximate, IP-based), for the selected audience.
     env.DB.prepare(
       `SELECT country, region, city, COUNT(*) AS n FROM queries
-        WHERE timestamp LIKE ? AND error IS NULL AND degraded_cache_only = 0 ${aud}
+        WHERE timestamp >= ? AND error IS NULL AND degraded_cache_only = 0 ${aud}
         GROUP BY country, region, city ORDER BY n DESC LIMIT 15`,
     )
-      .bind(likePeriod)
+      .bind(since)
       .all<{ country: string | null; region: string | null; city: string | null; n: number }>(),
   ]);
 
@@ -1867,6 +1894,8 @@ async function handleAdminUsage(env: Env, actorEmail: string, audience: Audience
   return adminJsonResponse({
     actor_email: actorEmail,
     period,
+    range,
+    range_start: since,
     queries: {
       total: queryRow?.total ?? 0,
       cache_hits: queryRow?.cache_hits ?? 0,
@@ -2339,7 +2368,10 @@ async function handleAdmin(request: Request, env: Env, path: string): Promise<Re
   const session = await requireAdminSession(request, env);
   if (!session) return adminJsonResponse({ error: "unauthorized" }, 401);
 
-  if (path === "/admin/api/usage" && request.method === "GET") return handleAdminUsage(env, session.email, parseAudience(new URL(request.url)));
+  if (path === "/admin/api/usage" && request.method === "GET") {
+    const u = new URL(request.url);
+    return handleAdminUsage(env, session.email, parseAudience(u), parseRange(u));
+  }
   if (path === "/admin/api/activity" && request.method === "GET") return handleAdminActivity(env);
   if (path === "/admin/api/budget" && request.method === "GET") return handleAdminBudgetGet(env);
   if (path === "/admin/api/budget" && request.method === "POST") return handleAdminBudgetPost(request, env, session.email);
