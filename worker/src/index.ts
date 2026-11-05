@@ -69,10 +69,12 @@ interface RouteResult {
 /** Where a visitor with a message for NACFE is pointed. CONTACT_URL in wrangler.toml overrides it. */
 const DEFAULT_CONTACT_URL = "https://nacfe.org/contact-us/";
 
-/** The reply to a message for NACFE. Honest about what happens: the assistant cannot act on the
- * message or reply, but it is logged where the team can read it (the console's Messages tab). */
+/** The reply to a message for NACFE. Says plainly what the assistant can't do (pass messages along)
+ * and what the visitor can do instead (use the contact link the widget shows under this text). It
+ * makes no promise that anyone will read the message: it is logged for the console's Messages tab,
+ * but that is not the same as delivering it. */
 const MESSAGE_REPLY =
-  "Thanks for letting NACFE know. This assistant only answers questions about NACFE's published research, so it can't look into this or reply to you itself. Your message has been logged where NACFE's team can see it. For anything urgent, or if you would like a reply, please use NACFE's contact page.";
+  "Thank you for trying to bring this to our attention. I'm here to answer questions about NACFE's research, so I can't pass messages along. If you would be so kind as to use the contact link below to send this to the team directly, it would be appreciated.";
 
 /** Hard cap on how many sources the answer stage will ever open. route.txt asks the model for
  * "between 1 and 6", but a prompt instruction is not an enforcement mechanism: a confused or
