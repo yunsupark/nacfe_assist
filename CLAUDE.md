@@ -74,6 +74,15 @@ hour after every deploy browsers run the previous copy.
 
 Useful queries live in `worker/reports.sql`.
 
+**Messages for NACFE.** When routing finds nothing to answer with, a separate catalog-free call
+(`classifyMessage`, `worker/prompts/message.txt`) decides whether the text is a message meant for
+NACFE's people (a hacked social account, a broken link, "how do I reach someone"). If so the
+visitor gets a pointer to the contact page (`CONTACT_URL`, default nacfe.org/contact-us/), the row
+is logged with `message_for_nacfe = 1` (migration 0015), and the console's Messages tab lists it.
+It is deliberately NOT part of `route.txt`: an extra rule there measurably hurt person and entity
+routing. It fails closed (any error means the ordinary out-of-scope reply), and message replies
+are never cached. Check the prompt with `python3 eval/run_message_eval.py`.
+
 ## Secrets
 
 `GEMINI_API` (paid; used by default), `GEMINI_API_FREE` (optional; only tried first when

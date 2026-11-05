@@ -70,6 +70,7 @@
     <button type="button" data-tab="sponsor">Sponsor</button>
     <button type="button" data-tab="info">Info text</button>
     <button type="button" data-tab="feedback">Feedback</button>
+    <button type="button" data-tab="messages">Messages</button>
     <button type="button" data-tab="sources">Sources</button>
     <button type="button" data-tab="activity">Activity</button>
   </nav>
@@ -274,6 +275,29 @@
         </div>
       </div>
     </section>
+    <section id="tab-messages">
+      <div class="card">
+        <h2>Messages for NACFE</h2>
+        <p class="muted">Things visitors typed into the assistant that are meant for NACFE's people rather than research questions, such as a problem report or a request to reach someone. The assistant told each of them it can't reply and pointed them to the contact page. Newest first, up to the last 200. Nothing here is a verified report: read each one as typed.</p>
+        <div class="row" style="margin:0 0 14px">
+          <div>
+            <label>Messages from</label>
+            <select class="audience-filter">
+              <option value="public">The public (default)</option>
+              <option value="internal">NACFE staff only</option>
+              <option value="all">Everyone</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>When</th><th>Who</th><th>Where</th><th>Page</th><th>Message</th></tr></thead>
+            <tbody id="messages-list"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <section id="tab-activity">
       <div class="card">
         <h2>Admin activity</h2>
@@ -337,8 +361,31 @@
       document.getElementById("tab-" + btn.getAttribute("data-tab")).classList.add("active");
       if (btn.getAttribute("data-tab") === "activity") loadActivity();
       if (btn.getAttribute("data-tab") === "feedback") loadFeedback();
+      if (btn.getAttribute("data-tab") === "messages") loadMessages();
     });
   });
+
+  // Visitor-typed text: every field below goes through text(), never innerHTML.
+  function loadMessages() {
+    adminFetch("/admin/api/messages?audience=" + encodeURIComponent(audience)).then(function (d) {
+      var tbody = document.getElementById("messages-list");
+      tbody.innerHTML = "";
+      var rows = d.messages || [];
+      if (!rows.length) {
+        tbody.appendChild(el("tr", {}, [el("td", { colspan: "5", text: "No messages yet." })]));
+        return;
+      }
+      rows.forEach(function (m) {
+        tbody.appendChild(el("tr", {}, [
+          el("td", {}, [text(new Date(m.timestamp).toLocaleString())]),
+          el("td", {}, [text(fmtWho(m.audience))]),
+          el("td", {}, [text(fmtWhere(m.country, m.region, m.city))]),
+          el("td", {}, [text(m.page_url || "—")]),
+          el("td", {}, [text(m.message)]),
+        ]));
+      });
+    }).catch(function (e) { console.error(e); });
+  }
 
   // Server time from request to answer, shown in seconds; "—" when not recorded.
   function fmtSeconds(ms) {
@@ -362,6 +409,7 @@
     document.querySelectorAll(".audience-filter").forEach(function (s) { s.value = value; });
     loadUsage();
     loadFeedback();
+    loadMessages();
   }
   document.querySelectorAll(".audience-filter").forEach(function (s) {
     s.addEventListener("change", function () { setAudience(s.value); });
@@ -795,6 +843,7 @@
   loadActivity();
   loadInfo();
   loadFeedback();
+  loadMessages();
   loadBudget();
 })();
 </script>

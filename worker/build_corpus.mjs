@@ -31,6 +31,7 @@ const OUT_PATH = join(__dirname, "src", "corpus_data.ts");
 const catalog = JSON.parse(readFileSync(CATALOG_PATH, "utf-8"));
 const routePrompt = readFileSync(join(PROMPTS_DIR, "route.txt"), "utf-8");
 const answerPrompt = readFileSync(join(PROMPTS_DIR, "answer.txt"), "utf-8");
+const messagePrompt = readFileSync(join(PROMPTS_DIR, "message.txt"), "utf-8");
 const widgetJs = readFileSync(WIDGET_PATH, "utf-8");
 const adminHtml = readFileSync(ADMIN_PATH, "utf-8");
 
@@ -84,7 +85,11 @@ const versionHash = createHash("sha256")
   .update("\0")
   .update(routePrompt)
   .update("\0")
-  .update(answerPrompt);
+  .update(answerPrompt)
+  .update("\0")
+  // An out-of-scope reply is cached, and message.txt decides which reply it is, so a change to it
+  // must start a fresh cache too.
+  .update(messagePrompt);
 for (const f of [...sourceFiles].sort()) {
   versionHash.update("\0").update(f).update("\0").update(readFileSync(join(SOURCES_DIR, `${f}.md`)));
 }
@@ -103,6 +108,8 @@ export const CONTENT_VERSION = ${JSON.stringify(CONTENT_VERSION)};
 export const ROUTE_PROMPT = ${JSON.stringify(routePrompt)};
 
 export const ANSWER_PROMPT = ${JSON.stringify(answerPrompt)};
+
+export const MESSAGE_PROMPT = ${JSON.stringify(messagePrompt)};
 
 export const WIDGET_JS = ${JSON.stringify(widgetJs)};
 

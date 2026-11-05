@@ -407,6 +407,21 @@
     }
   }
 
+  // A reply to a message meant for NACFE's people (not a research question) carries the contact
+  // page; show it as a link under the text. The URL comes from the API but is still checked.
+  function addContactLink(url) {
+    var href = safeHttpUrl(url);
+    if (!href) return;
+    var p = document.createElement("p");
+    var a = document.createElement("a");
+    a.setAttribute("href", href);
+    a.setAttribute("target", "_blank");
+    a.setAttribute("rel", "noopener noreferrer");
+    a.textContent = "Contact NACFE";
+    p.appendChild(a);
+    answerEl.appendChild(p);
+  }
+
   // Fallback only: the API sends each source's catalog title. If one is ever missing, make the id
   // readable ("run-on-less-electric-2021" -> "Run On Less Electric 2021") rather than show a slug.
   function sourceLabel(s) {
@@ -779,6 +794,7 @@
           answer: memoryStr(t.answer, 20000),
           sources: sources,
           warning: typeof t.warning === "string" && t.warning ? t.warning.slice(0, 1000) : null,
+          contact_url: typeof t.contact_url === "string" && t.contact_url ? t.contact_url.slice(0, 500) : null,
         });
       }
       if (!turns.length) return null;
@@ -799,6 +815,7 @@
       var turn = saved.turns[i];
       if (i > 0) archivePreviousAnswer(saved.turns[i - 1].question);
       renderAnswer(turn.answer);
+      if (turn.contact_url) addContactLink(turn.contact_url);
       renderSources(turn.sources);
       if (turn.warning) {
         warningEl.textContent = turn.warning;
@@ -927,6 +944,7 @@
         }
 
         renderAnswer(data.answer || "");
+        if (data.message_for_nacfe) addContactLink(data.contact_url);
         renderSources(data.selected_sources);
         if (data.recency_warning) {
           warningEl.textContent = data.recency_warning;
@@ -959,6 +977,7 @@
             return { id: s.id, why: s.why, title: s.title, url: s.url };
           }),
           warning: data.recency_warning || null,
+          contact_url: data.message_for_nacfe && data.contact_url ? data.contact_url : null,
         });
         if (savedTurns.length > MEMORY_MAX_TURNS) savedTurns.splice(0, savedTurns.length - MEMORY_MAX_TURNS);
         memorySave();
